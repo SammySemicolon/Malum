@@ -2,7 +2,7 @@
   "source_attribute": "malum:soul_ward_strength",
   "target_attributes": [
     {
-      "attribute": "minecraft:generic.armor",
+      "attribute": "minecraft:generic.armor_toughness",
       "ratio": "2.0"
     },
     {

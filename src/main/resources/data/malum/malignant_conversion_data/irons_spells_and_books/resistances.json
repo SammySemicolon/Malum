@@ -1,0 +1,20 @@
+{
+  "source_attributes": [
+    "irons_spellbooks:spell_resist", "irons_spellbooks:fire_magic_resist",
+    "irons_spellbooks:ice_magic_resist", "irons_spellbooks:lightning_magic_resist",
+    "irons_spellbooks:holy_magic_resist", "irons_spellbooks:ender_magic_resist",
+    "irons_spellbooks:blood_magic_resist", "irons_spellbooks:evocation_magic_resist",
+    "irons_spellbooks:nature_magic_resist", "irons_spellbooks:eldritch_magic_resist"
+  ],
+  "ignore_base_value": "true",
+  "target_attributes": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "ratio": "10"
+    },
+    {
+      "attribute": "minecraft:generic.armor_toughness",
+      "ratio": "5"
+    }
+  ]
+}

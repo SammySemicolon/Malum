@@ -1,0 +1,14 @@
+{
+  "source_attribute": "irons_spellbooks:max_mana",
+  "ignore_base_value": "true",
+  "target_attributes": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "ratio": "0.04"
+    },
+    {
+      "attribute": "lodestone:magic_resistance",
+      "ratio": "0.04"
+    }
+  ]
+}

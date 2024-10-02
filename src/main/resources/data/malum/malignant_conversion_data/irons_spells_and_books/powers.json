@@ -1,0 +1,20 @@
+{
+  "source_attributes": [
+    "irons_spellbooks:spell_power", "irons_spellbooks:fire_spell_power",
+    "irons_spellbooks:ice_spell_power", "irons_spellbooks:lightning_spell_power",
+    "irons_spellbooks:holy_spell_power", "irons_spellbooks:ender_spell_power",
+    "irons_spellbooks:blood_spell_power", "irons_spellbooks:evocation_spell_power",
+    "irons_spellbooks:nature_spell_power", "irons_spellbooks:eldritch_spell_power"
+  ],
+  "ignore_base_value": "true",
+  "target_attributes": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "ratio": "10"
+    },
+    {
+      "attribute": "minecraft:generic.armor_toughness",
+      "ratio": "5"
+    }
+  ]
+}

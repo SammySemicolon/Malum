@@ -33,19 +33,19 @@ public class MalignantConversionHandler {
                     handler.skipConversionLogic = false;
                 }
                 var conversionData = MalignantConversionReloadListener.CONVERSION_DATA;
-                for (MalignantConversionReloadListener.MalignantConversionData data : conversionData.values()) {
+                for (MalignantConversionReloadListener.MalignantConversionData data : conversionData.values()) { //check for any changed attributes, and apply malignant conversion to them if they've been updated
                     Attribute attribute = data.sourceAttribute();
                     AttributeInstance instance = livingEntity.getAttribute(attribute);
                     if (instance != null) {
                         if (handler.cachedAttributeValues.containsKey(attribute)) {
-                            convertAttribute(livingEntity, data.sourceAttribute(), data.consumptionRatio(), data.targetAttributes());
+                            convertAttribute(livingEntity, data.sourceAttribute(), data.consumptionRatio(), data.ignoreBaseValue(), data.targetAttributes(), false);
                         }
                     }
                 }
-                if (handler.cachedAttributeValues.containsKey(conversionAttribute)) {
+                if (handler.cachedAttributeValues.containsKey(conversionAttribute)) { //update attributes when malignant conversion changes
                     if (handler.cachedAttributeValues.get(conversionAttribute) != conversionInstance.getValue()) {
                         for (MalignantConversionReloadListener.MalignantConversionData data : conversionData.values()) {
-                            convertAttribute(livingEntity, data.sourceAttribute(), data.consumptionRatio(), data.targetAttributes(), true);
+                            convertAttribute(livingEntity, data.sourceAttribute(), data.consumptionRatio(), data.ignoreBaseValue(), data.targetAttributes(), true);
                         }
                     }
                 }
@@ -57,10 +57,7 @@ public class MalignantConversionHandler {
         }
     }
 
-    private static void convertAttribute(LivingEntity livingEntity, Attribute sourceAttribute, double consumptionRatio, List<Pair<Attribute, Double>> targetAttributes) {
-        convertAttribute(livingEntity, sourceAttribute, consumptionRatio, targetAttributes, false);
-    }
-    private static void convertAttribute(LivingEntity livingEntity, Attribute sourceAttribute, double consumptionRatio, List<Pair<Attribute, Double>> targetAttributes, boolean skipCacheComparison) {
+    private static void convertAttribute(LivingEntity livingEntity, Attribute sourceAttribute, double consumptionRatio, boolean ignoreBaseValue, List<Pair<Attribute, Double>> targetAttributes, boolean skipCacheComparison) {
         var attributes = livingEntity.getAttributes();
         double malignantConversion = attributes.getValue(AttributeRegistry.MALIGNANT_CONVERSION);
 
@@ -72,7 +69,7 @@ public class MalignantConversionHandler {
                 sourceInstance.removeModifier(originalModifier);
             }
             if (skipCacheComparison || handler.cachedAttributeValues.get(sourceAttribute) != sourceInstance.getValue()) {
-                double cachedValue = sourceInstance.getValue();
+                double cachedValue = sourceInstance.getValue() - (ignoreBaseValue ? sourceInstance.getBaseValue() : 0);
                 for (Pair<Attribute, Double> target : targetAttributes) {
                     final Attribute targetAttribute = target.getFirst();
                     final AttributeInstance targetInstance = livingEntity.getAttribute(targetAttribute);

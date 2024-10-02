@@ -2,12 +2,12 @@ package com.sammy.malum.core.listeners;
 
 import com.google.gson.*;
 import com.mojang.datafixers.util.*;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.resources.*;
 import net.minecraft.server.packs.resources.*;
 import net.minecraft.util.profiling.*;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.*;
 
 import java.util.*;
 
@@ -29,27 +29,41 @@ public class MalignantConversionReloadListener extends SimpleJsonResourceReloadL
         for (int i = 0; i < objectIn.size(); i++) {
             ResourceLocation location = (ResourceLocation) objectIn.keySet().toArray()[i];
             JsonObject object = objectIn.get(location).getAsJsonObject();
-            String name = object.getAsJsonPrimitive("source_attribute").getAsString();
-            ResourceLocation sourceAttribute = ResourceLocation.tryParse(name);
-            if (sourceAttribute != null && !BuiltInRegistries.ATTRIBUTE.containsKey(sourceAttribute)) {
-                continue;
+            ArrayList<String> sourceAttributeNames = new ArrayList<>();
+            if (object.has("source_attribute")) {
+                String name = object.getAsJsonPrimitive("source_attribute").getAsString();
+                sourceAttributeNames.add(name);
             }
-            double consumptionRatio = object.has("ratio") ? object.getAsJsonPrimitive("ratio").getAsDouble() : 1;
-            JsonArray targetAttributes = object.getAsJsonArray("target_attributes");
-            List<Pair<Attribute, Double>> attributeList = new ArrayList<>();
-            for (JsonElement attribute : targetAttributes) {
-                JsonObject attributeObject = attribute.getAsJsonObject();
-                ResourceLocation attributeName = ResourceLocation.tryParse(attributeObject.getAsJsonPrimitive("attribute").getAsString());
-                if (attributeName != null && !BuiltInRegistries.ATTRIBUTE.containsKey(attributeName)) {
+            else if (object.has("source_attributes")) {
+                JsonArray sourceAttributes = object.getAsJsonArray("source_attributes");
+                for (JsonElement sourceAttribute : sourceAttributes) {
+                    sourceAttributeNames.add(sourceAttribute.getAsString());
+                }
+            }
+
+            for (String name : sourceAttributeNames) {
+                ResourceLocation sourceAttribute = ResourceLocation.parse(name);
+                if (!BuiltInRegistries.ATTRIBUTE.containsKey(sourceAttribute)) {
                     continue;
                 }
-                double ratio = attributeObject.getAsJsonPrimitive("ratio").getAsDouble();
-                attributeList.add(Pair.of(BuiltInRegistries.ATTRIBUTE.get(attributeName), ratio));
+                double consumptionRatio = object.has("ratio") ? object.getAsJsonPrimitive("ratio").getAsDouble() : 1;
+                boolean ignoreBaseValue = object.has("ignore_base_value") && object.getAsJsonPrimitive("ignore_base_value").getAsBoolean();
+                JsonArray targetAttributes = object.getAsJsonArray("target_attributes");
+                List<Pair<Attribute, Double>> attributeList = new ArrayList<>();
+                for (JsonElement attribute : targetAttributes) {
+                    JsonObject attributeObject = attribute.getAsJsonObject();
+                    ResourceLocation attributeName = ResourceLocation.parse(attributeObject.getAsJsonPrimitive("attribute").getAsString());
+                    if (!BuiltInRegistries.ATTRIBUTE.containsKey(attributeName)) {
+                        continue;
+                    }
+                    double ratio = attributeObject.getAsJsonPrimitive("ratio").getAsDouble();
+                    attributeList.add(Pair.of(BuiltInRegistries.ATTRIBUTE.get(attributeName), ratio));
+                }
+                CONVERSION_DATA.put(sourceAttribute, new MalignantConversionData(BuiltInRegistries.ATTRIBUTE.get(sourceAttribute), consumptionRatio, ignoreBaseValue, attributeList));
             }
-            CONVERSION_DATA.put(sourceAttribute, new MalignantConversionData(BuiltInRegistries.ATTRIBUTE.get(sourceAttribute), consumptionRatio, attributeList));
         }
     }
 
-    public record MalignantConversionData(Attribute sourceAttribute, double consumptionRatio, List<Pair<Attribute, Double>> targetAttributes) {
+    public record MalignantConversionData(Attribute sourceAttribute, double consumptionRatio, boolean ignoreBaseValue, List<Pair<Attribute, Double>> targetAttributes) {
     }
 }

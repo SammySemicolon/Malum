@@ -1,0 +1,32 @@
+{
+  "key": "soul_stained_steel",
+  "category": "metal",
+  "primary": "8.0",
+  "secondary": "3.5",
+  "tertiary": "4.0",
+  "durability": "2500",
+  "integrityCost": "2",
+  "integrityGain": "7",
+  "magicCapacity": "120",
+  "toolLevel": "minecraft:diamond",
+  "toolEfficiency": "9.0",
+  "tints": {
+    "glyph": "eccef6",
+    "texture": "eccef6"
+  },
+  "textures": [
+    "metal",
+    "default"
+  ],
+  "material": {
+    "items": [
+      "malum:malignant_pewter_ingot"
+    ]
+  },
+  "improvements": {
+    "malum.soul_strike": 0
+  },
+  "requiredTools": {
+    "hammer_dig": "minecraft:netherite"
+  }
+}

@@ -2,6 +2,7 @@ package com.sammy.malum.core.listeners;
 
 import com.google.gson.*;
 import com.mojang.datafixers.util.*;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.resources.*;
 import net.minecraft.server.packs.resources.*;
@@ -64,6 +65,6 @@ public class MalignantConversionReloadListener extends SimpleJsonResourceReloadL
         }
     }
 
-    public record MalignantConversionData(Attribute sourceAttribute, double consumptionRatio, boolean ignoreBaseValue, List<Pair<Attribute, Double>> targetAttributes) {
+    public record MalignantConversionData(Holder<Attribute> sourceAttribute, double consumptionRatio, boolean ignoreBaseValue, List<Pair<Holder<Attribute>, Double>> targetAttributes) {
     }
 }

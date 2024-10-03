@@ -1,5 +1,6 @@
 package com.sammy.malum;
 
+import com.sammy.malum.compability.attributelib.*;
 import com.sammy.malum.compability.farmersdelight.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.config.*;
@@ -59,6 +60,7 @@ public class MalumMod {
 
         TetraCompat.init();
         FarmersDelightCompat.init();
+        AttributeLibCompat.init();
 
         modBus.addListener(CreativeTabRegistry::populateItemGroups);
     }

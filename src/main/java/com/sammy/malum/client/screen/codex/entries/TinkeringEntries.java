@@ -79,6 +79,8 @@ public class TinkeringEntries {
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_CURATIVE_TALENT.get()))
                 .addPage(new HeadlineTextPage("reactive_trinkets.ring_of_alchemical_mastery", "reactive_trinkets.ring_of_alchemical_mastery.1"))
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_ALCHEMICAL_MASTERY.get()))
+                .addPage(new HeadlineTextPage("reactive_trinkets.ring_of_manaweaving", "reactive_trinkets.ring_of_manaweaving.1"))
+                .addPage(SpiritInfusionPage.fromOutput(RING_OF_MANAWEAVING.get()))
                 .addPage(new HeadlineTextPage("reactive_trinkets.ring_of_prowess", "reactive_trinkets.ring_of_prowess.1"))
                 .addPage(new TextPage("reactive_trinkets.ring_of_prowess.2"))
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_ARCANE_PROWESS.get()))

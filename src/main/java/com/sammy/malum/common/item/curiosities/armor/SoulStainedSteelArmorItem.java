@@ -23,10 +23,14 @@ public class SoulStainedSteelArmorItem extends MalumArmorItem {
                 new ItemAttributeModifiers.Entry(
                         AttributeRegistry.SOUL_WARD_CAP,
                         new AttributeModifier(MalumMod.malumPath("soul_ward_cap"), 3f, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.ARMOR),
+
+                new ItemAttributeModifiers.Entry(
+                        AttributeRegistry.SOUL_WARD_RECOVERY_RATE,
+                        new AttributeModifier(MalumMod.malumPath("soul_ward_recovery"), 0.15f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
                         EquipmentSlotGroup.ARMOR)
         );
     }
-
     @Override
     public ResourceLocation getArmorTexture() {
         return MalumMod.malumPath("textures/armor/soul_stained_steel_reforged");

@@ -32,9 +32,8 @@ public class RuneAlimentCleansingItem extends AbstractRuneCurioItem {
         if (event.getOldEffectInstance() == null && CurioHelper.hasCurioEquipped(entity, ItemRegistry.RUNE_OF_ALIMENT_CLEANSING.get())) {
             MobEffectInstance effect = event.getEffectInstance();
             MobEffect type = effect.getEffect().value();
-            float multiplier = MobEffectRegistry.ALCHEMICAL_PROFICIENCY_MAP.getOrDefault(BuiltInRegistries.MOB_EFFECT.getKey(type), 1f);
             if (type.getCategory().equals(MobEffectCategory.HARMFUL)) {
-                EntityHelper.shortenEffect(effect, entity, (int) (effect.getDuration() * 0.33f * multiplier));
+                EntityHelper.shortenEffect(effect, entity, effect.getDuration() / 3);
             }
         }
     }

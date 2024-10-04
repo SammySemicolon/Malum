@@ -32,12 +32,6 @@ public class CurioSpiritInfusionRecipes {
                 .addSpirit(ELDRITCH_SPIRIT, 2)
                 .save(consumer);
 
-        new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_RING.get(), ItemRegistry.RING_OF_ARCANE_PROWESS.get(), 1)
-                .addExtraItem(ItemRegistry.CLUSTER_OF_BRILLIANCE.get(), 4)
-                .addExtraItem(ItemRegistry.ALCHEMICAL_CALX.get(), 4)
-                .addSpirit(ARCANE_SPIRIT, 32)
-                .save(consumer);
-
         new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_RING.get(), ItemRegistry.RING_OF_CURATIVE_TALENT.get(), 1)
                 .addExtraItem(ItemRegistry.LIVING_FLESH.get(), 4)
                 .addExtraItem(ItemRegistry.ALCHEMICAL_CALX.get(), 4)
@@ -55,7 +49,20 @@ public class CurioSpiritInfusionRecipes {
                 .addSpirit(AQUEOUS_SPIRIT, 16)
                 .save(consumer);
 
-        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_NECKLACE.get(), ItemRegistry.NECKLACE_OF_TIDAL_AFFINITY.get(), 1)
+        new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_RING.get(), 1, ItemRegistry.RING_OF_MANAWEAVING.get(), 1)
+                .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get(), 6)
+                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addSpirit(ARCANE_SPIRIT, 16)
+                .addSpirit(EARTHEN_SPIRIT, 16)
+                .save(consumer);
+
+        new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_RING.get(), 1, ItemRegistry.RING_OF_ARCANE_PROWESS.get(), 1)
+                .addExtraItem(ItemRegistry.CLUSTER_OF_BRILLIANCE.get(), 4)
+                .addExtraItem(ItemRegistry.ALCHEMICAL_CALX.get(), 4)
+                .addSpirit(ARCANE_SPIRIT, 32)
+                .save(consumer);
+
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_NECKLACE.get(), 1, ItemRegistry.NECKLACE_OF_TIDAL_AFFINITY.get(), 1)
                 .addExtraItem(ItemRegistry.GOLD_NODE.get(), 6)
                 .addExtraItem(Items.HEART_OF_THE_SEA, 1)
                 .addExtraItem(Items.NAUTILUS_SHELL, 2)

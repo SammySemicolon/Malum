@@ -195,6 +195,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.curio.effect.spirits_heal", "Spirit Collection Replenishes Health");
         add("malum.gui.curio.effect.spirits_xp", "Spirit Collection Generates Experience Points");
         add("malum.gui.curio.effect.spirits_extend_effect", "Spirit Collection Aids Potion Durations");
+        add("malum.gui.curio.effect.spirits_weave_mana", "Spirit Collection Recovers Soul Ward");
         add("malum.gui.curio.effect.spirits_add_health", "Spirit Collection Grants Extra Hearts");
         add("malum.gui.curio.effect.hunger_drain", "Actively Drains Hunger");
         add("malum.gui.curio.effect.eat_rotten", "Rotten Foods are Tastier");
@@ -675,6 +676,9 @@ public class MalumLang extends LanguageProvider {
         addHeadline("reactive_trinkets.ring_of_alchemical_mastery", "Ring of Alchemical Mastery");
         addPages("reactive_trinkets.ring_of_alchemical_mastery",
                 "This ring, through alchemical trickery, is able to manipulate the potions running through my blood. Whenever I collect arcana, the ring will partially filter out negative effects, while at the same time prolonging positive ones.");
+        addHeadline("reactive_trinkets.ring_of_manaweaving", "Ring of Manaweaving");
+        addPages("reactive_trinkets.ring_of_manaweaving",
+                "Soul Ward is a powerful barrier, but in it's current state it leaves much to be desired. One of it's glaring issues is the burdensome recovery time. I've designed a ring which, whenever I collect arcana, will accelerate the recovery process of Soul Ward.");
         addHeadline("reactive_trinkets.ring_of_prowess", "Ring of Prowess");
         addPages("reactive_trinkets.ring_of_prowess",
                 "Brilliance is attached to the soul, but isn't an impulse like the arcana. It is accumulated knowledge, and so is not inherently tied to the soul that learned it. Even strikes which pass through the soul harmlessly are capable of dislodging it.",
@@ -1081,20 +1085,20 @@ public class MalumLang extends LanguageProvider {
         add("death.attack." + DamageTypeRegistry.SCYTHE_SWEEP_IDENTIFIER, "%s was sliced in half");
         add("death.attack." + DamageTypeRegistry.SCYTHE_SWEEP_IDENTIFIER + ".player", "%s was sliced in half by %s");
 
-        addEffectDescription(MobEffectRegistry.GAIAS_BULWARK, "You are protected by an earthen bulwark, increasing your armor.");
-        addEffectDescription(MobEffectRegistry.EARTHEN_MIGHT, "Your fists and tools are reinforced with earth, increasing your overall damage.");
-        addEffectDescription(MobEffectRegistry.MINERS_RAGE, "Your tools are bolstered with radiance, increasing your mining and attack speed.");
-        addEffectDescription(MobEffectRegistry.IFRITS_EMBRACE, "The warm embrace of fire coats your soul, mending your seared scars.");
-        addEffectDescription(MobEffectRegistry.ZEPHYRS_COURAGE, "The zephyr propels you forward, increasing your movement speed.");
-        addEffectDescription(MobEffectRegistry.AETHERS_CHARM, "The heavens call for you, increasing jump height and decreasing gravity.");
-        addEffectDescription(MobEffectRegistry.POSEIDONS_GRASP, "You reach out for further power, increasing your reach and item pickup distance.");
-        addEffectDescription(MobEffectRegistry.ANGLERS_LURE, "Let any fish who meets my gaze learn the true meaning of fear; for I am the harbinger of death. The bane of creatures sub-aqueous, my rod is true and unwavering as I cast into the aquatic abyss. A man, scorned by this uncaring Earth, finds solace in the sea. My only friend, the worm upon my hook. Wriggling, writhing, struggling to surmount the mortal pointlessness that permeates this barren world. I am alone. I am empty. And yet, I fish.");
+        addJEEDEffectDescription(MobEffectRegistry.GAIAS_BULWARK, "You are protected by an earthen bulwark, increasing your armor.");
+        addJEEDEffectDescription(MobEffectRegistry.EARTHEN_MIGHT, "Your fists and tools are reinforced with earth, increasing your overall damage.");
+        addJEEDEffectDescription(MobEffectRegistry.MINERS_RAGE, "Your tools are bolstered with radiance, increasing your mining and attack speed.");
+        addJEEDEffectDescription(MobEffectRegistry.IFRITS_EMBRACE, "The warm embrace of fire coats your soul, mending your seared scars.");
+        addJEEDEffectDescription(MobEffectRegistry.ZEPHYRS_COURAGE, "The zephyr propels you forward, increasing your movement speed.");
+        addJEEDEffectDescription(MobEffectRegistry.AETHERS_CHARM, "The heavens call for you, increasing jump height and decreasing gravity.");
+        addJEEDEffectDescription(MobEffectRegistry.POSEIDONS_GRASP, "You reach out for further power, increasing your reach and item pickup distance.");
+        addJEEDEffectDescription(MobEffectRegistry.ANGLERS_LURE, "Let any fish who meets my gaze learn the true meaning of fear; for I am the harbinger of death. The bane of creatures sub-aqueous, my rod is true and unwavering as I cast into the aquatic abyss. A man, scorned by this uncaring Earth, finds solace in the sea. My only friend, the worm upon my hook. Wriggling, writhing, struggling to surmount the mortal pointlessness that permeates this barren world. I am alone. I am empty. And yet, I fish.");
 
-        addEffectDescription(MobEffectRegistry.GLUTTONY, "You feed on the vulnerable, increasing scythe proficiency and gradually restoring lost hunger.");
-        addEffectDescription(MobEffectRegistry.CANCEROUS_GROWTH, "You are emboldened by uncontrolled growth, increasing maximum health.");
-        addEffectDescription(MobEffectRegistry.WICKED_INTENT, "You bring forth a powerful counter attack, increasing scythe proficiency for just one strike.");
-        addEffectDescription(MobEffectRegistry.SILENCED, "You are silenced, leaving your magical capabilities neutered.");
-        addEffectDescription(MobEffectRegistry.GRIM_CERTAINTY, "The Weight of Worlds oscillates, sealing the next strike as a critical blow.");
+        addJEEDEffectDescription(MobEffectRegistry.GLUTTONY, "You feed on the vulnerable, increasing scythe proficiency and gradually restoring lost hunger.");
+        addJEEDEffectDescription(MobEffectRegistry.CANCEROUS_GROWTH, "You are emboldened by uncontrolled growth, increasing maximum health.");
+        addJEEDEffectDescription(MobEffectRegistry.WICKED_INTENT, "You bring forth a powerful counter attack, increasing scythe proficiency for just one strike.");
+        addJEEDEffectDescription(MobEffectRegistry.SILENCED, "You are silenced, leaving your magical capabilities neutered.");
+        addJEEDEffectDescription(MobEffectRegistry.GRIM_CERTAINTY, "The Weight of Worlds oscillates, sealing the next strike as a critical blow.");
 
         addTetraMaterial("soul_stained_steel", "Soulstained Steel");
         addTetraMaterial("hallowed_gold", "Hallowed Gold");
@@ -1104,7 +1108,19 @@ public class MalumLang extends LanguageProvider {
         addTetraMaterial("twisted_rock", "Twisted Rock");
         addTetraMaterial("spirit_fabric", "Spirit Fabric");
 
-        addTetraImprovement("malum.soul_strike", "Soul Strike", "Allows your item to shatter souls.");
+        addTetraImprovement("malum.soul_strike", "Soul Strike", "The item's material allows it to strike the soul.");
+
+        addAttributeLibAttributeDescription(AttributeRegistry.SCYTHE_PROFICIENCY, "Damage multiplier for Scythes");
+        addAttributeLibAttributeDescription(AttributeRegistry.SPIRIT_SPOILS, "Flat increase to spirits looted from slain foes");
+        addAttributeLibAttributeDescription(AttributeRegistry.ARCANE_RESONANCE, "Bonus potency for spirit-collection effects");
+
+        addAttributeLibAttributeDescription(AttributeRegistry.SOUL_WARD_INTEGRITY, "A percentile increase in durability for Soul Ward");
+        addAttributeLibAttributeDescription(AttributeRegistry.SOUL_WARD_RECOVERY_RATE, "A percentile increase in recovery rate for Soul Ward");
+        addAttributeLibAttributeDescription(AttributeRegistry.SOUL_WARD_CAP, "The capacity for Soul Ward");
+
+        addAttributeLibAttributeDescription(AttributeRegistry.RESERVE_STAFF_CHARGES, "A capacity for extra staff charges, replenished overtime, consumed when casting.");
+        addAttributeLibAttributeDescription(AttributeRegistry.MALIGNANT_CONVERSION, "A percentile conversion rate in which certain magical attributes are converted into armor, armor toughness and magic resistance");
+
     }
 
     @Override
@@ -1141,11 +1157,6 @@ public class MalumLang extends LanguageProvider {
         return "$u" + s + "/$";
     }
 
-    public void addTetraMaterial(String identifier, String name) {
-        add("tetra.material." + identifier, name);
-        add("tetra.material." + identifier + ".prefix", name);
-    }
-
     public void addRite(TotemicRiteType riteType, String basicName, String corruptName) {
         add(riteType.translationIdentifier(false), basicName);
         add(riteType.translationIdentifier(true), corruptName);
@@ -1153,11 +1164,6 @@ public class MalumLang extends LanguageProvider {
 
     public void addRiteEffectCategory(TotemicRiteEffect.MalumRiteEffectCategory category) {
         add(category.getTranslationKey(), DataHelper.toTitleCase(category.name().toLowerCase(), "_"));
-    }
-
-    public void addTetraImprovement(String identifier, String name, String description) {
-        add("tetra.improvement." + identifier + ".name", name);
-        add("tetra.improvement." + identifier + ".description", description);
     }
 
     public void addRiteEntry(String identifier, String riteDescription, String riteHoverDescription) {
@@ -1194,18 +1200,24 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.book.entry.page.headline." + identifier, tooltip);
     }
 
-    public void addTooltip(String identifier, String tooltip) {
-        add("malum.tooltip." + identifier, tooltip);
+    public void addTetraMaterial(String identifier, String name) {
+        add("tetra.material." + identifier, name);
+        add("tetra.material." + identifier + ".prefix", name);
     }
 
-    public void addEffectDescription(Supplier<MobEffect> mobEffectSupplier, String description) {
+    public void addTetraImprovement(String identifier, String name, String description) {
+        add("tetra.improvement." + identifier + ".name", name);
+        add("tetra.improvement." + identifier + ".description", description);
+    }
+
+    public void addAttributeLibAttributeDescription(RegistryObject<Attribute> attribute, String desc) {
+        add("attribute.name.malum." + attribute.getId().getPath() + ".desc", desc);
+    }
+
+    public void addJEEDEffectDescription(Supplier<MobEffect> mobEffectSupplier, String description) {
         add(mobEffectSupplier.get().getDescriptionId() + ".description", description);
     }
 
-    public void addDamageTypeDeathDescription(String identifier, String description) {
-        add("death.attack." + identifier, "%s " + description);
-        add("death.attack." + identifier + ".player", "%s " + description + " by %s");
-    }
 
     public String correctSoundName(String name) {
         if ((name.endsWith("_step"))) {

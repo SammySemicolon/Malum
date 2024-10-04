@@ -19,7 +19,7 @@ public class RuneReinforcementItem extends AbstractRuneCurioItem {
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, AttributeRegistry.SOUL_WARD_CAP,
                 new AttributeModifier(MalumMod.malumPath("curio_soul_ward_capacity"), 6f, AttributeModifier.Operation.ADD_VALUE));
-        addAttributeModifier(map, AttributeRegistry.SOUL_WARD_STRENGTH,
-                new AttributeModifier(MalumMod.malumPath("curio_soul_ward_strength"), 1f, AttributeModifier.Operation.ADD_VALUE));
+        addAttributeModifier(map, AttributeRegistry.SOUL_WARD_INTEGRITY,
+                new AttributeModifier(MalumMod.malumPath("curio_soul_ward_integrity"), 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 }

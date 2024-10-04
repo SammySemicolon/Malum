@@ -80,11 +80,6 @@ public class RuntimeEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void anvilUpdate(AnvilUpdateEvent event) {
-        CatalystFlingerItem.anvilUpdate(event);
-    }
-
 
     @SubscribeEvent
     public static void onEntityJoin(MobSpawnEvent.PositionCheck event) {

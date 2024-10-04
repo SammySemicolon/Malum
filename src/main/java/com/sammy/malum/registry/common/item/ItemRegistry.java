@@ -10,6 +10,7 @@ import com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer.*;
 import com.sammy.malum.common.block.nature.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.ArcaneElegyMusicDiscItem;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.augment.core.*;
 import com.sammy.malum.common.item.codex.*;
@@ -684,7 +685,8 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> RING_OF_ESOTERIC_SPOILS = register("ring_of_esoteric_spoils", GEAR_PROPERTIES(), CurioArcaneSpoilRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_CURATIVE_TALENT = register("ring_of_curative_talent", GEAR_PROPERTIES(), CurioCurativeRing::new);
-    public static final DeferredHolder<Item, Item> RING_OF_ARCANE_PROWESS = register("ring_of_arcane_prowess", GEAR_PROPERTIES(), CurioRingOfProwess::new);
+    public static final DeferredHolder<Item, Item> RING_OF_ARCANE_PROWESS = register("ring_of_arcane_prowess", GEAR_PROPERTIES(), CurioProwessRing::new);
+    public static final DeferredHolder<Item, Item> RING_OF_MANAWEAVING = register("ring_of_manaweaving", GEAR_PROPERTIES(), CurioManaweavingRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_ALCHEMICAL_MASTERY = register("ring_of_alchemical_mastery", GEAR_PROPERTIES(), CurioAlchemicalRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_DESPERATE_VORACITY = register("ring_of_desperate_voracity", GEAR_PROPERTIES(), CurioVoraciousRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_THE_HOARDER = register("ring_of_the_hoarder", GEAR_PROPERTIES(), CurioHoarderRing::new);
@@ -706,8 +708,8 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> NECKLACE_OF_THE_WATCHER = register("necklace_of_the_watcher", GEAR_PROPERTIES(), CurioWatcherNecklace::new);
     public static final DeferredHolder<Item, Item> BELT_OF_THE_LIMITLESS = register("belt_of_the_limitless", GEAR_PROPERTIES(), CurioLimitlessBelt::new);
 
-    public static final DeferredHolder<Item, Item> ARCANE_ELEGY = register("music_disc_arcane_elegy", HIDDEN_PROPERTIES().rarity(RARE), ArcaneElegyMusicDiscItem::new);
-    public static final DeferredHolder<Item, Item> AESTHETICA = register("music_disc_aesthetica", HIDDEN_PROPERTIES().rarity(RARE), AestheticaMusicDiscItem::new);
+    public static final DeferredHolder<Item, Item> ARCANE_ELEGY = register("music_disc_arcane_elegy", HIDDEN_PROPERTIES().rarity(RARE), Item::new);
+    public static final DeferredHolder<Item, Item> AESTHETICA = register("music_disc_aesthetica", HIDDEN_PROPERTIES().rarity(RARE), Item::new);
     //endregion
 
     //region cosmetics

@@ -27,19 +27,9 @@ public class CatalystFlingerItem extends Item {
         this.entitySupplier = entitySupplier;
     }
 
-    public static void anvilUpdate(AnvilUpdateEvent event) {
-//        var left = event.getLeft();
-//        if (left.getItem() instanceof NitrateFlingerItem) {
-//            var right = event.getRight();
-//            if (right.getItem().equals(ItemRegistry.MALIGNANT_LEAD.get())) {
-//                var copy = left.copy();
-//                copy.setDamageValue(0);
-//                event.setMaterialCost(1);
-//                event.setCost(left.getBaseRepairCost() + (right.isEmpty() ? 0 : right.getBaseRepairCost()));
-//
-//                event.setOutput(copy);
-//            }
-//        }
+    @Override
+    public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
+        return repairCandidate.getItem().equals(ItemRegistry.MALIGNANT_LEAD.get()) || super.isValidRepairItem(stack, repairCandidate);
     }
 
     @Override

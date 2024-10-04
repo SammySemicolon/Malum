@@ -31,9 +31,8 @@ public class RuneTwinnedDurationItem extends AbstractRuneCurioItem {
         if (event.getOldEffectInstance() == null && CurioHelper.hasCurioEquipped(entity, ItemRegistry.RUNE_OF_TWINNED_DURATION.get())) {
             MobEffectInstance effect = event.getEffectInstance();
             var type = effect.getEffect().value();
-            float multiplier = MobEffectRegistry.ALCHEMICAL_PROFICIENCY_MAP.getOrDefault(BuiltInRegistries.MOB_EFFECT.getKey(type), 1f);
             if (type.isBeneficial()) {
-                EntityHelper.extendEffect(effect, entity, (int) (effect.getDuration() * multiplier));
+                EntityHelper.extendEffect(effect, entity, effect.getDuration());
             }
         }
     }

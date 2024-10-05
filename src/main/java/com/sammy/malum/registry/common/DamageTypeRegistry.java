@@ -16,6 +16,8 @@ public class DamageTypeRegistry {
     public static final String SCYTHE_SWEEP_IDENTIFIER = "scythe_sweep";
 
     public static final ResourceKey<DamageType> VOODOO = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("voodoo"));
+
+    public static final ResourceKey<DamageType> SCYTHE_MELEE = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("scythe_melee"));
     public static final ResourceKey<DamageType> SCYTHE_SWEEP = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("scythe_sweep"));
 
     public static DamageSource create(Level level, ResourceKey<DamageType> damageType) {

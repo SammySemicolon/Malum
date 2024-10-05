@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.weapons.scythe;
 
 import com.sammy.malum.common.entity.boomerang.*;
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
@@ -29,25 +30,21 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
 
     @Override
     public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
-        //TODO: convert this to a ToolAction, or something alike
-        boolean canSweep = !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get()) && !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get());
+        boolean canSweep = canSweep(attacker);
         var level = attacker.level();
-        if (attacker instanceof Player player) {
-            SoundEvent sound;
-            if (canSweep) {
-                spawnSweepParticles(player, ParticleRegistry.SCYTHE_SWEEP_PARTICLE.get());
-                sound = SoundEvents.PLAYER_ATTACK_SWEEP;
-            } else {
-                spawnSweepParticles(player, ParticleRegistry.SCYTHE_CUT_PARTICLE.get());
-                sound = SoundRegistry.SCYTHE_CUT.get();
-            }
-            level.playSound(null, target.getX(), target.getY(), target.getZ(), sound, attacker.getSoundSource(), 1, 1);
-        }
 
-        if (!canSweep || event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC) || event.getSource().getMsgId().equals(DamageTypeRegistry.SCYTHE_SWEEP_IDENTIFIER)) {
+        if (!event.getSource().is(DamageTypeRegistry.SCYTHE_MELEE)) {
             return;
         }
-        int sweeping = EnchantmentHelper.getEnchantmentLevel(Enchantments.SWEEPING_EDGE, attacker);
+        if (!canSweep) {
+            SoundHelper.playSound(attacker, SoundRegistry.SCYTHE_CUT.get(), 1, 0.75f);
+            ParticleHelper.spawnVerticalSlashParticle(ParticleEffectTypeRegistry.SCYTHE_SLASH, attacker);
+            return;
+        }
+
+        SoundHelper.playSound(attacker, SoundRegistry.SCYTHE_SWEEP.get(), 1, 1);
+        ParticleHelper.spawnHorizontalSlashParticle(ParticleEffectTypeRegistry.SCYTHE_SLASH, attacker);
+        int sweeping = stack.getEnchantmentLevel(Enchantments.SWEEPING_EDGE.registry());
         float damage = event.getOriginalDamage() * (0.5f + EnchantmentHelper.getSweepingDamageRatio(attacker));
         level.getEntities(attacker, target.getBoundingBox().inflate(1 + sweeping * 0.25f)).forEach(e -> {
             if (e instanceof LivingEntity livingEntity) {
@@ -67,20 +64,17 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
         }
     }
 
-    public static ItemStack getScytheItemStack(DamageSource source, LivingEntity attacker) {
-        ItemStack stack = attacker.getMainHandItem();
-
-        if (source.getDirectEntity() instanceof ScytheBoomerangEntity scytheBoomerang) {
-            stack = scytheBoomerang.getItem();
-        }
-        return stack.getItem() instanceof MalumScytheItem ? stack : ItemStack.EMPTY;
-    }
-
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
         if (enchantment.equals(Enchantments.SWEEPING_EDGE)) {
             return true;
         }
         return super.supportsEnchantment(stack, enchantment);
+    }
+
+    public static boolean canSweep(LivingEntity attacker) {
+        //TODO: convert this to a ToolAction, or something alike
+        return !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get()) &&
+                !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get());
     }
 }

@@ -106,7 +106,7 @@ public class SoundRegistry {
 
     public static final RegistryObject<SoundEvent> CONCENTRATED_GLUTTONY_DRINK = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("concentrated_gluttony_drink")));
 
-    public static final RegistryObject<SoundEvent> HIDDEN_BLADE_STRIKES = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("hidden_blade_strikes")));
+    public static final RegistryObject<SoundEvent> HIDDEN_BLADE_UNLEASHED = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("hidden_blade_unleashed")));
     public static final RegistryObject<SoundEvent> MALIGNANT_METAL_RESONATES = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("malignant_metal_resonates")));
     public static final RegistryObject<SoundEvent> HUNGRY_BELT_FEEDS = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("hungry_belt_feeds")));
     public static final RegistryObject<SoundEvent> VORACIOUS_RING_FEEDS = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("voracious_ring_feeds")));

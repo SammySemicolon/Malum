@@ -39,7 +39,7 @@ public class TyrvingSlashParticleEffect extends ParticleEffectType {
             for (int i = 0; i < 4; i++) {
                 var slash = SlashParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), SpiritTypeRegistry.WICKED_SPIRIT);
                 float spinOffset = angle + (i % 2 == 0 ? 1 : -1) * offsetBase;
-                int lifeDelay = (i % 2 == 0 ? 2 : 0);
+                int lifeDelay = (i % 2 == 0 ? 3 : 0);
                 slash.getBuilder()
                         .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
                         .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(random, 1f, 2f)).build())

@@ -9,6 +9,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.phys.*;
 
 public class ParticleHelper {
+
     public static void spawnHorizontalSlashParticle(ParticleEffectType effectType, LivingEntity attacker) {
         if (!attacker.level().isClientSide()) {
             spawnSlashingParticle(effectType, attacker, 0f);
@@ -18,6 +19,12 @@ public class ParticleHelper {
     public static void spawnVerticalSlashParticle(ParticleEffectType effectType, LivingEntity attacker) {
         if (!attacker.level().isClientSide()) {
             spawnSlashingParticle(effectType, attacker, 0.4f, 1.57f, false);
+        }
+    }
+
+    public static void spawnRandomOrientationSlashParticle(ParticleEffectType effectType, LivingEntity attacker) {
+        if (!attacker.level().isClientSide()) {
+            spawnSlashingParticle(effectType, attacker, attacker.getRandom().nextFloat() * 3.14f);
         }
     }
 

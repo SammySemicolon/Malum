@@ -98,9 +98,13 @@ public class ScytheBoomerangEntity extends ThrowableItemProjectile {
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
+        if (level().isClientSide()) {
+            return;
+        }
         if (getOwner() instanceof LivingEntity scytheOwner && level() instanceof ServerLevel level) {
             Entity target = result.getEntity();
             DamageSource source = target.damageSources().mobProjectile(this, scytheOwner);
+            target.invulnerableTime = 0;
             boolean success = target.hurt(source, damage);
             if (success && target instanceof LivingEntity livingentity) {
                 ItemStack scythe = getItem();
@@ -112,7 +116,7 @@ public class ScytheBoomerangEntity extends ThrowableItemProjectile {
                         livingentity.hurt(DamageTypeRegistry.create(level(), DamageTypeRegistry.VOODOO, this, scytheOwner), magicDamage);
                     }
                 }
-
+                enemiesHit+=1;
             }
             returnTimer += 4;
             SoundHelper.playSound(this, SoundRegistry.SCYTHE_CUT.get(), 1.0F, 0.9f + level().getRandom().nextFloat() * 0.2f);
@@ -200,6 +204,11 @@ public class ScytheBoomerangEntity extends ThrowableItemProjectile {
     }
 
     @Override
+    protected Item getDefaultItem() {
+        return ItemRegistry.SOUL_STAINED_STEEL_SCYTHE.get();
+    }
+
+    @Override
     public boolean isNoGravity() {
         return true;
     }
@@ -207,11 +216,6 @@ public class ScytheBoomerangEntity extends ThrowableItemProjectile {
     @Override
     public float getPickRadius() {
         return 4f;
-    }
-
-    @Override
-    protected Item getDefaultItem() {
-        return ItemRegistry.SOUL_STAINED_STEEL_SCYTHE.get();
     }
 
     @Override

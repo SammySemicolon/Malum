@@ -51,6 +51,7 @@ public class ParticleEffectTypeRegistry {
     //Slash Effects
     public static final ParticleEffectType SCYTHE_SLASH = new SlashAttackParticleEffect("scythe_slash");
     public static final ParticleEffectType TYRVING_SLASH = new TyrvingSlashParticleEffect("tyrving_slash");
+    public static final ParticleEffectType HIDDEN_BLADE_COUNTER_SLASH = new HiddenBladeCounterParticleEffect("hidden_blade_counter_slash");
 
     //Wand
     public static final ParticleEffectType HEX_BOLT_IMPACT = new HexBoltImpactParticleEffect("hex_bolt_impact");

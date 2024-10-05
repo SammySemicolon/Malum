@@ -196,6 +196,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.curio.effect.spirits_xp", "Spirit Collection Generates Experience Points");
         add("malum.gui.curio.effect.spirits_extend_effect", "Spirit Collection Aids Potion Durations");
         add("malum.gui.curio.effect.spirits_weave_mana", "Spirit Collection Recovers Soul Ward");
+        add("malum.gui.curio.effect.spirits_weave_mana_irons_spellbooks", "Also Recovers Iron's Spellbooks' Mana");
         add("malum.gui.curio.effect.spirits_add_health", "Spirit Collection Grants Extra Hearts");
         add("malum.gui.curio.effect.hunger_drain", "Actively Drains Hunger");
         add("malum.gui.curio.effect.eat_rotten", "Rotten Foods are Tastier");
@@ -678,7 +679,7 @@ public class MalumLang extends LanguageProvider {
                 "This ring, through alchemical trickery, is able to manipulate the potions running through my blood. Whenever I collect arcana, the ring will partially filter out negative effects, while at the same time prolonging positive ones.");
         addHeadline("reactive_trinkets.ring_of_manaweaving", "Ring of Manaweaving");
         addPages("reactive_trinkets.ring_of_manaweaving",
-                "Soul Ward is a powerful barrier, but in it's current state it leaves much to be desired. One of it's glaring issues is the burdensome recovery time. I've designed a ring which, whenever I collect arcana, will accelerate the recovery process of Soul Ward.");
+                "Soul Ward is a powerful barrier, but in it's current state it leaves much to be desired. One of it's glaring issues is the burdensome recovery time. To combat this, I've created a ring that in reaction to spirit arcana accelerates the recovery process of Soul Ward");
         addHeadline("reactive_trinkets.ring_of_prowess", "Ring of Prowess");
         addPages("reactive_trinkets.ring_of_prowess",
                 "Brilliance is attached to the soul, but isn't an impulse like the arcana. It is accumulated knowledge, and so is not inherently tied to the soul that learned it. Even strikes which pass through the soul harmlessly are capable of dislodging it.",

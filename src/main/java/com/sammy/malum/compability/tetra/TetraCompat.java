@@ -1,5 +1,6 @@
 package com.sammy.malum.compability.tetra;
 
+import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -19,6 +20,16 @@ public class TetraCompat {
         LOADED = ModList.get().isLoaded("tetra");
     }
 
+    public static boolean hasSoulStrikeModifier(ItemStack stack) {
+        return LOADED && LoadedOnly.hasSoulStrikeModifier(stack);
+    }
+
+    public static void onEntityJoin(EntityJoinLevelEvent event) {
+        if (LOADED) {
+            LoadedOnly.fireArrow(event);
+        }
+    }
+
     public static class LoadedOnly {
 
         private static final ItemEffect SHATTERS_SOULS = ItemEffect.get("malum.shatters_souls");
@@ -29,7 +40,7 @@ public class TetraCompat {
             TetraEnchantmentHelper.registerMapping(SOUL_HUNTER_TOOL, new TetraEnchantmentHelper.EnchantmentRules("additions/malum_something", "exclusions/malum_something", EnchantmentRegistry.SOUL_HUNTER_WEAPON));
         }
 
-        public static boolean hasSoulStrike(ItemStack stack) {
+        public static boolean hasSoulStrikeModifier(ItemStack stack) {
             if (stack.getItem() instanceof ModularItem modularItem) {
                 return modularItem.getEffectLevel(stack, SHATTERS_SOULS) > 0;
             }
@@ -39,8 +50,8 @@ public class TetraCompat {
         public static void fireArrow(EntityJoinLevelEvent event) {
             if (event.getEntity() instanceof Arrow arrow) {
                 if (arrow.getOwner() instanceof Player player) {
-                    if (hasSoulStrike(player.getUseItem())) {
-                        arrow.addTag("malum:soul_arrow");
+                    if (hasSoulStrikeModifier(player.getUseItem())) {
+                        arrow.addTag(SoulDataHandler.SOUL_SHATTER_ENTITY_TAG);
                     }
                 }
             }

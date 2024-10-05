@@ -19,6 +19,6 @@ public class CurioCurativeRing extends MalumCurioItem implements IMalumEventResp
 
     @Override
     public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
-        collector.heal(collector.getMaxHealth() * 0.1f + (float) (arcaneResonance * 0.05f));
+        collector.heal((float) (collector.getMaxHealth() * 0.05f * arcaneResonance));
     }
 }

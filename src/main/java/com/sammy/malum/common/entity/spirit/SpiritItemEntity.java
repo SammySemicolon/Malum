@@ -37,6 +37,11 @@ public class SpiritItemEntity extends FloatingItemEntity {
     }
 
     @Override
+    public SoundSource getSoundSource() {
+        return SoundSource.NEUTRAL;
+    }
+
+    @Override
     public void collect() {
         ItemStack stack = getItem();
         if (stack.getItem() instanceof SpiritShardItem) {
@@ -45,18 +50,20 @@ public class SpiritItemEntity extends FloatingItemEntity {
             ItemHelper.giveItemToEntity(owner, stack);
         }
         if (random.nextFloat() < 0.6f) {
-            level().playSound(null, blockPosition(), SoundRegistry.SPIRIT_PICKUP.get(), SoundSource.NEUTRAL, 0.3f, Mth.nextFloat(random, 1.1f, 2f));
+            SoundHelper.playSound(this, SoundRegistry.SPIRIT_PICKUP.get(), 0.3f, Mth.nextFloat(random, 1.1f, 2f));
         }
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (soundCooldown-- == 0) {
-            if (random.nextFloat() < 0.4f) {
-                level().playSound(null, blockPosition(), SoundRegistry.ARCANE_WHISPERS.get(), SoundSource.NEUTRAL, 0.3f, Mth.nextFloat(random, 0.8f, 2f));
+        if (!level().isClientSide()) {
+            if (soundCooldown-- == 0) {
+                if (random.nextFloat() < 0.4f) {
+                    SoundHelper.playSound(this, SoundRegistry.ARCANE_WHISPERS.get(), 0.3f, Mth.nextFloat(random, 0.8f, 2f));
+                }
+                soundCooldown = 40 + random.nextInt(40);
             }
-            soundCooldown = random.nextInt(40) + 40;
         }
     }
 

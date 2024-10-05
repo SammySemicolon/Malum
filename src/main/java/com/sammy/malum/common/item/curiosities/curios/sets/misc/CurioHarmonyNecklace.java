@@ -7,6 +7,8 @@ import com.sammy.malum.registry.common.item.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
+import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import team.lodestar.lodestone.helpers.*;
 

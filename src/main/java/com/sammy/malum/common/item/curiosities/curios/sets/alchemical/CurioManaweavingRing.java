@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.alchemical;
 import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
+import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.core.handlers.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.entity.*;
@@ -18,6 +19,9 @@ public class CurioManaweavingRing extends MalumCurioItem implements IMalumEventR
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
         consumer.accept(positiveEffect("spirits_weave_mana"));
+        if (IronsSpellsCompat.LOADED) {
+            consumer.accept(positiveEffect("spirits_weave_mana_irons_spellbooks"));
+        }
     }
 
     @Override
@@ -25,6 +29,7 @@ public class CurioManaweavingRing extends MalumCurioItem implements IMalumEventR
         if (collector instanceof Player player) {
             var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
             handler.soulWardProgress -= SoulWardHandler.getSoulWardCooldown(player) * arcaneResonance;
+            IronsSpellsCompat.generateMana(collector, 10 * arcaneResonance);
         }
     }
 }

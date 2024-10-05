@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.sammy.malum.*;
 import com.sammy.malum.client.VoidRevelationHandler;
 import com.sammy.malum.common.block.curiosities.weeping_well.PrimordialSoupBlock;
 import com.sammy.malum.common.block.curiosities.weeping_well.VoidConduitBlock;
@@ -20,17 +21,18 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.*;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import team.lodestar.lodestone.helpers.BlockHelper;
 import team.lodestar.lodestone.systems.easing.Easing;
@@ -45,7 +47,7 @@ import static com.sammy.malum.client.VoidRevelationHandler.RevelationType.BLACK_
 
 public class TouchOfDarknessHandler {
 
-    public static final UUID GRAVITY_MODIFIER_UUID = UUID.fromString("d0aea6b5-f6c5-479d-b70c-455e46a62184");
+    public static final ResourceLocation GRAVITY_MODIFIER_UUID = MalumMod.malumPath("weeping_well_reduced_gravity");
     public static final float MAX_AFFLICTION = 100f;
 
     public boolean isNearWeepingWell;
@@ -128,7 +130,7 @@ public class TouchOfDarknessHandler {
             }
             //GRAVITY
 
-            AttributeInstance gravity = livingEntity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
+            AttributeInstance gravity = livingEntity.getAttribute(Attributes.GRAVITY);
             if (gravity != null) {
                 boolean hasModifier = gravity.getModifier(GRAVITY_MODIFIER_UUID) != null;
                 if (handler.progressToRejection > 0) {
@@ -146,7 +148,7 @@ public class TouchOfDarknessHandler {
                     handler.progressToRejection++;
                     if (!level.isClientSide) {
                         if (livingEntity instanceof Player && level.getGameTime() % 6L == 0) {
-                            level.playSound(null, livingEntity.blockPosition(), SoundRegistry.SONG_OF_THE_VOID.get(), SoundSource.HOSTILE, 0.5f + handler.progressToRejection * 0.02f, 0.5f + handler.progressToRejection * 0.03f);
+                            level.playSound(null, livingEntity.blockPosition(), SoundRegistry.SONG_OF_THE_VOID, SoundSource.HOSTILE, 0.5f + handler.progressToRejection * 0.02f, 0.5f + handler.progressToRejection * 0.03f);
                         }
                         if (handler.rejection == 0 && handler.progressToRejection > 60) {
                             handler.reject(livingEntity);
@@ -203,13 +205,13 @@ public class TouchOfDarknessHandler {
             if (!playerDataCapability.hasBeenRejected) {
                 SpiritHarvestHandler.spawnItemAsSpirit(ItemRegistry.UMBRAL_SPIRIT.get().getDefaultInstance(), player, player);
             }
-            level.playSound(null, livingEntity.blockPosition(), SoundRegistry.VOID_REJECTION.get(), SoundSource.HOSTILE, 2f, Mth.nextFloat(livingEntity.getRandom(), 0.5f, 0.8f));
+            SoundHelper.playSound(livingEntity, SoundRegistry.VOID_REJECTION, 2f, Mth.nextFloat(livingEntity.getRandom(), 0.5f, 0.8f));
         } else {
             VoidRevelationHandler.seeTheRevelation(BLACK_CRYSTAL);
         }
 
         playerDataCapability.hasBeenRejected = true;
-        livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.REJECTED.get(), 400, 0));
+        livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.REJECTED, 400, 0));
     }
 
     public static AttributeModifier getEntityGravityAttributeModifier(LivingEntity livingEntity) {
@@ -230,7 +232,6 @@ public class TouchOfDarknessHandler {
     }
 
     public static class ClientOnly {
-        private static final Tesselator INSTANCE = new Tesselator();
 
         public static void renderDarknessVignette(GuiGraphics guiGraphics) {
             Minecraft minecraft = Minecraft.getInstance();
@@ -255,7 +256,6 @@ public class TouchOfDarknessHandler {
             VFXBuilders.ScreenVFXBuilder builder = VFXBuilders.createScreen()
                     .setPosColorTexLightmapDefaultFormat()
                     .setPositionWithWidth(0, 0, screenWidth, screenHeight)
-                    .overrideBufferBuilder(INSTANCE.getBuilder())
                     .setColor(0, 0, 0)
                     .setAlpha(alpha)
                     .setShader(ShaderRegistry.TOUCH_OF_DARKNESS.getInstance());

@@ -42,24 +42,13 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @EventBusSubscriber
 public class RuntimeEvents {
-/*
-    @SubscribeEvent
-    public static void onAttachCapability(AttachCapabilitiesEvent<Entity> event) {
-        MalumPlayerDataCapability.attachPlayerCapability(event);
-        MalumLivingEntityDataCapability.attachEntityCapability(event);
-        MalumItemDataCapability.attachItemCapability(event);
-    }
 
-
- */
     @SubscribeEvent
     public static void onEntityJoin(EntityJoinLevelEvent event) {
         MalumPlayerDataCapability.playerJoin(event);
         CurioTokenOfGratitude.giveItem(event);
         SoulDataHandler.updateAi(event);
-        if (TetraCompat.LOADED) {
-            TetraCompat.LoadedOnly.fireArrow(event);
-        }
+        TetraCompat.onEntityJoin(event);
     }
 
 
@@ -79,7 +68,6 @@ public class RuntimeEvents {
             }
         }
     }
-
 
     @SubscribeEvent
     public static void onEntityJoin(MobSpawnEvent.PositionCheck event) {
@@ -200,20 +188,15 @@ public class RuntimeEvents {
         SoulWardHandler.shieldPlayer(event);
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onLateDamage(LivingDamageEvent.Pre event) {
-        WickedIntentEffect.removeWickedIntent(event);
-    }
-
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
-        EsotericReapingHandler.tryCreateReapingDrops(event);
-        SpiritHarvestHandler.shatterSoul(event);
+        EsotericReapingHandler.onDeath(event);
+        SpiritHarvestHandler.spawnSpiritsOnDeath(event);
     }
 
     @SubscribeEvent
     public static void onDrops(LivingDropsEvent event) {
-        SpiritHarvestHandler.modifyDroppedItems(event);
+        SpiritHarvestHandler.primeItemForShatter(event);
     }
 
     @SubscribeEvent

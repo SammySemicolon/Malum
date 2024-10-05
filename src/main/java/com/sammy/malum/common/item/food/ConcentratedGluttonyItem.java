@@ -25,7 +25,7 @@ public class ConcentratedGluttonyItem extends BottledDrinkItem {
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pEntityLiving) {
         final MobEffectInstance gluttonyEffect = createGluttonyEffect(pEntityLiving);
         pEntityLiving.addEffect(gluttonyEffect);
-        pEntityLiving.playSound(SoundRegistry.CONCENTRATED_GLUTTONY_DRINK.get(), 1f, RandomHelper.randomBetween(pLevel.random, 1.5f, 2f));
+        SoundHelper.playSound(pEntityLiving, SoundRegistry.CONCENTRATED_GLUTTONY_DRINK.get(), 1f, RandomHelper.randomBetween(pLevel.random, 1.5f, 2f));
         if (!pLevel.isClientSide) {
             createGluttonyVFX(pEntityLiving, gluttonyEffect.getAmplifier());
         }

@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import team.lodestar.lodestone.systems.particle.world.type.*;
@@ -39,6 +38,8 @@ public class ParticleRegistry {
     public static DeferredHolder<ParticleType<?>, SimpleParticleType> SCYTHE_CUT_PARTICLE = PARTICLES.register("scythe_cut", () -> new SimpleParticleType(true));
     public static DeferredHolder<ParticleType<?>, SimpleParticleType> SCYTHE_SWEEP_PARTICLE = PARTICLES.register("scythe_sweep", () -> new SimpleParticleType(true));
     public static DeferredHolder<ParticleType<?>, SimpleParticleType> STAFF_SLAM_PARTICLE = PARTICLES.register("staff_slam", () -> new SimpleParticleType(true));
+    public static DeferredHolder<ParticleType<?>, LodestoneWorldParticleType> SLASH = PARTICLES.register("slash", LodestoneWorldParticleType::new);
+    public static DeferredHolder<ParticleType<?>, LodestoneWorldParticleType> HEAVY_SLASH = PARTICLES.register("heavy_slash", LodestoneWorldParticleType::new);
 
     public static void registerParticleFactory(RegisterParticleProvidersEvent event) {
         Minecraft.getInstance().particleEngine.register(SPIRIT_FLAME_PARTICLE.get(), SpiritFlameParticleType.Factory::new);
@@ -59,6 +60,9 @@ public class ParticleRegistry {
         Minecraft.getInstance().particleEngine.register(CIRCLE.get(), LodestoneWorldParticleType.Factory::new);
         Minecraft.getInstance().particleEngine.register(SQUARE.get(), LodestoneWorldParticleType.Factory::new);
         Minecraft.getInstance().particleEngine.register(SAW.get(), LodestoneWorldParticleType.Factory::new);
+
+        Minecraft.getInstance().particleEngine.register(SLASH.get(), LodestoneWorldParticleType.Factory::new);
+        Minecraft.getInstance().particleEngine.register(HEAVY_SLASH.get(), LodestoneWorldParticleType.Factory::new);
 
         Minecraft.getInstance().particleEngine.register(SCYTHE_CUT_PARTICLE.get(), ScytheAttackParticle.Factory::new);
         Minecraft.getInstance().particleEngine.register(SCYTHE_SWEEP_PARTICLE.get(), ScytheAttackParticle.Factory::new);

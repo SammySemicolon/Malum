@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.weapons;
 
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.world.effect.*;
@@ -8,8 +9,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.*;
 import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.item.tools.*;
 
@@ -26,8 +26,8 @@ public class WeightOfWorldsItem extends LodestoneAxeItem implements IEventRespon
     @Override
     public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (attacker != null) {
-            if (attacker instanceof Player player) {
-                MalumScytheItem.spawnSweepParticles(player, ParticleRegistry.SCYTHE_CUT_PARTICLE.get());
+            if (attacker instanceof Player) {
+                ParticleHelper.spawnVerticalSlashParticle(ParticleEffectTypeRegistry.SCYTHE_SLASH, attacker);
             }
             final Level level = attacker.level();
             level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.WEIGHT_OF_WORLDS_SLASH.get(), attacker.getSoundSource(), 1, 0.5f);

@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.weapons;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.packets.particle.rite.generic.MajorEntityEffectParticlePacket;
 import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.*;
@@ -13,6 +14,7 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.item.tools.*;
 
@@ -39,8 +41,8 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
                 target.invulnerableTime = 0;
                 target.hurt(DamageTypeRegistry.create(level, DamageTypeRegistry.VOODOO, attacker), damage);
             }
-            level.playSound(null, target.blockPosition(), SoundRegistry.VOID_SLASH.get(), SoundSource.PLAYERS, 1, 1f + level.random.nextFloat() * 0.25f);
-            PacketDistributor.sendToPlayersTrackingEntity(target, new MajorEntityEffectParticlePacket(SpiritTypeRegistry.ELDRITCH_SPIRIT.getPrimaryColor(), target.getX(), target.getY() + target.getBbHeight() / 2, target.getZ()));
+            SoundHelper.playSound(attacker, SoundRegistry.TYRVING_SLASH.get(), 1, RandomHelper.randomBetween(attacker.getRandom(), 1f, 1.5f));
+            ParticleHelper.spawnVerticalSlashParticle(ParticleEffectTypeRegistry.TYRVING_SLASH, attacker);
         }
     }
 

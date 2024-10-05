@@ -9,6 +9,7 @@ import com.sammy.malum.visual_effects.networked.gluttony.*;
 import com.sammy.malum.visual_effects.networked.nitrate.*;
 import com.sammy.malum.visual_effects.networked.pylon.*;
 import com.sammy.malum.visual_effects.networked.ritual.*;
+import com.sammy.malum.visual_effects.networked.slash.*;
 import com.sammy.malum.visual_effects.networked.spirit_mote.*;
 import com.sammy.malum.visual_effects.networked.staff.*;
 import com.sammy.malum.visual_effects.networked.totem.*;
@@ -46,6 +47,10 @@ public class ParticleEffectTypeRegistry {
     public static final ParticleEffectType RITUAL_PLINTH_BEGINS_CHARGING = new RitualPlinthBeginChargingParticleEffect("ritual_plinth_begins_charging");
     public static final ParticleEffectType RITUAL_PLINTH_CHANGES_TIER = new RitualPlinthChangeTierParticleEffect("ritual_plinth_changes_tier");
     public static final ParticleEffectType RITUAL_PLINTH_FAILURE = new RitualPlinthFailureParticleEffect("ritual_plinth_failure");
+
+    //Slash Effects
+    public static final ParticleEffectType SCYTHE_SLASH = new SlashAttackParticleEffect("scythe_slash");
+    public static final ParticleEffectType TYRVING_SLASH = new TyrvingSlashParticleEffect("tyrving_slash");
 
     //Wand
     public static final ParticleEffectType HEX_BOLT_IMPACT = new HexBoltImpactParticleEffect("hex_bolt_impact");

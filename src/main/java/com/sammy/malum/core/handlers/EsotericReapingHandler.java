@@ -20,7 +20,7 @@ import java.util.List;
 
 public class EsotericReapingHandler {
 
-    public static void tryCreateReapingDrops(LivingDeathEvent event) {
+    public static void onDeath(LivingDeathEvent event) {
         if (event.isCanceled()) {
             return;
         }

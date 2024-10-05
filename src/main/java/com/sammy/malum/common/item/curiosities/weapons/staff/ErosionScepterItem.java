@@ -48,7 +48,7 @@ public class ErosionScepterItem extends AbstractStaffItem {
                 EntityHelper.amplifyEffect(effect, target, 2, 9);
                 EntityHelper.extendEffect(effect, target, 60, 600);
             }
-            attacker.level().playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.DRAINING_MOTIF.get(), attacker.getSoundSource(), 1, 1.25f);
+            SoundHelper.playSound(target, SoundRegistry.DRAINING_MOTIF.get(), attacker.getSoundSource(), 1, 1.25f);
         }
         super.hurtEvent(event, attacker, target, stack);
     }

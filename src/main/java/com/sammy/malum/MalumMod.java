@@ -2,6 +2,7 @@ package com.sammy.malum;
 
 import com.sammy.malum.compability.attributelib.*;
 import com.sammy.malum.compability.farmersdelight.*;
+import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.config.*;
 import com.sammy.malum.registry.common.item.tabs.*;
@@ -61,6 +62,7 @@ public class MalumMod {
         TetraCompat.init();
         FarmersDelightCompat.init();
         AttributeLibCompat.init();
+        IronsSpellsCompat.init();
 
         modBus.addListener(CreativeTabRegistry::populateItemGroups);
     }

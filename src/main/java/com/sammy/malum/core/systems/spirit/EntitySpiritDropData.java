@@ -8,8 +8,9 @@ import javax.annotation.*;
 import java.util.*;
 
 public class EntitySpiritDropData {
-    public static final String SOUL_DATA = "soul_data";
+
     public static final EntitySpiritDropData EMPTY = new EntitySpiritDropData(SpiritTypeRegistry.SACRED_SPIRIT, new ArrayList<>(), null);
+
     public final MalumSpiritType primaryType;
     public final int totalSpirits;
     public final List<SpiritIngredient> dataEntries;

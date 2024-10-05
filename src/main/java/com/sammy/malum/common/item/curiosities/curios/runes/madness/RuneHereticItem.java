@@ -10,7 +10,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import team.lodestar.lodestone.helpers.EntityHelper;
+import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.item.IEventResponderItem;
 
 import java.util.function.Consumer;
@@ -36,6 +36,6 @@ public class RuneHereticItem extends AbstractRuneCurioItem implements IEventResp
             EntityHelper.amplifyEffect(effect, attacker, 1, 9);
             EntityHelper.extendEffect(effect, attacker, 60, 600);
         }
-        attacked.level().playSound(null, attacked.getX(), attacked.getY(), attacked.getZ(), SoundRegistry.DRAINING_MOTIF.get(), attacked.getSoundSource(), 1f, 1.5f);
+        SoundHelper.playSound(attacked, SoundRegistry.DRAINING_MOTIF.get(), 1f, 1.5f);
     }
 }

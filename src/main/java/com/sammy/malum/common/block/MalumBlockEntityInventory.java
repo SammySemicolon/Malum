@@ -28,7 +28,8 @@ public class MalumBlockEntityInventory extends LodestoneBlockEntityInventory {
     public void extractItem(Player playerEntity, ItemStack stack, int slot) {
         super.extractItem(playerEntity, stack, slot);
         SoundEvent soundEvent = getExtractSound(stack);
-        playerEntity.level().playSound(null, playerEntity.blockPosition(), soundEvent, SoundSource.BLOCKS, 0.7f, RandomHelper.randomBetween(playerEntity.level().random, 0.8f, 1.2f));
+
+        SoundHelper.playSound(playerEntity, soundEvent, SoundSource.BLOCKS, 0.7f, RandomHelper.randomBetween(playerEntity.getRandom(), 0.8f, 1.2f));
     }
 
     @Override
@@ -36,7 +37,7 @@ public class MalumBlockEntityInventory extends LodestoneBlockEntityInventory {
         final ItemStack result = super.insertItem(playerEntity, stack);
         if (!result.isEmpty()) {
             SoundEvent soundEvent = getInsertSound(result);
-            playerEntity.level().playSound(null, playerEntity.blockPosition(), soundEvent, SoundSource.BLOCKS, 0.7f, RandomHelper.randomBetween(playerEntity.level().random, 0.8f, 1.2f));
+            SoundHelper.playSound(playerEntity, soundEvent, SoundSource.BLOCKS, 0.7f, RandomHelper.randomBetween(playerEntity.getRandom(), 0.8f, 1.2f));
         }
         return result;
     }

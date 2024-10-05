@@ -1,8 +1,5 @@
 package com.sammy.malum.core.handlers;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.entity.boomerang.*;
 import com.sammy.malum.compability.tetra.*;
@@ -12,12 +9,8 @@ import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.living.LivingChangeTargetEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
-import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.minecraftforge.event.entity.*;
+import net.minecraftforge.event.entity.living.*;
 
 public class SoulDataHandler {
 
@@ -105,6 +98,11 @@ public class SoulDataHandler {
 
     public static void removeSentience(Mob mob) {
         mob.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof LookAtPlayerGoal || g.getGoal() instanceof MeleeAttackGoal || g.getGoal() instanceof SwellGoal || g.getGoal() instanceof PanicGoal || g.getGoal() instanceof RandomLookAroundGoal || g.getGoal() instanceof AvoidEntityGoal);
+    }
+
+    public static ItemStack getScytheWeapon(DamageSource source, LivingEntity attacker) {
+        var soulHunterWeapon = getSoulHunterWeapon(source, attacker);
+        return soulHunterWeapon.getItem() instanceof MalumScytheItem ? soulHunterWeapon : ItemStack.EMPTY;
     }
 
     public static ItemStack getSoulHunterWeapon(DamageSource source, LivingEntity attacker) {

@@ -12,13 +12,13 @@ import team.lodestar.lodestone.registry.common.tag.*;
 
 public class MalumAttributeEventHandler {
     public static void processAttributes(LivingDamageEvent.Pre event) {
-        if (event.isCanceled() || event.getOriginalDamage() <= 0) {
+        if (event.isCanceled || event.getOriginalDamage() <= 0) {
             return;
         }
         DamageSource source = event.getSource();
         if (source.getEntity() instanceof LivingEntity attacker) {
             float amount = event.getOriginalDamage();
-            ItemStack stack = MalumScytheItem.getScytheItemStack(source, attacker);
+            ItemStack stack = SoulDataHandler.getScytheWeapon(source, attacker);
             if (stack.isEmpty()) {
                 return;
             }
@@ -26,7 +26,7 @@ public class MalumAttributeEventHandler {
                 return;
             }
             if (!event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC)) {
-                AttributeInstance scytheProficiency = attacker.getAttribute(AttributeRegistry.SCYTHE_PROFICIENCY.get());
+                AttributeInstance scytheProficiency = attacker.getAttribute(AttributeRegistry.SCYTHE_PROFICIENCY);
                 if (scytheProficiency != null && scytheProficiency.getValue() > 0) {
                     event.setNewDamage((float) (amount + scytheProficiency.getValue() * 0.5f));
                 }

@@ -8,6 +8,8 @@ import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
+import net.minecraft.core.particles.*;
+import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.stats.*;
 import net.minecraft.util.*;
@@ -58,7 +60,7 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
     public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (attacker instanceof Player player && !(event.getSource().getDirectEntity() instanceof AbstractBoltProjectileEntity)) {
             Level level = player.level();
-            MalumScytheItem.spawnSweepParticles(player, ParticleRegistry.STAFF_SLAM_PARTICLE.get());
+            spawnSweepParticles(player, ParticleRegistry.STAFF_SLAM_PARTICLE.get());
             level.playSound(null, target.blockPosition(), SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 0.75f, Mth.nextFloat(level.random, 0.5F, 1F));
             if (event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC)) {
                 ReplenishingEnchantment.replenishStaffCooldown(attacker, stack);
@@ -152,6 +154,13 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
         return UseAnim.BOW;
     }
 
+    public static void spawnSweepParticles(Player player, SimpleParticleType type) {
+        double d0 = (-Mth.sin(player.getYRot() * ((float) Math.PI / 180F)));
+        double d1 = Mth.cos(player.getYRot() * ((float) Math.PI / 180F));
+        if (player.level() instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(type, player.getX() + d0, player.getY(0.5D), player.getZ() + d1, 0, d0, 0.0D, d1, 0.0D);
+        }
+    }
     public Vec3 getProjectileSpawnPos(LivingEntity player, InteractionHand hand, float distance, float spread) {
         int angle = hand == InteractionHand.MAIN_HAND ? 225 : 90;
         double radians = Math.toRadians(angle - player.yHeadRot);

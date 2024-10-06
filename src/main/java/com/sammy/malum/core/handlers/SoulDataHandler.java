@@ -1,7 +1,10 @@
 package com.sammy.malum.core.handlers;
 
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.entity.boomerang.*;
+import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.nbt.*;
@@ -9,10 +12,13 @@ import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.item.*;
-import net.minecraftforge.event.entity.*;
-import net.minecraftforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.*;
+import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.tick.*;
 
 public class SoulDataHandler {
+
+    public static final String SOUL_SHATTER_ENTITY_TAG = "malum:can_shatter_souls";
 
     public float exposedSoulDuration;
     public boolean soulless;
@@ -75,16 +81,21 @@ public class SoulDataHandler {
         }
         LivingEntity target = event.getEntity();
         DamageSource source = event.getSource();
-        SoulDataHandler soulData = MalumLivingEntityDataCapability.getCapability(target).soulData;
         if (source.getEntity() instanceof LivingEntity attacker) {
             ItemStack stack = getSoulHunterWeapon(source, attacker);
-            if (stack.is(ItemTagRegistry.SOUL_HUNTER_WEAPON) || (TetraCompat.LOADED && TetraCompat.LoadedOnly.hasSoulStrike(stack))) {
-                soulData.exposedSoulDuration = 200;
+            if (stack.is(ItemTagRegistry.SOUL_HUNTER_WEAPON) || TetraCompat.hasSoulStrikeModifier(stack)) {
+                exposeSoul(target);
             }
         }
-        if (source.getDirectEntity() != null && source.getDirectEntity().getTags().contains("malum:soul_arrow")) {
-            soulData.exposedSoulDuration = 200;
+        var directEntity = source.getDirectEntity();
+        if (directEntity != null && directEntity.getTags().contains(SOUL_SHATTER_ENTITY_TAG)) {
+            exposeSoul(target);
         }
+    }
+    public static void exposeSoul(LivingEntity entity) {
+        SoulDataHandler soulData = MalumLivingEntityDataCapability.getCapability(entity).soulData;
+        soulData.exposedSoulDuration = 200;
+
     }
 
     public static void manageSoul(EntityTickEvent event) {

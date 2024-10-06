@@ -1,5 +1,6 @@
 package com.sammy.malum.core.events;
 
+import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.client.*;
@@ -25,7 +26,11 @@ public class ClientSetupEvents {
     public static void registerOverlays(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.ARMOR_LEVEL, "soul_ward", (gui, poseStack, partialTick, width, height) ->
                 SoulWardHandler.ClientOnly.renderSoulWard(gui, poseStack, width, height));
-        event.registerBelow(VanillaGuiLayers.BOSS_OVERLAY, "touch_of_darkness", (gui, poseStack, partialTick, width, height) ->
+
+        event.registerAboveAll("hidden_blade_cooldown", (gui, poseStack, partialTick, width, height) ->
+                CurioHiddenBladeNecklace.ClientOnly.renderHiddenBladeCooldown(gui, poseStack, width, height));
+
+        event.registerAbove(VanillaGuiLayers.BOSS_OVERLAY, "touch_of_darkness", (gui, poseStack, partialTick, width, height) ->
                 TouchOfDarknessHandler.ClientOnly.renderDarknessVignette(poseStack));
     }
 

@@ -92,6 +92,7 @@ public class HiddenBladeDelayedImpactEntity extends ThrowableItemProjectile {
             Entity target = result.getEntity();
             DamageSource source = DamageTypeHelper.create(level(), DamageTypeRegistry.HIDDEN_BLADE_COUNTER, this, scytheOwner);
             target.invulnerableTime = 0;
+            final Vec3 deltaMovement = target.getDeltaMovement();
             boolean success = target.hurt(source, damage);
             if (success && target instanceof LivingEntity livingentity) {
                 ItemStack scythe = getItem();
@@ -108,6 +109,7 @@ public class HiddenBladeDelayedImpactEntity extends ThrowableItemProjectile {
                 }
                 enemiesHit+=1;
             }
+            target.setDeltaMovement(deltaMovement);
             SoundHelper.playSound(this, SoundRegistry.SCYTHE_CUT.get(), 1.0F, 0.9f + level().getRandom().nextFloat() * 0.2f);
         }
         super.onHitEntity(result);

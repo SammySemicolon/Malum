@@ -100,6 +100,7 @@ public class RuntimeEvents {
         MalignantConversionHandler.checkForAttributeChanges(event);
         TouchOfDarknessHandler.entityTick(event);
         CurioWatcherNecklace.entityTick(event);
+        CurioHiddenBladeNecklace.entityTick(event);
     }
 
     @SubscribeEvent
@@ -179,13 +180,8 @@ public class RuntimeEvents {
 
     @SubscribeEvent
     public static void onHurt(LivingDamageEvent.Pre event) {
-        MalumAttributeEventHandler.processAttributes(event);
-    }
-
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onLateHurt(LivingDamageEvent.Post event) {
         SoulWardHandler.shieldPlayer(event);
+        MalumAttributeEventHandler.processAttributes(event);
     }
 
     @SubscribeEvent

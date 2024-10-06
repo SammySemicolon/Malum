@@ -33,6 +33,7 @@ public class MalumLivingEntityDataCapability {
             SoulDataHandler.CODEC.fieldOf("soulData").forGetter(c -> c.soulData),
             TouchOfDarknessHandler.CODEC.fieldOf("darknessAfflictionData").forGetter(c -> c.touchOfDarknessHandler),
             Codec.INT.fieldOf("watcherNecklaceCooldown").forGetter(c -> c.watcherNecklaceCooldown),
+            Codec.INT.fieldOf("hiddenBladeNecklaceCooldown").forGetter(c -> c.hiddenBladeNecklaceCooldown),
             Codec.list(ItemStack.CODEC).fieldOf("soulsToApplyToDrops").forGetter(c -> c.soulsToApplyToDrops),
             UUIDUtil.CODEC.fieldOf("killerUUID").forGetter(c -> c.killerUUID)
     ).apply(obj, MalumLivingEntityDataCapability::new));
@@ -42,16 +43,17 @@ public class MalumLivingEntityDataCapability {
     public TouchOfDarknessHandler touchOfDarknessHandler = new TouchOfDarknessHandler();
 
     public int watcherNecklaceCooldown;
+    public int hiddenBladeNecklaceCooldown;
 
     public List<ItemStack> soulsToApplyToDrops;
     public UUID killerUUID;
 
     public MalumLivingEntityDataCapability() {}
 
-    public MalumLivingEntityDataCapability(SoulDataHandler soulData, TouchOfDarknessHandler touchOfDarknessHandler, int watcherNecklaceCooldown, List<ItemStack> soulsToApplyToDrops, UUID killerUUID) {
+    public MalumLivingEntityDataCapability(SoulDataHandler soulData, TouchOfDarknessHandler touchOfDarknessHandler, int watcherNecklaceCooldown, int hiddenBladeNecklaceCooldown, List<ItemStack> soulsToApplyToDrops, UUID killerUUID) {
         this.soulData = soulData;
         this.touchOfDarknessHandler = touchOfDarknessHandler;
-        this.watcherNecklaceCooldown = watcherNecklaceCooldown;
+        this.hiddenBladeNecklaceCooldown = hiddenBladeNecklaceCooldown;
         this.soulsToApplyToDrops = soulsToApplyToDrops;
         this.killerUUID = killerUUID;
     }

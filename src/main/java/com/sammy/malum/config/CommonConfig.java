@@ -38,6 +38,10 @@ public class CommonConfig extends LodestoneConfig {
             builder.comment("Base time in ticks it takes for one point of soul ward to recover.")
                     .define("soulWardRate", 100)));
 
+    public static ConfigValueHolder<Boolean> IRONS_SPELLBOOKS_SOUL_SHATTER = new ConfigValueHolder<>(MALUM, "common/compat/irons_spellbooks", (builder ->
+            builder.comment("If set to true, and Iron's Spellbooks is installed, spells and scrolls from the mod will function as soul hunter weapons.")
+                    .define("spellsLootSpirits", true)));
+
     public CommonConfig(ModConfigSpec.Builder builder) {
         super(MALUM, "common", builder);
     }

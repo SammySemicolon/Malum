@@ -80,7 +80,6 @@ public class CreativeTabRegistry {
                     .icon(() -> ItemRegistry.WEAVERS_WORKBENCH.get().getDefaultInstance()).build()
     );
 
-    @SuppressWarnings("DataFlowIssue")
     public static void populateItemGroups(BuildCreativeModeTabContentsEvent event) {
         final ResourceKey<CreativeModeTab> tabKey = event.getTabKey();
         if (TAB_SORTING.containsKey(tabKey)) {

@@ -209,6 +209,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.curio.effect.soul_ward_magic_resilience", "Soul Ward Magic Resilience");
         add("malum.gui.curio.effect.rotten_gluttony", "Eating Rotten Food Generates Gluttony");
         add("malum.gui.curio.effect.scythe_counterattack", "Powerful Scythe Counterattack When Struck");
+        add("malum.gui.curio.effect.pacifist_recharge", "Cooldown Extends if the Scythe is Used");
         add("malum.gui.curio.effect.full_health_fake_collection", "Striking Full Health Targets Triggers Spirit Collection Effects");
         add("malum.gui.curio.effect.soul_ward_physical_absorption", "Soul Ward Absorbs Physical Damage Equally to Magic Damage");
         add("malum.gui.curio.effect.spirits_gluttony", "Spirit Collection Generates Gluttony");
@@ -406,8 +407,9 @@ public class MalumLang extends LanguageProvider {
         addEntryHeader("void.necklace_of_the_hidden_blade", "Necklace of the Hidden Blade", "A knife at their backs");
         addHeadline("void.necklace_of_the_hidden_blade", "The Hidden Blade");
         addPages("void.necklace_of_the_hidden_blade",
-                "The Narrow Edge concentrates my scythe's edge, but the Hidden Blade goes further, inverting the edge and making it hunger. I lose the sweeping attack, yes, but as I am harmed, the blade drinks of my pain, intensifying my next strike.");
-
+                "The Narrow Edge concentrates my scythe's edge, but the Hidden Blade goes further, inverting the edge and making it hunger. I lose the sweeping attack, yes, but as I am harmed, the blade drinks of my pain- feeding upon it to enable a seemingly impossible flurry of cuts and slashes.",
+                "Upon activation, the necklace remains inert for a total of ten seconds, requiring rest and concentration in order to recover it's effect. Attacking at any point in this state will prolong this absence of function.",
+                "The counterattack's nature is a strange one, one I have not fully identified. It is as though the blade asserts its existence in multiple places at once, demanding reality make it so.");
 
         addSimpleEntryHeader("introduction", "Introduction", "On the nature of souls");
         addPages("introduction",

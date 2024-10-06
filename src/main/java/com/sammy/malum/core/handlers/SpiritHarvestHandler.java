@@ -101,6 +101,7 @@ public class SpiritHarvestHandler {
         entity.setNoGravity(true);
         entity.setDeltaMovement(entity.getDeltaMovement().multiply(1, 0.5, 1));
     }
+
     public static void shatterItem(ItemExpireEvent event) {
         if (((AccessorEvent)event).malum$isCancelled()) {
             return;

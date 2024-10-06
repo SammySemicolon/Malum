@@ -18,6 +18,6 @@ public class CurioMirrorNecklace extends MalumCurioItem implements IMalumEventRe
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, AttributeRegistry.ARCANE_RESONANCE,
-                new AttributeModifier(MalumMod.malumPath("curio_arcane_resonance"), 0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                new AttributeModifier(MalumMod.malumPath("curio_arcane_resonance"), 1f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 }

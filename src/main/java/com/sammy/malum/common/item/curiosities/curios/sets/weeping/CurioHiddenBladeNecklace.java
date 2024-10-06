@@ -7,6 +7,7 @@ import com.sammy.malum.common.item.IVoidItem;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
+import com.sammy.malum.data.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.Holder;
@@ -38,13 +39,11 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
 
     @Override
     public void takeDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
-        float amount = event.getNewDamage();
-        int amplifier = (int) Math.ceil(amount / 4f);
-        if (amplifier >= 6) {
-            amplifier = Mth.ceil(amplifier * 1.5f);
-        }
-        Holder<MobEffect> effect = MobEffectRegistry.WICKED_INTENT;
-        attacked.addEffect(new MobEffectInstance(effect, 40, amplifier + 1));
+        float damage = event.getOriginalDamage();
+        int amplifier = 1 + Mth.ceil(damage * 0.6f);
+
+        var effect = MobEffectRegistry.WICKED_INTENT;
+        attacked.addEffect(new MobEffectInstance(effect, 40, amplifier));
     }
 
     @Override
@@ -54,23 +53,20 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         if (level.isClientSide()) {
             return;
         }
-        if (source.is(LodestoneDamageTypeTags.IS_MAGIC) || (source.is(DamageTypes.THORNS))) {
+        if (!source.is(DamageTypeTagRegistry.IS_SCYTHE_MELEE)) {
             return;
         }
-
         if (CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get())) {
-            if (SoulDataHandler.getScytheWeapon(source, attacker).isEmpty()) {
-                return;
-            }
             var effect = attacker.getEffect(MobEffectRegistry.WICKED_INTENT);
             if (effect == null) {
                 return;
             }
             int duration = 25;
-            float baseDamage = (float) (attacker.getAttributes().getValue(Attributes.ATTACK_DAMAGE) / duration);
-            float magicDamage = (float) (attacker.getAttributes().getValue(LodestoneAttributes.MAGIC_DAMAGE) / duration);
+            var attributes = attacker.getAttributes();
+            float baseDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * effect.getAmplifier();
+            float magicDamage = (float) (attributes.getValue(LodestoneAttributes.MAGIC_DAMAGE) / duration);
             var center = attacker.position().add(attacker.getLookAngle().scale(4));
-            HiddenBladeDelayedImpactEntity entity = new HiddenBladeDelayedImpactEntity(level, center.x, center.y-3f+attacker.getBbHeight()/2f, center.z);
+            var entity = new HiddenBladeDelayedImpactEntity(level, center.x, center.y-3f+attacker.getBbHeight()/2f, center.z);
             entity.setData(attacker, baseDamage, magicDamage, duration);
             entity.setItem(stack);
             level.addFreshEntity(entity);

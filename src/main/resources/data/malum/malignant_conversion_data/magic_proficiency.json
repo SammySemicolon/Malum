@@ -1,14 +1,15 @@
 {
   "source_attribute": "lodestone:magic_proficiency",
   "ratio" : "0.5",
+  "ignore_base_value": "true",
   "target_attributes": [
     {
       "attribute": "minecraft:generic.armor",
-      "ratio": "1.0"
+      "ratio": "10"
     },
     {
       "attribute": "lodestone:magic_resistance",
-      "ratio": "1.0"
+      "ratio": "0.25"
     }
   ]
 }

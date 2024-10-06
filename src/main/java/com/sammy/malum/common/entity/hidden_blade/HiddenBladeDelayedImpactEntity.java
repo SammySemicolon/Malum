@@ -90,7 +90,7 @@ public class HiddenBladeDelayedImpactEntity extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         if (getOwner() instanceof LivingEntity scytheOwner) {
             Entity target = result.getEntity();
-            DamageSource source = target.damageSources().mobProjectile(this, scytheOwner);
+            DamageSource source = DamageTypeHelper.create(level(), DamageTypeRegistry.HIDDEN_BLADE_COUNTER, this, scytheOwner);
             target.invulnerableTime = 0;
             boolean success = target.hurt(source, damage);
             if (success && target instanceof LivingEntity livingentity) {
@@ -103,7 +103,7 @@ public class HiddenBladeDelayedImpactEntity extends ThrowableItemProjectile {
                 if (magicDamage > 0) {
                     if (!livingentity.isDeadOrDying()) {
                         target.invulnerableTime = 0;
-                        livingentity.hurt(DamageTypeRegistry.create(level(), DamageTypeRegistry.VOODOO, this, scytheOwner), magicDamage);
+                        livingentity.hurt(DamageTypeHelper.create(level(), DamageTypeRegistry.VOODOO, this, scytheOwner), magicDamage);
                     }
                 }
                 enemiesHit+=1;

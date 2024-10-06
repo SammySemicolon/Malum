@@ -9,6 +9,7 @@ import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import org.jetbrains.annotations.Nullable;
+import team.lodestar.lodestone.helpers.*;
 
 public class NitrateExplosion extends Explosion {
 
@@ -19,9 +20,9 @@ public class NitrateExplosion extends Explosion {
     @Override
     public DamageSource getDamageSource() {
         if (getDirectSourceEntity() != null) {
-            return DamageTypeRegistry.create(getDirectSourceEntity().level(), DamageTypeRegistry.VOODOO, getDirectSourceEntity());
+            return DamageTypeHelper.create(getDirectSourceEntity().level(), DamageTypeRegistry.VOODOO, getDirectSourceEntity());
         }
-        return DamageTypeRegistry.create(getDirectSourceEntity().level(), DamageTypeRegistry.VOODOO);
+        return DamageTypeHelper.create(getDirectSourceEntity().level(), DamageTypeRegistry.VOODOO);
     }
 
     public static void processExplosion(ExplosionEvent.Detonate event) {

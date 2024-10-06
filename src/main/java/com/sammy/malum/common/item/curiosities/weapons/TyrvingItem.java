@@ -39,7 +39,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
 
             if (target.isAlive()) {
                 target.invulnerableTime = 0;
-                target.hurt(DamageTypeRegistry.create(level, DamageTypeRegistry.VOODOO, attacker), damage);
+                target.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOODOO, attacker), damage);
             }
             SoundHelper.playSound(attacker, SoundRegistry.TYRVING_SLASH.get(), 1, RandomHelper.randomBetween(attacker.getRandom(), 1f, 1.5f));
             ParticleHelper.spawnVerticalSlashParticle(ParticleEffectTypeRegistry.TYRVING_SLASH, attacker);

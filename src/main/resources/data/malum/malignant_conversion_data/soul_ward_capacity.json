@@ -4,10 +4,6 @@
     {
       "attribute": "minecraft:generic.armor",
       "ratio": "1.0"
-    },
-    {
-      "attribute": "lodestone:magic_resistance",
-      "ratio": "1.0"
     }
   ]
 }

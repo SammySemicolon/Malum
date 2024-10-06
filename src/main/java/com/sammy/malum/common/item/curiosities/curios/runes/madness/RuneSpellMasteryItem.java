@@ -19,7 +19,7 @@ public class RuneSpellMasteryItem extends AbstractRuneCurioItem {
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, LodestoneAttributes.MAGIC_PROFICIENCY,
-                new AttributeModifier(MalumMod.malumPath("curio_magic_proficiency"), 2f, AttributeModifier.Operation.ADD_VALUE));
+                new AttributeModifier(MalumMod.malumPath("curio_magic_proficiency"), 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         addAttributeModifier(map, AttributeRegistry.RESERVE_STAFF_CHARGES,
                 new AttributeModifier(MalumMod.malumPath("curio_reserve_staff_charges"), 2f, AttributeModifier.Operation.ADD_VALUE));
     }

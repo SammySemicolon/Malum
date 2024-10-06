@@ -9,7 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.*;
-import team.lodestar.lodestone.helpers.ColorHelper;
+import team.lodestar.lodestone.helpers.*;
 
 public class RejectedEffect extends MobEffect {
     public RejectedEffect() {
@@ -25,7 +25,7 @@ public class RejectedEffect extends MobEffect {
             if (pLivingEntity instanceof Player player && player.isCreative()) {
                 return;
             }
-            pLivingEntity.hurt(DamageTypeRegistry.create(pLivingEntity.level(), DamageTypeRegistry.VOODOO), 1);
+            pLivingEntity.hurt(DamageTypeHelper.create(pLivingEntity.level(), DamageTypeRegistry.VOODOO), 1);
         }
     }
 

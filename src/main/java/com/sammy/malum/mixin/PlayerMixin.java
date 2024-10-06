@@ -9,6 +9,7 @@ import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import team.lodestar.lodestone.helpers.*;
 
 @Mixin(Player.class)
 public class PlayerMixin {
@@ -23,7 +24,7 @@ public class PlayerMixin {
     private DamageSource malum$attack(DamageSource pSource) {
         Player player = (Player) (Object) this;
         if (player.getMainHandItem().getItem() instanceof MalumScytheItem) {
-            return DamageTypeRegistry.create(player.level(), DamageTypeRegistry.SCYTHE_MELEE, player);
+            return DamageTypeHelper.create(player.level(), DamageTypeRegistry.SCYTHE_MELEE, player);
         }
         return pSource;
     }

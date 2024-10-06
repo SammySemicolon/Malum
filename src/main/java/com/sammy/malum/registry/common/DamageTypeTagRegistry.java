@@ -10,6 +10,8 @@ import team.lodestar.lodestone.registry.common.tag.*;
 public class DamageTypeTagRegistry {
 
     public static final TagKey<DamageType> SOUL_SHATTER_DAMAGE = malumTag("can_soul_shatter");
+    public static final TagKey<DamageType> IS_SCYTHE = malumTag("is_scythe");
+    public static final TagKey<DamageType> IS_SCYTHE_MELEE = malumTag("is_scythe_melee");
 
     private static TagKey<DamageType> modTag(String path) {
         return TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.tryParse(path));

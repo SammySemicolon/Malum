@@ -1,13 +1,14 @@
 {
   "source_attribute": "malum:soul_ward_recovery_rate",
+  "ignore_base_value": "true",
   "target_attributes": [
     {
-      "attribute": "minecraft:generic.armor_toughness",
-      "ratio": "2.0"
+      "attribute": "minecraft:generic.armor",
+      "ratio": "10.0"
     },
     {
       "attribute": "lodestone:magic_resistance",
-      "ratio": "2.0"
+      "ratio": "1.0"
     }
   ]
 }

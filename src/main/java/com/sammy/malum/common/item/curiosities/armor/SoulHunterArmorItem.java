@@ -35,8 +35,7 @@ public class SoulHunterArmorItem extends MalumArmorItem {
     @Override
     public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
         ItemAttributeModifiers.Builder attributes = ItemAttributeModifiers.builder();
-        UUID uuid = ARMOR_MODIFIER_UUID_PER_TYPE.get(type);
-        attributes.add(LodestoneAttributes.MAGIC_PROFICIENCY, new AttributeModifier(MalumMod.malumPath("magic_proficiency"), 2f, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.ARMOR);
+        attributes.add(LodestoneAttributes.MAGIC_PROFICIENCY, new AttributeModifier(MalumMod.malumPath("magic_proficiency"), 0.15f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.ARMOR);
         return attributes.build().modifiers();
     }
 

@@ -30,13 +30,13 @@ public class CurioGrowingFleshRing extends MalumCurioItem implements IVoidItem, 
     public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
         Holder<MobEffect> cancerousGrowth = MobEffectRegistry.CANCEROUS_GROWTH;
         MobEffectInstance effect = collector.getEffect(cancerousGrowth);
+        int addedDuration = (int) (150 * arcaneResonance);
         if (effect == null) {
-            collector.addEffect(new MobEffectInstance(cancerousGrowth, 1200, 0, true, true, true));
+            collector.addEffect(new MobEffectInstance(cancerousGrowth, addedDuration*4, 0, true, true, true));
         } else {
-            EntityHelper.extendEffect(effect, collector, (int) (300+arcaneResonance*300), 72000);
+            EntityHelper.extendEffect(effect, collector, addedDuration, 72000);
             EntityHelper.amplifyEffect(effect, collector, 1, 19);
         }
-        Level level = collector.level();
-        level.playSound(null, collector.blockPosition(), SoundRegistry.FLESH_RING_ABSORBS.get(), SoundSource.PLAYERS, 0.3f, 1.5f + level.random.nextFloat() * 0.5f);
+        collector.playSound(SoundRegistry.FLESH_RING_ABSORBS, 0.3f, RandomHelper.randomBetween(collector.getRandom(), 1.5f, 2f));
     }
 }

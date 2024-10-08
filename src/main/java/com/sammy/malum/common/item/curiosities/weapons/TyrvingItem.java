@@ -1,7 +1,6 @@
 package com.sammy.malum.common.item.curiosities.weapons;
 
 import com.sammy.malum.common.item.*;
-import com.sammy.malum.common.packets.particle.rite.generic.MajorEntityEffectParticlePacket;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
@@ -27,25 +26,29 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
 
     @Override
     public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+        final Level level = attacker.level();
+        if (level.isClientSide) {
+            return;
+        }
         if (event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC)) {
             return;
         }
-        final Level level = attacker.level();
-        if (!level.isClientSide) {
-            float damage = SpiritHarvestHandler.getSpiritData(target).map(d -> d.totalSpirits).orElse(0) * 2f;
-            if (target instanceof Player) {
-                damage = 4 * Math.max(1, (1 + target.getArmorValue() / 12f) * (1 + (1 - 1 / (float) target.getArmorValue())) / 12f);
-            }
-
-            if (target.isAlive()) {
-                target.invulnerableTime = 0;
-                target.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOODOO, attacker), damage);
-            }
-            SoundHelper.playSound(attacker, SoundRegistry.TYRVING_SLASH.get(), 1, RandomHelper.randomBetween(attacker.getRandom(), 1f, 1.5f));
-            ParticleHelper.spawnVerticalSlashParticle(ParticleEffectTypeRegistry.TYRVING_SLASH, attacker);
+        float damage = SpiritHarvestHandler.getSpiritData(target).map(d -> d.totalSpirits).orElse(0) * 2f;
+        if (target instanceof Player) {
+            damage = 4 * Math.max(1, (1 + target.getArmorValue() / 12f) * (1 + (1 - 1 / (float) target.getArmorValue())) / 12f);
         }
-    }
 
+        if (target.isAlive()) {
+            target.invulnerableTime = 0;
+            target.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOODOO, attacker), damage);
+        }
+
+        SoundHelper.playSound(attacker, SoundRegistry.TYRVING_SLASH, 1, RandomHelper.randomBetween(attacker.getRandom(), 1f, 1.5f));
+        ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.TYRVING_SLASH)
+                .setSpiritType(SpiritTypeRegistry.WICKED_SPIRIT)
+                .setVerticalSlashAngle()
+                .spawnForwardSlashingParticle(attacker);
+    }
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
         return itemAbility.equals(ItemAbilities.SWORD_DIG);

@@ -198,6 +198,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.curio.effect.spirits_weave_mana", "Spirit Collection Recovers Soul Ward");
         add("malum.gui.curio.effect.spirits_weave_mana_irons_spellbooks", "Also Recovers Iron's Spellbooks' Mana");
         add("malum.gui.curio.effect.spirits_add_health", "Spirit Collection Grants Extra Hearts");
+        add("malum.gui.curio.effect.spirits_buff_spirit_collection", "Spirit Collection Generates Arcane Resonance");
         add("malum.gui.curio.effect.hunger_drain", "Actively Drains Hunger");
         add("malum.gui.curio.effect.eat_rotten", "Rotten Foods are Tastier");
         add("malum.gui.curio.effect.growing_gluttony", "Eating Rotten Foods Extends Gluttony");
@@ -394,6 +395,10 @@ public class MalumLang extends LanguageProvider {
         addSimpleEntryHeader("void.ring_of_growing_flesh", "Ring of Growing Flesh", "Creeping and crawling");
         addPages("void.ring_of_growing_flesh",
                 "I have overclocked the Ring of Curative Talent, creating a ring that does not simply heal, but overheal, granting additional health instead of regeneration whenever I collect a spirit crystal.");
+
+        addSimpleEntryHeader("void.ring_of_echoing_arcana", "Ring of Echoing Arcana", "I can see see the future " + italic("future future"));
+        addPages("void.ring_of_echoing_arcana",
+                "Overclocking the Ring of Curative Talent created a useful ring, so I have applied that principle to another ring, Manaweaving, to not only bind, but create resonance in magic. The Ring of Echoing Arcana grants Arcane Resonance whenever I collect a spirit crystal, empowering all my other spirit-collection effects.");
 
         addEntryHeader("void.ring_of_gruesome_concentration", "Ring of Gruesome Concentration", "Consume and incorporate");
         addHeadline("void.ring_of_gruesome_concentration", "Gruesome Concentration");

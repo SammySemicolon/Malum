@@ -51,7 +51,9 @@ public class ParticleEffectTypeRegistry {
     //Slash Effects
     public static final ParticleEffectType SCYTHE_SLASH = new SlashAttackParticleEffect("scythe_slash");
     public static final ParticleEffectType TYRVING_SLASH = new TyrvingSlashParticleEffect("tyrving_slash");
-    public static final ParticleEffectType HIDDEN_BLADE_COUNTER_SLASH = new HiddenBladeCounterParticleEffect("hidden_blade_counter_slash");
+    public static final ParticleEffectType WEIGHT_OF_WORLDS_CRIT = new WeightOfWorldsCritParticleEffect("weight_of_worlds_crit");
+    public static final ParticleEffectType EDGE_OF_DELIVERANCE_CRIT = new EdgeOfDeliveranceCritParticleEffect("weight_of_worlds_crit");
+    public static final ParticleEffectType HIDDEN_BLADE_COUNTER_FLURRY = new HiddenBladeCounterParticleEffect("hidden_blade_counter_flurry");
 
     //Wand
     public static final ParticleEffectType HEX_BOLT_IMPACT = new HexBoltImpactParticleEffect("hex_bolt_impact");

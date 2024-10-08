@@ -38,8 +38,15 @@
 
   "scythe_sweeps": { "sounds":["malum:curiosities/weapons/scythe/sweep1","malum:curiosities/weapons/scythe/sweep2","malum:curiosities/weapons/scythe/sweep3","malum:curiosities/weapons/scythe/sweep4","malum:curiosities/weapons/scythe/sweep5","malum:curiosities/weapons/scythe/sweep6","malum:curiosities/weapons/scythe/sweep7"], "subtitle": "malum.subtitle.scythe_sweeps" },
   "scythe_cuts": { "sounds":["malum:curiosities/weapons/scythe/sweep1","malum:curiosities/weapons/scythe/sweep2","malum:curiosities/weapons/scythe/sweep3","malum:curiosities/weapons/scythe/sweep4","malum:curiosities/weapons/scythe/sweep5","malum:curiosities/weapons/scythe/sweep6","malum:curiosities/weapons/scythe/sweep7"], "subtitle": "malum.subtitle.scythe_cuts" },
+  "edge_of_deliverance_sweeps": { "sounds":["malum:curiosities/weapons/scythe/sweep1","malum:curiosities/weapons/scythe/sweep2","malum:curiosities/weapons/scythe/sweep3","malum:curiosities/weapons/scythe/sweep4","malum:curiosities/weapons/scythe/sweep5","malum:curiosities/weapons/scythe/sweep6","malum:curiosities/weapons/scythe/sweep7"], "subtitle": "malum.subtitle.edge_of_deliverance_sweeps" },
+  "edge_of_deliverance_cuts": { "sounds":["malum:curiosities/weapons/scythe/sweep1","malum:curiosities/weapons/scythe/sweep2","malum:curiosities/weapons/scythe/sweep3","malum:curiosities/weapons/scythe/sweep4","malum:curiosities/weapons/scythe/sweep5","malum:curiosities/weapons/scythe/sweep6","malum:curiosities/weapons/scythe/sweep7"], "subtitle": "malum.subtitle.edge_of_deliverance_cuts" },
+
+  "scythe_thrown": { "sounds":["malum:curiosities/weapons/scythe/throw1","malum:curiosities/weapons/scythe/throw2","malum:curiosities/weapons/scythe/throw3"], "subtitle": "malum.subtitle.scythe_thrown" },
+  "scythe_spins_happily": { "sounds":["malum:curiosities/weapons/scythe/spin"], "subtitle": "malum.subtitle.scythe_spins_happily" },
+  "scythe_caught": { "sounds":["malum:curiosities/weapons/scythe/catch1","malum:curiosities/weapons/scythe/catch2","malum:curiosities/weapons/scythe/catch3"], "subtitle": "malum.subtitle.scythe_caught" },
+
   "tyrving_slashes_twice": { "sounds":["malum:curiosities/weapons/tyrving/hit1", "malum:curiosities/weapons/tyrving/hit2", "malum:curiosities/weapons/tyrving/hit3", "malum:curiosities/weapons/tyrving/hit4", "malum:curiosities/weapons/tyrving/hit5"], "subtitle": "malum.subtitle.tyrving_slashes_twice" },
-  "weight_of_worlds_slashes": { "sounds":["malum:curiosities/weapons/scythe/sweep1","malum:curiosities/weapons/scythe/sweep2","malum:curiosities/weapons/scythe/sweep3","malum:curiosities/weapons/scythe/sweep4","malum:curiosities/weapons/scythe/sweep5","malum:curiosities/weapons/scythe/sweep6","malum:curiosities/weapons/scythe/sweep7"], "subtitle": "malum.subtitle.weight_of_worlds_slashes" },
+  "weight_of_worlds_cuts": { "sounds":["malum:curiosities/weapons/scythe/sweep1","malum:curiosities/weapons/scythe/sweep2","malum:curiosities/weapons/scythe/sweep3","malum:curiosities/weapons/scythe/sweep4","malum:curiosities/weapons/scythe/sweep5","malum:curiosities/weapons/scythe/sweep6","malum:curiosities/weapons/scythe/sweep7"], "subtitle": "malum.subtitle.weight_of_worlds_cuts" },
 
   "staff_fires": { "sounds":["malum:curiosities/weapons/staff/fire1","malum:curiosities/weapons/staff/fire2"], "subtitle": "malum.subtitle.staff_fires" },
   "staff_powers_up": { "sounds":["malum:curiosities/weapons/staff/charge1","malum:curiosities/weapons/staff/charge2"], "subtitle": "malum.subtitle.staff_powers_up" },
@@ -47,8 +54,9 @@
   "staff_charged": { "sounds":["malum:curiosities/weapons/staff/sizzle1","malum:curiosities/weapons/staff/sizzle2"], "subtitle": "malum.subtitle.staff_charged" },
   "staff_strikes": { "sounds":["malum:curiosities/weapons/staff/hit1","malum:curiosities/weapons/staff/hit2","malum:curiosities/weapons/staff/hit3","malum:curiosities/weapons/staff/hit4"], "subtitle": "malum.subtitle.staff_strikes" },
 
-  "auric_flame_motif": { "sounds":["malum:curiosities/weapons/staff/auric_flame_motif1","malum:curiosities/weapons/staff/auric_flame_motif2","malum:curiosities/weapons/staff/auric_flame_motif3"]},
-  "draining_motif": { "sounds":["malum:curiosities/weapons/staff/draining_motif1","malum:curiosities/weapons/staff/draining_motif2","malum:curiosities/weapons/staff/draining_motif3"]},
+  "auric_flame_motif": { "sounds":["malum:curiosities/motifs/auric_cinders1","malum:curiosities/motifs/auric_cinders2","malum:curiosities/motifs/auric_cinders3"]},
+  "draining_motif": { "sounds":["malum:curiosities/motifs/draining_bubbling1","malum:curiosities/motifs/draining_bubbling2","malum:curiosities/motifs/draining_bubbling3"]},
+  "malignant_metal_motif": { "sounds":["malum:curiosities/motifs/malignant_crit1", "malum:curiosities/motifs/malignant_crit2", "malum:curiosities/motifs/malignant_crit3"]},
 
   "the_unknown_weeps": { "sounds":["malum:weeping_well/uncanny_valley0","malum:weeping_well/uncanny_valley1"], "subtitle": "malum.subtitle.the_unknown_weeps" },
   "the_void_heart_beats": { "sounds":["malum:weeping_well/void_heartbeat"], "subtitle": "malum.subtitle.the_void_heart_beats" },
@@ -97,7 +105,7 @@
   "hidden_blade_primed": { "sounds":["malum:curiosities/trinkets/hidden_blade/charge"], "subtitle": "malum.subtitle.trinkets/hidden_blade_primed" },
   "hidden_blade_disrupted": { "sounds":["malum:curiosities/trinkets/hidden_blade/charge"], "subtitle": "malum.subtitle.trinkets/hidden_blade_disrupted" },
   "hidden_blade_unleashed": { "sounds":["malum:curiosities/trinkets/hidden_blade/flurry1", "malum:curiosities/trinkets/hidden_blade/flurry2"], "subtitle": "malum.subtitle.trinkets/hidden_blade_unleashed" },
-  "malignant_metal_resonates": { "sounds":["malum:curiosities/trinkets/hidden_blade/strike1", "malum:curiosities/trinkets/hidden_blade/strike2", "malum:curiosities/trinkets/hidden_blade/strike3"], "subtitle": "malum.subtitle.malignant_metal_resonates" },
+
   "spirit_mote_created": { "sounds":["malum:curiosities/spirit_mote/created1", "malum:curiosities/spirit_mote/created2", "malum:curiosities/spirit_mote/created3"], "subtitle": "malum.subtitle.spirit_mote_created" },
 
   "catalyst_lobber_unlocked": { "sounds":["malum:curiosities/catalyst_lobber/open1", "malum:curiosities/catalyst_lobber/open2"], "subtitle": "malum.subtitle.catalyst_lobber_unlocked" },

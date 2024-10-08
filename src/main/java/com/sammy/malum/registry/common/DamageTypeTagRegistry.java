@@ -17,7 +17,7 @@ public class DamageTypeTagRegistry {
         return TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.tryParse(path));
     }
 
-    private static TagKey<DamageType> malumTag(String path) {
+    public static TagKey<DamageType> malumTag(String path) {
         return TagKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath(path));
     }
 

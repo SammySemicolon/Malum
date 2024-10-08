@@ -11,10 +11,11 @@ import net.minecraftforge.api.distmarker.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
+import team.lodestar.lodestone.systems.particle.render_types.*;
 
 import java.util.function.*;
 
-public class TyrvingSlashParticleEffect extends ParticleEffectType {
+public class TyrvingSlashParticleEffect extends SlashAttackParticleEffect {
 
     public TyrvingSlashParticleEffect(String id) {
         super(id);
@@ -34,10 +35,11 @@ public class TyrvingSlashParticleEffect extends ParticleEffectType {
             Vec3 direction = new Vec3(dirX, dirY, dirZ);
             float angle = nbtData.compoundTag.getFloat("angle");
             boolean mirror = nbtData.compoundTag.getBoolean("mirror");
+            var spirit = getSpiritType(nbtData);
 
             float offsetBase = RandomHelper.randomBetween(random, 0.4f, 0.8f) * (random.nextBoolean() ? 1 : -1) + (mirror ? 3.14f : 0);
             for (int i = 0; i < 4; i++) {
-                var slash = SlashParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), SpiritTypeRegistry.WICKED_SPIRIT);
+                var slash = SlashParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), spirit);
                 float spinOffset = angle + (i % 2 == 0 ? 1 : -1) * offsetBase;
                 int lifeDelay = (i % 2 == 0 ? 3 : 0);
                 slash.getBuilder()

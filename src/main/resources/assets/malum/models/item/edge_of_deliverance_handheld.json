@@ -1,0 +1,6 @@
+{
+  "parent": "malum:item/handheld_large",
+  "textures": {
+    "layer0": "malum:item/edge_of_deliverance_huge"
+  }
+}

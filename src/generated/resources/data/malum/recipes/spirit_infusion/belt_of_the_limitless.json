@@ -27,11 +27,11 @@
   },
   "spirits": [
     {
-      "type": "wicked",
-      "count": 32
+      "type": "arcane",
+      "count": 64
     },
     {
-      "type": "arcane",
+      "type": "wicked",
       "count": 32
     },
     {

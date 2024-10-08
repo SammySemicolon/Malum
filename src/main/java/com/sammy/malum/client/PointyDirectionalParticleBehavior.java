@@ -14,6 +14,7 @@ import java.lang.Math;
 
 public class PointyDirectionalParticleBehavior implements LodestoneParticleBehavior {
 
+    //TODO: move this to lodestone
     public static LodestoneParticleBehavior DIRECTIONAL = new PointyDirectionalParticleBehavior();
 
     protected PointyDirectionalParticleBehavior() {

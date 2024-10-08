@@ -1,13 +1,16 @@
 package com.sammy.malum.common.item.curiosities.weapons.scythe;
 
 import com.google.common.collect.ImmutableMultimap;
+import com.sammy.malum.common.item.*;
+import com.sammy.malum.core.systems.spirit.*;
+import com.sammy.malum.registry.common.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Tier;
 import team.lodestar.lodestone.registry.common.LodestoneAttributeRegistry;
 import team.lodestar.lodestone.registry.common.LodestoneAttributes;
 
-public class MagicScytheItem extends MalumScytheItem {
+public class MagicScytheItem extends MalumScytheItem implements ISpiritAffiliatedItem {
 
     public final float magicDamage;
 
@@ -27,5 +30,10 @@ public class MagicScytheItem extends MalumScytheItem {
                         AttributeModifier.Operation.ADD_VALUE)
         );
         return builder;
+    }
+
+    @Override
+    public MalumSpiritType getDefiningSpiritType() {
+        return SpiritTypeRegistry.WICKED_SPIRIT;
     }
 }

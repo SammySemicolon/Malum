@@ -8,8 +8,8 @@ import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraftforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.living.*;
+import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.item.tools.*;
 
@@ -25,11 +25,14 @@ public class WeightOfWorldsItem extends LodestoneAxeItem implements IEventRespon
 
     @Override
     public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+        var level = attacker.level();
+        if (level.isClientSide()) {
+            return;
+        }
         if (attacker != null) {
             if (attacker instanceof Player) {
                 ParticleHelper.spawnVerticalSlashParticle(ParticleEffectTypeRegistry.SCYTHE_SLASH, attacker);
             }
-            final Level level = attacker.level();
             level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.WEIGHT_OF_WORLDS_SLASH.get(), attacker.getSoundSource(), 1, 0.5f);
             final var effect = MobEffectRegistry.GRIM_CERTAINTY;
             if (attacker.hasEffect(effect) || level.random.nextFloat() < 0.25f) {
@@ -40,5 +43,9 @@ public class WeightOfWorldsItem extends LodestoneAxeItem implements IEventRespon
                 attacker.removeEffect(effect);
             }
         }
+        ParticleHelper.createSlashingEffect(particleEffectType)
+                .setVertical()
+                .spawnForwardSlashingParticle(attacker);
+        SoundHelper.playSound(target, SoundRegistry.WEIGHT_OF_WORLDS_CUT.get(), 2f, 0.75f);
     }
 }

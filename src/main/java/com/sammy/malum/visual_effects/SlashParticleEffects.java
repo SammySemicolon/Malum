@@ -23,11 +23,14 @@ import static com.sammy.malum.visual_effects.SpiritLightSpecs.spiritLightSpecs;
 public class SlashParticleEffects {
 
     public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, MalumSpiritType spiritType) {
+        if (spiritType == null) {
+            return spawnSlashParticle(level, pos);
+        }
         return spawnSlashParticle(level, pos, o -> SpiritBasedParticleBuilder.createSpirit(o).setSpirit(spiritType));
     }
 
     public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos) {
-        return spawnSlashParticle(level, pos, o -> WorldParticleBuilder.create(o).setColorData(createGraySlashColor(level.random)));
+        return spawnSlashParticle(level, pos, o -> WorldParticleBuilder.create(o).setRenderType(LodestoneWorldParticleRenderType.TRANSPARENT).setColorData(createGraySlashColor(level.random)));
     }
 
     public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, ColorParticleData colorData) {
@@ -43,7 +46,7 @@ public class SlashParticleEffects {
         var rand = level.getRandom();
         final WorldParticleBuilder worldParticleBuilder = builder
                 .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(rand, 1.5f, 2f)).build())
-                .setTransparencyData(GenericParticleData.create(1f, 0.95f).build())
+                .setTransparencyData(GenericParticleData.create(1f, 0.9f).build())
                 .setSpritePicker(SimpleParticleOptions.ParticleSpritePicker.WITH_AGE)
                 .setLifetime(5)
                 .enableNoClip();

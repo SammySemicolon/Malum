@@ -1,0 +1,38 @@
+{
+  "type": "malum:spirit_infusion",
+  "extra_items": [
+    {
+      "count": 16,
+      "item": "malum:null_slate"
+    },
+    {
+      "count": 8,
+      "item": "malum:mnemonic_fragment"
+    }
+  ],
+  "input": {
+    "count": 1,
+    "item": "malum:ring_of_manaweaving"
+  },
+  "output": {
+    "item": "malum:ring_of_echoing_arcana"
+  },
+  "spirits": [
+    {
+      "type": "aqueous",
+      "count": 32
+    },
+    {
+      "type": "arcane",
+      "count": 16
+    },
+    {
+      "type": "wicked",
+      "count": 16
+    },
+    {
+      "type": "eldritch",
+      "count": 8
+    }
+  ]
+}

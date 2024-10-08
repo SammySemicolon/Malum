@@ -4,16 +4,18 @@ import com.sammy.malum.client.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.*;
+import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.nbt.*;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.api.distmarker.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
+import team.lodestar.lodestone.systems.particle.render_types.*;
 
 import java.util.function.*;
 
-public class HiddenBladeCounterParticleEffect extends ParticleEffectType {
+public class HiddenBladeCounterParticleEffect extends SlashAttackParticleEffect {
 
     public HiddenBladeCounterParticleEffect(String id) {
         super(id);
@@ -33,6 +35,7 @@ public class HiddenBladeCounterParticleEffect extends ParticleEffectType {
             Vec3 direction = new Vec3(dirX, dirY, dirZ);
             float angle = nbtData.compoundTag.getFloat("angle");
             boolean mirror = nbtData.compoundTag.getBoolean("mirror");
+            var spirit = getSpiritType(nbtData);
 
             final float maxBackwardsOffset = 1.5f;
             final float maxForwardsOffset = 4.5f;
@@ -46,7 +49,7 @@ public class HiddenBladeCounterParticleEffect extends ParticleEffectType {
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset),
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset),
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset)));
-                    var slash = SlashParticleEffects.spawnSlashParticle(level, position, SpiritTypeRegistry.WICKED_SPIRIT);
+                    var slash = SlashParticleEffects.spawnSlashParticle(level, position, spirit);
                     slash.getBuilder()
                             .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
                             .setScaleData(GenericParticleData.create(scale).build())

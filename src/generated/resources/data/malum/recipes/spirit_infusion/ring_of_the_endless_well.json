@@ -2,7 +2,7 @@
   "type": "malum:spirit_infusion",
   "extra_items": [
     {
-      "count": 8,
+      "count": 16,
       "item": "malum:null_slate"
     },
     {

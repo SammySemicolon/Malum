@@ -2,7 +2,9 @@ package com.sammy.malum.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import com.sammy.malum.client.*;
 import com.sammy.malum.common.entity.boomerang.ScytheBoomerangEntity;
+import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.MalumScytheItem;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -14,6 +16,13 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import team.lodestar.lodestone.registry.client.*;
+import team.lodestar.lodestone.systems.rendering.*;
+import team.lodestar.lodestone.systems.rendering.rendeertype.*;
+
+import java.awt.*;
+
+import static com.sammy.malum.MalumMod.malumPath;
 
 public class ScytheBoomerangEntityRenderer extends EntityRenderer<ScytheBoomerangEntity> {
     public final ItemRenderer itemRenderer;
@@ -28,14 +37,27 @@ public class ScytheBoomerangEntityRenderer extends EntityRenderer<ScytheBoomeran
     @Override
     public void render(ScytheBoomerangEntity entityIn, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn) {
         poseStack.pushPose();
-        ItemStack itemstack = entityIn.getItem();
-        BakedModel model = this.itemRenderer.getModel(itemstack, entityIn.level(), null, 1);
+        var itemstack = entityIn.getItem();
+        var model = this.itemRenderer.getModel(itemstack, entityIn.level(), null, 1);
         poseStack.mulPose(Axis.XP.rotationDegrees(90F));
         poseStack.scale(2f, 2f, 2f);
         poseStack.mulPose(Axis.ZP.rotation((entityIn.age + partialTicks) * 0.9f));
         itemRenderer.render(itemstack, itemstack.getItem() instanceof MalumScytheItem ? ItemDisplayContext.NONE : ItemDisplayContext.FIXED, false, poseStack, bufferIn, packedLightIn, OverlayTexture.NO_OVERLAY, model);
-
         poseStack.popPose();
+
+        var spirit = entityIn.getItem().getItem() instanceof ISpiritAffiliatedItem affiliatedItem ? affiliatedItem.getDefiningSpiritType() : null;
+        final boolean isMagical = spirit != null;
+        var texture = malumPath("textures/vfx/concentrated_trail.png");
+        var token = RenderTypeToken.createCachedToken(texture);
+        var renderType = isMagical ?
+                LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE_TRIANGLE.applyAndCache(token) :
+                LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE_TRIANGLE.applyAndCache(token, ShaderUniformHandler.LUMITRANSPARENT);
+        var primaryColor = isMagical ? spirit.getPrimaryColor() : new Color(0.9f, 0.9f, 0.9f);
+        var secondaryColor = isMagical ? spirit.getSecondaryColor() : new Color(0.5f, 0.5f, 0.5f);
+        var builder = VFXBuilders.createWorld().setRenderType(renderType);
+        final float scalar = Math.min(entityIn.age / 20f, 1f);
+        RenderUtils.renderEntityTrail(poseStack, builder, entityIn.theFormer, entityIn, primaryColor, secondaryColor, scalar, partialTicks);
+        RenderUtils.renderEntityTrail(poseStack, builder, entityIn.theLatter, entityIn, primaryColor, secondaryColor, scalar, partialTicks);
 
         super.render(entityIn, entityYaw, partialTicks, poseStack, bufferIn, packedLightIn);
     }

@@ -1,0 +1,15 @@
+{
+  "parent": "item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "malum:item/edge_of_deliverance_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "malum:item/edge_of_deliverance_gui"
+    },
+    "fixed": {
+      "parent": "malum:item/edge_of_deliverance_gui"
+    }
+  }
+}

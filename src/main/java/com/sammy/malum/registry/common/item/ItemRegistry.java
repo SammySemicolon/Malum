@@ -703,6 +703,7 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> RING_OF_THE_ENDLESS_WELL = register("ring_of_the_endless_well", GEAR_PROPERTIES(), CurioEndlessRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_GROWING_FLESH = register("ring_of_growing_flesh", GEAR_PROPERTIES(), CurioGrowingFleshRing::new);
+    public static final DeferredHolder<Item, Item> RING_OF_ECHOING_ARCANA = register("ring_of_echoing_arcana", GEAR_PROPERTIES(), CurioEchoingArcanaRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_GRUESOME_CONCENTRATION = register("ring_of_gruesome_concentration", GEAR_PROPERTIES(), CurioGruesomeConcentrationRing::new);
     public static final DeferredHolder<Item, Item> NECKLACE_OF_THE_HIDDEN_BLADE = register("necklace_of_the_hidden_blade", GEAR_PROPERTIES(), CurioHiddenBladeNecklace::new);
     public static final DeferredHolder<Item, Item> NECKLACE_OF_THE_WATCHER = register("necklace_of_the_watcher", GEAR_PROPERTIES(), CurioWatcherNecklace::new);

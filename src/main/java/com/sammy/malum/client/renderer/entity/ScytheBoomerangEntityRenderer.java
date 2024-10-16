@@ -6,6 +6,7 @@ import com.sammy.malum.client.*;
 import com.sammy.malum.common.entity.boomerang.ScytheBoomerangEntity;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.MalumScytheItem;
+import com.sammy.malum.registry.client.*;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -25,6 +26,9 @@ import java.awt.*;
 import static com.sammy.malum.MalumMod.malumPath;
 
 public class ScytheBoomerangEntityRenderer extends EntityRenderer<ScytheBoomerangEntity> {
+
+    public static final RenderTypeToken TRAIL = MalumRenderTypeTokens.CONCENTRATED_TRAIL;
+
     public final ItemRenderer itemRenderer;
 
     public ScytheBoomerangEntityRenderer(EntityRendererProvider.Context context) {
@@ -47,11 +51,9 @@ public class ScytheBoomerangEntityRenderer extends EntityRenderer<ScytheBoomeran
 
         var spirit = entityIn.getItem().getItem() instanceof ISpiritAffiliatedItem affiliatedItem ? affiliatedItem.getDefiningSpiritType() : null;
         final boolean isMagical = spirit != null;
-        var texture = malumPath("textures/vfx/concentrated_trail.png");
-        var token = RenderTypeToken.createCachedToken(texture);
         var renderType = isMagical ?
-                LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE_TRIANGLE.applyAndCache(token) :
-                LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE_TRIANGLE.applyAndCache(token, ShaderUniformHandler.LUMITRANSPARENT);
+                LodestoneRenderTypeRegistry.ADDITIVE_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(TRAIL) :
+                LodestoneRenderTypeRegistry.ADDITIVE_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(TRAIL, ShaderUniformHandler.LUMITRANSPARENT);
         var primaryColor = isMagical ? spirit.getPrimaryColor() : new Color(0.9f, 0.9f, 0.9f);
         var secondaryColor = isMagical ? spirit.getSecondaryColor() : new Color(0.5f, 0.5f, 0.5f);
         var builder = VFXBuilders.createWorld().setRenderType(renderType);

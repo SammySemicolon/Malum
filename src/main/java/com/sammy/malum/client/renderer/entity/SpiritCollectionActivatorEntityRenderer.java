@@ -37,10 +37,10 @@ public class SpiritCollectionActivatorEntityRenderer extends EntityRenderer<Spir
         FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, spiritType, 0.85f, 4f, partialTicks);
         FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, SpiritTypeRegistry.ELDRITCH_SPIRIT, 0.6f, 0.5f, partialTicks);
         poseStack.popPose();
-        RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trailPointBuilder, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 1f, partialTicks);
+        RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trail, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 1f, partialTicks);
         spiritType = SpiritTypeRegistry.ELDRITCH_SPIRIT;
         trailBuilder = SpiritBasedWorldVFXBuilder.create(spiritType).setRenderType(TRAIL_TYPE);
-        RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trailPointBuilder, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 0.75f, 0.5f, partialTicks);
+        RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trail, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 0.75f, 0.5f, partialTicks);
 
 
         super.render(entity, entityYaw, partialTicks, poseStack, bufferIn, packedLightIn);

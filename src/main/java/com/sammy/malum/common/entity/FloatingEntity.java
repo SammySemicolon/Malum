@@ -21,7 +21,7 @@ import java.util.*;
 
 public abstract class FloatingEntity extends Entity {
 
-    public final TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(10);
+    public final TrailPointBuilder trail = TrailPointBuilder.create(10);
 
     public int age;
     public int maxAge;
@@ -122,7 +122,6 @@ public abstract class FloatingEntity extends Entity {
             }
         }
 
-
         //vanilla stump
         BlockHitResult result = level().clip(new ClipContext(position(), position().add(getDeltaMovement()), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
         if (result.getType() == HitResult.Type.BLOCK) {
@@ -151,22 +150,17 @@ public abstract class FloatingEntity extends Entity {
         setPos(nextX, nextY, nextZ);
         ProjectileUtil.rotateTowardsMovement(this, 0.2F);
 
+
         if (level().isClientSide) {
-            double x = xOld, y = yOld + getYOffset(0), z = zOld;
-            spawnParticles(x, y, z);
+            spawnParticles(xOld, yOld + getYOffset(0), zOld);
             for (int i = 0; i < 2; i++) {
                 float progress = (i+1) * 0.5f;
                 Vec3 position = getPosition(progress).add(0, getYOffset(progress), 0);
-                trailPointBuilder.addTrailPoint(position);
-                if (i == 0) {
-                    float f = 0;
-                }
-                if (i == 1) {
-                    float f = 0;
-                }
+                trail.addTrailPoint(position);
             }
-            trailPointBuilder.tickTrailPoints();
+            trail.tickTrailPoints();
         }
+
     }
 
     @Override

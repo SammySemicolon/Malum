@@ -148,8 +148,8 @@ public class ScytheBoomerangEntity extends ThrowableItemProjectile {
                 float scalar = (age + progress) / 2f;
                 for (int j = 0; j < 2; j++) {
                     var trail = j == 0 ? theFormer : theLatter;
-                    double xOffset = Math.cos(spinOffset + 1.56f * j + scalar) * 0.7f;
-                    double zOffset = Math.sin(spinOffset + 1.56f * j + scalar) * 0.7f;
+                    double xOffset = Math.cos(spinOffset + 3.14f * j + scalar) * 1.2f;
+                    double zOffset = Math.sin(spinOffset + 3.14f * j + scalar) * 1.2f;
                     trail.addTrailPoint(position.add(xOffset, 0, zOffset));
                 }
             }

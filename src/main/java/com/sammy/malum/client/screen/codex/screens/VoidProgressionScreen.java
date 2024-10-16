@@ -272,21 +272,29 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
             .afterUmbralCrystal()
         );
 
-        addEntry("void.erosion_scepter", 4, 10, b -> b
+        addEntry("void.weight_of_worlds", 4, 10, b -> b
+                .configureWidget(w -> w.setIcon(WEIGHT_OF_WORLDS).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new HeadlineTextPage("void.weight_of_worlds", "void.weight_of_worlds.1"))
+                .addPage(SpiritInfusionPage.fromOutput(WEIGHT_OF_WORLDS.get()))
+                .addPage(new TextPage("void.weight_of_worlds.2"))
+                .afterUmbralCrystal()
+        );
+
+        addEntry("void.edge_of_deliverance", 5, 10, b -> b
+                .configureWidget(w -> w.setIcon(EDGE_OF_DELIVERANCE).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new HeadlineTextPage("void.edge_of_deliverance", "void.edge_of_deliverance.1"))
+                .addPage(SpiritInfusionPage.fromOutput(EDGE_OF_DELIVERANCE.get()))
+                .addPage(new TextPage("void.edge_of_deliverance.2"))
+                .afterUmbralCrystal()
+        );
+
+        addEntry("void.erosion_scepter", 3, 11, b -> b
             .configureWidget(w -> w.setIcon(EROSION_SCEPTER).setStyle(BookWidgetStyle.SOULWOOD))
             .addPage(new HeadlineTextPage("void.erosion_scepter", "void.erosion_scepter.1"))
             .addPage(SpiritInfusionPage.fromOutput(EROSION_SCEPTER.get()))
             .addPage(new TextPage("void.erosion_scepter.2"))
             .addPage(new TextPage("void.erosion_scepter.3"))
             .addPage(new TextPage("void.erosion_scepter.4"))
-            .afterUmbralCrystal()
-        );
-
-        addEntry("void.weight_of_worlds", 3, 11, b -> b
-            .configureWidget(w -> w.setIcon(WEIGHT_OF_WORLDS).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new HeadlineTextPage("void.weight_of_worlds", "void.weight_of_worlds.1"))
-            .addPage(SpiritInfusionPage.fromOutput(WEIGHT_OF_WORLDS.get()))
-            .addPage(new TextPage("void.weight_of_worlds.2"))
             .afterUmbralCrystal()
         );
 

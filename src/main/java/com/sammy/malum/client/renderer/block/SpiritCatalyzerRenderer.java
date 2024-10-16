@@ -82,7 +82,6 @@ public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCataly
         float alpha = intensity / 60f;
         Vec3 midPoint = startPos.add(difference.scale(distance));
         SpiritBasedWorldVFXBuilder.create(spiritType)
-                
                 .setColor(spiritType.getPrimaryColor())
                 .setRenderType(TRAIL_TYPE)
                 .setAlpha(alpha)

@@ -11,6 +11,9 @@ public class ItemTagRegistry {
     public static final TagKey<Item> SCYTHE = malumTag("scythe");
     public static final TagKey<Item> STAFF = malumTag("staff");
 
+    public static final TagKey<Item> SPIRITS = malumTag("spirit");
+    public static final TagKey<Item> ASPECTED_SPIRITS = malumTag("aspected_spirits");
+
     public static final TagKey<Item> RUNEWOOD_BOARD_INGREDIENT = malumTag("runewood_board_ingredient");
     public static final TagKey<Item> RUNEWOOD_LOGS = malumTag("runewood_logs");
     public static final TagKey<Item> RUNEWOOD_PLANKS = malumTag("runewood_planks");

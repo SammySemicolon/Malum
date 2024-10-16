@@ -29,6 +29,13 @@ public class GearSpiritInfusionRecipes {
                 .addSpirit(ELDRITCH_SPIRIT, 16)
                 .save(recipeOutput);
 
+        new SpiritInfusionRecipeBuilder(ItemRegistry.SOUL_STAINED_STEEL_SCYTHE.get(), 1, ItemRegistry.EDGE_OF_DELIVERANCE.get(), 1)
+                .addExtraItem(ItemRegistry.MALIGNANT_PEWTER_INGOT.get(), 2)
+                .addSpirit(EARTHEN_SPIRIT, 32)
+                .addSpirit(WICKED_SPIRIT, 32)
+                .addSpirit(ELDRITCH_SPIRIT, 16)
+                .build(consumer);
+
         new SpiritInfusionRecipeBuilder(ItemRegistry.TOTEMIC_STAFF.get(), 1, ItemRegistry.MNEMONIC_HEX_STAFF.get(), 1)
                 .addExtraItem(ItemRegistry.MNEMONIC_FRAGMENT.get(), 8)
                 .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), 4)

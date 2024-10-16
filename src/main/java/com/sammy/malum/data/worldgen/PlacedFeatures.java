@@ -19,15 +19,15 @@ public class PlacedFeatures {
         context.register(PlacedFeatureRegistry.ORE_BRILLIANT, addOreFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_BRILLIANT_ORE), -64, 40, 3));
         context.register(PlacedFeatureRegistry.ORE_NATURAL_QUARTZ, addOreFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_NATURAL_QUARTZ_ORE), -64, 10, 2));
         context.register(PlacedFeatureRegistry.ORE_BLAZING_QUARTZ, addOreFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_BLAZING_QUARTZ_ORE), -16, 112, 16));
-        context.register(PlacedFeatureRegistry.ORE_CTHONIC_GOLD, addOreFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_CTHONIC_GOLD_ORE_FEATURE), -48, -0, 1, RarityFilter.onAverageOnceEvery(3)));
+        context.register(PlacedFeatureRegistry.ORE_CTHONIC_GOLD, addOreFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_CTHONIC_GOLD_ORE_FEATURE), -48, -0, 1, RarityFilter.onAverageOnceEvery(2)));
 
         context.register(PlacedFeatureRegistry.RUNEWOOD_TREE,
                 new PlacedFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_RUNEWOOD_TREE),
                         ImmutableList.<PlacementModifier>builder().add(
                                 PlacementUtils.HEIGHTMAP,
-                                RarityFilter.onAverageOnceEvery(8),
+                                RarityFilter.onAverageOnceEvery(12),
                                 InSquarePlacement.spread(),
-                                CountPlacement.of(3)
+                                CountPlacement.of(2)
                         ).build()
                 )
         );
@@ -35,7 +35,7 @@ public class PlacedFeatures {
                 new PlacedFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_RUNEWOOD_TREE),
                         ImmutableList.<PlacementModifier>builder().add(
                                 PlacementUtils.HEIGHTMAP,
-                                RarityFilter.onAverageOnceEvery(16),
+                                RarityFilter.onAverageOnceEvery(20),
                                 InSquarePlacement.spread(),
                                 CountPlacement.of(3)
                         ).build()
@@ -46,7 +46,7 @@ public class PlacedFeatures {
                 new PlacedFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_AZURE_RUNEWOOD_TREE),
                         ImmutableList.<PlacementModifier>builder().add(
                                 PlacementUtils.HEIGHTMAP,
-                                RarityFilter.onAverageOnceEvery(12),
+                                RarityFilter.onAverageOnceEvery(16),
                                 InSquarePlacement.spread(),
                                 CountPlacement.of(3)
                         ).build()
@@ -56,7 +56,7 @@ public class PlacedFeatures {
                 new PlacedFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_AZURE_RUNEWOOD_TREE),
                         ImmutableList.<PlacementModifier>builder().add(
                                 PlacementUtils.HEIGHTMAP,
-                                RarityFilter.onAverageOnceEvery(20),
+                                RarityFilter.onAverageOnceEvery(24),
                                 InSquarePlacement.spread(),
                                 CountPlacement.of(3)
                         ).build()

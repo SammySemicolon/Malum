@@ -1,14 +1,3 @@
 {
-  "registry_name": "spectrum:preservation_turrets",
-  "primary_type": "earthen",
-  "spirits": [
-    {
-      "spirit": "earthen",
-      "count": 4
-    },
-    {
-      "spirit": "arcane",
-      "count": 1
-    }
-  ]
+  "registry_name": "spectrum:preservation_turrets"
 }

@@ -1,12 +1,14 @@
 modLoader="javafml"
 loaderVersion="${loaderVersionRange}"
 license="${modLicense}"
+
 [[mods]]
 modId="malum"
 version="${modVersion}"
 displayName="${modName}"
 authors="${modAuthors}"
 description='''${modDescription}'''
+
 [[dependencies.malum]]
 modId="forge"
 mandatory=true
@@ -22,7 +24,7 @@ side="BOTH"
 [[dependencies.malum]]
 modId = "lodestone"
 mandatory = true
-versionRange = "[1.20.1-1.6.1,)"
+versionRange = "[1.20.1-1.6.3,)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.malum]]
@@ -31,6 +33,7 @@ mandatory = true
 versionRange = "[5.7.0,)"
 ordering = "NONE"
 side = "BOTH"
+
 [[dependencies.malum]]
 modId="fusion"
 mandatory=false

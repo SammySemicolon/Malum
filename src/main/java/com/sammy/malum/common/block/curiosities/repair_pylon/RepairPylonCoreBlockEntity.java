@@ -15,6 +15,7 @@ import com.sammy.malum.visual_effects.networked.pylon.*;
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
@@ -183,10 +184,14 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
         if (state.equals(RepairPylonState.COOLDOWN)) {
             return;
         }
-        boolean wasNull = recipe == null;
         recipe = LodestoneRecipeType.findRecipe(level, RecipeTypeRegistry.SPIRIT_REPAIR.get(), c -> c.matches(new SingleRecipeInput(inventory.getStackInSlot(0)), level) && c.doSpiritsMatch(spiritInventory.nonEmptyItemStacks));
-        if (wasNull) {
-            setState(RepairPylonState.SEARCHING);
+        if (recipe != null) {
+            if (state.equals(RepairPylonState.IDLE)) {
+                setState(RepairPylonState.SEARCHING);
+            }
+            if (level.isClientSide) {
+                RepairPylonSoundInstance.playSound(this);
+            }
         }
     }
 
@@ -196,12 +201,18 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
         spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.nonEmptyItemAmount));
         if (level.isClientSide) {
             spiritSpin++;
-            if (state.equals(RepairPylonState.COOLDOWN) && timer < 300) {
+            if (state.equals(RepairPylonState.COOLDOWN) && timer < 1200) {
                 timer++;
             }
             RepairPylonParticleEffects.passiveRepairPylonParticles(this);
         }
         else {
+            if (!state.equals(RepairPylonState.IDLE) && !state.equals(RepairPylonState.COOLDOWN)) {
+                if (recipe == null) {
+                    setState(RepairPylonState.IDLE);
+                    return;
+                }
+            }
             switch (state) {
                 case IDLE -> {
                     if (recipe != null) {
@@ -210,11 +221,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
                 }
                 case SEARCHING -> {
                     timer++;
-                    if (timer >= 100) {
-                        if (recipe == null) {
-                            timer = 0;
-                            return;
-                        }
+                    if (timer >= 40) {
                         boolean success = tryRepair();
                         if (success) {
                             setState(RepairPylonState.CHARGING);
@@ -226,11 +233,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
                 }
                 case CHARGING -> {
                     timer++;
-                    if (recipe == null) {
-                        setState(RepairPylonState.IDLE);
-                        return;
-                    }
-                    if (timer >= 60) {
+                    if (timer >= 600) {
                         if (repairablePosition == null) {
                             setState(RepairPylonState.IDLE);
                             return;
@@ -244,11 +247,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
                 }
                 case REPAIRING -> {
                     timer++;
-                    if (recipe == null) {
-                        setState(RepairPylonState.IDLE);
-                        return;
-                    }
-                    if (timer >= 30) {
+                    if (timer >= 40) {
                         if (repairablePosition == null) {
                             setState(RepairPylonState.IDLE);
                             return;
@@ -262,7 +261,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
                 }
                 case COOLDOWN -> {
                     timer++;
-                    if (timer >= 300) {
+                    if (timer >= 1200) {
                         setState(RepairPylonState.IDLE);
                     }
                 }
@@ -283,15 +282,28 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     }
 
     public boolean tryRepair(IMalumSpecialItemAccessPoint provider) {
-        LodestoneBlockEntityInventory inventoryForAltar = provider.getSuppliedInventory();
-        if (inventoryForAltar.getStackInSlot(0).isRepairable() && !inventoryForAltar.getStackInSlot(0).isDamaged()) return false;
-        if (getLevel() instanceof ServerLevel serverSide) return LodestoneRecipeType.findRecipe(serverSide, RecipeTypeRegistry.SPIRIT_REPAIR.get(), c -> c.matches(new SingleRecipeInput(inventoryForAltar.getStackInSlot(0)), level) && c.doesRepairMatch(inventory.getStackInSlot(0)) && c.doSpiritsMatch(spiritInventory.nonEmptyItemStacks)) != null;
-        else MalumMod.LOGGER.warn("RepairPylonCBE.tryRepair called from wrong side"); return false;
+        if (!(getLevel() instanceof ServerLevel serverLevel)) {
+            return false;
+        }
+        var inventoryForPylon = provider.getSuppliedInventory();
+        var repairTarget = inventoryForPylon.getStackInSlot(0);
+        if (repairTarget.isRepairable() && !repairTarget.isDamaged()) {
+            return false;
+        }
+        return LodestoneRecipeType.findRecipe(serverLevel,
+                RecipeTypeRegistry.SPIRIT_REPAIR.get(),
+                c -> c.matches(new SingleRecipeInput(repairTarget), level)
+                        && c.doesRepairMatch(inventory.getStackInSlot(0))
+                        && c.doSpiritsMatch(spiritInventory.nonEmptyItemStacks)) != null;
     }
 
+
     public void prepareRepair(IMalumSpecialItemAccessPoint provider) {
-        if (getLevel() instanceof ServerLevel serverSide) ParticleEffectTypeRegistry.REPAIR_PYLON_PREPARES.createPositionedEffect(serverSide, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits), PylonPrepareRepairParticleEffect.createData(provider.getAccessPointBlockPos()));
-        else MalumMod.LOGGER.warn("RepairPylonCBE.prepareRepair called from wrong side");
+        if (!(getLevel() instanceof ServerLevel serverLevel)) {
+            return;
+        }
+        ParticleEffectTypeRegistry.REPAIR_PYLON_PREPARES.createPositionedEffect(serverLevel, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits), PylonPrepareRepairParticleEffect.createData(provider.getAccessPointBlockPos()));
+        level.playSound(null, worldPosition, SoundRegistry.REPAIR_PYLON_REPAIR_START.get(), SoundSource.BLOCKS, 1.0f, 0.8f);
         setState(RepairPylonState.REPAIRING);
     }
 
@@ -311,18 +323,18 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
         }
         spiritInventory.updateData();
         ItemStack result = LodestoneRecipeType.getRecipe(
-                level, RecipeTypeRegistry.SPIRIT_REPAIR.get(),
-                new SingleRecipeInput(damagedItem)
+                level, RecipeTypeRegistry.SPIRIT_REPAIR.get(), new SingleRecipeInput(damagedItem)
         ).getResultItem(level.registryAccess());
         result.setDamageValue(Math.max(0, result.getDamageValue() - (int) (result.getMaxDamage() * recipe.durabilityPercentage)));
         suppliedInventory.setStackInSlot(0, result);
+        level.playSound(null, worldPosition, SoundRegistry.REPAIR_PYLON_REPAIR_FINISH.get(), SoundSource.BLOCKS, 1.0f, 0.8f);
         ParticleEffectTypeRegistry.REPAIR_PYLON_REPAIRS.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits), PylonPrepareRepairParticleEffect.createData(provider.getAccessPointBlockPos()));
         setState(RepairPylonState.COOLDOWN);
     }
 
     public void setState(RepairPylonState state) {
         this.state = state;
-        this.timer = 0;
+        this.timer = state.equals(RepairPylonState.SEARCHING) ? 100 : 0;
         BlockHelper.updateAndNotifyState(level, worldPosition);
     }
 
@@ -340,7 +352,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
         float distance = 0.75f + (float) Math.sin(((spiritSpin + partialTicks) % 6.28f) / 20f) * 0.025f;
         float height = 2.75f;
         if (state.equals(RepairPylonState.COOLDOWN)) {
-            int relativeCooldown = timer < 270 ? Math.min(timer, 30) : 300-timer;
+            int relativeCooldown = timer < 1110 ? Math.min(timer, 90) : 1200-timer;
             distance += getCooldownOffset(relativeCooldown, Easing.SINE_OUT) * 0.25f;
             height -= getCooldownOffset(relativeCooldown, Easing.QUARTIC_OUT) * getCooldownOffset(relativeCooldown, Easing.BACK_OUT) * 0.5f;
         }
@@ -348,7 +360,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     }
 
     public float getCooldownOffset(int relativeCooldown, Easing easing) {
-        return easing.ease(relativeCooldown / 30f, 0, 1, 1);
+        return easing.ease(relativeCooldown / 90f, 0, 1, 1);
     }
 
     @Override

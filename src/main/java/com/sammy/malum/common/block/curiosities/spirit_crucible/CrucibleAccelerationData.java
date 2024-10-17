@@ -54,24 +54,18 @@ public class CrucibleAccelerationData {
 
     public CrucibleAccelerationData(ICatalyzerAccelerationTarget target, Map<ICrucibleAccelerator.CrucibleAcceleratorType, Integer> typeCount, Collection<ICrucibleAccelerator> accelerators) {
         final List<AbstractAugmentItem> augments = Stream.concat(accelerators.stream().map(ICrucibleAccelerator::getAugmentType), target.getAugments().stream()).filter(Optional::isPresent).map(Optional::get).toList();
-        CrucibleTuning tuning = new CrucibleTuning(target, 1f + augments.stream().map(AbstractAugmentItem::getTuningStrengthIncrease).reduce(Float::sum).orElse(0f));
-        this.focusingSpeed = tuning.focusingSpeedMultiplier.createTunedValue(
-                typeCount.entrySet().stream().map((entry) -> entry.getKey().getAcceleration(entry.getValue())).reduce(Float::sum).orElse(0f)
-                        + augments.stream().map(AbstractAugmentItem::getSpeedIncrease).reduce(Float::sum).orElse(0f));
-        this.damageChance = tuning.damageChanceMultiplier.createTunedValue(
-                typeCount.entrySet().stream().map((entry) -> entry.getKey().getExtraDamageRollChance(entry.getValue())).reduce(Float::sum).orElse(0f)
-                        + augments.stream().map(AbstractAugmentItem::getInstabilityIncrease).reduce(Float::sum).orElse(0f));
+        float acceleratorExtraSpeed = typeCount.entrySet().stream().map((entry) -> entry.getKey().getAcceleration(entry.getValue())).reduce(Float::sum).orElse(0f);
+        float acceleratorExtraDamage = typeCount.entrySet().stream().map((entry) -> entry.getKey().getExtraDamageRollChance(entry.getValue())).reduce(Float::sum).orElse(0f);
+        float tuningStrength = 1f + augments.stream().map(AbstractAugmentItem::getTuningStrengthIncrease).reduce(Float::sum).orElse(0f);
+        var tuning = new CrucibleTuning(target, tuningStrength);
+        this.focusingSpeed = tuning.focusingSpeedMultiplier.createTunedValue(augments, AbstractAugmentItem::getSpeedIncrease, acceleratorExtraSpeed);
+        this.damageChance = tuning.damageChanceMultiplier.createTunedValue(augments, AbstractAugmentItem::getInstabilityIncrease, acceleratorExtraDamage);
 
-        this.bonusYieldChance = tuning.bonusYieldChanceMultiplier.createTunedValue(
-                augments.stream().map(AbstractAugmentItem::getFortuneChance).reduce(Float::sum).orElse(0f));
-        this.fuelUsageRate = tuning.fuelUsageRate.createTunedValue(
-                augments.stream().map(AbstractAugmentItem::getFuelUsageRateIncrease).reduce(Float::sum).orElse(0f));
-        this.chainFocusingChance = tuning.chainFocusingChanceMultiplier.createTunedValue(
-                augments.stream().map(AbstractAugmentItem::getChainFocusingChance).reduce(Float::sum).orElse(0f));
-        this.damageAbsorptionChance = tuning.damageAbsorptionChanceMultiplier.createTunedValue(
-                augments.stream().map(AbstractAugmentItem::getShieldingChance).reduce(Float::sum).orElse(0f));
-        this.restorationChance = tuning.restorationChanceMultiplier.createTunedValue(
-                augments.stream().map(AbstractAugmentItem::getRestorationChance).reduce(Float::sum).orElse(0f));
+        this.bonusYieldChance = tuning.bonusYieldChanceMultiplier.createTunedValue(augments, AbstractAugmentItem::getFortuneChance);
+        this.fuelUsageRate = tuning.fuelUsageRate.createTunedValue(augments, AbstractAugmentItem::getFuelUsageRateIncrease);
+        this.chainFocusingChance = tuning.chainFocusingChanceMultiplier.createTunedValue(augments, AbstractAugmentItem::getChainFocusingChance);
+        this.damageAbsorptionChance = tuning.damageAbsorptionChanceMultiplier.createTunedValue(augments, AbstractAugmentItem::getShieldingChance);
+        this.restorationChance = tuning.restorationChanceMultiplier.createTunedValue(augments, AbstractAugmentItem::getRestorationChance);
 
         final List<CrucibleTuning.CrucibleAttributeType> validTuningTypes = CrucibleTuning.CrucibleAttributeType.getValidValues(this);
         TunedValue weakestValue = figureOutWeakestValue(target.getAccelerationData(), Stream.of(focusingSpeed, bonusYieldChance, chainFocusingChance, damageAbsorptionChance, restorationChance).filter(t -> validTuningTypes.contains(t.tuning.attributeType)).collect(Collectors.toList()));

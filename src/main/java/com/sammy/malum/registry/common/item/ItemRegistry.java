@@ -639,11 +639,12 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_LEGGINGS = register("malignant_stronghold_leggings", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.LEGGINGS, p));
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_BOOTS = register("malignant_stronghold_boots", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.BOOTS, p));
 
-    public static final DeferredHolder<Item, Item> WEIGHT_OF_WORLDS = register("weight_of_worlds", GEAR_PROPERTIES(), (p) -> new WeightOfWorldsItem(ItemTiers.ItemTierEnum.MALIGNANT_ALLOY, -1, -0.1f, p));
-    public static final DeferredHolder<Item, Item> EROSION_SCEPTER = register("erosion_scepter", GEAR_PROPERTIES(), (p) -> new ErosionScepterItem(MALIGNANT_ALLOY, 5, p));
+    public static final DeferredHolder<Item, Item> WEIGHT_OF_WORLDS = register("weight_of_worlds", GEAR_PROPERTIES(), (p) -> new WeightOfWorldsItem(ItemTiers.ItemTierEnum.MALIGNANT_ALLOY, 3, -0.2f, p));
+    public static final DeferredHolder<Item, Item> EDGE_OF_DELIVERANCE = register("edge_of_deliverance", GEAR_PROPERTIES(), (p) -> new EdgeOfDeliveranceItem(ItemTiers.ItemTierEnum.MALIGNANT_ALLOY, 2, -0.2f, p));
 
     public static final DeferredHolder<Item, Item> MNEMONIC_HEX_STAFF = register("mnemonic_hex_staff", GEAR_PROPERTIES(), (p) -> new HexStaffItem(HEX_STAFF, 5, p));
     public static final DeferredHolder<Item, Item> STAFF_OF_THE_AURIC_FLAME = register("staff_of_the_auric_flame", GEAR_PROPERTIES(), (p) -> new AuricFlameStaffItem(AURIC_STAFF, 7, p));
+    public static final DeferredHolder<Item, Item> EROSION_SCEPTER = register("erosion_scepter", GEAR_PROPERTIES(), (p) -> new ErosionScepterItem(MALIGNANT_ALLOY, 5, p));
 
 
     public static final DeferredHolder<Item, Item> RUNE_OF_IDLE_RESTORATION = register("rune_of_idle_restoration", GEAR_PROPERTIES(), RuneIdleRestorationItem::new);
@@ -708,8 +709,8 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> NECKLACE_OF_THE_WATCHER = register("necklace_of_the_watcher", GEAR_PROPERTIES(), CurioWatcherNecklace::new);
     public static final DeferredHolder<Item, Item> BELT_OF_THE_LIMITLESS = register("belt_of_the_limitless", GEAR_PROPERTIES(), CurioLimitlessBelt::new);
 
-    public static final DeferredHolder<Item, Item> ARCANE_ELEGY = register("music_disc_arcane_elegy", HIDDEN_PROPERTIES().rarity(RARE), Item::new);
-    public static final DeferredHolder<Item, Item> AESTHETICA = register("music_disc_aesthetica", HIDDEN_PROPERTIES().rarity(RARE), Item::new);
+    public static final DeferredHolder<Item, Item> ARCANE_ELEGY = register("music_disc_arcane_elegy", HIDDEN_PROPERTIES().rarity(RARE), ArcaneElegyMusicDiscItem::new);
+    public static final DeferredHolder<Item, Item> AESTHETICA = register("music_disc_aesthetica", HIDDEN_PROPERTIES().rarity(RARE), AestheticaMusicDiscItem::new);
     //endregion
 
     //region cosmetics
@@ -795,33 +796,49 @@ public class ItemRegistry {
 
         @SubscribeEvent(priority = EventPriority.LOWEST)
         public static void addItemProperties(FMLClientSetupEvent event) {
-            Set<LodestoneArmorItem> armors = ItemRegistry.ITEMS.getEntries().stream().filter(r -> r.get() instanceof LodestoneArmorItem).map(r -> (LodestoneArmorItem) r.get()).collect(Collectors.toSet());
-            ItemPropertyFunction armorPropertyFunction = (stack, level, holder, holderID) -> {
-                if (!stack.has(DataComponentRegistry.ITEM_SKIN)) {
-                    return -1;
-                }
-                ArmorSkin armorSkin = ArmorSkinRegistry.SKINS.get(stack.get(DataComponentRegistry.ITEM_SKIN));
-                if (armorSkin == null) {
-                    return -1;
-                }
-                return armorSkin.index;
-            };
-            for (LodestoneArmorItem armor : armors) {
-                ItemProperties.register(armor, MalumMod.malumPath(ArmorSkin.MALUM_SKIN_TAG), armorPropertyFunction);
-            }
-            ItemProperties.register(RITUAL_SHARD.get(), MalumMod.malumPath(RitualShardItem.RITUAL_TYPE), (stack, level, holder, holderID) -> {
-                if (!stack.has(DataComponentRegistry.RITUAL_SHARD_PROPS)) {
-                    return -1;
-                }
-                return RitualShardItem.getRitualTier(stack).potency;
-            });
-
-            ItemProperties.register(CATALYST_LOBBER.get(), MalumMod.malumPath(CatalystFlingerItem.STATE), (stack, level, holder, holderID) -> {
-                if (!stack.has(DataComponentRegistry.CATALYST_FLINGER_STATE)) {
-                    return -1;
-                }
-                return stack.get(DataComponentRegistry.CATALYST_FLINGER_STATE);
-            });
+//            Set<LodestoneArmorItem> armors = ItemRegistry.ITEMS.getEntries().stream().filter(r -> r.get() instanceof LodestoneArmorItem).map(r -> (LodestoneArmorItem) r.get()).collect(Collectors.toSet());
+//            ItemPropertyFunction armorPropertyFunction = (stack, level, holder, holderID) -> {
+//                if (!stack.hasTag()) {
+//                    return -1;
+//                }
+//                CompoundTag nbt = stack.getTag();
+//                if (!nbt.contains(ArmorSkin.MALUM_SKIN_TAG)) {
+//                    return -1;
+//                }
+//                ArmorSkin armorSkin = ArmorSkinRegistry.SKINS.get(nbt.getString(ArmorSkin.MALUM_SKIN_TAG));
+//                if (armorSkin == null) {
+//                    return -1;
+//                }
+//                return armorSkin.index;
+//            };
+//            for (LodestoneArmorItem armor : armors) {
+//                ItemProperties.register(armor, new ResourceLocation(ArmorSkin.MALUM_SKIN_TAG), armorPropertyFunction);
+//            }
+//            ItemProperties.register(RITUAL_SHARD.get(), new ResourceLocation(RitualShardItem.RITUAL_TYPE), (stack, level, holder, holderID) -> {
+//                if (!stack.hasTag()) {
+//                    return -1;
+//                }
+//                CompoundTag nbt = stack.getTag();
+//                if (!nbt.contains(RitualShardItem.RITUAL_TYPE)) {
+//                    return -1;
+//                }
+//                if (!nbt.contains(RitualShardItem.STORED_SPIRITS)) {
+//                    return -1;
+//                }
+//                MalumRitualTier tier = RitualShardItem.getRitualTier(stack);
+//                return tier.potency;
+//            });
+//
+//            ItemProperties.register(CATALYST_LOBBER.get(), new ResourceLocation(CatalystFlingerItem.STATE), (stack, level, holder, holderID) -> {
+//                if (!stack.hasTag()) {
+//                    return -1;
+//                }
+//                CompoundTag nbt = stack.getTag();
+//                if (!nbt.contains(CatalystFlingerItem.STATE)) {
+//                    return -1;
+//                }
+//                return nbt.getInt(CatalystFlingerItem.STATE);
+//            });
         }
 
         @SubscribeEvent

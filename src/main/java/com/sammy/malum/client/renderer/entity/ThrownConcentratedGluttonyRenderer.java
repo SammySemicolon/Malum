@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import com.sammy.malum.client.*;
 import com.sammy.malum.common.entity.thrown.*;
+import com.sammy.malum.registry.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.texture.*;
@@ -22,8 +23,8 @@ import static com.sammy.malum.MalumMod.*;
 
 public class ThrownConcentratedGluttonyRenderer extends EntityRenderer<ThrownConcentratedGluttony> {
 
-   private static final RenderType ADDITIVE_TRAIL_TYPE = LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(malumPath("textures/vfx/concentrated_trail.png")));
-   private static final RenderType TRANSPARENT_TRAIL_TYPE = LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(malumPath("textures/vfx/concentrated_trail.png")), ShaderUniformHandler.LUMITRANSPARENT);
+   private static final RenderType TRANSPARENT_TRAIL_TYPE = LodestoneRenderTypeRegistry.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(malumPath("textures/vfx/concentrated_trail.png")), ShaderUniformHandler.LUMITRANSPARENT);
+
    private static final Color GLUTTONY_GREEN = new Color(47, 81, 28);
    private static final Color GLUTTONY_DARK = new Color(31, 35, 30);
    private static final Color GLUTTONY_SHADE = new Color(14, 14, 16);
@@ -60,7 +61,9 @@ public class ThrownConcentratedGluttonyRenderer extends EntityRenderer<ThrownCon
             poseStack.popPose();
          }
          float scale = entity.getVisualEffectScalar();
-         VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld().setRenderType(ADDITIVE_TRAIL_TYPE);
+         var additive = LodestoneRenderTypeRegistry.ADDITIVE_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
+         var transparent = LodestoneRenderTypeRegistry.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL, ShaderUniformHandler.LUMITRANSPARENT);
+         var builder = VFXBuilders.createWorld().setRenderType(additive);
          for (TrailPointBuilder trail : entity.trails) {
             RenderUtils.renderEntityTrail(poseStack, builder, trail, entity, GLUTTONY_GREEN, GLUTTONY_DARK, scale * 0.5f, scale * 0.5f, partialTicks);
          }

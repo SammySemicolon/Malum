@@ -1,12 +1,13 @@
 package com.sammy.malum.common.block.curiosities.spirit_crucible;
 
+import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.registry.common.SoundRegistry;
 import net.minecraft.client.Minecraft;
-import team.lodestar.lodestone.systems.sound.LodestoneBlockEntitySoundInstance;
+import team.lodestar.lodestone.systems.sound.*;
 
-public class CrucibleSoundInstance extends LodestoneBlockEntitySoundInstance<SpiritCrucibleCoreBlockEntity> {
+public class CrucibleSoundInstance extends CachedBlockEntitySoundInstance<SpiritCrucibleCoreBlockEntity> {
     public CrucibleSoundInstance(SpiritCrucibleCoreBlockEntity blockEntity, float volume, float pitch) {
-        super(blockEntity, SoundRegistry.CRUCIBLE_LOOP.get(), volume, pitch);
+        super(blockEntity, SoundRegistry.CRUCIBLE_LOOP, volume, pitch);
         this.x = blockEntity.getBlockPos().getX() + 0.5f;
         this.y = blockEntity.getBlockPos().getY() + 0.5f;
         this.z = blockEntity.getBlockPos().getZ() + 0.5f;
@@ -14,14 +15,13 @@ public class CrucibleSoundInstance extends LodestoneBlockEntitySoundInstance<Spi
 
     @Override
     public void tick() {
-        if (blockEntity.recipe != null) {
-            super.tick();
-            return;
+        if (blockEntity.recipe == null) {
+            stop();
         }
-        stop();
+        super.tick();
     }
 
-    public static void playSound(SpiritCrucibleCoreBlockEntity tileEntity) {
-        Minecraft.getInstance().getSoundManager().queueTickingSound(new CrucibleSoundInstance(tileEntity, 1, 1));
+    public static void playSound(SpiritCrucibleCoreBlockEntity blockEntity) {
+        playSound(blockEntity, new CrucibleSoundInstance(blockEntity, 1, 1));
     }
 }

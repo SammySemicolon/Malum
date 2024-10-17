@@ -15,6 +15,7 @@ import net.minecraft.core.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
+import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
@@ -25,8 +26,6 @@ import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 
 public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCatalyzerCoreBlockEntity> {
 
-    private static final RenderTypeToken LIGHT_TRAIL = MalumRenderTypeTokens.CONCENTRATED_TRAIL;
-    private static final RenderType TRAIL_TYPE = LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE.apply(LIGHT_TRAIL);
 
     public SpiritCatalyzerRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -74,16 +73,17 @@ public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCataly
     }
 
     public void renderBeam(SpiritCatalyzerCoreBlockEntity catalyzer, PoseStack poseStack, MalumSpiritType spiritType, int intensity) {
-        BlockPos catalyzerPos = catalyzer.getBlockPos();
-        Vec3 startPos = catalyzer.getItemOffset().add(catalyzerPos.getX(), catalyzerPos.getY(), catalyzerPos.getZ());
-        Vec3 targetPos = catalyzer.getTarget().getVisualAccelerationPoint();
-        Vec3 difference = targetPos.subtract(startPos);
+        var catalyzerPos = catalyzer.getBlockPos();
+        var startPos = catalyzer.getItemOffset().add(catalyzerPos.getX(), catalyzerPos.getY(), catalyzerPos.getZ());
+        var targetPos = catalyzer.getTarget().getVisualAccelerationPoint();
+        var difference = targetPos.subtract(startPos);
         float distance = 0.35f + Easing.SINE_OUT.ease(intensity / 60f, 0, 0.35f, 1);
         float alpha = intensity / 60f;
-        Vec3 midPoint = startPos.add(difference.scale(distance));
+        var midPoint = startPos.add(difference.scale(distance));
+        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
         SpiritBasedWorldVFXBuilder.create(spiritType)
                 .setColor(spiritType.getPrimaryColor())
-                .setRenderType(TRAIL_TYPE)
+                .setRenderType(renderType)
                 .setAlpha(alpha)
                 .renderBeam(poseStack.last().pose(), startPos, midPoint, 0.4f, b -> b.setColor(spiritType.getSecondaryColor()).setAlpha(0f));
     }

@@ -70,8 +70,8 @@
   "spirit_rite_cancelled": { "sounds":["malum:totem/totem_cancel"], "subtitle": "malum.subtitle.spirit_rite_cancelled" },
   "spirit_engraved": { "sounds":["malum:totem/totem_engrave1","malum:totem/totem_engrave2","malum:totem/totem_engrave3"], "subtitle": "malum.subtitle.spirit_engraved" },
 
-  "spirit_altar_completes_infusion": { "sounds":["malum:altar/altar_craft1","malum:altar/altar_craft2"], "subtitle": "malum.subtitle.spirit_altar_completes_infusion" },
   "spirit_altar_infuses": { "sounds":["malum:altar/altar_loop"], "subtitle": "malum.subtitle.spirit_altar_infuses" },
+  "spirit_altar_completes_infusion": { "sounds":["malum:altar/altar_craft1","malum:altar/altar_craft2"], "subtitle": "malum.subtitle.spirit_altar_completes_infusion" },
   "spirit_altar_speeds_up": { "sounds":["malum:altar/altar_speedup1","malum:altar/altar_speedup2"], "subtitle": "malum.subtitle.spirit_altar_speeds_up" },
   "spirit_altar_absorbs_item": { "sounds":["malum:altar/altar_consume1", "malum:altar/altar_consume2"], "subtitle": "malum.subtitle.spirit_altar_absorbs_item" },
   "alteration_plinth_alters": { "sounds":["malum:plinth/alter1","malum:plinth/alter2","malum:plinth/alter3"], "subtitle": "malum.subtitle.alteration_plinth_alters" },
@@ -89,9 +89,13 @@
   "ritual_evolution_ambience": { "sounds":["malum:ritual/ritual_loop2"], "subtitle": "malum.subtitle.ritual_evolution_ambience" },
   "completed_ritual_ambience": { "sounds":["malum:ritual/ritual_loop3"], "subtitle": "malum.subtitle.completed_ritual_ambience" },
 
-  "spirit_crucible_completes_focusing": { "sounds":["malum:crucible/crucible_craft1", "malum:crucible/crucible_craft2", "malum:crucible/crucible_craft3"], "subtitle": "malum.subtitle.spirit_crucible_completes_focusing" },
   "spirit_crucible_focuses": { "sounds":["malum:crucible/crucible_loop"], "subtitle": "malum.subtitle.spirit_crucible_focuses" },
+  "spirit_crucible_completes_focusing": { "sounds":["malum:crucible/crucible_craft1", "malum:crucible/crucible_craft2", "malum:crucible/crucible_craft3"], "subtitle": "malum.subtitle.spirit_crucible_completes_focusing" },
   "impetus_takes_damage": { "sounds":["malum:crucible/impetus_crack1", "malum:crucible/impetus_crack2", "malum:crucible/impetus_crack3"], "subtitle": "malum.subtitle.impetus_takes_damage" },
+
+  "repair_pylon_eagerly_hums": { "sounds":["malum:repair_pylon/repair_pylon_loop"], "subtitle": "malum.subtitle.repair_pylon_eagerly_hums" },
+  "repair_pylon_begins_repairing": { "sounds":["malum:repair_pylon/repair_pylon_send1", "malum:repair_pylon/repair_pylon_send2", "malum:repair_pylon/repair_pylon_send3", "malum:repair_pylon/repair_pylon_send4"], "subtitle": "malum.subtitle.repair_pylon_begins_repairing" },
+  "repair_pylon_finishes_repairing": { "sounds":["malum:repair_pylon/repair_pylon_fix1", "malum:repair_pylon/repair_pylon_fix2", "malum:repair_pylon/repair_pylon_fix3", "malum:repair_pylon/repair_pylon_fix4"], "subtitle": "malum.subtitle.repair_pylon_finishes_repairing" },
 
   "aerial_magic_swooshes": { "sounds":["minecraft:mob/phantom/flap1","minecraft:mob/phantom/flap2","minecraft:mob/phantom/flap3","minecraft:mob/phantom/flap4","minecraft:mob/phantom/flap5","minecraft:mob/phantom/flap6"], "subtitle": "malum.subtitle.aerial_magic_swooshes" },
 

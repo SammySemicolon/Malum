@@ -1,5 +1,7 @@
 package com.sammy.malum.common.block.curiosities.spirit_crucible;
 
+import com.sammy.malum.common.item.augment.*;
+
 import java.util.*;
 import java.util.function.*;
 
@@ -123,6 +125,12 @@ public class CrucibleTuning {
             this(tuning, attributeType, 0);
         }
 
+        public CrucibleAccelerationData.TunedValue createTunedValue(List<AbstractAugmentItem> augmentItems, Function<AbstractAugmentItem, Float> mappingFunction) {
+            return createTunedValue(augmentItems.stream().map(mappingFunction).reduce(Float::sum).orElse(0f));
+        }
+        public CrucibleAccelerationData.TunedValue createTunedValue(List<AbstractAugmentItem> augmentItems, Function<AbstractAugmentItem, Float> mappingFunction, float bonus) {
+            return createTunedValue(bonus + augmentItems.stream().map(mappingFunction).reduce(Float::sum).orElse(0f));
+        }
         public CrucibleAccelerationData.TunedValue createTunedValue(float bonus) {
             return new CrucibleAccelerationData.TunedValue(this, bonus);
         }

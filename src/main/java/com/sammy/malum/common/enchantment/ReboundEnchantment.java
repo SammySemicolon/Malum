@@ -1,7 +1,7 @@
 package com.sammy.malum.common.enchantment;
 
 import com.sammy.malum.common.entity.boomerang.ScytheBoomerangEntity;
-import com.sammy.malum.registry.common.AttributeRegistry;
+import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.*;
@@ -16,6 +16,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.LodestoneAttributes;
 
 public class ReboundEnchantment extends Enchantment {
@@ -37,7 +38,7 @@ public class ReboundEnchantment extends Enchantment {
             if (!level.isClientSide) {
                 float baseDamage = (float) player.getAttributes().getValue(Attributes.ATTACK_DAMAGE);
                 float magicDamage = (float) player.getAttributes().getValue(LodestoneAttributes.MAGIC_DAMAGE);
-                float velocity = (float) (1.5F * player.getAttributeValue(AttributeRegistry.SCYTHE_PROFICIENCY));
+                float velocity = (float) (1.5F + 0.5f * player.getAttributeValue(AttributeRegistry.SCYTHE_PROFICIENCY));
 
                 var hand = event.getHand();
                 int slot = hand == InteractionHand.OFF_HAND ? player.getInventory().getContainerSize() - 1 : player.getInventory().selected;
@@ -48,7 +49,7 @@ public class ReboundEnchantment extends Enchantment {
                 level.addFreshEntity(entity);
                 player.setItemInHand(hand, ItemStack.EMPTY);
                 player.swing(hand, true);
-//                SoundHelper.playSound(player, SoundRegistry.SCYTHE_THROW.get(),2.0f, RandomHelper.randomBetween(level.getRandom(), 0.75f, 1.25f));
+                SoundHelper.playSound(player, SoundRegistry.SCYTHE_THROW.get(),2.0f, RandomHelper.randomBetween(level.getRandom(), 0.75f, 1.25f));
             }
             player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
         }

@@ -385,10 +385,10 @@ public class MalumLang extends LanguageProvider {
                 "Harnessing the reality-corroding properties of Malignant Pewter is easy. What fits the revocation of progress better than a crude weapon? An axe, which I named the Weight of Worlds in a fit of pique. It is slow, it is clumsy, it is physical... and it is " + italic("powerful") + " beyond measure.",
                 "Rarely, the Weight seems to lend its approval to my slaughter, doubling the force I strike with, with no seeming source. I believe slaughter is the key because of the resonance I feel when I take a life with it - that resonance seems to expend itself when I swing next, guaranteeing that doubling of force.");
 
-        addSimpleEntryHeader("void.edge_of_deliverance", "The Edge of Deliverance", "Misplaced rhythmic nature");
+        addSimpleEntryHeader("void.edge_of_deliverance", "The Edge of Deliverance", "A mad screamer's melody");
         addPages("void.edge_of_deliverance",
-                "After becoming familiar with malignant pewter, I could not ommit experimenting with a more familiar weapon design. The Edge of Deliverance is much different from the axe, unlike it's geometric and sharp frame, the scythe is a lot more spindly and chaotic.",
-                "Similarly to the axe, the Edge of Deliverance strikes with a doubling of force on every second strike. It's beautiful in a way, anything made from malignant pewter seems to dodge fulfilling my intentions as much as it can- Order turns into chaos, and chaos turns into order.");
+                "Progress can be revoked, and crude can overcome grand. But progress can be undone by progress, can it not? A scythe, familiar in ways the axe was not, which I name the Edge of Deliverance. It is the true opposite - where the Weight of Worlds is sharp and heavy, the Edge is thin and winding.",
+                "This focuses the inconsistent force of the Weight of Worlds, seeking slaughter to wet the blade. Instead, a single attack's taste of blood empowers the scythe, creating an alternating pattern of killing strength.");
 
         addSimpleEntryHeader("void.erosion_scepter", "Erosion Scepter", "May mages fear my might");
         addPages("void.erosion_scepter",

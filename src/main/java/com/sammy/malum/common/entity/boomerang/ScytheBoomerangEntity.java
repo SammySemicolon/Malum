@@ -191,10 +191,14 @@ public class ScytheBoomerangEntity extends ThrowableItemProjectile {
             }
             if (owner instanceof LivingEntity scytheOwner) {
                 if (age % 3 == 0) {
-                    final float pitch = (float) (1f + Math.sin(level.getGameTime() * 0.5f) * 0.2f);
+                    float pitch = (float) (0.8f + Math.sin(level.getGameTime() * 0.5f) * 0.2f);
                     float volumeScalar = Mth.clamp(age / 12f, 0, 1f);
-                    SoundHelper.playSound(this, SoundRegistry.SCYTHE_SPINS.get(),0.8f * volumeScalar, pitch);
-                    SoundHelper.playSound(this, SoundRegistry.SCYTHE_SWEEP.get(),0.3f * volumeScalar, pitch);
+                    if (isInWater()) {
+                        volumeScalar *= 0.2f;
+                        pitch *= 0.5f;
+                    }
+                    SoundHelper.playSound(this, SoundRegistry.SCYTHE_SPINS.get(),0.6f * volumeScalar, pitch);
+                    SoundHelper.playSound(this, SoundRegistry.SCYTHE_SWEEP.get(),0.4f * volumeScalar, pitch);
                 }
                 var motion = getDeltaMovement();
                 if (xRotO == 0.0F && yRotO == 0.0F) {

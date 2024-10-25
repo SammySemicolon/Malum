@@ -9,6 +9,7 @@ import net.minecraft.world.item.*;
 public class ItemTagRegistry {
     public static final TagKey<Item> SOUL_HUNTER_WEAPON = malumTag("soul_hunter_weapon");
     public static final TagKey<Item> SCYTHE = malumTag("scythe");
+    public static final TagKey<Item> MAGIC_CAPABLE_SCYTHE = malumTag("magic_capable_scythe");
     public static final TagKey<Item> STAFF = malumTag("staff");
 
     public static final TagKey<Item> SPIRITS = malumTag("spirit");

@@ -140,14 +140,17 @@ public class MalumItemTags extends ItemTagsProvider {
                 AERIAL_SPIRIT.get(), AQUEOUS_SPIRIT.get(), EARTHEN_SPIRIT.get(), INFERNAL_SPIRIT.get());
         tag(ItemTagRegistry.SPIRITS).addTag(ItemTagRegistry.ASPECTED_SPIRITS).add(UMBRAL_SPIRIT.get());
 
-        tag(ItemTagRegistry.SCYTHE).add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), CREATIVE_SCYTHE.get());
+        tag(ItemTagRegistry.MAGIC_CAPABLE_SCYTHE).add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), CREATIVE_SCYTHE.get());
+        tag(ItemTagRegistry.SCYTHE).addTag(ItemTagRegistry.MAGIC_CAPABLE_SCYTHE).add(EDGE_OF_DELIVERANCE.get());
         tag(ItemTagRegistry.STAFF).add(MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
 
         tag(ItemTagRegistry.SOUL_HUNTER_WEAPON)
                 //staves
                 .add(MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get())
+                //scythes
+                .add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), EDGE_OF_DELIVERANCE.get(), CREATIVE_SCYTHE.get())
                 //unique weapons
-                .add(TYRVING.get(), CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), CREATIVE_SCYTHE.get(), WEIGHT_OF_WORLDS.get())
+                .add(TYRVING.get(), WEIGHT_OF_WORLDS.get())
                 //soul stained steel gear
                 .add(SOUL_STAINED_STEEL_AXE.get(), SOUL_STAINED_STEEL_PICKAXE.get(), SOUL_STAINED_STEEL_SHOVEL.get(), SOUL_STAINED_STEEL_SWORD.get(), SOUL_STAINED_STEEL_HOE.get(), SOUL_STAINED_STEEL_KNIFE.get());
 
@@ -179,7 +182,8 @@ public class MalumItemTags extends ItemTagsProvider {
                 // Equipment
                 .add(MALIGNANT_STRONGHOLD_HELMET.get(), MALIGNANT_STRONGHOLD_CHESTPLATE.get(),
                         MALIGNANT_STRONGHOLD_LEGGINGS.get(), MALIGNANT_STRONGHOLD_BOOTS.get(),
-                        WEIGHT_OF_WORLDS.get(), EROSION_SCEPTER.get(),
+                        WEIGHT_OF_WORLDS.get(), EDGE_OF_DELIVERANCE.get(),
+                        EROSION_SCEPTER.get(),
                         MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get())
                 // Runes
                 .add(VOID_TABLET.get(),

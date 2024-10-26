@@ -1,4 +1,4 @@
-package com.sammy.malum.common.enchantment;
+package com.sammy.malum.common.enchantment.staff;
 
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.common.packets.*;
@@ -16,7 +16,7 @@ import static com.sammy.malum.registry.common.PacketRegistry.*;
 
 public class ReplenishingEnchantment extends Enchantment {
     public ReplenishingEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentRegistry.STAFF, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.UNCOMMON, EnchantmentRegistry.STAFF_ONLY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
     }
 
     @Override

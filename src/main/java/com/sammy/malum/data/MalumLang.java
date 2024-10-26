@@ -9,8 +9,10 @@ import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.BlockRegistry;
+import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.*;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
@@ -34,7 +36,6 @@ import static com.sammy.malum.registry.common.MobEffectRegistry.EFFECTS;
 import static com.sammy.malum.registry.common.SoundRegistry.SOUNDS;
 import static com.sammy.malum.registry.common.block.BlockRegistry.BLOCKS;
 import static com.sammy.malum.registry.common.entity.EntityRegistry.ENTITY_TYPES;
-import static com.sammy.malum.registry.common.item.EnchantmentRegistry.ENCHANTMENTS;
 import static com.sammy.malum.registry.common.item.ItemRegistry.*;
 
 public class MalumLang extends LanguageProvider {
@@ -47,7 +48,7 @@ public class MalumLang extends LanguageProvider {
         Set<DeferredHolder<Block, ? extends Block>> blocks = new HashSet<>(BLOCKS.getEntries());
         Set<DeferredHolder<Item, ? extends Item>> items = new HashSet<>(ITEMS.getEntries());
         Set<DeferredHolder<SoundEvent, ? extends SoundEvent>> sounds = new HashSet<>(SOUNDS.getEntries());
-        Set<DeferredHolder<Enchantment, ? extends Enchantment>> enchantments = new HashSet<>(ENCHANTMENTS.getEntries());
+//        Set<DeferredHolder<Enchantment, ? extends Enchantment>> enchantments = new HashSet<>(ENCHANTMENTS.getEntries());
         Set<DeferredHolder<MobEffect, ? extends MobEffect>> effects = new HashSet<>(EFFECTS.getEntries());
         Set<DeferredHolder<Attribute, ? extends Attribute>> attributes = new HashSet<>(ATTRIBUTES.getEntries());
         Set<DeferredHolder<EntityType<?>, ? extends EntityType<?>>> entities = new HashSet<>(ENTITY_TYPES.getEntries());
@@ -87,10 +88,10 @@ public class MalumLang extends LanguageProvider {
             add("malum.subtitle." + s.getId().getPath(), name);
         });
 
-        enchantments.forEach(e -> {
-            String name = DataHelper.toTitleCase(e.getId().getPath(), "_");
-            add("enchantment.malum." + e.getKey().location().getPath(), name);
-        });
+//        enchantments.forEach(e -> {
+//            String name = DataHelper.toTitleCase(e.getId().getPath(), "_");
+//            add("enchantment.malum." + e.getKey().location().getPath(), name);
+//        });
 
         effects.forEach(e -> {
             String name = DataHelper.toTitleCase(makeProperEnglish(e.getId().getPath()), "_");
@@ -206,6 +207,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.curio.effect.bigger_explosions", "Improves Explosions");
         add("malum.gui.curio.effect.better_conduit_power", "Conduit Power Provides Numerous Benefits");
         add("malum.gui.curio.effect.no_sweep", "Disables Scythe Sweeping");
+        add("malum.gui.curio.effect.enhanced_maneuvers", "Augments Rebound and Ascension");
         add("malum.gui.curio.effect.friendly_enemies", "Reduces Enemy Aggression");
         add("malum.gui.curio.effect.soul_ward_magic_resilience", "Soul Ward Magic Resilience");
         add("malum.gui.curio.effect.rotten_gluttony", "Eating Rotten Food Generates Gluttony");
@@ -476,19 +478,24 @@ public class MalumLang extends LanguageProvider {
         addPages("scythes",
                 "After several inert attempts, I have socketed Soulstone into a weapon that can reliably harvest these spirit crystals. The long blade allows time for the body to die before I strike the soul, while also providing a wide sweep attack. It isn't as sharp as a sword, but for my purposes, it will do nicely.",
                 "What I had managed to do before with careful, painstaking experiments, the scythe did in a matter of seconds. The souls of the monsters I slew shattered, streaming bits of deeply hued matter towards me: the spirit crystals. Finally, my research can begin in earnest.");
-        addHeadline("scythes.enchanting", "Enchanting a Scythe");
+        addSimpleEntryHeader("scythes.enchanting", "Enchanting a Scythe", "Two ways to skin a soul");
         addPages("scythes.enchanting",
                 "At its core, the scythe enchants like other weapons or tools I've used. It has its own set of enchantments, of course, due to its differing nature, but can take Unbreaking and the like as well as a sword can.");
-        addHeadline("scythes.enchanting.haunted", "Haunted");
-        addPages("scythes.enchanting.haunted",
-                "The Soulstone can be used in ways other than just shattering the soul. By enchanting the stone, the swing of the blade gains a bit of the strange properties of the stone, cutting deeper into the target's soul and doing extra magic damage.");
         addHeadline("scythes.enchanting.spirit_plunder", "Spirit Plunder");
         addPages("scythes.enchanting.spirit_plunder",
                 "This is not a perfect method. Some of the soul is unavoidably lost in the moment between blade and stone. But by enchanting the blade, that loss can be mitigated, and more of the soul condensed. This unfortunately strains the stone, and can result in my scythe's durability decreasing.");
+        addHeadline("scythes.enchanting.haunted", "Haunted");
+        addPages("scythes.enchanting.haunted",
+                "Soulstone interacts with souls, obviously. The crudest and simplest use is blunt force, shattering a soul like a pane of glass. If I condense the arcane power of the stone, it would therefore hit and shatter harder, perhaps even damaging the body with the backlash.");
+        addHeadline("scythes.enchanting.winded", "Winded");
+        addPages("scythes.enchanting.winded",
+                "If power can be concentrated, it can be diffused. Interestingly, by diffusing the power that would be drawn together for Haunted into the rest of the scythe, the entire weapon gains a conceptual “lightness”, making its swings lighter and faster.");
         addHeadline("scythes.enchanting.rebound", "Rebound");
         addPages("scythes.enchanting.rebound",
-                "By working my enchantments into the wooden handle, I found that my scythe can be made to return to my hand. As strange as it looks, using my scythe as a boomerang can be useful to cut through hordes of monsters. The stronger the enchantment, the less time until I can throw the scythe again.");
-
+                "A scythe reaps. That is its purpose, and that can be harnessed. Should a reaper need my hand? By harnessing the purpose of the blade as a weapon, I can let it act on its own to some extent, as if it were a boomerang. The stronger the enchantment, the sooner it’s ready to throw again.");
+        addHeadline("scythes.enchanting.ascension", "Ascension");
+        addPages("scythes.enchanting.ascension",
+                "A fascinating bit of symbolism is the role of the tool in raising man up. Civilization was built by the food a scythe harvests. By harnessing the purpose of the blade as a tool, I can… well, raise myself, the winds I rise on sharp as the blade itself to my foes. Rebound is incompatible; literally, at cross purposes with this enchantment.");
 
         addSimpleEntryHeader("esoteric_reaping", "Esoteric Reaping", "Leaked magic");
         addPages("esoteric_reaping",
@@ -1089,10 +1096,6 @@ public class MalumLang extends LanguageProvider {
         add("itemGroup.malum_ritual_shards", "Malum: Ritual Shards");
         add("itemGroup.malum_cosmetics", "Malum: Self Expression");
 
-        add("enchantment.malum.haunted.desc", "Deals extra magic damage.");
-        add("enchantment.malum.rebound.desc", "Allows the item to be thrown much like a boomerang, cooldown decreases with tier.");
-        add("enchantment.malum.spirit_plunder.desc", "Increases the amount of spirits created when shattering a soul.");
-
         add("death.attack." + DamageTypeRegistry.VOODOO_IDENTIFIER, "%s had their soul shattered");
         add("death.attack." + DamageTypeRegistry.VOODOO_IDENTIFIER + ".player", "%s had their soul shattered by %s");
         add("death.attack." + DamageTypeRegistry.SCYTHE_SWEEP_IDENTIFIER, "%s was sliced in half");
@@ -1122,6 +1125,13 @@ public class MalumLang extends LanguageProvider {
         addTetraMaterial("spirit_fabric", "Spirit Fabric");
 
         addTetraImprovement("malum.soul_strike", "Soul Strike", "The item's material allows it to strike the soul.");
+
+        addEnchantmentDescription(EnchantmentRegistry.ANIMATED, "Improves the Scythe's attack rate.");
+        addEnchantmentDescription(EnchantmentRegistry.REBOUND, "Allows the Scythe to be thrown much like a boomerang when used.");
+        addEnchantmentDescription(EnchantmentRegistry.ASCENSION, "Enables the Scythe to propel the player upwards, pushing away nearby enemies when used.");
+        addEnchantmentDescription(EnchantmentRegistry.REPLENISHING, "Reduces the Staff's ranged attack cooldown when dealing melee damage.");
+        addEnchantmentDescription(EnchantmentRegistry.HAUNTED, "Improves the Weapon's Magic Damage");
+        addEnchantmentDescription(EnchantmentRegistry.SPIRIT_PLUNDER, "Reaps extra Spirits when killing an enemy.");
 
         addAttributeLibAttributeDescription(AttributeRegistry.SCYTHE_PROFICIENCY, "Damage multiplier for Scythes");
         addAttributeLibAttributeDescription(AttributeRegistry.SPIRIT_SPOILS, "Flat increase to spirits looted from slain foes");
@@ -1223,7 +1233,11 @@ public class MalumLang extends LanguageProvider {
         add("tetra.improvement." + identifier + ".description", description);
     }
 
-    public void addAttributeLibAttributeDescription(RegistryObject<Attribute> attribute, String desc) {
+    public void addEnchantmentDescription(ResourceKey<Enchantment> enchantment, String desc) {
+        add("enchantment.malum." + enchantment.location().getPath() + ".desc", desc);
+    }
+
+    public void addAttributeLibAttributeDescription(DeferredHolder<Attribute, Attribute> attribute, String desc) {
         add("attribute.name.malum." + attribute.getId().getPath() + ".desc", desc);
     }
 

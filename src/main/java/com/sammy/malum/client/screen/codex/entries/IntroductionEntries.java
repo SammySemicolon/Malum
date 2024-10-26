@@ -104,10 +104,15 @@ public class IntroductionEntries {
                 .addPage(new HeadlineTextPage("scythes", "scythes.1"))
                 .addPage(CraftingPage.scythePage(ItemRegistry.CRUDE_SCYTHE.get(), Items.IRON_INGOT, PROCESSED_SOULSTONE.get()))
                 .addPage(new TextPage("scythes.2"))
-                .addPage(new HeadlineTextPage("scythes.enchanting", "scythes.enchanting.1"))
-                .addPage(new HeadlineTextPage("scythes.enchanting.haunted", "scythes.enchanting.haunted.1"))
-                .addPage(new HeadlineTextPage("scythes.enchanting.spirit_plunder", "scythes.enchanting.spirit_plunder.1"))
-                .addPage(new HeadlineTextPage("scythes.enchanting.rebound", "scythes.enchanting.rebound.1"))
+                .addReference(new EntryReference(ENCHANTED_BOOK,
+                        BookEntry.build("scythes.enchanting")
+                                .addPage(new HeadlineTextPage("scythes.enchanting", "scythes.enchanting.1"))
+                                .addPage(new HeadlineTextPage("scythes.enchanting.spirit_plunder", "scythes.enchanting.spirit_plunder.1"))
+                                .addPage(new HeadlineTextPage("scythes.enchanting.haunted", "scythes.enchanting.haunted.1"))
+                                .addPage(new HeadlineTextPage("scythes.enchanting.winded", "scythes.enchanting.winded.1"))
+                                .addPage(new HeadlineTextPage("scythes.enchanting.rebound", "scythes.enchanting.rebound.1"))
+                                .addPage(new HeadlineTextPage("scythes.enchanting.ascension", "scythes.enchanting.ascension.1"))
+                ))
         );
 
         screen.addEntry("spirit_infusion", 0, 5, b -> b

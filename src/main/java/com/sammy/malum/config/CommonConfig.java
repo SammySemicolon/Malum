@@ -8,10 +8,6 @@ import static com.sammy.malum.MalumMod.MALUM;
 
 public class CommonConfig extends LodestoneConfig {
 
-    public static ConfigValueHolder<Boolean> ULTIMATE_REBOUND = new ConfigValueHolder<>(MALUM, "common/item/rebound", (builder ->
-            builder.comment("If set to true, you may put rebound on any weapon in the game.")
-                    .define("enableUltimateRebound", false)));
-
     public static ConfigValueHolder<Boolean> AWARD_CODEX_ON_KILL = new ConfigValueHolder<>(MALUM, "common/codex", (builder ->
             builder.comment("If set to true, the first undead enemy a player slays will drop the encyclopedia arcana.")
                     .define("enableCodexDrop", true)));
@@ -37,10 +33,6 @@ public class CommonConfig extends LodestoneConfig {
     public static ConfigValueHolder<Integer> SOUL_WARD_RATE = new ConfigValueHolder<>(MALUM, "common/spirit/affinity/soul_ward", (builder ->
             builder.comment("Base time in ticks it takes for one point of soul ward to recover.")
                     .define("soulWardRate", 100)));
-
-    public static ConfigValueHolder<Boolean> IRONS_SPELLBOOKS_SOUL_SHATTER = new ConfigValueHolder<>(MALUM, "common/compat/irons_spellbooks", (builder ->
-            builder.comment("If set to true, and Iron's Spellbooks is installed, spells and scrolls from the mod will function as soul hunter weapons.")
-                    .define("spellsLootSpirits", true)));
 
     public CommonConfig(ModConfigSpec.Builder builder) {
         super(MALUM, "common", builder);

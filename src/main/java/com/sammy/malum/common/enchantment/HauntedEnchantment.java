@@ -11,24 +11,29 @@ import java.util.*;
 
 public class HauntedEnchantment extends Enchantment {
     public HauntedEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentRegistry.SCYTHE_OR_STAFF, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.UNCOMMON, EnchantmentRegistry.MAGIC_CAPABLE_WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+    }
+
+    @Override
+    protected boolean checkCompatibility(Enchantment pOther) {
+        return !pOther.equals(EnchantmentRegistry.WINDED.get()) && super.checkCompatibility(pOther);
     }
 
     public static void addMagicDamage(ItemAttributeModifierEvent event) {
         if (event.getSlotType().equals(EquipmentSlot.MAINHAND)) {
-            ItemStack itemStack = event.getItemStack();
+            var itemStack = event.getItemStack();
             int enchantmentLevel = itemStack.getEnchantmentLevel(EnchantmentRegistry.HAUNTED.get());
             if (enchantmentLevel > 0) {
-                UUID uuid = LodestoneAttributeRegistry.UUIDS.get(LodestoneAttributeRegistry.MAGIC_DAMAGE);
-                final Attribute magicDamage = LodestoneAttributeRegistry.MAGIC_DAMAGE.get();
+                var uuid = LodestoneAttributeRegistry.UUIDS.get(LodestoneAttributeRegistry.MAGIC_DAMAGE);
+                var magicDamage = LodestoneAttributeRegistry.MAGIC_DAMAGE.get();
                 if (event.getOriginalModifiers().containsKey(magicDamage)) {
                     AttributeModifier attributeModifier = null;
-                    if (event.getOriginalModifiers().get(magicDamage).size() > 0) {
+                    if (!event.getOriginalModifiers().get(magicDamage).isEmpty()) {
                         attributeModifier = event.getOriginalModifiers().get(magicDamage).iterator().next();
                     }
                     if (attributeModifier != null) {
-                        final double amount = attributeModifier.getAmount() + enchantmentLevel;
-                        AttributeModifier newMagicDamage = new AttributeModifier(uuid, "Weapon magic damage", amount, AttributeModifier.Operation.ADDITION);
+                        double amount = attributeModifier.getAmount() + enchantmentLevel;
+                        var newMagicDamage = new AttributeModifier(uuid, "Weapon magic damage", amount, AttributeModifier.Operation.ADDITION);
                         event.removeAttribute(magicDamage);
                         event.addModifier(magicDamage, newMagicDamage);
                     }

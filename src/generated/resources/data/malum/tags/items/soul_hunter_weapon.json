@@ -1,12 +1,8 @@
 {
   "values": [
-    "malum:mnemonic_hex_staff",
-    "malum:staff_of_the_auric_flame",
-    "malum:erosion_scepter",
+    "#malum:scythe",
+    "#malum:staff",
     "malum:tyrving",
-    "malum:crude_scythe",
-    "malum:soul_stained_steel_scythe",
-    "malum:creative_scythe",
     "malum:weight_of_worlds",
     "malum:soul_stained_steel_axe",
     "malum:soul_stained_steel_pickaxe",

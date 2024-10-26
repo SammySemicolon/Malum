@@ -20,6 +20,7 @@ public class CurioNarrowNecklace extends MalumCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
+        consumer.accept(positiveEffect("enhanced_maneuvers"));
         consumer.accept(negativeEffect("no_sweep"));
     }
 

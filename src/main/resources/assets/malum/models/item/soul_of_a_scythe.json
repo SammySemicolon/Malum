@@ -1,0 +1,15 @@
+{
+  "parent": "item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "minecraft:item/air"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "malum:item/soul_of_a_scythe_gui"
+    },
+    "fixed": {
+      "parent": "malum:item/soul_of_a_scythe_gui"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "malum:item/soul_of_a_scythe"
+  }
+}

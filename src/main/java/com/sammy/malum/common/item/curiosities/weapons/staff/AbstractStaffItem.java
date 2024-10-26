@@ -2,10 +2,9 @@ package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.google.common.collect.*;
 import com.sammy.malum.common.capability.*;
-import com.sammy.malum.common.enchantment.*;
+import com.sammy.malum.common.enchantment.staff.*;
 import com.sammy.malum.common.entity.bolt.*;
 import com.sammy.malum.common.item.*;
-import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.particles.*;

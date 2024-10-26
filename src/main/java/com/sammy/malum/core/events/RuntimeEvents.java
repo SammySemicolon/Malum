@@ -5,6 +5,7 @@ import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.effect.*;
 import com.sammy.malum.common.effect.aura.*;
 import com.sammy.malum.common.enchantment.*;
+import com.sammy.malum.common.enchantment.scythe.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.cosmetic.curios.*;
 import com.sammy.malum.common.item.curiosities.*;
@@ -14,6 +15,7 @@ import com.sammy.malum.common.item.curiosities.curios.sets.misc.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.prospector.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.rotten.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
+import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.listeners.*;
@@ -135,17 +137,9 @@ public class RuntimeEvents {
     }
 
     @SubscribeEvent
-    public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        ReboundEnchantment.onRightClickItem(event);
-    }
-
-    @SubscribeEvent
-    public static void onSwapEquipment(LivingEquipmentChangeEvent event) {
-    }
-
-    @SubscribeEvent
     public static void addItemAttributes(ItemAttributeModifierEvent event) {
         HauntedEnchantment.addMagicDamage(event);
+        WindedEnchantment.addAttackSpeed(event);
     }
 
     @SubscribeEvent

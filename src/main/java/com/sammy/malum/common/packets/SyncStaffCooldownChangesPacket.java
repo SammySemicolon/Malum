@@ -1,6 +1,6 @@
 package com.sammy.malum.common.packets;
 
-import com.sammy.malum.common.enchantment.*;
+import com.sammy.malum.common.enchantment.staff.*;
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import net.minecraft.client.*;
 import net.minecraft.core.registries.*;

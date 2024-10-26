@@ -37,7 +37,7 @@ public class TetraCompat {
         public static final ItemAspect SOUL_HUNTER_TOOL = ItemAspect.get("soulStained");
 
         static {
-            TetraEnchantmentHelper.registerMapping(SOUL_HUNTER_TOOL, new TetraEnchantmentHelper.EnchantmentRules("additions/malum_something", "exclusions/malum_something", EnchantmentRegistry.SOUL_HUNTER_WEAPON));
+            TetraEnchantmentHelper.registerMapping(SOUL_HUNTER_TOOL, new TetraEnchantmentHelper.EnchantmentRules("additions/malum_something", "exclusions/malum_something", EnchantmentRegistry.SOUL_SHATTER_CAPABLE_WEAPON));
         }
 
         public static boolean hasSoulStrikeModifier(ItemStack stack) {

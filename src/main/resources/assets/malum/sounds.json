@@ -41,6 +41,8 @@
   "edge_of_deliverance_sweeps": { "sounds":["malum:curiosities/weapons/scythe/sweep1","malum:curiosities/weapons/scythe/sweep2","malum:curiosities/weapons/scythe/sweep3","malum:curiosities/weapons/scythe/sweep4","malum:curiosities/weapons/scythe/sweep5","malum:curiosities/weapons/scythe/sweep6","malum:curiosities/weapons/scythe/sweep7"], "subtitle": "malum.subtitle.edge_of_deliverance_sweeps" },
   "edge_of_deliverance_cuts": { "sounds":["malum:curiosities/weapons/scythe/sweep1","malum:curiosities/weapons/scythe/sweep2","malum:curiosities/weapons/scythe/sweep3","malum:curiosities/weapons/scythe/sweep4","malum:curiosities/weapons/scythe/sweep5","malum:curiosities/weapons/scythe/sweep6","malum:curiosities/weapons/scythe/sweep7"], "subtitle": "malum.subtitle.edge_of_deliverance_cuts" },
 
+  "scythe_user_ascends": { "sounds":["malum:curiosities/weapons/scythe/throw1"], "subtitle": "malum.subtitle.scythe_user_ascends" },
+
   "scythe_thrown": { "sounds":["malum:curiosities/weapons/scythe/throw1","malum:curiosities/weapons/scythe/throw2","malum:curiosities/weapons/scythe/throw3"], "subtitle": "malum.subtitle.scythe_thrown" },
   "scythe_spins_happily": { "sounds":["malum:curiosities/weapons/scythe/spin"], "subtitle": "malum.subtitle.scythe_spins_happily" },
   "scythe_caught": { "sounds":["malum:curiosities/weapons/scythe/catch1","malum:curiosities/weapons/scythe/catch2","malum:curiosities/weapons/scythe/catch3"], "subtitle": "malum.subtitle.scythe_caught" },

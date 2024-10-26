@@ -24,13 +24,13 @@ public class ClientSetupEvents {
 
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiLayersEvent event) {
-        event.registerAbove(VanillaGuiLayers.ARMOR_LEVEL, "soul_ward", (gui, poseStack, partialTick, width, height) ->
+        event.registerAbove(VanillaGuiLayers.ARMOR_LEVEL, "soul_ward", (gui, deltaTracker) ->
                 SoulWardHandler.ClientOnly.renderSoulWard(gui, poseStack, width, height));
 
-        event.registerAboveAll("hidden_blade_cooldown", (gui, poseStack, partialTick, width, height) ->
+        event.registerAboveAll("hidden_blade_cooldown", (gui, deltaTracker) ->
                 CurioHiddenBladeNecklace.ClientOnly.renderHiddenBladeCooldown(gui, poseStack, width, height));
 
-        event.registerAbove(VanillaGuiLayers.BOSS_OVERLAY, "touch_of_darkness", (gui, poseStack, partialTick, width, height) ->
+        event.registerAbove(VanillaGuiLayers.BOSS_OVERLAY, "touch_of_darkness", (gui, deltaTracker) ->
                 TouchOfDarknessHandler.ClientOnly.renderDarknessVignette(poseStack));
     }
 

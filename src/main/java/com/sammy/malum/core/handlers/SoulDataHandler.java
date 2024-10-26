@@ -3,7 +3,7 @@ package com.sammy.malum.core.handlers;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import com.sammy.malum.common.capability.*;
-import com.sammy.malum.common.entity.boomerang.*;
+import com.sammy.malum.common.entity.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.registry.common.item.*;

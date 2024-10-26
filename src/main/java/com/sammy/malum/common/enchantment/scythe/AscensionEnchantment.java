@@ -40,7 +40,7 @@ public class AscensionEnchantment extends Enchantment {
         final boolean isEnhanced = !MalumScytheItem.canSweep(player);
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
-            player.setDeltaMovement(motion.x, 0.74f, motion.z);
+            player.setDeltaMovement(motion.x, player.getJumpPower()*1.25f, motion.z);
             if (player.isSprinting()) {
                 float f = player.getYRot() * 0.017453292F;
                 float x = -Mth.sin(f);

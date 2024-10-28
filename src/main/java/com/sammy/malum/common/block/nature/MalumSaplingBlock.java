@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.*;
 
 public class MalumSaplingBlock extends SaplingBlock {
 
-    public MalumSaplingBlock(AbstractTreeGrower treeGrower, Properties properties) {
+    public MalumSaplingBlock(TreeGrower treeGrower, Properties properties) {
         super(treeGrower, properties);
     }
 

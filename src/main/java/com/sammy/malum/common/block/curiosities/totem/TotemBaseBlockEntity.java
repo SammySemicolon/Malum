@@ -10,6 +10,7 @@ import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import team.lodestar.lodestone.helpers.*;
@@ -61,7 +62,7 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compound) {
+    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
         compound.putString("state", state.name);
         if (activeRite != null) {
             compound.putString("rite", activeRite.identifier);
@@ -71,11 +72,11 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
         }
         compound.putInt("height", totemPolePositions.size());
         compound.putInt("timer", timer);
-        super.saveAdditional(compound);
+        super.saveAdditional(compound, registries);
     }
 
     @Override
-    public void load(CompoundTag compound) {
+    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider pRegistries) {
         state = compound.contains("state") ? CODEC.byName(compound.getString("state")) : TotemRiteState.IDLE;
         activeRite = SpiritRiteRegistry.getRite(compound.getString("rite"));
         direction = Direction.byName(compound.getString("direction"));
@@ -84,7 +85,7 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
             totemPolePositions.add(worldPosition.above(i));
         }
         timer = compound.getInt("timer");
-        super.load(compound);
+        super.loadAdditional(compound, pRegistries);
     }
 
     @Override
@@ -145,9 +146,9 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
     }
 
     @Override
-    public InteractionResult onUse(Player player, InteractionHand hand) {
+    public ItemInteractionResult onUseWithItem(Player player, ItemStack pStack, InteractionHand pHand) {
         if (state.equals(TotemRiteState.ASSEMBLING)) {
-            return InteractionResult.FAIL;
+            return ItemInteractionResult.FAIL;
         }
         if (level.getBlockEntity(worldPosition.above()) instanceof TotemPoleBlockEntity) {
             if (!level.isClientSide) {
@@ -159,9 +160,9 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
                 BlockHelper.updateState(level, worldPosition);
             }
             player.swing(InteractionHand.MAIN_HAND, true);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override

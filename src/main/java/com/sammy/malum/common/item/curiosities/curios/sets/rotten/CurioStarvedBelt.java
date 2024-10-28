@@ -4,6 +4,7 @@ import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.common.item.food.*;
 import com.sammy.malum.registry.common.*;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
@@ -26,7 +27,7 @@ public class CurioStarvedBelt extends MalumCurioItem implements IMalumEventRespo
 
     @Override
     public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
-        MobEffect gluttony = MobEffectRegistry.GLUTTONY.get();
+        Holder<MobEffect> gluttony = MobEffectRegistry.GLUTTONY;
         MobEffectInstance effect = collector.getEffect(gluttony);
         if (effect == null) {
             collector.addEffect(new MobEffectInstance(gluttony, 600 + (int) (arcaneResonance * 600), 0, true, true, true));

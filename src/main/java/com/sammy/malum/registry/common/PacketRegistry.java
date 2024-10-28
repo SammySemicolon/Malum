@@ -15,7 +15,7 @@ import team.lodestar.lodestone.registry.common.LodestoneNetworkPayloads;
 @EventBusSubscriber(modid = MalumMod.MALUM, bus = EventBusSubscriber.Bus.MOD)
 public class PacketRegistry {
 
-    public static LodestoneNetworkPayloads.PayloadNetworkChannel MALUM_CHANNEL =  new LodestoneNetworkPayloads.PayloadNetworkChannel(MalumMod.MALUM);
+    public static LodestoneNetworkPayloads.PayloadRegistryHelper MALUM_CHANNEL = new LodestoneNetworkPayloads.PayloadRegistryHelper(MalumMod.MALUM);
 
     @SubscribeEvent
     public static void registerNetworkStuff(RegisterPayloadHandlersEvent event) {

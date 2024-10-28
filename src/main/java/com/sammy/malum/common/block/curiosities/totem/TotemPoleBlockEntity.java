@@ -9,6 +9,7 @@ import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -75,7 +76,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
             }
         }
         if (success) {
-            ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect(level, new PositionEffectData(worldPosition));
+            ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition));
             level.playSound(null, worldPosition, SoundRegistry.TOTEM_ENGRAVE.get(), SoundSource.BLOCKS, 1, Mth.nextFloat(level.random, 0.9f, 1.1f));
             if (isSoulwood) {
                 level.playSound(null, worldPosition, SoundRegistry.MAJOR_BLIGHT_MOTIF.get(), SoundSource.BLOCKS, 1, 1);
@@ -141,7 +142,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
     public void setSpirit(MalumSpiritType type) {
         level.playSound(null, worldPosition, SoundRegistry.TOTEM_ENGRAVE.get(), SoundSource.BLOCKS, 1, Mth.nextFloat(level.random, 0.9f, 1.1f));
         level.playSound(null, worldPosition, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1, Mth.nextFloat(level.random, 0.9f, 1.1f));
-        ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect(level, new PositionEffectData(worldPosition));
+        ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition));
         this.spirit = type;
         this.chargeProgress = 10;
         BlockHelper.updateState(level, worldPosition);
@@ -149,7 +150,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
 
     public void riteStarting(TotemBaseBlockEntity totemBase, int height) {
         level.playSound(null, worldPosition, SoundRegistry.TOTEM_CHARGE.get(), SoundSource.BLOCKS, 1, 0.9f + 0.2f * height);
-        ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect(level, new PositionEffectData(worldPosition));
+        ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition));
         this.totemBaseYLevel = worldPosition.getY() - height;
         this.totemBase = totemBase;
         this.totemPoleState = TotemPoleState.CHARGING;

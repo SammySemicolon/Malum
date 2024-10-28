@@ -2,7 +2,7 @@ package com.sammy.malum.visual_effects.networked.data;
 
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.core.handlers.*;
-import com.sammy.malum.core.systems.recipe.SpiritWithCount;
+import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -18,8 +18,8 @@ public class ColorEffectData {
     public final ArrayList<ColorRecord> colorRecordList = new ArrayList<>();
     public int recordCycleCounter;
 
-    public static ColorEffectData fromRecipe(Collection<SpiritWithCount> malumSpiritTypes) {
-        return fromSpirits(malumSpiritTypes.stream().map(s -> s.type).collect(Collectors.toList()), ColorRecord::new);
+    public static ColorEffectData fromRecipe(Collection<SpiritIngredient> malumSpiritTypes) {
+        return fromSpirits(malumSpiritTypes.stream().map(SpiritIngredient::getSpiritType).collect(Collectors.toList()), ColorRecord::new);
     }
 
     public static ColorEffectData fromSpirits(Collection<MalumSpiritType> malumSpiritTypes) {
@@ -78,7 +78,7 @@ public class ColorEffectData {
                 boolean nonNullSpirit = colorRecord.spiritType != null;
                 buf.writeBoolean(nonNullSpirit);
                 if (nonNullSpirit) {
-                    buf.writeUtf(colorRecord.spiritType.identifier);
+                    buf.writeUtf(colorRecord.spiritType.getIdentifier());
                 }
             }
         }

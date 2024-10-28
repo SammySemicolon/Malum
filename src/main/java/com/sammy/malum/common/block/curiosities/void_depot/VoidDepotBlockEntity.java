@@ -6,15 +6,16 @@ import com.sammy.malum.registry.common.item.*;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.*;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.*;
-import net.minecraftforge.registries.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
@@ -37,8 +38,8 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compound) {
-        super.saveAdditional(compound);
+    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.saveAdditional(compound, registries);
 
         CompoundTag textTag = new CompoundTag();
         if (!textToDisplay.isEmpty()) {
@@ -74,8 +75,8 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
     }
 
     @Override
-    public void load(CompoundTag compound) {
-        super.load(compound);
+    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(compound, pRegistries);
 
         if (compound.contains("textDisplay")) {
             textToDisplay.clear();
@@ -123,7 +124,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
     }
 
     @Override
-    public InteractionResult onUse(Player player, InteractionHand hand) {
+    public ItemInteractionResult onUseWithItem(Player player, ItemStack stack, InteractionHand hand) {
         if (!goals.isEmpty()) {
             if (player.getItemInHand(hand).getItem().equals(ItemRegistry.CREATIVE_SCYTHE.get())) {
                 List<VoidDepotGoal> newGoals = new ArrayList<>();
@@ -140,7 +141,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
                 this.goals.clear();
                 this.goals.addAll(newGoals);
                 BlockHelper.updateState(level, getBlockPos());
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             }
             if (player.getItemInHand(hand).getItem().equals(ItemRegistry.VOID_CONDUIT.get())) {
                 List<VoidDepotGoal> newGoals = new ArrayList<>();
@@ -155,10 +156,10 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
                 this.goals.clear();
                 this.goals.addAll(newGoals);
                 BlockHelper.updateState(level, getBlockPos());
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             }
             if (oncePerPlayer && playersWhoCompleted.contains(player.getUUID())) {
-                return InteractionResult.PASS;
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
             boolean isSuccessful = false;
             for (VoidDepotGoal goal : goals) {
@@ -166,7 +167,6 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
                     continue;
                 }
                 if (goal instanceof ItemGoal itemGoal) {
-                    final ItemStack stack = player.getItemInHand(hand);
                     if (stack.getItem().equals(itemGoal.item)) {
                         int givenQuantity = Math.min(stack.getCount(), itemGoal.amount - itemGoal.deliveredAmount);
                         if (givenQuantity > 0) {
@@ -212,10 +212,10 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
                 level.playSound(null, worldPosition, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.7f, 0.6f + random.nextFloat() * 0.2f);
                 level.playSound(null, worldPosition, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.1F, (random.nextFloat() - random.nextFloat()) * 0.35F + 0.9F);
                 BlockHelper.updateState(level, getBlockPos());
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             }
         }
-        return super.onUse(player, hand);
+        return super.onUseWithItem(player, stack, hand);
     }
 
     @Override
@@ -242,7 +242,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
 
     public void onCompletion() {
         float pitch = Mth.nextFloat(level.getRandom(), 1.5f, 1.75f);
-        ParticleEffectTypeRegistry.WEEPING_WELL_REACTS.createPositionedEffect(level, new PositionEffectData(worldPosition.getX()+0.5f, worldPosition.getY()+0.9f, worldPosition.getZ()+0.5f));
+        ParticleEffectTypeRegistry.WEEPING_WELL_REACTS.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition.getX()+0.5f, worldPosition.getY()+0.9f, worldPosition.getZ()+0.5f));
         level.playSound(null, worldPosition, SoundRegistry.FLESH_RING_ABSORBS.get(), SoundSource.HOSTILE, 0.7f, pitch);
         level.playSound(null, worldPosition, SoundRegistry.VOID_TRANSMUTATION.get(), SoundSource.HOSTILE, 2f, pitch);
         if (repeatable) {
@@ -331,7 +331,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
         @Override
         public CompoundTag serialize() {
             CompoundTag compoundTag = new CompoundTag();
-            compoundTag.putString("itemType", ForgeRegistries.ITEMS.getKey(item).toString());
+            compoundTag.putString("itemType", BuiltInRegistries.ITEM.getKey(item).toString());
             compoundTag.putInt("amount", amount);
             compoundTag.putInt("deliveredAmount", deliveredAmount);
             return compoundTag;
@@ -340,7 +340,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
         public static ItemGoal deserialize(CompoundTag compoundTag) {
             return new ItemGoal(
                     compoundTag.getString("goalName"),
-                    ForgeRegistries.ITEMS.getValue(new ResourceLocation(compoundTag.getString("itemType"))),
+                    BuiltInRegistries.ITEM.get(ResourceLocation.parse(compoundTag.getString("itemType"))),
                     compoundTag.getInt("amount"),
                     compoundTag.getInt("deliveredAmount"));
         }

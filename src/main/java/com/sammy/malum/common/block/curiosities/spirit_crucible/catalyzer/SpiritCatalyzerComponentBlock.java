@@ -15,6 +15,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.systems.multiblock.MultiBlockComponentEntity;
@@ -67,7 +68,8 @@ public class SpiritCatalyzerComponentBlock extends MultiblockComponentBlock {
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         if (pLevel.getBlockEntity(pPos) instanceof MultiBlockComponentEntity component) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(component.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(new EmptyHandler()));
+            IItemHandler inv = Capabilities.ItemHandler.BLOCK.getCapability(pLevel, pPos, pState, component, null);
+            if (inv != null) return ItemHandlerHelper.calcRedstoneFromInventory(inv);
         }
         return 0;
     }

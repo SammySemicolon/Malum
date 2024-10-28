@@ -4,6 +4,7 @@ import com.sammy.malum.common.item.curiosities.curios.runes.AbstractRuneCurioIte
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -27,7 +28,7 @@ public class RuneHereticItem extends AbstractRuneCurioItem implements IEventResp
 
     @Override
     public void takeDamageEvent(LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
-        MobEffect silenced = MobEffectRegistry.SILENCED.get();
+        Holder<MobEffect> silenced = MobEffectRegistry.SILENCED;
         MobEffectInstance effect = attacker.getEffect(silenced);
         if (effect == null) {
             attacker.addEffect(new MobEffectInstance(silenced, 300, 0, true, true, true));

@@ -201,7 +201,7 @@ public class RuntimeEvents {
 
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onLateHurt(LivingDamageEvent.Pre event) {
+    public static void onLateHurt(LivingDamageEvent.Post event) {
         SoulWardHandler.shieldPlayer(event);
     }
 

@@ -11,9 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.wrapper.EmptyHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import team.lodestar.lodestone.systems.block.WaterLoggedEntityBlock;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
@@ -41,7 +40,7 @@ public class ItemStandBlock<T extends ItemStandBlockEntity> extends WaterLoggedE
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (be instanceof ItemStandBlockEntity stand) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(stand.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(new EmptyHandler()));
+            return ItemHandlerHelper.calcRedstoneFromInventory(stand.getCapability(pLevel, pPos, pState, stand, null));
         }
         return 0;
     }

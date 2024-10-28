@@ -1,8 +1,10 @@
 package com.sammy.malum.core.listeners;
 
 import com.google.gson.*;
+import com.mojang.serialization.JsonOps;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import com.sammy.malum.core.systems.spirit.EntitySpiritDropData;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -93,13 +95,13 @@ public class SpiritDataReloadListener extends SimpleJsonResourceReloadListener {
         }
     }
 
-    private static List<SpiritWithCount> getSpiritData(JsonArray array) {
-        List<SpiritWithCount> spiritData = new ArrayList<>();
+    private static List<SpiritIngredient> getSpiritData(JsonArray array) {
+        List<SpiritIngredient> spiritData = new ArrayList<>();
         for (JsonElement spiritElement : array) {
             JsonObject spiritObject = spiritElement.getAsJsonObject();
             String spiritName = spiritObject.getAsJsonPrimitive("spirit").getAsString();
             int count = spiritObject.getAsJsonPrimitive("count").getAsInt();
-            spiritData.add(new SpiritWithCount(SpiritHarvestHandler.getSpiritType(spiritName), count));
+            spiritData.add(new SpiritIngredient(SpiritHarvestHandler.getSpiritType(spiritName), count));
         }
         return spiritData;
     }
@@ -110,8 +112,8 @@ public class SpiritDataReloadListener extends SimpleJsonResourceReloadListener {
         }
 
         try {
-            return Ingredient.fromJson(object.get("spirit_item"));
-        } catch (JsonParseException ignored) {
+            return Ingredient.CODEC.decode(JsonOps.INSTANCE, object.get("spirit_item")).getOrThrow().getFirst();
+        } catch (IllegalStateException ignored) {
             return null;
         }
     }

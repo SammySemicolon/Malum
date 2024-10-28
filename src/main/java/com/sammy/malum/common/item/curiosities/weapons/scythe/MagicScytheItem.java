@@ -22,8 +22,7 @@ public class MagicScytheItem extends MalumScytheItem {
         builder.put(
                 LodestoneAttributes.MAGIC_DAMAGE.get(),
                 new AttributeModifier(
-                        LodestoneAttributes.UUIDS.get(LodestoneAttributes.MAGIC_DAMAGE),
-                        "Weapon magic damage",
+                        LodestoneAttributes.MAGIC_DAMAGE.getId(),
                         magicDamage,
                         AttributeModifier.Operation.ADD_VALUE)
         );

@@ -1,8 +1,11 @@
 package com.sammy.malum.common.item.curiosities.curios.brooches;
 
 import com.google.common.collect.Multimap;
+import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +18,7 @@ import java.util.function.Consumer;
 
 public class CurioGluttonousBrooch extends MalumCurioItem {
 
-    public static final UUID GLUTTONOUS_BROOCH_BELT = UUID.fromString("f8ec834e-18ba-4deb-9156-ff70d52821e4");
+    public static final ResourceLocation GLUTTONOUS_BROOCH_BELT = MalumMod.malumPath("gluttonous_brooch_belt");
 
     public CurioGluttonousBrooch(Properties builder) {
         super(builder, MalumTrinketType.ROTTEN);
@@ -27,8 +30,8 @@ public class CurioGluttonousBrooch extends MalumCurioItem {
     }
 
     @Override
-    public void addAttributeModifiers(Multimap<Attribute, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-        CuriosApi.addSlotModifier(map, "belt", GLUTTONOUS_BROOCH_BELT, 1, AttributeModifier.Operation.ADDITION);
+    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+        CuriosApi.addSlotModifier(map, "belt", GLUTTONOUS_BROOCH_BELT, 1, AttributeModifier.Operation.ADD_VALUE);
     }
 
     @Override

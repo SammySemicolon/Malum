@@ -50,7 +50,7 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
     @Override
     public ImmutableMultimap.Builder<Attribute, AttributeModifier> createExtraAttributes() {
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = new ImmutableMultimap.Builder<>();
-        builder.put(LodestoneAttributes.MAGIC_DAMAGE.get(), new AttributeModifier(LodestoneAttributes.UUIDS.get(LodestoneAttributes.MAGIC_DAMAGE), "Weapon magic damage", magicDamage, AttributeModifier.Operation.ADD_VALUE));
+        builder.put(LodestoneAttributes.MAGIC_DAMAGE.get(), new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE));
         return builder;
     }
 

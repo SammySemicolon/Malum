@@ -6,9 +6,8 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.shapes.*;
-import net.minecraftforge.common.capabilities.*;
-import net.minecraftforge.items.*;
-import net.minecraftforge.items.wrapper.*;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import team.lodestar.lodestone.systems.block.*;
 
 public class RitualPlinthBlock<T extends RitualPlinthBlockEntity> extends WaterLoggedEntityBlock<T> {
@@ -38,7 +37,7 @@ public class RitualPlinthBlock<T extends RitualPlinthBlockEntity> extends WaterL
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (be instanceof RitualPlinthBlockEntity altar) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(altar.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(new EmptyHandler()));
+            return ItemHandlerHelper.calcRedstoneFromInventory(altar.getCapability(pLevel, pPos, pState, altar, null));
         }
         return 0;
     }

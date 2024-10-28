@@ -12,13 +12,13 @@ public class EntitySpiritDropData {
     public static final EntitySpiritDropData EMPTY = new EntitySpiritDropData(SpiritTypeRegistry.SACRED_SPIRIT, new ArrayList<>(), null);
     public final MalumSpiritType primaryType;
     public final int totalSpirits;
-    public final List<SpiritWithCount> dataEntries;
+    public final List<SpiritIngredient> dataEntries;
     @Nullable
     public final Ingredient spiritItem;
 
-    public EntitySpiritDropData(MalumSpiritType primaryType, List<SpiritWithCount> dataEntries, @Nullable Ingredient spiritItem) {
+    public EntitySpiritDropData(MalumSpiritType primaryType, List<SpiritIngredient> dataEntries, @Nullable Ingredient spiritItem) {
         this.primaryType = primaryType;
-        this.totalSpirits = dataEntries.stream().mapToInt(d -> d.count).sum();
+        this.totalSpirits = dataEntries.stream().mapToInt(SpiritIngredient::getCount).sum();
         this.dataEntries = dataEntries;
         this.spiritItem = spiritItem;
     }
@@ -33,7 +33,7 @@ public class EntitySpiritDropData {
 
     public static class Builder {
         private final MalumSpiritType type;
-        private final List<SpiritWithCount> spirits = new ArrayList<>();
+        private final List<SpiritIngredient> spirits = new ArrayList<>();
         private Ingredient spiritItem = null;
 
         public Builder(MalumSpiritType type) {
@@ -45,7 +45,7 @@ public class EntitySpiritDropData {
         }
 
         public Builder withSpirit(MalumSpiritType spiritType, int count) {
-            spirits.add(new SpiritWithCount(spiritType, count));
+            spirits.add(new SpiritIngredient(spiritType, count));
             return this;
         }
 

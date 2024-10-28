@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.fml.loading.FMLLoader;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.ISlotType;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -18,21 +19,24 @@ public class MalumCurioItem extends AbstractMalumCurioItem implements ICurioItem
         super(properties, type);
     }
 
-    public void addExtraTooltipLines(Consumer<Component> consumer) {
-
+    public void addExtraTooltipLines(Consumer<Component> consumer, TooltipContext context) {
+        addExtraTooltipLines(consumer);
     }
 
+    public void addExtraTooltipLines(Consumer<Component> consumer) {}
+
+
     @Override
-    public List<Component> getAttributesTooltip(List<net.minecraft.network.chat.Component> tooltips, ItemStack stack) {
-        final List<Component> attributesTooltip = super.getAttributesTooltip(tooltips, stack);
+    public List<Component> getAttributesTooltip(List<Component> tooltips, TooltipContext context, ItemStack stack) {
+        final List<Component> attributesTooltip = super.getAttributesTooltip(tooltips, context, stack);
 
         final List<Component> extraTooltipLines = new ArrayList<>();
-        addExtraTooltipLines(extraTooltipLines::add);
+        addExtraTooltipLines(extraTooltipLines::add, context);
 
         if (!extraTooltipLines.isEmpty()) {
             if (attributesTooltip.isEmpty()) {
                 attributesTooltip.add(Component.empty());
-                final Map<String, ISlotType> itemStackSlots = CuriosApi.getItemStackSlots(stack);
+                final Map<String, ISlotType> itemStackSlots = CuriosApi.getItemStackSlots(stack, FMLLoader.getDist().isClient());
 
                 itemStackSlots.keySet().stream().findFirst().ifPresent(s ->
                     attributesTooltip.add(Component.translatable("curios.modifiers." + s)

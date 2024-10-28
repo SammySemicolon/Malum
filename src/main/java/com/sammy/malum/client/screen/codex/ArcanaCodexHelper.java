@@ -17,11 +17,11 @@ import net.minecraft.resources.*;
 import net.minecraft.util.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
+import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import org.joml.*;
 import org.lwjgl.opengl.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
-import team.lodestar.lodestone.systems.recipe.*;
 import team.lodestar.lodestone.systems.rendering.*;
 import team.lodestar.lodestone.systems.rendering.shader.*;
 
@@ -64,7 +64,7 @@ public class ArcanaCodexHelper {
         shaderInstance.safeGetUniform("Speed").set(1000f);
         Consumer<Float> setZoom = f -> shaderInstance.safeGetUniform("Zoom").set(f);
         Consumer<Float> setIntensity = f -> shaderInstance.safeGetUniform("Intensity").set(f);
-        builder.setPosColorTexDefaultFormat().setAlpha(effectAlpha).setShader(ShaderRegistry.TOUCH_OF_DARKNESS.getInstance());
+        builder.setPosTexColorDefaultFormat().setAlpha(effectAlpha).setShader(ShaderRegistry.TOUCH_OF_DARKNESS.getInstance());
 
         setZoom.accept(zoom);
         setIntensity.accept(intensity);
@@ -93,7 +93,7 @@ public class ArcanaCodexHelper {
     }
 
     public static void renderRiteIcon(ResourceLocation texture, MalumSpiritType spiritType, PoseStack stack, boolean corrupted, float glowAlpha, int x, int y, int z) {
-        ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaderRegistry.DISTORTED_TEXTURE.getInstance().get();
+        ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.DISTORTED_TEXTURE.getInstance().get();
         shaderInstance.safeGetUniform("YFrequency").set(corrupted ? 5f : 11f);
         shaderInstance.safeGetUniform("XFrequency").set(corrupted ? 12f : 17f);
         shaderInstance.safeGetUniform("Speed").set(2000f * (corrupted ? -0.75f : 1));
@@ -129,7 +129,7 @@ public class ArcanaCodexHelper {
         renderWavyIcon(location, stack, x, y, 0, 16, 16);
     }
     public static void renderWavyIcon(ResourceLocation location, PoseStack stack, int x, int y, int z, int textureWidth, int textureHeight) {
-        ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaderRegistry.DISTORTED_TEXTURE.getInstance().get();
+        ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.DISTORTED_TEXTURE.getInstance().get();
         shaderInstance.safeGetUniform("YFrequency").set(10f);
         shaderInstance.safeGetUniform("XFrequency").set(12f);
         shaderInstance.safeGetUniform("Speed").set(1000f);
@@ -195,18 +195,21 @@ public class ArcanaCodexHelper {
         RenderSystem.disableBlend();
     }
 
-    public static void renderComponents(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<? extends IRecipeComponent> components, int left, int top, int mouseX, int mouseY, boolean vertical) {
-        List<ItemStack> items = components.stream().map(IRecipeComponent::getStack).collect(Collectors.toList());
+    public static void renderComponents(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<Ingredient> components, int left, int top, int mouseX, int mouseY, boolean vertical) {
+        List<ItemStack> items = components.stream().flatMap(i -> Arrays.stream(i.getItems())).collect(Collectors.toList());
         renderItemList(screen, guiGraphics, items, left, top, mouseX, mouseY, vertical).run();
     }
 
-    public static Runnable renderBufferedComponents(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<? extends IRecipeComponent> components, int left, int top, int mouseX, int mouseY, boolean vertical) {
-        List<ItemStack> items = components.stream().map(IRecipeComponent::getStack).collect(Collectors.toList());
+    public static Runnable renderBufferedComponents(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<Ingredient> components, int left, int top, int mouseX, int mouseY, boolean vertical) {
+        List<ItemStack> items = components.stream().flatMap(i -> Arrays.stream(i.getItems())).collect(Collectors.toList());
         return renderItemList(screen, guiGraphics, items, left, top, mouseX, mouseY, vertical);
     }
 
-    public static void renderComponent(AbstractMalumScreen screen, GuiGraphics guiGraphics, IRecipeComponent component, int posX, int posY, int mouseX, int mouseY) {
-        renderItem(screen, guiGraphics, component.getStacks(), posX, posY, mouseX, mouseY);
+    public static void renderComponent(AbstractMalumScreen screen, GuiGraphics guiGraphics, Ingredient component, int posX, int posY, int mouseX, int mouseY) {
+        switch (component.getItems().length) {
+            case 1 -> renderItem(screen, guiGraphics, component.getItems()[0], posX, posY, mouseX, mouseY);
+            default -> renderItemList(screen, guiGraphics, List.of(component.getItems()), posX, posY, mouseX, mouseY, true).run();
+        }
     }
 
     public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, Ingredient ingredient, int posX, int posY, int mouseX, int mouseY) {

@@ -1,10 +1,13 @@
 package com.sammy.malum.common.block.storage.jar;
 
 import com.sammy.malum.common.item.curiosities.SpiritPouchItem;
+import com.sammy.malum.common.item.spirit.SpiritJarItem;
 import com.sammy.malum.common.item.spirit.SpiritShardItem;
+import com.sammy.malum.common.packets.CodecUtil;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.common.block.BlockEntityRegistry;
+import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import com.sammy.malum.visual_effects.SpiritLightSpecs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,17 +15,21 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.BlockHelper;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
@@ -33,9 +40,11 @@ import team.lodestar.lodestone.systems.particle.data.spin.SpinParticleData;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Supplier;
 
-public class SpiritJarBlockEntity extends LodestoneBlockEntity {
+public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlockCapabilityProvider<IItemHandler, Direction> {
 
     public SpiritJarBlockEntity(BlockEntityType<? extends SpiritJarBlockEntity> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -52,7 +61,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
     private long lastClickTime;
     private UUID lastClickUUID;
 
-    private final LazyOptional<IItemHandler> inventory = LazyOptional.of(() -> new IItemHandler() {
+    private final Supplier<IItemHandler> inventory = () -> new IItemHandler() {
         @Override
         public int getSlots() {
             return 2;
@@ -62,7 +71,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
         @Override
         public ItemStack getStackInSlot(int slot) {
             if (slot == 0 && type != null) {
-                return new ItemStack(type.spiritShard.get(), count); // Yes, this can create a stack bigger than 64. It's fine.
+                return new ItemStack(type.getSpiritShard(), count); // Yes, this can create a stack bigger than 64. It's fine.
             } else
                 return ItemStack.EMPTY;
         }
@@ -104,7 +113,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
                 }
             }
 
-            return new ItemStack(extractedType.spiritShard.get(), amountToExtract);
+            return new ItemStack(extractedType.getSpiritShard(), amountToExtract);
         }
 
         @Override
@@ -118,13 +127,13 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return stack.getItem() instanceof SpiritShardItem spiritItem && spiritItem.type == type;
         }
-    });
+    };
 
 
     @Override
-    public InteractionResult onUse(Player player, InteractionHand hand) {
+    public ItemInteractionResult onUseWithItem(Player player, ItemStack pStack, InteractionHand pHand) {
         if (getLevel() == null)
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
         int count;
         if (getLevel().getGameTime() - lastClickTime < 10 && player.getUUID().equals(lastClickUUID))
@@ -143,7 +152,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
             }
         }
 
-        return InteractionResult.sidedSuccess(player.level().isClientSide);
+        return ItemInteractionResult.sidedSuccess(player.level().isClientSide);
     }
 
     public int insertHeldItem(Player player) {
@@ -183,7 +192,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
                     ItemStack spiritStack = inventory.getItem(i);
                     if (spiritStack.getItem() instanceof SpiritShardItem spiritItem) {
                         MalumSpiritType type = spiritItem.type;
-                        if (type.identifier.equals(this.type.identifier)) {
+                        if (type.getIdentifier().equals(this.type.getIdentifier())) {
                             inventory.setItem(i, ItemStack.EMPTY);
                             inserted += spiritStack.getCount();
                             count += spiritStack.getCount();
@@ -206,8 +215,11 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
     @SuppressWarnings("ConstantConditions")
     @Override
     public void onPlace(LivingEntity placer, ItemStack stack) {
-        if (stack.hasTag()) {
-            load(stack.getTag());
+        if (stack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS)) {
+            loadAdditional((CompoundTag) CodecUtil.encodeNBT(SpiritJarItem.Contents.CODEC, stack.get(
+                            DataComponentRegistry.SPIRIT_JAR_CONTENTS
+                    )
+            ), placer.level().registryAccess());
         }
         setChanged();
     }
@@ -215,7 +227,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
     @Override
     protected void saveAdditional(CompoundTag compound, HolderLookup.Provider pRegistries) {
         if (type != null) {
-            compound.putString("spirit", type.identifier);
+            compound.putString("spirit", type.getIdentifier());
         }
         compound.putInt("count", count);
     }
@@ -263,12 +275,8 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
                 .repeat(level, pos.getX() + 0.5f, pos.getY() + 0.5f + Math.sin(level.getGameTime() / 20f) * 0.2f, pos.getZ() + 0.5f, 10);
     }
 
-    @Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return inventory.cast();
-        }
-        return super.getCapability(cap, side);
+    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
+        return inventory.get();
     }
 }

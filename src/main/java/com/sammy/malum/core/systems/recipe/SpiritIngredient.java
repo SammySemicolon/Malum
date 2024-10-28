@@ -44,7 +44,11 @@ public class SpiritIngredient implements ICustomIngredient {
 
     @Override
     public Stream<ItemStack> getItems() {
-        return Stream.of(new ItemStack(spiritType.getSpiritShard(), count));
+        return Stream.of(getStack());
+    }
+
+    public ItemStack getStack() {
+        return new ItemStack(spiritType.getSpiritShard(), count);
     }
 
     @Override

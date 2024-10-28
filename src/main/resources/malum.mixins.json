@@ -4,6 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "malum.refmap.json",
   "mixins": [
+    "AccessorEvent",
+    "AccessorEvent$PostDamage",
     "AccessorFeatureFlagSet",
     "ExplosionMixin",
     "FeatureFlagSetMixin",
@@ -11,7 +13,8 @@
     "ItemStackMixin",
     "PlayerMixin",
     "VanillaRecipeProviderMixin",
-    "VanillaRecipeProviderMixin$RecipeBuilderMixin"
+    "VanillaRecipeProviderMixin$RecipeBuilderMixin",
+    "AccessorEvent.PostDamage"
   ],
   "client": [
     "client.AccessorBakedGlyph",

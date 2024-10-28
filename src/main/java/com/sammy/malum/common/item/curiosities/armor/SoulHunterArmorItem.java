@@ -1,28 +1,31 @@
 package com.sammy.malum.common.item.curiosities.armor;
 
-import com.google.common.collect.*;
+import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.cosmetic.ArmorSkinRenderingData;
 import com.sammy.malum.common.item.cosmetic.skins.ArmorSkin;
 import com.sammy.malum.registry.client.ModelRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import team.lodestar.lodestone.registry.common.LodestoneAttributes;
 import team.lodestar.lodestone.systems.model.LodestoneArmorModel;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
-import static com.sammy.malum.registry.common.item.ArmorTiers.ArmorTierEnum.SPIRIT_HUNTER;
+import static com.sammy.malum.registry.common.item.ArmorTiers.SPIRIT_HUNTER;
 
 public class SoulHunterArmorItem extends MalumArmorItem {
     public SoulHunterArmorItem(ArmorItem.Type slot, Properties builder) {
@@ -30,15 +33,11 @@ public class SoulHunterArmorItem extends MalumArmorItem {
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> createExtraAttributes(Type type) {
-        Multimap<Attribute, AttributeModifier> attributes = ArrayListMultimap.create();
+    public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
+        ItemAttributeModifiers.Builder attributes = ItemAttributeModifiers.builder();
         UUID uuid = ARMOR_MODIFIER_UUID_PER_TYPE.get(type);
-        attributes.put(LodestoneAttributes.MAGIC_PROFICIENCY.get(), new AttributeModifier(uuid, "Magic Proficiency", 2f, AttributeModifier.Operation.ADD_VALUE));
-        return attributes;
-    }
-
-    public String getTexture() {
-        return "spirit_hunter_reforged";
+        attributes.add(LodestoneAttributes.MAGIC_PROFICIENCY, new AttributeModifier(MalumMod.malumPath("magic_proficiency"), 2f, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.ARMOR);
+        return attributes.build().modifiers();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -47,7 +46,7 @@ public class SoulHunterArmorItem extends MalumArmorItem {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public LodestoneArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-                float pticks = Minecraft.getInstance().getFrameTime();
+                float pticks = (float)(Minecraft.getInstance().getFrameTimeNs() / 20000000000L);
                 float f = Mth.rotLerp(pticks, entity.yBodyRotO, entity.yBodyRot);
                 float f1 = Mth.rotLerp(pticks, entity.yHeadRotO, entity.yHeadRot);
                 float netHeadYaw = f1 - f;
@@ -69,5 +68,10 @@ public class SoulHunterArmorItem extends MalumArmorItem {
                 return model;
             }
         });
+    }
+
+    @Override
+    public ResourceLocation getArmorTexture() {
+        return MalumMod.malumPath("textures/armor/spirit_hunter_reforged");
     }
 }

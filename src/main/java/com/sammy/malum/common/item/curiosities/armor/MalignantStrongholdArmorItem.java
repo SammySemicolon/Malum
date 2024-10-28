@@ -1,16 +1,18 @@
 package com.sammy.malum.common.item.curiosities.armor;
 
-import com.google.common.collect.*;
+import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.cosmetic.*;
 import com.sammy.malum.common.item.cosmetic.skins.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.client.*;
 import net.minecraft.client.model.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -19,7 +21,7 @@ import team.lodestar.lodestone.systems.model.*;
 import java.util.*;
 import java.util.function.*;
 
-import static com.sammy.malum.registry.common.item.ArmorTiers.ArmorTierEnum.*;
+import static com.sammy.malum.registry.common.item.ArmorTiers.MALIGNANT_ALLOY;
 
 public class MalignantStrongholdArmorItem extends MalumArmorItem {
 
@@ -28,15 +30,11 @@ public class MalignantStrongholdArmorItem extends MalumArmorItem {
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> createExtraAttributes(Type type) {
-        Multimap<Attribute, AttributeModifier> attributes = ArrayListMultimap.create();
+    public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
+        ItemAttributeModifiers.Builder attributes = ItemAttributeModifiers.builder();
         UUID uuid = ARMOR_MODIFIER_UUID_PER_TYPE.get(type);
-        attributes.put(AttributeRegistry.MALIGNANT_CONVERSION.get(), new AttributeModifier(uuid, "Malignant Conversion", 0.25f, AttributeModifier.Operation.ADDITION));
-        return attributes;
-    }
-
-    public String getTexture() {
-        return "malignant_stronghold";
+        attributes.add(AttributeRegistry.MALIGNANT_CONVERSION, new AttributeModifier(MalumMod.malumPath("malignant_conversion"), 0.25f, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.ARMOR);
+        return attributes.build().modifiers();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -73,5 +71,10 @@ public class MalignantStrongholdArmorItem extends MalumArmorItem {
                 return model;
             }
         });
+    }
+
+    @Override
+    public ResourceLocation getArmorTexture() {
+        return MalumMod.malumPath("textures/armor/malignant_stronghold");
     }
 }

@@ -4,12 +4,15 @@ import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.*;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -26,8 +29,8 @@ public class CurioProspectorBelt extends MalumCurioItem {
     }
 
     @Override
-    public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("enchanted_explosions", Enchantments.BLOCK_FORTUNE.getFullname(3).copy().withStyle(ChatFormatting.BLUE)));
+    public void addExtraTooltipLines(Consumer<Component> consumer, TooltipContext context) {
+        consumer.accept(positiveEffect("enchanted_explosions", Enchantment.getFullname(context.registries().holderOrThrow(Enchantments.FORTUNE), 3).copy().withStyle(ChatFormatting.BLUE)));
         consumer.accept(positiveEffect("explosions_spare_valuables"));
     }
 
@@ -40,10 +43,11 @@ public class CurioProspectorBelt extends MalumCurioItem {
 
     public static LootParams.Builder applyFortune(Entity source, LootParams.Builder builder) {
         if (source instanceof LivingEntity livingEntity) {
+            HolderLookup.RegistryLookup<Enchantment> registriesProvider = livingEntity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
             if (CurioHelper.hasCurioEquipped(livingEntity, ItemRegistry.BELT_OF_THE_PROSPECTOR.get())) {
                 int fortuneBonus = 3 + CuriosApi.getCuriosInventory(livingEntity).map(h -> h.getFortuneLevel(null)).orElse(0);
                 ItemStack diamondPickaxe = new ItemStack(Items.DIAMOND_PICKAXE);
-                diamondPickaxe.enchant(Enchantments.BLOCK_FORTUNE, fortuneBonus);
+                diamondPickaxe.enchant(registriesProvider.getOrThrow(Enchantments.FORTUNE), fortuneBonus);
                 return builder.withParameter(LootContextParams.TOOL, diamondPickaxe);
             }
         }

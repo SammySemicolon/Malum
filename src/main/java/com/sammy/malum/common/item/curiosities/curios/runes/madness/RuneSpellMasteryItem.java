@@ -1,8 +1,10 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.madness;
 
 import com.google.common.collect.*;
+import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.curios.runes.*;
 import com.sammy.malum.registry.common.*;
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.registry.common.*;
@@ -15,10 +17,10 @@ public class RuneSpellMasteryItem extends AbstractRuneCurioItem {
     }
 
     @Override
-    public void addAttributeModifiers(Multimap<Attribute, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-        addAttributeModifier(map, LodestoneAttributeRegistry.MAGIC_PROFICIENCY.get(), uuid -> new AttributeModifier(uuid,
-                "Curio Magic Proficiency", 2f, AttributeModifier.Operation.ADDITION));
-        addAttributeModifier(map, AttributeRegistry.RESERVE_STAFF_CHARGES.get(), uuid -> new AttributeModifier(uuid,
-                "Curio Reserve Staff Charges", 2f, AttributeModifier.Operation.ADDITION));
+    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+        addAttributeModifier(map, LodestoneAttributes.MAGIC_PROFICIENCY,
+                new AttributeModifier(MalumMod.malumPath("curio_magic_proficiency"), 2f, AttributeModifier.Operation.ADD_VALUE));
+        addAttributeModifier(map, AttributeRegistry.RESERVE_STAFF_CHARGES,
+                new AttributeModifier(MalumMod.malumPath("curio_reserve_staff_charges"), 2f, AttributeModifier.Operation.ADD_VALUE));
     }
 }

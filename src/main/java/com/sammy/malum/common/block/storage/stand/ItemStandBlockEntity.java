@@ -8,6 +8,8 @@ import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.*;
+import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
+import net.neoforged.neoforge.items.IItemHandler;
 
 
 public class ItemStandBlockEntity extends MalumItemHolderBlockEntity {

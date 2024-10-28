@@ -2,22 +2,27 @@ package com.sammy.malum.common.block.curiosities.spirit_crucible;
 
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.wrapper.EmptyHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 import team.lodestar.lodestone.systems.multiblock.MultiBlockComponentEntity;
 import team.lodestar.lodestone.systems.multiblock.MultiblockComponentBlock;
+
+import java.util.Optional;
 
 public class SpiritCrucibleComponentBlock extends MultiblockComponentBlock {
     public static final VoxelShape SHAPE = makeShape();
@@ -28,7 +33,7 @@ public class SpiritCrucibleComponentBlock extends MultiblockComponentBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+    public @NotNull ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         return ItemRegistry.SPIRIT_CRUCIBLE.get().getDefaultInstance();
     }
 
@@ -55,7 +60,9 @@ public class SpiritCrucibleComponentBlock extends MultiblockComponentBlock {
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         if (pLevel.getBlockEntity(pPos) instanceof MultiBlockComponentEntity component) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(component.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(new EmptyHandler()));
+            if (Capabilities.ItemHandler.BLOCK.getCapability(pLevel, pPos, pState, component, null) instanceof IItemHandler inventory) {
+                return ItemHandlerHelper.calcRedstoneFromInventory(inventory);
+            }
         }
         return 0;
     }

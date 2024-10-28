@@ -8,9 +8,11 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.capability.MalumPlayerDataCapability;
 import com.sammy.malum.config.CommonConfig;
 import com.sammy.malum.common.item.IMalumEventResponderItem;
+import com.sammy.malum.mixin.AccessorEvent;
 import com.sammy.malum.registry.common.AttributeRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.nbt.CompoundTag;
@@ -52,7 +54,7 @@ public class SoulWardHandler {
         Player player = event.getEntity();
         if (!player.level().isClientSide) {
             SoulWardHandler soulWardHandler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
-            AttributeInstance soulWardCap = player.getAttribute(AttributeRegistry.SOUL_WARD_CAP.get());
+            AttributeInstance soulWardCap = player.getAttribute(AttributeRegistry.SOUL_WARD_CAP);
             if (soulWardCap != null) {
                 if (soulWardHandler.soulWard < soulWardCap.getValue() && soulWardHandler.soulWardProgress <= 0) {
                     soulWardHandler.soulWard++;
@@ -74,8 +76,9 @@ public class SoulWardHandler {
         }
     }
 
-    public static void shieldPlayer(LivingDamageEvent.Pre event) {
-        if (event.isCanceled() || event.getOriginalDamage() <= 0) {
+    public static void shieldPlayer(LivingDamageEvent.Post event) {
+        AccessorEvent.PostDamage evnt = (AccessorEvent.PostDamage) event;
+        if (evnt.malum$isCancelled() || event.getOriginalDamage() <= 0) {
             return;
         }
         if (event.getEntity() instanceof Player player) {
@@ -96,7 +99,7 @@ public class SoulWardHandler {
                     }
                     float result = amount * multiplier;
                     float absorbed = amount - result;
-                    double strength = 1+player.getAttributeValue(AttributeRegistry.SOUL_WARD_STRENGTH.get());
+                    double strength = 1+player.getAttributeValue(AttributeRegistry.SOUL_WARD_STRENGTH);
                     float soulwardLost = (float) (soulWardHandler.soulWard - (absorbed / strength));
                     if (strength != 0) {
                         soulWardHandler.soulWard = Math.max(0, soulwardLost);
@@ -111,7 +114,7 @@ public class SoulWardHandler {
                     }
                     SoundEvent sound = soulWardHandler.soulWard == 0 ? SoundRegistry.SOUL_WARD_DEPLETE.get() : SoundRegistry.SOUL_WARD_HIT.get();
                     player.level().playSound(null, player.blockPosition(), sound, player.getSoundSource(), 1, Mth.nextFloat(player.getRandom(), 1f, 1.5f));
-                    event.setNewDamage(result);
+                    evnt.malum$setNewDamage(result);
 
                     MalumPlayerDataCapability.syncTrackingAndSelf(player);
                 }
@@ -120,7 +123,7 @@ public class SoulWardHandler {
     }
 
     public static int getSoulWardCooldown(Player player) {
-        return getSoulWardCooldown(player.getAttributeValue(AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get()));
+        return getSoulWardCooldown(player.getAttributeValue(AttributeRegistry.SOUL_WARD_RECOVERY_RATE));
     }
 
     public static int getSoulWardCooldown(double recoverySpeed) {
@@ -168,7 +171,7 @@ public class SoulWardHandler {
                         shaderInstance.safeGetUniform("Speed").set(550f);
                         shaderInstance.safeGetUniform("Intensity").set(120f);
                         VFXBuilders.ScreenVFXBuilder builder = VFXBuilders.createScreen()
-                                .setPosColorTexDefaultFormat()
+                                .setPosTexColorDefaultFormat()
                                 .setShader(() -> shaderInstance);
 
                         int size = 13;

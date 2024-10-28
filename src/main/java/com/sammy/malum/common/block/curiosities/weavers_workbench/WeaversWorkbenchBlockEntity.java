@@ -4,61 +4,65 @@ import com.sammy.malum.common.container.WeaversWorkbenchContainer;
 import com.sammy.malum.common.packets.particle.rite.BlightTransformItemParticlePacket;
 import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.block.BlockEntityRegistry;
+import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
+import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.BlockHelper;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 import static com.sammy.malum.common.item.cosmetic.skins.ArmorSkin.MALUM_SKIN_TAG;
 import static com.sammy.malum.common.item.cosmetic.skins.ArmorSkin.getApplicableItemSkinTag;
 import static com.sammy.malum.registry.common.PacketRegistry.MALUM_CHANNEL;
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.ARCANE_SPIRIT;
 
-public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity {
+public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity implements IBlockCapabilityProvider<IItemHandler, Direction> {
 
     public final WeaversWorkbenchItemHandler itemHandler = new WeaversWorkbenchItemHandler(2, 1, this);
-    private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
     public WeaversWorkbenchBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.WEAVERS_WORKBENCH.get(), pos, state);
     }
 
     @Override
-    public InteractionResult onUse(Player player, InteractionHand hand) {
+    public ItemInteractionResult onUse(Player player, InteractionHand pHand) {
         if (player instanceof ServerPlayer serverPlayer) {
             MenuProvider container = new SimpleMenuProvider((w, p, pl) -> new WeaversWorkbenchContainer(w, p, this), WeaversWorkbenchContainer.component);
-            NetworkHooks.openScreen(serverPlayer, container, buf -> buf.writeBlockPos(this.getBlockPos()));
+            serverPlayer.openMenu(container, buf -> buf.writeBlockPos(this.getBlockPos()));
         }
-        return InteractionResult.SUCCESS;
+        return ItemInteractionResult.SUCCESS;
     }
 
-    @NotNull
     @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return handler.cast();
-        }
-        return super.getCapability(cap);
+    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
+        return itemHandler;
     }
 
     public void onCraft() {
         if (!level.isClientSide) {
             Vec3 itemPos = getItemPos();
-            MALUM_CHANNEL.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(getBlockPos())), new BlightTransformItemParticlePacket(List.of(ARCANE_SPIRIT.identifier), itemPos));
+            PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(ARCANE_SPIRIT.getIdentifier()), itemPos));
             level.playSound(null, getBlockPos(), SoundRegistry.ALTERATION_PLINTH_ALTERS.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.25f);
         }
         itemHandler.getStackInSlot(0).shrink(1);
@@ -77,9 +81,9 @@ public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity {
         ItemStack target = itemHandler.getStackInSlot(0);
         ItemStack weave = itemHandler.getStackInSlot(1);
         if (!target.isEmpty() && weave.isEmpty()) {
-            if (target.hasTag() && target.getTag().contains(MALUM_SKIN_TAG)) {
+            if (target.has(DataComponentRegistry.ITEM_SKIN)) {
                 ItemStack result = target.copy();
-                result.getTag().remove(MALUM_SKIN_TAG);
+                target.remove(DataComponentRegistry.ITEM_SKIN);
                 return result;
             }
         }
@@ -87,13 +91,10 @@ public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity {
             ItemStack result = target.copy();
             String skinTag = getApplicableItemSkinTag(target, weave);
             if (skinTag != null) {
-                CompoundTag tag = target.getOrCreateTag();
-                CompoundTag modifiedTag = tag.copy();
-                modifiedTag.putString(MALUM_SKIN_TAG, skinTag);
-                if (tag.equals(modifiedTag)) {
+                if (target.get(DataComponentRegistry.ITEM_SKIN).equals(skinTag)) {
                     return ItemStack.EMPTY;
                 }
-                result.setTag(modifiedTag);
+                result.set(DataComponentRegistry.ITEM_SKIN, skinTag);
                 return result;
             }
         }

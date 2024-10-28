@@ -9,10 +9,12 @@ import com.sammy.malum.config.*;
 import com.sammy.malum.core.listeners.*;
 import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.core.systems.spirit.*;
+import com.sammy.malum.mixin.AccessorEvent;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
@@ -24,6 +26,7 @@ import net.minecraft.world.entity.item.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.event.entity.item.ItemExpireEvent;
@@ -100,7 +103,7 @@ public class SpiritHarvestHandler {
     }
 
     public static void shatterItem(ItemExpireEvent event) {
-        if (event.isCanceled()) {
+        if (((AccessorEvent)event).malum$isCancelled()) {
             return;
         }
 
@@ -127,7 +130,7 @@ public class SpiritHarvestHandler {
 
     public static void pickupSpirit(LivingEntity collector, ItemStack stack) {
         if (collector instanceof Player player) {
-            AttributeInstance instance = player.getAttribute(AttributeRegistry.ARCANE_RESONANCE.get());
+            AttributeInstance instance = player.getAttribute(AttributeRegistry.ARCANE_RESONANCE);
             ItemHelper.getEventResponders(collector).forEach(s -> {
                 if (s.getItem() instanceof IMalumEventResponderItem eventItem) {
                     eventItem.pickupSpirit(collector, instance != null ? instance.getValue() : 0);
@@ -236,7 +239,9 @@ public class SpiritHarvestHandler {
             spiritBonus += attacker.getAttributeValue(AttributeRegistry.SPIRIT_SPOILS);
         }
         if (!weapon.isEmpty()) {
-            final int spiritPlunder = weapon.getEnchantmentLevel(EnchantmentRegistry.SPIRIT_PLUNDER);
+            HolderGetter<Enchantment> enchantmentLookup = attacker.level().registryAccess()
+                    .asGetterLookup().lookupOrThrow(Registries.ENCHANTMENT);
+            final int spiritPlunder = weapon.getEnchantmentLevel(enchantmentLookup.getOrThrow(EnchantmentRegistry.SPIRIT_PLUNDER));
             if (spiritPlunder > 0) {
                 weapon.hurtAndBreak(spiritPlunder, attacker, MAINHAND);
             }
@@ -254,7 +259,7 @@ public class SpiritHarvestHandler {
     }
 
     public static List<ItemStack> getSpiritDropsRaw(EntitySpiritDropData data) {
-        return data != null ? data.dataEntries.stream().map(SpiritWithCount::getStack).collect(Collectors.toList()) : (Collections.emptyList());
+        return data != null ? data.dataEntries.stream().map(SpiritIngredient::getStack).collect(Collectors.toList()) : (Collections.emptyList());
     }
 
     public static Optional<EntitySpiritDropData> getSpiritData(LivingEntity entity) {

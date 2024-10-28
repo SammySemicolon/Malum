@@ -18,7 +18,7 @@ import net.minecraft.world.phys.*;
 import static com.sammy.malum.registry.common.block.BlockTagRegistry.*;
 
 public class SoulwoodGrowthBlock extends MalumSaplingBlock {
-    public SoulwoodGrowthBlock(AbstractTreeGrower treeGrower, Properties properties) {
+    public SoulwoodGrowthBlock(TreeGrower treeGrower, Properties properties) {
         super(treeGrower, properties);
     }
 
@@ -39,8 +39,7 @@ public class SoulwoodGrowthBlock extends MalumSaplingBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        ItemStack itemInHand = pPlayer.getItemInHand(pHand);
+    protected ItemInteractionResult useItemOn(ItemStack itemInHand, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand hand, BlockHitResult hitResult) {
         if (itemInHand.getItem() instanceof SpiritShardItem) {
             if (pLevel instanceof ServerLevel serverLevel) {
                 performBonemeal(serverLevel, pLevel.random, pPos, pState);
@@ -48,8 +47,8 @@ public class SoulwoodGrowthBlock extends MalumSaplingBlock {
             if (!pPlayer.isCreative()) {
                 itemInHand.shrink(1);
             }
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
-        return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+        return super.useItemOn(itemInHand, pState, pLevel, pPos, pPlayer, hand, hitResult);
     }
 }

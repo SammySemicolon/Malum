@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.minecraftforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import team.lodestar.lodestone.helpers.*;
 
@@ -27,7 +27,7 @@ public class CurioWatcherNecklace extends MalumCurioItem implements IMalumEventR
     }
 
     @Override
-    public void hurtEvent(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (target.getHealth() >= target.getMaxHealth() * 0.9875f) {
             MalumLivingEntityDataCapability.getCapabilityOptional(target).ifPresent(c -> {
                 if (c.watcherNecklaceCooldown == 0) {
@@ -53,12 +53,12 @@ public class CurioWatcherNecklace extends MalumCurioItem implements IMalumEventR
     }
 
     public static void entityTick(EntityTickEvent event) {
-        LivingEntity entity = event.getEntity();
-
-        MalumLivingEntityDataCapability.getCapabilityOptional(entity).ifPresent(c -> {
-            if (c.watcherNecklaceCooldown > 0) {
-                c.watcherNecklaceCooldown--;
-            }
-        });
+        if (event.getEntity() instanceof LivingEntity entity) {
+            MalumLivingEntityDataCapability.getCapabilityOptional(entity).ifPresent(c -> {
+                if (c.watcherNecklaceCooldown > 0) {
+                    c.watcherNecklaceCooldown--;
+                }
+            });
+        }
     }
 }

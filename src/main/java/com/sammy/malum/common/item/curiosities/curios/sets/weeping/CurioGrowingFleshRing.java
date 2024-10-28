@@ -5,6 +5,7 @@ import com.sammy.malum.common.item.IVoidItem;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
@@ -27,7 +28,7 @@ public class CurioGrowingFleshRing extends MalumCurioItem implements IVoidItem, 
 
     @Override
     public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
-        MobEffect cancerousGrowth = MobEffectRegistry.CANCEROUS_GROWTH.get();
+        Holder<MobEffect> cancerousGrowth = MobEffectRegistry.CANCEROUS_GROWTH;
         MobEffectInstance effect = collector.getEffect(cancerousGrowth);
         if (effect == null) {
             collector.addEffect(new MobEffectInstance(cancerousGrowth, 1200, 0, true, true, true));

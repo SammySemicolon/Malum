@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.runes.madness;
 import com.sammy.malum.common.item.curiosities.curios.runes.AbstractRuneCurioItem;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -26,7 +27,7 @@ public class RuneSacrificialEmpowermentItem extends AbstractRuneCurioItem implem
 
     @Override
     public void killEvent(LivingEntity attacker, LivingEntity target, ItemStack stack) {
-        MobEffect sacrificialEmpowerment = MobEffectRegistry.SACRIFICIAL_EMPOWERMENT.get();
+        Holder<MobEffect> sacrificialEmpowerment = MobEffectRegistry.SACRIFICIAL_EMPOWERMENT;
         MobEffectInstance effect = attacker.getEffect(sacrificialEmpowerment);
         if (effect == null) {
             attacker.addEffect(new MobEffectInstance(sacrificialEmpowerment, 200, 0, true, true, true));

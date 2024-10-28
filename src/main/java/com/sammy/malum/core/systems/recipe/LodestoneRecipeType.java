@@ -1,7 +1,5 @@
 package com.sammy.malum.core.systems.recipe;
 
-import com.sammy.malum.common.recipe.spirit.transmutation.*;
-import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.*;
@@ -27,7 +25,7 @@ public class LodestoneRecipeType<T extends Recipe<?>> implements RecipeType<T> {
         return findRecipe(level, recipeType, recipe -> recipe.matches(recipeInput, level));
     }
 
-    public static <T extends RecipeInput, K extends Recipe<T>> K findRecipe(Level level, RecipeType<K> recipeType, Predicate<Recipe<T>> predicate) {
+    public static <T extends RecipeInput, K extends Recipe<T>> K findRecipe(Level level, RecipeType<K> recipeType, Predicate<K> predicate) {
         List<RecipeHolder<K>> recipes = getRecipeHolders(level, recipeType);
         for (RecipeHolder<K> recipe : recipes) {
             final K value = recipe.value();

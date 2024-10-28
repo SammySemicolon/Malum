@@ -1,33 +1,40 @@
 package com.sammy.malum.common.recipe;
 
-import com.google.gson.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.registry.common.recipe.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.*;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.*;
-import net.minecraftforge.registries.*;
-import team.lodestar.lodestone.systems.recipe.*;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
-import javax.annotation.*;
 import java.util.*;
-import java.util.function.*;
 import java.util.stream.*;
 
 public class SpiritRepairRecipe extends AbstractSpiritListMalumRecipe {
     public static final String NAME = "spirit_repair";
 
     public final float durabilityPercentage;
-    public final List<Item> inputs;
-    public final IngredientWithCount repairMaterial;
+    public final String itemIdRegex;
+    public final String modIdRegex;
+    public final ArrayList<Item> inputs;
+    public final SizedIngredient repairMaterial;
 
-    public SpiritRepairRecipe(ResourceLocation id, float durabilityPercentage, List<Item> inputs, IngredientWithCount repairMaterial, List<SpiritWithCount> spirits) {
-        super(id, RecipeSerializerRegistry.REPAIR_RECIPE_SERIALIZER.get(), RecipeTypeRegistry.SPIRIT_REPAIR.get(), spirits);
+    public SpiritRepairRecipe(float durabilityPercentage, String itemIdRegex, String modIdRegex, List<ResourceLocation> inputs, SizedIngredient repairMaterial, List<SpiritIngredient> spirits) {
+        super(RecipeSerializerRegistry.REPAIR_RECIPE_SERIALIZER.get(), RecipeTypeRegistry.SPIRIT_REPAIR.get(), spirits);
         this.durabilityPercentage = durabilityPercentage;
+        this.itemIdRegex = itemIdRegex;
+        this.modIdRegex = modIdRegex;
         this.repairMaterial = repairMaterial;
-        this.inputs = inputs;
+        this.inputs = new ArrayList<>(inputs.stream().map(BuiltInRegistries.ITEM::get).collect(Collectors.toList()));
+        addToInputs(this.inputs, itemIdRegex, modIdRegex);
     }
 
 
@@ -36,26 +43,30 @@ public class SpiritRepairRecipe extends AbstractSpiritListMalumRecipe {
     }
 
     public boolean doesRepairMatch(ItemStack input) {
-        return this.repairMaterial.matches(input);
+        return this.repairMaterial.test(input);
     }
 
-    public static SpiritRepairRecipe getRecipe(Level level, ItemStack stack, ItemStack repairStack, List<ItemStack> spirits) {
-        if (stack.isRepairable() && !stack.isDamaged()) {
-            return null;
+    protected static void addToInputs(ArrayList<Item> inputs, String itemIdRegex, String modIdRegex) {
+        BuiltInRegistries.ITEM.entrySet().stream().map(Map.Entry::getValue).filter(i -> i.isRepairable(i.getDefaultInstance())).forEach(item -> {
+            if (BuiltInRegistries.ITEM.getKey(item).getPath().matches(itemIdRegex)) {
+                iteration : {
+                    if (!modIdRegex.equals("") && !BuiltInRegistries.ITEM.getKey(item).getNamespace().matches(modIdRegex)) {
+                        break iteration;
+                    }
+                    if (item instanceof IRepairOutputOverride repairOutputOverride && repairOutputOverride.ignoreDuringLookup()) {
+                        break iteration;
+                    }
+                    if (!inputs.contains(item)) {
+                        inputs.add(item);
+                    }
+                }
+            }
+        });
         }
-        return getRecipe(level, c -> c.doesInputMatch(stack) && c.doesRepairMatch(repairStack) && c.doSpiritsMatch(spirits));
-    }
 
-    public static SpiritRepairRecipe getRecipe(Level level, Predicate<SpiritRepairRecipe> predicate) {
-        return getRecipe(level, RecipeTypeRegistry.SPIRIT_REPAIR.get(), predicate);
-    }
-
-    public static List<SpiritRepairRecipe> getRecipes(Level level) {
-        return getRecipes(level, RecipeTypeRegistry.SPIRIT_REPAIR.get());
-    }
-
-    public static ItemStack getRepairRecipeOutput(ItemStack input) {
-        return input.getItem() instanceof IRepairOutputOverride ? new ItemStack(((IRepairOutputOverride) input.getItem()).overrideRepairResult(), input.getCount(), input.getTag()) : input;
+    @Override
+    public boolean matches(SingleRecipeInput singleRecipeInput, Level level) {
+        return inputs.contains(singleRecipeInput.item().getItem());
     }
 
     public interface IRepairOutputOverride {
@@ -70,83 +81,23 @@ public class SpiritRepairRecipe extends AbstractSpiritListMalumRecipe {
 
     public static class Serializer implements RecipeSerializer<SpiritRepairRecipe> {
 
-        public static List<Item> REPAIRABLE;
+        public static final MapCodec<SpiritRepairRecipe> CODEC = RecordCodecBuilder.mapCodec(obj -> obj.group(
+                Codec.FLOAT.fieldOf("durabilityPercentage").forGetter(recipe -> recipe.durabilityPercentage),
+                Codec.STRING.fieldOf("itemIdRegex").forGetter(recipe -> ".*"),
+                Codec.STRING.fieldOf("modIdRegex").forGetter(recipe -> ".*"),
+                ResourceLocation.CODEC.listOf().fieldOf("inputs").forGetter(recipe -> recipe.inputs.stream().map(BuiltInRegistries.ITEM::getKey).collect(Collectors.toList())),
+                SizedIngredient.FLAT_CODEC.fieldOf("repairMaterial").forGetter(recipe -> recipe.repairMaterial),
+                SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits)
+        ).apply(obj, SpiritRepairRecipe::new));
 
         @Override
-        public SpiritRepairRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-            if (REPAIRABLE == null) {
-                REPAIRABLE = ForgeRegistries.ITEMS.getEntries().stream().map(Map.Entry::getValue).filter(Item::canBeDepleted).collect(Collectors.toList());
-            }
-            float durabilityPercentage = json.getAsJsonPrimitive("durabilityPercentage").getAsFloat();
-            String itemIdRegex = json.get("itemIdRegex").getAsString();
-            String modIdRegex = json.get("modIdRegex").getAsString();
-            JsonArray inputsArray = json.getAsJsonArray("inputs");
-            List<Item> inputs = new ArrayList<>();
-            for (JsonElement jsonElement : inputsArray) {
-                Item input = ForgeRegistries.ITEMS.getValue(new ResourceLocation(jsonElement.getAsString()));
-                if (input == null) {
-                    continue;
-                }
-                inputs.add(input);
-            }
-            for (Item item : REPAIRABLE) {
-                if (ForgeRegistries.ITEMS.getKey(item).getPath().matches(itemIdRegex)) {
-                    if (!modIdRegex.equals("") && !ForgeRegistries.ITEMS.getKey(item).getNamespace().matches(modIdRegex)) {
-                        continue;
-                    }
-                    if (item instanceof IRepairOutputOverride repairOutputOverride && repairOutputOverride.ignoreDuringLookup()) {
-                        continue;
-                    }
-                    if (!inputs.contains(item)) {
-                        inputs.add(item);
-                    }
-                }
-            }
-            if (inputs.isEmpty()) {
-                return null;
-            }
-            JsonObject repairObject = json.getAsJsonObject("repairMaterial");
-            IngredientWithCount repair = IngredientWithCount.deserialize(repairObject);
-
-            JsonArray spiritsArray = json.getAsJsonArray("spirits");
-            List<SpiritWithCount> spirits = new ArrayList<>();
-            for (int i = 0; i < spiritsArray.size(); i++) {
-                JsonObject spiritObject = spiritsArray.get(i).getAsJsonObject();
-                spirits.add(SpiritWithCount.deserialize(spiritObject));
-            }
-            return new SpiritRepairRecipe(recipeId, durabilityPercentage, inputs, repair, spirits);
-        }
-
-        @Nullable
-        @Override
-        public SpiritRepairRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            float durabilityPercentage = buffer.readFloat();
-            int inputCount = buffer.readInt();
-            List<Item> inputs = new ArrayList<>();
-            for (int i = 0; i < inputCount; i++) {
-                inputs.add(buffer.readItem().getItem());
-            }
-            IngredientWithCount repair = IngredientWithCount.read(buffer);
-            int spiritCount = buffer.readInt();
-            List<SpiritWithCount> spirits = new ArrayList<>();
-            for (int i = 0; i < spiritCount; i++) {
-                spirits.add(new SpiritWithCount(buffer.readItem()));
-            }
-            return new SpiritRepairRecipe(recipeId, durabilityPercentage, inputs, repair, spirits);
+        public MapCodec<SpiritRepairRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buffer, SpiritRepairRecipe recipe) {
-            buffer.writeFloat(recipe.durabilityPercentage);
-            buffer.writeInt(recipe.inputs.size());
-            for (Item item : recipe.inputs) {
-                buffer.writeItem(item.getDefaultInstance());
-            }
-            recipe.repairMaterial.write(buffer);
-            buffer.writeInt(recipe.spirits.size());
-            for (SpiritWithCount item : recipe.spirits) {
-                buffer.writeItem(item.getStack());
-            }
+        public StreamCodec<RegistryFriendlyByteBuf, SpiritRepairRecipe> streamCodec() {
+            return ByteBufCodecs.fromCodecWithRegistries(CODEC.codec());
         }
     }
 }

@@ -2,11 +2,14 @@ package com.sammy.malum.common.block.curiosities.spirit_altar;
 
 import com.sammy.malum.common.block.storage.IMalumSpecialItemAccessPoint;
 import com.sammy.malum.common.recipe.spirit.infusion.SpiritInfusionRecipe;
+import com.sammy.malum.core.systems.recipe.SpiritBasedRecipeInput;
+import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -49,16 +52,16 @@ public class AltarCraftingHelper {
 	 * Returns null if not everything could be found.
 	 * Otherwise, returns the number of stacks and the total count of items.
 	 */
-	public static Extraction simulateExtraction(IItemHandler inventory, List<IngredientWithCount> ingredients) {
+	public static Extraction simulateExtraction(IItemHandler inventory, List<SizedIngredient> ingredients) {
 		IItemHandler frozen = frozenCopy(inventory);
 		int numberOfItems = 0;
 		int numberOfIngredients = 0;
 
-		for (IngredientWithCount ingredient : ingredients) {
-			NonNullList<ItemStack> extracted = extractIngredient(frozen, ingredient.ingredient, ingredient.count, false);
+		for (SizedIngredient ingredient : ingredients) {
+			NonNullList<ItemStack> extracted = extractIngredient(frozen, ingredient.ingredient(), ingredient.count(), false);
 
 			int numExtracted = extracted.stream().mapToInt(ItemStack::getCount).sum();
-			if (numExtracted != ingredient.count)
+			if (numExtracted != ingredient.count())
 				return null;
 
 			numberOfIngredients++;
@@ -68,23 +71,27 @@ public class AltarCraftingHelper {
 		return new Extraction(numberOfIngredients, numberOfItems);
 	}
 
-	public static IngredientWithCount getFirstMissingIngredient(IItemHandler inventory, List<IngredientWithCount> ingredients) {
+	public static SizedIngredient getFirstMissingIngredient(IItemHandler inventory, List<SizedIngredient> ingredients) {
 		IItemHandler frozen = frozenCopy(inventory);
 
-		for (IngredientWithCount ingredient : ingredients) {
-			NonNullList<ItemStack> extracted = extractIngredient(frozen, ingredient.ingredient, ingredient.count, false);
+		for (SizedIngredient ingredient : ingredients) {
+			NonNullList<ItemStack> extracted = extractIngredient(frozen, ingredient.ingredient(), ingredient.count(), false);
 			int numExtracted = extracted.stream().mapToInt(ItemStack::getCount).sum();
-			if (numExtracted != ingredient.count)
-				return new IngredientWithCount(ingredient.ingredient, ingredient.count - numExtracted);
+			if (numExtracted != ingredient.count())
+				return new SizedIngredient(ingredient.ingredient(), ingredient.count() - numExtracted);
 		}
 
 		return null;
 	}
 
-	private static List<IngredientWithCount> convertSpiritsToIngredients(List<SpiritWithCount> ingredients) {
+	private static List<SizedIngredient> convertSpiritsToIngredients(List<SpiritIngredient> ingredients) {
 		return ingredients.stream()
-			.map(ingredient -> new IngredientWithCount(Ingredient.of(ingredient.getItem()), ingredient.count))
-			.collect(Collectors.toList());
+			.map(ingredient -> new SizedIngredient(Ingredient.of(ingredient.getItems()), ingredient.getCount()))
+			.toList();
+	}
+
+	private static List<ItemStack> convertSpiritsToItems(List<SpiritIngredient> ingredients) {
+		return ingredients.stream().map(SpiritIngredient::getStack).toList();
 	}
 
 	/**
@@ -116,7 +123,7 @@ public class AltarCraftingHelper {
 		return extracted;
 	}
 
-	public static IngredientWithCount getNextIngredientToTake(SpiritInfusionRecipe recipe, IItemHandlerModifiable consumedItems) {
+	public static SizedIngredient getNextIngredientToTake(SpiritInfusionRecipe recipe, IItemHandlerModifiable consumedItems) {
 		IItemHandler frozen = frozenCopy(consumedItems);
 
 		return getFirstMissingIngredient(frozen, recipe.extraIngredients);
@@ -137,10 +144,11 @@ public class AltarCraftingHelper {
 	 * Returns a recipe ranking for a given spirit infusion recipe, or null if the recipe does not match.
 	 */
 	public static Ranking rankRecipe(SpiritInfusionRecipe recipe, ItemStack inputItem, IItemHandlerModifiable spiritContainer, IItemHandlerModifiable pedestalItems, IItemHandlerModifiable consumedItems) {
-		if (!recipe.doesInputMatch(inputItem))
+		SpiritBasedRecipeInput input = new SpiritBasedRecipeInput(inputItem, convertSpiritsToItems(recipe.spirits));
+		if (!recipe.matches(input, null))
 			return null;
 
-		int inputCount = recipe.input.count;
+		int inputCount = recipe.ingredient.count();
 
 		Extraction spiritRanking = simulateExtraction(spiritContainer, convertSpiritsToIngredients(recipe.spirits));
 		if (spiritRanking == null)

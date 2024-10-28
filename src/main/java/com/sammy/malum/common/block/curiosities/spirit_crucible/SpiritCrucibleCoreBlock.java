@@ -3,15 +3,14 @@ package com.sammy.malum.common.block.curiosities.spirit_crucible;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.wrapper.EmptyHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import team.lodestar.lodestone.systems.block.WaterLoggedEntityBlock;
 
 public class SpiritCrucibleCoreBlock<T extends SpiritCrucibleCoreBlockEntity> extends WaterLoggedEntityBlock<T> {
@@ -29,7 +28,8 @@ public class SpiritCrucibleCoreBlock<T extends SpiritCrucibleCoreBlockEntity> ex
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         if (pLevel.getBlockEntity(pPos) instanceof SpiritCrucibleCoreBlockEntity crucible) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(crucible.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(new EmptyHandler()));
+            IItemHandler inv = Capabilities.ItemHandler.BLOCK.getCapability(pLevel, pPos, pState, crucible, null);
+            if (inv != null) return ItemHandlerHelper.calcRedstoneFromInventory(inv);
         }
         return 0;
     }

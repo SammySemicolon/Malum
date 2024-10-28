@@ -4,12 +4,13 @@ import com.sammy.malum.common.item.IMalumEventResponderItem;
 import com.sammy.malum.common.item.IVoidItem;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.registry.common.MobEffectRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 import java.util.function.Consumer;
 
@@ -25,13 +26,13 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
     }
 
     @Override
-    public void takeDamageEvent(LivingHurtEvent event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
-        float amount = event.getAmount();
+    public void takeDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
+        float amount = event.getNewDamage();
         int amplifier = (int) Math.ceil(amount / 4f);
         if (amplifier >= 6) {
             amplifier *= amplifier / 6f;
         }
-        MobEffect effect = MobEffectRegistry.WICKED_INTENT.get();
+        Holder<MobEffect> effect = MobEffectRegistry.WICKED_INTENT;
         attacked.addEffect(new MobEffectInstance(effect, 40, amplifier + 1));
     }
 }

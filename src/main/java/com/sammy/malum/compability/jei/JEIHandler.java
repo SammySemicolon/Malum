@@ -12,9 +12,11 @@ import com.sammy.malum.compability.farmersdelight.FarmersDelightCompat;
 import com.sammy.malum.compability.jei.categories.*;
 import com.sammy.malum.compability.jei.recipes.SpiritTransmutationWrapper;
 import com.sammy.malum.core.handlers.hiding.HiddenTagHandler;
+import com.sammy.malum.core.systems.recipe.LodestoneRecipeType;
 import com.sammy.malum.registry.client.HiddenTagRegistry;
 import com.sammy.malum.registry.common.SpiritRiteRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
+import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -34,8 +36,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.apache.commons.compress.utils.Lists;
-import team.lodestar.lodestone.systems.recipe.IRecipeComponent;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -44,7 +46,7 @@ import java.util.stream.Collectors;
 
 @JeiPlugin
 public class JEIHandler implements IModPlugin {
-    private static final ResourceLocation ID = new ResourceLocation(MalumMod.MALUM, "main");
+    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(MalumMod.MALUM, "main");
 
     public static final RecipeType<SpiritInfusionRecipe> SPIRIT_INFUSION = new RecipeType<>(SpiritInfusionRecipeCategory.UID, SpiritInfusionRecipe.class);
     public static final RecipeType<SpiritTransmutationWrapper> TRANSMUTATION = new RecipeType<>(SpiritTransmutationRecipeCategory.UID, SpiritTransmutationWrapper.class);
@@ -58,7 +60,7 @@ public class JEIHandler implements IModPlugin {
         HiddenTagRegistry.blankOutHidingTags();
     }
 
-    public static void addItemsToJei(IRecipeLayoutBuilder iRecipeLayout, RecipeIngredientRole role, int left, int top, boolean vertical, List<? extends IRecipeComponent> components) {
+    public static void addItemsToJei(IRecipeLayoutBuilder iRecipeLayout, RecipeIngredientRole role, int left, int top, boolean vertical, List<? extends Ingredient> components) {
         int slots = components.size();
         if (vertical) {
             top -= 10 * (slots - 1);
@@ -69,7 +71,7 @@ public class JEIHandler implements IModPlugin {
             int offset = i * 20;
             int oLeft = left + 1 + (vertical ? 0 : offset);
             int oTop = top + 1 + (vertical ? offset : 0);
-            iRecipeLayout.addSlot(role, oLeft, oTop).addItemStacks(components.get(i).getStacks());
+            iRecipeLayout.addSlot(role, oLeft, oTop).addItemStacks(List.of(components.get(i).getItems()));
         }
     }
 
@@ -90,14 +92,14 @@ public class JEIHandler implements IModPlugin {
     public void registerRecipes(@Nonnull IRecipeRegistration registry) {
         ClientLevel level = Minecraft.getInstance().level;
         if (level != null) {
-            registry.addRecipes(SPIRIT_INFUSION, SpiritInfusionRecipe.getRecipes(level));
+            registry.addRecipes(SPIRIT_INFUSION, LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_INFUSION.get()));
 
-            List<SpiritTransmutationRecipe> transmutation = SpiritTransmutationRecipe.getRecipes(level);
+            List<SpiritTransmutationRecipe> transmutation = LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_TRANSMUTATION.get());
             List<SpiritTransmutationRecipe> leftovers = Lists.newArrayList();
             Map<String, List<SpiritTransmutationRecipe>> groups = Maps.newLinkedHashMap();
             for (SpiritTransmutationRecipe recipe : transmutation) {
-                if (recipe.group != null) {
-                    var group = groups.computeIfAbsent(recipe.group, k -> Lists.newArrayList());
+                if (recipe.getGroup() != null) {
+                    var group = groups.computeIfAbsent(recipe.getGroup(), k -> Lists.newArrayList());
                     group.add(recipe);
                 } else
                     leftovers.add(recipe);
@@ -113,14 +115,14 @@ public class JEIHandler implements IModPlugin {
                 .map(SpiritTransmutationWrapper::new)
                 .collect(Collectors.toList()));
 
-            registry.addRecipes(FOCUSING, SpiritFocusingRecipe.getRecipes(level).stream()
+            registry.addRecipes(FOCUSING, LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_FOCUSING.get()).stream()
                 .filter(it -> !it.output.isEmpty()).collect(Collectors.toList()));
             registry.addRecipes(RITES, SpiritRiteRegistry.RITES);
-            registry.addRecipes(SPIRIT_REPAIR, SpiritRepairRecipe.getRecipes(level).stream()
+            registry.addRecipes(SPIRIT_REPAIR, LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_REPAIR.get()).stream()
                 .filter(it -> !it.inputs.isEmpty()).collect(Collectors.toList()));
-            registry.addRecipes(WEEPING_WELL, FavorOfTheVoidRecipe.getRecipes(level).stream()
+            registry.addRecipes(WEEPING_WELL, LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.VOID_FAVOR.get()).stream()
                 .filter(it -> !it.output.isEmpty()).collect(Collectors.toList()));
-            registry.addRecipes(RUNEWORKING, RunicWorkbenchRecipe.getRecipes(level).stream()
+            registry.addRecipes(RUNEWORKING, LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.RUNEWORKING.get()).stream()
                 .filter(it -> !it.output.isEmpty()).collect(Collectors.toList()));
             if (FarmersDelightCompat.LOADED) {
                 FarmersDelightCompat.AndJeiLoadedOnly.addInfo(registry);

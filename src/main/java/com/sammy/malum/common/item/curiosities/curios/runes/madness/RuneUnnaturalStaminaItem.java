@@ -1,9 +1,11 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.madness;
 
 import com.google.common.collect.Multimap;
+import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.curios.runes.AbstractRuneCurioItem;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -27,11 +29,10 @@ public class RuneUnnaturalStaminaItem extends AbstractRuneCurioItem {
     }
 
     @Override
-    public void addAttributeModifiers(Multimap<Attribute, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-        addAttributeModifier(map, Attributes.MOVEMENT_SPEED, uuid -> new AttributeModifier(uuid,
-                "Curio Movement Speed", 0.2f, AttributeModifier.Operation.MULTIPLY_TOTAL));
+    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+        addAttributeModifier(map, Attributes.MOVEMENT_SPEED,
+                new AttributeModifier(MalumMod.malumPath("curio_movement_speed"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
-
 
     public static boolean forceSprint(LivingEntity livingEntity) {
         return CurioHelper.hasCurioEquipped(livingEntity, ItemRegistry.RUNE_OF_UNNATURAL_STAMINA.get());

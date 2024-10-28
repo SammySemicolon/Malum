@@ -1,9 +1,12 @@
 package com.sammy.malum.common.block.curiosities.weeping_well;
 
+import com.sammy.malum.common.packets.CodecUtil;
 import com.sammy.malum.common.recipe.void_favor.*;
+import com.sammy.malum.core.systems.recipe.LodestoneRecipeType;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.*;
+import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.*;
 import com.sammy.malum.visual_effects.networked.data.*;
@@ -14,8 +17,10 @@ import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.item.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
@@ -33,33 +38,31 @@ public class VoidConduitBlockEntity extends LodestoneBlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compound) {
+    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
         if (!eatenItems.isEmpty()) {
             compound.putInt("itemCount", eatenItems.size());
             for (int i = 0; i < eatenItems.size(); i++) {
-                CompoundTag itemTag = new CompoundTag();
                 ItemStack stack = eatenItems.get(i);
-                stack.save(itemTag);
+                CompoundTag itemTag = (CompoundTag)CodecUtil.encodeNBT(ItemStack.CODEC, stack);
                 compound.put("item_" + i, itemTag);
             }
         }
         compound.putInt("progress", progress);
         compound.putInt("streak", streak);
         compound.putInt("lingeringRadiance", lingeringRadiance);
-        super.saveAdditional(compound);
+        super.saveAdditional(compound, registries);
     }
 
     @Override
-    public void load(CompoundTag compound) {
+    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider pRegistries) {
         eatenItems.clear();
         for (int i = 0; i < compound.getInt("itemCount"); i++) {
             CompoundTag itemTag = compound.getCompound("item_" + i);
-            eatenItems.add(ItemStack.of(itemTag));
+            eatenItems.add(CodecUtil.decodeNBT(ItemStack.CODEC, itemTag));
         }
         progress = compound.getInt("progress");
         streak = compound.getInt("streak");
         lingeringRadiance = compound.getInt("lingeringRadiance");
-        super.load(compound);
     }
 
     @Override
@@ -98,7 +101,7 @@ public class VoidConduitBlockEntity extends LodestoneBlockEntity {
                     }
                     progress = resultingProgress;
                     eatenItems.remove(eatenItems.size() - 1);
-                    particleEffectType.createPositionedEffect(level, new PositionEffectData(worldPosition.getX() + 0.5f, worldPosition.getY() + 0.6f, worldPosition.getZ() + 0.5f));
+                    particleEffectType.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition.getX() + 0.5f, worldPosition.getY() + 0.6f, worldPosition.getZ() + 0.5f));
                     BlockHelper.updateAndNotifyState(level, worldPosition);
                 }
                 if (eatenItems.isEmpty()) {
@@ -116,8 +119,12 @@ public class VoidConduitBlockEntity extends LodestoneBlockEntity {
         }
     }
 
+    protected static Vec3 blockPosToVec3(BlockPos pos) {
+        return new Vec3(pos.getX(), pos.getY(), pos.getZ());
+    }
+
     public void eatItems(ServerLevel serverLevel) {
-        List<ItemEntity> items = serverLevel.getEntitiesOfClass(ItemEntity.class, new AABB(worldPosition.offset(1, -3, 1), worldPosition.offset(-1, -1, -1)).inflate(1))
+        List<ItemEntity> items = serverLevel.getEntitiesOfClass(ItemEntity.class, new AABB(blockPosToVec3(worldPosition.offset(1, -3, 1)), blockPosToVec3(worldPosition.offset(-1, -1, -1))).inflate(1))
                 .stream().sorted(Comparator.comparingInt(itemEntity -> itemEntity.age)).toList();
         for (ItemEntity entity : items) {
             ItemStack item = entity.getItem();
@@ -131,7 +138,10 @@ public class VoidConduitBlockEntity extends LodestoneBlockEntity {
     }
 
     public Item spitOutItem(ItemStack stack) {
-        FavorOfTheVoidRecipe recipe = FavorOfTheVoidRecipe.getRecipe(level, stack);
+        FavorOfTheVoidRecipe recipe = LodestoneRecipeType.getRecipe(
+                level, RecipeTypeRegistry.VOID_FAVOR.get(),
+                new SingleRecipeInput(stack)
+        );
         float pitch = Mth.nextFloat(level.getRandom(), 0.85f, 1.35f) + streak * 0.1f;
         if (recipe != null) {
             streak++;
@@ -139,7 +149,7 @@ public class VoidConduitBlockEntity extends LodestoneBlockEntity {
             while (amount > 0) {
                 int count = Math.min(64, amount);
                 ItemStack outputStack = new ItemStack(recipe.output.getItem(), count);
-                outputStack.setTag(recipe.output.getTag());
+                outputStack.applyComponents(recipe.output.getComponents());
                 ItemEntity entity = new ItemEntity(level, worldPosition.getX() + 0.5f, worldPosition.getY() + 0.5f, worldPosition.getZ() + 0.5f, outputStack);
                 entity.setDeltaMovement(0, 0.65f, 0.15f);
                 level.addFreshEntity(entity);
@@ -156,9 +166,9 @@ public class VoidConduitBlockEntity extends LodestoneBlockEntity {
         }
     }
 
-    @Override
+    /*@Override
     public AABB getRenderBoundingBox() {
         var pos = worldPosition;
         return new AABB(pos.getX() - 3, pos.getY() - 1, pos.getZ() - 3, pos.getX() + 4, pos.getY() + 2, pos.getZ() + 4);
-    }
+    }*/
 }

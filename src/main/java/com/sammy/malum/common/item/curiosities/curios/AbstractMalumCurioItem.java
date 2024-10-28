@@ -2,7 +2,9 @@ package com.sammy.malum.common.item.curiosities.curios;
 
 import com.google.common.collect.*;
 import com.sammy.malum.registry.common.*;
-import net.minecraft.*;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -12,7 +14,6 @@ import team.lodestar.lodestone.helpers.*;
 import top.theillusivec4.curios.api.*;
 import top.theillusivec4.curios.api.type.capability.*;
 
-import java.util.*;
 import java.util.function.*;
 
 public abstract class AbstractMalumCurioItem extends Item implements ICurioItem {
@@ -33,7 +34,6 @@ public abstract class AbstractMalumCurioItem extends Item implements ICurioItem 
         }
     }
 
-    private final Function<Attribute, UUID> uuids = Util.memoize(a -> UUID.randomUUID());
     public final MalumTrinketType type;
 
     public AbstractMalumCurioItem(Properties properties, MalumTrinketType type) {
@@ -41,12 +41,12 @@ public abstract class AbstractMalumCurioItem extends Item implements ICurioItem 
         this.type = type;
     }
 
-    public void addAttributeModifiers(Multimap<Attribute, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
     }
 
     @Override
-    public final Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        Multimap<Attribute, AttributeModifier> map = LinkedHashMultimap.create();
+    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        Multimap<Holder<Attribute>, AttributeModifier> map = LinkedHashMultimap.create();
         addAttributeModifiers(map, slotContext, stack);
         return map;
     }
@@ -59,19 +59,20 @@ public abstract class AbstractMalumCurioItem extends Item implements ICurioItem 
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        Map<Enchantment, Integer> list = EnchantmentHelper.getEnchantments(book);
-        if (list.size() == 1 && list.containsKey(Enchantments.BINDING_CURSE)) {
+        ItemEnchantments list = book.get(DataComponents.ENCHANTMENTS);
+        if (list.size() == 1 && list.getLevel(Enchantments.BINDING_CURSE)) {
             return true;
         }
         return super.isBookEnchantable(stack, book);
     }
+
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
         return true;
     }
 
-    public void addAttributeModifier(Multimap<Attribute, AttributeModifier> map, Attribute attribute, Function<UUID, AttributeModifier> attributeModifier) {
-        map.put(attribute, attributeModifier.apply(uuids.apply(attribute)));
+    public void addAttributeModifier(Multimap<Holder<Attribute>, AttributeModifier> map, Holder<Attribute> attribute, AttributeModifier modifier) {
+        map.put(attribute, modifier);
     }
 }

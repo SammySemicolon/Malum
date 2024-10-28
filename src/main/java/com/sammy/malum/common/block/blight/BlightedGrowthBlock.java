@@ -1,5 +1,6 @@
 package com.sammy.malum.common.block.blight;
 
+import com.mojang.serialization.*;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
 import net.minecraft.util.*;
@@ -7,13 +8,21 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.shapes.*;
+import net.neoforged.neoforge.common.*;
 
 import static com.sammy.malum.registry.common.block.BlockTagRegistry.*;
 
-public class BlightedGrowthBlock extends BushBlock implements BonemealableBlock, net.minecraftforge.common.IForgeShearable {
+public class BlightedGrowthBlock extends BushBlock implements BonemealableBlock, IShearable {
+
+    public static final MapCodec<BlightedGrowthBlock> CODEC = simpleCodec(BlightedGrowthBlock::new);
     protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 8.0D, 14.0D);
     public BlightedGrowthBlock(Properties p_57318_) {
         super(p_57318_);
+    }
+
+    @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -29,8 +38,9 @@ public class BlightedGrowthBlock extends BushBlock implements BonemealableBlock,
         return super.mayPlaceOn(pState, pLevel, pPos);
     }
 
+
     @Override
-    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 

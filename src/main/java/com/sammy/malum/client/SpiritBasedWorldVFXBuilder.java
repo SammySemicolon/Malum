@@ -5,7 +5,7 @@ import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.core.systems.spirit.UmbralSpiritType;
 import net.minecraft.client.renderer.RenderType;
 import team.lodestar.lodestone.handlers.RenderHandler;
-import team.lodestar.lodestone.registry.client.LodestoneRenderTypeRegistry;
+import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.rendering.LodestoneRenderType;
 import team.lodestar.lodestone.systems.rendering.StateShards;
 import team.lodestar.lodestone.systems.rendering.VFXBuilders;
@@ -26,12 +26,12 @@ public class SpiritBasedWorldVFXBuilder extends VFXBuilders.WorldVFXBuilder {
     @Override
     public VFXBuilders.WorldVFXBuilder setRenderType(RenderType renderType) {
         if (spiritType instanceof UmbralSpiritType && renderType instanceof LodestoneRenderType lodestoneRenderType) {
-            if (!LodestoneRenderTypeRegistry.COPIES.containsKey(Pair.of(spiritType, lodestoneRenderType))) {
-                LodestoneRenderTypeRegistry.addRenderTypeModifier(b -> b.setTransparencyState(StateShards.NORMAL_TRANSPARENCY));
+            if (!LodestoneRenderTypes.COPIES.containsKey(Pair.of(spiritType, lodestoneRenderType))) {
+                LodestoneRenderTypes.addRenderTypeModifier(b -> b.setTransparencyState(StateShards.NORMAL_TRANSPARENCY));
             }
-            LodestoneRenderType umbralRenderType = LodestoneRenderTypeRegistry.copyAndStore(spiritType, lodestoneRenderType);
+            LodestoneRenderType umbralRenderType = LodestoneRenderTypes.copyAndStore(spiritType, lodestoneRenderType);
             if (!RenderHandler.UNIFORM_HANDLERS.containsKey(umbralRenderType)) {
-                LodestoneRenderTypeRegistry.applyUniformChanges(umbralRenderType, ShaderUniformHandler.LUMITRANSPARENT);
+                LodestoneRenderTypes.applyUniformChanges(umbralRenderType, ShaderUniformHandler.LUMITRANSPARENT);
             }
             return super.setRenderType(umbralRenderType);
         }

@@ -18,7 +18,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.minecraftforge.items.*;
 import team.lodestar.lodestone.helpers.*;
 
 import java.util.*;
@@ -96,11 +95,7 @@ public class HiddenBladeDelayedImpactEntity extends ThrowableItemProjectile {
             boolean success = target.hurt(source, damage);
             if (success && target instanceof LivingEntity livingentity) {
                 ItemStack scythe = getItem();
-                ItemHelper.applyEnchantments(scytheOwner, livingentity, scythe);
-                int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, scythe);
-                if (i > 0) {
-                    livingentity.setSecondsOnFire(i * 4);
-                }
+                ItemHelper.applyEnchantments(scytheOwner, livingentity, source, scythe);
                 if (magicDamage > 0) {
                     if (!livingentity.isDeadOrDying()) {
                         target.invulnerableTime = 0;
@@ -149,7 +144,7 @@ public class HiddenBladeDelayedImpactEntity extends ThrowableItemProjectile {
     }
 
     @Override
-    public boolean ignoreExplosion() {
+    public boolean ignoreExplosion(Explosion explosion) {
         return true;
     }
 }

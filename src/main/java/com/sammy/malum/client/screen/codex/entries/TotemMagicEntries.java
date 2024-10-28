@@ -8,8 +8,8 @@ import com.sammy.malum.client.screen.codex.pages.recipe.vanilla.*;
 import com.sammy.malum.client.screen.codex.pages.text.*;
 import com.sammy.malum.client.screen.codex.screens.*;
 import com.sammy.malum.registry.common.*;
+import net.minecraft.core.registries.*;
 import net.minecraft.world.item.*;
-import net.minecraftforge.registries.*;
 
 import static com.sammy.malum.registry.common.item.ItemRegistry.*;
 import static net.minecraft.world.item.Items.*;
@@ -50,7 +50,7 @@ public class TotemMagicEntries {
                 ))
                 .addPage(new TextPage("totemic_runes.2"))
                 .addPage(new EntrySelectorPage(item -> {
-                    final String translationKey = ForgeRegistries.ITEMS.getKey(item).getPath();
+                    final String translationKey = BuiltInRegistries.ITEM.getKey(item).getPath();
                     return new EntryReference(item,
                             BookEntry.build(translationKey)
                                     .addPage(new HeadlineTextPage(translationKey))

@@ -8,7 +8,7 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
-import net.minecraftforge.registries.*;
+import net.neoforged.neoforge.registries.*;
 import org.joml.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.systems.particle.*;
@@ -35,11 +35,11 @@ public class SpiritBasedParticleBuilder extends WorldParticleBuilder {
         return createSpirit(new WorldParticleOptions(particle).setBehavior(behavior));
     }
 
-    public static SpiritBasedParticleBuilder createSpirit(DeferredHolder<? extends AbstractLodestoneParticleType<?>> particle) {
+    public static SpiritBasedParticleBuilder createSpirit(DeferredHolder<? extends AbstractLodestoneParticleType<?>, ? extends AbstractLodestoneParticleType<?>> particle) {
         return createSpirit(particle, null);
     }
 
-    public static SpiritBasedParticleBuilder createSpirit(DeferredHolder<? extends AbstractLodestoneParticleType<?>> particle, LodestoneBehaviorComponent behavior) {
+    public static SpiritBasedParticleBuilder createSpirit(DeferredHolder<? extends AbstractLodestoneParticleType<?>, ? extends AbstractLodestoneParticleType<?>> particle, LodestoneBehaviorComponent behavior) {
         return createSpirit(new WorldParticleOptions(particle.get()).setBehavior(behavior));
     }
 

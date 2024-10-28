@@ -1,5 +1,6 @@
 package com.sammy.malum.common.block.blight;
 
+import com.mojang.serialization.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.*;
@@ -14,13 +15,14 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
+import net.neoforged.neoforge.common.*;
 
 import java.util.*;
 import java.util.stream.*;
 
 import static com.sammy.malum.registry.common.block.BlockTagRegistry.*;
 
-public class CalcifiedBlightBlock extends BushBlock implements net.minecraftforge.common.IForgeShearable {
+public class CalcifiedBlightBlock extends BushBlock implements IShearable {
 
     protected static final List<VoxelShape> SHAPES = IntStream.range(0, 4).boxed().map(i -> Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6 + i * 2, 14.0D)).collect(Collectors.toList());
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 0, 3);
@@ -30,9 +32,15 @@ public class CalcifiedBlightBlock extends BushBlock implements net.minecraftforg
     }
 
     @Override
+    protected MapCodec<? extends BushBlock> codec() {
+        return null;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(STAGE);
     }
+
 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {

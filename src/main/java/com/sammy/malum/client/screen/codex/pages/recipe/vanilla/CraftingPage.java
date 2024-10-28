@@ -5,7 +5,7 @@ import com.sammy.malum.client.screen.codex.pages.*;
 import com.sammy.malum.client.screen.codex.screens.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.world.item.*;
-import net.minecraftforge.fml.*;
+import net.neoforged.fml.*;
 
 import java.util.*;
 

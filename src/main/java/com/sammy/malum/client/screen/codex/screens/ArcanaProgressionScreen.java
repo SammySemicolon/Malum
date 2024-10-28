@@ -12,7 +12,7 @@ import com.sammy.malum.common.item.codex.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.client.*;
 import net.minecraft.resources.*;
-import net.minecraftforge.common.*;
+import net.neoforged.neoforge.common.*;
 
 import java.util.*;
 
@@ -31,7 +31,7 @@ public class ArcanaProgressionScreen extends AbstractProgressionCodexScreen {
         super(SoundRegistry.ARCANA_SWEETENER_NORMAL, 1024, 2560);
         minecraft = Minecraft.getInstance();
         setupEntries();
-        MinecraftForge.EVENT_BUS.post(new SetupMalumCodexEntriesEvent());
+        NeoForge.EVENT_BUS.post(new SetupMalumCodexEntriesEvent());
         setupObjects();
     }
 

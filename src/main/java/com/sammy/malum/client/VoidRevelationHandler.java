@@ -9,8 +9,8 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import com.sammy.malum.core.handlers.hiding.HiddenTagHandler;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+import net.neoforged.api.distmarker.*;
 import net.minecraftforge.data.loading.DatagenModLoader;
 
 import java.io.IOException;

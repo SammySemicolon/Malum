@@ -2,8 +2,8 @@ package com.sammy.malum.visual_effects.networked.weeping_well;
 
 import com.sammy.malum.visual_effects.networked.ParticleEffectType;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.helpers.ColorHelper;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.Easing;
@@ -16,7 +16,7 @@ import team.lodestar.lodestone.systems.particle.render_types.LodestoneWorldParti
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.*;
 import net.minecraft.util.*;
-import net.minecraftforge.api.distmarker.*;
+import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.helpers.*;
 
 import team.lodestar.lodestone.systems.easing.*;

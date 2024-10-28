@@ -2,7 +2,7 @@ package com.sammy.malum.registry.client;
 
 import com.mojang.blaze3d.vertex.*;
 import com.sammy.malum.*;
-import net.minecraftforge.api.distmarker.*;
+import net.neoforged.api.distmarker.*;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;

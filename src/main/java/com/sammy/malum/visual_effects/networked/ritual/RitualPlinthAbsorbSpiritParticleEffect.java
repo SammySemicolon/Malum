@@ -7,8 +7,8 @@ import com.sammy.malum.visual_effects.networked.data.NBTEffectData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+
+import net.neoforged.api.distmarker.*;
 
 import java.util.function.Supplier;
 

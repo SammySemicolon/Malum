@@ -7,7 +7,7 @@ import net.minecraft.client.player.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.network.*;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraftforge.api.distmarker.*;
+import net.neoforged.api.distmarker.*;
 import net.minecraftforge.network.*;
 import net.minecraftforge.network.simple.*;
 import team.lodestar.lodestone.systems.network.*;

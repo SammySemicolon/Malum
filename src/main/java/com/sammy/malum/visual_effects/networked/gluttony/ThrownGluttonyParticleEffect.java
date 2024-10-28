@@ -2,7 +2,7 @@ package com.sammy.malum.visual_effects.networked.gluttony;
 
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.*;
-import net.minecraftforge.api.distmarker.*;
+import net.neoforged.api.distmarker.*;
 
 import java.util.function.*;
 

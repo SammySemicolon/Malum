@@ -3,8 +3,7 @@ package com.sammy.malum.visual_effects.networked.altar;
 import com.sammy.malum.common.block.curiosities.spirit_altar.SpiritAltarBlockEntity;
 import com.sammy.malum.visual_effects.SpiritAltarParticleEffects;
 import com.sammy.malum.visual_effects.networked.ParticleEffectType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.*;
 
 import java.util.function.Supplier;
 

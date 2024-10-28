@@ -4,7 +4,7 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.recipe.void_favor.*;
 import net.minecraft.client.player.*;
 import net.minecraft.world.item.*;
-import net.minecraftforge.api.distmarker.*;
+import net.neoforged.api.distmarker.*;
 import net.minecraftforge.event.entity.*;
 import net.minecraftforge.eventbus.api.*;
 import net.minecraftforge.fml.common.*;

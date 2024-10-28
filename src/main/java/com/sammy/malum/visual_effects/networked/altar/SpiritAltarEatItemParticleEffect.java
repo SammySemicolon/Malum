@@ -7,8 +7,7 @@ import com.sammy.malum.visual_effects.networked.ParticleEffectType;
 import com.sammy.malum.visual_effects.networked.data.NBTEffectData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.helpers.BlockHelper;
 
 import java.util.function.Supplier;

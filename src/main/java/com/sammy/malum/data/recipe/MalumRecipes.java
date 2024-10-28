@@ -28,8 +28,8 @@ public class MalumRecipes extends VanillaRecipeProvider {
     protected void buildRecipes(RecipeOutput recipeOutput) {
         vanillaRecipeReplacements.buildRecipes(recipeOutput);
         MalumVanillaRecipes.buildRecipes(recipeOutput);
-        MalumWoodSetRecipes.buildRecipes(recipeOutput);
-        MalumRockSetRecipes.buildRecipes(recipeOutput);
+        MalumWoodSetDatagen.buildRecipes(recipeOutput);
+        MalumRockSetDatagen.buildRecipes(recipeOutput);
 
         ArtificeSpiritInfusionRecipes.buildRecipes(recipeOutput);
         CurioSpiritInfusionRecipes.buildRecipes(recipeOutput);

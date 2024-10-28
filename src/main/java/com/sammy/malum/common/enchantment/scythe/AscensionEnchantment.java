@@ -8,6 +8,7 @@ import com.sammy.malum.registry.common.item.*;
 import net.minecraft.stats.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
+import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
@@ -38,9 +39,10 @@ public class AscensionEnchantment extends Enchantment {
 
     public static void triggerAscension(Level level, Player player, InteractionHand hand, ItemStack scythe) {
         final boolean isEnhanced = !MalumScytheItem.canSweep(player);
+        player.resetFallDistance();
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
-            player.setDeltaMovement(motion.x, player.getJumpPower()*1.25f, motion.z);
+            player.setDeltaMovement(motion.x, player.getJumpPower()*1.5f, motion.z);
             if (player.isSprinting()) {
                 float f = player.getYRot() * 0.017453292F;
                 float x = -Mth.sin(f);
@@ -48,10 +50,10 @@ public class AscensionEnchantment extends Enchantment {
 
                 var newMotion = player.getDeltaMovement();
                 if (isEnhanced) {
-                    newMotion = newMotion.subtract(x * 0.6f, -0.2, z * 0.6f);
+                    newMotion = newMotion.subtract(x * 0.6f, 0, z * 0.6f);
                 }
                 else {
-                    newMotion = newMotion.add(x * 0.75f, -0.2, z * 0.75f);
+                    newMotion = newMotion.add(x * 0.75f, -0.25, z * 0.75f);
                 }
                 player.setDeltaMovement(newMotion);
             }
@@ -74,6 +76,7 @@ public class AscensionEnchantment extends Enchantment {
             if (scythe.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
                 particleEffect.setSpiritType(spiritAffiliatedItem);
             }
+            boolean dealtDamage = false;
             for(Entity target : level.getEntities(player, aabb, t -> canHitEntity(player, t))) {
                 var damageSource = DamageTypeHelper.create(level, DamageTypeRegistry.SCYTHE_SWEEP, player);
                 target.invulnerableTime = 0;
@@ -91,7 +94,11 @@ public class AscensionEnchantment extends Enchantment {
                         }
                     }
                     SoundHelper.playSound(player, sound, 2.0f, RandomHelper.randomBetween(level.getRandom(), 0.75f, 1.25f));
+                    dealtDamage = true;
                 }
+            }
+            if (dealtDamage) {
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.ASCENSION.get(), 80, 0));
             }
             var slashPosition = player.position().add(0, player.getBbHeight() * 0.75, 0);
             var slashDirection = player.getLookAngle().multiply(1, 0, 1);

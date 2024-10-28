@@ -33,6 +33,28 @@ public class IntroductionEntries {
                 .addPage(new TextPage("introduction.3"))
                 .addPage(new TextPage("introduction.4"))
                 .addPage(new TextPage("introduction.5"))
+                .addReference(new EntryReference(TOKEN_OF_GRATITUDE.get(),
+                        BookEntry.build("a_personal_note")
+                                .afterSomeTime()
+                                .addPage(new HeadlineTextPage("a_personal_note", "a_personal_note.1"))
+                                .addReference(new EntryReference(TOKEN_OF_GRATITUDE.get(),
+                                        BookEntry.build("a_personal_note.commendations")
+                                                .addPage(new HeadlineTextPage("a_personal_note.commendations.wiresegal", "a_personal_note.commendations.wiresegal.1"))
+                                                .addPage(new HeadlineTextPage("a_personal_note.commendations.alphalilly", "a_personal_note.commendations.alphalilly.1"))
+                                                .addPage(new HeadlineTextPage("a_personal_note.commendations.pessi_mysterio", "a_personal_note.commendations.pessi_mysterio.1"))
+                                                .addPage(new HeadlineTextPage("a_personal_note.commendations.kultik", "a_personal_note.commendations.kultik.1"))
+                                                .addPage(new HeadlineTextPage("a_personal_note.commendations.coalition_of_magic", "a_personal_note.commendations.coalition_of_magic.1"))
+                                ))
+                                .addReference(new EntryReference(TOKEN_OF_GRATITUDE.get(),
+                                        BookEntry.build("a_personal_note.inspirations")
+                                                .addPage(new HeadlineTextPage("a_personal_note.inspirations.thaumcraft", "a_personal_note.inspirations.thaumcraft.1"))
+                                                .addPage(new HeadlineTextPage("a_personal_note.inspirations.astral_sorcery", "a_personal_note.inspirations.astral_sorcery.1"))
+                                                .addPage(new HeadlineTextPage("a_personal_note.inspirations.mystic_modding", "a_personal_note.inspirations.mystic_modding.1"))
+                                                .addPage(new HeadlineTextPage("a_personal_note.inspirations.eidolon", "a_personal_note.inspirations.eidolon.1"))
+                                ))
+                ))
+
+
         );
 
         screen.addEntry("spirit_crystals", 0, 1, b -> b

@@ -4,8 +4,14 @@
     "malum:stripped_soulwood_log",
     "malum:soulwood",
     "malum:stripped_soulwood",
-    "malum:exposed_soulwood_log",
     "malum:revealed_soulwood_log",
+    "malum:exposed_soulwood_log",
+    "malum:stripped_soulwood_log",
+    "malum:soulwood_log",
+    "malum:stripped_soulwood",
+    "malum:soulwood",
+    "malum:revealed_soulwood_log",
+    "malum:exposed_soulwood_log",
     "malum:blighted_soulwood"
   ]
 }

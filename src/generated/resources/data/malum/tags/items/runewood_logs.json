@@ -4,7 +4,13 @@
     "malum:stripped_runewood_log",
     "malum:runewood",
     "malum:stripped_runewood",
+    "malum:revealed_runewood_log",
     "malum:exposed_runewood_log",
-    "malum:revealed_runewood_log"
+    "malum:stripped_runewood_log",
+    "malum:runewood_log",
+    "malum:stripped_runewood",
+    "malum:runewood",
+    "malum:revealed_runewood_log",
+    "malum:exposed_runewood_log"
   ]
 }

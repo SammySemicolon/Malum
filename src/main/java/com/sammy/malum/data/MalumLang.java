@@ -45,14 +45,15 @@ public class MalumLang extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
-        Set<DeferredHolder<Block, ? extends Block>> blocks = new HashSet<>(BLOCKS.getEntries());
-        Set<DeferredHolder<Item, ? extends Item>> items = new HashSet<>(ITEMS.getEntries());
-        Set<DeferredHolder<SoundEvent, ? extends SoundEvent>> sounds = new HashSet<>(SOUNDS.getEntries());
-//        Set<DeferredHolder<Enchantment, ? extends Enchantment>> enchantments = new HashSet<>(ENCHANTMENTS.getEntries());
-        Set<DeferredHolder<MobEffect, ? extends MobEffect>> effects = new HashSet<>(EFFECTS.getEntries());
-        Set<DeferredHolder<Attribute, ? extends Attribute>> attributes = new HashSet<>(ATTRIBUTES.getEntries());
-        Set<DeferredHolder<EntityType<?>, ? extends EntityType<?>>> entities = new HashSet<>(ENTITY_TYPES.getEntries());
-        List<MalumSpiritType> spirits = new ArrayList<>(SpiritTypeRegistry.SPIRITS.values());
+        var blocks = new HashSet<>(BLOCKS.getEntries());
+        var items = new HashSet<>(ITEMS.getEntries());
+        var sounds = new HashSet<>(SOUNDS.getEntries());
+//        var enchantments = new HashSet<>(ENCHANTMENTS.getEntries());
+        var effects = new HashSet<>(EFFECTS.getEntries());
+        var attributes = new HashSet<>(ATTRIBUTES.getEntries());
+        var entities = new HashSet<>(ENTITY_TYPES.getEntries());
+        var spirits = new ArrayList<>(SpiritTypeRegistry.SPIRITS.values());
+        var crucibleTuningTypes = CrucibleTuning.CrucibleAttributeType.values();
 
         add(DataHelper.take(blocks, BlockRegistry.PRIMORDIAL_SOUP).get(), "The Weeping Well");
         add(DataHelper.take(blocks, BlockRegistry.VOID_CONDUIT).get(), "The Weeping Well");
@@ -60,8 +61,7 @@ public class MalumLang extends LanguageProvider {
         DataHelper.takeAll(blocks, i -> i.get() instanceof WallTorchBlock);
         DataHelper.takeAll(blocks, i -> i.get() instanceof EtherWallTorchBlock);
         DataHelper.takeAll(blocks, i -> i.get() instanceof WallSignBlock);
-        blocks.forEach(b ->
-        {
+        blocks.forEach(b -> {
             String name = b.get().getDescriptionId().replaceFirst("block\\.malum\\.", "");
             name = makeProper(DataHelper.toTitleCase(correctItemName(name), "_"));
             add(b.get().getDescriptionId(), name);
@@ -72,15 +72,11 @@ public class MalumLang extends LanguageProvider {
             add("item.malum." + filled, makeProper(DataHelper.toTitleCase(filled, "_")));
         });
         DataHelper.takeAll(items, i -> i.get() instanceof BlockItem && !(i.get() instanceof ItemNameBlockItem));
-        items.forEach(i ->
-        {
+        items.forEach(i -> {
             String name = i.get().getDescriptionId().replaceFirst("item\\.malum\\.", "");
             name = makeProper(DataHelper.toTitleCase(correctItemName(name), "_"));
             add(i.get().getDescriptionId(), name);
         });
-        add("item.malum.music_disc_arcane_elegy.desc", "Kultik - Arcane Elegy");
-        add("item.malum.music_disc_aesthetica.desc", "Kultik - Aesthetica");
-
 
         sounds.forEach(s -> {
             String name = correctSoundName(s.getId().getPath()).replaceAll("_", " ");
@@ -90,7 +86,7 @@ public class MalumLang extends LanguageProvider {
 
 //        enchantments.forEach(e -> {
 //            String name = DataHelper.toTitleCase(e.getId().getPath(), "_");
-//            add("enchantment.malum." + e.getKey().location().getPath(), name);
+//            add(e.get().getDescriptionId(), name);
 //        });
 
         effects.forEach(e -> {
@@ -110,7 +106,7 @@ public class MalumLang extends LanguageProvider {
 
         spirits.forEach(s -> add(s.getSpiritDescription(), DataHelper.toTitleCase(s.getIdentifier() + "_spirit", "_")));
 
-        for (CrucibleTuning.CrucibleAttributeType value : CrucibleTuning.CrucibleAttributeType.values()) {
+        for (CrucibleTuning.CrucibleAttributeType value : crucibleTuningTypes) {
             if (value.equals(CrucibleTuning.CrucibleAttributeType.NONE)) {
                 continue;
             }
@@ -118,6 +114,7 @@ public class MalumLang extends LanguageProvider {
             String name = DataHelper.toTitleCase(value.toString().toLowerCase(Locale.ROOT), "_");
             add(translation, name);
         }
+
         add("malum.gui.crucible.attribute.weakest_boost", "Weakest Boost");
         add("malum.gui.crucible.attribute.tuning_potency", "Tuning Potency");
 
@@ -170,6 +167,8 @@ public class MalumLang extends LanguageProvider {
             add("malum.gui.ritual.tier." + id, name);
         }
 
+        add("item.malum.music_disc_arcane_elegy.desc", "Kultik - Arcane Elegy");
+        add("item.malum.music_disc_aesthetica.desc", "Kultik - Aesthetica");
 
         add("curios.identifier.brooch", "Brooch");
         add("curios.modifiers.brooch", "When worn:");
@@ -322,7 +321,7 @@ public class MalumLang extends LanguageProvider {
 
         addSimpleEntryHeader("fragment.void.black_crystal", "Scribbled notes", "Incomprehensible");
         addPages("fragment.void.black_crystal",
-                italic("You attempt to read the entry, but the text seems to slide off the eyes, escaping from your mind every time you grasp it. What little fragments stick with you form an impression of something besides these materials being cast into the Well..."));
+            italic("You attempt to read the entry, but the text seems to slide off the eyes, escaping from your mind every time you grasp it. What little fragments stick with you form an impression of something besides these materials being cast into the Well..."));
 
         addSimpleEntryHeader("void.black_crystal", "A Black Crystal", "A mistake, or a boon?");
         addPages("void.black_crystal",
@@ -1063,44 +1062,6 @@ public class MalumLang extends LanguageProvider {
         addSimpleEntryHeader("belt_of_the_magebane", "Belt of the Magebane", "Newfound ruin");
         addPages("belt_of_the_magebane", "The Belt of the Magebane is a simple innovation, but a dangerously effective one. Normally, after being struck by any attack, soul ward will not recover until a long moment after. That moment of downtime has proven itself detrimental far too frequently. But that ends now.",
                 "While worn, the belt provides a substantial bonus to soul ward recovery rate, while also improving capacity slightly. Furthermore, the belt will absorb the arcane essence of any instance of magical damage that strikes its bearer, converting that repurposed energy into immediate recovery of soul ward.");
-
-        addSimpleEntryHeader("a_personal_note", "A Personal Note", "A page from another book");
-        addPages("a_personal_note",
-                "Within the 'Arcana, a page sticks out just barely. As you examine it, the writing seems different than usual- out of this world. The texts inside appear to be a show of gratitude of sorts. The names ring a bell, but not to you.");
-
-        addSimpleEntryHeader("a_personal_note.commendations", "Malum; Commendations", "A Thank You Letter");
-        addHeadline("a_personal_note.commendations.wiresegal", "Wiresegal");
-        addPages("a_personal_note.commendations.wiresegal",
-                "I'm not quite sure how we met, can't remember really. At some point, they offered to help out with Malum- most notably with the Encyclopedia Arcana, but also with a decent few bug fixes and refactors of dated systems. A large majority of the Entries are written by them :3");
-        addHeadline("a_personal_note.commendations.alphalilly", "Alphalilly");
-        addPages("a_personal_note.commendations.alphalilly",
-                "I reached out to them after seeing their work for the Arcana project, the Malum' book background art was made by them per commission. They've done an incredible job with them and I'm very happy to have their work in game :3");
-        addHeadline("a_personal_note.commendations.pessi_mysterio", "Pessi Mysterio");
-        addPages("a_personal_note.commendations.pessi_mysterio",
-                "I remember going on quite a witch hunt to find them, scouring through the internet and asking a bunch of people. They worked on Sound Design for a few mods and so I reached out to them to commission some for Malum. The Spirit Altar, Crucible and Totems are some of their works for this project.");
-        addHeadline("a_personal_note.commendations.kultik", "Kultik");
-        addPages("a_personal_note.commendations.kultik",
-                "Once again, no idea how we got in touch, but they showed quite an interest in Malum and offered to have one of their tracks added to the mod as a music disc. They're responsible for the Aesthetica and Arcane Elegy Music Discs :3");
-        addHeadline("a_personal_note.commendations.coalition_of_magic", "Coalition of Magic");
-        addPages("a_personal_note.commendations.coalition_of_magic",
-                "The Coalition of Magic is a Supporter exclusive server organized by me and Joefoxe, without everyone's voices and support of the mod, it'd be difficult to find motivation to work as much as I can now. Thank you!");
-        addHeadline("a_personal_note.commendations.translation", "Translation");
-        addPages("a_personal_note.commendations.translation",
-                "There's this fella on github who very routinely pushes translations to the mod for the Chinese language, figured they deserve some thanks. They go by ChuijkYahus, so if you're reading this in Chinese it's thanks to them! If you plan to do a complete translation of Malum, let me know- I hope in the future I can replace this page with a list of credits.");
-
-        addSimpleEntryHeader("a_personal_note.inspirations", "Malum; Inspirations", "What brought me here");
-        addHeadline("a_personal_note.inspirations.thaumcraft", "Thaumcraft");
-        addPages("a_personal_note.inspirations.thaumcraft",
-                "By far the biggest inspiration for Malum, I enjoyed the mod immensely when I was first getting into modded minecraft. I only ever tried the 1.12 version though. The way the magic system is designed and the general sense of progression is something I love.");
-        addHeadline("a_personal_note.inspirations.astral_sorcery", "Astral Sorcery");
-        addPages("a_personal_note.inspirations.astral_sorcery",
-                "I love the mod's visual identity and mechanics, anytime it was in a pack I'd make sure to make the most of it. The Path of Exiles is a huge inspiration for some upcoming stuff I wanna add to Malum.");
-        addHeadline("a_personal_note.inspirations.eidolon", "Eidolon");
-        addPages("a_personal_note.inspirations.eidolon",
-                "Eidolon has such a charming atmosphere, when it released I got a little scared about how similar the mod was to my concept of what I want Malum to be, and it really pushed me to innovate. Additionally, the mod's author and I exchange a myriad of cat pictures, it is a charm.");
-        addHeadline("a_personal_note.inspirations.mystic_modding", "Mystic Modding' Mods");
-        addPages("a_personal_note.inspirations.mystic_modding",
-                "Embers and Roots were some of my favourite magic mods I've come across, I found their very approachable nature a really appealing thing for a mod to incorporate.");
 
         addSimpleEntryHeader("the_device", "The Device.", "microwave to recharge");
         addPage("the_device", "even works while bended");

@@ -3,6 +3,7 @@ package com.sammy.malum.data.item;
 import com.sammy.malum.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.common.item.impetus.*;
+import com.sammy.malum.data.recipe.crafting.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.*;
@@ -12,9 +13,9 @@ import net.minecraft.resources.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
-import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.common.data.*;
-import net.neoforged.neoforge.registries.*;
+import net.minecraftforge.common.*;
+import net.minecraftforge.common.data.*;
+import net.minecraftforge.registries.*;
 import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.systems.block.*;
 import team.lodestar.lodestone.systems.datagen.*;
@@ -38,6 +39,9 @@ public class MalumItemTags extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        MalumWoodSetDatagen.addTags(this);
+        MalumRockSetDatagen.addTags(this);
+
         copy(BlockTags.PLANKS, ItemTags.PLANKS);
         copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
         copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
@@ -59,81 +63,25 @@ public class MalumItemTags extends ItemTagsProvider {
         copy(Tags.Blocks.ORES, Tags.Items.ORES);
         copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
 
-        tag(ItemTagRegistry.RUNEWOOD_LOGS).add(RUNEWOOD_LOG.get(), STRIPPED_RUNEWOOD_LOG.get(), RUNEWOOD.get(), STRIPPED_RUNEWOOD.get(), EXPOSED_RUNEWOOD_LOG.get(), REVEALED_RUNEWOOD_LOG.get());
-        tag(ItemTagRegistry.RUNEWOOD_BOARD_INGREDIENT).add(RUNEWOOD_LOG.get(), RUNEWOOD.get());
-        tag(ItemTagRegistry.RUNEWOOD_PLANKS).add(
-                RUNEWOOD_BOARDS.get(), VERTICAL_RUNEWOOD_BOARDS.get(),
-                RUNEWOOD_PLANKS.get(), RUSTIC_RUNEWOOD_PLANKS.get(), VERTICAL_RUNEWOOD_PLANKS.get(),
-                VERTICAL_RUSTIC_RUNEWOOD_PLANKS.get(), RUNEWOOD_TILES.get(), RUSTIC_RUNEWOOD_TILES.get()
-        );
-        tag(ItemTagRegistry.RUNEWOOD_SLABS).add(
-                RUNEWOOD_BOARDS_SLAB.get(), VERTICAL_RUNEWOOD_BOARDS_SLAB.get(),
-                RUNEWOOD_PLANKS_SLAB.get(), RUSTIC_RUNEWOOD_PLANKS_SLAB.get(), VERTICAL_RUNEWOOD_PLANKS_SLAB.get(),
-                VERTICAL_RUSTIC_RUNEWOOD_PLANKS_SLAB.get(), RUNEWOOD_TILES_SLAB.get(), RUSTIC_RUNEWOOD_TILES_SLAB.get()
-        );
-        tag(ItemTagRegistry.RUNEWOOD_STAIRS).add(
-                RUNEWOOD_BOARDS_STAIRS.get(), VERTICAL_RUNEWOOD_BOARDS_STAIRS.get(),
-                RUNEWOOD_PLANKS_STAIRS.get(), RUSTIC_RUNEWOOD_PLANKS_STAIRS.get(), VERTICAL_RUNEWOOD_PLANKS_STAIRS.get(),
-                VERTICAL_RUSTIC_RUNEWOOD_PLANKS_STAIRS.get(), RUNEWOOD_TILES_STAIRS.get(), RUSTIC_RUNEWOOD_TILES_STAIRS.get()
-        );
-
-        tag(ItemTagRegistry.SOULWOOD_LOGS).add(SOULWOOD_LOG.get(), STRIPPED_SOULWOOD_LOG.get(), SOULWOOD.get(), STRIPPED_SOULWOOD.get(), EXPOSED_SOULWOOD_LOG.get(), REVEALED_SOULWOOD_LOG.get(), BLIGHTED_SOULWOOD.get());
-        tag(ItemTagRegistry.SOULWOOD_BOARD_INGREDIENT).add(SOULWOOD_LOG.get(), SOULWOOD.get());
-        tag(ItemTagRegistry.SOULWOOD_PLANKS).add(
-                SOULWOOD_BOARDS.get(), VERTICAL_SOULWOOD_BOARDS.get(),
-                SOULWOOD_PLANKS.get(), RUSTIC_SOULWOOD_PLANKS.get(), VERTICAL_SOULWOOD_PLANKS.get(),
-                VERTICAL_RUSTIC_SOULWOOD_PLANKS.get(), SOULWOOD_TILES.get(), RUSTIC_SOULWOOD_TILES.get()
-        );
-        tag(ItemTagRegistry.SOULWOOD_SLABS).add(
-                SOULWOOD_BOARDS_SLAB.get(), VERTICAL_SOULWOOD_BOARDS_SLAB.get(),
-                SOULWOOD_PLANKS_SLAB.get(), RUSTIC_SOULWOOD_PLANKS_SLAB.get(), VERTICAL_SOULWOOD_PLANKS_SLAB.get(),
-                VERTICAL_RUSTIC_SOULWOOD_PLANKS_SLAB.get(), SOULWOOD_TILES_SLAB.get(), RUSTIC_SOULWOOD_TILES_SLAB.get()
-        );
-        tag(ItemTagRegistry.SOULWOOD_STAIRS).add(
-                SOULWOOD_BOARDS_STAIRS.get(), VERTICAL_SOULWOOD_BOARDS_STAIRS.get(),
-                SOULWOOD_PLANKS_STAIRS.get(), RUSTIC_SOULWOOD_PLANKS_STAIRS.get(), VERTICAL_SOULWOOD_PLANKS_STAIRS.get(),
-                VERTICAL_RUSTIC_SOULWOOD_PLANKS_STAIRS.get(), SOULWOOD_TILES_STAIRS.get(), RUSTIC_SOULWOOD_TILES_STAIRS.get()
-        );
-
-        safeCopy(BlockTagRegistry.TAINTED_ROCK, ItemTagRegistry.TAINTED_ROCK);
-        safeCopy(BlockTagRegistry.TAINTED_BLOCKS, ItemTagRegistry.TAINTED_BLOCKS);
-        safeCopy(BlockTagRegistry.TAINTED_SLABS, ItemTagRegistry.TAINTED_SLABS);
-        safeCopy(BlockTagRegistry.TAINTED_STAIRS, ItemTagRegistry.TAINTED_STAIRS);
-        safeCopy(BlockTagRegistry.TAINTED_WALLS, ItemTagRegistry.TAINTED_WALLS);
-        safeCopy(BlockTagRegistry.TAINTED_BLOCKS, ItemTagRegistry.TAINTED_BLOCKS);
-
-        safeCopy(BlockTagRegistry.TWISTED_ROCK, ItemTagRegistry.TWISTED_ROCK);
-        safeCopy(BlockTagRegistry.TWISTED_BLOCKS, ItemTagRegistry.TWISTED_BLOCKS);
-        safeCopy(BlockTagRegistry.TWISTED_SLABS, ItemTagRegistry.TWISTED_SLABS);
-        safeCopy(BlockTagRegistry.TWISTED_STAIRS, ItemTagRegistry.TWISTED_STAIRS);
-        safeCopy(BlockTagRegistry.TWISTED_WALLS, ItemTagRegistry.TWISTED_WALLS);
-        safeCopy(BlockTagRegistry.TWISTED_BLOCKS, ItemTagRegistry.TWISTED_BLOCKS);
-
-        tag(Tags.Items.NUGGETS).add(COPPER_NUGGET.get(), HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get());
-        tag(Tags.Items.INGOTS).add(SOUL_STAINED_STEEL_INGOT.get(), HALLOWED_GOLD_INGOT.get());
-        tag(Tags.Items.GEMS).add(PROCESSED_SOULSTONE.get(), NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), CLUSTER_OF_BRILLIANCE.get());
-        tag(Tags.Items.GEMS_QUARTZ).add(NATURAL_QUARTZ.get());
-        tag(Tags.Items.ORES_QUARTZ).add(NATURAL_QUARTZ_ORE.get(), DEEPSLATE_QUARTZ_ORE.get());
-        tag(Tags.Items.SLIME_BALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
-        tag(NUGGETS_COPPER).add(COPPER_NUGGET.get());
-
+        tag(Tags.Items.GEMS).add(PROCESSED_SOULSTONE.get(), BLAZING_QUARTZ.get());
         tag(ItemTags.LOGS).addTag(ItemTagRegistry.RUNEWOOD_LOGS).addTag(ItemTagRegistry.SOULWOOD_LOGS);
         tag(ItemTags.LOGS_THAT_BURN).addTag(ItemTagRegistry.RUNEWOOD_LOGS).addTag(ItemTagRegistry.SOULWOOD_LOGS);
+        tag(Tags.Items.SLIMEBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
+        tag(Tags.Items.GEMS_QUARTZ).add(NATURAL_QUARTZ.get());
+        tag(Tags.Items.ORES_QUARTZ).add(NATURAL_QUARTZ_ORE.get(), DEEPSLATE_QUARTZ_ORE.get());
 
-        tag(ItemTagRegistry.ARCANE_ELEGY_COMPONENTS).addTag(ItemTags.CREEPER_DROP_MUSIC_DISCS);
+        tag(ItemTags.MUSIC_DISCS).add(ARCANE_ELEGY.get(), AESTHETICA.get());
+        tag(ItemTagRegistry.ARCANE_ELEGY_COMPONENTS).addTag(ItemTags.MUSIC_DISCS).remove(ARCANE_ELEGY.get(), AESTHETICA.get());
 
         tag(ItemTagRegistry.SAPBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
         tag(ItemTagRegistry.GROSS_FOODS).add(Items.ROTTEN_FLESH, ROTTING_ESSENCE.get(), CONCENTRATED_GLUTTONY.get());
 
-        ITEMS.getEntries().stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::get).forEach(i -> {
+        ITEMS.getEntries().stream().filter(i -> i.get() instanceof NodeItem).map(RegistryObject::get).forEach(i -> {
             tag(ItemTagRegistry.METAL_NODES).add(i);
         });
         tag(ItemTagRegistry.PROSPECTORS_TREASURE)
                 .addTags(Tags.Items.ORES, Tags.Items.STORAGE_BLOCKS, Tags.Items.INGOTS, Tags.Items.NUGGETS, Tags.Items.GEMS, Tags.Items.RAW_MATERIALS, ItemTags.COALS, ItemTagRegistry.METAL_NODES)
-                .addOptional(ResourceLocation.fromNamespaceAndPath("tetra", "geode"));
-
-        tag(ItemTagRegistry.KNIVES).add(SOUL_STAINED_STEEL_KNIFE.get());
-        tag(ItemTagRegistry.KNIVES_FD).add(SOUL_STAINED_STEEL_KNIFE.get());
+                .addOptional(new ResourceLocation("tetra", "geode"));
 
         tag(ItemTagRegistry.ASPECTED_SPIRITS).add(
                 SACRED_SPIRIT.get(), WICKED_SPIRIT.get(), ARCANE_SPIRIT.get(), ELDRITCH_SPIRIT.get(),
@@ -153,6 +101,15 @@ public class MalumItemTags extends ItemTagsProvider {
                 .add(TYRVING.get(), WEIGHT_OF_WORLDS.get())
                 //soul stained steel gear
                 .add(SOUL_STAINED_STEEL_AXE.get(), SOUL_STAINED_STEEL_PICKAXE.get(), SOUL_STAINED_STEEL_SHOVEL.get(), SOUL_STAINED_STEEL_SWORD.get(), SOUL_STAINED_STEEL_HOE.get(), SOUL_STAINED_STEEL_KNIFE.get());
+
+        tag(Tags.Items.NUGGETS).add(COPPER_NUGGET.get(), HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get());
+        tag(Tags.Items.GEMS).add(NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), CLUSTER_OF_BRILLIANCE.get());
+        tag(Tags.Items.INGOTS).add(SOUL_STAINED_STEEL_INGOT.get(), HALLOWED_GOLD_INGOT.get());
+
+        tag(ItemTagRegistry.KNIVES).add(SOUL_STAINED_STEEL_KNIFE.get());
+        tag(ItemTagRegistry.KNIVES_FD).add(SOUL_STAINED_STEEL_KNIFE.get());
+
+        tag(NUGGETS_COPPER).add(COPPER_NUGGET.get());
 
         tag(ItemTagRegistry.HIDDEN_ALWAYS).add(THE_DEVICE.get(), THE_VESSEL.get());
 
@@ -226,6 +183,15 @@ public class MalumItemTags extends ItemTagsProvider {
             }
         }
         tag(ItemTagRegistry.CHARM).add(TOPHAT.get(), TOKEN_OF_GRATITUDE.get());
+    }
+
+    @Override
+    public IntrinsicTagAppender<Item> tag(TagKey<Item> pTag) {
+        return super.tag(pTag);
+    }
+
+    public void safeCopy(TagKey<Item> itemTag) {
+        safeCopy(BlockRegistry.BLOCKS, TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), itemTag.location()), itemTag);
     }
 
     public void safeCopy(TagKey<Block> blockTag, TagKey<Item> itemTag) {

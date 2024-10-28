@@ -29,19 +29,15 @@ public class WeightOfWorldsItem extends LodestoneAxeItem implements IEventRespon
         if (level.isClientSide()) {
             return;
         }
-        if (attacker != null) {
-            if (attacker instanceof Player) {
-                ParticleHelper.spawnVerticalSlashParticle(ParticleEffectTypeRegistry.SCYTHE_SLASH, attacker);
-            }
-            level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.WEIGHT_OF_WORLDS_SLASH.get(), attacker.getSoundSource(), 1, 0.5f);
-            final var effect = MobEffectRegistry.GRIM_CERTAINTY;
-            if (attacker.hasEffect(effect) || level.random.nextFloat() < 0.25f) {
-                event.newDamage = event.getNewDamage()*2;
-                level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.MALIGNANT_METAL_RESONATES.get(), attacker.getSoundSource(), 2, 0.5f);
-                level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.MALIGNANT_METAL_RESONATES.get(), attacker.getSoundSource(), 2, 1.5f);
-                level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.DRAINING_MOTIF.get(), attacker.getSoundSource(), 2, 0.5f);
-                attacker.removeEffect(effect);
-            }
+        var particleEffectType = ParticleEffectTypeRegistry.SCYTHE_SLASH;
+        var effect = MobEffectRegistry.GRIM_CERTAINTY;
+        if (attacker.hasEffect(effect) || level.random.nextFloat() < 0.25f) {
+            event.setAmount(event.getAmount() * 2);
+            SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 2f, 0.75f);
+            SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 3f, 1.25f);
+            SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 3f, 1.75f);
+            particleEffectType = ParticleEffectTypeRegistry.WEIGHT_OF_WORLDS_CRIT;
+            attacker.removeEffect(effect);
         }
         ParticleHelper.createSlashingEffect(particleEffectType)
                 .setVertical()

@@ -693,7 +693,6 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> RING_OF_THE_DEMOLITIONIST = register("ring_of_the_demolitionist", GEAR_PROPERTIES(), CurioDemolitionistRing::new);
 
     public static final DeferredHolder<Item, Item> NECKLACE_OF_THE_MYSTIC_MIRROR = register("necklace_of_the_mystic_mirror", GEAR_PROPERTIES(), CurioMirrorNecklace::new);
-    public static final DeferredHolder<Item, Item> NECKLACE_OF_TIDAL_AFFINITY = register("necklace_of_tidal_affinity", GEAR_PROPERTIES(), CurioWaterNecklace::new);
     public static final DeferredHolder<Item, Item> NECKLACE_OF_THE_NARROW_EDGE = register("necklace_of_the_narrow_edge", GEAR_PROPERTIES(), CurioNarrowNecklace::new);
     public static final DeferredHolder<Item, Item> NECKLACE_OF_BLISSFUL_HARMONY = register("necklace_of_blissful_harmony", GEAR_PROPERTIES(), CurioHarmonyNecklace::new);
 

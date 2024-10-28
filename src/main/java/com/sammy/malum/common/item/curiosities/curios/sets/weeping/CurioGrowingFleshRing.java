@@ -12,7 +12,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import team.lodestar.lodestone.helpers.EntityHelper;
+import team.lodestar.lodestone.helpers.*;
 
 import java.util.function.Consumer;
 
@@ -37,6 +37,6 @@ public class CurioGrowingFleshRing extends MalumCurioItem implements IVoidItem, 
             EntityHelper.extendEffect(effect, collector, addedDuration, 72000);
             EntityHelper.amplifyEffect(effect, collector, 1, 19);
         }
-        collector.playSound(SoundRegistry.FLESH_RING_ABSORBS, 0.3f, RandomHelper.randomBetween(collector.getRandom(), 1.5f, 2f));
+        collector.playSound(SoundRegistry.FLESH_RING_ABSORBS.get(), 0.3f, RandomHelper.randomBetween(collector.getRandom(), 1.5f, 2f));
     }
 }

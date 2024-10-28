@@ -2,11 +2,9 @@ package com.sammy.malum.common.item.curiosities.curios.sets.alchemical;
 
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
-import com.sammy.malum.registry.common.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
-import net.minecraftforge.registries.*;
 import team.lodestar.lodestone.helpers.*;
 
 import java.util.function.*;
@@ -25,8 +23,8 @@ public class CurioAlchemicalRing extends MalumCurioItem implements IMalumEventRe
     @Override
     public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
         for (MobEffectInstance instance : collector.getActiveEffectsMap().values()) {
-            var e = instance.getEffect();
-            int durationChange = (int) ((e.isBeneficial() ? 60 : 120) * arcaneResonance);
+            var e = instance.getEffect().value();
+            int durationChange = (int) (60 * arcaneResonance);
             if (e.isBeneficial()) {
                 EntityHelper.extendEffect(instance, collector, durationChange, 1200);
                 continue;

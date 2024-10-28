@@ -19,13 +19,10 @@ import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
-import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.item.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
@@ -97,7 +94,7 @@ public class SpiritHarvestHandler {
             e.attackerForSouls = data.killerUUID;
         });
         entity.setNeverPickUp();
-        entity.age = entity.lifespan - 20;
+        entity.age = entity.lifespan - 20; //TODO: AT this fella
         entity.setNoGravity(true);
         entity.setDeltaMovement(entity.getDeltaMovement().multiply(1, 0.5, 1));
     }
@@ -130,7 +127,7 @@ public class SpiritHarvestHandler {
 
     public static void pickupSpirit(LivingEntity collector, ItemStack stack) {
         if (collector instanceof Player player) {
-            AttributeInstance instance = player.getAttribute(AttributeRegistry.ARCANE_RESONANCE);
+            var instance = player.getAttribute(AttributeRegistry.ARCANE_RESONANCE);
             ItemHelper.getEventResponders(collector).forEach(s -> {
                 if (s.getItem() instanceof IMalumEventResponderItem eventItem) {
                     eventItem.pickupSpirit(collector, instance != null ? instance.getValue() : 0);

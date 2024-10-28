@@ -6,7 +6,6 @@ import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
-import net.minecraftforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
 
 public class EdgeOfDeliveranceItem extends MalumScytheItem {

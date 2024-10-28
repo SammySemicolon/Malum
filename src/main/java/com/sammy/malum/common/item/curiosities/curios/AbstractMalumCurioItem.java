@@ -2,8 +2,10 @@ package com.sammy.malum.common.item.curiosities.curios;
 
 import com.google.common.collect.*;
 import com.sammy.malum.registry.common.*;
-import net.minecraft.core.Holder;
+import com.sammy.malum.registry.common.item.*;
+import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.*;
@@ -56,16 +58,6 @@ public abstract class AbstractMalumCurioItem extends Item implements ICurioItem 
         final LivingEntity livingEntity = slotContext.entity();
         livingEntity.level().playSound(null, livingEntity.blockPosition(), type.sound.get(), SoundSource.PLAYERS, 1.0f, RandomHelper.randomBetween(livingEntity.getRandom(), 0.9f, 1.1f));
     }
-
-    @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        ItemEnchantments list = book.get(DataComponents.ENCHANTMENTS);
-        if (list.size() == 1 && list.getLevel(Enchantments.BINDING_CURSE)) {
-            return true;
-        }
-        return super.isBookEnchantable(stack, book);
-    }
-
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {

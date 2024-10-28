@@ -66,7 +66,7 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
     }
 
     public SoundEvent getScytheSound(boolean canSweep) {
-        return canSweep ? SoundRegistry.SCYTHE_SWEEP : SoundRegistry.SCYTHE_CUT;
+        return canSweep ? SoundRegistry.SCYTHE_SWEEP.get() : SoundRegistry.SCYTHE_CUT.get();
     }
 
     @Override

@@ -13,11 +13,12 @@ import com.sammy.malum.client.model.cosmetic.risky.CommandoArmorModel;
 import com.sammy.malum.client.model.cosmetic.risky.ExecutionerArmorModel;
 import com.sammy.malum.client.model.cosmetic.ultrakill.UltrakillMachineArmorModel;
 
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.*;
+import net.neoforged.bus.api.*;
+import net.neoforged.fml.common.*;
+import net.neoforged.neoforge.client.event.*;
 
-@Mod.EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ModelRegistry {
 
     public static SoulHunterArmorModel SOUL_HUNTER_ARMOR;

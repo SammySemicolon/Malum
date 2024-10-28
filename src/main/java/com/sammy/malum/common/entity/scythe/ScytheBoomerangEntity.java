@@ -27,9 +27,9 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.getEntityData().define(DATA_ENHANCED, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_ENHANCED, false);
     }
 
     @Override

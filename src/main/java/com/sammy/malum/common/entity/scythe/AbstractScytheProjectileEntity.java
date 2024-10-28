@@ -101,11 +101,7 @@ public abstract class AbstractScytheProjectileEntity extends ThrowableItemProjec
             boolean success = target.hurt(source, damage);
             if (success && target instanceof LivingEntity livingentity) {
                 ItemStack scythe = getItem();
-                ItemHelper.applyEnchantments(scytheOwner, livingentity, scythe);
-                int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_ASPECT, scythe);
-                if (i > 0) {
-                    livingentity.setSecondsOnFire(i * 4);
-                }
+                ItemHelper.applyEnchantments(scytheOwner, livingentity, source, scythe);
                 if (magicDamage > 0) {
                     if (!livingentity.isDeadOrDying()) {
                         livingentity.invulnerableTime = 0;
@@ -183,7 +179,7 @@ public abstract class AbstractScytheProjectileEntity extends ThrowableItemProjec
     }
 
     @Override
-    public boolean ignoreExplosion() {
+    public boolean ignoreExplosion(Explosion explosion) {
         return true;
     }
 }

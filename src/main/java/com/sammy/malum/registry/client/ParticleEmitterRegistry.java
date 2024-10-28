@@ -5,16 +5,16 @@ import com.sammy.malum.common.recipe.void_favor.*;
 import net.minecraft.client.player.*;
 import net.minecraft.world.item.*;
 import net.neoforged.api.distmarker.*;
-import net.minecraftforge.event.entity.*;
-import net.minecraftforge.eventbus.api.*;
-import net.minecraftforge.fml.common.*;
+import net.neoforged.bus.api.*;
+import net.neoforged.fml.common.*;
+import net.neoforged.neoforge.event.entity.*;
 import team.lodestar.lodestone.handlers.screenparticle.*;
 
 import java.util.*;
 
 import static com.sammy.malum.visual_effects.ScreenParticleEffects.VoidTransmutableParticleEffect.*;
 
-@Mod.EventBusSubscriber(modid= MalumMod.MALUM, bus= Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@EventBusSubscriber(modid= MalumMod.MALUM, bus= EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class ParticleEmitterRegistry {
 
     public static boolean registeredVoidParticleEmitters = false;

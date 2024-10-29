@@ -24,10 +24,10 @@ import com.sammy.malum.common.block.storage.jar.*;
 import com.sammy.malum.common.block.storage.pedestal.*;
 import com.sammy.malum.common.block.storage.stand.*;
 import com.sammy.malum.common.block.the_device.*;
-import com.sammy.malum.common.worldgen.tree.grower.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import com.sammy.malum.registry.common.worldgen.*;
 import net.minecraft.client.color.block.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.*;
@@ -237,11 +237,11 @@ public class BlockRegistry {
     //endregion
 
     //region runewood
-    public static final DeferredHolder<Block, Block> RUNEWOOD_SAPLING = BLOCKS.register("runewood_sapling", () -> new MalumSaplingBlock(new RunewoodTreeGrower(), MalumBlockProperties.RUNEWOOD_SAPLING()));
+    public static final DeferredHolder<Block, Block> RUNEWOOD_SAPLING = BLOCKS.register("runewood_sapling", () -> new MalumSaplingBlock(TreeGrowerRegistry.RUNEWOOD, MalumBlockProperties.RUNEWOOD_SAPLING()));
     public static final DeferredHolder<Block, Block> RUNEWOOD_LEAVES = BLOCKS.register("runewood_leaves", () -> new MalumLeavesBlock(MalumBlockProperties.RUNEWOOD_LEAVES(), MalumBlockProperties.RUNEWOOD_LEAVES_ORANGE, MalumBlockProperties.RUNEWOOD_LEAVES_YELLOW));
     public static final DeferredHolder<Block, Block> HANGING_RUNEWOOD_LEAVES = BLOCKS.register("hanging_runewood_leaves", () -> new MalumHangingLeavesBlock(MalumBlockProperties.HANGING_RUNEWOOD_LEAVES().setCutoutRenderType().noOcclusion().noCollission(), MalumBlockProperties.RUNEWOOD_LEAVES_ORANGE, MalumBlockProperties.RUNEWOOD_LEAVES_YELLOW));
 
-    public static final DeferredHolder<Block, Block> AZURE_RUNEWOOD_SAPLING = BLOCKS.register("azure_runewood_sapling", () -> new MalumSaplingBlock(new AzureRunewoodTreeGrower(), MalumBlockProperties.RUNEWOOD_SAPLING()));
+    public static final DeferredHolder<Block, Block> AZURE_RUNEWOOD_SAPLING = BLOCKS.register("azure_runewood_sapling", () -> new MalumSaplingBlock(TreeGrowerRegistry.AZURE_RUNEWOOD, MalumBlockProperties.RUNEWOOD_SAPLING()));
     public static final DeferredHolder<Block, Block> AZURE_RUNEWOOD_LEAVES = BLOCKS.register("azure_runewood_leaves", () -> new MalumLeavesBlock(MalumBlockProperties.RUNEWOOD_LEAVES(), MalumBlockProperties.AZURE_RUNEWOOD_LEAVES_BLUE, MalumBlockProperties.AZURE_RUNEWOOD_LEAVES_CYAN));
     public static final DeferredHolder<Block, Block> HANGING_AZURE_RUNEWOOD_LEAVES = BLOCKS.register("hanging_azure_runewood_leaves", () -> new MalumHangingLeavesBlock(MalumBlockProperties.HANGING_RUNEWOOD_LEAVES().setCutoutRenderType().noOcclusion().noCollission(), MalumBlockProperties.AZURE_RUNEWOOD_LEAVES_BLUE, MalumBlockProperties.AZURE_RUNEWOOD_LEAVES_CYAN));
 
@@ -310,7 +310,7 @@ public class BlockRegistry {
     //endregion
 
     //region soulwood
-    public static final DeferredHolder<Block, Block> SOULWOOD_GROWTH = BLOCKS.register("soulwood_growth", () -> new SoulwoodGrowthBlock(new SoulwoodTreeGrower(), MalumBlockProperties.BLIGHTED_PLANTS().setCutoutRenderType().randomTicks()));
+    public static final DeferredHolder<Block, Block> SOULWOOD_GROWTH = BLOCKS.register("soulwood_growth", () -> new SoulwoodGrowthBlock(TreeGrowerRegistry.SOULWOOD, MalumBlockProperties.BLIGHTED_PLANTS().setCutoutRenderType().randomTicks()));
     public static final DeferredHolder<Block, Block> SOULWOOD_LEAVES = BLOCKS.register("soulwood_leaves", () -> new MalumLeavesBlock(MalumBlockProperties.SOULWOOD_LEAVES().setCutoutRenderType(), new Color(213, 8, 63), new Color(255, 61, 243)));
     public static final DeferredHolder<Block, Block> BUDDING_SOULWOOD_LEAVES = BLOCKS.register("budding_soulwood_leaves", () -> new MalumLeavesBlock(MalumBlockProperties.SOULWOOD_LEAVES().setCutoutRenderType(), new Color(213, 8, 63), new Color(255, 61, 243)));
     public static final DeferredHolder<Block, Block> HANGING_SOULWOOD_LEAVES = BLOCKS.register("hanging_soulwood_leaves", () -> new MalumHangingLeavesBlock(MalumBlockProperties.HANGING_SOULWOOD_LEAVES().setCutoutRenderType().noOcclusion().noCollission(), new Color(213, 8, 63), new Color(255, 61, 243)));

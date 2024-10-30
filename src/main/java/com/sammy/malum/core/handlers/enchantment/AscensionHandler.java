@@ -1,10 +1,17 @@
-package com.sammy.malum.common.enchantment.scythe;
+package com.sammy.malum.core.handlers.enchantment;
 
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
+import com.sammy.malum.common.item.curiosities.weapons.staff.*;
+import com.sammy.malum.common.packets.*;
+import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.*;
+import net.minecraft.resources.*;
+import net.minecraft.server.level.*;
 import net.minecraft.stats.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -16,33 +23,27 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.minecraftforge.common.*;
+import net.neoforged.bus.api.*;
+import net.neoforged.fml.common.*;
+import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.network.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
+import team.lodestar.lodestone.registry.common.tag.*;
 
 import java.util.*;
 
-public class AscensionEnchantment extends Enchantment {
-    public AscensionEnchantment() {
-        super(Rarity.UNCOMMON, EnchantmentRegistry.SCYTHE_ONLY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
-    }
+import static com.sammy.malum.registry.common.item.EnchantmentRegistry.getEnchantmentLevel;
 
-    @Override
-    public int getMaxLevel() {
-        return 3;
-    }
-
-    @Override
-    protected boolean checkCompatibility(Enchantment pOther) {
-        return !pOther.equals(EnchantmentRegistry.REBOUND.get()) && super.checkCompatibility(pOther);
-    }
+public class AscensionHandler {
 
     public static void triggerAscension(Level level, Player player, InteractionHand hand, ItemStack scythe) {
         final boolean isEnhanced = !MalumScytheItem.canSweep(player);
         player.resetFallDistance();
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
-            player.setDeltaMovement(motion.x, player.getJumpPower()*1.5f, motion.z);
+            player.setDeltaMovement(motion.x, player.getJumpPower() * 1.5f, motion.z);
             if (player.isSprinting()) {
                 float f = player.getYRot() * 0.017453292F;
                 float x = -Mth.sin(f);
@@ -51,18 +52,16 @@ public class AscensionEnchantment extends Enchantment {
                 var newMotion = player.getDeltaMovement();
                 if (isEnhanced) {
                     newMotion = newMotion.subtract(x * 0.6f, 0, z * 0.6f);
-                }
-                else {
+                } else {
                     newMotion = newMotion.add(x * 0.75f, -0.25, z * 0.75f);
                 }
                 player.setDeltaMovement(newMotion);
             }
             player.hasImpulse = true;
-            ForgeHooks.onLivingJump(player);
-        }
-        else {
+            CommonHooks.onLivingJump(player);
+        } else {
             float baseDamage = (float) player.getAttributes().getValue(Attributes.ATTACK_DAMAGE);
-            float magicDamage = (float) player.getAttributes().getValue(LodestoneAttributeRegistry.MAGIC_DAMAGE.get());
+            float magicDamage = (float) player.getAttributes().getValue(LodestoneAttributes.MAGIC_DAMAGE);
             var aabb = player.getBoundingBox().inflate(4, 1f, 4);
             var sound = SoundRegistry.SCYTHE_SWEEP.get();
             var particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_SPIN).mirrorRandomly(level.getRandom());
@@ -77,16 +76,12 @@ public class AscensionEnchantment extends Enchantment {
                 particleEffect.setSpiritType(spiritAffiliatedItem);
             }
             boolean dealtDamage = false;
-            for(Entity target : level.getEntities(player, aabb, t -> canHitEntity(player, t))) {
+            for (Entity target : level.getEntities(player, aabb, t -> ascensionCanHitEntity(player, t))) {
                 var damageSource = DamageTypeHelper.create(level, DamageTypeRegistry.SCYTHE_SWEEP, player);
                 target.invulnerableTime = 0;
                 boolean success = target.hurt(damageSource, baseDamage);
                 if (success && target instanceof LivingEntity livingentity) {
                     ItemHelper.applyEnchantments(player, livingentity, scythe);
-                    int i = scythe.getEnchantmentLevel(Enchantments.FIRE_ASPECT);
-                    if (i > 0) {
-                        livingentity.setSecondsOnFire(i * 4);
-                    }
                     if (magicDamage > 0) {
                         if (!livingentity.isDeadOrDying()) {
                             livingentity.invulnerableTime = 0;
@@ -98,7 +93,7 @@ public class AscensionEnchantment extends Enchantment {
                 }
             }
             if (dealtDamage) {
-                player.addEffect(new MobEffectInstance(MobEffectRegistry.ASCENSION.get(), 80, 0));
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.ASCENSION, 80, 0));
             }
             var slashPosition = player.position().add(0, player.getBbHeight() * 0.75, 0);
             var slashDirection = player.getLookAngle().multiply(1, 0, 1);
@@ -109,7 +104,7 @@ public class AscensionEnchantment extends Enchantment {
             SoundHelper.playSound(player, SoundRegistry.SCYTHE_ASCENSION.get(), 2f, RandomHelper.randomBetween(level.getRandom(), 1.25f, 1.5f));
         }
         if (!player.isCreative()) {
-            int enchantmentLevel = scythe.getEnchantmentLevel(EnchantmentRegistry.ASCENSION.get());
+            int enchantmentLevel = getEnchantmentLevel(level, EnchantmentRegistry.ASCENSION, scythe);
             if (enchantmentLevel < 6) {
                 player.getCooldowns().addCooldown(scythe.getItem(), 150 - 25 * (enchantmentLevel - 1));
             }
@@ -118,7 +113,7 @@ public class AscensionEnchantment extends Enchantment {
         player.awardStat(Stats.ITEM_USED.get(scythe.getItem()));
     }
 
-    protected static boolean canHitEntity(Player attacker, Entity pTarget) {
+    protected static boolean ascensionCanHitEntity(Player attacker, Entity pTarget) {
         if (!pTarget.canBeHitByProjectile()) {
             return false;
         } else {

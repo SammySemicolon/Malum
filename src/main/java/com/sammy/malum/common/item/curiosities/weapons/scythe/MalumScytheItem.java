@@ -1,7 +1,7 @@
 package com.sammy.malum.common.item.curiosities.weapons.scythe;
 
-import com.sammy.malum.common.enchantment.scythe.*;
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
@@ -28,12 +28,12 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         var stack = player.getItemInHand(hand);
-        if (stack.getEnchantmentLevel(level.holderLookup(Registries.ENCHANTMENT).getOrThrow(EnchantmentRegistry.REBOUND)) > 0) {
-            ReboundEnchantment.throwScythe(level, player, hand, stack);
+        if (EnchantmentRegistry.getEnchantmentLevel(level, EnchantmentRegistry.REBOUND, stack) > 0) {
+            ReboundHandler.throwScythe(level, player, hand, stack);
             return InteractionResultHolder.success(stack);
         }
-        if (stack.getEnchantmentLevel(level.holderLookup(Registries.ENCHANTMENT).getOrThrow(EnchantmentRegistry.ASCENSION)) > 0) {
-            AscensionEnchantment.triggerAscension(level, player, hand, stack);
+        if (EnchantmentRegistry.getEnchantmentLevel(level, EnchantmentRegistry.ASCENSION, stack) > 0) {
+            AscensionHandler.triggerAscension(level, player, hand, stack);
             return InteractionResultHolder.success(stack);
         }
         return super.use(level, player, hand);

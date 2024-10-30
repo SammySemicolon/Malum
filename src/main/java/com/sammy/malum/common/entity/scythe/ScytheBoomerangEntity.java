@@ -1,6 +1,6 @@
 package com.sammy.malum.common.entity.scythe;
 
-import com.sammy.malum.common.enchantment.scythe.*;
+import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.entity.*;
 import net.minecraft.nbt.*;
@@ -8,8 +8,6 @@ import net.minecraft.network.syncher.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
@@ -109,7 +107,7 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
 
                     if (isAlive() && distance < 3f) {
                         if (scytheOwner instanceof Player player) {
-                            ReboundEnchantment.pickupScythe(this, scythe, player);
+                            ReboundHandler.pickupScythe(this, scythe, player);
                             SoundHelper.playSound(this, SoundRegistry.SCYTHE_CATCH.get(), 1.5f, RandomHelper.randomBetween(level().getRandom(), 0.75f, 1.25f));
                             remove(RemovalReason.DISCARDED);
                         }

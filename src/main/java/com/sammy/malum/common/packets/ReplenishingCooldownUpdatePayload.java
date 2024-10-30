@@ -1,7 +1,7 @@
 package com.sammy.malum.common.packets;
 
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
-import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.core.handlers.enchantment.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.network.*;
 import net.minecraft.world.item.*;
@@ -27,7 +27,7 @@ public class ReplenishingCooldownUpdatePayload extends OneSidedPayloadData {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void handle(IPayloadContext iPayloadContext) {
-        EnchantmentEffectEventHandler.replenishStaffCooldown((AbstractStaffItem) item, iPayloadContext.player(), enchantmentLevel);
+        AscensionHandler.replenishStaffCooldown((AbstractStaffItem) item, iPayloadContext.player(), enchantmentLevel);
     }
 
     @Override

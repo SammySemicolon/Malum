@@ -1,18 +1,12 @@
 package com.sammy.malum.registry.common.item;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.common.enchantment.*;
-import com.sammy.malum.config.CommonConfig;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.function.*;
-import java.util.logging.*;
 
 public class EnchantmentRegistry {
 
@@ -25,6 +19,12 @@ public class EnchantmentRegistry {
 
     static ResourceKey<Enchantment> keyOf(String id) {
         return ResourceKey.create(Registries.ENCHANTMENT, MalumMod.malumPath(id));
+    }
+
+    //TODO: move this to lodestone
+    public static int getEnchantmentLevel(Level level, ResourceKey<Enchantment> key, ItemStack stack) {
+        HolderGetter<Enchantment> enchantmentLookup = level.registryAccess().asGetterLookup().lookupOrThrow(Registries.ENCHANTMENT);
+        return stack.getEnchantmentLevel(enchantmentLookup.getOrThrow(key));
     }
 
 }

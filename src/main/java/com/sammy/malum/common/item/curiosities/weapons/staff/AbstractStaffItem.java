@@ -2,11 +2,11 @@ package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.google.common.collect.*;
 import com.sammy.malum.common.capability.*;
-import com.sammy.malum.common.enchantment.staff.*;
-import com.sammy.malum.common.entity.bolt.*;
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
+import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.particles.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
@@ -58,10 +58,14 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
 
     @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
-        if (attacker instanceof Player player && !(event.getSource().getDirectEntity() instanceof AbstractBoltProjectileEntity)) {
-            Level level = player.level();
+        if (attacker instanceof Player player && event.getSource().is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
+            var level = player.level();
             SoundHelper.playSound(target, SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 0.75f, RandomHelper.randomBetween(level.random, 0.5f, 1.0f));
             spawnSweepParticles(player, ParticleRegistry.STAFF_SLAM_PARTICLE.get());
+
+            if (EnchantmentRegistry.getEnchantmentLevel(level, EnchantmentRegistry.REPLENISHING, stack) > 0) {
+                ReplenishingHandler.triggerReplenishing(event.getSource(), attacker, stack);
+            }
         }
     }
 

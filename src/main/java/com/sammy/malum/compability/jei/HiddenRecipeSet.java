@@ -2,15 +2,13 @@ package com.sammy.malum.compability.jei;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.recipe.*;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class HiddenRecipeSet<T> {
@@ -28,10 +26,10 @@ public class HiddenRecipeSet<T> {
 	}
 
 	public void scanAndHideRecipes(IRecipeManager manager, IFocusFactory focusFactory, Collection<TagKey<Item>> nowHidden) {
-		var itemTags = ForgeRegistries.ITEMS.tags();
-		if (itemTags != null) {
-			List<IFocus<ItemStack>> foci = nowHidden.stream()
-				.flatMap(tag -> itemTags.getTag(tag).stream())
+		List<IFocus<ItemStack>> foci = nowHidden.stream()
+				.flatMap(tag -> BuiltInRegistries.ITEM.getTags().map((d) -> d.getSecond().contents())) //TODO: AT this thing
+				.flatMap(Collection::stream)
+				.map(Holder::value)
 				.distinct()
 				.flatMap(item -> {
 					ItemStack stack = new ItemStack(item);
@@ -41,13 +39,12 @@ public class HiddenRecipeSet<T> {
 					return Stream.of(asIngredient, asResult, asCatalyst);
 				}).toList();
 
-			manager.createRecipeLookup(recipeType)
+		manager.createRecipeLookup(recipeType)
 				.limitFocus(foci)
 				.get()
 				.forEach(hiddenRecipes::add);
 
-			manager.hideRecipes(recipeType, hiddenRecipes);
-		}
+		manager.hideRecipes(recipeType, hiddenRecipes);
 	}
 
 

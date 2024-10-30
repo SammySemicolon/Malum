@@ -6,9 +6,7 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.shapes.*;
-import net.minecraftforge.common.capabilities.*;
-import net.minecraftforge.items.*;
-import net.minecraftforge.items.wrapper.*;
+import net.neoforged.neoforge.items.*;
 import team.lodestar.lodestone.systems.block.*;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.*;
@@ -34,7 +32,7 @@ public class RepairPylonCoreBlock<T extends RepairPylonCoreBlockEntity> extends 
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         if (pLevel.getBlockEntity(pPos) instanceof RepairPylonCoreBlockEntity pylon) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(pylon.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(new EmptyHandler()));
+            return ItemHandlerHelper.calcRedstoneFromInventory(pylon.inventory);
         }
         return 0;
     }

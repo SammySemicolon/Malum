@@ -19,21 +19,24 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static com.sammy.malum.MalumMod.MALUM;
 
-@EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ContainerRegistry {
 
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(BuiltInRegistries.MENU, MALUM);
+//
+//    public static final DeferredHolder<MenuType<SpiritPouchContainer>> SPIRIT_POUCH = CONTAINERS.register("spirit_pouch", () -> IForgeMenuType.create((int id, Inventory inv, FriendlyByteBuf extraData) -> new SpiritPouchContainer(id, inv, extraData.readItem())));
+    public static final DeferredHolder<MenuType<WeaversWorkbenchContainer>, MenuType<WeaversWorkbenchContainer>> WEAVERS_WORKBENCH = CONTAINERS.register("weavers_workbench", () -> WeaversWorkbenchContainer::new);
+//
 
-    public static final DeferredHolder<MenuType<SpiritPouchContainer>> SPIRIT_POUCH = CONTAINERS.register("spirit_pouch", () -> IForgeMenuType.create((int id, Inventory inv, FriendlyByteBuf extraData) -> new SpiritPouchContainer(id, inv, extraData.readItem())));
-    public static final DeferredHolder<MenuType<WeaversWorkbenchContainer>> WEAVERS_WORKBENCH = CONTAINERS.register("weavers_workbench", () -> IForgeMenuType.create(WeaversWorkbenchContainer::new));
 
-
-    @SubscribeEvent
-    public static void bindContainerRenderers(FMLClientSetupEvent event) {
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
-        {
-            MenuScreens.register(ContainerRegistry.SPIRIT_POUCH.get(), SpiritPouchContainerScreen::new);
-            MenuScreens.register(ContainerRegistry.WEAVERS_WORKBENCH.get(), WeaversWorkbenchContainerScreen::new);
-        });
+    @EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+    public static class ClientOnly {
+        @SubscribeEvent
+        public static void bindContainerRenderers(FMLClientSetupEvent event) {
+//            DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
+//            {
+//                MenuScreens.register(ContainerRegistry.SPIRIT_POUCH.get(), SpiritPouchContainerScreen::new);
+                MenuScreens.register(ContainerRegistry.WEAVERS_WORKBENCH.get(), WeaversWorkbenchContainerScreen::new);
+//            });
+        }
     }
 }

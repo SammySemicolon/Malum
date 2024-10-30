@@ -13,11 +13,8 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-import net.minecraftforge.items.wrapper.EmptyHandler;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.*;
 import team.lodestar.lodestone.helpers.BlockHelper;
 import team.lodestar.lodestone.systems.block.WaterLoggedEntityBlock;
 
@@ -41,7 +38,7 @@ public class SpiritJarBlock<T extends SpiritJarBlockEntity> extends WaterLoggedE
     public boolean handleAttack(Level pLevel, BlockPos pPos, Player pPlayer) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (be instanceof SpiritJarBlockEntity jar) {
-            IItemHandler jarHandler = jar.getCapability(Capabilities.ItemHandler.BLOCK, Direction.DOWN).orElse(new EmptyHandler());
+            IItemHandler jarHandler = jar.getCapability(pLevel, pPos, pLevel.getBlockState(pPos), jar, Direction.DOWN);
             ItemStack item = jarHandler.extractItem(0, pPlayer.isShiftKeyDown() ? 64 : 1, false);
             if (!item.isEmpty()) {
                 ItemHandlerHelper.giveItemToPlayer(pPlayer, item, pPlayer.getInventory().selected);

@@ -50,9 +50,4 @@ public class SpiritTransmutationRecipe extends LodestoneInWorldRecipe<SingleReci
             return STREAM_CODEC;
         }
     }
-
-    @SuppressWarnings("unchecked")
-    public static SpiritTransmutationRecipe getRecipe(Level level, ItemStack stack) {
-        return level.getRecipeManager().getRecipeFor(RecipeTypeRegistry.SPIRIT_TRANSMUTATION.get(), new SingleRecipeInput(stack), level).get().value();
-    }
 }

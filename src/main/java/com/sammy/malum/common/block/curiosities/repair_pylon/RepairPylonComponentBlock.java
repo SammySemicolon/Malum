@@ -9,9 +9,8 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
-import net.minecraftforge.common.capabilities.*;
-import net.minecraftforge.items.*;
-import net.minecraftforge.items.wrapper.*;
+import net.neoforged.neoforge.items.*;
+import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.systems.multiblock.*;
 
 import java.util.function.*;
@@ -42,7 +41,7 @@ public class RepairPylonComponentBlock extends MultiblockComponentBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+    public @NotNull ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         return cloneStack.get().getDefaultInstance();
     }
 

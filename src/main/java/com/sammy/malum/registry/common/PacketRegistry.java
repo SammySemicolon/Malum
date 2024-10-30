@@ -23,7 +23,7 @@ public class PacketRegistry {
 
         //functionality
         MALUM_CHANNEL.playToClient(registrar, "void_rejection", VoidRejectionPacket.class, VoidRejectionPacket::new);
-        MALUM_CHANNEL.playToClient(registrar, "sync_staff_cooldown_changes", SyncStaffCooldownChangesPacket.class, SyncStaffCooldownChangesPacket::new);
+        MALUM_CHANNEL.playToClient(registrar, "sync_staff_cooldown_changes", ReplenishingCooldownUpdatePayload.class, ReplenishingCooldownUpdatePayload::new);
         MALUM_CHANNEL.playToClient(registrar, "particle_effect", ParticleEffectPacket.class, ParticleEffectPacket::new);
         MALUM_CHANNEL.playToClient(registrar, "major_entity_effect", MajorEntityEffectParticlePacket.class, MajorEntityEffectParticlePacket::new);
         MALUM_CHANNEL.playToClient(registrar, "sacred_mist_rite_effect", SacredMistRiteEffectPacket.class, SacredMistRiteEffectPacket::new);

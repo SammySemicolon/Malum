@@ -12,7 +12,7 @@ import team.lodestar.lodestone.registry.common.tag.*;
 
 public class MalumAttributeEventHandler {
     public static void processAttributes(LivingDamageEvent.Pre event) {
-        if (event.isCanceled || event.getOriginalDamage() <= 0) {
+        if (event.getOriginalDamage() <= 0) {
             return;
         }
         DamageSource source = event.getSource();

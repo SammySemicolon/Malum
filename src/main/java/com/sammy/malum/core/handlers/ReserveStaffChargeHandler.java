@@ -28,7 +28,7 @@ public class ReserveStaffChargeHandler {
     public static void recoverStaffCharges(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         if (!player.level().isClientSide) {
-            AttributeInstance reserveStaffCharges = player.getAttribute(AttributeRegistry.RESERVE_STAFF_CHARGES.get());
+            AttributeInstance reserveStaffCharges = player.getAttribute(AttributeRegistry.RESERVE_STAFF_CHARGES);
             if (reserveStaffCharges != null) {
                 ReserveStaffChargeHandler chargeHandler = MalumPlayerDataCapability.getCapability(player).reserveStaffChargeHandler;
                 if (chargeHandler.chargeCount < reserveStaffCharges.getValue()) {

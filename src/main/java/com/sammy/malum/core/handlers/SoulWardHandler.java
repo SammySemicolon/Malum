@@ -38,6 +38,8 @@ public class SoulWardHandler {
             Codec.DOUBLE.fieldOf("soulWardProgress").forGetter(sw -> sw.soulWardProgress)
     ).apply(obj, SoulWardHandler::new));
 
+    public SoulWardHandler() {
+    }
     public SoulWardHandler(double soulWard, double soulWardProgress) {
         this.soulWard = soulWard;
         this.soulWardProgress = soulWardProgress;
@@ -102,7 +104,7 @@ public class SoulWardHandler {
                     }
                 }
                 var sound = soulWardHandler.soulWard == 0 ? SoundRegistry.SOUL_WARD_DEPLETE : SoundRegistry.SOUL_WARD_HIT;
-                SoundHelper.playSound(player, sound, 1, Mth.nextFloat(player.getRandom(), 1f, 1.5f));
+                SoundHelper.playSound(player, sound.get(), 1, Mth.nextFloat(player.getRandom(), 1f, 1.5f));
                 event.setNewDamage(result);
                 MalumPlayerDataCapability.syncTrackingAndSelf(player);
             }
@@ -116,7 +118,7 @@ public class SoulWardHandler {
             if (capacity != null) {
                 var sound = soulWard >= capacity.getValue() ? SoundRegistry.SOUL_WARD_CHARGE : SoundRegistry.SOUL_WARD_GROW;
                 double pitchOffset = (soulWard / capacity.getValue()) * 0.5f + (Mth.ceil(soulWard) % 3) * 0.25f;
-                SoundHelper.playSound(player, sound, 0.25f, (float) (1f + pitchOffset));
+                SoundHelper.playSound(player, sound.get(), 0.25f, (float) (1f + pitchOffset));
             }
         }
         soulWardProgress += getSoulWardCooldown(player);
@@ -170,7 +172,6 @@ public class SoulWardHandler {
                         int rowHeight = Math.max(10 - (healthRows - 2), 3);
 
                         poseStack.pushPose();
-                        gui.setupOverlayRenderState(true, false);
                         RenderSystem.setShaderTexture(0, getSoulWardTexture());
                         RenderSystem.depthMask(true);
                         RenderSystem.enableBlend();

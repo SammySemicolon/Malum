@@ -7,15 +7,15 @@ import com.sammy.malum.data.recipe.crafting.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.*;
+import net.minecraft.core.registries.*;
 import net.minecraft.data.*;
 import net.minecraft.data.tags.*;
 import net.minecraft.resources.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
-import net.minecraftforge.common.*;
-import net.minecraftforge.common.data.*;
-import net.minecraftforge.registries.*;
+import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.systems.block.*;
 import team.lodestar.lodestone.systems.datagen.*;
@@ -70,18 +70,15 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(Tags.Items.GEMS_QUARTZ).add(NATURAL_QUARTZ.get());
         tag(Tags.Items.ORES_QUARTZ).add(NATURAL_QUARTZ_ORE.get(), DEEPSLATE_QUARTZ_ORE.get());
 
-        tag(ItemTags.MUSIC_DISCS).add(ARCANE_ELEGY.get(), AESTHETICA.get());
-        tag(ItemTagRegistry.ARCANE_ELEGY_COMPONENTS).addTag(ItemTags.MUSIC_DISCS).remove(ARCANE_ELEGY.get(), AESTHETICA.get());
-
         tag(ItemTagRegistry.SAPBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
         tag(ItemTagRegistry.GROSS_FOODS).add(Items.ROTTEN_FLESH, ROTTING_ESSENCE.get(), CONCENTRATED_GLUTTONY.get());
 
-        ITEMS.getEntries().stream().filter(i -> i.get() instanceof NodeItem).map(RegistryObject::get).forEach(i -> {
+        ITEMS.getEntries().stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::get).forEach(i -> {
             tag(ItemTagRegistry.METAL_NODES).add(i);
         });
         tag(ItemTagRegistry.PROSPECTORS_TREASURE)
                 .addTags(Tags.Items.ORES, Tags.Items.STORAGE_BLOCKS, Tags.Items.INGOTS, Tags.Items.NUGGETS, Tags.Items.GEMS, Tags.Items.RAW_MATERIALS, ItemTags.COALS, ItemTagRegistry.METAL_NODES)
-                .addOptional(new ResourceLocation("tetra", "geode"));
+                .addOptional(ResourceLocation.parse("tetra:geode"));
 
         tag(ItemTagRegistry.ASPECTED_SPIRITS).add(
                 SACRED_SPIRIT.get(), WICKED_SPIRIT.get(), ARCANE_SPIRIT.get(), ELDRITCH_SPIRIT.get(),
@@ -101,6 +98,13 @@ public class MalumItemTags extends ItemTagsProvider {
                 .add(TYRVING.get(), WEIGHT_OF_WORLDS.get())
                 //soul stained steel gear
                 .add(SOUL_STAINED_STEEL_AXE.get(), SOUL_STAINED_STEEL_PICKAXE.get(), SOUL_STAINED_STEEL_SHOVEL.get(), SOUL_STAINED_STEEL_SWORD.get(), SOUL_STAINED_STEEL_HOE.get(), SOUL_STAINED_STEEL_KNIFE.get());
+
+        tag(ItemTagRegistry.ANIMATED_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHE);
+        tag(ItemTagRegistry.REBOUND_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHE);
+        tag(ItemTagRegistry.ASCENSION_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHE);
+        tag(ItemTagRegistry.REPLENISHING_ENCHANTABLE).addTag(ItemTagRegistry.STAFF);
+        tag(ItemTagRegistry.HAUNTED_ENCHANTABLE).addTag(ItemTagRegistry.MAGIC_CAPABLE_WEAPON);
+        tag(ItemTagRegistry.SPIRIT_SPOILS_ENCHANTABLE).addTag(ItemTagRegistry.SOUL_HUNTER_WEAPON);
 
         tag(Tags.Items.NUGGETS).add(COPPER_NUGGET.get(), HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get());
         tag(Tags.Items.GEMS).add(NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), CLUSTER_OF_BRILLIANCE.get());
@@ -191,7 +195,7 @@ public class MalumItemTags extends ItemTagsProvider {
     }
 
     public void safeCopy(TagKey<Item> itemTag) {
-        safeCopy(BlockRegistry.BLOCKS, TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), itemTag.location()), itemTag);
+        safeCopy(BlockRegistry.BLOCKS, TagKey.create(BuiltInRegistries.BLOCK.key(), itemTag.location()), itemTag);
     }
 
     public void safeCopy(TagKey<Block> blockTag, TagKey<Item> itemTag) {

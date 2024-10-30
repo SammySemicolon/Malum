@@ -12,7 +12,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import team.lodestar.lodestone.helpers.CurioHelper;
-import team.lodestar.lodestone.systems.item.IEventResponderItem;
+import team.lodestar.lodestone.handlers.*;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 

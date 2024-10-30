@@ -1,8 +1,7 @@
 package com.sammy.malum.common.packets;
 
-import com.sammy.malum.common.enchantment.staff.*;
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
-import net.minecraft.client.*;
+import com.sammy.malum.core.handlers.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.network.*;
 import net.minecraft.world.item.*;
@@ -11,18 +10,16 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import team.lodestar.lodestone.systems.network.OneSidedPayloadData;
 
-import java.util.function.*;
-
-public class SyncStaffCooldownChangesPacket extends OneSidedPayloadData {
+public class ReplenishingCooldownUpdatePayload extends OneSidedPayloadData {
     private final Item item;
     private final int enchantmentLevel;
 
-    public SyncStaffCooldownChangesPacket(Item item, int enchantmentLevel) {
+    public ReplenishingCooldownUpdatePayload(Item item, int enchantmentLevel) {
         this.item = item;
         this.enchantmentLevel = enchantmentLevel;
     }
 
-    public SyncStaffCooldownChangesPacket(FriendlyByteBuf buf) {
+    public ReplenishingCooldownUpdatePayload(FriendlyByteBuf buf) {
         this.item = BuiltInRegistries.ITEM.byId(buf.readInt());
         this.enchantmentLevel = buf.readInt();
     }
@@ -30,7 +27,7 @@ public class SyncStaffCooldownChangesPacket extends OneSidedPayloadData {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void handle(IPayloadContext iPayloadContext) {
-        ReplenishingEnchantment.replenishStaffCooldown((AbstractStaffItem) item, Minecraft.getInstance().player, enchantmentLevel);
+        EnchantmentEffectEventHandler.replenishStaffCooldown((AbstractStaffItem) item, iPayloadContext.player(), enchantmentLevel);
     }
 
     @Override

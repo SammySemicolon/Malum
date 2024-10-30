@@ -12,6 +12,13 @@ public class ItemTagRegistry {
     public static final TagKey<Item> SCYTHE = malumTag("scythe");
     public static final TagKey<Item> STAFF = malumTag("staff");
 
+    public static final TagKey<Item> ANIMATED_ENCHANTABLE = malumTag("enchantable/animated");
+    public static final TagKey<Item> REBOUND_ENCHANTABLE = malumTag("enchantable/rebound");
+    public static final TagKey<Item> ASCENSION_ENCHANTABLE = malumTag("enchantable/ascension");
+    public static final TagKey<Item> REPLENISHING_ENCHANTABLE = malumTag("enchantable/replenishing");
+    public static final TagKey<Item> HAUNTED_ENCHANTABLE = malumTag("enchantable/haunted");
+    public static final TagKey<Item> SPIRIT_SPOILS_ENCHANTABLE = malumTag("enchantable/spirit_spoils");
+
     public static final TagKey<Item> SPIRITS = malumTag("spirit");
     public static final TagKey<Item> ASPECTED_SPIRITS = malumTag("aspected_spirits");
 
@@ -38,9 +45,6 @@ public class ItemTagRegistry {
     public static final TagKey<Item> TWISTED_SLABS = malumTag("twisted_rock_slabs");
     public static final TagKey<Item> TWISTED_STAIRS = malumTag("twisted_rock_stairs");
     public static final TagKey<Item> TWISTED_WALLS = malumTag("twisted_rock_walls");
-
-    public static final TagKey<Item> REBOUND_SCYTHE = malumTag("enchantable/rebound_scythe");
-    public static final TagKey<Item> SCYTHE_OR_STAFF = malumTag("enchantable/scythe_or_staff");
 
     public static final TagKey<Item> SAPBALLS = malumTag("sapballs");
     public static final TagKey<Item> GROSS_FOODS = malumTag("gross_foods");

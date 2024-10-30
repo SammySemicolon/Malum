@@ -4,9 +4,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.*;
-import team.lodestar.lodestone.systems.item.IEventResponderItem;
+import team.lodestar.lodestone.handlers.*;
 
-public interface IMalumEventResponderItem extends IEventResponderItem {
+public interface IMalumEventResponderItem extends ItemEventHandler.IEventResponderItem {
     default void pickupSpirit(LivingEntity collector, double arcaneResonance) {
 
     }

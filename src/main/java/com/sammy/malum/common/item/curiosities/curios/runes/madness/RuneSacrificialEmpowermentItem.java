@@ -10,7 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import team.lodestar.lodestone.helpers.EntityHelper;
-import team.lodestar.lodestone.systems.item.IEventResponderItem;
+import team.lodestar.lodestone.handlers.*;
 
 import java.util.function.Consumer;
 

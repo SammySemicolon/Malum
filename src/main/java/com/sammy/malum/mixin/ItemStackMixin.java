@@ -51,15 +51,4 @@ public abstract class ItemStackMixin {
         }
         return map;
     }
-
-    @Inject(method = "is(Lnet/minecraft/tags/TagKey;)Z", at = @At("HEAD"), cancellable = true)
-    private void malum$ultimateRebound(TagKey<Item> tag, CallbackInfoReturnable<Boolean> cir) {
-        if (tag.equals(ItemTagRegistry.REBOUND_SCYTHE)) {
-            //noinspection ConstantValue
-            if (CommonConfig.ULTIMATE_REBOUND.getConfigValue() && (Object)this instanceof TieredItem) {
-                cir.setReturnValue(true);
-            }
-        }
-
-    }
 }

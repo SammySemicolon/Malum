@@ -22,6 +22,7 @@ import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.LodestoneAttributes;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.item.*;
@@ -56,14 +57,11 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
     }
 
     @Override
-    public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (attacker instanceof Player player && !(event.getSource().getDirectEntity() instanceof AbstractBoltProjectileEntity)) {
             Level level = player.level();
+            SoundHelper.playSound(target, SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 0.75f, RandomHelper.randomBetween(level.random, 0.5f, 1.0f));
             spawnSweepParticles(player, ParticleRegistry.STAFF_SLAM_PARTICLE.get());
-            level.playSound(null, target.blockPosition(), SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 0.75f, Mth.nextFloat(level.random, 0.5F, 1F));
-            if (event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC)) {
-                ReplenishingEnchantment.replenishStaffCooldown(attacker, stack);
-            }
         }
     }
 

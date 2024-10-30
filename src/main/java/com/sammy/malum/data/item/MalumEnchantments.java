@@ -1,7 +1,6 @@
 package com.sammy.malum.data.item;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
@@ -41,16 +40,16 @@ public class MalumEnchantments extends DatapackBuiltinEntriesProvider {
         HolderGetter<Item> itemGetter = context.lookup(Registries.ITEM);
 
         context.register(rKey("rebound"), new Enchantment.Builder(Enchantment.definition(
-                itemGetter.getOrThrow(ItemTagRegistry.REBOUND_SCYTHE),
-                itemGetter.getOrThrow(ItemTagRegistry.REBOUND_SCYTHE),
+                itemGetter.getOrThrow(ItemTagRegistry.REBOUND_ENCHANTABLE),
+                itemGetter.getOrThrow(ItemTagRegistry.REBOUND_ENCHANTABLE),
                 Weights.UNCOMMON, 3, LEGACY_LOWEST, LEGACY_HIGHEST,
                 1,
                 EquipmentSlotGroup.HAND
         )).build(MalumMod.malumPath("rebound")));
 
         context.register(rKey("haunted"), new Enchantment.Builder(Enchantment.definition(
-                itemGetter.getOrThrow(ItemTagRegistry.SCYTHE_OR_STAFF),
-                itemGetter.getOrThrow(ItemTagRegistry.SCYTHE_OR_STAFF),
+                itemGetter.getOrThrow(ItemTagRegistry.ASCENSION_ENCHANTABLE),
+                itemGetter.getOrThrow(ItemTagRegistry.ASCENSION_ENCHANTABLE),
                 Weights.UNCOMMON, 2, LEGACY_LOWEST, LEGACY_HIGHEST,
                 1,
                 EquipmentSlotGroup.HAND

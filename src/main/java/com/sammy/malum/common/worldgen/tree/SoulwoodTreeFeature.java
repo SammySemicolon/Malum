@@ -18,6 +18,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.synth.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.worldgen.*;
 import team.lodestar.lodestone.systems.worldgen.LodestoneBlockFiller.*;
 
@@ -205,7 +206,7 @@ public class SoulwoodTreeFeature extends Feature<NoneFeatureConfiguration> {
             if (entry.getState().getBlock().equals(BlockRegistry.BLIGHTED_SOULWOOD.get())) {
                 continue;
             }
-            filler.getLayer(LOGS).replace(blockPos, e -> create(BlockHelper.getBlockStateWithExistingProperties(e.getState(), BlockRegistry.EXPOSED_SOULWOOD_LOG.get().defaultBlockState())).build());
+            filler.getLayer(LOGS).replace(blockPos, e -> create(BlockStateHelper.getBlockStateWithExistingProperties(e.getState(), BlockRegistry.EXPOSED_SOULWOOD_LOG.get().defaultBlockState())).build());
         }
 
         int spikeCount = 6;
@@ -363,7 +364,7 @@ public class SoulwoodTreeFeature extends Feature<NoneFeatureConfiguration> {
                             BlockState blockState = level.getBlockState(plantPos);
                             if (naturalNoiseValue > 2.5f) {
                                 if (lastSaplingPos == null || lastSaplingPos.distanceToSqr(plantPos.getX(), plantPos.getY(), plantPos.getZ()) > 5) {
-                                    if (BlockHelper.fromBlockPos(center).distanceToSqr(plantPos.getX(), plantPos.getY(), plantPos.getZ()) > 4) {
+                                    if (center.getCenter().distanceToSqr(plantPos.getX(), plantPos.getY(), plantPos.getZ()) > 4) {
                                         if (random.nextFloat() < 0.5f / (Math.pow(saplingsPlaced + 1, 2))) {
                                             filler.getLayer(BLIGHT).put(plantPos, create(BlockRegistry.SOULWOOD_GROWTH.get().defaultBlockState()));
                                             lastSaplingPos = new Vec3(plantPos.getX(), plantPos.getY(), plantPos.getZ());

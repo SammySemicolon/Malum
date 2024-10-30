@@ -24,7 +24,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -40,13 +39,12 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
-import team.lodestar.lodestone.helpers.BlockHelper;
-import team.lodestar.lodestone.helpers.DataHelper;
+import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntityInventory;
 import team.lodestar.lodestone.systems.easing.Easing;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
@@ -89,14 +87,14 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
                 needsSync = true;
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         };
         extrasInventory = new MalumBlockEntityInventory(8, 64) {
             @Override
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         };
         spiritInventory = new MalumBlockEntityInventory(SpiritTypeRegistry.SPIRITS.size(), 64) {
@@ -105,7 +103,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
                 super.onContentsChanged(slot);
                 needsSync = true;
                 spiritAmount = Math.max(1, Mth.lerp(0.15f, spiritAmount, nonEmptyItemAmount + 1));
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
 
             @Override
@@ -133,10 +131,13 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
         compound.putFloat("spiritYLevel", spiritYLevel);
         compound.putFloat("speed", speed);
         compound.putFloat("spiritAmount", spiritAmount);
-        compound.putInt("acceleratorAmount", acceleratorPositions.size());
+
+        var acceleratorData = new CompoundTag();
+        acceleratorData.putInt("acceleratorAmount", acceleratorPositions.size());
         for (int i = 0; i < acceleratorPositions.size(); i++) {
-            BlockHelper.saveBlockPos(compound, acceleratorPositions.get(i), "" + i);
+            acceleratorData.put("acceleratorPosition_" + i, NBTHelper.saveBlockPos(acceleratorPositions.get(i)));
         }
+        compound.put("acceleratorData", acceleratorData);
 
         inventory.save(pRegistries, compound);
         spiritInventory.save(pRegistries, compound, "spiritInventory");
@@ -153,9 +154,11 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
 
         acceleratorPositions.clear();
         accelerators.clear();
-        int amount = compound.getInt("acceleratorAmount");
+
+        var acceleratorData = compound.getCompound("acceleratorData");
+        int amount = acceleratorData.getInt("acceleratorAmount");
         for (int i = 0; i < amount; i++) {
-            BlockPos pos = BlockHelper.loadBlockPos(compound, "" + i);
+            BlockPos pos = NBTHelper.readBlockPos(acceleratorData.getCompound("acceleratorPosition_" + i));
             if (level != null && level.getBlockEntity(pos) instanceof IAltarAccelerator accelerator) {
                 acceleratorPositions.add(pos);
                 accelerators.add(accelerator);
@@ -216,7 +219,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
             if (idleProgress >= progressCap) {
                 recalculateRecipes();
                 idleProgress = 0;
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         }
 
@@ -226,14 +229,14 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
             }
             if (recipe != null) {
                 if (!isCrafting) {
-                    BlockHelper.updateAndNotifyState(level, worldPosition);
+                    BlockStateHelper.updateAndNotifyState(level, worldPosition);
                     isCrafting = true;
                 }
                 progress++;
             }
             else {
                 if (isCrafting) {
-                    BlockHelper.updateAndNotifyState(level, worldPosition);
+                    BlockStateHelper.updateAndNotifyState(level, worldPosition);
                     isCrafting = false;
                 }
                 progress = 0;
@@ -315,7 +318,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
                     ParticleEffectTypeRegistry.SPIRIT_ALTAR_EATS_ITEM.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits), SpiritAltarEatItemParticleEffect.createData(provider.getAccessPointBlockPos(), providedStack));
                     extrasInventory.insertItem(inventoryForAltar.extractItem(0, nextIngredient.count(), false));
                     inventoryForAltar.updateData();
-                    BlockHelper.updateAndNotifyState(level, provider.getAccessPointBlockPos());
+                    BlockStateHelper.updateAndNotifyState(level, provider.getAccessPointBlockPos());
                     break;
                 }
             }
@@ -354,14 +357,14 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
         level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, outputStack));
         init();
         recalibrateAccelerators();
-        BlockHelper.updateAndNotifyState(level, worldPosition);
+        BlockStateHelper.updateAndNotifyState(level, worldPosition);
     }
 
     public void recalibrateAccelerators() {
         speed = 1f;
         accelerators.clear();
         acceleratorPositions.clear();
-        Collection<IAltarAccelerator> nearbyAccelerators = BlockHelper.getBlockEntities(IAltarAccelerator.class, level, worldPosition, HORIZONTAL_RANGE, VERTICAL_RANGE, HORIZONTAL_RANGE);
+        Collection<IAltarAccelerator> nearbyAccelerators = BlockEntityHelper.getBlockEntities(IAltarAccelerator.class, level, worldPosition, HORIZONTAL_RANGE, VERTICAL_RANGE, HORIZONTAL_RANGE);
         Map<IAltarAccelerator.AltarAcceleratorType, Integer> entries = new HashMap<>();
         for (IAltarAccelerator accelerator : nearbyAccelerators) {
             if (accelerator.canAccelerate()) {
@@ -392,19 +395,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
         float lerpSpiritSpin = spiritSpin + partialTicks * (projectedSpiritSpin - spiritSpin);
         float distance = 1 - getSpinUp(Easing.SINE_OUT) * 0.25f + (float) Math.sin((lerpSpiritSpin % 6.28f) / 20f) * 0.025f;
         float height = 0.75f + getSpinUp(Easing.QUARTIC_OUT) * getSpinUp(Easing.BACK_OUT) * 0.5f;
-
-        int period = 360;
-        double angle = slot / spiritAmount * (Math.PI * 2);
-        angle += ((lerpSpiritSpin % period) / period) * (Math.PI * 2);
-        double dx2 = (distance * Math.cos(angle));
-        double dz2 = (distance * Math.sin(angle));
-
-        Vec3 vector2f = new Vec3(dx2, 0, dz2);
-        double x = vector2f.x * distance;
-        double z = vector2f.z * distance;
-        return new Vec3(x + 0.5f, height, z + 0.5f);
-        // Datahelper clamps to long... why?
-//        return DataHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, spiritAmount, (long) lerpSpiritSpin, 360);
+        return VecHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, spiritAmount, lerpSpiritSpin, 360);
     }
 
     public float getSpinUp(Easing easing) {

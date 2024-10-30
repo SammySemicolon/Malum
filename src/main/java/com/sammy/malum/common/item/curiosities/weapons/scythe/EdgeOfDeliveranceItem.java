@@ -6,6 +6,7 @@ import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
+import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
 
 public class EdgeOfDeliveranceItem extends MalumScytheItem {
@@ -15,7 +16,7 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
     }
 
     @Override
-    public void hurtEvent(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         super.hurtEvent(event, attacker, target, stack);
         var level = attacker.level();
         if (level.isClientSide()) {
@@ -23,7 +24,7 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
         }
         var source = event.getSource();
         if (source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
-            var effect = MobEffectRegistry.IMMINENT_DELIVERANCE.get();
+            var effect = MobEffectRegistry.IMMINENT_DELIVERANCE;
             if (target.hasEffect(effect)) {
                 event.setAmount(event.getAmount() * 2);
                 SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 2f, 1.25f);

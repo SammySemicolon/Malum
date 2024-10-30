@@ -1,10 +1,12 @@
 package com.sammy.malum.core.handlers;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.entity.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
+import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.nbt.*;
@@ -15,6 +17,8 @@ import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.entity.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
+
+import java.util.function.*;
 
 public class SoulDataHandler {
 
@@ -111,9 +115,22 @@ public class SoulDataHandler {
         mob.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof LookAtPlayerGoal || g.getGoal() instanceof MeleeAttackGoal || g.getGoal() instanceof SwellGoal || g.getGoal() instanceof PanicGoal || g.getGoal() instanceof RandomLookAroundGoal || g.getGoal() instanceof AvoidEntityGoal);
     }
 
+    public static Pair<ItemStack, AbstractStaffItem> getStaffWeapon(DamageSource source, LivingEntity attacker) {
+        var stack = getSoulHunterWeapon(source, attacker);
+        if (!(stack.getItem() instanceof AbstractStaffItem staffItem))
+        {
+            return Pair.of(ItemStack.EMPTY, null);
+        }
+        return Pair.of(stack, staffItem);
+    }
+
     public static ItemStack getScytheWeapon(DamageSource source, LivingEntity attacker) {
+        return getSoulHunterWeapon(source, attacker, s -> s.getItem() instanceof MalumScytheItem);
+    }
+
+    public static ItemStack getSoulHunterWeapon(DamageSource source, LivingEntity attacker, Predicate<ItemStack> predicate) {
         var soulHunterWeapon = getSoulHunterWeapon(source, attacker);
-        return soulHunterWeapon.getItem() instanceof MalumScytheItem ? soulHunterWeapon : ItemStack.EMPTY;
+        return predicate.test(soulHunterWeapon) ? soulHunterWeapon : ItemStack.EMPTY;
     }
 
     public static ItemStack getSoulHunterWeapon(DamageSource source, LivingEntity attacker) {

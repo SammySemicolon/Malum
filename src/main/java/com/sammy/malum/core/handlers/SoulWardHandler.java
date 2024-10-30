@@ -1,6 +1,8 @@
 package com.sammy.malum.core.handlers;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.capability.*;
 import com.sammy.malum.config.CommonConfig;
@@ -27,21 +29,18 @@ import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.rendering.VFXBuilders;
 import team.lodestar.lodestone.systems.rendering.shader.ExtendedShaderInstance;
 
-
 public class SoulWardHandler {
     public double soulWard;
     public double soulWardProgress;
 
-    public CompoundTag serializeNBT() {
-        CompoundTag tag = new CompoundTag();
-        tag.putDouble("soulWard", soulWard);
-        tag.putDouble("soulWardProgress", soulWardProgress);
-        return tag;
-    }
+    public static Codec<SoulWardHandler> CODEC = RecordCodecBuilder.create(obj -> obj.group(
+            Codec.DOUBLE.fieldOf("soulWard").forGetter(sw -> sw.soulWard),
+            Codec.DOUBLE.fieldOf("soulWardProgress").forGetter(sw -> sw.soulWardProgress)
+    ).apply(obj, SoulWardHandler::new));
 
-    public void deserializeNBT(CompoundTag tag) {
-        soulWard = tag.getDouble("soulWard");
-        soulWardProgress = tag.getDouble("soulWardProgress");
+    public SoulWardHandler(double soulWard, double soulWardProgress) {
+        this.soulWard = soulWard;
+        this.soulWardProgress = soulWardProgress;
     }
 
     public static void recoverSoulWard(PlayerTickEvent event) {
@@ -69,7 +68,7 @@ public class SoulWardHandler {
         if (event.getEntity().level().isClientSide()) {
             return;
         }
-        if (event.isCanceled() || event.getOriginalDamage() <= 0) {
+        if (event.getOriginalDamage() <= 0) {
             return;
         }
         if (event.getEntity() instanceof Player player) {

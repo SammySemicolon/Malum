@@ -15,7 +15,7 @@ import team.lodestar.lodestone.handlers.*;
 
 import java.util.function.Consumer;
 
-public class RuneReactiveShieldingItem extends AbstractRuneCurioItem implements IEventResponderItem {
+public class RuneReactiveShieldingItem extends AbstractRuneCurioItem implements ItemEventHandler.IEventResponderItem {
 
     public RuneReactiveShieldingItem(Properties builder) {
         super(builder, SpiritTypeRegistry.EARTHEN_SPIRIT);

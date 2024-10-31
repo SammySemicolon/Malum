@@ -1,10 +1,12 @@
 package com.sammy.malum.core.events;
 
+import com.sammy.malum.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.item.*;
+import net.minecraft.resources.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -24,14 +26,14 @@ public class ClientSetupEvents {
 
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiLayersEvent event) {
-        event.registerAbove(VanillaGuiLayers.ARMOR_LEVEL, "soul_ward", (gui, deltaTracker) ->
-                SoulWardHandler.ClientOnly.renderSoulWard(gui, poseStack, width, height));
+        event.registerAbove(VanillaGuiLayers.ARMOR_LEVEL, MalumMod.malumPath("soul_ward"),
+                SoulWardHandler.ClientOnly::renderSoulWard);
 
-        event.registerAboveAll("hidden_blade_cooldown", (gui, deltaTracker) ->
-                CurioHiddenBladeNecklace.ClientOnly.renderHiddenBladeCooldown(gui, poseStack, width, height));
+        event.registerAboveAll(MalumMod.malumPath("hidden_blade_cooldown"),
+                CurioHiddenBladeNecklace.ClientOnly::renderHiddenBladeCooldown);
 
-        event.registerAbove(VanillaGuiLayers.BOSS_OVERLAY, "touch_of_darkness", (gui, deltaTracker) ->
-                TouchOfDarknessHandler.ClientOnly.renderDarknessVignette(poseStack));
+        event.registerAbove(VanillaGuiLayers.BOSS_OVERLAY, MalumMod.malumPath("touch_of_darkness"),
+                TouchOfDarknessHandler.ClientOnly::renderDarknessVignette);
     }
 
     @SubscribeEvent

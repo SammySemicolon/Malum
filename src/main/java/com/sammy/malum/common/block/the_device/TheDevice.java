@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.network.PacketDistributor;
-import team.lodestar.lodestone.helpers.BlockHelper;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.network.screenshake.PositionedScreenshakePayload;
 import team.lodestar.lodestone.systems.easing.Easing;
 
@@ -62,9 +62,9 @@ public class TheDevice extends Block {
     }
 
     public void playSound(Level level, BlockPos pos) {
-        if (level instanceof ServerLevel serverLevel) {
-            PacketDistributor.sendToPlayersTrackingChunk(serverLevel, new ChunkPos(pos), new PositionedScreenshakePayload(40, BlockHelper.fromBlockPos(pos), 4f, 10f, Easing.EXPO_OUT).setIntensity(4f, 0));
-        }
+//        if (level instanceof ServerLevel serverLevel) {
+//            PacketDistributor.sendToPlayersTrackingChunk(serverLevel, new ChunkPos(pos), new PositionedScreenshakePayload(40, BlockPosHelper.fromBlockPos(pos), 4f, 10f, Easing.EXPO_OUT).setIntensity(4f, 0));
+//        }
         level.playSound(null, pos, SoundRegistry.THE_DEEP_BECKONS.get(), SoundSource.BLOCKS, 1, 1);
     }
 }

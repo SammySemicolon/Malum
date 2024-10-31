@@ -115,13 +115,8 @@ public class SoulDataHandler {
         mob.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof LookAtPlayerGoal || g.getGoal() instanceof MeleeAttackGoal || g.getGoal() instanceof SwellGoal || g.getGoal() instanceof PanicGoal || g.getGoal() instanceof RandomLookAroundGoal || g.getGoal() instanceof AvoidEntityGoal);
     }
 
-    public static Pair<ItemStack, AbstractStaffItem> getStaffWeapon(DamageSource source, LivingEntity attacker) {
-        var stack = getSoulHunterWeapon(source, attacker);
-        if (!(stack.getItem() instanceof AbstractStaffItem staffItem))
-        {
-            return Pair.of(ItemStack.EMPTY, null);
-        }
-        return Pair.of(stack, staffItem);
+    public static ItemStack getStaffWeapon(DamageSource source, LivingEntity attacker) {
+        return getSoulHunterWeapon(source, attacker, s -> s.getItem() instanceof AbstractStaffItem);
     }
 
     public static ItemStack getScytheWeapon(DamageSource source, LivingEntity attacker) {

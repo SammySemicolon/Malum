@@ -15,7 +15,7 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
-import team.lodestar.lodestone.helpers.BlockHelper;
+import team.lodestar.lodestone.helpers.block.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -169,7 +169,7 @@ public class AltarCraftingHelper {
 		return capturePedestals(level, pos, HORIZONTAL_RANGE, VERTICAL_RANGE, HORIZONTAL_RANGE);
 	}
 	public static List<IMalumSpecialItemAccessPoint> capturePedestals(Level level, BlockPos pos, int xRange, int yRange, int zRange) {
-		return BlockHelper.getBlockEntities(IMalumSpecialItemAccessPoint.class, level, pos, xRange, yRange, zRange).stream()
+		return BlockEntityHelper.getBlockEntities(IMalumSpecialItemAccessPoint.class, level, pos, xRange, yRange, zRange).stream()
 			.sorted(Comparator.comparingDouble(it -> -pos.distSqr(it.getAccessPointBlockPos())))
 			.collect(Collectors.toList());
 	}

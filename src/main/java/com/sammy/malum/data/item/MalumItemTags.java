@@ -15,6 +15,7 @@ import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.common.data.*;
 import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.systems.block.*;

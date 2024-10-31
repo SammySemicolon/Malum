@@ -7,8 +7,9 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.capability.*;
 import com.sammy.malum.config.CommonConfig;
 import com.sammy.malum.common.item.IMalumEventResponderItem;
+import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.*;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.*;
 import net.minecraft.nbt.CompoundTag;
@@ -19,15 +20,22 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
 import org.joml.Vector4f;
 import org.lwjgl.opengl.*;
+import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.rendering.VFXBuilders;
 import team.lodestar.lodestone.systems.rendering.shader.ExtendedShaderInstance;
+import vectorwing.farmersdelight.common.event.*;
+
+import java.util.*;
+
+import static team.lodestar.lodestone.handlers.ItemEventHandler.getEventResponders;
 
 public class SoulWardHandler {
     public double soulWard;
@@ -77,36 +85,29 @@ public class SoulWardHandler {
             SoulWardHandler soulWardHandler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
             soulWardHandler.soulWardProgress = getSoulWardCooldown(1) + getSoulWardCooldown(player);
             if (soulWardHandler.soulWard > 0) {
-                DamageSource source = event.getSource();
-
+                var source = event.getSource();
                 float amount = event.getOriginalDamage();
-                float multiplier = source.is(LodestoneDamageTypeTags.IS_MAGIC) ? CommonConfig.SOUL_WARD_MAGIC.getConfigValue().floatValue() : CommonConfig.SOUL_WARD_PHYSICAL.getConfigValue().floatValue();
-
-                for (ItemStack s : ItemHelper.getEventResponders(player)) {
-                    if (s.getItem() instanceof IMalumEventResponderItem eventItem) {
-                        multiplier = eventItem.adjustSoulWardDamageAbsorption(event, player, s, multiplier);
-                        break;
-                    }
-                }
-                float result = amount * multiplier;
-                float absorbed = amount - result;
+                double magicMultiplier = CommonConfig.SOUL_WARD_MAGIC.getConfigValue();
+                double physicalMultiplier = CommonConfig.SOUL_WARD_PHYSICAL.getConfigValue();
                 double integrity = player.getAttributeValue(AttributeRegistry.SOUL_WARD_INTEGRITY);
-                double soulwardLost =  soulWardHandler.soulWard - (absorbed / integrity);
+                var eventResponders = getEventResponders(player);
+
+                var propertiesEvent = new ModifySoulWardPropertiesEvent(player, soulWardHandler, magicMultiplier, physicalMultiplier, integrity);
+                eventResponders.forEach(lookup -> lookup.run(IMalumEventResponderItem.class, (eventResponderItem, stack) -> eventResponderItem.modifySoulWardProperties(propertiesEvent, player, stack)));
+                NeoForge.EVENT_BUS.post(propertiesEvent);
+
+                double damageMultiplier = source.is(LodestoneDamageTypeTags.IS_MAGIC) ? magicMultiplier : physicalMultiplier;
+                double newDamage = amount * damageMultiplier;
+                double absorbed = amount - newDamage;
                 if (integrity != 0) {
-                    soulWardHandler.soulWard = Math.max(0, soulwardLost);
+                    soulWardHandler.soulWard = Math.max(0, soulWardHandler.soulWard - (absorbed / integrity));
                 } else {
-                    soulwardLost = soulWardHandler.soulWard;
                     soulWardHandler.soulWard = 0;
-                }
-                for (ItemStack s : ItemHelper.getEventResponders(player)) {
-                    if (s.getItem() instanceof IMalumEventResponderItem eventItem) {
-                        eventItem.onSoulwardAbsorbDamage(event, player, s, soulwardLost, absorbed);
-                    }
                 }
                 var sound = soulWardHandler.soulWard == 0 ? SoundRegistry.SOUL_WARD_DEPLETE : SoundRegistry.SOUL_WARD_HIT;
                 SoundHelper.playSound(player, sound.get(), 1, Mth.nextFloat(player.getRandom(), 1f, 1.5f));
-                event.setNewDamage(result);
                 MalumPlayerDataCapability.syncTrackingAndSelf(player);
+                event.setNewDamage((float) newDamage);
             }
         }
     }
@@ -149,10 +150,10 @@ public class SoulWardHandler {
             }
         }
 
-        public static void renderSoulWard(ForgeGui gui, GuiGraphics guiGraphics, int width, int height) {
+        public static void renderSoulWard(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
             var minecraft = Minecraft.getInstance();
             var poseStack = guiGraphics.pose();
-            if (!minecraft.options.hideGui && gui.shouldDrawSurvivalElements()) {
+            if (!minecraft.options.hideGui) {
                 var player = minecraft.player;
                 if (!player.isCreative() && !player.isSpectator()) {
                     var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
@@ -162,8 +163,8 @@ public class SoulWardHandler {
                         float maxHealth = (float) player.getAttribute(Attributes.MAX_HEALTH).getValue();
                         float armor = (float) player.getAttribute(Attributes.ARMOR).getValue();
 
-                        int left = width / 2 - 91;
-                        int top = height - 66;
+                        int left = guiGraphics.guiWidth() / 2 - 91;
+                        int top = guiGraphics.guiHeight() - 66;
 
                         if (armor == 0) {
                             top += 10;

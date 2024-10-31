@@ -14,7 +14,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -30,7 +29,7 @@ import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import team.lodestar.lodestone.helpers.BlockHelper;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
 import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
@@ -38,9 +37,7 @@ import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
 import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
 import team.lodestar.lodestone.systems.particle.data.spin.SpinParticleData;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -85,7 +82,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlock
                         type = spiritItem.type;
                     count += stack.getCount();
                     if (!level.isClientSide) {
-                        BlockHelper.updateAndNotifyState(level, worldPosition);
+                        BlockStateHelper.updateAndNotifyState(level, worldPosition);
                     }
                 }
                 return ItemStack.EMPTY;
@@ -109,7 +106,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlock
                     type = null;
                 }
                 if (!level.isClientSide) {
-                    BlockHelper.updateAndNotifyState(level, worldPosition);
+                    BlockStateHelper.updateAndNotifyState(level, worldPosition);
                 }
             }
 
@@ -148,7 +145,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlock
             if (player.level().isClientSide) {
                 spawnUseParticles(level, worldPosition, type);
             } else {
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         }
 

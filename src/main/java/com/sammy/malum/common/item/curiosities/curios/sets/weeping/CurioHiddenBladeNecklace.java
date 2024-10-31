@@ -48,8 +48,9 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         consumer.accept(negativeEffect("no_sweep"));
     }
 
+
     @Override
-    public void takeDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
+    public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
         if (attacked.level().isClientSide()) {
             return;
         }
@@ -64,7 +65,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
     }
 
     @Override
-    public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         var source = event.getSource();
         var level = attacker.level();
         if (level.isClientSide()) {
@@ -162,7 +163,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         public static void renderHiddenBladeCooldown(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
             var minecraft = Minecraft.getInstance();
             var poseStack = guiGraphics.pose();
-            if (!minecraft.options.hideGui && guiGraphics.shouldDrawSurvivalElements()) {
+            if (!minecraft.options.hideGui) {
                 var player = minecraft.player;
                 if (!player.isCreative() && !player.isSpectator()) {
                     var cooldown = MalumLivingEntityDataCapability.getCapability(player).hiddenBladeNecklaceCooldown;

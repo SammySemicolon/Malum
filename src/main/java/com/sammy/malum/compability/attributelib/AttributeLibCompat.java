@@ -1,7 +1,7 @@
 package com.sammy.malum.compability.attributelib;
 
-import dev.shadowsoffire.attributeslib.client.*;
-import net.minecraftforge.fml.*;
+//import dev.shadowsoffire.attributeslib.client.*;
+import net.neoforged.fml.*;
 
 public class AttributeLibCompat {
 
@@ -17,7 +17,7 @@ public class AttributeLibCompat {
     public static class LoadedOnly {
 
         public static void init() {
-            ModifierSourceType.register(new MalignantConversionModifierSourceType());
+//            ModifierSourceType.register(new MalignantConversionModifierSourceType());
         }
     }
 }

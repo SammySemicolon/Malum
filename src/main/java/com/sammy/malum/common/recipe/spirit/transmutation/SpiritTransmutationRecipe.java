@@ -3,6 +3,7 @@ package com.sammy.malum.common.recipe.spirit.transmutation;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import com.sammy.malum.*;
+import com.sammy.malum.common.packets.*;
 import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.network.*;
@@ -19,10 +20,13 @@ public class SpiritTransmutationRecipe extends LodestoneInWorldRecipe<SingleReci
 
     public final ItemStack output;
 
-    public SpiritTransmutationRecipe(Ingredient ingredient, ItemStack output) {
+    public final String group;
+
+    public SpiritTransmutationRecipe(Ingredient ingredient, ItemStack output, String group) {
         super(RecipeSerializerRegistry.SPIRIT_TRANSMUTATION_RECIPE_SERIALIZER.get(), RecipeTypeRegistry.SPIRIT_TRANSMUTATION.get(), output);
         this.ingredient = ingredient;
         this.output = output;
+        this.group = group;
     }
 
     @Override
@@ -34,7 +38,8 @@ public class SpiritTransmutationRecipe extends LodestoneInWorldRecipe<SingleReci
 
         public static final MapCodec<SpiritTransmutationRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
                 Ingredient.CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
-                ItemStack.CODEC.fieldOf("output").forGetter((recipe) -> recipe.output)
+                ItemStack.CODEC.fieldOf("output").forGetter((recipe) -> recipe.output),
+                Codec.STRING.fieldOf("group").forGetter((recipe) -> recipe.group)
         ).apply(obj, SpiritTransmutationRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, SpiritTransmutationRecipe> STREAM_CODEC =

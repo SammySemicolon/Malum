@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-import team.lodestar.lodestone.helpers.BlockHelper;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.registry.common.particle.*;
 
 import java.awt.*;
@@ -47,7 +47,7 @@ public class SapFilledLogBlock extends RotatedPillarBlock {
                 ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(sap.get()));
                 ParticleEffectTypeRegistry.SAP_COLLECTED.createPositionedEffect((ServerLevel) level, new PositionEffectData(pos), new ColorEffectData(sapColor), SapCollectionParticleEffect.createData(hit.getDirection()));
                 if (level.random.nextBoolean()) {
-                    BlockHelper.setBlockStateWithExistingProperties(level, pos, drained.get().defaultBlockState(), 3);
+                    BlockStateHelper.setBlockStateWithExistingProperties(level, pos, drained.get().defaultBlockState(), 3);
                 }
                 collectSap(level, pos, player);
             }

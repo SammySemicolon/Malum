@@ -4,8 +4,6 @@ import com.sammy.malum.common.block.storage.jar.*;
 import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.effect.*;
 import com.sammy.malum.common.effect.aura.*;
-import com.sammy.malum.common.enchantment.*;
-import com.sammy.malum.common.enchantment.scythe.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.cosmetic.curios.*;
 import com.sammy.malum.common.item.curiosities.*;
@@ -135,12 +133,6 @@ public class RuntimeEvents {
         ReapingDataReloadListener.register(event);
         RitualRecipeReloadListener.register(event);
         MalignantConversionReloadListener.register(event);
-    }
-
-    @SubscribeEvent
-    public static void addItemAttributes(ItemAttributeModifierEvent event) {
-        HauntedEnchantment.addMagicDamage(event);
-        WindedEnchantment.addAttackSpeed(event);
     }
 
     @SubscribeEvent

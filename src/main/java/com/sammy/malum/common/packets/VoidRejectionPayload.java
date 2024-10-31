@@ -10,16 +10,14 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import team.lodestar.lodestone.systems.network.OneSidedPayloadData;
 
-import java.util.function.Supplier;
-
-public class VoidRejectionPacket extends OneSidedPayloadData {
+public class VoidRejectionPayload extends OneSidedPayloadData {
     private final int entityId;
 
-    public VoidRejectionPacket(int entityId) {
+    public VoidRejectionPayload(int entityId) {
         this.entityId = entityId;
     }
 
-    public VoidRejectionPacket(FriendlyByteBuf byteBuf) {
+    public VoidRejectionPayload(FriendlyByteBuf byteBuf) {
         this.entityId = byteBuf.readInt();
     }
 

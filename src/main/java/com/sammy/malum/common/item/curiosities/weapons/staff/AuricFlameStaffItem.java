@@ -10,7 +10,8 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.minecraftforge.event.entity.living.*;
+import net.neoforged.api.distmarker.*;
+import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
@@ -31,15 +32,12 @@ public class AuricFlameStaffItem extends AbstractStaffItem {
     }
 
     @Override
-    public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (!(event.getSource().getDirectEntity() instanceof AbstractBoltProjectileEntity)) {
             target.setRemainingFireTicks(4 * 20);
             attacker.level().playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.AURIC_FLAME_MOTIF.get(), attacker.getSoundSource(), 1, 1.25f);
         }
-        super.hurtEvent(event, attacker, target, stack);
     }
-
-
 
     @Override
     public int getCooldownDuration(Level level, LivingEntity livingEntity) {

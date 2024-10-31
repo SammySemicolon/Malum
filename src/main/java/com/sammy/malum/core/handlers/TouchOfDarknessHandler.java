@@ -2,7 +2,6 @@ package com.sammy.malum.core.handlers;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.*;
@@ -12,16 +11,16 @@ import com.sammy.malum.common.block.curiosities.weeping_well.VoidConduitBlock;
 import com.sammy.malum.common.block.curiosities.weeping_well.VoidConduitBlockEntity;
 import com.sammy.malum.common.capability.MalumLivingEntityDataCapability;
 import com.sammy.malum.common.capability.MalumPlayerDataCapability;
-import com.sammy.malum.common.packets.VoidRejectionPacket;
+import com.sammy.malum.common.packets.VoidRejectionPayload;
 import com.sammy.malum.registry.client.ShaderRegistry;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.visual_effects.networked.data.PositionEffectData;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.*;
+import net.minecraft.server.level.*;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -32,22 +31,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
-import team.lodestar.lodestone.helpers.BlockHelper;
+import net.neoforged.neoforge.network.*;
+import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.easing.Easing;
 import team.lodestar.lodestone.systems.rendering.VFXBuilders;
 import team.lodestar.lodestone.systems.rendering.shader.ExtendedShaderInstance;
 
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 import static com.sammy.malum.client.VoidRevelationHandler.RevelationType.BLACK_CRYSTAL;
 
 public class TouchOfDarknessHandler {
 
-    public static final ResourceLocation GRAVITY_MODIFIER_UUID = MalumMod.malumPath("weeping_well_reduced_gravity");
+    public static final ResourceLocation GRAVITY_MODIFIER_ID = MalumMod.malumPath("weeping_well_reduced_gravity");
     public static final float MAX_AFFLICTION = 100f;
 
     public boolean isNearWeepingWell;
@@ -92,7 +91,7 @@ public class TouchOfDarknessHandler {
     }
 
     public static Optional<VoidConduitBlockEntity> checkForWeepingWell(LivingEntity livingEntity) {
-        return BlockHelper.getBlockEntitiesStream(VoidConduitBlockEntity.class, livingEntity.level(), livingEntity.blockPosition(), 8).findFirst();
+        return BlockEntityHelper.getBlockEntitiesStream(VoidConduitBlockEntity.class, livingEntity.level(), livingEntity.blockPosition(), 8).findFirst();
     }
 
     public static void entityTick(EntityTickEvent event) {
@@ -132,14 +131,12 @@ public class TouchOfDarknessHandler {
 
             AttributeInstance gravity = livingEntity.getAttribute(Attributes.GRAVITY);
             if (gravity != null) {
-                boolean hasModifier = gravity.getModifier(GRAVITY_MODIFIER_UUID) != null;
+                boolean hasModifier = gravity.getModifier(GRAVITY_MODIFIER_ID) != null;
+                if (hasModifier) {
+                    gravity.removeModifier(GRAVITY_MODIFIER_ID);
+                }
                 if (handler.progressToRejection > 0) {
-                    if (!hasModifier) {
-                        gravity.addTransientModifier(getEntityGravityAttributeModifier(livingEntity));
-                    }
-                    gravity.setDirty();
-                } else if (hasModifier) {
-                    gravity.removeModifier(GRAVITY_MODIFIER_UUID);
+                    gravity.addTransientModifier(getEntityGravityAttributeModifier(livingEntity));
                 }
             }
             //REJECTION
@@ -148,7 +145,9 @@ public class TouchOfDarknessHandler {
                     handler.progressToRejection++;
                     if (!level.isClientSide) {
                         if (livingEntity instanceof Player && level.getGameTime() % 6L == 0) {
-                            level.playSound(null, livingEntity.blockPosition(), SoundRegistry.SONG_OF_THE_VOID, SoundSource.HOSTILE, 0.5f + handler.progressToRejection * 0.02f, 0.5f + handler.progressToRejection * 0.03f);
+                            float volume = 0.5f + handler.progressToRejection * 0.02f;
+                            float pitch = 0.5f + handler.progressToRejection * 0.03f;
+                            SoundHelper.playSound(livingEntity, SoundRegistry.SONG_OF_THE_VOID.get(), SoundSource.HOSTILE, volume, pitch);
                         }
                         if (handler.rejection == 0 && handler.progressToRejection > 60) {
                             handler.reject(livingEntity);
@@ -188,13 +187,12 @@ public class TouchOfDarknessHandler {
         final Level level = livingEntity.level();
         progressToRejection = 0;
         rejection = 40;
-        if (!level.isClientSide) {
-            PacketRegistry.MALUM_CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> livingEntity), new VoidRejectionPacket(livingEntity.getId()));
+        if (level instanceof ServerLevel serverLevel) {
             final Optional<VoidConduitBlockEntity> voidConduitBlockEntity = checkForWeepingWell(livingEntity);
             if (voidConduitBlockEntity.isPresent()) {
                 VoidConduitBlockEntity weepingWell = voidConduitBlockEntity.get();
                 BlockPos worldPosition = weepingWell.getBlockPos();
-                ParticleEffectTypeRegistry.WEEPING_WELL_REACTS.createPositionedEffect(level, new PositionEffectData(worldPosition.getX()+0.5f, worldPosition.getY()+0.6f, worldPosition.getZ()+0.5f));
+                ParticleEffectTypeRegistry.WEEPING_WELL_REACTS.createPositionedEffect(serverLevel, new PositionEffectData(worldPosition.getX()+0.5f, worldPosition.getY()+0.6f, worldPosition.getZ()+0.5f));
             }
             else {
                 ParticleEffectTypeRegistry.WEEPING_WELL_REACTS.createEntityEffect(livingEntity);
@@ -205,7 +203,8 @@ public class TouchOfDarknessHandler {
             if (!playerDataCapability.hasBeenRejected) {
                 SpiritHarvestHandler.spawnItemAsSpirit(ItemRegistry.UMBRAL_SPIRIT.get().getDefaultInstance(), player, player);
             }
-            SoundHelper.playSound(livingEntity, SoundRegistry.VOID_REJECTION, 2f, Mth.nextFloat(livingEntity.getRandom(), 0.5f, 0.8f));
+            PacketDistributor.sendToPlayersTrackingEntityAndSelf(livingEntity, new VoidRejectionPayload(livingEntity.getId()));
+            SoundHelper.playSound(livingEntity, SoundRegistry.VOID_REJECTION.get(), 2f, Mth.nextFloat(livingEntity.getRandom(), 0.5f, 0.8f));
         } else {
             VoidRevelationHandler.seeTheRevelation(BLACK_CRYSTAL);
         }
@@ -215,12 +214,7 @@ public class TouchOfDarknessHandler {
     }
 
     public static AttributeModifier getEntityGravityAttributeModifier(LivingEntity livingEntity) {
-        return new AttributeModifier(GRAVITY_MODIFIER_UUID, "Weeping Well Gravity Modifier", 0, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL) {
-            @Override
-            public double getAmount() {
-                return updateEntityGravity(livingEntity);
-            }
-        };
+        return new AttributeModifier(GRAVITY_MODIFIER_ID, updateEntityGravity(livingEntity), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     }
 
     public static double updateEntityGravity(LivingEntity livingEntity) {
@@ -233,7 +227,7 @@ public class TouchOfDarknessHandler {
 
     public static class ClientOnly {
 
-        public static void renderDarknessVignette(GuiGraphics guiGraphics) {
+        public static void renderDarknessVignette(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
             Minecraft minecraft = Minecraft.getInstance();
             PoseStack poseStack = guiGraphics.pose();
             Player player = minecraft.player;

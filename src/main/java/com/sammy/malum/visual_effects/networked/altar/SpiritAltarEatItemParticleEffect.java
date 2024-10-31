@@ -8,7 +8,8 @@ import com.sammy.malum.visual_effects.networked.data.NBTEffectData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.*;
-import team.lodestar.lodestone.helpers.BlockHelper;
+import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 
 import java.util.function.Supplier;
 
@@ -20,7 +21,7 @@ public class SpiritAltarEatItemParticleEffect extends ParticleEffectType {
 
     public static NBTEffectData createData(BlockPos holderPos, ItemStack stack) {
         NBTEffectData effectData = new NBTEffectData(stack);
-        BlockHelper.saveBlockPos(effectData.compoundTag, holderPos);
+        NBTHelper.saveBlockPos(effectData.compoundTag, holderPos);
         return effectData;
     }
 
@@ -31,7 +32,7 @@ public class SpiritAltarEatItemParticleEffect extends ParticleEffectType {
             if (!(level.getBlockEntity(positionData.getAsBlockPos()) instanceof SpiritAltarBlockEntity spiritAltar)) {
                 return;
             }
-            if (!(level.getBlockEntity(BlockHelper.loadBlockPos(nbtData.compoundTag)) instanceof IMalumSpecialItemAccessPoint holder)) {
+            if (!(level.getBlockEntity(NBTHelper.readBlockPos(nbtData.compoundTag)) instanceof IMalumSpecialItemAccessPoint holder)) {
                 return;
             }
             SpiritAltarParticleEffects.eatItemParticles(spiritAltar, holder, colorData, nbtData.getStack());

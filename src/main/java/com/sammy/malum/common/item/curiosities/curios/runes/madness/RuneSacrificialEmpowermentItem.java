@@ -14,7 +14,7 @@ import team.lodestar.lodestone.handlers.*;
 
 import java.util.function.Consumer;
 
-public class RuneSacrificialEmpowermentItem extends AbstractRuneCurioItem implements IEventResponderItem {
+public class RuneSacrificialEmpowermentItem extends AbstractRuneCurioItem implements ItemEventHandler.IEventResponderItem {
 
     public RuneSacrificialEmpowermentItem(Properties builder) {
         super(builder, SpiritTypeRegistry.WICKED_SPIRIT);

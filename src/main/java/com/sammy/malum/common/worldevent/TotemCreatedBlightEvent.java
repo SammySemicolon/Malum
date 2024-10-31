@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import team.lodestar.lodestone.helpers.BlockHelper;
+import team.lodestar.lodestone.helpers.block.*;
 
 import static com.sammy.malum.registry.common.block.BlockRegistry.SOULWOOD_TOTEM_BASE;
 import static com.sammy.malum.registry.common.block.BlockRegistry.SOULWOOD_TOTEM_POLE;
@@ -24,7 +24,7 @@ public class TotemCreatedBlightEvent extends ActiveBlightEvent {
     @Override
     public void tick(Level level) {
         if (totemTakeoverTimer == 0) {
-            BlockState state = BlockHelper.setBlockStateWithExistingProperties(level, sourcePos, SOULWOOD_TOTEM_BASE.get().defaultBlockState(), 3);
+            BlockState state = BlockStateHelper.setBlockStateWithExistingProperties(level, sourcePos, SOULWOOD_TOTEM_BASE.get().defaultBlockState(), 3);
             level.setBlockEntity(new TotemBaseBlockEntity(sourcePos, state));
             level.levelEvent(null, 2001, sourcePos, Block.getId(state));
             level.playSound(null, sourcePos, SoundRegistry.MINOR_BLIGHT_MOTIF.get(), SoundSource.BLOCKS, 1f, 1.8f);
@@ -35,7 +35,7 @@ public class TotemCreatedBlightEvent extends ActiveBlightEvent {
             BlockPos totemPos = sourcePos.above(offset);
             if (level.getBlockEntity(totemPos) instanceof TotemPoleBlockEntity totemPoleTile) {
                 MalumSpiritType type = totemPoleTile.spirit;
-                BlockState state = BlockHelper.setBlockStateWithExistingProperties(level, totemPos, SOULWOOD_TOTEM_POLE.get().defaultBlockState(), 3);
+                BlockState state = BlockStateHelper.setBlockStateWithExistingProperties(level, totemPos, SOULWOOD_TOTEM_POLE.get().defaultBlockState(), 3);
                 TotemPoleBlockEntity newTotemPole = new TotemPoleBlockEntity(totemPos, state);
                 newTotemPole.setLevel(level);
                 newTotemPole.setSpirit(type);

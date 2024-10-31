@@ -1,5 +1,6 @@
 package com.sammy.malum.common.item;
 
+import com.sammy.malum.core.systems.events.*;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -11,19 +12,9 @@ public interface IMalumEventResponderItem extends ItemEventHandler.IEventRespond
 
     }
 
-    default float adjustSoulWardDamageAbsorption(LivingDamageEvent.Pre event, Player wardedEntity, ItemStack stack, float original) {
-        return adjustSoulWardDamageAbsorption(wardedEntity, stack, original);
+    default void modifySoulWardProperties(ModifySoulWardPropertiesEvent event, Player wardedEntity, ItemStack stack) {
     }
 
-    default float adjustSoulWardDamageAbsorption(Player wardedEntity, ItemStack stack, float original) {
-        return original;
-    }
-
-    default void onSoulwardAbsorbDamage(LivingDamageEvent.Pre event, Player wardedEntity, ItemStack stack, double soulwardLost, float damageAbsorbed) {
-        onSoulwardAbsorbDamage(wardedEntity, stack, soulwardLost, damageAbsorbed);
-    }
-
-    default void onSoulwardAbsorbDamage(Player wardedEntity, ItemStack stack, double soulwardLost, float damageAbsorbed) {
-
+    default void incomingSoulWardDamageEvent(LivingDamageEvent.Pre event, Player wardedEntity, ItemStack stack, double soulwardLost, float damageAbsorbed) {
     }
 }

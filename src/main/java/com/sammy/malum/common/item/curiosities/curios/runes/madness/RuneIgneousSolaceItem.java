@@ -11,7 +11,7 @@ import team.lodestar.lodestone.handlers.*;
 
 import java.util.function.Consumer;
 
-public class RuneIgneousSolaceItem extends AbstractRuneCurioItem implements IEventResponderItem {
+public class RuneIgneousSolaceItem extends AbstractRuneCurioItem implements ItemEventHandler.IEventResponderItem {
 
     public RuneIgneousSolaceItem(Properties builder) {
         super(builder, SpiritTypeRegistry.INFERNAL_SPIRIT);
@@ -23,9 +23,9 @@ public class RuneIgneousSolaceItem extends AbstractRuneCurioItem implements IEve
     }
 
     @Override
-    public void takeDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
+    public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
         if (attacked.isOnFire()) {
-            ((AccessorEvent.PostDamage)event).malum$setNewDamage(event.getNewDamage()*0.75f);
+            event.setNewDamage(event.getNewDamage()*0.75f);
         }
     }
 }

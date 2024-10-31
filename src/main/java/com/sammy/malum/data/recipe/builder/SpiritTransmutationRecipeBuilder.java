@@ -1,7 +1,7 @@
 package com.sammy.malum.data.recipe.builder;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.common.recipe.SpiritTransmutationRecipe;
+import com.sammy.malum.common.recipe.spirit.transmutation.*;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -25,7 +25,7 @@ public class SpiritTransmutationRecipeBuilder implements AutonamedRecipeBuilder<
         this.output = output;
     }
 
-    public SpiritTransmutationRecipeBuilder(DeferredHolder<Item, ? extends ItemLike> input, DeferredHolder<? extends ItemLike> output) {
+    public SpiritTransmutationRecipeBuilder(DeferredHolder<Item, ? extends ItemLike> input, DeferredHolder<Item, ? extends ItemLike> output) {
         this(input.get(), output.get());
     }
 

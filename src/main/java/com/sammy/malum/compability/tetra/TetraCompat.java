@@ -5,13 +5,12 @@ import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.*;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.*;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import se.mickelus.tetra.aspect.ItemAspect;
-import se.mickelus.tetra.aspect.TetraEnchantmentHelper;
-import se.mickelus.tetra.effect.ItemEffect;
-import se.mickelus.tetra.items.modular.ModularItem;
+//import se.mickelus.tetra.aspect.ItemAspect;
+//import se.mickelus.tetra.aspect.TetraEnchantmentHelper;
+//import se.mickelus.tetra.effect.ItemEffect;
+//import se.mickelus.tetra.items.modular.ModularItem;
 
 public class TetraCompat {
     public static boolean LOADED;
@@ -32,18 +31,18 @@ public class TetraCompat {
 
     public static class LoadedOnly {
 
-        private static final ItemEffect SHATTERS_SOULS = ItemEffect.get("malum.shatters_souls");
+//        private static final ItemEffect SHATTERS_SOULS = ItemEffect.get("malum.shatters_souls");
 
-        public static final ItemAspect SOUL_HUNTER_TOOL = ItemAspect.get("soulStained");
+//        public static final ItemAspect SOUL_HUNTER_TOOL = ItemAspect.get("soulStained");
 
-        static {
-            TetraEnchantmentHelper.registerMapping(SOUL_HUNTER_TOOL, new TetraEnchantmentHelper.EnchantmentRules("additions/malum_something", "exclusions/malum_something", EnchantmentRegistry.SOUL_SHATTER_CAPABLE_WEAPON));
-        }
+//        static {
+//            TetraEnchantmentHelper.registerMapping(SOUL_HUNTER_TOOL, new TetraEnchantmentHelper.EnchantmentRules("additions/malum_something", "exclusions/malum_something", EnchantmentRegistry.SOUL_SHATTER_CAPABLE_WEAPON));
+//        }
 
         public static boolean hasSoulStrikeModifier(ItemStack stack) {
-            if (stack.getItem() instanceof ModularItem modularItem) {
-                return modularItem.getEffectLevel(stack, SHATTERS_SOULS) > 0;
-            }
+//            if (stack.getItem() instanceof ModularItem modularItem) {
+//                return modularItem.getEffectLevel(stack, SHATTERS_SOULS) > 0;
+//            }
             return false;
         }
 

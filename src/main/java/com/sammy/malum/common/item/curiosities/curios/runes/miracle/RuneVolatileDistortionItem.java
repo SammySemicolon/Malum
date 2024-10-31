@@ -13,7 +13,7 @@ import team.lodestar.lodestone.handlers.*;
 
 import java.util.function.Consumer;
 
-public class RuneVolatileDistortionItem extends AbstractRuneCurioItem implements IEventResponderItem {
+public class RuneVolatileDistortionItem extends AbstractRuneCurioItem implements ItemEventHandler.IEventResponderItem {
 
     public RuneVolatileDistortionItem(Properties builder) {
         super(builder, SpiritTypeRegistry.ELDRITCH_SPIRIT);
@@ -26,12 +26,12 @@ public class RuneVolatileDistortionItem extends AbstractRuneCurioItem implements
     }
 
     @Override
-    public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         final RandomSource random = attacker.getRandom();
         float multiplier = Mth.nextFloat(random, 0.9f, 1.2f);
         if (random.nextFloat() < 0.1f) {
             multiplier *= 2;
         }
-        ((AccessorEvent.PostDamage)event).malum$setNewDamage(event.getNewDamage() * multiplier);
+        event.setNewDamage(event.getNewDamage() * multiplier);
     }
 }

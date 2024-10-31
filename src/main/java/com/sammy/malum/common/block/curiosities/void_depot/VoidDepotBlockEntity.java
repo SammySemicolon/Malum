@@ -17,6 +17,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.state.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
 import java.util.*;
@@ -140,7 +141,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
                 }
                 this.goals.clear();
                 this.goals.addAll(newGoals);
-                BlockHelper.updateState(level, getBlockPos());
+                BlockStateHelper.updateState(level, getBlockPos());
                 return ItemInteractionResult.SUCCESS;
             }
             if (player.getItemInHand(hand).getItem().equals(ItemRegistry.VOID_CONDUIT.get())) {
@@ -155,7 +156,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
                 }
                 this.goals.clear();
                 this.goals.addAll(newGoals);
-                BlockHelper.updateState(level, getBlockPos());
+                BlockStateHelper.updateState(level, getBlockPos());
                 return ItemInteractionResult.SUCCESS;
             }
             if (oncePerPlayer && playersWhoCompleted.contains(player.getUUID())) {
@@ -211,7 +212,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
                 level.playSound(null, worldPosition, SoundRegistry.VOID_EATS_GUNK.get(), SoundSource.PLAYERS, 0.7f, 0.6f + random.nextFloat() * 0.3f);
                 level.playSound(null, worldPosition, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 0.7f, 0.6f + random.nextFloat() * 0.2f);
                 level.playSound(null, worldPosition, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.1F, (random.nextFloat() - random.nextFloat()) * 0.35F + 0.9F);
-                BlockHelper.updateState(level, getBlockPos());
+                BlockStateHelper.updateState(level, getBlockPos());
                 return ItemInteractionResult.SUCCESS;
             }
         }
@@ -250,7 +251,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
                 goal.reset();
             }
         }
-        BlockHelper.updateState(level, getBlockPos());
+        BlockStateHelper.updateState(level, getBlockPos());
     }
 
     public static final StringRepresentable.EnumCodec<VoidDepotGoal.VoidDepotGoalType> CODEC = StringRepresentable.fromEnum(VoidDepotGoal.VoidDepotGoalType::values);

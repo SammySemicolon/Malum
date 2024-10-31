@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
 import javax.annotation.*;
@@ -98,7 +99,7 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
                     if (timer >= activeRite.getRiteEffect(isSoulwood).getRiteEffectTickRate()) {
                         activeRite.executeRite(this);
                         timer = 0;
-                        BlockHelper.updateAndNotifyState(level, worldPosition);
+                        BlockStateHelper.updateAndNotifyState(level, worldPosition);
                     }
                 }
                 case ASSEMBLING -> {
@@ -157,7 +158,7 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
                 } else {
                     setState(TotemRiteState.ASSEMBLING);
                 }
-                BlockHelper.updateState(level, worldPosition);
+                BlockStateHelper.updateState(level, worldPosition);
             }
             player.swing(InteractionHand.MAIN_HAND, true);
             return ItemInteractionResult.SUCCESS;
@@ -183,14 +184,14 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
                 pole.riteStarting(this, totemPolePositions.size());
             }
         }
-        BlockHelper.updateState(level, worldPosition);
+        BlockStateHelper.updateState(level, worldPosition);
     }
 
     public void deactivateOtherRites() {
         TotemicRiteEffect riteEffect = activeRite.getRiteEffect(isSoulwood);
         int horizontalRadius = riteEffect.getRiteEffectHorizontalRadius();
         int verticalRadius = riteEffect.getRiteEffectVerticalRadius();
-        Collection<TotemBaseBlockEntity> deactivatedTotems = BlockHelper.getBlockEntities(TotemBaseBlockEntity.class, level, riteEffect.getRiteEffectCenter(this), horizontalRadius, verticalRadius, horizontalRadius);
+        Collection<TotemBaseBlockEntity> deactivatedTotems = BlockEntityHelper.getBlockEntities(TotemBaseBlockEntity.class, level, riteEffect.getRiteEffectCenter(this), horizontalRadius, verticalRadius, horizontalRadius);
         for (TotemBaseBlockEntity deactivatedTotem : deactivatedTotems) {
             if (deactivatedTotem.equals(this)) {
                 continue;
@@ -203,7 +204,7 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
             }
             deactivatedTotem.setState(TotemRiteState.IDLE);
         }
-        Collection<TotemBaseBlockEntity> otherTotems = BlockHelper.getBlockEntities(TotemBaseBlockEntity.class, level, worldPosition, 24);
+        Collection<TotemBaseBlockEntity> otherTotems = BlockEntityHelper.getBlockEntities(TotemBaseBlockEntity.class, level, worldPosition, 24);
         for (TotemBaseBlockEntity otherTotem : otherTotems) {
             if (otherTotem.equals(this)) {
                 continue;
@@ -214,7 +215,7 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
             riteEffect = activeRite.getRiteEffect(isSoulwood);
             horizontalRadius = riteEffect.getRiteEffectHorizontalRadius();
             verticalRadius = riteEffect.getRiteEffectVerticalRadius();
-            if (BlockHelper.getBlockEntities(TotemBaseBlockEntity.class, level, riteEffect.getRiteEffectCenter(otherTotem), horizontalRadius, verticalRadius, horizontalRadius).contains(this)) {
+            if (BlockEntityHelper.getBlockEntities(TotemBaseBlockEntity.class, level, riteEffect.getRiteEffectCenter(otherTotem), horizontalRadius, verticalRadius, horizontalRadius).contains(this)) {
                 otherTotem.setState(TotemRiteState.IDLE);
             }
         }
@@ -235,7 +236,7 @@ public class TotemBaseBlockEntity extends LodestoneBlockEntity {
         }
         this.state = state;
         this.timer = 0;
-        BlockHelper.updateAndNotifyState(level, worldPosition);
+        BlockStateHelper.updateAndNotifyState(level, worldPosition);
     }
 
     public void modifyTotemPoles(TotemPoleBlockEntity.TotemPoleState state) {

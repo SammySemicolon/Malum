@@ -19,10 +19,11 @@ public class NBTEffectData {
 
     public NBTEffectData(ItemStack stack) {
         this();
-        compoundTag.put(ITEM, stack.save(new CompoundTag()));
+//        compoundTag.put(ITEM, stack.save(new CompoundTag()));
     }
 
     public ItemStack getStack() {
-        return compoundTag.contains(ITEM) ? ItemStack.of(compoundTag.getCompound(ITEM)) : ItemStack.EMPTY;
+        return ItemStack.EMPTY;
+//        return compoundTag.contains(ITEM) ? ItemStack.of(compoundTag.getCompound(ITEM)) : ItemStack.EMPTY;
     }
 }

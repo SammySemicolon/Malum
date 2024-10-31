@@ -63,10 +63,10 @@ public class PointyDirectionalParticleBehavior implements LodestoneParticleBehav
         float blue = particle.getBlue();
         float alpha = particle.getAlpha();
 
-        consumer.vertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).uv(f8, f6).color(red, green, blue, alpha).uv2(j).endVertex();
-        consumer.vertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).uv(f8, f5).color(red, green, blue, alpha).uv2(j).endVertex();
-        consumer.vertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).uv(f7, f5).color(red, green, blue, alpha).uv2(j).endVertex();
-        consumer.vertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).uv(f7, f6).color(red, green, blue, alpha).uv2(j).endVertex();
+        consumer.addVertex(avector3f[0].x(), avector3f[0].y(), avector3f[0].z()).setUv(f8, f6).setColor(red, green, blue, alpha).setLight(j);
+        consumer.addVertex(avector3f[1].x(), avector3f[1].y(), avector3f[1].z()).setUv(f8, f5).setColor(red, green, blue, alpha).setLight(j);
+        consumer.addVertex(avector3f[2].x(), avector3f[2].y(), avector3f[2].z()).setUv(f7, f5).setColor(red, green, blue, alpha).setLight(j);
+        consumer.addVertex(avector3f[3].x(), avector3f[3].y(), avector3f[3].z()).setUv(f7, f6).setColor(red, green, blue, alpha).setLight(j);
     }
 
     public Quaternionf oldSchool(float pX, float pY, float pZ) {

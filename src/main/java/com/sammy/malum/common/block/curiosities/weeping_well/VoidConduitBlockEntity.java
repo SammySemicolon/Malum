@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
 import java.util.*;
@@ -102,7 +103,7 @@ public class VoidConduitBlockEntity extends LodestoneBlockEntity {
                     progress = resultingProgress;
                     eatenItems.remove(eatenItems.size() - 1);
                     particleEffectType.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition.getX() + 0.5f, worldPosition.getY() + 0.6f, worldPosition.getZ() + 0.5f));
-                    BlockHelper.updateAndNotifyState(level, worldPosition);
+                    BlockStateHelper.updateAndNotifyState(level, worldPosition);
                 }
                 if (eatenItems.isEmpty()) {
                     progress = 0;
@@ -134,7 +135,7 @@ public class VoidConduitBlockEntity extends LodestoneBlockEntity {
             eatenItems.add(item);
             entity.discard();
         }
-        BlockHelper.updateAndNotifyState(level, worldPosition);
+        BlockStateHelper.updateAndNotifyState(level, worldPosition);
     }
 
     public Item spitOutItem(ItemStack stack) {

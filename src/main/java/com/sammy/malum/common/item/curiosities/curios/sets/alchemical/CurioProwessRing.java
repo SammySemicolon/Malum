@@ -22,7 +22,7 @@ public class CurioProwessRing extends MalumCurioItem implements IMalumEventRespo
     }
 
     @Override
-    public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
+    public void collectSpirit(LivingEntity collector, double arcaneResonance) {
         var level = collector.level();
         int generatedExperience = (int) Math.round(RandomHelper.randomBetween(level.random, 1, 4) * arcaneResonance);
 

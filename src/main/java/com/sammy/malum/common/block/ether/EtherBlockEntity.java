@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
@@ -95,7 +96,7 @@ public class EtherBlockEntity extends LodestoneBlockEntity {
     @Override
     public void init() {
         if (!level.isClientSide) {
-            BlockHelper.updateState(level, worldPosition);
+            BlockStateHelper.updateState(level, worldPosition);
         }
     }
 

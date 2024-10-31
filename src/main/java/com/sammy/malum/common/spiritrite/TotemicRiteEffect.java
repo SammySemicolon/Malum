@@ -8,6 +8,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 
 import java.util.*;
 import java.util.function.*;
@@ -100,14 +101,14 @@ public abstract class TotemicRiteEffect {
     public Stream<BlockPos> getNearbyBlocks(TotemBaseBlockEntity totemBase, Class<?> clazz) {
         final int horizontal = getRiteEffectHorizontalRadius();
         final int vertical = getRiteEffectVerticalRadius();
-        return BlockHelper.getBlocksStream(
+        return BlockPosHelper.getBlocksStream(
                 getRiteEffectCenter(totemBase),
                 horizontal, vertical, horizontal,
                 p -> canAffectBlock(totemBase, clazz, p));
     }
 
     public Stream<BlockPos> getBlocksAhead(TotemBaseBlockEntity totemBase) {
-        return BlockHelper.getPlaneOfBlocksStream(
+        return BlockPosHelper.getPlaneOfBlocksStream(
                 getRiteEffectCenter(totemBase),
                 getRiteEffectHorizontalRadius(),
                 p -> canAffectBlock(totemBase, p));

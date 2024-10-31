@@ -206,9 +206,10 @@ public class ArcanaCodexHelper {
     }
 
     public static void renderComponent(AbstractMalumScreen screen, GuiGraphics guiGraphics, Ingredient component, int posX, int posY, int mouseX, int mouseY) {
-        switch (component.getItems().length) {
-            case 1 -> renderItem(screen, guiGraphics, component.getItems()[0], posX, posY, mouseX, mouseY);
-            default -> renderItemList(screen, guiGraphics, List.of(component.getItems()), posX, posY, mouseX, mouseY, true).run();
+        if (component.getItems().length == 1) {
+            renderItem(screen, guiGraphics, component.getItems()[0], posX, posY, mouseX, mouseY);
+        } else {
+            renderItemList(screen, guiGraphics, List.of(component.getItems()), posX, posY, mouseX, mouseY, true).run();
         }
     }
 

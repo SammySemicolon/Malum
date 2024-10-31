@@ -23,7 +23,7 @@ import static com.sammy.malum.MalumMod.*;
 
 public class ThrownConcentratedGluttonyRenderer extends EntityRenderer<ThrownConcentratedGluttony> {
 
-   private static final RenderType TRANSPARENT_TRAIL_TYPE = LodestoneRenderTypeRegistry.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(malumPath("textures/vfx/concentrated_trail.png")), ShaderUniformHandler.LUMITRANSPARENT);
+   private static final RenderType TRANSPARENT_TRAIL_TYPE = LodestoneRenderTypes.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(malumPath("textures/vfx/concentrated_trail.png")), ShaderUniformHandler.LUMITRANSPARENT);
 
    private static final Color GLUTTONY_GREEN = new Color(47, 81, 28);
    private static final Color GLUTTONY_DARK = new Color(31, 35, 30);
@@ -52,7 +52,7 @@ public class ThrownConcentratedGluttonyRenderer extends EntityRenderer<ThrownCon
    @Override
    public void render(ThrownConcentratedGluttony entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn) {
       if (entity.tickCount >= 2 || !(this.entityRenderDispatcher.camera.getEntity().distanceToSqr(entity) < 12.25D)) {
-         if (!entity.fadingAway) {
+         if (!entity.isFadingAway()) {
             poseStack.pushPose();
             poseStack.scale(this.scale, this.scale, this.scale);
             poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
@@ -61,8 +61,8 @@ public class ThrownConcentratedGluttonyRenderer extends EntityRenderer<ThrownCon
             poseStack.popPose();
          }
          float scale = entity.getVisualEffectScalar();
-         var additive = LodestoneRenderTypeRegistry.ADDITIVE_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
-         var transparent = LodestoneRenderTypeRegistry.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL, ShaderUniformHandler.LUMITRANSPARENT);
+         var additive = LodestoneRenderTypes.ADDITIVE_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
+         var transparent = LodestoneRenderTypes.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL, ShaderUniformHandler.LUMITRANSPARENT);
          var builder = VFXBuilders.createWorld().setRenderType(additive);
          for (TrailPointBuilder trail : entity.trails) {
             RenderUtils.renderEntityTrail(poseStack, builder, trail, entity, GLUTTONY_GREEN, GLUTTONY_DARK, scale * 0.5f, scale * 0.5f, partialTicks);

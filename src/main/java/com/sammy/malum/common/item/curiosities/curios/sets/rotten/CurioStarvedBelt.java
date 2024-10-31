@@ -26,7 +26,7 @@ public class CurioStarvedBelt extends MalumCurioItem implements IMalumEventRespo
     }
 
     @Override
-    public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
+    public void collectSpirit(LivingEntity collector, double arcaneResonance) {
         Holder<MobEffect> gluttony = MobEffectRegistry.GLUTTONY;
         MobEffectInstance effect = collector.getEffect(gluttony);
         if (effect == null) {

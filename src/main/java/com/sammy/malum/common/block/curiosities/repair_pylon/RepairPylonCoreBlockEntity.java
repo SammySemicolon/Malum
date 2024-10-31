@@ -30,6 +30,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.multiblock.*;
@@ -89,7 +90,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
                 needsSync = true;
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         };
         spiritInventory = new MalumBlockEntityInventory(4, 64) {
@@ -98,7 +99,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
                 super.onContentsChanged(slot);
                 needsSync = true;
                 spiritAmount = Math.max(1, Mth.lerp(0.15f, spiritAmount, nonEmptyItemAmount + 1));
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
 
             @Override
@@ -129,7 +130,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
             compound.putFloat("spiritAmount", spiritAmount);
         }
         if (repairablePosition != null) {
-            compound.put("targetedBlock", BlockHelper.saveBlockPos(new CompoundTag(), repairablePosition));
+            compound.put("targetedBlock", NBTHelper.saveBlockPos(new CompoundTag(), repairablePosition));
         }
         if (timer != 0) {
             compound.putInt("timer", timer);
@@ -142,7 +143,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     public void loadAdditional(CompoundTag compound, HolderLookup.Provider pRegistries) {
         state = compound.contains("state") ? CODEC.byName(compound.getString("state")) : RepairPylonState.IDLE;
         spiritAmount = compound.getFloat("spiritAmount");
-        repairablePosition = BlockHelper.loadBlockPos(compound.getCompound("targetedBlock"));
+        repairablePosition = NBTHelper.readBlockPos(compound.getCompound("targetedBlock"));
         timer = compound.getInt("timer");
         inventory.load(pRegistries, compound);
         spiritInventory.load(pRegistries, compound, "spiritInventory");
@@ -270,7 +271,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     }
 
     public boolean tryRepair() {
-        Collection<IMalumSpecialItemAccessPoint> altarProviders = BlockHelper.getBlockEntities(IMalumSpecialItemAccessPoint.class, level, worldPosition, HORIZONTAL_RANGE, VERTICAL_RANGE, HORIZONTAL_RANGE);
+        Collection<IMalumSpecialItemAccessPoint> altarProviders = BlockEntityHelper.getBlockEntities(IMalumSpecialItemAccessPoint.class, level, worldPosition, HORIZONTAL_RANGE, VERTICAL_RANGE, HORIZONTAL_RANGE);
         for (IMalumSpecialItemAccessPoint provider : altarProviders) {
             boolean success = tryRepair(provider);
             if (success) {
@@ -335,7 +336,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     public void setState(RepairPylonState state) {
         this.state = state;
         this.timer = state.equals(RepairPylonState.SEARCHING) ? 100 : 0;
-        BlockHelper.updateAndNotifyState(level, worldPosition);
+        BlockStateHelper.updateAndNotifyState(level, worldPosition);
     }
 
     public Vec3 getItemPos() {
@@ -356,7 +357,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
             distance += getCooldownOffset(relativeCooldown, Easing.SINE_OUT) * 0.25f;
             height -= getCooldownOffset(relativeCooldown, Easing.QUARTIC_OUT) * getCooldownOffset(relativeCooldown, Easing.BACK_OUT) * 0.5f;
         }
-        return DataHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, spiritAmount, (long) (spiritSpin + partialTicks), 360);
+        return VecHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, spiritAmount, spiritSpin + partialTicks, 360);
     }
 
     public float getCooldownOffset(int relativeCooldown, Easing easing) {
@@ -367,10 +368,4 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
         return combinedInventory.get();
     }
-
-    /*@Override
-    public AABB getRenderBoundingBox() {
-        var pos = worldPosition;
-        return new AABB(pos.getX() - 1, pos.getY(), pos.getZ() - 1, pos.getX() + 1, pos.getY() + 4, pos.getZ() + 1);
-    }*/
 }

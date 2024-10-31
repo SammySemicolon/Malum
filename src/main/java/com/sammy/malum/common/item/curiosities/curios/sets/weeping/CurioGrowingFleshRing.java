@@ -27,7 +27,7 @@ public class CurioGrowingFleshRing extends MalumCurioItem implements IVoidItem, 
     }
 
     @Override
-    public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
+    public void collectSpirit(LivingEntity collector, double arcaneResonance) {
         Holder<MobEffect> cancerousGrowth = MobEffectRegistry.CANCEROUS_GROWTH;
         MobEffectInstance effect = collector.getEffect(cancerousGrowth);
         int addedDuration = (int) (150 * arcaneResonance);

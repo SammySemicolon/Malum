@@ -21,7 +21,7 @@ public class CurioAlchemicalRing extends MalumCurioItem implements IMalumEventRe
     }
 
     @Override
-    public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
+    public void collectSpirit(LivingEntity collector, double arcaneResonance) {
         for (MobEffectInstance instance : collector.getActiveEffectsMap().values()) {
             var e = instance.getEffect().value();
             int durationChange = (int) (60 * arcaneResonance);

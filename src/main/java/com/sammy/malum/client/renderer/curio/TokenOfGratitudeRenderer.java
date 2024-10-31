@@ -79,7 +79,7 @@ public class TokenOfGratitudeRenderer implements ICurioRenderer {
     public static void renderGlowingEyes(AbstractClientPlayer playerEntity, RenderType renderType, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light) {
         VertexConsumer vertexconsumer = renderTypeBuffer.getBuffer(renderType);
         ICurioRenderer.followHeadRotations(playerEntity, ModelRegistry.HEAD_OVERLAY_MODEL.overlay);
-        ModelRegistry.HEAD_OVERLAY_MODEL.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        ModelRegistry.HEAD_OVERLAY_MODEL.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 16777215);
     }
 
 
@@ -101,18 +101,18 @@ public class TokenOfGratitudeRenderer implements ICurioRenderer {
         poseStack.mulPose(Axis.XP.rotationDegrees((float) ambientXRotation));
         double ambientYRotation = Math.cos(playerEntity.level().getGameTime() / 24f) * -ambientFactor;
         poseStack.mulPose(Axis.YP.rotationDegrees((float) ambientYRotation));
-        VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), false, stack.hasFoil());
+        VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
         ModelRegistry.TAIL_MODEL.setupAnim(playerEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         ModelRegistry.TAIL_MODEL.prepareMobModel(playerEntity, limbSwing, limbSwingAmount, partialTicks);
         ICurioRenderer.translateIfSneaking(poseStack, playerEntity);
         ICurioRenderer.rotateIfSneaking(poseStack, playerEntity);
-        ModelRegistry.TAIL_MODEL.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        ModelRegistry.TAIL_MODEL.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 16777215);
         poseStack.popPose();
     }
 
     public static void renderScarf(AbstractClientPlayer playerEntity, ResourceLocation texture, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light) {
         VertexConsumer vertexconsumer = renderTypeBuffer.getBuffer(RenderType.armorCutoutNoCull(texture));
-        float pticks = Minecraft.getInstance().getFrameTime();
+        float pticks = Minecraft.getInstance().timer.getGameTimeDeltaTicks();
         float f = Mth.rotLerp(pticks, playerEntity.yBodyRotO, playerEntity.yBodyRot);
         float f1 = Mth.rotLerp(pticks, playerEntity.yHeadRotO, playerEntity.yHeadRot);
         float netHeadYaw = f1 - f;
@@ -125,6 +125,6 @@ public class TokenOfGratitudeRenderer implements ICurioRenderer {
             }
         }
         ModelRegistry.SCARF.setupAnim(playerEntity, playerEntity.walkAnimation.position(), playerEntity.walkAnimation.speed(), playerEntity.tickCount + pticks, netHeadYaw, netHeadPitch);
-        ModelRegistry.SCARF.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        ModelRegistry.SCARF.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 16777215);
     }
 }

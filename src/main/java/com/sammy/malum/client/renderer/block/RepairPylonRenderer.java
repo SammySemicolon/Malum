@@ -25,6 +25,12 @@ public class RepairPylonRenderer implements BlockEntityRenderer<RepairPylonCoreB
     }
 
     @Override
+    public AABB getRenderBoundingBox(RepairPylonCoreBlockEntity blockEntityIn) {
+        var pos = blockEntityIn.getBlockPos();
+        return new AABB(pos.getX() - 1, pos.getY(), pos.getZ() - 1, pos.getX() + 2, pos.getY() + 5, pos.getZ() + 2);
+    }
+
+    @Override
     public void render(RepairPylonCoreBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         Level level = Minecraft.getInstance().level;
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();

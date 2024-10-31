@@ -24,6 +24,7 @@ import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.items.IItemHandler;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.multiblock.*;
 
@@ -51,7 +52,7 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
             @Override
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         };
         augmentInventory = new AugmentBlockEntityInventory(1, 1) {
@@ -59,7 +60,7 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
                 needsSync = true;
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         };
     }
@@ -183,7 +184,7 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
                 burnTicks = inventory.getStackInSlot(0).getBurnTime(RecipeType.SMELTING) / 2f;
                 stack.shrink(1);
                 inventory.updateData();
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         }
         return burnTicks != 0;

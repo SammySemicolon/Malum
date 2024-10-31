@@ -63,7 +63,7 @@ public class EntryScreen extends AbstractMalumScreen {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        renderBackground(guiGraphics);
+        renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         PoseStack poseStack = guiGraphics.pose();
         int guiLeft = getGuiLeft();
@@ -133,16 +133,16 @@ public class EntryScreen extends AbstractMalumScreen {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         if (ClientConfig.SCROLL_DIRECTION.getConfigValue()) {
-            scroll = -scroll;
+            scrollY = -scrollY;
         }
-        if (scroll > 0) {
+        if (scrollY > 0) {
             nextPage();
         } else {
             previousPage(false);
         }
-        return super.mouseScrolled(mouseX, mouseY, scroll);
+        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.util.*;
+import net.minecraft.world.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.*;
@@ -15,8 +16,6 @@ import team.lodestar.lodestone.systems.rendering.trail.*;
 
 public abstract class AbstractScytheProjectileEntity extends ThrowableItemProjectile {
 
-    public final TrailPointBuilder theFormer = TrailPointBuilder.create(8);
-    public final TrailPointBuilder theLatter = TrailPointBuilder.create(8);
     public float spinOffset = (float) (random.nextFloat() * Math.PI * 2);
 
     public int slot;
@@ -88,23 +87,25 @@ public abstract class AbstractScytheProjectileEntity extends ThrowableItemProjec
         if (level().isClientSide()) {
             return;
         }
-        if (getOwner() instanceof LivingEntity scytheOwner) {
-            Entity target = result.getEntity();
-            DamageSource source = DamageTypeHelper.create(level(), DamageTypeRegistry.SCYTHE_SWEEP, this, scytheOwner);
+        if (getOwner() instanceof LivingEntity owner) {
+            var target = result.getEntity();
+            var source = DamageTypeHelper.create(level(), DamageTypeRegistry.SCYTHE_SWEEP, this, owner);
+            var heldItem = owner.getMainHandItem();
+
+            owner.setItemInHand(InteractionHand.MAIN_HAND, getItem());
             target.invulnerableTime = 0;
             boolean success = target.hurt(source, damage);
             if (success && target instanceof LivingEntity livingentity) {
-                ItemStack scythe = getItem();
-                ItemHelper.applyEnchantments(scytheOwner, livingentity, source, scythe);
                 if (magicDamage > 0) {
                     if (!livingentity.isDeadOrDying()) {
                         livingentity.invulnerableTime = 0;
-                        livingentity.hurt(DamageTypeHelper.create(level(), DamageTypeRegistry.VOODOO, this, scytheOwner), magicDamage);
+                        livingentity.hurt(DamageTypeHelper.create(level(), DamageTypeRegistry.VOODOO, this, owner), magicDamage);
                     }
                 }
-                enemiesHit += 1;
+                enemiesHit++;
                 returnTimer += 2;
             }
+            owner.setItemInHand(InteractionHand.MAIN_HAND, heldItem);
             SoundHelper.playSound(this, SoundRegistry.SCYTHE_SWEEP.get(),1.0f, RandomHelper.randomBetween(level().getRandom(), 0.75f, 1.25f));
         }
         super.onHitEntity(result);
@@ -114,32 +115,11 @@ public abstract class AbstractScytheProjectileEntity extends ThrowableItemProjec
     public void tick() {
         super.tick();
         age++;
-        var level = level();
-        if (level.isClientSide) {
-            addTrailPoints();
-            theFormer.tickTrailPoints();
-            theLatter.tickTrailPoints();
-        } else {
+        if (xRotO == 0.0F && yRotO == 0.0F) {
             var motion = getDeltaMovement();
-            if (xRotO == 0.0F && yRotO == 0.0F) {
-                setYRot((float) (Mth.atan2(motion.x, motion.z) * (double) (180F / (float) Math.PI)));
-                yRotO = getYRot();
-                xRotO = getXRot();
-            }
-        }
-    }
-
-    public void addTrailPoints() {
-        for (int i = 0; i < 2; i++) {
-            float progress = (i + 1) * 0.5f;
-            Vec3 position = getPosition(progress);
-            float scalar = (age + progress) / 2f;
-            for (int j = 0; j < 2; j++) {
-                var trail = j == 0 ? theFormer : theLatter;
-                double xOffset = Math.cos(spinOffset + 3.14f * j + scalar) * 1.2f;
-                double zOffset = Math.sin(spinOffset + 3.14f * j + scalar) * 1.2f;
-                trail.addTrailPoint(position.add(xOffset, 0, zOffset));
-            }
+            setYRot((float) (Mth.atan2(motion.x, motion.z) * (double) (180F / (float) Math.PI)));
+            yRotO = getYRot();
+            xRotO = getXRot();
         }
     }
 

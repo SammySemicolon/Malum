@@ -64,7 +64,7 @@ public class ArcaneRiteType extends TotemicRiteType {
                             level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, recipe.output.copy()));
                             PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(p), new BlightTransformItemParticlePacket(List.of(ARCANE_SPIRIT.getIdentifier()), itemPos));
                             inventoryForAltar.extractItem(0, 1, false);
-                            BlockHelper.updateAndNotifyState(level, p);
+                            BlockStateHelper.updateAndNotifyState(level, p);
                         }
                     }
                     ItemStack stack = stateToTransmute.getBlock().asItem().getDefaultInstance();

@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -41,7 +42,7 @@ public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity implements
     @Override
     public ItemInteractionResult onUse(Player player, InteractionHand pHand) {
         if (player instanceof ServerPlayer serverPlayer) {
-            MenuProvider container = new SimpleMenuProvider((w, p, pl) -> new WeaversWorkbenchContainer(w, p, this), WeaversWorkbenchContainer.component);
+            MenuProvider container = new SimpleMenuProvider((w, p, pl) -> new WeaversWorkbenchContainer(w, p, ContainerLevelAccess.create(level, this.getBlockPos())), WeaversWorkbenchContainer.component);
             serverPlayer.openMenu(container, buf -> buf.writeBlockPos(this.getBlockPos()));
         }
         return ItemInteractionResult.SUCCESS;

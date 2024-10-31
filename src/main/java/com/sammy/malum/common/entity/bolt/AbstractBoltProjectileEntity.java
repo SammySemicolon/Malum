@@ -6,6 +6,7 @@ import com.sammy.malum.visual_effects.networked.data.*;
 import com.sammy.malum.visual_effects.networked.staff.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.syncher.*;
+import net.minecraft.server.level.*;
 import net.minecraft.util.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
@@ -116,8 +117,8 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
         if (fadingAway || spawnDelay > 0) {
             return;
         }
-        if (!level().isClientSide) {
-            getImpactParticleEffect().createPositionedEffect(level(), new PositionEffectData(position().add(getDeltaMovement().scale(0.25f))), new ColorEffectData(SpiritTypeRegistry.WICKED_SPIRIT), HexBoltImpactParticleEffect.createData(getDeltaMovement().reverse().normalize()));
+        if (level() instanceof ServerLevel serverLevel) {
+            getImpactParticleEffect().createPositionedEffect(serverLevel, new PositionEffectData(position().add(getDeltaMovement().scale(0.25f))), new ColorEffectData(SpiritTypeRegistry.WICKED_SPIRIT), HexBoltImpactParticleEffect.createData(getDeltaMovement().reverse().normalize()));
             playSound(SoundRegistry.STAFF_STRIKES.get(), 0.5f, Mth.nextFloat(random, 0.9F, 1.5F));
             getEntityData().set(DATA_FADING_AWAY, true);
             Vec3 direction = pResult.getLocation().subtract(position());
@@ -140,21 +141,22 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        if (level().isClientSide || fadingAway || spawnDelay > 0) {
-            return;
-        }
-        if (getOwner() instanceof LivingEntity staffOwner) {
-            Entity target = result.getEntity();
-            target.invulnerableTime = 0;
-            DamageSource source = DamageTypeHelper.create(level(), DamageTypeRegistry.VOODOO, this, staffOwner);
-            boolean success = target.hurt(source, magicDamage);
-            if (success && target instanceof LivingEntity livingentity) {
-                onDealDamage(livingentity);
-                getImpactParticleEffect().createPositionedEffect(level(), new PositionEffectData(position().add(getDeltaMovement().scale(0.5f))), new ColorEffectData(SpiritTypeRegistry.WICKED_SPIRIT), HexBoltImpactParticleEffect.createData(getDeltaMovement().reverse().normalize()));
-                playSound(SoundRegistry.STAFF_STRIKES.get(), 0.75f, Mth.nextFloat(random, 1f, 1.4f));
-                ItemHelper.applyEnchantments(staffOwner, livingentity, source, getItem());
-                setDeltaMovement(getDeltaMovement().scale(0.05f));
-                getEntityData().set(DATA_FADING_AWAY, true);
+        if (level() instanceof ServerLevel serverLevel) {
+            if (fadingAway || spawnDelay > 0) {
+                return;
+            }
+            if (getOwner() instanceof LivingEntity staffOwner) {
+                Entity target = result.getEntity();
+                target.invulnerableTime = 0;
+                DamageSource source = DamageTypeHelper.create(level(), DamageTypeRegistry.VOODOO, this, staffOwner);
+                boolean success = target.hurt(source, magicDamage);
+                if (success && target instanceof LivingEntity livingentity) {
+                    onDealDamage(livingentity);
+                    getImpactParticleEffect().createPositionedEffect(serverLevel, new PositionEffectData(position().add(getDeltaMovement().scale(0.5f))), new ColorEffectData(SpiritTypeRegistry.WICKED_SPIRIT), HexBoltImpactParticleEffect.createData(getDeltaMovement().reverse().normalize()));
+                    playSound(SoundRegistry.STAFF_STRIKES.get(), 0.75f, Mth.nextFloat(random, 1f, 1.4f));
+                    setDeltaMovement(getDeltaMovement().scale(0.05f));
+                    getEntityData().set(DATA_FADING_AWAY, true);
+                }
             }
         }
         super.onHitEntity(result);

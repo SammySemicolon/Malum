@@ -11,10 +11,14 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.systems.rendering.trail.*;
 
 public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
 
     private static final EntityDataAccessor<Boolean> DATA_ENHANCED = SynchedEntityData.defineId(ScytheBoomerangEntity.class, EntityDataSerializers.BOOLEAN);
+
+    public final TrailPointBuilder theFormer = TrailPointBuilder.create(8);
+    public final TrailPointBuilder theLatter = TrailPointBuilder.create(8);
 
     public ScytheBoomerangEntity(Level level) {
         super(EntityRegistry.SCYTHE_BOOMERANG.get(), level);
@@ -75,7 +79,11 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
         super.tick();
         var scythe = getItem();
         var level = level();
-        if (!level.isClientSide()) {
+        if (level.isClientSide) {
+            addTrailPoints();
+            theFormer.tickTrailPoints();
+            theLatter.tickTrailPoints();
+        } else {
             var owner = getOwner();
             if (owner == null || !owner.isAlive() || !owner.level().equals(level()) || distanceTo(owner) > 1000f) {
                 setDeltaMovement(Vec3.ZERO);
@@ -123,7 +131,6 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
         }
     }
 
-    @Override
     public void addTrailPoints() {
         if (isEnhanced()) {
             Vec3 direction = getDeltaMovement().normalize();
@@ -147,7 +154,17 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
             }
             return;
         }
-        super.addTrailPoints();
+        for (int i = 0; i < 2; i++) {
+            float progress = (i + 1) * 0.5f;
+            Vec3 position = getPosition(progress);
+            float scalar = (age + progress) / 2f;
+            for (int j = 0; j < 2; j++) {
+                var trail = j == 0 ? theFormer : theLatter;
+                double xOffset = Math.cos(spinOffset + 3.14f * j + scalar) * 1.2f;
+                double zOffset = Math.sin(spinOffset + 3.14f * j + scalar) * 1.2f;
+                trail.addTrailPoint(position.add(xOffset, 0, zOffset));
+            }
+        }
     }
 
     public void flyBack(Entity scytheOwner) {

@@ -12,13 +12,10 @@ import com.sammy.malum.registry.common.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.*;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -31,9 +28,8 @@ import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.rendering.VFXBuilders;
 import team.lodestar.lodestone.systems.rendering.shader.ExtendedShaderInstance;
-import vectorwing.farmersdelight.common.event.*;
 
-import java.util.*;
+import java.awt.event.*;
 
 import static team.lodestar.lodestone.handlers.ItemEventHandler.getEventResponders;
 
@@ -90,10 +86,10 @@ public class SoulWardHandler {
                 double magicMultiplier = CommonConfig.SOUL_WARD_MAGIC.getConfigValue();
                 double physicalMultiplier = CommonConfig.SOUL_WARD_PHYSICAL.getConfigValue();
                 double integrity = player.getAttributeValue(AttributeRegistry.SOUL_WARD_INTEGRITY);
-                var eventResponders = getEventResponders(player);
 
                 var propertiesEvent = new ModifySoulWardPropertiesEvent(player, soulWardHandler, magicMultiplier, physicalMultiplier, integrity);
-                eventResponders.forEach(lookup -> lookup.run(IMalumEventResponderItem.class, (eventResponderItem, stack) -> eventResponderItem.modifySoulWardProperties(propertiesEvent, player, stack)));
+                ItemEventHandler.getEventResponders(player).forEach(lookup -> lookup.run(IMalumEventResponderItem.class,
+                                (eventResponderItem, stack) -> eventResponderItem.modifySoulWardProperties(propertiesEvent, player, stack)));
                 NeoForge.EVENT_BUS.post(propertiesEvent);
 
                 double damageMultiplier = source.is(LodestoneDamageTypeTags.IS_MAGIC) ? magicMultiplier : physicalMultiplier;

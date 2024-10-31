@@ -54,8 +54,8 @@ public class ScytheBoomerangEntityRenderer extends EntityRenderer<ScytheBoomeran
         var spirit = entityIn.getItem().getItem() instanceof ISpiritAffiliatedItem affiliatedItem ? affiliatedItem.getDefiningSpiritType() : null;
         boolean isMagical = spirit != null;
         var renderType = isMagical ?
-                LodestoneRenderTypeRegistry.ADDITIVE_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL) :
-                LodestoneRenderTypeRegistry.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL, ShaderUniformHandler.LUMITRANSPARENT);
+                LodestoneRenderTypes.ADDITIVE_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL) :
+                LodestoneRenderTypes.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL, ShaderUniformHandler.LUMITRANSPARENT);
         var primaryColor = isMagical ? spirit.getPrimaryColor() : new Color(0.9f, 0.9f, 0.9f);
         var secondaryColor = isMagical ? spirit.getSecondaryColor() : new Color(0.5f, 0.5f, 0.5f);
         var builder = VFXBuilders.createWorld().setRenderType(renderType);

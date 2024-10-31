@@ -2,7 +2,6 @@ package com.sammy.malum.common.entity;
 
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
-import com.sammy.malum.registry.common.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.syncher.*;
 import net.minecraft.world.entity.*;
@@ -14,77 +13,51 @@ public abstract class FloatingItemEntity extends FloatingEntity {
     private static final EntityDataAccessor<ItemStack> DATA_ITEM_STACK = SynchedEntityData.defineId(FloatingItemEntity.class, EntityDataSerializers.ITEM_STACK);
     protected static final EntityDataAccessor<String> DATA_SPIRIT = SynchedEntityData.defineId(FloatingItemEntity.class, EntityDataSerializers.STRING);
 
-    public ItemStack itemStack = ItemStack.EMPTY;
-    protected MalumSpiritType spiritType = SpiritTypeRegistry.ARCANE_SPIRIT;
-
     public FloatingItemEntity(EntityType<? extends FloatingEntity> type, Level level) {
         super(type, level);
     }
 
     @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+
+        builder.define(DATA_ITEM_STACK, ItemStack.EMPTY);
+        builder.define(DATA_SPIRIT, SpiritTypeRegistry.ARCANE_SPIRIT.getIdentifier());
+    }
+
+    @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        ItemStack itemstack = this.getItemRaw();
+        ItemStack itemstack = this.getItem();
         if (!itemstack.isEmpty()) {
-            pCompound.put("Item", itemstack.save(new CompoundTag()));
+            pCompound.put("item", getItem().save(this.registryAccess()));
         }
-        pCompound.putString("spiritType", spiritType.identifier);
+        pCompound.putString("spiritType", getSpiritType().getIdentifier());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
-        ItemStack itemstack = ItemStack.of(pCompound.getCompound("Item"));
-        this.setItem(itemstack);
+        setItem(ItemStack.parse(registryAccess(), pCompound.getCompound("item")).orElse(ItemStack.EMPTY));
         setSpirit(pCompound.getString("spiritType"));
     }
 
+    public ItemStack getItem() {
+        return getEntityData().get(DATA_ITEM_STACK);
+    }
+
     public void setItem(ItemStack pStack) {
-        if (!pStack.is(this.getDefaultItem()) || pStack.hasTag()) {
-            this.getEntityData().set(DATA_ITEM_STACK, pStack);
-        }
+        this.getEntityData().set(DATA_ITEM_STACK, pStack);
     }
 
     public MalumSpiritType getSpiritType() {
-        return spiritType;
+        return SpiritTypeRegistry.SPIRITS.get(getEntityData().get(DATA_SPIRIT));
     }
 
     public void setSpirit(MalumSpiritType spiritType) {
-        setSpirit(spiritType.identifier);
-        this.spiritType = spiritType;
+        setSpirit(spiritType.getIdentifier());
     }
 
     public void setSpirit(String spiritIdentifier) {
         this.getEntityData().set(DATA_SPIRIT, spiritIdentifier);
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        this.getEntityData().define(DATA_ITEM_STACK, ItemStack.EMPTY);
-        this.getEntityData().define(DATA_SPIRIT, SpiritTypeRegistry.ARCANE_SPIRIT.identifier);
-    }
-
-    @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
-        if (DATA_ITEM_STACK.equals(pKey)) {
-            itemStack = getEntityData().get(DATA_ITEM_STACK);
-        }
-        if (DATA_SPIRIT.equals(pKey)) {
-            spiritType = SpiritTypeRegistry.SPIRITS.get(entityData.get(DATA_SPIRIT));
-        }
-        super.onSyncedDataUpdated(pKey);
-    }
-
-    protected ItemStack getItemRaw() {
-        return this.getEntityData().get(DATA_ITEM_STACK);
-    }
-
-    protected Item getDefaultItem() {
-        return ItemRegistry.ARCANE_SPIRIT.get();
-    }
-
-    public ItemStack getItem() {
-        ItemStack itemstack = this.getItemRaw();
-        return itemstack.isEmpty() ? new ItemStack(this.getDefaultItem()) : itemstack;
     }
 }

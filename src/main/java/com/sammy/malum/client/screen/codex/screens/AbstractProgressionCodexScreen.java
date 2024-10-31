@@ -82,7 +82,7 @@ public abstract class AbstractProgressionCodexScreen extends AbstractMalumScreen
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        renderBackground(guiGraphics);
+        renderBackground(guiGraphics.pose());
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         int guiLeft = getGuiLeft();
         int guiTop = getGuiTop();

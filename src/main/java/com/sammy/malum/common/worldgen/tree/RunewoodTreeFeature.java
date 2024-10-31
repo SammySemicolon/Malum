@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.levelgen.feature.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.worldgen.*;
 
 import java.util.*;
@@ -122,7 +123,7 @@ public class RunewoodTreeFeature extends Feature<RunewoodTreeConfiguration> {
         ArrayList<BlockPos> sapBlockPositions = new ArrayList<>(filler.getLayer(LOGS).keySet());
         Collections.shuffle(sapBlockPositions);
         for (BlockPos blockPos : sapBlockPositions.subList(0, sapBlockCount)) {
-            filler.getLayer(LOGS).replace(blockPos, e -> create(BlockHelper.getBlockStateWithExistingProperties(e.getState(), BlockRegistry.EXPOSED_RUNEWOOD_LOG.get().defaultBlockState())).build());
+            filler.getLayer(LOGS).replace(blockPos, e -> create(BlockStateHelper.getBlockStateWithExistingProperties(e.getState(), BlockRegistry.EXPOSED_RUNEWOOD_LOG.get().defaultBlockState())).build());
         }
 
         filler.fill(level);

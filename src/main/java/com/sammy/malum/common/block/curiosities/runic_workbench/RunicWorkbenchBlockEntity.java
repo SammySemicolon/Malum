@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.network.PacketDistributor;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 
 import java.util.*;
 
@@ -60,10 +61,10 @@ public class RunicWorkbenchBlockEntity extends MalumItemHolderBlockEntity {
                     secondaryInput.shrink(recipe.secondaryInput.getCount());
                     level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, recipe.output.copy()));
                     level.playSound(null, worldPosition, SoundRegistry.ALTERATION_PLINTH_ALTERS.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.25f);
-                    if (secondaryInput.getItem() instanceof SpiritShardItem spiritShardItem) {
-                        PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(spiritShardItem.type.getIdentifier()), itemPos));
+                    if (secondaryInput.getItem() instanceof SpiritShardItem spirit) {
+                        PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(spirit.type.getIdentifier()), itemPos));
                     }
-                    BlockHelper.updateAndNotifyState(level, worldPosition);
+                    BlockStateHelper.updateAndNotifyState(level, worldPosition);
                 }
                 return ItemInteractionResult.SUCCESS;
             }

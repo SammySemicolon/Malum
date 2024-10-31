@@ -39,7 +39,7 @@ public class VoidConduitRenderer implements BlockEntityRenderer<VoidConduitBlock
             poseStack.pushPose();
             poseStack.translate(0.5f, 0.01f, 0.5f);
 
-            builder.replaceBufferSource(RenderHandler.LATE_DELAYED_RENDER.getTarget()).setRenderType(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyAndCache(VIGNETTE)).renderQuad(poseStack, positions, 1f);
+            builder.replaceBufferSource(RenderHandler.LATE_DELAYED_RENDER.getTarget()).setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(VIGNETTE)).renderQuad(poseStack, positions, 1f);
             final long gameTime = voidConduit.getLevel().getGameTime();
             float uOffset = ((gameTime + partialTicks) % 4000) / 2000f;
             float vOffset = ((gameTime + 500f + partialTicks) % 8000) / 8000f;
@@ -50,7 +50,7 @@ public class VoidConduitRenderer implements BlockEntityRenderer<VoidConduitBlock
             for (int i = 0; i < 3; i++) {
                 builder.setAlpha(alpha);
                 float speed = 1000f + 250f * i;
-                builder.setColor(SpiritTypeRegistry.WICKED_SPIRIT.getPrimaryColor()).setRenderType(LodestoneRenderTypeRegistry.applyUniformChanges(LodestoneRenderTypeRegistry.copyAndStore(i, renderType), s -> {
+                builder.setColor(SpiritTypeRegistry.WICKED_SPIRIT.getPrimaryColor()).setRenderType(LodestoneRenderTypes.applyUniformChanges(LodestoneRenderTypes.copyAndStore(i, renderType), s -> {
                     s.safeGetUniform("Speed").set(speed);
                     s.safeGetUniform("Width").set(48f);
                     s.safeGetUniform("Height").set(48f);

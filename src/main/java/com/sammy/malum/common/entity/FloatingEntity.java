@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
+import net.neoforged.neoforge.event.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.trail.*;
 
@@ -81,7 +82,6 @@ public abstract class FloatingEntity extends Entity {
         super.tick();
         baseTick();
         hoverOffset = getHoverStart(0);
-
         age++;
         if (age > maxAge) {
             discard();
@@ -122,34 +122,14 @@ public abstract class FloatingEntity extends Entity {
             }
         }
 
-        //vanilla stump
-        BlockHitResult result = level().clip(new ClipContext(position(), position().add(getDeltaMovement()), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
-        if (result.getType() == HitResult.Type.BLOCK) {
-            BlockPos blockpos = result.getBlockPos();
-            BlockState blockstate = this.level().getBlockState(blockpos);
-            if (blockstate.is(Blocks.NETHER_PORTAL)) {
-                this.handleInsidePortal(blockpos);
-            } else if (blockstate.is(Blocks.END_GATEWAY)) {
-                BlockEntity blockentity = this.level().getBlockEntity(blockpos);
-                if (blockentity instanceof TheEndGatewayBlockEntity && TheEndGatewayBlockEntity.canEntityTeleport(this)) {
-                    TheEndGatewayBlockEntity.teleportEntity(this.level(), blockpos, blockstate, this, (TheEndGatewayBlockEntity) blockentity);
-                }
-            }
-        }
         this.checkInsideBlocks();
-        Vec3 movement = getDeltaMovement();
-        double nextX = getX() + movement.x;
-        double nextY = getY() + movement.y;
-        double nextZ = getZ() + movement.z;
-        double distance = movement.horizontalDistance();
-
-        final float xRot = lerpRotation(this.xRotO, (float) (Mth.atan2(movement.y, distance) * (double) (180F / (float) Math.PI)));
-        final float yRot = lerpRotation(this.yRotO, (float) (Mth.atan2(movement.x, movement.z) * (double) (180F / (float) Math.PI)));
-        setXRot(xRot);
-        setYRot(yRot);
-        setPos(nextX, nextY, nextZ);
-        ProjectileUtil.rotateTowardsMovement(this, 0.2F);
-
+        Vec3 vec3 = this.getDeltaMovement();
+        double d0 = this.getX() + vec3.x;
+        double d1 = this.getY() + vec3.y;
+        double d2 = this.getZ() + vec3.z;
+        this.updateRotation();
+        this.applyGravity();
+        this.setPos(d0, d1, d2);
 
         if (level().isClientSide) {
             spawnParticles(xOld, yOld + getYOffset(0), zOld);
@@ -169,9 +149,11 @@ public abstract class FloatingEntity extends Entity {
         this.setOldPosAndRot();
     }
 
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this, owner == null ? 0 : owner.getId());
+    protected void updateRotation() {
+        Vec3 vec3 = this.getDeltaMovement();
+        double d0 = vec3.horizontalDistance();
+        this.setXRot(lerpRotation(this.xRotO, (float)(Mth.atan2(vec3.y, d0) * 180.0 / 3.1415927410125732)));
+        this.setYRot(lerpRotation(this.yRotO, (float)(Mth.atan2(vec3.x, vec3.z) * 180.0 / 3.1415927410125732)));
     }
 
     protected static float lerpRotation(float p_37274_, float p_37275_) {

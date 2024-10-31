@@ -31,7 +31,9 @@ neoForge {
         minecraftVersion.set(project.property("parchment_minecraft_version").toString())
     }
 
-    //accessTransformer(file("src/main/resources/META-INF/accesstransformer.cfg"))
+    accessTransformers.from(
+        project.files("src/main/resources/META-INF/recipebuilders.cfg", "src/main/resources/META-INF/blockproperties.cfg")
+    )
 
     runs {
         register("client") {

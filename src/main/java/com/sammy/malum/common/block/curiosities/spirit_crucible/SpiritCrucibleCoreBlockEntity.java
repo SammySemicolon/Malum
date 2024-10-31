@@ -34,6 +34,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.multiblock.*;
 
@@ -73,7 +74,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
                 needsSync = true;
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         };
         spiritInventory = new MalumBlockEntityInventory(4, 64) {
@@ -82,7 +83,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
                 super.onContentsChanged(slot);
                 needsSync = true;
                 spiritAmount = Math.max(1, Mth.lerp(0.15f, spiritAmount, nonEmptyItemAmount + 1));
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
 
             @Override
@@ -105,7 +106,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
                 needsSync = true;
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         };
         coreAugmentInventory = new AugmentBlockEntityInventory(1, 1, t -> t.getItem() instanceof AbstractCoreAugmentItem) {
@@ -113,7 +114,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
             public void onContentsChanged(int slot) {
                 super.onContentsChanged(slot);
                 needsSync = true;
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
         };
     }
@@ -170,7 +171,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
                 tuningType = tuningType.next(tuningType, this);
                 recalibrateAccelerators(level, worldPosition);
                 level.playSound(null, worldPosition, SoundRegistry.TUNING_FORK_TINKERS.get(), SoundSource.BLOCKS, 1.25f+level.random.nextFloat()*0.5f, 0.75f+level.random.nextFloat()*0.5f);
-                BlockHelper.updateAndNotifyState(level, worldPosition);
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
                 return ItemInteractionResult.SUCCESS;
             }
         }
@@ -260,7 +261,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
                 boolean needsRecalibration = !acceleratorData.accelerators.stream().allMatch(ICrucibleAccelerator::canContinueAccelerating);
                 if (needsRecalibration) {
                     recalibrateAccelerators(level, worldPosition);
-                    BlockHelper.updateAndNotifyState(level, worldPosition);
+                    BlockStateHelper.updateAndNotifyState(level, worldPosition);
                 }
                 progress += speed;
                 if (progress >= recipe.time) {
@@ -335,7 +336,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
             bonusYieldChance-=1;
         }
         recipe = LodestoneRecipeType.getRecipe(level, RecipeTypeRegistry.SPIRIT_FOCUSING.get(), new SpiritBasedRecipeInput(inventory.getStackInSlot(0), spiritInventory.nonEmptyItemStacks));
-        BlockHelper.updateAndNotifyState(level, worldPosition);
+        BlockStateHelper.updateAndNotifyState(level, worldPosition);
     }
 
     @Override
@@ -412,13 +413,13 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
     public Vec3 getSpiritItemOffset(int slot, float partialTicks) {
         float distance = 0.75f + (float) Math.sin(((spiritSpin + partialTicks) % 6.28f) / 20f) * 0.025f;
         float height = 1.8f;
-        return DataHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, spiritAmount, (long) (spiritSpin + partialTicks), 360);
+        return VecHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, spiritAmount, spiritSpin + partialTicks, 360);
     }
 
     public Vec3 getAugmentItemOffset(int slot, float partialTicks) {
         float distance = 0.6f + (float) Math.sin(((spiritSpin + partialTicks) % 6.28f) / 20f) * 0.025f;
         float height = 1.6f;
-        return DataHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, augmentInventory.slotCount, (long) (spiritSpin + partialTicks), 240);
+        return VecHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, augmentInventory.slotCount,spiritSpin + partialTicks, 240);
     }
 
     @Override

@@ -96,69 +96,69 @@ public class MalignantStrongholdArmorModel extends LodestoneArmorModel {
 
 
     @Override
-    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
-        super.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
-        if (!this.young && !activeGlows.isEmpty()) {
-            final List<ModelPart> glowingParts = getGlowingParts();
-            if (glowingParts.isEmpty()) {
-                return;
-            }
-            pPoseStack.pushPose();
-
-            float gameTime = Minecraft.getInstance().level.getGameTime() + Minecraft.getInstance().getPartialTick();
-            Color primaryColor = activeGlows.get(0).getPrimaryColor();
-            Color secondaryColor = activeGlows.get(0).getSecondaryColor();
-            float colorCoefficient = activeGlows.get(0).getColorCoefficient();
-            if (activeGlows.size() > 1) {
-                activeGlows.add(activeGlows.get(0));
-                final float loopTime = 100 * activeGlows.size();
-                final float pct = (gameTime % loopTime) / loopTime;
-                final float relative = pct * activeGlows.size();
-                primaryColor = multicolorLerp(Easing.LINEAR, pct, activeGlows.stream().map(MalumSpiritType::getPrimaryColor).collect(Collectors.toList()));
-                secondaryColor = multicolorLerp(Easing.LINEAR, pct, activeGlows.stream().map(MalumSpiritType::getSecondaryColor).collect(Collectors.toList()));
-                colorCoefficient = activeGlows.size() == 1 ?
-                        activeGlows.get(0).getColorCoefficient() :
-                        Mth.lerp(relative % activeGlows.size(),
-                                activeGlows.get((int)relative).getColorCoefficient(),
-                                activeGlows.get(Math.min((int)relative+1, activeGlows.size()-1)).getColorCoefficient());
-            }
-
-            final VertexConsumer transparent = RenderHandler.DELAYED_RENDER.getTarget().getBuffer(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyAndCache(GLOW_TEXTURE));
-            final VertexConsumer additive = RenderHandler.DELAYED_RENDER.getTarget().getBuffer(RenderTypeRegistry.MALIGNANT_GLOW.applyAndCache(GLOW_TEXTURE));
-            float distance = 0.06f;
-            float alpha = 0.25f;
-            int time = 320;
-            for (ModelPart glowingPart : glowingParts) {
-                glowingPart.render(pPoseStack, transparent, pPackedLight, pPackedOverlay, primaryColor.getRed()/255f, primaryColor.getGreen()/255f, primaryColor.getBlue()/255f, 0.6f);
-            }
-            for (int i = 0; i < 8; i++) {
-                double angle = i / 4f * (Math.PI * 2);
-                angle += ((gameTime % time) / time) * (Math.PI * 2);
-                for (ModelPart glowingPart : glowingParts) {
-                    final double sin = Math.sin(angle);
-                    Color color = ColorHelper.colorLerp(Easing.SINE_IN, Math.min(1, i/2f/colorCoefficient), secondaryColor, primaryColor);
-                    float yaw = glowingPart.yRot;
-                    float pitch = -glowingPart.xRot;
-                    if (glowingPart.equals(helmet_glow)) {
-                        yaw += 1.57f;
-                    }
-                    Vec3 forward = new Vec3(-Math.cos(yaw), 0, Math.sin(yaw));
-                    if (!glowingPart.equals(helmet_glow)) {
-                        Vec3 direction = new Vec3(Math.cos(yaw) * Math.cos(pitch), Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch));
-                        forward = forward.cross(direction).add(0, 1, 0);
-                    }
-                    Vec3 offset = forward.xRot(pitch).normalize().scale(distance * sin);
-                    pPoseStack.translate(offset.x, offset.y, offset.z);
-                    glowingPart.render(pPoseStack, additive, RenderHelper.FULL_BRIGHT, pPackedOverlay, color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f, alpha);
-                    pPoseStack.translate(-offset.x, -offset.y, -offset.z);
-                }
-                if (i == 3) {
-                    distance *= 2.5f;
-                    alpha *= 0.35f;
-                }
-            }
-            pPoseStack.popPose();
-        }
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
+//        if (!this.young && !activeGlows.isEmpty()) {
+//            final List<ModelPart> glowingParts = getGlowingParts();
+//            if (glowingParts.isEmpty()) {
+//                return;
+//            }
+//            poseStack.pushPose();
+//
+//            float gameTime = Minecraft.getInstance().level.getGameTime() + Minecraft.getInstance().getPartialTick();
+//            Color primaryColor = activeGlows.get(0).getPrimaryColor();
+//            Color secondaryColor = activeGlows.get(0).getSecondaryColor();
+//            float colorCoefficient = activeGlows.get(0).getColorCoefficient();
+//            if (activeGlows.size() > 1) {
+//                activeGlows.add(activeGlows.get(0));
+//                final float loopTime = 100 * activeGlows.size();
+//                final float pct = (gameTime % loopTime) / loopTime;
+//                final float relative = pct * activeGlows.size();
+//                primaryColor = multicolorLerp(Easing.LINEAR, pct, activeGlows.stream().map(MalumSpiritType::getPrimaryColor).collect(Collectors.toList()));
+//                secondaryColor = multicolorLerp(Easing.LINEAR, pct, activeGlows.stream().map(MalumSpiritType::getSecondaryColor).collect(Collectors.toList()));
+//                colorCoefficient = activeGlows.size() == 1 ?
+//                        activeGlows.get(0).getColorCoefficient() :
+//                        Mth.lerp(relative % activeGlows.size(),
+//                                activeGlows.get((int)relative).getColorCoefficient(),
+//                                activeGlows.get(Math.min((int)relative+1, activeGlows.size()-1)).getColorCoefficient());
+//            }
+//
+//            final VertexConsumer transparent = RenderHandler.DELAYED_RENDER.getTarget().getBuffer(LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(GLOW_TEXTURE));
+//            final VertexConsumer additive = RenderHandler.DELAYED_RENDER.getTarget().getBuffer(RenderTypeRegistry.MALIGNANT_GLOW.applyAndCache(GLOW_TEXTURE));
+//            float distance = 0.06f;
+//            float alpha = 0.25f;
+//            int time = 320;
+//            for (ModelPart glowingPart : glowingParts) {
+//                glowingPart.render(pPoseStack, transparent, pPackedLight, pPackedOverlay, primaryColor.getRed()/255f, primaryColor.getGreen()/255f, primaryColor.getBlue()/255f, 0.6f);
+//            }
+//            for (int i = 0; i < 8; i++) {
+//                double angle = i / 4f * (Math.PI * 2);
+//                angle += ((gameTime % time) / time) * (Math.PI * 2);
+//                for (ModelPart glowingPart : glowingParts) {
+//                    final double sin = Math.sin(angle);
+//                    Color color = ColorHelper.colorLerp(Easing.SINE_IN, Math.min(1, i/2f/colorCoefficient), secondaryColor, primaryColor);
+//                    float yaw = glowingPart.yRot;
+//                    float pitch = -glowingPart.xRot;
+//                    if (glowingPart.equals(helmet_glow)) {
+//                        yaw += 1.57f;
+//                    }
+//                    Vec3 forward = new Vec3(-Math.cos(yaw), 0, Math.sin(yaw));
+//                    if (!glowingPart.equals(helmet_glow)) {
+//                        Vec3 direction = new Vec3(Math.cos(yaw) * Math.cos(pitch), Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch));
+//                        forward = forward.cross(direction).add(0, 1, 0);
+//                    }
+//                    Vec3 offset = forward.xRot(pitch).normalize().scale(distance * sin);
+//                    pPoseStack.translate(offset.x, offset.y, offset.z);
+//                    glowingPart.render(pPoseStack, additive, RenderHelper.FULL_BRIGHT, pPackedOverlay, color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f, alpha);
+//                    pPoseStack.translate(-offset.x, -offset.y, -offset.z);
+//                }
+//                if (i == 3) {
+//                    distance *= 2.5f;
+//                    alpha *= 0.35f;
+//                }
+//            }
+//            pPoseStack.popPose();
+//        }
     }
 
 

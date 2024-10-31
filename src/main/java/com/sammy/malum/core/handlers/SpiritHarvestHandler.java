@@ -1,12 +1,11 @@
 package com.sammy.malum.core.handlers;
 
 import com.sammy.malum.common.capability.*;
-import com.sammy.malum.common.container.*;
 import com.sammy.malum.common.entity.spirit.*;
 import com.sammy.malum.common.item.*;
-import com.sammy.malum.common.item.curiosities.*;
 import com.sammy.malum.config.*;
 import com.sammy.malum.core.listeners.*;
+import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.mixin.AccessorEvent;
@@ -26,9 +25,11 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
+import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.item.ItemExpireEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 
 import javax.annotation.*;
@@ -59,8 +60,7 @@ public class SpiritHarvestHandler {
         if (source.is(DamageTypeTagRegistry.SOUL_SHATTER_DAMAGE) || soulData.exposedSoulDuration > 0) {
             if (attacker == null) {
                 spawnSpirits(event.getEntity());
-            }
-            else {
+            } else {
                 ItemStack stack = SoulDataHandler.getSoulHunterWeapon(source, attacker);
                 spawnSpirits(target, attacker, stack);
             }
@@ -100,7 +100,7 @@ public class SpiritHarvestHandler {
     }
 
     public static void shatterItem(ItemExpireEvent event) {
-        if (((AccessorEvent)event).malum$isCancelled()) {
+        if (((AccessorEvent) event).malum$isCancelled()) {
             return;
         }
 
@@ -126,34 +126,37 @@ public class SpiritHarvestHandler {
     }
 
     public static void pickupSpirit(LivingEntity collector, ItemStack stack) {
-        if (collector instanceof Player player) {
-            var instance = player.getAttribute(AttributeRegistry.ARCANE_RESONANCE);
-            ItemHelper.getEventResponders(collector).forEach(s -> {
-                if (s.getItem() instanceof IMalumEventResponderItem eventItem) {
-                    eventItem.pickupSpirit(collector, instance != null ? instance.getValue() : 0);
-                }
-            });
-            for (NonNullList<ItemStack> playerInventory : player.getInventory().compartments) {
-                //TODO: need AT for compartments
-                for (ItemStack item : playerInventory) {
-                    if (item.getItem() instanceof SpiritPouchItem) {
-                        var inventory = SpiritPouchItem.getInventory(item);
-                        ItemStack result = inventory.addItem(stack);
-                        if (result.isEmpty()) {
-                            var random = collector.getRandom();
-                            float pitch = ((random.nextFloat() - random.nextFloat()) * 0.7F + 1.0F) * 2.0F; //this kinda smells but we want it to match vanilla
-
-                            player.playSound(SoundEvents.ITEM_PICKUP, 0.2F, pitch);
-                            if (player.containerMenu instanceof SpiritPouchContainer pouchMenu) {
-                                pouchMenu.update(inventory);
-                            }
-                            return;
-                        }
-                    }
-                }
-            }
-        }
+        triggerSpiritCollection(collector);
+//        if (collector instanceof Player player) {
+//            for (NonNullList<ItemStack> playerInventory : player.getInventory().compartments) {
+//                //TODO: need AT for compartments
+//                for (ItemStack item : playerInventory) {
+//                    if (item.getItem() instanceof SpiritPouchItem) {
+//                        var inventory = SpiritPouchItem.getInventory(item);
+//                        ItemStack result = inventory.addItem(stack);
+//                        if (result.isEmpty()) {
+//                            var random = collector.getRandom();
+//                            float pitch = ((random.nextFloat() - random.nextFloat()) * 0.7F + 1.0F) * 2.0F; //this kinda smells but we want it to match vanilla
+//
+//                            player.playSound(SoundEvents.ITEM_PICKUP, 0.2F, pitch);
+//                            if (player.containerMenu instanceof SpiritPouchContainer pouchMenu) {
+//                                pouchMenu.update(inventory);
+//                            }
+//                            return;
+//                        }
+//                    }
+//                }
+//            }
+//        }
         ItemHelper.giveItemToEntity(collector, stack);
+    }
+
+    public static void triggerSpiritCollection(LivingEntity collector) {
+        var collectionEvent = new CollectSpiritEvent(collector);
+        var attribute = collector.getAttributeValue(AttributeRegistry.ARCANE_RESONANCE);
+        ItemEventHandler.getEventResponders(collector).forEach(lookup -> lookup.run(IMalumEventResponderItem.class,
+                (eventResponderItem, stack) -> eventResponderItem.collectSpirit(collectionEvent, collector, attribute)));
+        NeoForge.EVENT_BUS.post(collectionEvent);
     }
 
     public static void spawnSpirits(LivingEntity target) {

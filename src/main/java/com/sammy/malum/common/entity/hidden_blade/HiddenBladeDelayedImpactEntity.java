@@ -9,6 +9,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.network.syncher.*;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
+import net.minecraft.world.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.*;
@@ -87,24 +88,26 @@ public class HiddenBladeDelayedImpactEntity extends ThrowableItemProjectile {
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        if (getOwner() instanceof LivingEntity scytheOwner) {
-            Entity target = result.getEntity();
-            DamageSource source = DamageTypeHelper.create(level(), DamageTypeRegistry.HIDDEN_BLADE_COUNTER, this, scytheOwner);
+        if (getOwner() instanceof LivingEntity owner) {
+            var target = result.getEntity();
+            var source = DamageTypeHelper.create(level(), DamageTypeRegistry.SCYTHE_SWEEP, this, owner);
+            var heldItem = owner.getMainHandItem();
+            var motion = target.getDeltaMovement();
+
+            owner.setItemInHand(InteractionHand.MAIN_HAND, getItem());
             target.invulnerableTime = 0;
-            final Vec3 deltaMovement = target.getDeltaMovement();
             boolean success = target.hurt(source, damage);
             if (success && target instanceof LivingEntity livingentity) {
-                ItemStack scythe = getItem();
-                ItemHelper.applyEnchantments(scytheOwner, livingentity, source, scythe);
                 if (magicDamage > 0) {
                     if (!livingentity.isDeadOrDying()) {
-                        target.invulnerableTime = 0;
-                        livingentity.hurt(DamageTypeHelper.create(level(), DamageTypeRegistry.VOODOO, this, scytheOwner), magicDamage);
+                        livingentity.invulnerableTime = 0;
+                        livingentity.hurt(DamageTypeHelper.create(level(), DamageTypeRegistry.VOODOO, this, owner), magicDamage);
                     }
                 }
-                enemiesHit+=1;
+                enemiesHit++;
             }
-            target.setDeltaMovement(deltaMovement);
+            owner.setItemInHand(InteractionHand.MAIN_HAND, heldItem);
+            target.setDeltaMovement(motion);
             SoundHelper.playSound(this, SoundRegistry.SCYTHE_CUT.get(), 1.0F, 0.9f + level().getRandom().nextFloat() * 0.2f);
         }
         super.onHitEntity(result);

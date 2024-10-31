@@ -28,6 +28,6 @@ public class TopHatCurioRenderer implements ICurioRenderer {
     public static void renderTopHat(LivingEntity livingEntity, RenderType renderType, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light) {
         VertexConsumer vertexconsumer = renderTypeBuffer.getBuffer(renderType);
         ICurioRenderer.followHeadRotations(livingEntity, ModelRegistry.TOP_HAT.topHat);
-        ModelRegistry.TOP_HAT.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+        ModelRegistry.TOP_HAT.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 16777215);
     }
 }

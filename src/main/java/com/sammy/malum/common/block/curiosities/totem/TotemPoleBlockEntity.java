@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.common.ItemAbilities;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
 import javax.annotation.*;
@@ -81,7 +82,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
             if (isSoulwood) {
                 level.playSound(null, worldPosition, SoundRegistry.MAJOR_BLIGHT_MOTIF.get(), SoundSource.BLOCKS, 1, 1);
             }
-            BlockHelper.updateState(level, worldPosition);
+            BlockStateHelper.updateState(level, worldPosition);
             return ItemInteractionResult.SUCCESS;
         }
         return super.onUse(player, hand);
@@ -145,7 +146,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
         ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition));
         this.spirit = type;
         this.chargeProgress = 10;
-        BlockHelper.updateState(level, worldPosition);
+        BlockStateHelper.updateState(level, worldPosition);
     }
 
     public void riteStarting(TotemBaseBlockEntity totemBase, int height) {
@@ -154,12 +155,12 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
         this.totemBaseYLevel = worldPosition.getY() - height;
         this.totemBase = totemBase;
         this.totemPoleState = TotemPoleState.CHARGING;
-        BlockHelper.updateState(level, worldPosition);
+        BlockStateHelper.updateState(level, worldPosition);
     }
 
     public void setState(TotemPoleState state) {
         this.totemPoleState = state;
-        BlockHelper.updateState(level, worldPosition);
+        BlockStateHelper.updateState(level, worldPosition);
     }
 
     @Override

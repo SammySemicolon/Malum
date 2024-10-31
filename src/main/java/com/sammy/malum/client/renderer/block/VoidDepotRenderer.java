@@ -33,8 +33,8 @@ public class VoidDepotRenderer implements BlockEntityRenderer<VoidDepotBlockEnti
     private static final RenderTypeToken VIGNETTE = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/weeping_well/primordial_soup_vignette.png"));
     private static final RenderTypeToken NOISE_TEXTURE = RenderTypeToken.createToken(MalumMod.malumPath("textures/vfx/void_noise.png"));
 
-    private static final MultiBufferSource ADDITIVE = new LodestoneBufferWrapper(LodestoneRenderTypeRegistry.ADDITIVE_TEXT, RenderHandler.LATE_DELAYED_RENDER.getTarget());
-    private static final MultiBufferSource TRANSPARENT = new LodestoneBufferWrapper(LodestoneRenderTypeRegistry.TRANSPARENT_TEXT, RenderHandler.DELAYED_RENDER.getTarget());
+    private static final MultiBufferSource ADDITIVE = new LodestoneBufferWrapper(LodestoneRenderTypes.ADDITIVE_TEXT, RenderHandler.LATE_DELAYED_RENDER.getTarget());
+    private static final MultiBufferSource TRANSPARENT = new LodestoneBufferWrapper(LodestoneRenderTypes.TRANSPARENT_TEXT, RenderHandler.DELAYED_RENDER.getTarget());
 
     public VoidDepotRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -53,7 +53,7 @@ public class VoidDepotRenderer implements BlockEntityRenderer<VoidDepotBlockEnti
         poseStack.pushPose();
         poseStack.translate(0.5f, 0.01f, 0.5f);
 
-        builder.replaceBufferSource(RenderHandler.LATE_DELAYED_RENDER.getTarget()).setRenderType(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyAndCache(VIGNETTE)).renderQuad(poseStack, positions, 1f);
+        builder.replaceBufferSource(RenderHandler.LATE_DELAYED_RENDER.getTarget()).setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(VIGNETTE)).renderQuad(poseStack, positions, 1f);
         final long gameTime = voidDepot.getLevel().getGameTime();
         float uOffset = ((gameTime + partialTicks) % 4000) / 2000f;
         float vOffset = ((gameTime + 500f + partialTicks) % 8000) / 8000f;
@@ -64,7 +64,7 @@ public class VoidDepotRenderer implements BlockEntityRenderer<VoidDepotBlockEnti
         for (int i = 0; i < 2; i++) {
             builder.setAlpha(alpha);
             float speed = 1000f + 250f * i;
-            builder.setColor(SpiritTypeRegistry.WICKED_SPIRIT.getPrimaryColor()).setRenderType(LodestoneRenderTypeRegistry.applyUniformChanges(LodestoneRenderTypeRegistry.copyAndStore(i, renderType), s -> {
+            builder.setColor(SpiritTypeRegistry.WICKED_SPIRIT.getPrimaryColor()).setRenderType(LodestoneRenderTypes.applyUniformChanges(LodestoneRenderTypes.copyAndStore(i, renderType), s -> {
                 s.safeGetUniform("Speed").set(speed);
                 s.safeGetUniform("Width").set(16f);
                 s.safeGetUniform("Height").set(16f);

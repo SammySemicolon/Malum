@@ -25,7 +25,7 @@ public class CurioManaweavingRing extends MalumCurioItem implements IMalumEventR
     }
 
     @Override
-    public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
+    public void collectSpirit(LivingEntity collector, double arcaneResonance) {
         if (collector instanceof Player player) {
             var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
             handler.soulWardProgress -= 2 * SoulWardHandler.getSoulWardCooldown(player) * arcaneResonance;

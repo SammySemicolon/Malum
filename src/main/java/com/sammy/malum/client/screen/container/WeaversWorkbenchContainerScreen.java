@@ -5,8 +5,7 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.container.WeaversWorkbenchContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.client.gui.screens.inventory.*;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -16,13 +15,16 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.joml.Quaternionf;
+import net.minecraft.world.phys.*;
+import org.joml.*;
 
 import javax.annotation.Nonnull;
+import java.lang.Math;
 
 public class WeaversWorkbenchContainerScreen extends AbstractContainerScreen<WeaversWorkbenchContainer> {
 
-    public static final Quaternionf ROTATION = (new Quaternionf()).rotationXYZ(0.43633232F, 0.0F, (float) Math.PI);
+    public static final Vector3f TRANSLATION = new Vector3f();
+    public static final Quaternionf ANGLE = (new Quaternionf()).rotationXYZ(0.43633232F, 0.0F, (float) Math.PI);
     private static final ResourceLocation TEXTURE = MalumMod.malumPath("textures/gui/weavers_workbench.png");
 
     private final WeaversWorkbenchContainer weaversWorkbenchContainer;
@@ -41,10 +43,10 @@ public class WeaversWorkbenchContainerScreen extends AbstractContainerScreen<Wea
     }
 
     @Override
-    public void render(@Nonnull GuiGraphics poseStack, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(poseStack);
-        super.render(poseStack, mouseX, mouseY, partialTicks);
-        this.renderTooltip(poseStack, mouseX, mouseY);
+    public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
+        super.render(guiGraphics, mouseX, mouseY, partialTicks);
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
     @Override
@@ -60,9 +62,7 @@ public class WeaversWorkbenchContainerScreen extends AbstractContainerScreen<Wea
             setupArmorStand();
         }
         cachedOutput = output;
-
-        InventoryScreen.renderEntityInInventory(pGuiGraphics, this.leftPos + 141, this.topPos + 65, 25, ROTATION, null, this.armorStand);
-        //drawEntity(pGuiGraphics.pose(), this.leftPos + 141, this.topPos + 65, 25, ROTATION, null, this.armorStand);
+        InventoryScreen.renderEntityInInventory(pGuiGraphics, this.leftPos + 141, this.topPos + 75, 25.0F, TRANSLATION, ANGLE, null, this.armorStand);
     }
 
     protected void setupArmorStand() {

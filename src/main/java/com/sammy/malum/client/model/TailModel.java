@@ -45,7 +45,7 @@ public class TailModel extends EntityModel<Player> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
         tail.render(poseStack, buffer, packedLight, packedOverlay);
     }
 }

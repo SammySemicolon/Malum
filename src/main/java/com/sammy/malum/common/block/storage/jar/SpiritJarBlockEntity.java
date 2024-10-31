@@ -184,22 +184,22 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlock
         int inserted = 0;
         if (stack.getItem() instanceof SpiritPouchItem) {
             if (type != null) {
-                ItemInventory inventory = SpiritPouchItem.getInventory(stack);
-                for (int i = 0; i < inventory.getContainerSize(); i++) {
-                    ItemStack spiritStack = inventory.getItem(i);
-                    if (spiritStack.getItem() instanceof SpiritShardItem spiritItem) {
-                        MalumSpiritType type = spiritItem.type;
-                        if (type.getIdentifier().equals(this.type.getIdentifier())) {
-                            inventory.setItem(i, ItemStack.EMPTY);
-                            inserted += spiritStack.getCount();
-                            count += spiritStack.getCount();
-                        }
-                    }
-                }
+//                ItemInventory inventory = SpiritPouchItem.getInventory(stack);
+//                for (int i = 0; i < inventory.getContainerSize(); i++) {
+//                    ItemStack spiritStack = inventory.getItem(i);
+//                    if (spiritStack.getItem() instanceof SpiritShardItem spiritItem) {
+//                        MalumSpiritType type = spiritItem.type;
+//                        if (type.getIdentifier().equals(this.type.getIdentifier())) {
+//                            inventory.setItem(i, ItemStack.EMPTY);
+//                            inserted += spiritStack.getCount();
+//                            count += spiritStack.getCount();
+//                        }
+//                    }
+//                }
             }
-        } else if (stack.getItem() instanceof SpiritShardItem spiritSplinterItem) {
-            if (type == null || type.equals(spiritSplinterItem.type)) {
-                type = spiritSplinterItem.type;
+        } else if (stack.getItem() instanceof SpiritShardItem shard) {
+            if (type == null || type.equals(shard.type)) {
+                type = shard.type;
                 inserted += stack.getCount();
                 count += stack.getCount();
                 stack.shrink(stack.getCount());

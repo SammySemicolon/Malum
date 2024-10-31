@@ -105,7 +105,8 @@ public class MalumSpiritType {
     public Rarity getItemRarity() {
         if (itemRarity == null) {
             TextColor textColor = getTextColor(false);
-            itemRarity = Rarity.create("malum$" + identifier, (style) -> style.withColor(textColor));
+            itemRarity = Rarity.UNCOMMON;
+//            itemRarity = Rarity.create("malum$" + identifier, (style) -> style.withColor(textColor));
         }
         return itemRarity;
     }

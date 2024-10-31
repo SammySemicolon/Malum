@@ -6,6 +6,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -29,7 +30,7 @@ public class CrucibleAccelerationData {
     public float globalAttributeModifier;
 
     public static CrucibleAccelerationData createData(ICatalyzerAccelerationTarget target, int lookupRange, Level level, BlockPos pos) {
-        Collection<ICrucibleAccelerator> nearbyAccelerators = BlockHelper.getBlockEntities(ICrucibleAccelerator.class, level, pos, lookupRange);
+        Collection<ICrucibleAccelerator> nearbyAccelerators = BlockEntityHelper.getBlockEntities(ICrucibleAccelerator.class, level, pos, lookupRange);
         Collection<ICrucibleAccelerator> validAccelerators = new ArrayList<>();
         Map<ICrucibleAccelerator.CrucibleAcceleratorType, Integer> typeCount = new HashMap<>();
 
@@ -94,7 +95,8 @@ public class CrucibleAccelerationData {
             acceleratorTag.putInt("amount", positions.size());
             for (int i = 0; i < positions.size(); i++) {
                 BlockPos position = positions.get(i);
-                BlockHelper.saveBlockPos(acceleratorTag, position, "accelerator_" + i + "_");
+
+                acceleratorTag.put("acceleratorPosition_"+i, NBTHelper.saveBlockPos(position));
             }
         }
         acceleratorTag.putFloat("globalAttributeModifier", globalAttributeModifier);
@@ -111,12 +113,12 @@ public class CrucibleAccelerationData {
             CompoundTag acceleratorTag = compound.getCompound("acceleratorData");
             int amount = acceleratorTag.getInt("amount");
             for (int i = 0; i < amount; i++) {
-                BlockPos pos = BlockHelper.loadBlockPos(acceleratorTag, "accelerator_" + i + "_");
+                BlockPos pos = NBTHelper.readBlockPos(acceleratorTag.getCompound("acceleratorPosition_" + i));
                 if (level.getBlockEntity(pos) instanceof ICrucibleAccelerator accelerator) {
                     typeCount.compute(accelerator.getAcceleratorType(), (type, count) -> count == null ? 1 : count + 1);
                     accelerators.add(accelerator);
                     accelerator.setTarget(target);
-                    BlockHelper.updateState(level, pos);
+                    BlockStateHelper.updateState(level, pos);
                 }
             }
             final CrucibleAccelerationData data = new CrucibleAccelerationData(target, typeCount, accelerators);

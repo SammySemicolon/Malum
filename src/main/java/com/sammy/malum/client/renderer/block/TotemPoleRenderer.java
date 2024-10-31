@@ -13,6 +13,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.properties.*;
 import org.joml.*;
+import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
@@ -34,7 +35,7 @@ public class TotemPoleRenderer implements BlockEntityRenderer<TotemPoleBlockEnti
         }
 
         Level level = Minecraft.getInstance().level;
-        RenderType renderType = LodestoneRenderTypeRegistry.ADDITIVE_TEXTURE.applyAndCache(RenderTypeToken.createCachedToken(spiritType.getTotemGlowTexture()));
+        RenderType renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(RenderTypeToken.createCachedToken(spiritType.getTotemGlowTexture()));
 
         poseStack.pushPose();
         poseStack.translate(0.5f, 0.5f, 0.5f);

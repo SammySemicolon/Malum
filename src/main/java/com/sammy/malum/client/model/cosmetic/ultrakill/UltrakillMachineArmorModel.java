@@ -32,14 +32,14 @@ public class UltrakillMachineArmorModel extends LodestoneArmorModel {
     }
 
     @Override
-    public void renderToBuffer(PoseStack pPoseStack, VertexConsumer pBuffer, int pPackedLight, int pPackedOverlay, float pRed, float pGreen, float pBlue, float pAlpha) {
-        super.renderToBuffer(pPoseStack, pBuffer, pPackedLight, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+        super.renderToBuffer(poseStack, buffer, packedLight, packedOverlay, color);
         if (!this.young) {
             if (slot == EquipmentSlot.CHEST) {
-                wingsFullBright.render(pPoseStack, pBuffer, RenderHelper.FULL_BRIGHT, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+                wingsFullBright.render(poseStack, buffer, RenderHelper.FULL_BRIGHT, packedOverlay, color);
             }
             if (slot == EquipmentSlot.HEAD) {
-                helmetFullBright.render(pPoseStack, pBuffer, RenderHelper.FULL_BRIGHT, pPackedOverlay, pRed, pGreen, pBlue, pAlpha);
+                helmetFullBright.render(poseStack, buffer, RenderHelper.FULL_BRIGHT, packedOverlay, color);
             }
         }
     }

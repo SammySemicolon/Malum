@@ -8,9 +8,9 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import team.lodestar.lodestone.systems.item.LodestoneArmorItem;
@@ -24,47 +24,52 @@ public class WeaversWorkbenchContainer extends AbstractContainerMenu {
     public final WeaversWorkbenchItemHandler itemHandler;
     public final WeaversWorkbenchBlockEntity blockEntity;
 
-    public WeaversWorkbenchContainer(int windowId, Inventory playerInv, FriendlyByteBuf data) {
-        this(windowId, playerInv, getTileEntity(playerInv, data));
+    public WeaversWorkbenchContainer(int containerId, Inventory playerInv) {
+        this(containerId, playerInv, ContainerLevelAccess.NULL);
     }
 
-    public WeaversWorkbenchContainer(int windowId, Inventory playerInv, WeaversWorkbenchBlockEntity blockEntity) {
-        super(ContainerRegistry.WEAVERS_WORKBENCH.get(), windowId);
-        this.itemHandler = blockEntity.itemHandler;
-        this.blockEntity = blockEntity;
-        addSlot(new SlotItemHandler(itemHandler, 0, 18, 52) {
-            @Override
-            public boolean mayPlace(ItemStack pStack) {
-                return pStack.getItem() instanceof LodestoneArmorItem;
-            }
-        });
-        addSlot(new SlotItemHandler(itemHandler, 1, 54, 52) {
-            @Override
-            public boolean mayPlace(ItemStack pStack) {
-                return pStack.getItem() instanceof AbstractWeaveItem;
-            }
-        });
-        addSlot(new SlotItemHandler(itemHandler, 2, 90, 52) {
-            @Override
-            public boolean mayPlace(ItemStack pStack) {
-                return false;
-            }
+    public WeaversWorkbenchContainer(int containerId, Inventory playerInventory, final ContainerLevelAccess access) {
+        super(ContainerRegistry.WEAVERS_WORKBENCH.get(), containerId);
 
-            @Override
-            public void onTake(Player pPlayer, ItemStack pStack) {
-                super.onTake(pPlayer, pStack);
-                blockEntity.onCraft();
-            }
-        });
+        var blockEntity = access.evaluate((Level::getBlockEntity)).filter(b -> b instanceof WeaversWorkbenchBlockEntity).map(b -> (WeaversWorkbenchBlockEntity)b);
+        this.itemHandler = blockEntity.map(b -> b.itemHandler).orElse(null);
+        this.blockEntity = blockEntity.orElse(null);
+        if (blockEntity.isPresent()) {
+            addSlot(new SlotItemHandler(itemHandler, 0, 18, 52) {
+                @Override
+                public boolean mayPlace(ItemStack pStack) {
+                    return pStack.getItem() instanceof LodestoneArmorItem;
+                }
+            });
+            addSlot(new SlotItemHandler(itemHandler, 1, 54, 52) {
+                @Override
+                public boolean mayPlace(ItemStack pStack) {
+                    return pStack.getItem() instanceof AbstractWeaveItem;
+                }
+            });
+
+            addSlot(new SlotItemHandler(itemHandler, 2, 90, 52) {
+                @Override
+                public boolean mayPlace(ItemStack pStack) {
+                    return false;
+                }
+
+                @Override
+                public void onTake(Player pPlayer, ItemStack pStack) {
+                    super.onTake(pPlayer, pStack);
+                    blockEntity.get().onCraft();
+                }
+            });
+        }
 
         for (int l = 0; l < 3; ++l) {
             for (int j1 = 0; j1 < 9; ++j1) {
-                this.addSlot(new Slot(playerInv, j1 + (l + 1) * 9, 8 + j1 * 18, 84 + l * 18));
+                this.addSlot(new Slot(playerInventory, j1 + (l + 1) * 9, 8 + j1 * 18, 84 + l * 18));
             }
         }
 
         for (int i1 = 0; i1 < 9; ++i1) {
-            this.addSlot(new Slot(playerInv, i1, 8 + i1 * 18, 142));
+            this.addSlot(new Slot(playerInventory, i1, 8 + i1 * 18, 142));
         }
     }
 

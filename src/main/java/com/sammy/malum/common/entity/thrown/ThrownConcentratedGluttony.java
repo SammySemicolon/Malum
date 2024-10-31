@@ -29,7 +29,6 @@ public class ThrownConcentratedGluttony extends ThrowableItemProjectile {
 
     public int age;
 
-    public boolean fadingAway;
     public int fadingTimer;
 
     public ThrownConcentratedGluttony(Level pLevel) {
@@ -45,16 +44,15 @@ public class ThrownConcentratedGluttony extends ThrowableItemProjectile {
     }
 
     @Override
-    protected void defineSynchedData() {
-        this.getEntityData().define(DATA_FADING_AWAY, false);
-        super.defineSynchedData();
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(DATA_FADING_AWAY, false);
+        super.defineSynchedData(builder);
     }
 
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
         if (DATA_FADING_AWAY.equals(pKey)) {
-            fadingAway = entityData.get(DATA_FADING_AWAY);
-            if (fadingAway) {
+            if (isFadingAway()) {
                 setDeltaMovement(getDeltaMovement().scale(0.02f));
             }
         }
@@ -67,7 +65,7 @@ public class ThrownConcentratedGluttony extends ThrowableItemProjectile {
         if (age != 0) {
             compound.putInt("age", age);
         }
-        if (fadingAway) {
+        if (entityData.get(DATA_FADING_AWAY)) {
             compound.putBoolean("fadingAway", true);
             compound.putInt("fadingTimer", fadingTimer);
         }
@@ -86,13 +84,9 @@ public class ThrownConcentratedGluttony extends ThrowableItemProjectile {
     }
 
     @Override
-    protected float getGravity() {
-        return fadingAway ? 0f : 0.05F;
-    }
-
-    @Override
     public void tick() {
         super.tick();
+        boolean fadingAway = isFadingAway();
         if (level().isClientSide) {
             for (int i = 0; i < 3; i++) {
                 var trailPointBuilder = trails.get(i);
@@ -126,7 +120,7 @@ public class ThrownConcentratedGluttony extends ThrowableItemProjectile {
         if (!(level() instanceof ServerLevel level)) {
             return;
         }
-        if (fadingAway) {
+        if (isFadingAway()) {
             return;
         }
         var impactedEntity = pResult instanceof EntityHitResult entityHitResult ? entityHitResult.getEntity() : null;
@@ -161,12 +155,16 @@ public class ThrownConcentratedGluttony extends ThrowableItemProjectile {
         }
     }
 
+    public boolean isFadingAway() {
+        return entityData.get(DATA_FADING_AWAY);
+    }
+
     public float getVisualEffectScalar() {
         float effectScalar = 1;
         if (age < 5) {
             effectScalar = age / 5f;
         }
-        else if (fadingAway) {
+        else if (isFadingAway()) {
             effectScalar = effectScalar * (40 - fadingTimer) / 40f;
         }
         return effectScalar;

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
 import com.sammy.malum.client.screen.codex.screens.*;
 import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.client.*;
@@ -17,7 +18,7 @@ import net.minecraft.resources.*;
 import net.minecraft.util.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
-import net.neoforged.neoforge.common.crafting.ICustomIngredient;
+import net.neoforged.neoforge.common.crafting.*;
 import org.joml.*;
 import org.lwjgl.opengl.*;
 import team.lodestar.lodestone.registry.client.*;
@@ -42,7 +43,7 @@ public class ArcanaCodexHelper {
     }
 
     public static <T extends AbstractProgressionCodexScreen> void renderTransitionFade(T screen, PoseStack stack) {
-        final float pct = screen.transitionTimer / (float)screen.getTransitionDuration();
+        final float pct = screen.transitionTimer / (float) screen.getTransitionDuration();
         float overlayAlpha = Easing.SINE_IN_OUT.ease(pct, 0, 1, 1);
         float effectStrength = Easing.QUAD_OUT.ease(pct, 0, 1, 1);
         float effectAlpha = Math.min(1, effectStrength * 1);
@@ -128,6 +129,7 @@ public class ArcanaCodexHelper {
     public static void renderWavyIcon(ResourceLocation location, PoseStack stack, int x, int y, int z) {
         renderWavyIcon(location, stack, x, y, 0, 16, 16);
     }
+
     public static void renderWavyIcon(ResourceLocation location, PoseStack stack, int x, int y, int z, int textureWidth, int textureHeight) {
         ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.DISTORTED_TEXTURE.getInstance().get();
         shaderInstance.safeGetUniform("YFrequency").set(10f);
@@ -164,7 +166,7 @@ public class ArcanaCodexHelper {
     }
 
     public static void renderTexture(ResourceLocation texture, PoseStack poseStack, int x, int y, float u, float v, int width, int height, int textureWidth, int textureHeight) {
-        renderTexture(texture, poseStack, VFX_BUILDER, x, y,0, u, v, width, height, textureWidth, textureHeight);
+        renderTexture(texture, poseStack, VFX_BUILDER, x, y, 0, u, v, width, height, textureWidth, textureHeight);
     }
 
     public static void renderTexture(ResourceLocation texture, PoseStack poseStack, int x, int y, int z, float u, float v, int width, int height, int textureWidth, int textureHeight) {
@@ -195,22 +197,32 @@ public class ArcanaCodexHelper {
         RenderSystem.disableBlend();
     }
 
-    public static void renderComponents(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<Ingredient> components, int left, int top, int mouseX, int mouseY, boolean vertical) {
-        List<ItemStack> items = components.stream().flatMap(i -> Arrays.stream(i.getItems())).collect(Collectors.toList());
-        renderItemList(screen, guiGraphics, items, left, top, mouseX, mouseY, vertical).run();
+    public static void renderIngredients(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<?> ingredients, int left, int top, int mouseX, int mouseY, boolean vertical) {
+        final List<ItemStack> stacks =
+                Stream.of(
+                        ingredients.stream().filter(o -> o instanceof ICustomIngredient).flatMap(o -> ((ICustomIngredient) o).getItems()),
+                        ingredients.stream().filter(o -> o instanceof SizedIngredient).flatMap(o -> Arrays.stream(((SizedIngredient) o).getItems())),
+                        ingredients.stream().filter(o -> o instanceof Ingredient).flatMap(o -> Arrays.stream(((Ingredient) o).getItems()))
+                ).flatMap(s -> s).toList();
+        renderItemList(screen, guiGraphics, stacks, left, top, mouseX, mouseY, vertical);
     }
 
-    public static Runnable renderBufferedComponents(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<Ingredient> components, int left, int top, int mouseX, int mouseY, boolean vertical) {
-        List<ItemStack> items = components.stream().flatMap(i -> Arrays.stream(i.getItems())).collect(Collectors.toList());
-        return renderItemList(screen, guiGraphics, items, left, top, mouseX, mouseY, vertical);
+    public static void renderIngredient(AbstractMalumScreen screen, GuiGraphics guiGraphics, ICustomIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
+        renderItem(screen, guiGraphics, ingredient.getItems().toList(), posX, posY, mouseX, mouseY);
+    }
+    public static void renderIngredient(AbstractMalumScreen screen, GuiGraphics guiGraphics, SizedIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
+        renderItem(screen, guiGraphics, List.of(ingredient.getItems()), posX, posY, mouseX, mouseY);
+    }
+    public static void renderIngredient(AbstractMalumScreen screen, GuiGraphics guiGraphics, Ingredient ingredient, int posX, int posY, int mouseX, int mouseY) {
+        renderItem(screen, guiGraphics, List.of(ingredient.getItems()), posX, posY, mouseX, mouseY);
     }
 
-    public static void renderComponent(AbstractMalumScreen screen, GuiGraphics guiGraphics, Ingredient component, int posX, int posY, int mouseX, int mouseY) {
-        if (component.getItems().length == 1) {
-            renderItem(screen, guiGraphics, component.getItems()[0], posX, posY, mouseX, mouseY);
-        } else {
-            renderItemList(screen, guiGraphics, List.of(component.getItems()), posX, posY, mouseX, mouseY, true).run();
-        }
+    public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, ICustomIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
+        renderItem(screen, guiGraphics, ingredient.getItems().toList(), posX, posY, mouseX, mouseY);
+    }
+
+    public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, SizedIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
+        renderItem(screen, guiGraphics, List.of(ingredient.getItems()), posX, posY, mouseX, mouseY);
     }
 
     public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, Ingredient ingredient, int posX, int posY, int mouseX, int mouseY) {
@@ -219,7 +231,7 @@ public class ArcanaCodexHelper {
 
     public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<ItemStack> stacks, int posX, int posY, int mouseX, int mouseY) {
         if (stacks.size() == 1) {
-            renderItem(screen, guiGraphics, stacks.get(0), posX, posY, mouseX, mouseY);
+            renderItem(screen, guiGraphics, stacks.getFirst(), posX, posY, mouseX, mouseY);
             return;
         }
         int index = (int) (Minecraft.getInstance().level.getGameTime() % (20L * stacks.size()) / 20);
@@ -237,25 +249,21 @@ public class ArcanaCodexHelper {
         }
     }
 
-    public static Runnable renderItemList(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<ItemStack> items, int left, int top, int mouseX, int mouseY, boolean vertical) {
+    public static void renderItemList(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<ItemStack> items, int left, int top, int mouseX, int mouseY, boolean vertical) {
         int slots = items.size();
         renderItemFrames(guiGraphics.pose(), slots, left, top, vertical);
-        return () -> {
-            int finalLeft = left;
-            int finalTop = top;
-            if (vertical) {
-                finalTop -= 10 * (slots - 1);
-            } else {
-                finalLeft -= 10 * (slots - 1);
-            }
-            for (int i = 0; i < slots; i++) {
-                ItemStack stack = items.get(i);
-                int offset = i * 20;
-                int oLeft = finalLeft + 2 + (vertical ? 0 : offset);
-                int oTop = finalTop + 2 + (vertical ? offset : 0);
-                renderItem(screen, guiGraphics, stack, oLeft, oTop, mouseX, mouseY);
-            }
-        };
+        if (vertical) {
+            top -= 10 * (slots - 1);
+        } else {
+            left -= 10 * (slots - 1);
+        }
+        for (int i = 0; i < slots; i++) {
+            ItemStack stack = items.get(i);
+            int offset = i * 20;
+            int oLeft = left + 2 + (vertical ? 0 : offset);
+            int oTop = top + 2 + (vertical ? offset : 0);
+            renderItem(screen, guiGraphics, stack, oLeft, oTop, mouseX, mouseY);
+        }
     }
 
     public static void renderItemFrames(PoseStack poseStack, int slots, int left, int top, boolean vertical) {
@@ -390,7 +398,7 @@ public class ArcanaCodexHelper {
         for (int i = 0; i < text.length(); i++) {
             char chr = text.charAt(i);
             if (chr == ' ' || chr == '\n') {
-                if (word.length() > 0) {
+                if (!word.isEmpty()) {
                     if (font.width(line.toString()) + font.width(word.toString()) > w) {
                         line = newLine(lines, italic, bold, strikethrough, underline, obfuscated, line);
                     }

@@ -10,8 +10,4 @@ public class CorruptedAqueousAura extends MobEffect {
     public CorruptedAqueousAura() {
         super(MobEffectCategory.BENEFICIAL, ColorHelper.getColor(SpiritTypeRegistry.AQUEOUS_SPIRIT.getPrimaryColor()));
     }
-
-    @Override
-    public void applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
-    }
 }

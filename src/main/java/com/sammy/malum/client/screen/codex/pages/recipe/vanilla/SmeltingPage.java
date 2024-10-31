@@ -3,13 +3,14 @@ package com.sammy.malum.client.screen.codex.pages.recipe.vanilla;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.screen.codex.screens.*;
 import com.sammy.malum.client.screen.codex.pages.*;
+import com.sammy.malum.core.systems.recipe.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.multiplayer.*;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.item.crafting.*;
 
 import java.util.Optional;
 
@@ -41,13 +42,10 @@ public class SmeltingPage extends BookPage {
     }
 
     public static SmeltingPage fromInput(Item input) {
-        if (Minecraft.getInstance() == null) {
-            return new SmeltingPage(ItemStack.EMPTY, ItemStack.EMPTY);
-        }
-        Optional<SmeltingRecipe> optional = Minecraft.getInstance().level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SimpleContainer(new ItemStack(input, 1)), Minecraft.getInstance().level);
-        if (optional.isPresent()) {
-            SmeltingRecipe recipe = optional.get();
-            return new SmeltingPage(new ItemStack(input), recipe.getResultItem(Minecraft.getInstance().level.registryAccess()));
+        var level = Minecraft.getInstance().level;
+        SmeltingRecipe recipe = LodestoneRecipeType.getRecipe(level, RecipeType.SMELTING, new SingleRecipeInput(new ItemStack(input, 1)));
+        if (recipe != null) {
+            return new SmeltingPage(new ItemStack(input), recipe.getResultItem(level.registryAccess()));
         }
         return new SmeltingPage(ItemStack.EMPTY, ItemStack.EMPTY);
     }

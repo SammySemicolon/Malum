@@ -54,7 +54,7 @@ public class SpiritRiteRecipePage extends BookPage {
             final int y = riteStartY - 20 * i;
             MalumSpiritType spiritType = spirits.get(i);
             ResourceLocation spiritTexture = spiritType.getTotemGlowTexture();
-            ItemStack stack = spirits.get(i).spiritShard.get().getDefaultInstance();
+            ItemStack stack = spirits.get(i).getSpiritShard().getDefaultInstance();
             renderRiteIcon(spiritTexture, spiritType, poseStack, isCorrupted(), 0.25f, riteStartX, y);
             if (screen.isHovering(mouseX, mouseY, riteStartX, y, 16, 16)) {
                 guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, Screen.getTooltipFromItem(Minecraft.getInstance(), stack), mouseX, mouseY);
@@ -66,7 +66,7 @@ public class SpiritRiteRecipePage extends BookPage {
                 int lifetime = RandomHelper.randomBetween(rand, 40, 80);
                 float scale = RandomHelper.randomBetween(rand, 0.2f, 0.6f);
                 float spin = RandomHelper.randomBetween(rand, 0.2f, 0.4f);
-                ScreenParticleBuilder.create(LodestoneScreenParticleRegistry.WISP, RITE_PARTICLES)
+                ScreenParticleBuilder.create(LodestoneScreenParticleTypes.WISP, RITE_PARTICLES)
                         .setTransparencyData(GenericParticleData.create(0.04f, 0.4f, 0f).setEasing(Easing.SINE_IN_OUT).build())
                         .setSpinData(SpinParticleData.create(spin).build())
                         .setScaleData(GenericParticleData.create(scale, 0).build())

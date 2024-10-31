@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.armor;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.cosmetic.*;
 import com.sammy.malum.common.item.cosmetic.skins.*;
+import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.client.*;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import team.lodestar.lodestone.registry.common.*;
 import team.lodestar.lodestone.systems.model.*;
 
 import java.util.*;
@@ -32,7 +34,6 @@ public class MalignantStrongholdArmorItem extends MalumArmorItem {
     @Override
     public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
         ItemAttributeModifiers.Builder attributes = ItemAttributeModifiers.builder();
-        UUID uuid = ARMOR_MODIFIER_UUID_PER_TYPE.get(type);
         attributes.add(AttributeRegistry.MALIGNANT_CONVERSION, new AttributeModifier(MalumMod.malumPath("malignant_conversion"), 0.25f, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.ARMOR);
         return attributes.build().modifiers();
     }
@@ -43,7 +44,7 @@ public class MalignantStrongholdArmorItem extends MalumArmorItem {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public LodestoneArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-                float pticks = Minecraft.getInstance().getFrameTime();
+                float pticks = (float)(Minecraft.getInstance().getFrameTimeNs() / 20000000000L);
                 float f = Mth.rotLerp(pticks, entity.yBodyRotO, entity.yBodyRot);
                 float f1 = Mth.rotLerp(pticks, entity.yHeadRotO, entity.yHeadRot);
                 float netHeadYaw = f1 - f;

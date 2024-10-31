@@ -18,12 +18,7 @@ public class RuneworkingPage extends BookPage {
     private final RunicWorkbenchRecipe recipe;
 
     public RuneworkingPage(Predicate<RunicWorkbenchRecipe> predicate) {
-        super(MalumMod.malumPath("textures/gui/book/pages/runeworking_page.png"));
-        if (Minecraft.getInstance() == null) {
-            this.recipe = null;
-            return;
-        }
-        this.recipe = LodestoneRecipeType.findRecipe(Minecraft.getInstance().level, RecipeTypeRegistry.RUNEWORKING.get(), predicate);
+        this(LodestoneRecipeType.findRecipe(Minecraft.getInstance().level, RecipeTypeRegistry.RUNEWORKING.get(), predicate));
     }
 
     public RuneworkingPage(RunicWorkbenchRecipe recipe) {
@@ -33,8 +28,8 @@ public class RuneworkingPage extends BookPage {
 
     @Override
     public void render(EntryScreen screen, GuiGraphics guiGraphics, int left, int top, int mouseX, int mouseY, float partialTicks, boolean isRepeat) {
-        renderComponent(screen, guiGraphics, recipe.primaryInput, left + 63, top + 59, mouseX, mouseY);
-        renderComponent(screen, guiGraphics, recipe.secondaryInput, left + 63, top + 16, mouseX, mouseY);
+        renderIngredient(screen, guiGraphics, recipe.primaryInput, left + 63, top + 59, mouseX, mouseY);
+        renderIngredient(screen, guiGraphics, recipe.secondaryInput, left + 63, top + 16, mouseX, mouseY);
         renderItem(screen, guiGraphics, recipe.output, left + 63, top + 126, mouseX, mouseY);
     }
 

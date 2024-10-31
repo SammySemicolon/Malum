@@ -45,29 +45,27 @@ public class BlightedSoilBlock extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
     }
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        if (pLevel instanceof ServerLevel serverLevel) {
-            ItemStack itemInHand = pPlayer.getItemInHand(pHand);
-            Item item = itemInHand.getItem();
-            if (item instanceof SpiritShardItem) {
-                if (!pPlayer.isCreative()) {
-                    itemInHand.shrink(1);
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (level instanceof ServerLevel serverLevel) {
+            if (stack.getItem() instanceof SpiritShardItem) {
+                if (!player.isCreative()) {
+                    stack.shrink(1);
                 }
-                serverLevel.levelEvent(1505, pPos, 0);
-                performBonemeal(serverLevel, pLevel.random, pPos, pState);
-                return InteractionResult.SUCCESS;
+                serverLevel.levelEvent(1505, pos, 0);
+                performBonemeal(serverLevel, level.random, pos, state);
+                return ItemInteractionResult.SUCCESS;
             }
         }
-        return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 

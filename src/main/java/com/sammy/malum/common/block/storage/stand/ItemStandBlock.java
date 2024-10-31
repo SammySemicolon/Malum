@@ -40,7 +40,7 @@ public class ItemStandBlock<T extends ItemStandBlockEntity> extends WaterLoggedE
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (be instanceof ItemStandBlockEntity stand) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(stand.getCapability(pLevel, pPos, pState, stand, null));
+            return ItemHandlerHelper.calcRedstoneFromInventory(stand.getCapability(pLevel, pPos, pState, stand, Direction.UP));
         }
         return 0;
     }

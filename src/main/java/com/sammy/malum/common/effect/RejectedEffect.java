@@ -1,5 +1,6 @@
 package com.sammy.malum.common.effect;
 
+import com.sammy.malum.*;
 import com.sammy.malum.common.capability.MalumLivingEntityDataCapability;
 import com.sammy.malum.core.handlers.TouchOfDarknessHandler;
 import com.sammy.malum.registry.common.DamageTypeRegistry;
@@ -14,23 +15,20 @@ import team.lodestar.lodestone.helpers.*;
 public class RejectedEffect extends MobEffect {
     public RejectedEffect() {
         super(MobEffectCategory.NEUTRAL, ColorHelper.getColor(20, 14, 22));
-        addAttributeModifier(Attributes.MOVEMENT_SPEED, "248da214-2292-4637-a040-5597fb65db58", -0.2f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        addAttributeModifier(Attributes.MOVEMENT_SPEED, MalumMod.malumPath("rejection"), -0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
+    public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
         TouchOfDarknessHandler handler = MalumLivingEntityDataCapability.getCapability(pLivingEntity).touchOfDarknessHandler;
         handler.afflict(40);
         if (pLivingEntity.level().getGameTime() % 60L == 0) {
             if (pLivingEntity instanceof Player player && player.isCreative()) {
-                return;
+                return false;
             }
             pLivingEntity.hurt(DamageTypeHelper.create(pLivingEntity.level(), DamageTypeRegistry.VOODOO), 1);
+            return true;
         }
-    }
-
-    @Override
-    public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
-        return true;
+        return false;
     }
 }

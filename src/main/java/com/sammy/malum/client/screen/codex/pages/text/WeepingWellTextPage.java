@@ -70,7 +70,7 @@ public class WeepingWellTextPage extends BookPage {
                 float spin = 6.28f * (level.getGameTime() / 240f);
                 final int x = left + 71;
                 final int y = top + 46;
-                ScreenParticleBuilder.create(LodestoneScreenParticleRegistry.STAR, ITEM_PARTICLES)
+                ScreenParticleBuilder.create(LodestoneScreenParticleTypes.STAR, ITEM_PARTICLES)
                         .setTransparencyData(GenericParticleData.create(0.02f, 0.4f, 0f).build())
                         .setSpinData(SpinParticleData.create(0).setSpinOffset(spin).build())
                         .setScaleData(GenericParticleData.create(0, scale * 1.2f).build())

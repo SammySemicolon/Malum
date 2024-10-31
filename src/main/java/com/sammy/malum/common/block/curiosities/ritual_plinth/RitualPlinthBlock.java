@@ -34,17 +34,17 @@ public class RitualPlinthBlock<T extends RitualPlinthBlockEntity> extends WaterL
 //    }
 
     @Override
-    public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
-        BlockEntity be = pLevel.getBlockEntity(pPos);
-        if (be instanceof RitualPlinthBlockEntity altar) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(altar.getCapability(pLevel, pPos, pState, altar, null));
-        }
-        return 0;
+    public boolean hasAnalogOutputSignal(BlockState pState) {
+        return true;
     }
 
     @Override
-    public boolean hasAnalogOutputSignal(BlockState pState) {
-        return true;
+    public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
+        BlockEntity be = pLevel.getBlockEntity(pPos);
+        if (be instanceof RitualPlinthBlockEntity plinth) {
+            return ItemHandlerHelper.calcRedstoneFromInventory(plinth.getCapability(pLevel, pPos, pState, plinth, Direction.UP));
+        }
+        return 0;
     }
 
 //    public static VoxelShape makeShape() {

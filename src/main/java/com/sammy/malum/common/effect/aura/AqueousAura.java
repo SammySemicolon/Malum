@@ -26,9 +26,4 @@ public class AqueousAura extends MobEffect {
         }
         return original;
     }
-
-    @Override
-    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        return false;
-    }
 }

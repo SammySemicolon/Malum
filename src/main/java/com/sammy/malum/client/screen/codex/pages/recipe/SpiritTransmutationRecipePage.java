@@ -4,10 +4,13 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.screen.codex.pages.BookPage;
 import com.sammy.malum.client.screen.codex.screens.EntryScreen;
 import com.sammy.malum.common.recipe.spirit.transmutation.SpiritTransmutationRecipe;
+import com.sammy.malum.core.systems.recipe.*;
+import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
@@ -27,11 +30,11 @@ public class SpiritTransmutationRecipePage extends BookPage {
         final Level level = Minecraft.getInstance().level;
         if (level != null) {
             this.recipes = new ArrayList<>();
-            final SpiritTransmutationRecipe recipe = SpiritTransmutationRecipe.getRecipe(level, predicate);
+            var recipe = LodestoneRecipeType.findRecipe(level, RecipeTypeRegistry.SPIRIT_TRANSMUTATION.get(), predicate);
             if (recipe != null) {
                 recipes.add(recipe);
                 if (recipe.group != null) {
-                    for (SpiritTransmutationRecipe otherRecipe : SpiritTransmutationRecipe.getRecipes(level)) {
+                    for (SpiritTransmutationRecipe otherRecipe : LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_TRANSMUTATION.get())) {
                         if (!recipe.equals(otherRecipe) && recipe.group.equals(otherRecipe.group)) {
                             recipes.add(otherRecipe);
                         }
@@ -54,11 +57,11 @@ public class SpiritTransmutationRecipePage extends BookPage {
     }
 
     public static SpiritTransmutationRecipePage fromInput(String headlineTranslationKey, Item inputItem) {
-        return new SpiritTransmutationRecipePage(headlineTranslationKey, s -> s.doesInputMatch(inputItem.getDefaultInstance()));
+        return new SpiritTransmutationRecipePage(headlineTranslationKey, s -> s.ingredient.test(inputItem.getDefaultInstance()));
     }
 
     public static SpiritTransmutationRecipePage fromOutput(String headlineTranslationKey, Item outputItem) {
-        return new SpiritTransmutationRecipePage(headlineTranslationKey, s -> s.doesOutputMatch(outputItem.getDefaultInstance()));
+        return new SpiritTransmutationRecipePage(headlineTranslationKey, s -> s.output.is(outputItem));
     }
 
     @Override

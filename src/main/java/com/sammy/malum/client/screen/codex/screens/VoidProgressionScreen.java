@@ -20,6 +20,7 @@ import com.sammy.malum.common.events.SetupMalumCodexEntriesEvent;
 import com.sammy.malum.common.item.codex.EncyclopediaEsotericaItem;
 import com.sammy.malum.registry.common.SoundRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -318,7 +319,7 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
             .addPage(SpiritInfusionPage.fromOutput(VOID_TABLET.get()))
             .addPage(new TextPage("void.runes.2"))
             .addPage(new EntrySelectorPage(item -> {
-                final String translationKey = "void." + ForgeRegistries.ITEMS.getKey(item).getPath();
+                final String translationKey = "void." + BuiltInRegistries.ITEM.getKey(item).getPath();
                 return new EntryReference(item,
                     BookEntry.build(translationKey)
                         .addPage(new HeadlineTextPage(translationKey))

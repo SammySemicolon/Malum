@@ -1,5 +1,6 @@
 package com.sammy.malum.common.effect.aura;
 
+import com.sammy.malum.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -11,10 +12,6 @@ import team.lodestar.lodestone.helpers.ColorHelper;
 public class AerialAura extends MobEffect {
     public AerialAura() {
         super(MobEffectCategory.BENEFICIAL, ColorHelper.getColor(SpiritTypeRegistry.AERIAL_SPIRIT.getPrimaryColor()));
-        addAttributeModifier(Attributes.MOVEMENT_SPEED, "e3f9c028-d6cc-4cf2-86a6-d5b5efd86be6", 0.2f, AttributeModifier.Operation.MULTIPLY_TOTAL);
-    }
-
-    @Override
-    public void applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
+        addAttributeModifier(Attributes.MOVEMENT_SPEED, MalumMod.malumPath("aerial_aura"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     }
 }

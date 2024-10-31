@@ -23,7 +23,7 @@ public class SpiritPouchContainerScreen extends AbstractContainerScreen<SpiritPo
 
     @Override
     public void render(@Nonnull GuiGraphics poseStack, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(poseStack);
+        this.renderBackground(poseStack, mouseX, mouseY, partialTicks);
         super.render(poseStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(poseStack, mouseX, mouseY);
     }

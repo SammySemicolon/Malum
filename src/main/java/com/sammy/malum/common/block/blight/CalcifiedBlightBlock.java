@@ -41,26 +41,24 @@ public class CalcifiedBlightBlock extends BushBlock implements IShearable {
         pBuilder.add(STAGE);
     }
 
-
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-        ItemStack stack = pPlayer.getItemInHand(pHand);
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (stack.getItem().equals(ItemRegistry.CALCIFIED_BLIGHT.get())) {
-            final int stage = pState.getValue(STAGE);
+            final int stage = state.getValue(STAGE);
             if (stage < 3) {
-                pLevel.setBlock(pPos, pState.setValue(STAGE, stage + 1), 3);
+                level.setBlock(pos, state.setValue(STAGE, stage + 1), 3);
             }
             else {
-                TallCalcifiedBlightBlock.placeAt(pLevel, BlockRegistry.TALL_CALCIFIED_BLIGHT.get().defaultBlockState(), pPos, 3);
+                TallCalcifiedBlightBlock.placeAt(level, BlockRegistry.TALL_CALCIFIED_BLIGHT.get().defaultBlockState(), pos, 3);
             }
-            if (!pPlayer.getAbilities().instabuild) {
+            if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
-            SoundType soundtype = pState.getSoundType(pLevel, pPos, pPlayer);
-            pLevel.playSound(pPlayer, pPos, SoundRegistry.CALCIFIED_BLIGHT_PLACE.get(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * (1 + stage * 0.1f));
-            return InteractionResult.SUCCESS;
+            SoundType soundtype = state.getSoundType(level, pos, player);
+            level.playSound(null, pos, SoundRegistry.CALCIFIED_BLIGHT_PLACE.get(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * (1 + stage * 0.1f));
+            return ItemInteractionResult.SUCCESS;
         }
-        return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override

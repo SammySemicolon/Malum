@@ -52,9 +52,9 @@ public class RepairPylonComponentBlock extends MultiblockComponentBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
-        if (pLevel.getBlockEntity(pPos) instanceof MultiBlockComponentEntity component) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(component.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(new EmptyHandler()));
-        }
+//        if (pLevel.getBlockEntity(pPos) instanceof MultiBlockComponentEntity component) {
+//            return ItemHandlerHelper.calcRedstoneFromInventory(component.getCapability(pLevel, pPos, pState, stand, Direction.UP));
+//        }
         return 0;
     }
 

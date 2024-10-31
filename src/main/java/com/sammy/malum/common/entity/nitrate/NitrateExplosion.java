@@ -1,28 +1,23 @@
 package com.sammy.malum.common.entity.nitrate;
 
 import com.sammy.malum.registry.common.DamageTypeRegistry;
+import net.minecraft.core.*;
+import net.minecraft.core.particles.*;
+import net.minecraft.sounds.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.ExplosionDamageCalculator;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.*;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.*;
 
+import java.util.*;
+
 public class NitrateExplosion extends Explosion {
 
-    public NitrateExplosion(Level pLevel, @Nullable Entity pSource, @Nullable DamageSource pDamageSource, @Nullable ExplosionDamageCalculator pDamageCalculator, double pToBlowX, double pToBlowY, double pToBlowZ, float pRadius, boolean pFire, BlockInteraction pBlockInteraction) {
-        super(pLevel, pSource, pDamageSource, pDamageCalculator, pToBlowX, pToBlowY, pToBlowZ, pRadius, pFire, pBlockInteraction);
-    }
-
-    @Override
-    public DamageSource getDamageSource() {
-        if (getDirectSourceEntity() != null) {
-            return DamageTypeHelper.create(getDirectSourceEntity().level(), DamageTypeRegistry.VOODOO, getDirectSourceEntity());
-        }
-        return DamageTypeHelper.create(getDirectSourceEntity().level(), DamageTypeRegistry.VOODOO);
+    public NitrateExplosion(Level level, @Nullable Entity source, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, BlockInteraction blockInteraction, ParticleOptions smallExplosionParticles, ParticleOptions largeExplosionParticles, Holder<SoundEvent> explosionSound) {
+        super(level, source, damageSource, damageCalculator, x, y, z, radius, fire, blockInteraction, smallExplosionParticles, largeExplosionParticles, explosionSound);
     }
 
     public static void processExplosion(ExplosionEvent.Detonate event) {
@@ -31,17 +26,25 @@ public class NitrateExplosion extends Explosion {
         }
     }
 
-    public static NitrateExplosion explode(Level level, @Nullable Entity pEntity, double pX, double pY, double pZ, float pExplosionRadius, Explosion.BlockInteraction pMode) {
-        return explode(level, pEntity, null, null, pX, pY, pZ, pExplosionRadius, false, pMode);
+    public static NitrateExplosion explode(Level level, @Nullable Entity source, double x, double y, double z, float radius) {
+        return explode(level, source, null, x, y, z, radius);
     }
 
-    public static NitrateExplosion explode(Level level, @Nullable Entity pExploder, @Nullable DamageSource pDamageSource, @Nullable ExplosionDamageCalculator pContext, double pX, double pY, double pZ, float pSize, boolean pCausesFire, Explosion.BlockInteraction pMode) {
-        NitrateExplosion explosion = new NitrateExplosion(level, pExploder, pDamageSource, pContext, pX, pY, pZ, pSize, pCausesFire, pMode);
-        if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(level, explosion)) return explosion;
-        if (!level.isClientSide) {
-            explosion.explode();
-        }
-        explosion.finalizeExplosion(true);
+    public static NitrateExplosion explode(Level level, @Nullable Entity source, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius) {
+        return explode(level, source, damageCalculator, x, y, z, radius, true);
+    }
+
+    public static NitrateExplosion explode(Level level, @Nullable Entity source, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean spawnParticles) {
+        var damageSource = DamageTypeHelper.create(level, DamageTypeRegistry.VOODOO, source);
+        var explosion = new NitrateExplosion(
+                level, source, damageSource, damageCalculator,
+                x, y, z, radius, false,
+                level.getGameRules().getBoolean(GameRules.RULE_TNT_EXPLOSION_DROP_DECAY) ? BlockInteraction.DESTROY_WITH_DECAY : BlockInteraction.DESTROY,
+                ParticleTypes.EXPLOSION, ParticleTypes.EXPLOSION_EMITTER, SoundEvents.GENERIC_EXPLODE
+        );
+        if (net.neoforged.neoforge.event.EventHooks.onExplosionStart(level, explosion)) return explosion;
+        explosion.explode();
+        explosion.finalizeExplosion(spawnParticles);
         return explosion;
     }
 }

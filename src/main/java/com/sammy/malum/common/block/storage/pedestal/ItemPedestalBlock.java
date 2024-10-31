@@ -1,6 +1,6 @@
 package com.sammy.malum.common.block.storage.pedestal;
 
-import net.minecraft.core.BlockPos;
+import net.minecraft.core.*;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -36,7 +36,7 @@ public class ItemPedestalBlock<T extends ItemPedestalBlockEntity> extends WaterL
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (be instanceof ItemPedestalBlockEntity pedestal) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(pedestal.getCapability(pLevel, pPos, pState, pedestal, null));
+            return ItemHandlerHelper.calcRedstoneFromInventory(pedestal.getCapability(pLevel, pPos, pState, pedestal, Direction.UP));
         }
         return 0;
     }

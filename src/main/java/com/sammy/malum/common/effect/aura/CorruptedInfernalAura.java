@@ -12,17 +12,20 @@ public class CorruptedInfernalAura extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
+    public boolean applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
         if (entityLivingBaseIn.isOnFire()) {
             entityLivingBaseIn.extinguishFire();
+            return true;
         }
         if (entityLivingBaseIn.getHealth() < entityLivingBaseIn.getMaxHealth()) {
             entityLivingBaseIn.heal(amplifier + 1);
+            return true;
         }
+        return false;
     }
 
     @Override
-    public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
-        return pDuration % 10 == 0;
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+        return duration % 10 == 0;
     }
 }

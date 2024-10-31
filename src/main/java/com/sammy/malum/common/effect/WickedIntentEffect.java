@@ -9,8 +9,5 @@ public class WickedIntentEffect extends MobEffect {
         super(MobEffectCategory.BENEFICIAL, ColorHelper.getColor(88, 86, 60));
     }
 
-    @Override
-    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        return false;
-    }
+
 }

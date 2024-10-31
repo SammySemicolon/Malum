@@ -3,14 +3,12 @@ package com.sammy.malum.client.screen.codex.pages.recipe;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.screen.codex.pages.BookPage;
 import com.sammy.malum.client.screen.codex.screens.EntryScreen;
-import com.sammy.malum.common.recipe.spirit.transmutation.SpiritTransmutationRecipe;
 import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.multiplayer.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
@@ -29,7 +27,7 @@ import team.lodestar.lodestone.systems.particle.screen.ScreenParticleHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.renderComponent;
+import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.renderIngredient;
 import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.renderText;
 
 public class SpiritTransmutationRecipeTreePage extends BookPage {
@@ -78,12 +76,12 @@ public class SpiritTransmutationRecipeTreePage extends BookPage {
             }
             ScreenParticleHandler.renderParticles(TRANSMUTATION_PARTICLES);
         }
-        renderComponent(screen, guiGraphics, itemTree.getFirst(), left + 63, top + 38, mouseX, mouseY);
-        renderComponent(screen, guiGraphics, itemTree.getLast(), left + 63, top + 120, mouseX, mouseY);
+        renderIngredient(screen, guiGraphics, itemTree.getFirst(), left + 63, top + 38, mouseX, mouseY);
+        renderIngredient(screen, guiGraphics, itemTree.getLast(), left + 63, top + 120, mouseX, mouseY);
 
         int leftStart = left + 73 - (itemTree.size())*10;
         for (int i = 1; i < itemTree.size()-1; i++) {
-            renderComponent(screen, guiGraphics, itemTree.get(i), leftStart+i*20, top + 79, mouseX, mouseY);
+            renderIngredient(screen, guiGraphics, itemTree.get(i), leftStart+i*20, top + 79, mouseX, mouseY);
         }
         int particlesX = left + 25;
         int particlesY = top + 88;

@@ -85,7 +85,7 @@ public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity implements
             ItemStack result = target.copy();
             String skinTag = getApplicableItemSkinTag(target, weave);
             if (skinTag != null) {
-                if (target.get(DataComponentRegistry.ITEM_SKIN).equals(skinTag)) {
+                if (skinTag.equals(target.get(DataComponentRegistry.ITEM_SKIN))) {
                     return ItemStack.EMPTY;
                 }
                 result.set(DataComponentRegistry.ITEM_SKIN, skinTag);

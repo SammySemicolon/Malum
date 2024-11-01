@@ -1,11 +1,17 @@
 package com.sammy.malum.common.item.curiosities;
 
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import com.sammy.malum.common.entity.nitrate.*;
+import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import io.netty.buffer.*;
 import net.minecraft.nbt.*;
+import net.minecraft.network.codec.*;
 import net.minecraft.sounds.*;
 import net.minecraft.stats.*;
+import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
@@ -17,9 +23,19 @@ import java.util.function.*;
 
 public class CatalystFlingerItem extends Item {
 
-    public static final String STATE = "malum:state";
-    public static final String STASHED_STATE = "malum:stashed_state";
-    public static final String TIMER = "malum:timer";
+    public record FlingerData(int timer, int state, int stashedState) {
+
+        public FlingerData() {
+            this(0, 0, 0);
+        }
+
+        public static Codec<FlingerData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ExtraCodecs.NON_NEGATIVE_INT.fieldOf("malum:timer").forGetter(FlingerData::timer),
+                ExtraCodecs.NON_NEGATIVE_INT.fieldOf("malum:state").forGetter(FlingerData::state),
+                ExtraCodecs.NON_NEGATIVE_INT.fieldOf("malum:stashed_state").forGetter(FlingerData::stashedState)
+        ).apply(instance, FlingerData::new));
+
+    }
 
     public final Function<Player, AbstractNitrateEntity> entitySupplier;
     public CatalystFlingerItem(Properties pProperties, Function<Player, AbstractNitrateEntity> entitySupplier) {
@@ -34,27 +50,25 @@ public class CatalystFlingerItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if (pStack.hasTag()) {
-            CompoundTag tag = pStack.getTag();
-            int state = tag.getInt(STATE);
+        var stateComponent = DataComponentRegistry.CATALYST_FLINGER_DATA;
+        if (pStack.has(stateComponent)) {
+            var data = pStack.get(stateComponent);
+            int state = data.state;
             if (state != 0) {
-                int timer = tag.getInt(TIMER);
-                if (pIsSelected && timer > 0) {
-                    tag.remove(TIMER);
-                    return;
-                }
+                int timer = data.timer;
+                int stashedState = data.stashedState;
                 if (!pIsSelected) {
                     timer++;
+                } else if (timer > 0) {
+                    timer = 0;
                 }
                 if (timer >= 100) {
-                    tag.putInt(STASHED_STATE, state);
-                    tag.remove(STATE);
-                    tag.remove(TIMER);
-
+                    timer = 0;
+                    stashedState = state;
+                    state = 0;
                     pEntity.playSound(SoundRegistry.CATALYST_LOBBER_LOCKED.get(), 1.2f, 0.8f);
-                    return;
                 }
-                tag.putInt(TIMER, timer);
+                pStack.set(stateComponent, new FlingerData(timer, state, stashedState));
             }
         }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
@@ -62,15 +76,18 @@ public class CatalystFlingerItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        ItemStack itemstack = playerIn.getItemInHand(handIn);
-        CompoundTag tag = itemstack.getOrCreateTag();
-        int state = tag.getInt(STATE);
+        ItemStack stack = playerIn.getItemInHand(handIn);
+        var stateComponent = stack.getOrDefault(DataComponentRegistry.CATALYST_FLINGER_DATA, new FlingerData());
+
+        int timer = stateComponent.timer();
+        int state = stateComponent.state();
+        int stashedState = stateComponent.stashedState();
         int cooldown = 0;
         SoundEvent sound;
         switch (state) {
             case 0 -> {
                 cooldown = 100;
-                state = Math.max(1, tag.getInt(STASHED_STATE));
+                state = Math.max(1, stashedState);
                 sound = SoundRegistry.CATALYST_LOBBER_UNLOCKED.get();
             }
             case 1 -> {
@@ -83,7 +100,7 @@ public class CatalystFlingerItem extends Item {
                     }
                 }
                 if (ammo.isEmpty()) {
-                    return InteractionResultHolder.fail(itemstack);
+                    return InteractionResultHolder.fail(stack);
                 }
                 cooldown = 20;
                 state = 2;
@@ -102,21 +119,21 @@ public class CatalystFlingerItem extends Item {
                 }
                 playerIn.awardStat(Stats.ITEM_USED.get(this));
                 if (!playerIn.getAbilities().instabuild) {
-                    itemstack.hurtAndBreak(1, playerIn, EquipmentSlot.MAINHAND);
+                    stack.hurtAndBreak(1, playerIn, EquipmentSlot.MAINHAND);
                 }
                 state = 1;
                 sound = SoundRegistry.CATALYST_LOBBER_FIRED.get();
             }
             default -> {
-                tag.remove(STATE);
+                stack.set(DataComponentRegistry.CATALYST_FLINGER_DATA, new FlingerData());
                 throw new IllegalStateException("Nitrate lobber used with an invalid state.");
             }
         }
-        tag.putInt(STATE, state);
+        stack.set(DataComponentRegistry.CATALYST_FLINGER_DATA, new FlingerData(timer, state, stashedState));
         if (cooldown != 0) {
             playerIn.getCooldowns().addCooldown(this, cooldown);
         }
         playerIn.playSound(sound, 1f, 1f);
-        return InteractionResultHolder.sidedSuccess(itemstack, worldIn.isClientSide());
+        return InteractionResultHolder.sidedSuccess(stack, worldIn.isClientSide());
     }
 }

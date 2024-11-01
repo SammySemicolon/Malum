@@ -9,6 +9,8 @@ import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.block.Block;
 import team.lodestar.lodestone.handlers.screenparticle.ParticleEmitterHandler;
 
+import java.util.*;
+
 public abstract class AbstractEtherItem extends BlockItem implements ParticleEmitterHandler.ItemParticleSupplier {
     public static final DyedItemColor DEFAULT_FIRST_COLOR = new DyedItemColor(15712278, false);
     public static final DyedItemColor DEFAULT_SECOND_COLOR = new DyedItemColor(4607909, false);
@@ -49,6 +51,6 @@ public abstract class AbstractEtherItem extends BlockItem implements ParticleEmi
     }
 
     public void setFirstColor(ItemStack stack, int color) {
-        stack.set(FIRST_COLOR, new DyedItemColor(color, false));
+        stack.set(DataComponents.DYED_COLOR, new DyedItemColor(color, false));
     }
 }

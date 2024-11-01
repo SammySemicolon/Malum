@@ -1,67 +1,62 @@
 package com.sammy.malum.core.systems.events;
 
 import com.sammy.malum.core.handlers.*;
+import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
-import net.neoforged.neoforge.event.entity.living.*;
 
-public class ModifySoulWardPropertiesEvent extends LivingEvent {
+public class ModifySoulWardPropertiesEvent extends SoulWardEvent {
 
-    private final SoulWardHandler soulWardHandler;
+    private final double physicalDamageAbsorption;
+    private final double magicDamageAbsorption;
+    private final double soulWardIntegrity;
 
-    private final double originalPhysicalAbsorptionRate;
-    private double newPhysicalAbsorptionRate;
-    private final double originalMagicalAbsorptionRate;
-    private double newMagicalAbsorptionRate;
-    private final double originalSoulWardIntegrity;
+    private double newPhysicalDamageAbsorption;
+    private double newMagicDamageAbsorption;
     private double newSoulWardIntegrity;
 
-
-    public ModifySoulWardPropertiesEvent(LivingEntity entity, SoulWardHandler soulWardHandler, double originalPhysicalAbsorptionRate, double originalMagicalAbsorptionRate, double originalSoulWardIntegrity) {
-        super(entity);
-        this.soulWardHandler = soulWardHandler;
-        this.originalPhysicalAbsorptionRate = originalPhysicalAbsorptionRate;
-        this.originalMagicalAbsorptionRate = originalMagicalAbsorptionRate;
-        this.originalSoulWardIntegrity = originalSoulWardIntegrity;
+    public ModifySoulWardPropertiesEvent(LivingEntity entity, SoulWardHandler soulWardHandler, DamageSource source, double physicalDamageAbsorption, double magicDamageAbsorption, double soulWardIntegrity) {
+        super(entity, soulWardHandler, source);
+        this.physicalDamageAbsorption = physicalDamageAbsorption;
+        this.magicDamageAbsorption = magicDamageAbsorption;
+        this.soulWardIntegrity = soulWardIntegrity;
+        this.newPhysicalDamageAbsorption = physicalDamageAbsorption;
+        this.newMagicDamageAbsorption = magicDamageAbsorption;
+        this.newSoulWardIntegrity = soulWardIntegrity;
     }
 
-    public SoulWardHandler getSoulWardHandler() {
-        return soulWardHandler;
+    public double getPhysicalDamageAbsorption() {
+        return physicalDamageAbsorption;
     }
 
-    public double getOriginalPhysicalAbsorptionRate() {
-        return originalPhysicalAbsorptionRate;
+    public double getNewPhysicalDamageAbsorption() {
+        return newPhysicalDamageAbsorption;
     }
 
-    public double getOriginalMagicalAbsorptionRate() {
-        return originalMagicalAbsorptionRate;
+    public void setNewMagicDamageAbsorption(double newMagicDamageAbsorption) {
+        this.newMagicDamageAbsorption = newMagicDamageAbsorption;
     }
 
-    public double getOriginalSoulWardIntegrity() {
-        return originalSoulWardIntegrity;
+    public double getMagicDamageAbsorption() {
+        return magicDamageAbsorption;
     }
 
-    public double getNewPhysicalAbsorptionRate() {
-        return newPhysicalAbsorptionRate;
+    public double getNewMagicDamageAbsorption() {
+        return newMagicDamageAbsorption;
     }
 
-    public double getNewMagicalAbsorptionRate() {
-        return newMagicalAbsorptionRate;
+    public void setNewPhysicalDamageAbsorption(double newPhysicalDamageAbsorption) {
+        this.newPhysicalDamageAbsorption = newPhysicalDamageAbsorption;
     }
 
-    public double getNewSoulWardIntegrity() {
+    public double getOriginalIntegrity() {
+        return soulWardIntegrity;
+    }
+
+    public double getNewIntegrity() {
         return newSoulWardIntegrity;
     }
 
-    public void setNewPhysicalAbsorptionRate(double newPhysicalAbsorptionRate) {
-        this.newPhysicalAbsorptionRate = newPhysicalAbsorptionRate;
-    }
-
-    public void setNewMagicalAbsorptionRate(double newMagicalAbsorptionRate) {
-        this.newMagicalAbsorptionRate = newMagicalAbsorptionRate;
-    }
-
-    public void setNewSoulWardIntegrity(double newSoulWardIntegrity) {
+    public void setNewIntegrity(double newSoulWardIntegrity) {
         this.newSoulWardIntegrity = newSoulWardIntegrity;
     }
-
 }

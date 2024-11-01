@@ -4,9 +4,9 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.core.handlers.client.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.item.*;
-import net.minecraft.resources.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -27,7 +27,7 @@ public class ClientSetupEvents {
     @SubscribeEvent
     public static void registerOverlays(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.ARMOR_LEVEL, MalumMod.malumPath("soul_ward"),
-                SoulWardHandler.ClientOnly::renderSoulWard);
+                SoulWardRenderHandler::renderSoulWard);
 
         event.registerAboveAll(MalumMod.malumPath("hidden_blade_cooldown"),
                 CurioHiddenBladeNecklace.ClientOnly::renderHiddenBladeCooldown);

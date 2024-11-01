@@ -25,7 +25,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
     }
 
     @Override
-    public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         final Level level = attacker.level();
         if (level.isClientSide) {
             return;
@@ -43,7 +43,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
             target.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOODOO, attacker), damage);
         }
 
-        SoundHelper.playSound(attacker, SoundRegistry.TYRVING_SLASH, 1, RandomHelper.randomBetween(attacker.getRandom(), 1f, 1.5f));
+        SoundHelper.playSound(attacker, SoundRegistry.TYRVING_SLASH.get(), 1, RandomHelper.randomBetween(attacker.getRandom(), 1f, 1.5f));
         ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.TYRVING_SLASH)
                 .setSpiritType(SpiritTypeRegistry.WICKED_SPIRIT)
                 .setVerticalSlashAngle()

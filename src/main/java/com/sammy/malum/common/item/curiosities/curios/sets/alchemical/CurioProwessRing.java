@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.alchemical;
 
 import com.sammy.malum.common.item.IMalumEventResponderItem;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.systems.events.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -22,7 +23,7 @@ public class CurioProwessRing extends MalumCurioItem implements IMalumEventRespo
     }
 
     @Override
-    public void collectSpirit(LivingEntity collector, double arcaneResonance) {
+    public void spiritCollectionEvent(CollectSpiritEvent event, LivingEntity collector, double arcaneResonance) {
         var level = collector.level();
         int generatedExperience = (int) Math.round(RandomHelper.randomBetween(level.random, 1, 4) * arcaneResonance);
 

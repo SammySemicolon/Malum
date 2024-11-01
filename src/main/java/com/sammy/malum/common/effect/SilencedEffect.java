@@ -4,7 +4,6 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.capability.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.common.*;
-import net.minecraft.resources.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -20,7 +19,7 @@ public class SilencedEffect extends MobEffect {
         addAttributeModifier(LodestoneAttributes.MAGIC_RESISTANCE, id, -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
         addAttributeModifier(AttributeRegistry.SOUL_WARD_INTEGRITY, id, -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-        addAttributeModifier(AttributeRegistry.SOUL_WARD_CAP, id, -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        addAttributeModifier(AttributeRegistry.SOUL_WARD_CAPACITY, id, -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         addAttributeModifier(AttributeRegistry.SOUL_WARD_RECOVERY_RATE, id, -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
         addAttributeModifier(AttributeRegistry.ARCANE_RESONANCE, id, -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);

@@ -126,7 +126,7 @@ public class CatalystFlingerItem extends Item {
             }
             default -> {
                 stack.set(DataComponentRegistry.CATALYST_FLINGER_DATA, new FlingerData());
-                throw new IllegalStateException("Nitrate lobber used with an invalid state.");
+                throw new IllegalStateException("Catalyst lobber used with an invalid state.");
             }
         }
         stack.set(DataComponentRegistry.CATALYST_FLINGER_DATA, new FlingerData(timer, state, stashedState));

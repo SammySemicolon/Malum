@@ -3,9 +3,11 @@ package com.sammy.malum.common.item.curiosities.curios.sets.rotten;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.common.item.food.*;
+import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.*;
+import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
@@ -26,7 +28,7 @@ public class CurioStarvedBelt extends MalumCurioItem implements IMalumEventRespo
     }
 
     @Override
-    public void collectSpirit(LivingEntity collector, double arcaneResonance) {
+    public void spiritCollectionEvent(CollectSpiritEvent event, LivingEntity collector, double arcaneResonance) {
         Holder<MobEffect> gluttony = MobEffectRegistry.GLUTTONY;
         MobEffectInstance effect = collector.getEffect(gluttony);
         if (effect == null) {
@@ -37,8 +39,8 @@ public class CurioStarvedBelt extends MalumCurioItem implements IMalumEventRespo
         Level level = collector.level();
         collector.playSound(SoundRegistry.HUNGRY_BELT_FEEDS.get(), 0.7f, 1.5f + level.random.nextFloat() * 0.5f);
         collector.playSound(SoundEvents.GENERIC_EAT, 0.7f, 0.8f + level.random.nextFloat() * 0.4f);
-        if (!level.isClientSide) {
-            ConcentratedGluttonyItem.createGluttonyVFX(collector, 0.5f);
+        if (level instanceof ServerLevel serverLevel) {
+            ConcentratedGluttonyItem.createGluttonyVFX(serverLevel, collector, 0.5f);
         }
 
     }

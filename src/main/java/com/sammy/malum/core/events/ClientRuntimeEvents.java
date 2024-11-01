@@ -3,7 +3,7 @@ package com.sammy.malum.core.events;
 import com.sammy.malum.client.renderer.block.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
-import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.core.handlers.client.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,7 +28,7 @@ public class ClientRuntimeEvents {
     public static void clientTickEvent(ClientTickEvent.Pre event) {
         SpiritCrucibleRenderer.checkForTuningFork(event);
         CurioHiddenBladeNecklace.ClientOnly.tick(event);
-        SoulWardHandler.ClientOnly.tick(event);
+        SoulWardRenderHandler.tick(event);
         TotemBaseRenderer.checkForTotemicStaff(event);
     }
 

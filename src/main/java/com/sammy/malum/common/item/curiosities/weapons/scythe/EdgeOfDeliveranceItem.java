@@ -16,8 +16,7 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
     }
 
     @Override
-    public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
-        super.hurtEvent(event, attacker, target, stack);
+    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         var level = attacker.level();
         if (level.isClientSide()) {
             return;
@@ -26,7 +25,7 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
         if (source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
             var effect = MobEffectRegistry.IMMINENT_DELIVERANCE;
             if (target.hasEffect(effect)) {
-                event.setAmount(event.getAmount() * 2);
+                event.setNewDamage(event.getNewDamage() * 2);
                 SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 2f, 1.25f);
                 SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 3f, 1.75f);
                 var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.EDGE_OF_DELIVERANCE_CRIT);
@@ -37,11 +36,11 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
                 target.removeEffect(effect);
             }
             else {
-                event.setAmount(event.getAmount() * 0.5f);
+                event.setNewDamage(event.getNewDamage() * 0.5f);
                 if (source.is(DamageTypeRegistry.HIDDEN_BLADE_COUNTER) && attacker.getRandom().nextFloat() >= 0.4f) {
                     return;
                 }
-                target.addEffect(new MobEffectInstance(MobEffectRegistry.IMMINENT_DELIVERANCE.get(), 60));
+                target.addEffect(new MobEffectInstance(MobEffectRegistry.IMMINENT_DELIVERANCE, 60));
             }
         }
     }

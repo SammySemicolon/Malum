@@ -27,7 +27,7 @@ public class RuneReactiveShieldingItem extends AbstractRuneCurioItem implements 
     }
 
     @Override
-    public void takeDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
+    public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
         Holder<MobEffect> shielding = MobEffectRegistry.REACTIVE_SHIELDING;
         MobEffectInstance effect = attacked.getEffect(shielding);
         if (effect == null) {

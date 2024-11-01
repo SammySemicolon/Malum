@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.weeping;
 import com.sammy.malum.common.item.IMalumEventResponderItem;
 import com.sammy.malum.common.item.IVoidItem;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
 import net.minecraft.core.Holder;
@@ -27,7 +28,7 @@ public class CurioGrowingFleshRing extends MalumCurioItem implements IVoidItem, 
     }
 
     @Override
-    public void collectSpirit(LivingEntity collector, double arcaneResonance) {
+    public void spiritCollectionEvent(CollectSpiritEvent event, LivingEntity collector, double arcaneResonance) {
         Holder<MobEffect> cancerousGrowth = MobEffectRegistry.CANCEROUS_GROWTH;
         MobEffectInstance effect = collector.getEffect(cancerousGrowth);
         int addedDuration = (int) (150 * arcaneResonance);

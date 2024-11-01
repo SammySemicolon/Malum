@@ -6,22 +6,17 @@ import com.sammy.malum.common.block.ether.EtherWallTorchBlock;
 import com.sammy.malum.common.item.spirit.SpiritJarItem;
 import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.core.systems.ritual.*;
-import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.*;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.WallTorchBlock;
 import net.neoforged.neoforge.common.data.LanguageProvider;
@@ -208,12 +203,14 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.curio.effect.no_sweep", "Disables Scythe Sweeping");
         add("malum.gui.curio.effect.enhanced_maneuvers", "Augments Rebound and Ascension");
         add("malum.gui.curio.effect.friendly_enemies", "Reduces Enemy Aggression");
-        add("malum.gui.curio.effect.soul_ward_magic_resilience", "Soul Ward Magic Resilience");
+        add("malum.gui.curio.effect.soul_ward_magic_resilience", "Soul Ward Magic Rerouting");
+        add("malum.gui.curio.effect.soul_ward_long_shatter_cooldown", "Lengthy Soul Ward Recharge upon Disintegration");
         add("malum.gui.curio.effect.rotten_gluttony", "Eating Rotten Food Generates Gluttony");
         add("malum.gui.curio.effect.scythe_counterattack", "Powerful Scythe Counterattack When Struck");
         add("malum.gui.curio.effect.pacifist_recharge", "Cooldown Extends if the Scythe is Used");
         add("malum.gui.curio.effect.full_health_fake_collection", "Striking Full Health Targets Triggers Spirit Collection Effects");
-        add("malum.gui.curio.effect.soul_ward_physical_absorption", "Soul Ward Absorbs Physical Damage Equally to Magic Damage");
+        add("malum.gui.curio.effect.soul_ward_complete_absorption", "Soul Ward Absorbs All Damage");
+        add("malum.gui.curio.effect.soul_ward_escalating_integrity", "Soul Ward Gains Integrity When Nearing Disintegration");
         add("malum.gui.curio.effect.spirits_gluttony", "Spirit Collection Generates Gluttony");
         add("malum.gui.curio.effect.enchanted_explosions", "Explosions are Enchanted with %s");
         add("malum.gui.curio.effect.explosions_spare_valuables", "Protects Valuable Items from Explosions");
@@ -1177,7 +1174,7 @@ public class MalumLang extends LanguageProvider {
 
         addAttributeLibAttributeDescription(AttributeRegistry.SOUL_WARD_INTEGRITY, "A percentile increase in durability for Soul Ward");
         addAttributeLibAttributeDescription(AttributeRegistry.SOUL_WARD_RECOVERY_RATE, "A percentile increase in recovery rate for Soul Ward");
-        addAttributeLibAttributeDescription(AttributeRegistry.SOUL_WARD_CAP, "The capacity for Soul Ward");
+        addAttributeLibAttributeDescription(AttributeRegistry.SOUL_WARD_CAPACITY, "The capacity for Soul Ward");
 
         addAttributeLibAttributeDescription(AttributeRegistry.RESERVE_STAFF_CHARGES, "A capacity for extra staff charges, replenished overtime, consumed when casting.");
         addAttributeLibAttributeDescription(AttributeRegistry.MALIGNANT_CONVERSION, "A percentile conversion rate in which certain magical attributes are converted into armor, armor toughness and magic resistance");

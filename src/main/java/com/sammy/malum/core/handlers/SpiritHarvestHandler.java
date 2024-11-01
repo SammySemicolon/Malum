@@ -155,7 +155,7 @@ public class SpiritHarvestHandler {
         var collectionEvent = new CollectSpiritEvent(collector);
         var attribute = collector.getAttributeValue(AttributeRegistry.ARCANE_RESONANCE);
         ItemEventHandler.getEventResponders(collector).forEach(lookup -> lookup.run(IMalumEventResponderItem.class,
-                (eventResponderItem, stack) -> eventResponderItem.collectSpirit(collectionEvent, collector, attribute)));
+                (eventResponderItem, stack) -> eventResponderItem.spiritCollectionEvent(collectionEvent, collector, attribute)));
         NeoForge.EVENT_BUS.post(collectionEvent);
     }
 

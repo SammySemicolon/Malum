@@ -27,7 +27,7 @@ public class CurioWatcherNecklace extends MalumCurioItem implements IMalumEventR
     }
 
     @Override
-    public void hurtEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (target.getHealth() >= target.getMaxHealth() * 0.9875f) {
             MalumLivingEntityDataCapability.getCapabilityOptional(target).ifPresent(c -> {
                 if (c.watcherNecklaceCooldown == 0) {

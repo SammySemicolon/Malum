@@ -9,6 +9,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.EntityHelper;
 import team.lodestar.lodestone.handlers.*;
 
@@ -26,7 +27,7 @@ public class RuneSacrificialEmpowermentItem extends AbstractRuneCurioItem implem
     }
 
     @Override
-    public void killEvent(LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDeathEvent(LivingDeathEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         Holder<MobEffect> sacrificialEmpowerment = MobEffectRegistry.SACRIFICIAL_EMPOWERMENT;
         MobEffectInstance effect = attacker.getEffect(sacrificialEmpowerment);
         if (effect == null) {

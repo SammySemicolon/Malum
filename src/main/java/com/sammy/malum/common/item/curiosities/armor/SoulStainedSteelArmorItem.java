@@ -21,7 +21,7 @@ public class SoulStainedSteelArmorItem extends MalumArmorItem {
     public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
         return List.of(
                 new ItemAttributeModifiers.Entry(
-                        AttributeRegistry.SOUL_WARD_CAP,
+                        AttributeRegistry.SOUL_WARD_CAPACITY,
                         new AttributeModifier(MalumMod.malumPath("soul_ward_cap"), 3f, AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.ARMOR),
 

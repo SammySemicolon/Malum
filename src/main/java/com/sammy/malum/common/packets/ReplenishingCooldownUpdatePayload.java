@@ -27,7 +27,7 @@ public class ReplenishingCooldownUpdatePayload extends OneSidedPayloadData {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void handle(IPayloadContext iPayloadContext) {
-        AscensionHandler.replenishStaffCooldown((AbstractStaffItem) item, iPayloadContext.player(), enchantmentLevel);
+        ReplenishingHandler.replenishStaffCooldown((AbstractStaffItem) item, iPayloadContext.player(), enchantmentLevel);
     }
 
     @Override

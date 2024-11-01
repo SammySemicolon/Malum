@@ -21,7 +21,8 @@ public class AttributeRegistry {
 
     public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_INTEGRITY = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_integrity", (id) -> new RangedAttribute(id, 1.0D, 0.0D, 2048.0D).setSyncable(true));
     public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_RECOVERY_RATE = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_recovery_rate", (id) -> new RangedAttribute(id, 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_CAP = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_capacity", (id) -> new RangedAttribute(id, 0D, 0.0D, 2048.0D).setSyncable(true));
+    public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_RECOVERY_MULTIPLIER = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_multiplier", (id) -> new RangedAttribute(id, 0D, 0.0D, 2048.0D).setSyncable(true));
+    public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_CAPACITY = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_capacity", (id) -> new RangedAttribute(id, 0D, 0.0D, 2048.0D).setSyncable(true));
 
     public static final DeferredHolder<Attribute, Attribute> RESERVE_STAFF_CHARGES = registerAttribute(ATTRIBUTES, MALUM, "reserve_staff_charges", (id) -> new RangedAttribute(id, 0D, 0.0D, 2048.0D).setSyncable(true));
     public static final DeferredHolder<Attribute, Attribute> MALIGNANT_CONVERSION = registerAttribute(ATTRIBUTES, MALUM, "malignant_conversion", (id) -> new RangedAttribute(id, 0D, 0.0D, 1.0D).setSyncable(true));
@@ -36,7 +37,8 @@ public class AttributeRegistry {
 
             event.add(e, SOUL_WARD_INTEGRITY);
             event.add(e, SOUL_WARD_RECOVERY_RATE);
-            event.add(e, SOUL_WARD_CAP);
+            event.add(e, SOUL_WARD_RECOVERY_MULTIPLIER);
+            event.add(e, SOUL_WARD_CAPACITY);
             event.add(e, RESERVE_STAFF_CHARGES);
             event.add(e, MALIGNANT_CONVERSION);
         });

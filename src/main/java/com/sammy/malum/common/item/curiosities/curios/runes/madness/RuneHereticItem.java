@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.handlers.*;
 
@@ -26,8 +27,9 @@ public class RuneHereticItem extends AbstractRuneCurioItem implements ItemEventH
         consumer.accept(positiveEffect("silence"));
     }
 
+
     @Override
-    public void takeDamageEvent(LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
+    public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
         Holder<MobEffect> silenced = MobEffectRegistry.SILENCED;
         MobEffectInstance effect = attacker.getEffect(silenced);
         if (effect == null) {

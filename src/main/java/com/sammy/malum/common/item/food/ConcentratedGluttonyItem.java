@@ -4,6 +4,7 @@ import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import com.sammy.malum.visual_effects.networked.data.*;
 import com.sammy.malum.visual_effects.networked.gluttony.*;
+import net.minecraft.server.level.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
@@ -26,8 +27,8 @@ public class ConcentratedGluttonyItem extends BottledDrinkItem {
         final MobEffectInstance gluttonyEffect = createGluttonyEffect(pEntityLiving);
         pEntityLiving.addEffect(gluttonyEffect);
         SoundHelper.playSound(pEntityLiving, SoundRegistry.CONCENTRATED_GLUTTONY_DRINK.get(), 1f, RandomHelper.randomBetween(pLevel.random, 1.5f, 2f));
-        if (!pLevel.isClientSide) {
-            createGluttonyVFX(pEntityLiving, gluttonyEffect.getAmplifier());
+        if (pLevel instanceof ServerLevel serverLevel) {
+            createGluttonyVFX(serverLevel, pEntityLiving, gluttonyEffect.getAmplifier());
         }
         return super.finishUsingItem(pStack, pLevel, pEntityLiving);
     }
@@ -55,12 +56,12 @@ public class ConcentratedGluttonyItem extends BottledDrinkItem {
         return new MobEffectInstance(MobEffectRegistry.GLUTTONY, (int) (duration * 20 * durationScalar), amplifier);
     }
 
-    public static void createGluttonyVFX(LivingEntity target, int amplifier) {
-        createGluttonyVFX(target, 1f + amplifier * 0.05f);
+    public static void createGluttonyVFX(ServerLevel serverLevel, LivingEntity target, int amplifier) {
+        createGluttonyVFX(serverLevel, target, 1f + amplifier * 0.05f);
     }
 
-    public static void createGluttonyVFX(LivingEntity target, float potency) {
+    public static void createGluttonyVFX(ServerLevel serverLevel, LivingEntity target, float potency) {
         var position = target.position().add(0, target.getBbHeight() / 2f, 0);
-        ParticleEffectTypeRegistry.GLUTTONY_ABSORB.createPositionedEffect(target.level(), new PositionEffectData(position), AbsorbGluttonyParticleEffect.createData(potency));
+        ParticleEffectTypeRegistry.GLUTTONY_ABSORB.createPositionedEffect(serverLevel, new PositionEffectData(position), AbsorbGluttonyParticleEffect.createData(potency));
     }
 }

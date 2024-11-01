@@ -147,7 +147,7 @@ public class ThrownConcentratedGluttony extends ThrowableItemProjectile {
                         if (newDuration > 20) {
                             MobEffectInstance appliedGluttony = ConcentratedGluttonyItem.createGluttonyEffect(owner, durationScalar);
                             target.addEffect(appliedGluttony, owner);
-                            ConcentratedGluttonyItem.createGluttonyVFX(target, 0.25f);
+                            ConcentratedGluttonyItem.createGluttonyVFX(level, target, 0.25f);
                         }
                     }
                 }

@@ -1,22 +1,18 @@
 {
-  "registry_name": "minecraft:wither",
+  "registry_name": "irons_spellbooks:citadel_keeper",
   "primary_type": "infernal",
   "spirits": [
     {
       "spirit": "wicked",
-      "count": 6
-    },
-    {
-      "spirit": "arcane",
-      "count": 6
+      "count": 2
     },
     {
       "spirit": "eldritch",
-      "count": 6
+      "count": 2
     },
     {
       "spirit": "infernal",
-      "count": 6
+      "count": 2
     }
   ]
 }

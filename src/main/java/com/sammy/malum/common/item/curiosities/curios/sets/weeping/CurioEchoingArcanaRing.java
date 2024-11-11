@@ -23,11 +23,11 @@ public class CurioEchoingArcanaRing extends MalumCurioItem implements IVoidItem,
 
     @Override
     public void spiritCollectionEvent(CollectSpiritEvent event, LivingEntity collector, double arcaneResonance) {
-        var arcaneReverberation = MobEffectRegistry.ARCANE_REVERBERATION;
-        var effect = collector.getEffect(arcaneReverberation);
+        var echoingArcana = MobEffectRegistry.ECHOING_ARCANA;
+        var effect = collector.getEffect(echoingArcana);
         int addedDuration = (int) (150 * arcaneResonance);
         if (effect == null) {
-            collector.addEffect(new MobEffectInstance(arcaneReverberation, addedDuration*4, 0, true, true, true));
+            collector.addEffect(new MobEffectInstance(echoingArcana, addedDuration*4, 0, true, true, true));
         } else {
             EntityHelper.extendEffect(effect, collector, addedDuration, 72000);
             EntityHelper.amplifyEffect(effect, collector, 1, 19);

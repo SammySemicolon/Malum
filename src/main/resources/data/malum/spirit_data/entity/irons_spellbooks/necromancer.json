@@ -1,0 +1,10 @@
+{
+  "registry_name": "irons_spellbooks:necromancer",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 6
+    }
+  ]
+}

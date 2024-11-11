@@ -1,0 +1,10 @@
+{
+  "registry_name": "irons_spellbooks:infernal",
+  "primary_type": "infernal",
+  "spirits": [
+    {
+      "spirit": "infernal",
+      "count": 6
+    }
+  ]
+}

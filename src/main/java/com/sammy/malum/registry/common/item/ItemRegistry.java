@@ -639,7 +639,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_LEGGINGS = register("malignant_stronghold_leggings", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.LEGGINGS, p));
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_BOOTS = register("malignant_stronghold_boots", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.BOOTS, p));
 
-    public static final DeferredHolder<Item, Item> WEIGHT_OF_WORLDS = register("weight_of_worlds", GEAR_PROPERTIES(), (p) -> new WeightOfWorldsItem(ItemTiers.ItemTierEnum.MALIGNANT_ALLOY, 3, -0.2f, p));
+    public static final DeferredHolder<Item, Item> WEIGHT_OF_WORLDS = register("weight_of_worlds", GEAR_PROPERTIES(), (p) -> new WeightOfWorldsItem(ItemTiers.ItemTierEnum.MALIGNANT_ALLOY, 2, -0.4f, p));
     public static final DeferredHolder<Item, Item> EDGE_OF_DELIVERANCE = register("edge_of_deliverance", GEAR_PROPERTIES(), (p) -> new EdgeOfDeliveranceItem(ItemTiers.ItemTierEnum.MALIGNANT_ALLOY, 2, -0.2f, p));
 
     public static final DeferredHolder<Item, Item> MNEMONIC_HEX_STAFF = register("mnemonic_hex_staff", GEAR_PROPERTIES(), (p) -> new HexStaffItem(HEX_STAFF, 5, p));

@@ -1,6 +1,6 @@
 package com.sammy.malum.config;
 
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 import team.lodestar.lodestone.systems.config.LodestoneConfig;
 
@@ -34,15 +34,25 @@ public class CommonConfig extends LodestoneConfig {
             builder.comment("Base time in ticks it takes for one point of soul ward to recover.")
                     .define("soulWardRate", 100)));
 
-    public CommonConfig(ModConfigSpec.Builder builder) {
+    public static ConfigValueHolder<Boolean> IRONS_SPELLBOOKS_SPIRIT_DAMAGE = new ConfigValueHolder<>(MALUM, "common/compat/irons_spellbooks", (builder ->
+            builder.comment("Should Iron's Spellbooks' magic damage count as Soul Damage?")
+                    .define("ironsSpellbooksPlayerSpiritDrops", true)));
+
+    public static ConfigValueHolder<Boolean> IRONS_SPELLBOOKS_NON_PLAYER_SPIRIT_DAMAGE = new ConfigValueHolder<>(MALUM, "common/compat/irons_spellbooks", (builder ->
+            builder.comment("Should Iron's Spellbooks' magic damage when dealt by non-players count as Soul Damage")
+                    .define("ironsSpellbooksNonPlayerSpiritDrops", true)));
+
+
+
+    public CommonConfig(ForgeConfigSpec.Builder builder) {
         super(MALUM, "common", builder);
     }
 
     public static final CommonConfig INSTANCE;
-    public static final ModConfigSpec SPEC;
+    public static final ForgeConfigSpec SPEC;
 
     static {
-        final Pair<CommonConfig, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(CommonConfig::new);
+        final Pair<CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
         SPEC = specPair.getRight();
         INSTANCE = specPair.getLeft();
     }

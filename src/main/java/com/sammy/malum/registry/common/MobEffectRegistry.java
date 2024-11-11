@@ -5,19 +5,14 @@ import com.sammy.malum.common.effect.*;
 import com.sammy.malum.common.effect.aura.*;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class MobEffectRegistry {
@@ -38,12 +33,10 @@ public class MobEffectRegistry {
 
     public static final DeferredHolder<MobEffect, MobEffect> REACTIVE_SHIELDING = EFFECTS.register("reactive_shielding", ReactiveShieldingEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> SACRIFICIAL_EMPOWERMENT = EFFECTS.register("sacrificial_empowerment", SacrificialEmpowermentEffect::new);
-
-
     public static final DeferredHolder<MobEffect, MobEffect> ASCENSION = EFFECTS.register("ascension", AscensionEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> GLUTTONY = EFFECTS.register("gluttony", GluttonyEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> CANCEROUS_GROWTH = EFFECTS.register("cancerous_growth", GrowingFleshEffect::new);
-    public static final DeferredHolder<MobEffect, MobEffect> ARCANE_REVERBERATION = EFFECTS.register("arcane_reverberation", EchoingArcanaEffect::new);
+    public static final DeferredHolder<MobEffect, MobEffect> ECHOING_ARCANA = EFFECTS.register("echoing_arcana", EchoingArcanaEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> WICKED_INTENT = EFFECTS.register("wicked_intent", WickedIntentEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> SILENCED = EFFECTS.register("silenced", SilencedEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> GRIM_CERTAINTY = EFFECTS.register("grim_certainty", GrimCertaintyEffect::new);

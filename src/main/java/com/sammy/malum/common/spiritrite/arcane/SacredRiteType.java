@@ -8,12 +8,13 @@ import com.sammy.malum.visual_effects.networked.data.ColorEffectData;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.*;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.EatBlockGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.allay.*;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
@@ -52,15 +53,17 @@ public class SacredRiteType extends TotemicRiteType {
             @SuppressWarnings("DataFlowIssue")
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
-                getNearbyEntities(totemBase, Animal.class).forEach(e -> {
-                    if (e.getAge() < 0) {
-                        if (totemBase.getLevel().random.nextFloat() <= 0.04f) {
-                            ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
-                            e.ageUp(25);
+                getNearbyEntities(totemBase, Mob.class).forEach(e -> {
+                    if (e instanceof Animal animal) {
+                        if (animal.getAge() < 0) {
+                            if (totemBase.getLevel().random.nextFloat() <= 0.04f) {
+                                ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                                animal.ageUp(25);
+                            }
                         }
                     }
                     if (NOURISHMENT_RITE_ACTORS.containsKey(e.getClass())) {
-                        NourishmentRiteActor<? extends Animal> nourishmentRiteActor = NOURISHMENT_RITE_ACTORS.get(e.getClass());
+                        NourishmentRiteActor<? extends Mob> nourishmentRiteActor = NOURISHMENT_RITE_ACTORS.get(e.getClass());
                         nourishmentRiteActor.tryAct(totemBase, e);
                     }
                 });
@@ -68,7 +71,7 @@ public class SacredRiteType extends TotemicRiteType {
         };
     }
 
-    public static final Map<Class<? extends Animal>, NourishmentRiteActor<?>> NOURISHMENT_RITE_ACTORS = Util.make(new HashMap<>(), m -> {
+    public static final Map<Class<? extends Mob>, NourishmentRiteActor<?>> NOURISHMENT_RITE_ACTORS = Util.make(new HashMap<>(), m -> {
         m.put(Sheep.class, new NourishmentRiteActor<>(Sheep.class) {
             @Override
             public void act(TotemBaseBlockEntity totemBaseBlockEntity, Sheep sheep) {
@@ -102,9 +105,17 @@ public class SacredRiteType extends TotemicRiteType {
                 ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(chicken, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
             }
         });
+
+        m.put(Allay.class, new NourishmentRiteActor<>(Allay.class) {
+            @Override
+            public void act(TotemBaseBlockEntity totemBaseBlockEntity, Allay allay) {
+                allay.duplicationCooldown -= 80;
+                ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(allay, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+            }
+        });
     });
 
-    public static abstract class NourishmentRiteActor<T extends Animal> {
+    public static abstract class NourishmentRiteActor<T extends Mob> {
         public final Class<T> targetClass;
 
         public NourishmentRiteActor(Class<T> targetClass) {
@@ -112,9 +123,9 @@ public class SacredRiteType extends TotemicRiteType {
         }
 
         @SuppressWarnings("unchecked")
-        public final void tryAct(TotemBaseBlockEntity totemBaseBlockEntity, Animal animal) {
-            if (targetClass.isInstance(animal)) {
-                act(totemBaseBlockEntity, (T) animal);
+        public final void tryAct(TotemBaseBlockEntity totemBaseBlockEntity, Mob mob) {
+            if (targetClass.isInstance(mob)) {
+                act(totemBaseBlockEntity, (T) mob);
             }
         }
 

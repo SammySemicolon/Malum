@@ -43,7 +43,7 @@ public class AscensionHandler {
         player.resetFallDistance();
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
-            player.setDeltaMovement(motion.x, player.getJumpPower() * 1.5f, motion.z);
+            player.setDeltaMovement(motion.x, player.getJumpPower() * 2f, motion.z);
             if (player.isSprinting()) {
                 float f = player.getYRot() * 0.017453292F;
                 float x = -Mth.sin(f);
@@ -53,18 +53,20 @@ public class AscensionHandler {
                 if (isEnhanced) {
                     newMotion = newMotion.subtract(x * 0.6f, 0, z * 0.6f);
                 } else {
-                    newMotion = newMotion.add(x * 0.75f, -0.25, z * 0.75f);
+                    newMotion = newMotion.add(x * 0.75f, 0, z * 0.75f);
                 }
                 player.setDeltaMovement(newMotion);
             }
             player.hasImpulse = true;
             CommonHooks.onLivingJump(player);
-        } else {
+        }
+        if (level instanceof ServerLevel serverLevel) {
+            var random = serverLevel.getRandom();
             float baseDamage = (float) player.getAttributes().getValue(Attributes.ATTACK_DAMAGE);
             float magicDamage = (float) player.getAttributes().getValue(LodestoneAttributes.MAGIC_DAMAGE);
             var aabb = player.getBoundingBox().inflate(4, 1f, 4);
             var sound = SoundRegistry.SCYTHE_SWEEP.get();
-            var particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_SPIN).mirrorRandomly(level.getRandom());
+            var particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_SPIN).mirrorRandomly(random);
             if (isEnhanced) {
                 baseDamage *= 1.25f;
                 magicDamage *= 1.25f;
@@ -76,19 +78,18 @@ public class AscensionHandler {
                 particleEffect.setSpiritType(spiritAffiliatedItem);
             }
             boolean dealtDamage = false;
-            for (Entity target : level.getEntities(player, aabb, t -> ascensionCanHitEntity(player, t))) {
-                var damageSource = DamageTypeHelper.create(level, DamageTypeRegistry.SCYTHE_SWEEP, player);
+            for (Entity target : serverLevel.getEntities(player, aabb, t -> ascensionCanHitEntity(player, t))) {
+                var damageSource = DamageTypeHelper.create(serverLevel, DamageTypeRegistry.SCYTHE_SWEEP, player);
                 target.invulnerableTime = 0;
                 boolean success = target.hurt(damageSource, baseDamage);
                 if (success && target instanceof LivingEntity livingentity) {
-                    ItemHelper.applyEnchantments(player, livingentity, scythe);
                     if (magicDamage > 0) {
                         if (!livingentity.isDeadOrDying()) {
                             livingentity.invulnerableTime = 0;
-                            livingentity.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOODOO, player), magicDamage);
+                            livingentity.hurt(DamageTypeHelper.create(serverLevel, DamageTypeRegistry.VOODOO, player), magicDamage);
                         }
                     }
-                    SoundHelper.playSound(player, sound, 2.0f, RandomHelper.randomBetween(level.getRandom(), 0.75f, 1.25f));
+                    SoundHelper.playSound(player, sound, 2.0f, RandomHelper.randomBetween(random, 0.75f, 1.25f));
                     dealtDamage = true;
                 }
             }
@@ -97,11 +98,11 @@ public class AscensionHandler {
             }
             var slashPosition = player.position().add(0, player.getBbHeight() * 0.75, 0);
             var slashDirection = player.getLookAngle().multiply(1, 0, 1);
-            particleEffect.spawnSlashingParticle(level, slashPosition, slashDirection);
+            particleEffect.spawnSlashingParticle(serverLevel, slashPosition, slashDirection);
             for (int i = 0; i < 3; i++) {
-                SoundHelper.playSound(player, sound, 1f, RandomHelper.randomBetween(level.getRandom(), 1.25f, 1.75f));
+                SoundHelper.playSound(player, sound, 1f, RandomHelper.randomBetween(random, 1.25f, 1.75f));
             }
-            SoundHelper.playSound(player, SoundRegistry.SCYTHE_ASCENSION.get(), 2f, RandomHelper.randomBetween(level.getRandom(), 1.25f, 1.5f));
+            SoundHelper.playSound(player, SoundRegistry.SCYTHE_ASCENSION.get(), 2f, RandomHelper.randomBetween(random, 1.25f, 1.5f));
         }
         if (!player.isCreative()) {
             int enchantmentLevel = getEnchantmentLevel(level, EnchantmentRegistry.ASCENSION, scythe);

@@ -77,8 +77,6 @@ public class BiomeModifications {
                 addFeatureModifier(context,
                         getPlacedHolderSet(context, PlacedFeatureRegistry.DEEPSLATE_QUARTZ_GEODE_FEATURE),
                         BiomeTagRegistry.HAS_QUARTZ, GenerationStep.Decoration.UNDERGROUND_DECORATION));
-
-
     }
 
     public static HolderSet<PlacedFeature> getPlacedHolderSet(BootstrapContext<?> context, ResourceKey<PlacedFeature>... placedFeatures) {

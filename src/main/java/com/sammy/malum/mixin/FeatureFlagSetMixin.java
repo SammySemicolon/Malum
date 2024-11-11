@@ -1,6 +1,7 @@
 package com.sammy.malum.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.sammy.malum.*;
 import com.sammy.malum.core.handlers.hiding.flags.FeatureFlagExpandedUniverseSet;
 import com.sammy.malum.core.handlers.hiding.flags.UncappedFeatureFlagSet;
 import net.minecraft.resources.ResourceLocation;
@@ -51,7 +52,7 @@ public class FeatureFlagSetMixin implements FeatureFlagExpandedUniverseSet {
 		if (universe != null) {
 			if (malum$featureFlags == null)
 				malum$featureFlags = new HashMap<>();
-			malum$featureFlags.put(new ResourceLocation(universe.toString()), set);
+			malum$featureFlags.put(MalumMod.malumPath(universe.toString()), set);
 		}
 	}
 
@@ -62,7 +63,7 @@ public class FeatureFlagSetMixin implements FeatureFlagExpandedUniverseSet {
 		if (universe != null) {
 			if (malum$uncappedFeatureFlags == null)
 				malum$uncappedFeatureFlags = new HashMap<>();
-			malum$uncappedFeatureFlags.put(new ResourceLocation(universe.toString()), set);
+			malum$uncappedFeatureFlags.put(MalumMod.malumPath(universe.toString()), set);
 		}
 	}
 

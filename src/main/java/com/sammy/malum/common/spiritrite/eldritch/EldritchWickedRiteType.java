@@ -10,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
+import team.lodestar.lodestone.helpers.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -30,7 +31,7 @@ public class EldritchWickedRiteType extends TotemicRiteType {
                 getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Player)).forEach(e -> {
                     if (e.getHealth() <= 2.5f && !e.isInvulnerableTo(DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO))) {
                         PacketDistributor.sendToPlayersTrackingEntity(e, new MajorEntityEffectParticlePacket(getIdentifyingSpirit().getPrimaryColor(), e.getX(), e.getY() + e.getBbHeight() / 2f, e.getZ()));
-                        e.hurt(DamageTypeRegistry.create(e.level(), DamageTypeRegistry.VOODOO), 10f);
+                        e.hurt(DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO), 10f);
                     }
                 });
             }

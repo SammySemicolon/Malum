@@ -75,7 +75,6 @@ public class PlacedFeatures {
                                 .build()
                 ));
 
-
         context.register(PlacedFeatureRegistry.DEEPSLATE_QUARTZ_GEODE_FEATURE,
                 new PlacedFeature(features.getOrThrow(ConfiguredFeatureRegistry.CONFIGURED_DEEPSLATE_QUARTZ_GEODE_FEATURE),
                         ImmutableList.<PlacementModifier>builder().add(

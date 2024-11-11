@@ -30,8 +30,8 @@ public class MalumBlockStateSmithTypes {
         provider.getVariantBuilder(block).forAllStates(s -> {
             String type = s.getValue(SpiritTypeRegistry.SPIRIT_TYPE_PROPERTY);
             MalumSpiritType spiritType = SpiritTypeRegistry.SPIRITS.get(type);
-            ResourceLocation front = provider.modLoc("block/totem_poles/" + spiritType.identifier + "_" + woodName + "_cutout");
-            ModelFile pole = provider.models().withExistingParent(name + "_" + spiritType.identifier, parent)
+            ResourceLocation front = provider.modLoc("block/totem_poles/" + spiritType.getIdentifier() + "_" + woodName + "_cutout");
+            ModelFile pole = provider.models().withExistingParent(name + "_" + spiritType.getIdentifier(), parent)
                     .texture("side", side)
                     .texture("top", top)
                     .texture("front", front);

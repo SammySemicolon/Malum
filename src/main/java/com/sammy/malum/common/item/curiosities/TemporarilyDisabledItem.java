@@ -7,6 +7,8 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 
+import java.util.*;
+
 public class TemporarilyDisabledItem extends Item {
 
     public static final String DISABLED = "malum:disabled";

@@ -8,10 +8,13 @@ import com.sammy.malum.common.packets.particle.rite.generic.BlockSparkleParticle
 import com.sammy.malum.common.recipe.spirit.transmutation.*;
 import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.common.worldevent.*;
+import com.sammy.malum.core.systems.recipe.*;
+import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.item.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.*;
@@ -20,6 +23,7 @@ import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.network.PacketDistributor;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
 import java.util.*;
@@ -58,7 +62,7 @@ public class ArcaneRiteType extends TotemicRiteType {
                     if (level.getBlockEntity(posToTransmute) instanceof IMalumSpecialItemAccessPoint iMalumSpecialItemAccessPoint) {
                         LodestoneBlockEntityInventory inventoryForAltar = iMalumSpecialItemAccessPoint.getSuppliedInventory();
                         ItemStack stack = inventoryForAltar.getStackInSlot(0);
-                        var recipe = SpiritTransmutationRecipe.getRecipe(level, stack);
+                        var recipe = LodestoneRecipeType.getRecipe(level, RecipeTypeRegistry.SPIRIT_TRANSMUTATION.get(), new SingleRecipeInput(stack));
                         if (recipe != null && !inventoryForAltar.extractItem(0, 1, true).isEmpty()) {
                             Vec3 itemPos = iMalumSpecialItemAccessPoint.getItemPos();
                             level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, recipe.output.copy()));
@@ -68,13 +72,13 @@ public class ArcaneRiteType extends TotemicRiteType {
                         }
                     }
                     ItemStack stack = stateToTransmute.getBlock().asItem().getDefaultInstance();
-                    var recipe = SpiritTransmutationRecipe.getRecipe(level, stack);
+                    var recipe = LodestoneRecipeType.getRecipe(level, RecipeTypeRegistry.SPIRIT_TRANSMUTATION.get(), new SingleRecipeInput(stack));
                     if (recipe != null) {
                         ItemStack output = recipe.output.copy();
                         if (output.getItem() instanceof BlockItem blockItem) {
                             Block block = blockItem.getBlock();
                             BlockEntity entity = level.getBlockEntity(posToTransmute);
-                            BlockState newState = BlockHelper.setBlockStateWithExistingProperties(level, posToTransmute, block.defaultBlockState(), 3);
+                            BlockState newState = BlockStateHelper.setBlockStateWithExistingProperties(level, posToTransmute, block.defaultBlockState(), 3);
                             level.levelEvent(2001, posToTransmute, Block.getId(newState));
                             PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(posToTransmute), new BlockSparkleParticlePacket(ARCANE_SPIRIT.getPrimaryColor(), posToTransmute, true));
                             if (block instanceof EntityBlock entityBlock) {

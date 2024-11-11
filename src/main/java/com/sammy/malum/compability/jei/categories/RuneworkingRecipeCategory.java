@@ -20,6 +20,8 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
+import java.util.*;
+
 import static com.sammy.malum.MalumMod.malumPath;
 
 public class RuneworkingRecipeCategory implements IRecipeCategory<RunicWorkbenchRecipe> {
@@ -31,7 +33,7 @@ public class RuneworkingRecipeCategory implements IRecipeCategory<RunicWorkbench
 
     public RuneworkingRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createBlankDrawable(142, 185);
-        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MALUM, "textures/gui/runeworking_jei.png"), 0, 0, 142, 183);
+        overlay = guiHelper.createDrawable(MalumMod.malumPath("textures/gui/runeworking_jei.png"), 0, 0, 142, 183);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.RUNIC_WORKBENCH.get()));
     }
 
@@ -65,9 +67,9 @@ public class RuneworkingRecipeCategory implements IRecipeCategory<RunicWorkbench
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, RunicWorkbenchRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 14)
-                .addItemStacks(recipe.secondaryInput.getStacks());
+                .addItemStacks(recipe.secondaryInput.getItems().toList());
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 57)
-                .addItemStacks(recipe.primaryInput.getStacks());
+                .addItemStacks(Arrays.stream(recipe.primaryInput.getItems()).toList());
         builder.addSlot(RecipeIngredientRole.OUTPUT, 63, 124)
                 .addItemStack(recipe.output);
     }

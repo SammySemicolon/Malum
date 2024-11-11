@@ -27,8 +27,6 @@ public class EldritchEarthenRiteType extends TotemicRiteType {
                     boolean canBreak = !state.isAir() && state.getDestroySpeed(level, p) != -1;
                     if (canBreak) {
                         level.destroyBlock(p, true);
-                        state.getBlock().spawnAfterBreak(state, level, p, ItemStack.EMPTY, true);
-
                         PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(p), new BlockSparkleParticlePacket(EARTHEN_SPIRIT.getPrimaryColor(), p));
                     }
                 });

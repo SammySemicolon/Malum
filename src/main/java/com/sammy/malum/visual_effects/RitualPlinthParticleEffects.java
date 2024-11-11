@@ -245,7 +245,7 @@ public class RitualPlinthParticleEffects {
         }
         for (int i = 0; i < 128; i++) {
             int finalI = i;
-            Vec3 particlePosition = DataHelper.rotatingRadialOffset(plinthItemPos, 0.75f, i, 64, gameTime, 160);
+            Vec3 particlePosition = VecHelper.rotatingRadialOffset(plinthItemPos, 0.75f, i, 64, gameTime, 160);
             Consumer<WorldParticleBuilder> behavior = b -> b.addTickActor(p -> {
                 if (level.getGameTime() < gameTime + (finalI + 2)/2f) {
                     p.setParticleSpeed(0, 0.03f*(finalI/128f), 0);
@@ -346,7 +346,7 @@ public class RitualPlinthParticleEffects {
         for (int i = 0; i < 16; i++) {
             Vec3 velocity = plinthItemPos.subtract(targetPos).normalize().scale(0.025f);
             int finalI = i;
-            Vec3 offsetPosition = DataHelper.rotatingRadialOffset(targetPos, 0.5f, i, 16, gameTime, 160);
+            Vec3 offsetPosition = VecHelper.rotatingRadialOffset(targetPos, 0.5f, i, 16, gameTime, 160);
             final Consumer<LodestoneWorldParticle> behavior = p -> {
                 if (level.getGameTime() > gameTime + finalI * 2 && level.getGameTime() < gameTime + (finalI + 4) * 2) {
                     p.setParticleSpeed(p.getParticleSpeed().add(velocity));
@@ -371,7 +371,7 @@ public class RitualPlinthParticleEffects {
         }
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 4; j++) {
-                final Vec3 particlePosition = DataHelper.rotatingRadialOffset(targetPos, 0.5f, j, 4, level.getGameTime()+i*4, 160);
+                final Vec3 particlePosition = VecHelper.rotatingRadialOffset(targetPos, 0.5f, j, 4, level.getGameTime()+i*4, 160);
                 WorldParticleBuilder.create(ParticleRegistry.SHARP_SPARK, new DirectionalBehaviorComponent(targetPos.subtract(particlePosition).normalize()))
                         .setTransparencyData(GenericParticleData.create(0f, 0.6f, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
                         .setSpinData(SpinParticleData.createRandomDirection(random, nextFloat(random, 0.05f, 0.1f)).randomSpinOffset(random).build())
@@ -401,13 +401,13 @@ public class RitualPlinthParticleEffects {
 
     public static void holdingPrimeItemPlinthParticles(RitualPlinthBlockEntity plinth) {
         Level level = plinth.getLevel();
-        MalumSpiritType spiritType = plinth.type != null ? plinth.type.spirit : plinth.ritualRecipe.type.spirit;
+        MalumSpiritType spiritType = plinth.ritualType != null ? plinth.ritualType.spirit : plinth.ritualRecipe.ritualType.spirit;
         RandomSource random = level.random;
         Vec3 itemPos = plinth.getItemPos();
         SpiritLightSpecs.rotatingLightSpecs(level, itemPos, spiritType, 0.5f, 3, b -> b.multiplyLifetime(1.2f).modifyData(b::getScaleData, d -> d.multiplyValue(1.2f)));
         if (level.getGameTime() % 3L == 0) {
             for (int i = 0; i < 8; i++) {
-                final Vec3 particlePosition = DataHelper.rotatingRadialOffset(itemPos, 0.5f, i, 8, level.getGameTime(), 320);
+                final Vec3 particlePosition = VecHelper.rotatingRadialOffset(itemPos, 0.5f, i, 8, level.getGameTime(), 320);
                 WorldParticleBuilder.create(ParticleRegistry.SHARP_SPARK, new DirectionalBehaviorComponent(itemPos.subtract(particlePosition).normalize()))
                         .setTransparencyData(GenericParticleData.create(0f, 0.4f, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
                         .setSpinData(SpinParticleData.createRandomDirection(random, nextFloat(random, 0.05f, 0.1f)).randomSpinOffset(random).build())

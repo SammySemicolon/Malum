@@ -34,7 +34,7 @@ public class GearSpiritInfusionRecipes {
                 .addSpirit(EARTHEN_SPIRIT, 32)
                 .addSpirit(WICKED_SPIRIT, 32)
                 .addSpirit(ELDRITCH_SPIRIT, 16)
-                .build(consumer);
+                .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.TOTEMIC_STAFF.get(), 1, ItemRegistry.MNEMONIC_HEX_STAFF.get(), 1)
                 .addExtraItem(ItemRegistry.MNEMONIC_FRAGMENT.get(), 8)

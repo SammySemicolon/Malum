@@ -18,6 +18,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.crafting.*;
 
 import javax.annotation.Nonnull;
 
@@ -32,7 +33,7 @@ public class SpiritFocusingRecipeCategory implements IRecipeCategory<SpiritFocus
 
     public SpiritFocusingRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createBlankDrawable(142, 185);
-        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MALUM, "textures/gui/spirit_focusing_jei.png"), 0, 0, 142, 183);
+        overlay = guiHelper.createDrawable(MalumMod.malumPath("textures/gui/spirit_focusing_jei.png"), 0, 0, 142, 183);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.SPIRIT_CRUCIBLE.get()));
     }
 
@@ -68,7 +69,7 @@ public class SpiritFocusingRecipeCategory implements IRecipeCategory<SpiritFocus
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SpiritFocusingRecipe recipe, IFocusGroup focuses) {
-        JEIHandler.addItemsToJei(builder, RecipeIngredientRole.INPUT, 62, 13, false, recipe.spirits);
+        JEIHandler.addItemsToJei(builder, RecipeIngredientRole.INPUT, 62, 13, false, recipe.spirits.stream().map(ICustomIngredient::toVanilla).toList());
 
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 57)
                 .addIngredients(recipe.ingredient);

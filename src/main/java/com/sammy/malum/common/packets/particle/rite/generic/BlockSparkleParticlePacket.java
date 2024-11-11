@@ -31,6 +31,10 @@ public class BlockSparkleParticlePacket extends ColorBasedBlockParticleEffectPac
         this.addMist = blightedMist;
     }
 
+    public BlockSparkleParticlePacket(Color col, BlockPos pos) {
+        this(col, pos, false);
+    }
+
     public BlockSparkleParticlePacket(FriendlyByteBuf buf) {
         super(buf);
         this.addMist = buf.readBoolean();

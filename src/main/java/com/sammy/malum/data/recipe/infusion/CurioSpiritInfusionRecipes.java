@@ -65,15 +65,6 @@ public class CurioSpiritInfusionRecipes {
                 .addSpirit(ARCANE_SPIRIT, 32)
                 .save(recipeOutput);
 
-        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_NECKLACE.get(), 1, ItemRegistry.NECKLACE_OF_TIDAL_AFFINITY.get(), 1)
-                .addExtraItem(ItemRegistry.GOLD_NODE.get(), 6)
-                .addExtraItem(Items.HEART_OF_THE_SEA, 1)
-                .addExtraItem(Items.NAUTILUS_SHELL, 2)
-                .addSpirit(AQUEOUS_SPIRIT, 16)
-                .addSpirit(SACRED_SPIRIT, 16)
-                .addSpirit(ELDRITCH_SPIRIT, 2)
-                .save(recipeOutput);
-
         new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_NECKLACE.get(), 1, ItemRegistry.NECKLACE_OF_BLISSFUL_HARMONY.get(), 1)
                 .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 6))
                 .addExtraItem(Items.PHANTOM_MEMBRANE, 4)

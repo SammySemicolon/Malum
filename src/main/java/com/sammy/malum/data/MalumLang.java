@@ -196,9 +196,10 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.curio.effect.spirits_xp", "Spirit Collection Generates Experience Points");
         add("malum.gui.curio.effect.spirits_extend_effect", "Spirit Collection Aids Potion Durations");
         add("malum.gui.curio.effect.spirits_weave_mana", "Spirit Collection Recovers Soul Ward");
-        add("malum.gui.curio.effect.spirits_weave_mana_irons_spellbooks", "Also Recovers Iron's Spellbooks' Mana");
+        add("malum.gui.curio.effect.spirits_weave_mana_irons_spellbooks", "Spirit Collection Recovers Spell Mana [Iron's Spellbooks]");
         add("malum.gui.curio.effect.spirits_add_health", "Spirit Collection Grants Extra Hearts");
-        add("malum.gui.curio.effect.spirits_buff_spirit_collection", "Spirit Collection Generates Arcane Resonance");
+        add("malum.gui.curio.effect.spirits_weave_resonance", "Spirit Collection Generates Arcane Resonance");
+        add("malum.gui.curio.effect.spirits_weave_resonance_irons_spellbooks", "Spirit Collection Reduces Spell Cooldown [Iron's Spellbooks]");
         add("malum.gui.curio.effect.hunger_drain", "Actively Drains Hunger");
         add("malum.gui.curio.effect.eat_rotten", "Rotten Foods are Tastier");
         add("malum.gui.curio.effect.growing_gluttony", "Eating Rotten Foods Extends Gluttony");

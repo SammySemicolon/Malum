@@ -1,0 +1,10 @@
+{
+  "registry_name": "yungscavebiomes:ice_cube",
+  "primary_type": "aqueous",
+  "spirits": [
+    {
+      "spirit": "aqueous",
+      "count": 3
+    }
+  ]
+}

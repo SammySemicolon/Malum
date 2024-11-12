@@ -4,6 +4,7 @@ import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.entity.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.compability.tetra.*;
+import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.world.damagesource.*;
@@ -77,6 +78,9 @@ public class SoulDataHandler {
         }
         LivingEntity target = event.getEntity();
         DamageSource source = event.getSource();
+        if (source.is(DamageTypeTagRegistry.SOUL_SHATTER_DAMAGE)) {
+            exposeSoul(target);
+        }
         if (source.getEntity() instanceof LivingEntity attacker) {
             ItemStack stack = getSoulHunterWeapon(source, attacker);
             if (stack.is(ItemTagRegistry.SOUL_HUNTER_WEAPON) || TetraCompat.hasSoulStrikeModifier(stack)) {
@@ -91,7 +95,6 @@ public class SoulDataHandler {
     public static void exposeSoul(LivingEntity entity) {
         SoulDataHandler soulData = MalumLivingEntityDataCapability.getCapability(entity).soulData;
         soulData.exposedSoulDuration = 200;
-
     }
 
     public static void livingTick(LivingEvent.LivingTickEvent event) {

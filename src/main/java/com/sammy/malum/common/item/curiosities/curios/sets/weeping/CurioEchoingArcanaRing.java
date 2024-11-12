@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.weeping;
 
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
+import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.effect.*;
@@ -17,12 +18,15 @@ public class CurioEchoingArcanaRing extends MalumCurioItem implements IVoidItem,
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("spirits_buff_spirit_collection"));
+        consumer.accept(positiveEffect("spirits_weave_resonance"));
+        if (IronsSpellsCompat.LOADED) {
+            consumer.accept(positiveEffect("spirits_weave_resonance_irons_spellbooks"));
+        }
     }
 
     @Override
     public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
-        var arcaneReverberation = MobEffectRegistry.ARCANE_REVERBERATION.get();
+        var arcaneReverberation = MobEffectRegistry.ECHOING_ARCANA.get();
         var effect = collector.getEffect(arcaneReverberation);
         int addedDuration = (int) (150 * arcaneResonance);
         if (effect == null) {

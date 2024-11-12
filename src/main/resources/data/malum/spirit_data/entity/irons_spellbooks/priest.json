@@ -1,0 +1,10 @@
+{
+  "registry_name": "irons_spellbooks:priest",
+  "primary_type": "sacred",
+  "spirits": [
+    {
+      "spirit": "sacred",
+      "count": 6
+    }
+  ]
+}

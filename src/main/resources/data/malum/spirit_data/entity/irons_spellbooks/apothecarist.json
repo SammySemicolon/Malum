@@ -1,0 +1,10 @@
+{
+  "registry_name": "irons_spellbooks:apothecarist",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 6
+    }
+  ]
+}

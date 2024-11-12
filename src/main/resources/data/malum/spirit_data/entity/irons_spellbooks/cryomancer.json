@@ -1,0 +1,10 @@
+{
+  "registry_name": "irons_spellbooks:cryomancer",
+  "primary_type": "aqueous",
+  "spirits": [
+    {
+      "spirit": "aqueous",
+      "count": 6
+    }
+  ]
+}

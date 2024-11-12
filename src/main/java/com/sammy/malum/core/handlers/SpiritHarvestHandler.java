@@ -54,7 +54,7 @@ public class SpiritHarvestHandler {
         }
         var source = event.getSource();
         var attacker = source.getEntity() instanceof LivingEntity living ? living : target.getLastHurtByMob();
-        if (source.is(DamageTypeTagRegistry.SOUL_SHATTER_DAMAGE) || soulData.exposedSoulDuration > 0) {
+        if (soulData.exposedSoulDuration > 0) {
             if (attacker == null) {
                 spawnSpirits(event.getEntity());
             }

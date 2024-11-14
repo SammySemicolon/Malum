@@ -102,15 +102,18 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
                 }
                 if (returnTimer <= 0) {
                     var ownerPos = scytheOwner.position().add(0, scytheOwner.getBbHeight() * 0.6f, 0);
+                    float velocityLimit = 2f;
                     if (isEnhanced()) {
                         double radians = Math.toRadians(90 - scytheOwner.yHeadRot);
                         ownerPos = scytheOwner.position().add(0.75f * Math.sin(radians), scytheOwner.getBbHeight() * 0.5f, 0.75f * Math.cos(radians));
+                        velocityLimit = 4f;
                         if (returnTimer == 0) {
                             flyBack(scytheOwner);
                         }
                     }
                     var motion = getDeltaMovement();
-                    var returnMotion = ownerPos.subtract(position()).normalize().scale(Mth.clamp(motion.length() * 3, 0.5f, 2f));
+                    double velocity = Mth.clamp(motion.length() * 3, 0.5f, velocityLimit);
+                    var returnMotion = ownerPos.subtract(position()).normalize().scale(velocity);
                     float distance = distanceTo(scytheOwner);
 
                     if (isAlive() && distance < 3f) {
@@ -128,6 +131,7 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
                 }
                 returnTimer--;
             }
+            updateRotation();
         }
     }
 
@@ -170,6 +174,9 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
     public void flyBack(Entity scytheOwner) {
         var ownerPos = scytheOwner.position().add(0, scytheOwner.getBbHeight()*0.5f, 0);
         var returnMotion = ownerPos.subtract(position()).normalize().scale(0.75f);
+        if (isEnhanced()) {
+            returnMotion = returnMotion.scale(3f);
+        }
         setDeltaMovement(returnMotion);
     }
 }

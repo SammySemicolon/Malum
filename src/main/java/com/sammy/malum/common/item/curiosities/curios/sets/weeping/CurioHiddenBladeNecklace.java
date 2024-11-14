@@ -16,6 +16,7 @@ import net.minecraft.client.player.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
+import net.minecraft.world.*;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -89,13 +90,16 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
                 if (effect == null) {
                     return;
                 }
+                var scytheWeapon = SoulDataHandler.getScytheWeapon(source, attacker);
+
+                var damageDealer = source.getDirectEntity() != null ? source.getDirectEntity() : attacker;
+                var damageCenter = damageDealer.position().add(attacker.getLookAngle().scale(4));
                 int duration = 25;
                 var attributes = attacker.getAttributes();
                 float multiplier = (float) Mth.clamp(attributes.getValue(Attributes.ATTACK_SPEED), 0, 1) * 2;
                 float baseDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * multiplier * effect.getAmplifier();
                 float magicDamage = (float) (attributes.getValue(LodestoneAttributes.MAGIC_DAMAGE) / duration) * multiplier;
-                var center = attacker.position().add(attacker.getLookAngle().scale(4));
-                var entity = new HiddenBladeDelayedImpactEntity(level, center.x, center.y - 3f + attacker.getBbHeight() / 2f, center.z);
+                var entity = new HiddenBladeDelayedImpactEntity(level, damageCenter.x, damageCenter.y - 3f + attacker.getBbHeight() / 2f, damageCenter.z);
                 entity.setData(attacker, baseDamage, magicDamage, duration);
                 entity.setItem(stack);
                 level.addFreshEntity(entity);
@@ -105,7 +109,6 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
                     SoundHelper.playSound(attacker, SoundRegistry.HIDDEN_BLADE_UNLEASHED.get(), 3f, RandomHelper.randomBetween(random, 0.75f, 1.25f));
                 }
                 var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.HIDDEN_BLADE_COUNTER_FLURRY);
-                final ItemStack scytheWeapon = SoulDataHandler.getScytheWeapon(source, attacker);
                 if (scytheWeapon.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
                     particle.setSpiritType(spiritAffiliatedItem);
                 }

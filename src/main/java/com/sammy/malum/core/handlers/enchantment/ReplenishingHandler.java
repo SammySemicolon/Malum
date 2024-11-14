@@ -2,6 +2,7 @@ package com.sammy.malum.core.handlers.enchantment;
 
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.common.packets.*;
+import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.damagesource.*;
@@ -20,8 +21,8 @@ public class ReplenishingHandler {
     public static void triggerReplenishing(DamageSource source, LivingEntity attacker, ItemStack stack) {
         if (attacker instanceof Player player) {
             if (source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
+                int level = getEnchantmentLevel(attacker.level(), EnchantmentRegistry.REPLENISHING, stack);
                 if (stack.getItem() instanceof AbstractStaffItem staff) {
-                    int level = getEnchantmentLevel(attacker.level(), EnchantmentRegistry.REPLENISHING, stack);
                     var cooldowns = player.getCooldowns();
                     if (cooldowns.isOnCooldown(staff) && player.getAttackStrengthScale(0) > 0.8f) {
                         replenishStaffCooldown(staff, player, level);
@@ -29,6 +30,10 @@ public class ReplenishingHandler {
                             PacketDistributor.sendToPlayer(serverPlayer, new ReplenishingCooldownUpdatePayload(staff, level));
                         }
                     }
+                    return;
+                }
+                if (player instanceof ServerPlayer serverPlayer) {
+                    IronsSpellsCompat.recoverSpellCooldowns(serverPlayer, level);
                 }
             }
         }

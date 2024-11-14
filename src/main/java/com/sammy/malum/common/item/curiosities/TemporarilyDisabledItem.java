@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities;
 
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.nbt.*;
+import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
@@ -18,7 +19,7 @@ public class TemporarilyDisabledItem extends Item {
     @SuppressWarnings("DataFlowIssue")
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        if (pEntity instanceof Player player) {
+        if (pEntity instanceof ServerPlayer player) {
             if (pStack.hasTag()) {
                 CompoundTag tag = pStack.getTag();
                 if (tag.contains(DISABLED)) {
@@ -33,10 +34,10 @@ public class TemporarilyDisabledItem extends Item {
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
     }
 
-    public static void disable(Player player, int slot) {
+    public static void disable(ServerPlayer player, int slot) {
         disable(player, slot, ItemRegistry.SOUL_OF_A_SCYTHE.get());
     }
-    public static void disable(Player player, int slot, Item disabledItemType) {
+    public static void disable(ServerPlayer player, int slot, Item disabledItemType) {
         var inventory = player.getInventory();
         var disabled = disabledItemType.getDefaultInstance();
         var disabledTag = disabled.getOrCreateTag();
@@ -48,7 +49,7 @@ public class TemporarilyDisabledItem extends Item {
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static void enable(Player player, int slot) {
+    public static void enable(ServerPlayer player, int slot) {
         var inventory = player.getInventory();
         var disabledItem = inventory.getItem(slot);
         if (disabledItem.hasTag()) {

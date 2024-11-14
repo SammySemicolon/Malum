@@ -212,8 +212,8 @@ dependencies {
     runtimeOnly(fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelusVersion}"))
     implementation(fg.deobf("software.bernie.geckolib:geckolib-forge-${geckoLibVersion}"))
     implementation(fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${playerAnimatorVersion}"))
-    compileOnly(fg.deobf("io.redspace.ironsspellbooks:irons_spellbooks:${ironsSpellsVersion}:api"))
-    runtimeOnly(fg.deobf("io.redspace.ironsspellbooks:irons_spellbooks:${ironsSpellsVersion}"))
+//    compileOnly(fg.deobf("io.redspace.ironsspellbooks:irons_spellbooks:${ironsSpellsVersion}:api"))
+    implementation(fg.deobf("io.redspace.ironsspellbooks:irons_spellbooks:${ironsSpellsVersion}"))
 
     //Apothic Attributes
     implementation(fg.deobf("curse.maven:placebo-283644:5414631"))

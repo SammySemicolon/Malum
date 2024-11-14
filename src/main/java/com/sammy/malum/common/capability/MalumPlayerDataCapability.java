@@ -63,9 +63,15 @@ public class MalumPlayerDataCapability implements LodestoneCapability {
     }
 
     public static void playerClone(PlayerEvent.Clone event) {
-        MalumPlayerDataCapability originalCapability = MalumPlayerDataCapability.getCapabilityOptional(event.getOriginal()).orElse(new MalumPlayerDataCapability());
-        MalumPlayerDataCapability capability = MalumPlayerDataCapability.getCapabilityOptional(event.getEntity()).orElse(new MalumPlayerDataCapability());
-        capability.deserializeNBT(originalCapability.serializeNBT());
+        if (event.getOriginal() instanceof ServerPlayer oldPlayer && event.getEntity() instanceof ServerPlayer newPlayer) {
+            oldPlayer.reviveCaps();
+            MalumPlayerDataCapability.getCapabilityOptional(oldPlayer).ifPresent(oldCapability -> {
+                MalumPlayerDataCapability.getCapabilityOptional(newPlayer).ifPresent(newCapability -> {
+                    newCapability.deserializeNBT(oldCapability.serializeNBT());
+                });
+            });
+            oldPlayer.invalidateCaps();
+        }
     }
 
     @Override

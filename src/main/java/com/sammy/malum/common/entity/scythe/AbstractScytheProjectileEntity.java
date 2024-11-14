@@ -8,6 +8,7 @@ import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.particles.*;
 import net.minecraft.nbt.*;
 import net.minecraft.util.*;
+import net.minecraft.world.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
@@ -97,6 +98,8 @@ public abstract class AbstractScytheProjectileEntity extends ThrowableItemProjec
         if (getOwner() instanceof LivingEntity scytheOwner) {
             Entity target = result.getEntity();
             DamageSource source = DamageTypeHelper.create(level(), DamageTypeRegistry.SCYTHE_SWEEP, this, scytheOwner);
+            var heldItem = scytheOwner.getMainHandItem();
+            scytheOwner.setItemInHand(InteractionHand.MAIN_HAND, getItem());
             target.invulnerableTime = 0;
             boolean success = target.hurt(source, damage);
             if (success && target instanceof LivingEntity livingentity) {
@@ -115,6 +118,7 @@ public abstract class AbstractScytheProjectileEntity extends ThrowableItemProjec
                 enemiesHit += 1;
                 returnTimer += 2;
             }
+            scytheOwner.setItemInHand(InteractionHand.MAIN_HAND, heldItem);
             SoundHelper.playSound(this, SoundRegistry.SCYTHE_SWEEP.get(),1.0f, RandomHelper.randomBetween(level().getRandom(), 0.75f, 1.25f));
         }
         super.onHitEntity(result);

@@ -5,6 +5,7 @@ import com.sammy.malum.common.item.curiosities.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
+import net.minecraft.server.level.*;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -34,7 +35,7 @@ public class ReboundEnchantment extends Enchantment {
 
     public static void throwScythe(Level level, Player player, InteractionHand hand, ItemStack scythe) {
         int slot = hand == InteractionHand.OFF_HAND ? player.getInventory().getContainerSize() - 1 : player.getInventory().selected;
-        if (!level.isClientSide) {
+        if (player instanceof ServerPlayer serverPlayer) {
             final boolean isEnhanced = !MalumScytheItem.canSweep(player);
             float baseDamage = (float) player.getAttributes().getValue(Attributes.ATTACK_DAMAGE);
             float magicDamage = (float) player.getAttributes().getValue(LodestoneAttributeRegistry.MAGIC_DAMAGE.get());
@@ -49,24 +50,30 @@ public class ReboundEnchantment extends Enchantment {
                 magicDamage *= 1.5f;
             }
             var entity = new ScytheBoomerangEntity(level, position.x, position.y, position.z);
-
             entity.setData(player, baseDamage, magicDamage, slot, 8);
             entity.setItem(scythe);
             entity.setEnhanced(isEnhanced);
             entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity, 0F);
             level.addFreshEntity(entity);
+
             SoundHelper.playSound(player, SoundRegistry.SCYTHE_THROW.get(), 2.0f, RandomHelper.randomBetween(level.getRandom(), 0.75f, 1.25f));
+            TemporarilyDisabledItem.disable(serverPlayer, slot);
+            player.awardStat(Stats.ITEM_USED.get(scythe.getItem()));
+            player.swing(hand, true);
         }
-        player.swing(hand, false);
-        TemporarilyDisabledItem.disable(player, slot);
-        player.awardStat(Stats.ITEM_USED.get(scythe.getItem()));
     }
 
-    public static void pickupScythe(ScytheBoomerangEntity entity, ItemStack scythe, Player player) {
+    public static void pickupScythe(ScytheBoomerangEntity entity, ItemStack scythe, ServerPlayer player) {
         if (!player.isCreative()) {
             int enchantmentLevel = scythe.getEnchantmentLevel(EnchantmentRegistry.REBOUND.get());
             if (enchantmentLevel < 4) {
-                player.getCooldowns().addCooldown(scythe.getItem(), 100 - 25 * (enchantmentLevel - 1));
+                int duration = 100 - 25 * (enchantmentLevel - 1);
+                if (entity.enemiesHit > 0) {
+                    duration -= (entity.enemiesHit+1) * 20;
+                }
+                if (duration > 0) {
+                    player.getCooldowns().addCooldown(scythe.getItem(), duration);
+                }
             }
         }
         TemporarilyDisabledItem.enable(player, entity.slot);

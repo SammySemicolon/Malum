@@ -70,22 +70,24 @@ public class ParticleHelper {
             this.spiritType = spiritType;
             return this;
         }
+        public void spawnForwardSlashingParticle(Entity attacker) {
+            spawnForwardSlashingParticle(attacker, attacker.getLookAngle());
+        }
 
-        public void spawnForwardSlashingParticle(LivingEntity attacker) {
-            var direction = attacker.getLookAngle();
-            float yRot = ((float) (Mth.atan2(direction.x, direction.z) * (double) (180F / (float) Math.PI)));
+        public void spawnForwardSlashingParticle(Entity attacker, Vec3 slashDirection) {
+            float yRot = ((float) (Mth.atan2(slashDirection.x, slashDirection.z) * (double) (180F / (float) Math.PI)));
             float yaw = (float) Math.toRadians(yRot);
             var left = new Vec3(-Math.cos(yaw), 0, Math.sin(yaw));
-            var up = left.cross(direction);
+            var up = left.cross(slashDirection);
 
-            var offset = direction.scale(0.4f).add(up.scale(-0.3f));
+            var offset = slashDirection.scale(0.4f).add(up.scale(-0.3f));
             if (horizontalOffset != 0) {
                 offset = offset.add(left.scale(horizontalOffset));
             }
-            spawnForwardSlashingParticle(attacker, offset, direction);
+            spawnForwardSlashingParticle(attacker, offset, slashDirection);
         }
 
-        public void spawnForwardSlashingParticle(LivingEntity attacker, Vec3 slashOffset, Vec3 slashDirection) {
+        public void spawnForwardSlashingParticle(Entity attacker, Vec3 slashOffset, Vec3 slashDirection) {
             if (attacker.level() instanceof ServerLevel serverLevel) {
                 double xOffset = slashOffset.x;
                 double yOffset = slashOffset.y + attacker.getBbHeight() * 0.5f;
@@ -95,7 +97,7 @@ public class ParticleHelper {
             }
         }
 
-        public void spawnTargetBoundSlashingParticle(LivingEntity attacker, LivingEntity target) {
+        public void spawnTargetBoundSlashingParticle(Entity attacker, Entity target) {
             var direction = attacker.getLookAngle();
             var random = attacker.getRandom();
             float yRot = ((float) (Mth.atan2(direction.x, direction.z) * (double) (180F / (float) Math.PI)));
@@ -111,7 +113,7 @@ public class ParticleHelper {
             spawnTargetBoundSlashingParticle(attacker, target, offset, slashDirection);
         }
 
-        public void spawnTargetBoundSlashingParticle(LivingEntity attacker, LivingEntity target, Vec3 slashOffset, Vec3 slashDirection) {
+        public void spawnTargetBoundSlashingParticle(Entity attacker, Entity target, Vec3 slashOffset, Vec3 slashDirection) {
             if (attacker.level() instanceof ServerLevel serverLevel) {
                 double xOffset = slashOffset.x;
                 double yOffset = slashOffset.y + attacker.getBbHeight() * 0.5f;

@@ -174,9 +174,6 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
     public void flyBack(Entity scytheOwner) {
         var ownerPos = scytheOwner.position().add(0, scytheOwner.getBbHeight()*0.5f, 0);
         var returnMotion = ownerPos.subtract(position()).normalize().scale(0.75f);
-        if (isEnhanced()) {
-            returnMotion = returnMotion.scale(3f);
-        }
         setDeltaMovement(returnMotion);
     }
 }

@@ -16,7 +16,6 @@ import net.minecraft.client.player.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
-import net.minecraft.world.*;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -91,20 +90,23 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
                     return;
                 }
                 var scytheWeapon = SoulDataHandler.getScytheWeapon(source, attacker);
-
-                var damageDealer = source.getDirectEntity() != null ? source.getDirectEntity() : attacker;
-                var damageCenter = damageDealer.position().add(attacker.getLookAngle().scale(4));
-                int duration = 25;
+                final boolean isRanged = source.getDirectEntity() != null;
+                var damageDealer = isRanged ? source.getDirectEntity() : attacker;
+                var direction = isRanged ? damageDealer.getDeltaMovement().normalize() : attacker.getLookAngle();
+                var damageCenter = damageDealer.position().add(direction);
                 var attributes = attacker.getAttributes();
                 float multiplier = (float) Mth.clamp(attributes.getValue(Attributes.ATTACK_SPEED), 0, 1) * 2;
-                float baseDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * multiplier * effect.getAmplifier();
+                int duration = 25;
+                float physicalDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * multiplier * (effect.amplifier+1);
                 float magicDamage = (float) (attributes.getValue(LodestoneAttributes.MAGIC_DAMAGE) / duration) * multiplier;
                 var entity = new HiddenBladeDelayedImpactEntity(level, damageCenter.x, damageCenter.y - 3f + attacker.getBbHeight() / 2f, damageCenter.z);
-                entity.setData(attacker, baseDamage, magicDamage, duration);
-                entity.setItem(stack);
+                entity.setData(attacker, physicalDamage, magicDamage, duration);
+                entity.setItem(scytheWeapon);
                 level.addFreshEntity(entity);
-                attacker.removeEffect(effect.getEffect());
                 c.hiddenBladeNecklaceCooldown = 200;
+                if (!effect.isInfiniteDuration()) {
+                    attacker.removeEffect(effect.getEffect());
+                }
                 for (int i = 0; i < 3; i++) {
                     SoundHelper.playSound(attacker, SoundRegistry.HIDDEN_BLADE_UNLEASHED.get(), 3f, RandomHelper.randomBetween(random, 0.75f, 1.25f));
                 }
@@ -114,7 +116,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
                 }
                 particle.setRandomSlashAngle(random)
                         .mirrorRandomly(random)
-                        .spawnForwardSlashingParticle(attacker);
+                        .spawnForwardSlashingParticle(attacker, direction);
                 MalumLivingEntityDataCapability.sync(attacker);
             });
         }

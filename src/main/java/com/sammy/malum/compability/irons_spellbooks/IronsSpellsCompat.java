@@ -41,6 +41,11 @@ public class IronsSpellsCompat {
             LoadedOnly.addEchoingArcanaSpellCooldown(effect);
         }
     }
+    public static void addSilencedNegativeAttributeModifiers(SilencedEffect effect) {
+        if (LOADED) {
+            LoadedOnly.addSilencedNegativeAttributeModifiers(effect);
+        }
+    }
 
     public static class LoadedOnly {
 
@@ -63,6 +68,11 @@ public class IronsSpellsCompat {
 
         public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {
             effect.addAttributeModifier(AttributeRegistry.COOLDOWN_REDUCTION.get(), "8949b9d4-2505-4248-9667-0ece857af8a4", 0.0125f, AttributeModifier.Operation.ADDITION);
+        }
+
+        public static void addSilencedNegativeAttributeModifiers(SilencedEffect effect) {
+            effect.addAttributeModifier(AttributeRegistry.MANA_REGEN.get(), "47bad2ce-0eff-4472-9b97-fd7328eca05d", -0.1f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+            effect.addAttributeModifier(AttributeRegistry.SPELL_POWER.get(), "dabe8298-d6db-4f8c-8fb4-a6c28a4148cd", -0.1f, AttributeModifier.Operation.MULTIPLY_TOTAL);
         }
     }
 }

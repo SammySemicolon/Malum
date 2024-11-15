@@ -2,6 +2,7 @@ package com.sammy.malum.common.enchantment.staff;
 
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.common.packets.*;
+import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
@@ -30,6 +31,7 @@ public class ReplenishingEnchantment extends Enchantment {
             if (cooldowns.isOnCooldown(staff) && player.getAttackStrengthScale(0) > 0.8f) {
                 int level = stack.getEnchantmentLevel(EnchantmentRegistry.REPLENISHING.get());
                 replenishStaffCooldown(staff, player, level);
+                IronsSpellsCompat.recoverSpellCooldowns(player, level);
                 MALUM_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncStaffCooldownChangesPacket(staff, level));
             }
         }

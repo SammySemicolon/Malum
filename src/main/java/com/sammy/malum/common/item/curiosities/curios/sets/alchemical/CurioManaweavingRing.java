@@ -6,6 +6,7 @@ import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.core.handlers.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 
@@ -26,10 +27,11 @@ public class CurioManaweavingRing extends MalumCurioItem implements IMalumEventR
 
     @Override
     public void pickupSpirit(LivingEntity collector, double arcaneResonance) {
-        if (collector instanceof Player player) {
+        if (collector instanceof ServerPlayer player) {
             var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
             handler.soulWardProgress -= 2 * SoulWardHandler.getSoulWardCooldown(player) * arcaneResonance;
-            IronsSpellsCompat.generateMana(collector, 10 * arcaneResonance);
+            IronsSpellsCompat.generateMana(player, 10 * arcaneResonance);
+            MalumPlayerDataCapability.syncTrackingAndSelf(player);
         }
     }
 }

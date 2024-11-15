@@ -8,11 +8,14 @@ import io.redspace.ironsspellbooks.api.events.*;
 import io.redspace.ironsspellbooks.api.magic.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.*;
+import io.redspace.ironsspellbooks.item.weapons.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.*;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.fml.*;
 
 public class IronsSpellsCompat {
@@ -26,13 +29,25 @@ public class IronsSpellsCompat {
         }
     }
 
-    public static void generateMana(LivingEntity collector, double amount) {
+    public static boolean isStaff(ItemStack stack) {
+        if (LOADED) {
+            return LoadedOnly.isStaff(stack);
+        }
+        return false;
+    }
+
+    public static void generateMana(ServerPlayer collector, double amount) {
         generateMana(collector, (float) amount);
     }
 
-    public static void generateMana(LivingEntity collector, float amount) {
+    public static void generateMana(ServerPlayer collector, float amount) {
         if (LOADED) {
             LoadedOnly.generateMana(collector, amount);
+        }
+    }
+    public static void recoverSpellCooldowns(ServerPlayer serverPlayer, int enchantmentLevel) {
+        if (LOADED) {
+            LoadedOnly.recoverSpellCooldowns(serverPlayer, enchantmentLevel);
         }
     }
 
@@ -41,6 +56,7 @@ public class IronsSpellsCompat {
             LoadedOnly.addEchoingArcanaSpellCooldown(effect);
         }
     }
+
     public static void addSilencedNegativeAttributeModifiers(SilencedEffect effect) {
         if (LOADED) {
             LoadedOnly.addSilencedNegativeAttributeModifiers(effect);
@@ -58,16 +74,24 @@ public class IronsSpellsCompat {
             }
         }
 
-        public static void generateMana(LivingEntity collector, float amount) {
+        public static boolean isStaff(ItemStack stack) {
+            return stack.getItem() instanceof StaffItem;
+        }
+
+        public static void generateMana(ServerPlayer collector, float amount) {
             var magicData = MagicData.getPlayerMagicData(collector);
             magicData.addMana(amount);
-            if (collector instanceof ServerPlayer serverPlayer) {
-                UpdateClient.SendManaUpdate(serverPlayer, magicData);
-            }
+            UpdateClient.SendManaUpdate(collector, magicData);
+        }
+
+        public static void recoverSpellCooldowns(ServerPlayer serverPlayer, int enchantmentLevel) {
+            var cooldowns = MagicData.getPlayerMagicData(serverPlayer).getPlayerCooldowns();
+            cooldowns.getSpellCooldowns().forEach((key, value) -> cooldowns.decrementCooldown(value, (int) (value.getSpellCooldown() * .05f * enchantmentLevel)));
+            cooldowns.syncToPlayer(serverPlayer);
         }
 
         public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {
-            effect.addAttributeModifier(AttributeRegistry.COOLDOWN_REDUCTION.get(), "8949b9d4-2505-4248-9667-0ece857af8a4", 0.0125f, AttributeModifier.Operation.ADDITION);
+            effect.addAttributeModifier(AttributeRegistry.COOLDOWN_REDUCTION.get(), "8949b9d4-2505-4248-9667-0ece857af8a4", 0.02f, AttributeModifier.Operation.MULTIPLY_BASE);
         }
 
         public static void addSilencedNegativeAttributeModifiers(SilencedEffect effect) {

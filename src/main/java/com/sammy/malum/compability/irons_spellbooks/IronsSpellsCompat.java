@@ -1,22 +1,20 @@
 package com.sammy.malum.compability.irons_spellbooks;
 
+import com.sammy.malum.*;
 import com.sammy.malum.common.effect.*;
 import com.sammy.malum.config.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.common.*;
 import io.redspace.ironsspellbooks.api.events.*;
 import io.redspace.ironsspellbooks.api.magic.*;
-import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import io.redspace.ironsspellbooks.api.util.*;
 import io.redspace.ironsspellbooks.item.weapons.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraftforge.common.*;
-import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.fml.*;
+import net.neoforged.fml.*;
+import net.neoforged.neoforge.common.*;
 
 public class IronsSpellsCompat {
 
@@ -25,7 +23,7 @@ public class IronsSpellsCompat {
     public static void init() {
         LOADED = ModList.get().isLoaded("irons_spellbooks");
         if (LOADED) {
-            MinecraftForge.EVENT_BUS.addListener(LoadedOnly::spellDamage);
+            NeoForge.EVENT_BUS.addListener(LoadedOnly::spellDamage);
         }
     }
 
@@ -81,7 +79,7 @@ public class IronsSpellsCompat {
         public static void generateMana(ServerPlayer collector, float amount) {
             var magicData = MagicData.getPlayerMagicData(collector);
             magicData.addMana(amount);
-            UpdateClient.SendManaUpdate(collector, magicData);
+//            UpdateClient.SendManaUpdate(collector, magicData);
         }
 
         public static void recoverSpellCooldowns(ServerPlayer serverPlayer, int enchantmentLevel) {
@@ -91,12 +89,12 @@ public class IronsSpellsCompat {
         }
 
         public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {
-            effect.addAttributeModifier(AttributeRegistry.COOLDOWN_REDUCTION.get(), "8949b9d4-2505-4248-9667-0ece857af8a4", 0.02f, AttributeModifier.Operation.MULTIPLY_BASE);
+            effect.addAttributeModifier(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.COOLDOWN_REDUCTION, MalumMod.malumPath("echoing_arcana"), 0.02f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         }
 
         public static void addSilencedNegativeAttributeModifiers(SilencedEffect effect) {
-            effect.addAttributeModifier(AttributeRegistry.MANA_REGEN.get(), "47bad2ce-0eff-4472-9b97-fd7328eca05d", -0.1f, AttributeModifier.Operation.MULTIPLY_TOTAL);
-            effect.addAttributeModifier(AttributeRegistry.SPELL_POWER.get(), "dabe8298-d6db-4f8c-8fb4-a6c28a4148cd", -0.1f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+            effect.addAttributeModifier(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MANA_REGEN, MalumMod.malumPath("silenced"), -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            effect.addAttributeModifier(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER, MalumMod.malumPath("silenced"), -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         }
     }
 }

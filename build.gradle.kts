@@ -113,7 +113,12 @@ repositories {
         }
     }
     maven {
-        // location of a maven mirror for JEI files, as a fallback
+        url = uri("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
+    maven {
         name = "ModMaven"
         url = uri("https://modmaven.dev")
     }
@@ -144,17 +149,23 @@ dependencies {
 
     //runtimeOnly(("maven.modrinth:fusion-connected-textures:${property("fusion_version")}-forge-mc${property("minecraft_version")}"))
 
+    // Tetra Optional Dependency
+
+//    compileOnly(("curse.maven:tetra-${property("tetra_version")}"))
+//    compileOnly(("se.mickelus.mutil:mutil:${property("mutil_version")}"))
+
+    // FD Optional Dependency
     compileOnly(("curse.maven:farmers-delight-398521:5566383"))
 
-    //runtimeOnly(("curse.maven:create-328085:4626108"))
-    //implementation(("curse.maven:jeed-532286:4599236"))
-    //implementation(("curse.maven:mutil-351914:4824501"))
-    //implementation(("curse.maven:tetra-289712:5544287"))
+    // Iron's Spellbooks Optional Dependency
+    runtimeOnly(("software.bernie.geckolib:geckolib-neoforge-${property("minecraft_version")}:${property("gecko_lib_version")}"))
+    runtimeOnly(("dev.kosmx.player-anim:player-animation-lib-forge:${property("player_animator_version")}"))
+    implementation(("curse.maven:irons-spells-n-spellbooks-855414:5863590"))
 
-    //runtimeOnly(("curse.maven:world-stripper-250603:4578579"))
-    //runtimeOnly(("curse.maven:spark-361579:4587309"))
-    //runtimeOnly(("curse.maven:attributefix-280510:4911084"))
-    //runtimeOnly(("curse.maven:overloaded-armor-bar-314002:4631133"))
+    runtimeOnly(("curse.maven:jeed-532286:5634312"))
+    runtimeOnly(("curse.maven:spark-361579:4587309"))
+    runtimeOnly(("curse.maven:attributefix-280510:4911084"))
+    runtimeOnly(("curse.maven:overloaded-armor-bar-314002:4631133"))
 }
 
 val generateModMetadata by tasks.registering(ProcessResources::class) {

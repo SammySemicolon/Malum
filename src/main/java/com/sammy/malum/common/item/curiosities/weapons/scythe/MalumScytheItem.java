@@ -7,6 +7,7 @@ import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.*;
+import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;

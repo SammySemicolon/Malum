@@ -127,7 +127,7 @@ public class RadiantParticleEffects {
         };
         if (level.getGameTime() % 2L == 0) {
             int rotation = (int) ((level.getGameTime() / 2f) % 16);
-            Vec3 offsetPosition = DataHelper.rotatingRadialOffset(new Vec3(blockPos.getX() + 0.5f, blockPos.getY() + 0.75f, blockPos.getZ() + 0.5f), 1.1f, rotation, 16, voidConduit.getLevel().getGameTime(), 640);
+            Vec3 offsetPosition = VecHelper.rotatingRadialOffset(new Vec3(blockPos.getX() + 0.5f, blockPos.getY() + 0.75f, blockPos.getZ() + 0.5f), 1.1f, rotation, 16, voidConduit.getLevel().getGameTime(), 640);
             var lightSpecs = WeepingWellParticleEffects.weepingWellSpecs(level, offsetPosition, colorData, LodestoneWorldParticleRenderType.ADDITIVE);
             lightSpecs.getBuilder().addTickActor(behavior);
             lightSpecs.getBloomBuilder().addTickActor(behavior);

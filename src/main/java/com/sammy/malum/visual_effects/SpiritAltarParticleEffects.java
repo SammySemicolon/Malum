@@ -103,7 +103,7 @@ public class SpiritAltarParticleEffects {
             MalumSpiritType cyclingSpiritType = colorData.getCyclingColorRecord().spiritType();
             Vec3 velocity = altarTargetPos.subtract(holderTargetPos).normalize().scale(0.025f);
             int finalI = i;
-            Vec3 offsetPosition = DataHelper.rotatingRadialOffset(holderTargetPos, 0.5f, i, 16, gameTime, 160);
+            Vec3 offsetPosition = VecHelper.rotatingRadialOffset(holderTargetPos, 0.5f, i, 16, gameTime, 160);
             final Consumer<LodestoneWorldParticle> behavior = p -> {
                 if (level.getGameTime() > gameTime + finalI * 2 && level.getGameTime() < gameTime + (finalI + 4) * 2) {
                     p.setParticleSpeed(p.getParticleSpeed().add(velocity));
@@ -193,7 +193,7 @@ public class SpiritAltarParticleEffects {
         }
         for (int i = 0; i < 8; i++) {
             int finalI = i;
-            Vec3 offsetPosition = DataHelper.rotatingRadialOffset(targetPos, 0.6f, i, 8, gameTime, 160);
+            Vec3 offsetPosition = VecHelper.rotatingRadialOffset(targetPos, 0.6f, i, 8, gameTime, 160);
             Consumer<WorldParticleBuilder> behavior = b -> b.addTickActor(p -> {
                 if (level.getGameTime() > gameTime + finalI * 4 && level.getGameTime() < gameTime + (finalI + 4) * 4) {
                     p.setParticleSpeed(p.getParticleSpeed().add(0, 0.015f, 0));
@@ -230,7 +230,7 @@ public class SpiritAltarParticleEffects {
             Vec3 targetPos = altar.getCentralItemOffset().add(altarPos.getX(), altarPos.getY(), altarPos.getZ());
             Vec3 velocity = targetPos.subtract(startPos).normalize().scale(RandomHelper.randomBetween(random, 0.01f, 0.02f));
             double yOffset = Math.sin((gameTime % 360) / 30f) * 0.1f;
-            Vec3 offsetPosition = DataHelper.rotatingRadialOffset(startPos.add(0, yOffset, 0), 0.45f, 0, 1, gameTime, 30);
+            Vec3 offsetPosition = VecHelper.rotatingRadialOffset(startPos.add(0, yOffset, 0), 0.45f, 0, 1, gameTime, 30);
             Consumer<WorldParticleBuilder> behavior = b -> b.addTickActor(p -> {
                 if (gameTime % 6L == 0) {
                     p.setParticleSpeed(p.getParticleSpeed().scale(1.05f));

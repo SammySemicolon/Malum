@@ -26,7 +26,7 @@ public class SoulWardRenderHandler {
         final LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
             var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
-            if (handler.soulWard >= player.getAttributeValue(AttributeRegistry.SOUL_WARD_CAPACITY)) {
+            if (handler.getSoulWard() >= player.getAttributeValue(AttributeRegistry.SOUL_WARD_CAPACITY)) {
                 if (fadeOut < 80) {
                     fadeOut++;
                 }
@@ -43,7 +43,7 @@ public class SoulWardRenderHandler {
             var player = minecraft.player;
             if (!player.isCreative() && !player.isSpectator()) {
                 var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
-                double soulWard = handler.soulWard;
+                double soulWard = handler.getSoulWard();
                 if (soulWard > 0) {
                     float absorb = Mth.ceil(player.getAbsorptionAmount());
                     float maxHealth = (float) player.getAttribute(Attributes.MAX_HEALTH).getValue();

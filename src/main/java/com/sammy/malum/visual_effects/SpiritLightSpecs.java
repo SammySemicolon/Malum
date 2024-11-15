@@ -61,7 +61,7 @@ public class SpiritLightSpecs {
             for (int i = 0; i < rotatingSpecs; i++) {
                 long offsetGameTime = gameTime + i * 120L;
                 double yOffset = Math.sin((offsetGameTime % 360) / 30f) * 0.1f;
-                Vec3 offsetPosition = DataHelper.rotatingRadialOffset(pos.add(0, yOffset, 0), distance, i, rotatingSpecs, gameTime, 160);
+                Vec3 offsetPosition = VecHelper.rotatingRadialOffset(pos.add(0, yOffset, 0), distance, i, rotatingSpecs, gameTime, 160);
 
                 var lightSpecs = spiritLightSpecs(level, offsetPosition, spiritType, options);
                 lightSpecs.getBuilder().act(lightSpecModifier).multiplyLifetime(2f).modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(1.2f));

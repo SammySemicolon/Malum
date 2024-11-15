@@ -99,7 +99,7 @@ public class RepairPylonParticleEffects {
             for (int j = 0; j < 60; j++) {
                 float distance = 0.8f * (1 - j / 90f);
                 long time = gameTime+j*4;
-                Vec3 offsetPosition = DataHelper.rotatingRadialOffset(holderItemPos, distance, i, 4, time, 160);
+                Vec3 offsetPosition = VecHelper.rotatingRadialOffset(holderItemPos, distance, i, 4, time, 160);
                 if (random.nextFloat() < 0.85f) {
                     var sparkParticles = SparkParticleEffects.spiritMotionSparks(level, offsetPosition, cyclingSpiritType);
                     sparkParticles.getBuilder()
@@ -131,7 +131,7 @@ public class RepairPylonParticleEffects {
                 float distance = 0.8f * (j / 32f);
                 long time = gameTime+j*3;
                 int lifeDelay = 32 - j;
-                Vec3 offsetPosition = DataHelper.rotatingRadialOffset(pylonItemPos, distance, i, 4, time, 160);
+                Vec3 offsetPosition = VecHelper.rotatingRadialOffset(pylonItemPos, distance, i, 4, time, 160);
                 if (random.nextFloat() < 0.85f) {
                     var sparkParticles = SparkParticleEffects.spiritMotionSparks(level, offsetPosition, cyclingSpiritType);
                     sparkParticles.getBuilder()
@@ -226,7 +226,7 @@ public class RepairPylonParticleEffects {
         }
         for (int i = 0; i < 8; i++) {
             int finalI = i;
-            Vec3 offsetPosition = DataHelper.rotatingRadialOffset(itemPos, 0.6f, i, 8, gameTime, 160);
+            Vec3 offsetPosition = VecHelper.rotatingRadialOffset(itemPos, 0.6f, i, 8, gameTime, 160);
             Consumer<WorldParticleBuilder> behavior = b -> b.addTickActor(p -> {
                 if (level.getGameTime() > gameTime + finalI * 4 && level.getGameTime() < gameTime + (finalI + 4) * 4) {
                     p.setParticleSpeed(p.getParticleSpeed().add(0, 0.015f, 0));

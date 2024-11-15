@@ -23,7 +23,7 @@ public class TotemParticleEffects {
             final float time = 480;
             for (int i = 0; i < 2; i++) {
                 float velocity = RandomHelper.randomBetween(random, 0.005f, 0.015f);
-                Vec3 offsetPosition = DataHelper.rotatingRadialOffset(totemPoleBlockEntity.getBlockPos().getCenter(), 0.9f, i, 2, gameTime, time);
+                Vec3 offsetPosition = VecHelper.rotatingRadialOffset(totemPoleBlockEntity.getBlockPos().getCenter(), 0.9f, i, 2, gameTime, time);
                 offsetPosition = offsetPosition.add(0, (Math.cos(((gameTime + i * 240) % time) / time) * 0.25f) - 0.25f, 0);
                 var lightSpecs = spiritLightSpecs(level, offsetPosition, spiritType);
                 lightSpecs.getBuilder()
@@ -49,7 +49,7 @@ public class TotemParticleEffects {
         final float time = 16;
         for (int i = 0; i < 16; i++) {
             float velocity = RandomHelper.randomBetween(random, 0.005f, 0.015f);
-            Vec3 offsetPosition = DataHelper.rotatingRadialOffset(totemPoleBlockEntity.getBlockPos().getCenter(), 0.85f, i, 16, gameTime, time);
+            Vec3 offsetPosition = VecHelper.rotatingRadialOffset(totemPoleBlockEntity.getBlockPos().getCenter(), 0.85f, i, 16, gameTime, time);
             offsetPosition = offsetPosition.add(0, (Math.cos(((gameTime + i * 240) % time) / time) * 0.25f) - 0.25f, 0);
             var lightSpecs = spiritLightSpecs(level, offsetPosition, spiritType);
             lightSpecs.getBuilder()

@@ -144,7 +144,7 @@ public class WeepingWellParticleEffects {
                     .surroundVoxelShape(level, blockPos, WELL_SHAPE, 12);
             if (rand.nextFloat() < 0.75f) {
                 int rotation = rand.nextInt(16);
-                Vec3 offsetPosition = DataHelper.rotatingRadialOffset(new Vec3(blockPos.getX() + 0.5f, blockPos.getY() + 0.75f, blockPos.getZ() + 0.5f), 1.1f, rotation, 16, level.getGameTime(), 640);
+                Vec3 offsetPosition = VecHelper.rotatingRadialOffset(new Vec3(blockPos.getX() + 0.5f, blockPos.getY() + 0.75f, blockPos.getZ() + 0.5f), 1.1f, rotation, 16, level.getGameTime(), 640);
                 final float acceleration = RandomHelper.randomBetween(rand, 0.002f, 0.02f);
                 final long gameTime = level.getGameTime();
                 final Consumer<LodestoneWorldParticle> behavior = p -> {
@@ -187,7 +187,7 @@ public class WeepingWellParticleEffects {
                     .surroundVoxelShape(level, blockPos, DEPOT_SHAPE, 4);
             if (rand.nextFloat() < 0.2f) {
                 int rotation = rand.nextInt(16);
-                Vec3 offsetPosition = DataHelper.rotatingRadialOffset(new Vec3(blockPos.getX() + 0.5f, blockPos.getY() + 0.75f, blockPos.getZ() + 0.5f), 0.5f, rotation, 16, level.getGameTime(), 640);
+                Vec3 offsetPosition = VecHelper.rotatingRadialOffset(new Vec3(blockPos.getX() + 0.5f, blockPos.getY() + 0.75f, blockPos.getZ() + 0.5f), 0.5f, rotation, 16, level.getGameTime(), 640);
                 final float acceleration = RandomHelper.randomBetween(rand, 0.002f, 0.02f);
                 final long gameTime = level.getGameTime();
                 final Consumer<LodestoneWorldParticle> behavior = p -> {

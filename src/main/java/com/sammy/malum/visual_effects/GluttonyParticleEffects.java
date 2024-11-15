@@ -106,7 +106,7 @@ public class GluttonyParticleEffects {
         var random = level.random;
         return new ParticleEffectSpawner(builder, b -> {
             for (int i = 0; i < count; i++) {
-                Vec3 offsetPosition = DataHelper.rotatingRadialOffset(center, distance, i, count, gameTime, 320);
+                Vec3 offsetPosition = VecHelper.rotatingRadialOffset(center, distance, i, count, gameTime, 320);
                 for (int j = 0; j < 3; j++) {
                     boolean isAdditive = j == 0;
                     Color bright = j < 2 ? GLUTTONY_GREEN : GLUTTONY_DARK;

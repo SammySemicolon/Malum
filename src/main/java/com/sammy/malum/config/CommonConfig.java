@@ -1,6 +1,6 @@
 package com.sammy.malum.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.*;
 import org.apache.commons.lang3.tuple.Pair;
 import team.lodestar.lodestone.systems.config.LodestoneConfig;
 
@@ -44,15 +44,15 @@ public class CommonConfig extends LodestoneConfig {
 
 
 
-    public CommonConfig(ForgeConfigSpec.Builder builder) {
+    public CommonConfig(ModConfigSpec.Builder builder) {
         super(MALUM, "common", builder);
     }
 
     public static final CommonConfig INSTANCE;
-    public static final ForgeConfigSpec SPEC;
+    public static final ModConfigSpec SPEC;
 
     static {
-        final Pair<CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
+        final Pair<CommonConfig, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(CommonConfig::new);
         SPEC = specPair.getRight();
         INSTANCE = specPair.getLeft();
     }

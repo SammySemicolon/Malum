@@ -8,6 +8,7 @@ import io.redspace.ironsspellbooks.api.events.*;
 import io.redspace.ironsspellbooks.api.magic.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.*;
+import io.redspace.ironsspellbooks.item.weapons.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -28,6 +29,13 @@ public class IronsSpellsCompat {
         }
     }
 
+    public static boolean isStaff(ItemStack stack) {
+        if (LOADED) {
+            return LoadedOnly.isStaff(stack);
+        }
+        return false;
+    }
+
     public static void generateMana(ServerPlayer collector, double amount) {
         generateMana(collector, (float) amount);
     }
@@ -37,7 +45,6 @@ public class IronsSpellsCompat {
             LoadedOnly.generateMana(collector, amount);
         }
     }
-
     public static void recoverSpellCooldowns(ServerPlayer serverPlayer, int enchantmentLevel) {
         if (LOADED) {
             LoadedOnly.recoverSpellCooldowns(serverPlayer, enchantmentLevel);
@@ -49,6 +56,7 @@ public class IronsSpellsCompat {
             LoadedOnly.addEchoingArcanaSpellCooldown(effect);
         }
     }
+
     public static void addSilencedNegativeAttributeModifiers(SilencedEffect effect) {
         if (LOADED) {
             LoadedOnly.addSilencedNegativeAttributeModifiers(effect);
@@ -66,6 +74,10 @@ public class IronsSpellsCompat {
             }
         }
 
+        public static boolean isStaff(ItemStack stack) {
+            return stack.getItem() instanceof StaffItem;
+        }
+
         public static void generateMana(ServerPlayer collector, float amount) {
             var magicData = MagicData.getPlayerMagicData(collector);
             magicData.addMana(amount);
@@ -74,7 +86,7 @@ public class IronsSpellsCompat {
 
         public static void recoverSpellCooldowns(ServerPlayer serverPlayer, int enchantmentLevel) {
             var cooldowns = MagicData.getPlayerMagicData(serverPlayer).getPlayerCooldowns();
-            cooldowns.getSpellCooldowns().forEach((key, value) -> cooldowns.decrementCooldown(value, (int) (value.getSpellCooldown() * .1f * enchantmentLevel)));
+            cooldowns.getSpellCooldowns().forEach((key, value) -> cooldowns.decrementCooldown(value, (int) (value.getSpellCooldown() * .05f * enchantmentLevel)));
             cooldowns.syncToPlayer(serverPlayer);
         }
 

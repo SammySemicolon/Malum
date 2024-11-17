@@ -1,20 +1,27 @@
 package com.sammy.malum.compability.irons_spellbooks;
 
+import com.google.common.collect.Multimap;
 import com.sammy.malum.*;
 import com.sammy.malum.common.effect.*;
+import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.config.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.common.*;
 import io.redspace.ironsspellbooks.api.events.*;
 import io.redspace.ironsspellbooks.api.magic.*;
 import io.redspace.ironsspellbooks.item.weapons.*;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.fml.*;
 import net.neoforged.neoforge.common.*;
+
+import java.util.UUID;
 
 public class IronsSpellsCompat {
 
@@ -25,13 +32,6 @@ public class IronsSpellsCompat {
         if (LOADED) {
             NeoForge.EVENT_BUS.addListener(LoadedOnly::spellDamage);
         }
-    }
-
-    public static boolean isStaff(ItemStack stack) {
-        if (LOADED) {
-            return LoadedOnly.isStaff(stack);
-        }
-        return false;
     }
 
     public static void generateMana(ServerPlayer collector, double amount) {
@@ -49,10 +49,26 @@ public class IronsSpellsCompat {
             LoadedOnly.recoverSpellCooldowns(serverPlayer, enchantmentLevel);
         }
     }
+    public static void addSoulHunterSpellPower(ItemAttributeModifiers.Builder attributes) {
+        if (LOADED) {
+            LoadedOnly.addSoulHunterSpellPower(attributes);
+        }
+    }
+    public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Holder<Attribute>, AttributeModifier> map, float amount) {
+        if (LOADED) {
+            LoadedOnly.addSpellPowerToCurio(item, map, amount);
+        }
+    }
 
     public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {
         if (LOADED) {
             LoadedOnly.addEchoingArcanaSpellCooldown(effect);
+        }
+    }
+
+    public static void addGluttonySpellPower(GluttonyEffect effect) {
+        if (LOADED) {
+            LoadedOnly.addGluttonySpellPower(effect);
         }
     }
 
@@ -89,25 +105,23 @@ public class IronsSpellsCompat {
             cooldowns.syncToPlayer(serverPlayer);
         }
 
+        public static void addSoulHunterSpellPower(ItemAttributeModifiers.Builder attributes) {
+            attributes.add(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER,
+                    new AttributeModifier(MalumMod.malumPath("spell_power"), 0.1f, AttributeModifier.Operation.ADD_VALUE),
+                    EquipmentSlotGroup.ARMOR);
+        }
+
+        public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Holder<Attribute>, AttributeModifier> map, float amount) {
+            item.addAttributeModifier(map, io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER,
+                    new AttributeModifier(MalumMod.malumPath("spell_power"), amount, AttributeModifier.Operation.ADD_VALUE));
+        }
+
         public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {
             effect.addAttributeModifier(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.COOLDOWN_REDUCTION, MalumMod.malumPath("echoing_arcana"), 0.02f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         }
 
-        public static void addSoulHunterSpellPower(Multimap<Attribute, AttributeModifier> attributes, UUID uuid) {
-            attributes.put(AttributeRegistry.SPELL_POWER.get(), new AttributeModifier(uuid, "Malum Spell Power", 0.1f, AttributeModifier.Operation.ADDITION));
-        }
-
         public static void addGluttonySpellPower(GluttonyEffect effect) {
-            effect.addAttributeModifier(AttributeRegistry.SPELL_POWER.get(), "90523925-900e-49bf-b07d-12e2e7350f2d", 0.2f, AttributeModifier.Operation.MULTIPLY_TOTAL);
-        }
-
-        public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Attribute, AttributeModifier> map, float amount) {
-            item.addAttributeModifier(map, AttributeRegistry.SPELL_POWER.get(), uuid -> new AttributeModifier(uuid,
-                    "Curio Spell Power", amount, AttributeModifier.Operation.ADDITION));
-        }
-
-        public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {
-            effect.addAttributeModifier(AttributeRegistry.COOLDOWN_REDUCTION.get(), "8949b9d4-2505-4248-9667-0ece857af8a4", 0.02f, AttributeModifier.Operation.MULTIPLY_BASE);
+            effect.addAttributeModifier(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER, MalumMod.malumPath("gluttony_spell_power_multiplier"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         }
 
         public static void addSilencedNegativeAttributeModifiers(SilencedEffect effect) {

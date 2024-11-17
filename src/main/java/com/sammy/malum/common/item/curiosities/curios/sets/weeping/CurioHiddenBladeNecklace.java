@@ -27,6 +27,7 @@ import org.lwjgl.opengl.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.registry.common.*;
+import team.lodestar.lodestone.registry.common.tag.LodestoneDamageTypeTags;
 import team.lodestar.lodestone.systems.rendering.*;
 import team.lodestar.lodestone.systems.rendering.shader.*;
 
@@ -71,7 +72,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         if (level.isClientSide()) {
             return;
         }
-        if (!source.is(DamageTypeTagRegistry.IS_SCYTHE_MELEE)) {
+        if (!source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
             return;
         }
         if (CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get())) {

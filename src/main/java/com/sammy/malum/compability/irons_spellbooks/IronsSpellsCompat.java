@@ -1,25 +1,26 @@
 package com.sammy.malum.compability.irons_spellbooks;
 
 import com.google.common.collect.Multimap;
-import com.sammy.malum.*;
+import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.effect.*;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.common.item.curiosities.curios.runes.madness.RuneSpellMasteryItem;
 import com.sammy.malum.config.*;
 import com.sammy.malum.core.handlers.*;
-import com.sammy.malum.registry.common.*;
 import io.redspace.ironsspellbooks.api.events.*;
 import io.redspace.ironsspellbooks.api.magic.*;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
+import io.redspace.ironsspellbooks.api.util.*;
 import io.redspace.ironsspellbooks.item.weapons.*;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.neoforged.fml.*;
-import net.neoforged.neoforge.common.*;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.UUID;
 
@@ -31,7 +32,15 @@ public class IronsSpellsCompat {
         LOADED = ModList.get().isLoaded("irons_spellbooks");
         if (LOADED) {
             NeoForge.EVENT_BUS.addListener(LoadedOnly::spellDamage);
+            NeoForge.EVENT_BUS.addListener(LoadedOnly::triggerReplenishing);
         }
+    }
+
+    public static boolean isStaff(ItemStack stack) {
+        if (LOADED) {
+            return LoadedOnly.isStaff(stack);
+        }
+        return false;
     }
 
     public static void generateMana(ServerPlayer collector, double amount) {
@@ -99,21 +108,21 @@ public class IronsSpellsCompat {
 //            UpdateClient.SendManaUpdate(collector, magicData);
         }
 
-        public static void recoverSpellCooldowns(ServerPlayer serverPlayer, int enchantmentLevel) {
+        public static void recoverSpellCooldowns(ServerPlayer serverPlayer, float amount) {
             var cooldowns = MagicData.getPlayerMagicData(serverPlayer).getPlayerCooldowns();
-            cooldowns.getSpellCooldowns().forEach((key, value) -> cooldowns.decrementCooldown(value, (int) (value.getSpellCooldown() * .1f * enchantmentLevel)));
+            cooldowns.getSpellCooldowns().forEach((key, value) -> cooldowns.decrementCooldown(value, (int) (value.getSpellCooldown() * amount)));
             cooldowns.syncToPlayer(serverPlayer);
         }
 
         public static void addSoulHunterSpellPower(ItemAttributeModifiers.Builder attributes) {
             attributes.add(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER,
-                    new AttributeModifier(MalumMod.malumPath("spell_power"), 0.1f, AttributeModifier.Operation.ADD_VALUE),
+                    new AttributeModifier(MalumMod.malumPath("spell_power"), 0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
                     EquipmentSlotGroup.ARMOR);
         }
 
         public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Holder<Attribute>, AttributeModifier> map, float amount) {
             item.addAttributeModifier(map, io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER,
-                    new AttributeModifier(MalumMod.malumPath("spell_power"), amount, AttributeModifier.Operation.ADD_VALUE));
+                    new AttributeModifier(MalumMod.malumPath("spell_power"), amount, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         }
 
         public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {

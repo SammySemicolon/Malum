@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import team.lodestar.lodestone.recipe.builder.AutonamedRecipeBuilder;
 
 import java.util.LinkedHashMap;
@@ -51,7 +52,9 @@ public class RunicWorkbenchRecipeBuilder implements AutonamedRecipeBuilder<Runic
 
     @Override
     public RunicWorkbenchRecipe build(ResourceLocation resourceLocation) {
-        return new RunicWorkbenchRecipe(primaryInput, secondaryInput, output);
+        return new RunicWorkbenchRecipe(
+                SizedIngredient.of(primaryInput.getItem(), primaryInput.getCount()),
+                secondaryInput, output);
     }
 
     @Override

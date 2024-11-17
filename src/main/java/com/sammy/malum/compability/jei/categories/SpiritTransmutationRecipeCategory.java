@@ -32,7 +32,7 @@ public class SpiritTransmutationRecipeCategory implements IRecipeCategory<Spirit
 
     public SpiritTransmutationRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createBlankDrawable(142, 83);
-        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MALUM, "textures/gui/spirit_transmutation_jei.png"), 0, 0, 140, 81);
+        overlay = guiHelper.createDrawable(MalumMod.malumPath("textures/gui/spirit_transmutation_jei.png"), 0, 0, 140, 81);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()));
     }
 

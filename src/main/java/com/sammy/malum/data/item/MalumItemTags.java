@@ -101,15 +101,15 @@ public class MalumItemTags extends ItemTagsProvider {
                 .add(SOUL_STAINED_STEEL_AXE.get(), SOUL_STAINED_STEEL_PICKAXE.get(), SOUL_STAINED_STEEL_SHOVEL.get(), SOUL_STAINED_STEEL_SWORD.get(), SOUL_STAINED_STEEL_HOE.get(), SOUL_STAINED_STEEL_KNIFE.get());
 
         tag(ItemTagRegistry.SOUL_HUNTER_WEAPON)
-                .addOptional(new ResourceLocation("irons_spellbooks:graybeard_staff"))
-                .addOptional(new ResourceLocation("irons_spellbooks:artificer_cane"))
-                .addOptional(new ResourceLocation("irons_spellbooks:lightning_rod"))
-                .addOptional(new ResourceLocation("irons_spellbooks:ice_staff"))
-                .addOptional(new ResourceLocation("irons_spellbooks:blood_staff"))
-                .addOptional(new ResourceLocation("irons_spellbooks:magehunter"))
-                .addOptional(new ResourceLocation("irons_spellbooks:keeper_flamberge"))
-                .addOptional(new ResourceLocation("irons_spellbooks:spellbreaker"))
-                .addOptional(new ResourceLocation("irons_spellbooks:amethyst_rapier"));
+                .addOptional(ResourceLocation.parse("irons_spellbooks:graybeard_staff"))
+                .addOptional(ResourceLocation.parse("irons_spellbooks:artificer_cane"))
+                .addOptional(ResourceLocation.parse("irons_spellbooks:lightning_rod"))
+                .addOptional(ResourceLocation.parse("irons_spellbooks:ice_staff"))
+                .addOptional(ResourceLocation.parse("irons_spellbooks:blood_staff"))
+                .addOptional(ResourceLocation.parse("irons_spellbooks:magehunter"))
+                .addOptional(ResourceLocation.parse("irons_spellbooks:keeper_flamberge"))
+                .addOptional(ResourceLocation.parse("irons_spellbooks:spellbreaker"))
+                .addOptional(ResourceLocation.parse("irons_spellbooks:amethyst_rapier"));
 
         tag(ItemTagRegistry.ANIMATED_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHE);
         tag(ItemTagRegistry.REBOUND_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHE);

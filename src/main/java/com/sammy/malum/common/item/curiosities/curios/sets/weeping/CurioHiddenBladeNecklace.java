@@ -58,8 +58,8 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         MalumLivingEntityDataCapability.getCapabilityOptional(attacked).ifPresent(c -> {
             if (c.hiddenBladeNecklaceCooldown == 0) {
                 float damage = event.getOriginalDamage();
-                int amplifier = 1 + Mth.ceil(damage * 0.6f);
-                attacked.addEffect(new MobEffectInstance(MobEffectRegistry.WICKED_INTENT, 60, amplifier));
+                int amplifier = Math.min(1 + Mth.floor(damage / 6), 10);
+                attacked.addEffect(new MobEffectInstance(MobEffectRegistry.WICKED_INTENT, 80, amplifier));
                 SoundHelper.playSound(attacked, SoundRegistry.HIDDEN_BLADE_PRIMED.get(), 1f, RandomHelper.randomBetween(attacked.level().getRandom(), 1.4f, 1.6f));
             }
         });
@@ -96,10 +96,12 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
                 var direction = isRanged ? damageDealer.getDeltaMovement().normalize() : attacker.getLookAngle();
                 var damageCenter = damageDealer.position().add(direction);
                 var attributes = attacker.getAttributes();
-                float multiplier = (float) Mth.clamp(attributes.getValue(Attributes.ATTACK_SPEED), 0, 1) * 2;
+                float multiplier = (float) Mth.clamp(attributes.getValue(Attributes.ATTACK_SPEED), 0, 2) * ((effect.amplifier*2) + 1);
                 int duration = 25;
-                float physicalDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * multiplier * (effect.amplifier+1);
+
+                float physicalDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * multiplier;
                 float magicDamage = (float) (attributes.getValue(LodestoneAttributes.MAGIC_DAMAGE) / duration) * multiplier;
+
                 var entity = new HiddenBladeDelayedImpactEntity(level, damageCenter.x, damageCenter.y - 3f + attacker.getBbHeight() / 2f, damageCenter.z);
                 entity.setData(attacker, physicalDamage, magicDamage, duration);
                 entity.setItem(scytheWeapon);

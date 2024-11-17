@@ -2,6 +2,8 @@ package com.sammy.malum.common.effect;
 
 import com.sammy.malum.*;
 import com.sammy.malum.registry.common.MobEffectRegistry;
+import com.sammy.malum.registry.common.SoundRegistry;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,6 +21,7 @@ public class GluttonyEffect extends MobEffect {
     public GluttonyEffect() {
         super(MobEffectCategory.BENEFICIAL, ColorHelper.getColor(88, 86, 60));
         addAttributeModifier(LodestoneAttributes.MAGIC_PROFICIENCY, MalumMod.malumPath("gluttony_magic_multiplier"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        IronsSpellsCompat.addGluttonySpellPower(this);
     }
 
     public static void canApplyPotion(MobEffectEvent.Applicable event) {
@@ -36,6 +39,4 @@ public class GluttonyEffect extends MobEffect {
         }
         return true;
     }
-
-
 }

@@ -43,6 +43,7 @@ public class IronsSpellsCompat {
             LoadedOnly.generateMana(collector, amount);
         }
     }
+
     public static void recoverSpellCooldowns(ServerPlayer serverPlayer, int enchantmentLevel) {
         if (LOADED) {
             LoadedOnly.recoverSpellCooldowns(serverPlayer, enchantmentLevel);
@@ -84,12 +85,29 @@ public class IronsSpellsCompat {
 
         public static void recoverSpellCooldowns(ServerPlayer serverPlayer, int enchantmentLevel) {
             var cooldowns = MagicData.getPlayerMagicData(serverPlayer).getPlayerCooldowns();
-            cooldowns.getSpellCooldowns().forEach((key, value) -> cooldowns.decrementCooldown(value, (int) (value.getSpellCooldown() * .05f * enchantmentLevel)));
+            cooldowns.getSpellCooldowns().forEach((key, value) -> cooldowns.decrementCooldown(value, (int) (value.getSpellCooldown() * .1f * enchantmentLevel)));
             cooldowns.syncToPlayer(serverPlayer);
         }
 
         public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {
             effect.addAttributeModifier(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.COOLDOWN_REDUCTION, MalumMod.malumPath("echoing_arcana"), 0.02f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        }
+
+        public static void addSoulHunterSpellPower(Multimap<Attribute, AttributeModifier> attributes, UUID uuid) {
+            attributes.put(AttributeRegistry.SPELL_POWER.get(), new AttributeModifier(uuid, "Malum Spell Power", 0.1f, AttributeModifier.Operation.ADDITION));
+        }
+
+        public static void addGluttonySpellPower(GluttonyEffect effect) {
+            effect.addAttributeModifier(AttributeRegistry.SPELL_POWER.get(), "90523925-900e-49bf-b07d-12e2e7350f2d", 0.2f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        }
+
+        public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Attribute, AttributeModifier> map, float amount) {
+            item.addAttributeModifier(map, AttributeRegistry.SPELL_POWER.get(), uuid -> new AttributeModifier(uuid,
+                    "Curio Spell Power", amount, AttributeModifier.Operation.ADDITION));
+        }
+
+        public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {
+            effect.addAttributeModifier(AttributeRegistry.COOLDOWN_REDUCTION.get(), "8949b9d4-2505-4248-9667-0ece857af8a4", 0.02f, AttributeModifier.Operation.MULTIPLY_BASE);
         }
 
         public static void addSilencedNegativeAttributeModifiers(SilencedEffect effect) {

@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.runes.madness;
 import com.google.common.collect.*;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.curios.runes.*;
+import com.sammy.malum.compability.irons_spellbooks.IronsSpellsCompat;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -22,5 +23,7 @@ public class RuneSpellMasteryItem extends AbstractRuneCurioItem {
                 new AttributeModifier(MalumMod.malumPath("curio_magic_proficiency"), 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         addAttributeModifier(map, AttributeRegistry.RESERVE_STAFF_CHARGES,
                 new AttributeModifier(MalumMod.malumPath("curio_reserve_staff_charges"), 2f, AttributeModifier.Operation.ADD_VALUE));
+
+        IronsSpellsCompat.addSpellPowerToCurio(this, map, 0.1f);
     }
 }

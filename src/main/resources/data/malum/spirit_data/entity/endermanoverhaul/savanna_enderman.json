@@ -1,0 +1,18 @@
+{
+  "registry_name": "endermanoverhaul:savanna_enderman",
+  "primary_type": "eldritch",
+  "spirits": [
+    {
+      "spirit": "eldritch",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 2
+    },
+    {
+      "spirit": "arcane",
+      "count": 1
+    }
+  ]
+}

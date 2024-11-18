@@ -1,0 +1,14 @@
+{
+  "registry_name": "endermanoverhaul:scarab",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    }
+  ]
+}

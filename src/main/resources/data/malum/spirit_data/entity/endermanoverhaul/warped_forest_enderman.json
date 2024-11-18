@@ -1,0 +1,22 @@
+{
+  "registry_name": "endermanoverhaul:warped_forest_enderman",
+  "primary_type": "eldritch",
+  "spirits": [
+    {
+      "spirit": "eldritch",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 2
+    },
+    {
+      "spirit": "infernal",
+      "count": 1
+    },
+    {
+      "spirit": "arcane",
+      "count": 2
+    }
+  ]
+}

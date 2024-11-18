@@ -7,6 +7,7 @@ import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.common.item.curiosities.curios.runes.madness.RuneSpellMasteryItem;
 import com.sammy.malum.config.*;
 import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import io.redspace.ironsspellbooks.api.events.*;
 import io.redspace.ironsspellbooks.api.magic.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
@@ -14,6 +15,8 @@ import io.redspace.ironsspellbooks.api.util.*;
 import io.redspace.ironsspellbooks.item.weapons.*;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.*;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
@@ -21,8 +24,11 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 import java.util.UUID;
+
+import static com.sammy.malum.registry.common.item.EnchantmentRegistry.getEnchantmentLevel;
 
 public class IronsSpellsCompat {
 
@@ -95,6 +101,18 @@ public class IronsSpellsCompat {
                     CommonConfig.IRONS_SPELLBOOKS_NON_PLAYER_SPIRIT_DAMAGE.getConfigValue();
             if (canShatter) {
                 SoulDataHandler.exposeSoul(event.getEntity());
+            }
+        }
+
+        public static void triggerReplenishing(LivingDamageEvent.Post event) {
+            DamageSource source = event.getSource();
+            Entity directEntity = source.getDirectEntity();
+            if (directEntity instanceof ServerPlayer serverPlayer) {
+                if (serverPlayer.getAttackStrengthScale(0) > 0.8f) {
+                    ItemStack stack = serverPlayer.getMainHandItem();
+                    int level = getEnchantmentLevel(serverPlayer.level(), EnchantmentRegistry.REPLENISHING, stack);
+                    recoverSpellCooldowns(serverPlayer, 0.025f * level);
+                }
             }
         }
 

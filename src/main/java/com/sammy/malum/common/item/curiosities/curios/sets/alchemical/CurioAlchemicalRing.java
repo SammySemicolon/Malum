@@ -28,7 +28,7 @@ public class CurioAlchemicalRing extends MalumCurioItem implements IMalumEventRe
             var e = instance.getEffect();
             int durationChange = (int) ((e.isBeneficial() ? 60 : 120) * arcaneResonance);
             if (e.isBeneficial()) {
-                EntityHelper.extendEffect(instance, collector, durationChange, 1200);
+                EntityHelper.extendEffect(instance, collector, durationChange, 3000);
                 continue;
             }
             if (e.getCategory().equals(MobEffectCategory.HARMFUL)) {

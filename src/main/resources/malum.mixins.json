@@ -9,6 +9,7 @@
     "FeatureFlagSetMixin",
     "FishingHookEntityMixin",
     "ItemStackMixin",
+    "LivingEntityMixin",
     "PlayerMixin"
   ],
   "client": [

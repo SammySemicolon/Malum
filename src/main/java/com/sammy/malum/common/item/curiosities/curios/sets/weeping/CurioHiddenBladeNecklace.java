@@ -32,6 +32,7 @@ import org.lwjgl.opengl.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.registry.common.*;
+import team.lodestar.lodestone.registry.common.tag.LodestoneDamageTypeTags;
 import team.lodestar.lodestone.systems.rendering.*;
 import team.lodestar.lodestone.systems.rendering.shader.*;
 
@@ -61,9 +62,9 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         MalumLivingEntityDataCapability.getCapabilityOptional(attacked).ifPresent(c -> {
             if (c.hiddenBladeCounterCooldown == 0) {
                 float damage = event.getAmount();
-                int amplifier = 1 + Mth.ceil(damage * 0.6f);
+                int amplifier = Math.min(1 + Mth.floor(damage / 6), 10);
                 MobEffect effect = MobEffectRegistry.WICKED_INTENT.get();
-                attacked.addEffect(new MobEffectInstance(effect, 60, amplifier));
+                attacked.addEffect(new MobEffectInstance(effect, 100, amplifier));
                 SoundHelper.playSound(attacked, SoundRegistry.HIDDEN_BLADE_PRIMED.get(), 1f, RandomHelper.randomBetween(attacked.level().getRandom(), 1.4f, 1.6f));
             }
         });
@@ -76,20 +77,20 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         if (level.isClientSide()) {
             return;
         }
-        if (!source.is(DamageTypeTagRegistry.IS_SCYTHE_MELEE)) {
+        if (!source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
             return;
         }
         if (CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get())) {
             MalumLivingEntityDataCapability.getCapabilityOptional(attacker).ifPresent(c -> {
                 var random = level.getRandom();
-//                if (c.hiddenBladeCounterCooldown != 0) {
-//                    if (c.hiddenBladeCounterCooldown <= COOLDOWN_DURATION) {
-//                        SoundHelper.playSound(attacker, SoundRegistry.HIDDEN_BLADE_DISRUPTED.get(), 1f, RandomHelper.randomBetween(random, 0.7f, 0.8f));
-//                    }
-//                    c.hiddenBladeCounterCooldown = (int) (COOLDOWN_DURATION * 1.5);
-//                    MalumLivingEntityDataCapability.syncSelf((ServerPlayer) attacker);
-//                    return;
-//                }
+                if (c.hiddenBladeCounterCooldown != 0) {
+                    if (c.hiddenBladeCounterCooldown <= COOLDOWN_DURATION) {
+                        SoundHelper.playSound(attacker, SoundRegistry.HIDDEN_BLADE_DISRUPTED.get(), 1f, RandomHelper.randomBetween(random, 0.7f, 0.8f));
+                    }
+                    c.hiddenBladeCounterCooldown = (int) (COOLDOWN_DURATION * 1.5);
+                    MalumLivingEntityDataCapability.syncSelf((ServerPlayer) attacker);
+                    return;
+                }
                 var effect = attacker.getEffect(MobEffectRegistry.WICKED_INTENT.get());
                 if (effect == null) {
                     return;
@@ -100,9 +101,9 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
                 var direction = isRanged ? damageDealer.getDeltaMovement().normalize() : attacker.getLookAngle();
                 var damageCenter = damageDealer.position().add(direction);
                 var attributes = attacker.getAttributes();
-                float multiplier = (float) Mth.clamp(attributes.getValue(Attributes.ATTACK_SPEED), 0, 1) * 2;
+                float multiplier = (float) Mth.clamp(attributes.getValue(Attributes.ATTACK_SPEED), 0, 2) * ((effect.amplifier*2) + 1);
                 int duration = 25;
-                float physicalDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * multiplier * (effect.amplifier+1);
+                float physicalDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * multiplier;
                 float magicDamage = (float) (attributes.getValue(LodestoneAttributeRegistry.MAGIC_DAMAGE.get()) / duration) * multiplier;
 
 

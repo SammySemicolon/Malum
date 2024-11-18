@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.armor;
 import com.google.common.collect.*;
 import com.sammy.malum.client.cosmetic.ArmorSkinRenderingData;
 import com.sammy.malum.common.item.cosmetic.skins.ArmorSkin;
+import com.sammy.malum.compability.irons_spellbooks.IronsSpellsCompat;
 import com.sammy.malum.registry.client.ModelRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -34,6 +35,7 @@ public class SoulHunterArmorItem extends MalumArmorItem {
         Multimap<Attribute, AttributeModifier> attributes = ArrayListMultimap.create();
         UUID uuid = ARMOR_MODIFIER_UUID_PER_TYPE.get(type);
         attributes.put(LodestoneAttributeRegistry.MAGIC_PROFICIENCY.get(), new AttributeModifier(uuid, "Magic Proficiency", 0.15f, AttributeModifier.Operation.MULTIPLY_BASE));
+        IronsSpellsCompat.addSoulHunterSpellPower(attributes, uuid);
         return attributes;
     }
 

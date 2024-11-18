@@ -25,7 +25,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
         if (level.isClientSide) {
             return;
         }
-        if (event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC)) {
+        if (!event.getSource().is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
             return;
         }
         float damage = SpiritHarvestHandler.getSpiritData(target).map(d -> d.totalSpirits).orElse(0) * 2f;

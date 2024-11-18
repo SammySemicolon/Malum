@@ -27,12 +27,13 @@ public class ReplenishingEnchantment extends Enchantment {
 
     public static void replenishStaffCooldown(LivingEntity attacker, ItemStack stack) {
         if (attacker instanceof ServerPlayer player && stack.getItem() instanceof AbstractStaffItem staff) {
-            ItemCooldowns cooldowns = player.getCooldowns();
-            if (cooldowns.isOnCooldown(staff) && player.getAttackStrengthScale(0) > 0.8f) {
+            if (player.getAttackStrengthScale(0) > 0.8f) {
+                ItemCooldowns cooldowns = player.getCooldowns();
                 int level = stack.getEnchantmentLevel(EnchantmentRegistry.REPLENISHING.get());
-                replenishStaffCooldown(staff, player, level);
-                IronsSpellsCompat.recoverSpellCooldowns(player, level);
-                MALUM_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncStaffCooldownChangesPacket(staff, level));
+                if (cooldowns.isOnCooldown(staff)) {
+                    replenishStaffCooldown(staff, player, level);
+                    MALUM_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncStaffCooldownChangesPacket(staff, level));
+                }
             }
         }
     }

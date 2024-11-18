@@ -60,7 +60,7 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
             Level level = player.level();
             spawnSweepParticles(player, ParticleRegistry.STAFF_SLAM_PARTICLE.get());
             level.playSound(null, target.blockPosition(), SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 0.75f, Mth.nextFloat(level.random, 0.5F, 1F));
-            if (event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC)) {
+            if (event.getSource().is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
                 ReplenishingEnchantment.replenishStaffCooldown(attacker, stack);
             }
         }

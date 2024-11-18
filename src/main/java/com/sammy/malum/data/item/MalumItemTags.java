@@ -102,6 +102,17 @@ public class MalumItemTags extends ItemTagsProvider {
                 //soul stained steel gear
                 .add(SOUL_STAINED_STEEL_AXE.get(), SOUL_STAINED_STEEL_PICKAXE.get(), SOUL_STAINED_STEEL_SHOVEL.get(), SOUL_STAINED_STEEL_SWORD.get(), SOUL_STAINED_STEEL_HOE.get(), SOUL_STAINED_STEEL_KNIFE.get());
 
+        tag(ItemTagRegistry.SOUL_HUNTER_WEAPON)
+                .addOptional(new ResourceLocation("irons_spellbooks:graybeard_staff"))
+                .addOptional(new ResourceLocation("irons_spellbooks:artificer_cane"))
+                .addOptional(new ResourceLocation("irons_spellbooks:lightning_rod"))
+                .addOptional(new ResourceLocation("irons_spellbooks:ice_staff"))
+                .addOptional(new ResourceLocation("irons_spellbooks:blood_staff"))
+                .addOptional(new ResourceLocation("irons_spellbooks:magehunter"))
+                .addOptional(new ResourceLocation("irons_spellbooks:keeper_flamberge"))
+                .addOptional(new ResourceLocation("irons_spellbooks:spellbreaker"))
+                .addOptional(new ResourceLocation("irons_spellbooks:amethyst_rapier"));
+
         tag(Tags.Items.NUGGETS).add(COPPER_NUGGET.get(), HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get());
         tag(Tags.Items.GEMS).add(NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), CLUSTER_OF_BRILLIANCE.get());
         tag(Tags.Items.INGOTS).add(SOUL_STAINED_STEEL_INGOT.get(), HALLOWED_GOLD_INGOT.get());

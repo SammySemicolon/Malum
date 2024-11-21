@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:cave_spider_servant",
+  "primary_type": "aerial",
+  "spirits": [
+    {
+      "spirit": "aerial",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

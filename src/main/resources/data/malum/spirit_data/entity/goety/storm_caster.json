@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:storm_caster",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "aerial",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 2
+    }
+  ]
+}

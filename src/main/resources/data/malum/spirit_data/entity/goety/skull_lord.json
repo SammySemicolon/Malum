@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:skull_lord",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 5
+    },
+    {
+      "spirit": "wicked",
+      "count": 5
+    }
+  ]
+}

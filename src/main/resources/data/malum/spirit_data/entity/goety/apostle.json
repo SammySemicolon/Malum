@@ -1,0 +1,22 @@
+{
+  "registry_name": "goety:apostle",
+  "primary_type": "infernal",
+  "spirits": [
+    {
+      "spirit": "eldritch",
+      "count": 4
+    },
+    {
+      "spirit": "arcane",
+      "count": 4
+    },
+    {
+      "spirit": "wicked",
+      "count": 3
+    },
+    {
+      "spirit": "infernal",
+      "count": 5
+    }
+  ]
+}

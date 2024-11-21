@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:black_beast",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 4
+    },
+    {
+      "spirit": "wicked",
+      "count": 4
+    }
+  ]
+}

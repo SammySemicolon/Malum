@@ -1,0 +1,15 @@
+{
+  "registry_name": "goety:whisperer",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "earthen",
+      "count": 2
+    }
+   }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:grave_golem",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 3
+    },
+    {
+      "spirit": "earthen",
+      "count": 3
+    },
+    {
+      "spirit": "wicked",
+      "count": 2
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:vizier",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 3
+    },
+    {
+      "spirit": "aerial",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 4
+    }
+  ]
+}

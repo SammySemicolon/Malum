@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:icy_spider_servant",
+  "primary_type": "aqueous",
+  "spirits": [
+    {
+      "spirit": "aerial",
+      "count": 1
+    },
+    {
+      "spirit": "aqueous",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:irk",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "aerial",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

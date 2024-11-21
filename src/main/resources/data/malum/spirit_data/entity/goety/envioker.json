@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:envioker",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 3
+    },
+    {
+      "spirit": "wicked",
+      "count": 2
+    }
+  ]
+}

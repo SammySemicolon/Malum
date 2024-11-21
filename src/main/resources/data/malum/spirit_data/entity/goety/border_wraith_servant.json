@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:border_wraith_servant",
+  "primary_type": "arcane",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 1
+    },
+    {
+      "spirit": "aerial",
+      "count": 1
+    }
+  ]
+}

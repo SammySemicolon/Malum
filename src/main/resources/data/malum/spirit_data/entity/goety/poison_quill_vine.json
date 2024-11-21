@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:poison_quill_vine",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "arcane",
+      "count": 1
+    }
+  ]
+}

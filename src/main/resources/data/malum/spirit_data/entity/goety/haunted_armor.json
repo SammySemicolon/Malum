@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:haunted_armor",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 3
+    }
+  ]
+}

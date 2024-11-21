@@ -1,0 +1,22 @@
+{
+  "registry_name": "goety:ghast_servant",
+  "primary_type": "arcane",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 1
+    },
+    {
+      "spirit": "infernal",
+      "count": 1
+    },
+    {
+      "spirit": "aqueous",
+      "count": 1
+    },
+    {
+      "spirit": "aerial",
+      "count": 1
+    }
+  ]
+}

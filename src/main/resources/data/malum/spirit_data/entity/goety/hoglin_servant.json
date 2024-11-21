@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:hoglin_servant",
+  "primary_type": "infernal",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "infernal",
+      "count": 1
+    }
+  ]
+}

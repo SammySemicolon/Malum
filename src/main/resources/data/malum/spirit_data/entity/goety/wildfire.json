@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:wildfire",
+  "primary_type": "infernal",
+  "spirits": [
+    {
+      "spirit": "infernal",
+      "count": 2
+    },
+    {
+      "spirit": "arcane",
+      "count": 2
+    }
+  ]
+}

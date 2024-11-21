@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:quick_growing_vine",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    }
+  ]
+}

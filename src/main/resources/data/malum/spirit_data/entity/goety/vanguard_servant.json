@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:vanguard_servant",
+  "primary_type": "arcane",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:inferno",
+  "primary_type": "infernal",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "aerial",
+      "count": 2
+    },
+    {
+      "spirit": "infernal",
+      "count": 2
+    }
+  ]
+}

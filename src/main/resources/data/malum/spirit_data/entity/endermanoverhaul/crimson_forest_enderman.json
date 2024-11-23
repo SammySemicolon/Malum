@@ -1,0 +1,22 @@
+{
+  "registry_name": "endermanoverhaul:crimson_forest_enderman",
+  "primary_type": "eldritch",
+  "spirits": [
+    {
+      "spirit": "eldritch",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 2
+    },
+    {
+      "spirit": "infernal",
+      "count": 2
+    },
+    {
+      "spirit": "arcane",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:husk_servant",
+  "primary_type": "infernal",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "infernal",
+      "count": 1
+    }
+  ]
+}

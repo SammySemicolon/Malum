@@ -1,17 +1,12 @@
 package com.sammy.malum.common.entity.scythe;
 
-import com.sammy.malum.common.enchantment.scythe.*;
-import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.registry.common.*;
-import com.sammy.malum.registry.common.entity.*;
 import com.sammy.malum.registry.common.item.*;
-import net.minecraft.core.particles.*;
 import net.minecraft.nbt.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.*;

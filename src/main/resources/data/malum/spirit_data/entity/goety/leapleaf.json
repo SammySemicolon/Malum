@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:leapleaf",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 3
+    },
+    {
+      "spirit": "arcane",
+      "count": 2
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:crusher",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 2
+    }
+  ]
+}

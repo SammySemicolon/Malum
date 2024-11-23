@@ -1,27 +1,17 @@
 package com.sammy.malum.common.entity.hidden_blade;
 
-import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.entity.*;
 import com.sammy.malum.registry.common.item.*;
-import net.minecraft.core.particles.*;
 import net.minecraft.nbt.*;
-import net.minecraft.network.syncher.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.entity.player.*;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.minecraftforge.items.*;
 import team.lodestar.lodestone.helpers.*;
-
-import java.util.*;
 
 import static net.minecraft.world.entity.projectile.ProjectileUtil.getEntityHitResult;
 

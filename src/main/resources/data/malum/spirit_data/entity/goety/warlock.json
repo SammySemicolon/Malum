@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:warlock",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 2
+    }
+  ]
+}

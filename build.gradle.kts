@@ -209,15 +209,15 @@ dependencies {
 
     //Iron's Spellbooks Optional Dependency
     compileOnly(fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelusVersion}:api"))
-    runtimeOnly(fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelusVersion}"))
-    implementation(fg.deobf("software.bernie.geckolib:geckolib-forge-${geckoLibVersion}"))
-    implementation(fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${playerAnimatorVersion}"))
+//    runtimeOnly(fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelusVersion}"))
+    compileOnly(fg.deobf("software.bernie.geckolib:geckolib-forge-${geckoLibVersion}"))
+    compileOnly(fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${playerAnimatorVersion}"))
 //    compileOnly(fg.deobf("io.redspace.ironsspellbooks:irons_spellbooks:${ironsSpellsVersion}:api"))
-    implementation(fg.deobf("io.redspace.ironsspellbooks:irons_spellbooks:${ironsSpellsVersion}"))
+    compileOnly(fg.deobf("io.redspace.ironsspellbooks:irons_spellbooks:${ironsSpellsVersion}"))
 
     //Apothic Attributes
-    implementation(fg.deobf("curse.maven:placebo-283644:5414631"))
-    implementation(fg.deobf("curse.maven:apothic-attributes-898963:5634071"))
+    compileOnly(fg.deobf("curse.maven:placebo-283644:5414631"))
+    compileOnly(fg.deobf("curse.maven:apothic-attributes-898963:5634071"))
 
     //Misc
     runtimeOnly(fg.deobf("curse.maven:spark-361579:4587309"))

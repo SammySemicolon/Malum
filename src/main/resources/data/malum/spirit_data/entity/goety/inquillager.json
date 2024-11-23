@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:inquillager",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 2
+    }
+  ]
+}

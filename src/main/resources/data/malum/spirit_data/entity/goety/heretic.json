@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:heretic",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "infernal",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "registry_name": "goety:conquillager",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 3
+    }
+  ]
+}

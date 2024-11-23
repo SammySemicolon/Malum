@@ -1,0 +1,26 @@
+{
+  "registry_name": "endermanoverhaul:soulsand_valley_enderman",
+  "primary_type": "eldritch",
+  "spirits": [
+    {
+      "spirit": "eldritch",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 2
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "infernal",
+      "count": 2
+    },
+    {
+      "spirit": "arcane",
+      "count": 1
+    }
+  ]
+}

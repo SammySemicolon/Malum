@@ -201,7 +201,7 @@ public class TouchOfDarknessHandler {
                 ParticleEffectTypeRegistry.WEEPING_WELL_REACTS.createEntityEffect(livingEntity);
             }
             if (!player.isCreative()) {
-                livingEntity.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOODOO), 4);
+                livingEntity.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOODOO_PLAYERLESS), 4);
             }
             if (!playerDataCapability.hasBeenRejected) {
                 SpiritHarvestHandler.spawnItemAsSpirit(ItemRegistry.UMBRAL_SPIRIT.get().getDefaultInstance(), player, player);

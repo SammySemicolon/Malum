@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:wavewhisperer",
+  "primary_type": "aqueous",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "earthen",
+      "count": 2
+    },
+    {
+      "spirit": "aqueous",
+      "count": 1
+    }
+  ]
+}

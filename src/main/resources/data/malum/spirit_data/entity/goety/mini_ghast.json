@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:mini_ghast",
+  "primary_type": "arcane",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 1
+    },
+    {
+      "spirit": "aerial",
+      "count": 1
+    },
+    {
+      "spirit": "infernal",
+      "count": 1
+    }
+  ]
+}

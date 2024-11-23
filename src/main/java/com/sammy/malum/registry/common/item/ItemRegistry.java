@@ -640,7 +640,6 @@ public class ItemRegistry {
     public static final RegistryObject<Item> STAFF_OF_THE_AURIC_FLAME = register("staff_of_the_auric_flame", GEAR_PROPERTIES(), (p) -> new AuricFlameStaffItem(AURIC_STAFF, 7, p));
     public static final RegistryObject<Item> EROSION_SCEPTER = register("erosion_scepter", GEAR_PROPERTIES(), (p) -> new ErosionScepterItem(MALIGNANT_ALLOY, 5, p));
 
-
     public static final RegistryObject<Item> RUNE_OF_IDLE_RESTORATION = register("rune_of_idle_restoration", GEAR_PROPERTIES(), RuneIdleRestorationItem::new);
     public static final RegistryObject<Item> RUNE_OF_CULLING = register("rune_of_culling", GEAR_PROPERTIES(), RuneCullingItem::new);
     public static final RegistryObject<Item> RUNE_OF_REINFORCEMENT = register("rune_of_reinforcement", GEAR_PROPERTIES(), RuneReinforcementItem::new);

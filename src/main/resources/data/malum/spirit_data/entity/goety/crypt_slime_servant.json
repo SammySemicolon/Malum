@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:crypt_slime_servant",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 1
+    },
+    {
+      "spirit": "aqueous",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

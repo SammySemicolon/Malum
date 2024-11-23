@@ -1134,13 +1134,24 @@ public class MalumLang extends LanguageProvider {
         add("itemGroup.malum_ritual_shards", "Malum: Ritual Shards");
         add("itemGroup.malum_cosmetics", "Malum: Self Expression");
 
-        add("death.attack." + DamageTypeRegistry.VOODOO_IDENTIFIER, "%s had their soul shattered");
-        add("death.attack." + DamageTypeRegistry.VOODOO_IDENTIFIER + ".player", "%s had their soul shattered by %s");
-        add("death.attack." + DamageTypeRegistry.SCYTHE_SWEEP_IDENTIFIER, "%s was sliced in half");
-        add("death.attack." + DamageTypeRegistry.SCYTHE_SWEEP_IDENTIFIER + ".player", "%s was sliced in half by %s");
+        add("death.attack.voodoo", "%1$s had their soul shattered");
+        add("death.attack.vodooo.player", "%1$s had their soul shattered by %2$s");
+        add("death.attack.vodooo.player.item", "%1$s had their soul shattered by %2$s using %3$s");
 
-        addJEEDEffectDescription(MobEffectRegistry.GAIAS_BULWARK, "You are protected by an earthen bulwark, increasing your armor.");
-        addJEEDEffectDescription(MobEffectRegistry.EARTHEN_MIGHT, "Your fists and tools are reinforced with earth, increasing your overall damage.");
+        add("death.attack.vodooo_playerless", "%1$s had their soul shattered");
+        add("death.attack.vodooo_playerless.player", "%1$s had their soul shattered while trying to escape %2$s");
+
+        add("death.attack.scythe_melee", "%1$s was sliced in half");
+        add("death.attack.scythe_melee.item", "%1$s was sliced in half by %2$s using %3$s");
+
+        add("death.attack.scythe_sweep", "%1$s was sliced in half");
+        add("death.attack.scythe_sweep.item", "%1$s was sliced in half by %2$s using %3$s");
+
+        add("death.attack.hidden_blade_counter", "%1$s was sliced into innumerable pieces");
+        add("death.attack.hidden_blade_counter.item", "%1$s was sliced into innumerable pieces by %2$s using %3$s");
+
+        addJEEDEffectDescription(MobEffectRegistry.GAIAS_BULWARK, "An earthen carapace surrounds your body, functioning as extra armor.");
+        addJEEDEffectDescription(MobEffectRegistry.EARTHEN_MIGHT, "Your fists and tools are reinforced with earth, increasing your strength.");
         addJEEDEffectDescription(MobEffectRegistry.MINERS_RAGE, "Your tools are bolstered with radiance, increasing your mining and attack speed.");
         addJEEDEffectDescription(MobEffectRegistry.IFRITS_EMBRACE, "The warm embrace of fire coats your soul, mending your seared scars.");
         addJEEDEffectDescription(MobEffectRegistry.ZEPHYRS_COURAGE, "The zephyr propels you forward, increasing your movement speed.");
@@ -1148,11 +1159,17 @@ public class MalumLang extends LanguageProvider {
         addJEEDEffectDescription(MobEffectRegistry.POSEIDONS_GRASP, "You reach out for further power, increasing your reach and item pickup distance.");
         addJEEDEffectDescription(MobEffectRegistry.ANGLERS_LURE, "Let any fish who meets my gaze learn the true meaning of fear; for I am the harbinger of death. The bane of creatures sub-aqueous, my rod is true and unwavering as I cast into the aquatic abyss. A man, scorned by this uncaring Earth, finds solace in the sea. My only friend, the worm upon my hook. Wriggling, writhing, struggling to surmount the mortal pointlessness that permeates this barren world. I am alone. I am empty. And yet, I fish.");
 
-        addJEEDEffectDescription(MobEffectRegistry.GLUTTONY, "You feed on the vulnerable, increasing scythe proficiency and gradually restoring lost hunger.");
+        addJEEDEffectDescription(MobEffectRegistry.REACTIVE_SHIELDING, "A Runic Power bolsters your armor and toughness by a tenth.");
+        addJEEDEffectDescription(MobEffectRegistry.SACRIFICIAL_EMPOWERMENT, "A Runic Power reaps extra scythe proficiency for your blade.");
+
+        addJEEDEffectDescription(MobEffectRegistry.ASCENSION, "Eases your fall and reduces gravity after a successful Scythe Ascenison.");
+        addJEEDEffectDescription(MobEffectRegistry.GLUTTONY, "You feed on the vulnerable, increasing magic proficiency at the expense of hunger./");
         addJEEDEffectDescription(MobEffectRegistry.CANCEROUS_GROWTH, "You are emboldened by uncontrolled growth, increasing maximum health.");
-        addJEEDEffectDescription(MobEffectRegistry.WICKED_INTENT, "You bring forth a powerful counter attack, increasing scythe proficiency for just one strike.");
+        addJEEDEffectDescription(MobEffectRegistry.ECHOING_ARCANA, "You are made wiser by uncontrolled magnification, increasing arcane resonance.");
+        addJEEDEffectDescription(MobEffectRegistry.WICKED_INTENT, "You bring forth a powerful counter attack, your next scythe attack will unleash an impossible volley of cuts.");
         addJEEDEffectDescription(MobEffectRegistry.SILENCED, "You are silenced, leaving your magical capabilities neutered.");
         addJEEDEffectDescription(MobEffectRegistry.GRIM_CERTAINTY, "The Weight of Worlds oscillates, sealing the next strike as a critical blow.");
+        addJEEDEffectDescription(MobEffectRegistry.IMMINENT_DELIVERANCE, "The Edge of Deliverance oscillates, sealing it's next strike as a critical blow.");
 
         addTetraMaterial("soul_stained_steel", "Soulstained Steel");
         addTetraMaterial("hallowed_gold", "Hallowed Gold");

@@ -20,8 +20,6 @@ import net.minecraftforge.common.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
 
-import java.util.*;
-
 public class AscensionEnchantment extends Enchantment {
     public AscensionEnchantment() {
         super(Rarity.UNCOMMON, EnchantmentRegistry.SCYTHE_ONLY, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});

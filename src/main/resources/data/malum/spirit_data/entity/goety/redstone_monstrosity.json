@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:redstone_monstrosity",
+  "primary_type": "arcane",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 7
+    },
+    {
+      "spirit": "earthen",
+      "count": 7
+    }
+  ]
+}

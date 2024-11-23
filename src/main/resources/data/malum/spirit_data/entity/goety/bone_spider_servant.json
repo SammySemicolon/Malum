@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:bone_spider_servant",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "aerial",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:jungle_zombie_servant",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

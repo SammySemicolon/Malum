@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:zpiglin_servant",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "infernal",
+      "count": 1
+    }
+  ]
+}

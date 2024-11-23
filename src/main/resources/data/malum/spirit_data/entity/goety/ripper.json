@@ -1,0 +1,14 @@
+{
+  "registry_name": "goety:ripper",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

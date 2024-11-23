@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:polar_bear_servant",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "aqueous",
+      "count": 1
+    }
+  ]
+}

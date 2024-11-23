@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:wight",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 3
+    },
+    {
+      "spirit": "eldritch",
+      "count": 3
+    },
+    {
+      "spirit": "wicked",
+      "count": 4
+    }
+  ]
+}

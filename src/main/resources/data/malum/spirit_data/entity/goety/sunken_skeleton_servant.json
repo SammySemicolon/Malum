@@ -1,0 +1,18 @@
+{
+  "registry_name": "goety:sunken_skeleton_servant",
+  "primary_type": "aqueous",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "arcane",
+      "count": 1
+    },
+    {
+      "spirit": "aqueous",
+      "count": 1
+    }
+  ]
+}

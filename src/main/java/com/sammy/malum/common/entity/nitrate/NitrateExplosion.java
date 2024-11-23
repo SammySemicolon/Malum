@@ -22,7 +22,7 @@ public class NitrateExplosion extends Explosion {
         if (getDirectSourceEntity() != null) {
             return DamageTypeHelper.create(getDirectSourceEntity().level(), DamageTypeRegistry.VOODOO, getDirectSourceEntity());
         }
-        return DamageTypeHelper.create(getDirectSourceEntity().level(), DamageTypeRegistry.VOODOO);
+        return super.getDamageSource();
     }
 
     public static void processExplosion(ExplosionEvent.Detonate event) {

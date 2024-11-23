@@ -1,0 +1,10 @@
+{
+  "registry_name": "goety:piker",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 2
+    }
+  ]
+}

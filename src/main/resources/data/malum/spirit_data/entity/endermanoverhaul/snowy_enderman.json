@@ -1,0 +1,22 @@
+{
+  "registry_name": "endermanoverhaul:snowy_enderman",
+  "primary_type": "eldritch",
+  "spirits": [
+    {
+      "spirit": "eldritch",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "aqueous",
+      "count": 1
+    },
+    {
+      "spirit": "arcane",
+      "count": 1
+    }
+  ]
+}

@@ -6,7 +6,6 @@ plugins {
     id("net.neoforged.moddev") version "1.0.17"
 }
 
-
 version = "${property("minecraft_version")}-${property("mod_version")}"
 if (System.getenv("BUILD_NUMBER") != null) {
     version = "${property("minecraft_version")}-${property("mod_version")}.${System.getenv("BUILD_NUMBER")}"

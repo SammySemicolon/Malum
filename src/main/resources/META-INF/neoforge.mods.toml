@@ -10,33 +10,33 @@ authors="${modAuthors}"
 description='''${modDescription}'''
 
 [[dependencies.malum]]
-modId="forge"
-mandatory=true
+modId="neoforge"
+type="required"
 versionRange="${forgeVersionRange}"
 ordering="NONE"
 side="BOTH"
 [[dependencies.malum]]
 modId="minecraft"
-mandatory=true
+type="required"
 versionRange="${minecraftVersionRange}"
 ordering="NONE"
 side="BOTH"
 [[dependencies.malum]]
 modId = "lodestone"
-mandatory = true
+type="required"
 versionRange = "[1.20.1-1.6.4,)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.malum]]
 modId = "curios"
-mandatory = true
+type="required"
 versionRange = "[5.7.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.malum]]
 modId="fusion"
-mandatory=false
+type="optional"
 versionRange="[1.0.0,)"
 ordering="NONE"
 side="CLIENT"

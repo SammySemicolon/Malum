@@ -133,7 +133,7 @@ public class IronsSpellsCompat {
         }
 
         public static void addGluttonySpellPower(GluttonyEffect effect) {
-            effect.addAttributeModifier(AttributeRegistry.SPELL_POWER.get(), "90523925-900e-49bf-b07d-12e2e7350f2d", 0.2f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+            effect.addAttributeModifier(AttributeRegistry.SPELL_POWER.get(), "90523925-900e-49bf-b07d-12e2e7350f2d", 0.1f, AttributeModifier.Operation.MULTIPLY_TOTAL);
         }
 
         public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Attribute, AttributeModifier> map, float amount) {

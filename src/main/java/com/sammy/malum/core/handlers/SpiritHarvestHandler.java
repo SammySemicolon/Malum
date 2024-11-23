@@ -191,7 +191,9 @@ public class SpiritHarvestHandler {
     }
 
     private static void createSpiritEntities(Level level, Collection<ItemStack> spirits, Vec3 position, float totalCount, @Nullable LivingEntity attacker) {
+        boolean noFancySpirits = CommonConfig.NO_FANCY_SPIRITS.getConfigValue();
         if (attacker == null) {
+            noFancySpirits = CommonConfig.NO_FANCY_SPIRITS_FOR_TOTEMS.getConfigValue();
             attacker = level.getNearestPlayer(position.x, position.y, position.z, 8, e -> true);
         }
         final UUID attackerUUID = attacker == null ? null : attacker.getUUID();
@@ -201,7 +203,6 @@ public class SpiritHarvestHandler {
             if (stack.isEmpty()) {
                 continue;
             }
-            boolean noFancySpirits = CommonConfig.NO_FANCY_SPIRITS.getConfigValue();
             for (int j = 0; j < stack.getCount(); j++) {
                 if (noFancySpirits) {
                     ItemEntity itemEntity = new ItemEntity(level, position.x, position.y, position.z, stack);

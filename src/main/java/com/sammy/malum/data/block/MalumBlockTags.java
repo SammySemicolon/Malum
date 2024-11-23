@@ -1,6 +1,7 @@
 package com.sammy.malum.data.block;
 
 import com.sammy.malum.MalumMod;
+import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.block.BlockTagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -36,6 +37,7 @@ public class MalumBlockTags extends LodestoneBlockTagsProvider {
         Set<RegistryObject<Block>> blocks = new HashSet<>(BLOCKS.getEntries());
 
         tag(BlockTagRegistry.RITE_IMMUNE).addTags(BlockTagRegistry.TAINTED_ROCK, BlockTagRegistry.TWISTED_ROCK);
+        tag(BlockTagRegistry.UNCHAINED_RITE_CATALYST).add(BlockRegistry.BLIGHTED_EARTH.get(), BlockRegistry.BLIGHTED_SOIL.get());
 
         tag(BlockTagRegistry.ENDLESS_FLAME);
         tag(BlockTagRegistry.GREATER_AERIAL_WHITELIST);

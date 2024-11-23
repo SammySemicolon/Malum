@@ -8,6 +8,7 @@ import com.sammy.malum.common.packets.particle.curiosities.rite.generic.*;
 import com.sammy.malum.common.recipe.*;
 import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.common.worldevent.*;
+import com.sammy.malum.registry.common.block.BlockTagRegistry;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.item.*;
@@ -47,11 +48,16 @@ public class ArcaneRiteType extends TotemicRiteType {
     public TotemicRiteEffect getCorruptedEffect() {
         return new TotemicRiteEffect(TotemicRiteEffect.MalumRiteEffectCategory.RADIAL_BLOCK_EFFECT) {
 
+            @Override
+            public boolean canAffectBlock(TotemBaseBlockEntity totemBase, BlockState state, BlockPos pos) {
+                return state.is(BlockTagRegistry.UNCHAINED_RITE_CATALYST) && super.canAffectBlock(totemBase, state, pos);
+            }
+
             @SuppressWarnings("ConstantConditions")
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 BlockPos pos = totemBase.getBlockPos();
-                List<BlockPos> nearbyBlocks = getNearbyBlocks(totemBase, BlightedSoilBlock.class).toList();
+                List<BlockPos> nearbyBlocks = getNearbyBlocks(totemBase, Block.class).toList();
                 for (BlockPos p : nearbyBlocks) {
                     BlockPos posToTransmute = p.above();
                     BlockState stateToTransmute = level.getBlockState(posToTransmute);

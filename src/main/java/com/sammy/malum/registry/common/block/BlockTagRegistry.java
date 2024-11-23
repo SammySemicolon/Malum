@@ -37,6 +37,7 @@ public class BlockTagRegistry {
     public static final TagKey<Block> TWISTED_WALLS = malumTag("twisted_rock_walls");
 
     public static final TagKey<Block> RITE_IMMUNE = malumTag("rite_immune");
+    public static final TagKey<Block> UNCHAINED_RITE_CATALYST = malumTag("unchained_rite_catalyst");
 
     public static final TagKey<Block> ENDLESS_FLAME = malumTag("endless_flame");
 

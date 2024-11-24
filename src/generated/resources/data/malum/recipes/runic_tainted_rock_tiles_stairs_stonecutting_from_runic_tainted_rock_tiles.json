@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "malum:runic_tainted_rock_tiles"
-  },
-  "result": "malum:runic_tainted_rock_tiles_stairs"
-}

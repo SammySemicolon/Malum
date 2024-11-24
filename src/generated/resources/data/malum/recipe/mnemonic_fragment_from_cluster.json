@@ -1,0 +1,10 @@
+{
+  "type": "malum:favor_of_the_void",
+  "ingredient": {
+    "item": "malum:cluster_of_brilliance"
+  },
+  "output": {
+    "count": 2,
+    "id": "malum:mnemonic_fragment"
+  }
+}

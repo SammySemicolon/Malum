@@ -1,9 +1,0 @@
-{
-  "type": "malum:favor_of_the_void",
-  "input": {
-    "item": "malum:the_device"
-  },
-  "output": {
-    "item": "malum:the_vessel"
-  }
-}

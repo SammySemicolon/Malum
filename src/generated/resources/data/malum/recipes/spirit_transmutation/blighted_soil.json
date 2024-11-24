@@ -1,9 +1,0 @@
-{
-  "type": "malum:spirit_transmutation",
-  "input": {
-    "item": "minecraft:sand"
-  },
-  "output": {
-    "item": "malum:blighted_soil"
-  }
-}

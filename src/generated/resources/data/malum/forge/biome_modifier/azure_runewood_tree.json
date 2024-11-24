@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#malum:has_azure_runewood",
-  "features": "malum:azure_runewood_tree",
-  "step": "vegetal_decoration"
-}

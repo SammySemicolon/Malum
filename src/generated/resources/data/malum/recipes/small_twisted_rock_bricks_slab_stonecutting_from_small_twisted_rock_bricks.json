@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "malum:small_twisted_rock_bricks"
-  },
-  "result": "malum:small_twisted_rock_bricks_slab"
-}

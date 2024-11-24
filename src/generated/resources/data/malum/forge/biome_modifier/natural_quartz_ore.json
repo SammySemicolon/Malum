@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#malum:has_quartz",
-  "features": "malum:ore_natural_quartz",
-  "step": "underground_ores"
-}

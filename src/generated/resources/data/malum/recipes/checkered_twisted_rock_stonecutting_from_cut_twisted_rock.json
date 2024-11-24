@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "malum:cut_twisted_rock"
-  },
-  "result": "malum:checkered_twisted_rock"
-}

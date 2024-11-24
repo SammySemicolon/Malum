@@ -1,9 +1,0 @@
-{
-  "type": "malum:favor_of_the_void",
-  "input": {
-    "item": "minecraft:black_wool"
-  },
-  "output": {
-    "item": "malum:tophat"
-  }
-}

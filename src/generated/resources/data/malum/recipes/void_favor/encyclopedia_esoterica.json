@@ -1,9 +1,0 @@
-{
-  "type": "malum:favor_of_the_void",
-  "input": {
-    "item": "malum:encyclopedia_arcana"
-  },
-  "output": {
-    "item": "malum:encyclopedia_esoterica"
-  }
-}

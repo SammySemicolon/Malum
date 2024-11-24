@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "malum:smooth_twisted_rock"
-  },
-  "result": "malum:smooth_twisted_rock_slab"
-}

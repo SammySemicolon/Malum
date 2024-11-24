@@ -1,0 +1,11 @@
+{
+  "type": "malum:spirit_transmutation",
+  "group": "soulwood",
+  "ingredient": {
+    "item": "malum:cut_runewood_planks"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:cut_soulwood_planks"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "malum:spirit_transmutation",
+  "group": "",
+  "ingredient": {
+    "item": "minecraft:sand"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:blighted_soil"
+  }
+}

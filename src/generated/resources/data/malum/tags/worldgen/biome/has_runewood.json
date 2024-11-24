@@ -1,10 +1,10 @@
 {
   "remove": [
-    "#forge:is_snowy"
+    "#c:is_snowy"
   ],
   "values": [
-    "#forge:is_plains",
-    "#forge:is_mountain",
+    "#c:is_plains",
+    "#c:is_mountain",
     "#minecraft:is_hill"
   ]
 }

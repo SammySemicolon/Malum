@@ -1,9 +1,0 @@
-{
-  "type": "malum:spirit_transmutation",
-  "input": {
-    "item": "minecraft:deepslate"
-  },
-  "output": {
-    "item": "minecraft:cobbled_deepslate"
-  }
-}

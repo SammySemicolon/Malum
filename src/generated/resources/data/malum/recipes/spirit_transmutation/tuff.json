@@ -1,9 +1,0 @@
-{
-  "type": "malum:spirit_transmutation",
-  "input": {
-    "item": "minecraft:andesite"
-  },
-  "output": {
-    "item": "minecraft:tuff"
-  }
-}

@@ -51,10 +51,8 @@
     },
     "distribution_points": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 3,
-        "min_inclusive": 2
-      }
+      "max_inclusive": 3,
+      "min_inclusive": 2
     },
     "invalid_blocks_threshold": 1,
     "layers": {
@@ -68,18 +66,14 @@
     "noise_multiplier": 0.1,
     "outer_wall_distance": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 5,
-        "min_inclusive": 3
-      }
+      "max_inclusive": 5,
+      "min_inclusive": 3
     },
     "placements_require_layer0_alternate": true,
     "point_offset": {
       "type": "minecraft:uniform",
-      "value": {
-        "max_inclusive": 1,
-        "min_inclusive": 0
-      }
+      "max_inclusive": 1,
+      "min_inclusive": 0
     },
     "use_alternate_layer0_chance": 0.2,
     "use_potential_placements_chance": 0.85

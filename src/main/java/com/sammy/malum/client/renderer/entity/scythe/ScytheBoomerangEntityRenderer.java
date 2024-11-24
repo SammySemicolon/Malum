@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.registry.client.*;

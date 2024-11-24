@@ -1,7 +1,7 @@
 package com.sammy.malum.data.item;
 
+import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.cosmetic.skins.ArmorSkin;
-import com.sammy.malum.common.item.curiosities.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.registry.common.item.ArmorSkinRegistry;
@@ -52,7 +52,7 @@ public class MalumItemModelSmithTypes {
             String affix = i == 1 ? "open" : "loaded";
             ResourceLocation itemTexturePath = provider.getItemTexture(base + "_" + affix);
             provider.getBuilder(BuiltInRegistries.ITEM.getKey(item).getPath()).override()
-                    .predicate(ResourceLocation.withDefaultNamespace(CatalystFlingerItem.STATE), i)
+                    .predicate(MalumMod.malumPath("state"), i)
                     .model(provider.withExistingParent(base + "_" + affix, HANDHELD).texture("layer0", itemTexturePath))
                     .end();
         }
@@ -105,9 +105,9 @@ public class MalumItemModelSmithTypes {
                 continue;
             }
             String itemSuffix = datagenData.getSuffix((LodestoneArmorItem) item);
-            ResourceLocation itemTexturePath = ResourceLocation.withDefaultNamespace(datagenData.itemTexturePrefix + itemSuffix);
+            ResourceLocation itemTexturePath = ResourceLocation.tryParse(datagenData.itemTexturePrefix + itemSuffix);
             provider.getBuilder(BuiltInRegistries.ITEM.getKey(item).getPath()).override()
-                    .predicate(ResourceLocation.withDefaultNamespace(ArmorSkin.MALUM_SKIN_TAG), value)
+                    .predicate(ResourceLocation.parse(ArmorSkin.MALUM_SKIN_TAG), value)
                     .model(provider.withExistingParent(entry.getKey() + "_" + itemSuffix, GENERATED).texture("layer0", itemTexturePath))
                     .end();
         }

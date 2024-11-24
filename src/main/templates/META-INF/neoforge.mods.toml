@@ -1,0 +1,42 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="malum"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
+
+[[dependencies.malum]]
+modId="neoforge"
+type="required"
+versionRange="${neo_version_range}"
+ordering="NONE"
+side="BOTH"
+[[dependencies.malum]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"
+[[dependencies.malum]]
+modId = "lodestone"
+type="required"
+versionRange = "[1.7.0,)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.malum]]
+modId = "curios"
+type="required"
+versionRange = "[9,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.malum]]
+modId="fusion"
+type="optional"
+versionRange="[1.0.0,)"
+ordering="NONE"
+side="CLIENT"

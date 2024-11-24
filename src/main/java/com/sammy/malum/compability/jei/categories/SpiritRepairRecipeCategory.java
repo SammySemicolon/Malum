@@ -1,6 +1,5 @@
 package com.sammy.malum.compability.jei.categories;
 
-import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.screen.codex.ArcanaCodexHelper;
 import com.sammy.malum.common.recipe.SpiritRepairRecipe;
 import com.sammy.malum.compability.jei.JEIHandler;
@@ -23,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +37,7 @@ public class SpiritRepairRecipeCategory implements IRecipeCategory<SpiritRepairR
 
     public SpiritRepairRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createBlankDrawable(142, 185);
-        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MALUM, "textures/gui/spirit_repair_jei.png"), 0, 0, 142, 183);
+        overlay = guiHelper.createDrawable(malumPath("textures/gui/spirit_repair_jei.png"), 0, 0, 142, 183);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.REPAIR_PYLON.get()));
     }
 
@@ -74,14 +74,14 @@ public class SpiritRepairRecipeCategory implements IRecipeCategory<SpiritRepairR
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SpiritRepairRecipe recipe, IFocusGroup focuses) {
         List<ItemStack> repaired = recipe.inputs.stream().map(Item::getDefaultInstance).collect(Collectors.toList());
-        List<ItemStack> repairIngredient = recipe.repairMaterial.getStacks();
+        List<ItemStack> repairIngredient = Arrays.stream(recipe.repairMaterial.getItems()).toList();
 
         List<ItemStack> damaged = repaired.stream()
                 .map(ItemStack::copy)
                 .peek(s -> s.setDamageValue((int) (s.getMaxDamage() * recipe.durabilityPercentage)))
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        JEIHandler.addItemsToJei(builder, RecipeIngredientRole.INPUT, 62, 13, false, recipe.spirits);
+        JEIHandler.addCustomIngredientToJei(builder, RecipeIngredientRole.INPUT, 62, 13, false, recipe.spirits);
 
         IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 82, 57)
                 .addItemStacks(damaged);
@@ -90,7 +90,7 @@ public class SpiritRepairRecipeCategory implements IRecipeCategory<SpiritRepairR
                 .addItemStacks(repairIngredient);
 
         IRecipeSlotBuilder output = builder.addSlot(RecipeIngredientRole.OUTPUT, 63, 124)
-                .addItemStacks(repaired.stream().map(SpiritRepairRecipe::getRepairRecipeOutput).collect(Collectors.toList()));
+                .addItemStacks(repaired);
 
         builder.createFocusLink(input, output);
     }

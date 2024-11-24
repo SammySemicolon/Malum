@@ -27,7 +27,7 @@ public class HiddenRecipeSet<T> {
 
 	public void scanAndHideRecipes(IRecipeManager manager, IFocusFactory focusFactory, Collection<TagKey<Item>> nowHidden) {
 		List<IFocus<ItemStack>> foci = nowHidden.stream()
-				.flatMap(tag -> BuiltInRegistries.ITEM.getTags().map((d) -> d.getSecond().contents())) //TODO: AT this thing
+				.flatMap(tag -> BuiltInRegistries.ITEM.getTags().map((d) -> d.getSecond().contents)) //TODO: AT this thing
 				.flatMap(Collection::stream)
 				.map(Holder::value)
 				.distinct()

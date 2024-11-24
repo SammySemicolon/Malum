@@ -8,7 +8,6 @@ import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
 import net.neoforged.api.distmarker.*;
-import team.lodestar.lodestone.helpers.*;
 
 import java.util.function.*;
 
@@ -20,7 +19,7 @@ public class PylonRepairParticleEffect extends ParticleEffectType {
 
     public static NBTEffectData createData(BlockPos holderPos) {
         NBTEffectData effectData = new NBTEffectData(new CompoundTag());
-        BlockHelper.saveBlockPos(effectData.compoundTag, holderPos);
+        effectData.compoundTag.putLong("pos", holderPos.asLong());
         return effectData;
     }
 
@@ -31,7 +30,7 @@ public class PylonRepairParticleEffect extends ParticleEffectType {
             if (!(level.getBlockEntity(positionData.getAsBlockPos()) instanceof RepairPylonCoreBlockEntity pylon)) {
                 return;
             }
-            if (!(level.getBlockEntity(BlockHelper.loadBlockPos(nbtData.compoundTag)) instanceof IMalumSpecialItemAccessPoint holder)) {
+            if (!(level.getBlockEntity(BlockPos.of(nbtData.compoundTag.getLong("pos"))) instanceof IMalumSpecialItemAccessPoint holder)) {
                 return;
             }
             RepairPylonParticleEffects.repairItemParticles(pylon, holder, colorData);

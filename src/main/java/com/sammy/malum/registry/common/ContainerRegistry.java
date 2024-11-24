@@ -1,20 +1,14 @@
 package com.sammy.malum.registry.common;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.client.screen.container.SpiritPouchContainerScreen;
 import com.sammy.malum.client.screen.container.WeaversWorkbenchContainerScreen;
-import com.sammy.malum.common.container.SpiritPouchContainer;
 import com.sammy.malum.common.container.WeaversWorkbenchContainer;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.flag.*;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;

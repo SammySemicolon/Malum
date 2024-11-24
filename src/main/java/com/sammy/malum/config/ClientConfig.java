@@ -4,7 +4,6 @@ package com.sammy.malum.config;
 import com.sammy.malum.client.screen.codex.ArcanaCodexHelper;
 import net.neoforged.fml.config.IConfigSpec;
 import net.neoforged.neoforge.common.ModConfigSpec;
-import net.neoforged.neoforge.common.NeoForgeConfig;
 import team.lodestar.lodestone.systems.config.LodestoneConfig;
 
 import static com.sammy.malum.MalumMod.MALUM;

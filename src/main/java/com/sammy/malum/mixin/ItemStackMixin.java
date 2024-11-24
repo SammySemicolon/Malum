@@ -2,18 +2,14 @@ package com.sammy.malum.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
-import com.sammy.malum.config.CommonConfig;
 import com.sammy.malum.registry.common.*;
-import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.core.Holder;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.minecraft.world.item.Item.BASE_ATTACK_DAMAGE_ID;
 

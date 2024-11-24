@@ -18,8 +18,6 @@ import team.lodestar.lodestone.systems.particle.world.options.*;
 import java.awt.*;
 import java.util.function.*;
 
-import static com.sammy.malum.visual_effects.SpiritLightSpecs.spiritLightSpecs;
-
 public class SlashParticleEffects {
 
     public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, MalumSpiritType spiritType) {

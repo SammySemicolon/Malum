@@ -1,20 +1,8 @@
 package com.sammy.malum.common.container;
 
-import com.sammy.malum.common.item.curiosities.SpiritPouchItem;
-import com.sammy.malum.common.item.spirit.SpiritShardItem;
-import com.sammy.malum.registry.common.ContainerRegistry;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.*;
-
-import javax.annotation.Nonnull;
 
 public abstract class SpiritPouchContainer extends AbstractContainerMenu {
     protected SpiritPouchContainer(@Nullable MenuType<?> menuType, int containerId) {

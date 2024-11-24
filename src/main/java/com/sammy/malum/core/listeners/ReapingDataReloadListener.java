@@ -1,6 +1,7 @@
 package com.sammy.malum.core.listeners;
 
 import com.google.gson.*;
+import com.mojang.serialization.JsonOps;
 import com.sammy.malum.MalumMod;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -49,7 +50,7 @@ public class ReapingDataReloadListener extends SimpleJsonResourceReloadListener 
                     MalumMod.LOGGER.info("Entity with registry name: " + name + " lacks a reaping ingredient. Skipping drops entry.");
                     continue;
                 }
-                Ingredient dropIngredient = Ingredient.fromJson(dropObject.getAsJsonObject("ingredient"));
+                Ingredient dropIngredient = Ingredient.CODEC.parse(JsonOps.INSTANCE, dropObject.getAsJsonObject("ingredient")).getOrThrow(JsonParseException::new);
                 float chance = dropObject.getAsJsonPrimitive("chance").getAsFloat();
                 int min = dropObject.getAsJsonPrimitive("min").getAsInt();
                 int max = dropObject.getAsJsonPrimitive("max").getAsInt();

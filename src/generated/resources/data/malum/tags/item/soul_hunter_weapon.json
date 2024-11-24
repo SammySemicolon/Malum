@@ -1,0 +1,50 @@
+{
+  "values": [
+    "#malum:scythe",
+    "#malum:staff",
+    "malum:tyrving",
+    "malum:weight_of_worlds",
+    "malum:soul_stained_steel_axe",
+    "malum:soul_stained_steel_pickaxe",
+    "malum:soul_stained_steel_shovel",
+    "malum:soul_stained_steel_sword",
+    "malum:soul_stained_steel_hoe",
+    "malum:soul_stained_steel_knife",
+    {
+      "id": "irons_spellbooks:graybeard_staff",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:artificer_cane",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:lightning_rod",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:ice_staff",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:blood_staff",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:magehunter",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:keeper_flamberge",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:spellbreaker",
+      "required": false
+    },
+    {
+      "id": "irons_spellbooks:amethyst_rapier",
+      "required": false
+    }
+  ]
+}

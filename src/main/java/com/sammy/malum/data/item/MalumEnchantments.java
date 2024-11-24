@@ -75,4 +75,9 @@ public class MalumEnchantments extends DatapackBuiltinEntriesProvider {
     static ResourceKey<Enchantment> rKey(String id) {
         return ResourceKey.create(Registries.ENCHANTMENT, MalumMod.malumPath(id));
     }
+
+    @Override
+    public String getName() {
+        return "Malum Enchantments";
+    }
 }

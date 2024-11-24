@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.common.capability.*;
 import com.sammy.malum.registry.common.*;
-import net.minecraft.nbt.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;

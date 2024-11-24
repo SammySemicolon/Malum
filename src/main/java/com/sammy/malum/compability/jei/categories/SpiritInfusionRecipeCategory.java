@@ -1,6 +1,5 @@
 package com.sammy.malum.compability.jei.categories;
 
-import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.screen.codex.ArcanaCodexHelper;
 import com.sammy.malum.common.recipe.spirit.infusion.SpiritInfusionRecipe;
 import com.sammy.malum.compability.jei.JEIHandler;
@@ -21,6 +20,8 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
+import java.util.Arrays;
+
 import static com.sammy.malum.MalumMod.malumPath;
 
 public class SpiritInfusionRecipeCategory implements IRecipeCategory<SpiritInfusionRecipe> {
@@ -32,7 +33,7 @@ public class SpiritInfusionRecipeCategory implements IRecipeCategory<SpiritInfus
 
     public SpiritInfusionRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createBlankDrawable(142, 185);
-        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MALUM, "textures/gui/spirit_infusion_jei.png"), 0, 0, 142, 183);
+        overlay = guiHelper.createDrawable(malumPath("textures/gui/spirit_infusion_jei.png"), 0, 0, 142, 183);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.SPIRIT_ALTAR.get()));
     }
 
@@ -74,11 +75,11 @@ public class SpiritInfusionRecipeCategory implements IRecipeCategory<SpiritInfus
     public void setRecipe(IRecipeLayoutBuilder builder, SpiritInfusionRecipe recipe, IFocusGroup focuses) {
         int spiritOffset = recipe.spirits.size() > 5 ? (recipe.spirits.size()-5)*10 : 0;
         int itemOffset = recipe.extraIngredients.size() > 5 ? (recipe.extraIngredients.size()-5)*10 : 0;
-        JEIHandler.addItemsToJei(builder, RecipeIngredientRole.INPUT, 20, 49+spiritOffset, true, recipe.spirits);
-        JEIHandler.addItemsToJei(builder, RecipeIngredientRole.INPUT, 104, 49+itemOffset, true, recipe.extraIngredients);
+        JEIHandler.addCustomIngredientToJei(builder, RecipeIngredientRole.INPUT, 20, 49+spiritOffset, true, recipe.spirits);
+        JEIHandler.addSizedIngredientsToJei(builder, RecipeIngredientRole.INPUT, 104, 49+itemOffset, true, recipe.extraIngredients);
 
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 57)
-                .addItemStacks(recipe.input.getStacks());
+                .addItemStacks(Arrays.stream(recipe.ingredient.getItems()).toList());
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 63, 124)
                 .addItemStack(recipe.output);

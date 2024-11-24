@@ -19,7 +19,6 @@ import team.lodestar.lodestone.systems.particle.data.spin.SpinParticleData;
 
 import java.awt.*;
 import java.util.List;
-import java.util.function.Supplier;
 
 public class SpiritRiteActivationEffectPacket extends SpiritBasedBlockParticleEffectPacket {
 

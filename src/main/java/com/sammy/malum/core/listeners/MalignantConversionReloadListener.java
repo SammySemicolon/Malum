@@ -50,7 +50,7 @@ public class MalignantConversionReloadListener extends SimpleJsonResourceReloadL
                 double consumptionRatio = object.has("ratio") ? object.getAsJsonPrimitive("ratio").getAsDouble() : 1;
                 boolean ignoreBaseValue = object.has("ignore_base_value") && object.getAsJsonPrimitive("ignore_base_value").getAsBoolean();
                 JsonArray targetAttributes = object.getAsJsonArray("target_attributes");
-                List<Pair<Attribute, Double>> attributeList = new ArrayList<>();
+                List<Pair<Holder<Attribute>, Double>> attributeList = new ArrayList<>();
                 for (JsonElement attribute : targetAttributes) {
                     JsonObject attributeObject = attribute.getAsJsonObject();
                     ResourceLocation attributeName = ResourceLocation.parse(attributeObject.getAsJsonPrimitive("attribute").getAsString());
@@ -58,9 +58,15 @@ public class MalignantConversionReloadListener extends SimpleJsonResourceReloadL
                         continue;
                     }
                     double ratio = attributeObject.getAsJsonPrimitive("ratio").getAsDouble();
-                    attributeList.add(Pair.of(BuiltInRegistries.ATTRIBUTE.get(attributeName), ratio));
+                    ResourceKey<Attribute> attributeKey = ResourceKey.create(Registries.ATTRIBUTE, attributeName);
+                    var attributeHolder = BuiltInRegistries.ATTRIBUTE.getHolder(attributeKey);
+                    attributeHolder.ifPresent(attributeReference -> attributeList.add(Pair.of(attributeReference, ratio)));
                 }
-                CONVERSION_DATA.put(sourceAttribute, new MalignantConversionData(BuiltInRegistries.ATTRIBUTE.get(sourceAttribute), consumptionRatio, ignoreBaseValue, attributeList));
+                ResourceKey<Attribute> sourceKey = ResourceKey.create(Registries.ATTRIBUTE, sourceAttribute);
+                var attributeHolder = BuiltInRegistries.ATTRIBUTE.getHolder(sourceAttribute);
+                attributeHolder.ifPresent(attributeReference -> {
+                    CONVERSION_DATA.put(sourceAttribute, new MalignantConversionData(BuiltInRegistries.ATTRIBUTE.getHolderOrThrow(sourceKey), consumptionRatio, ignoreBaseValue, attributeList));
+                });
             }
         }
     }

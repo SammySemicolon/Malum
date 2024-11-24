@@ -49,11 +49,7 @@ import java.awt.*;
 
 import static com.sammy.malum.MalumMod.*;
 import static com.sammy.malum.registry.common.block.BlockTagRegistry.*;
-import static net.minecraft.tags.BlockTags.FENCES;
-import static net.minecraft.tags.BlockTags.FENCE_GATES;
 import static net.minecraft.tags.BlockTags.*;
-import static net.minecraft.world.level.block.state.properties.BlockSetType.PressurePlateSensitivity.EVERYTHING;
-import static net.minecraft.world.level.block.state.properties.BlockSetType.PressurePlateSensitivity.MOBS;
 import static net.neoforged.neoforge.common.Tags.Blocks.FENCE_GATES_WOODEN;
 import static net.neoforged.neoforge.common.Tags.Blocks.STORAGE_BLOCKS;
 

@@ -2,7 +2,6 @@ package com.sammy.malum.core.systems.spirit;
 
 import com.google.gson.*;
 import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
 import com.sammy.malum.*;
 import com.sammy.malum.common.block.curiosities.mana_mote.*;
 import com.sammy.malum.common.item.spirit.*;
@@ -13,17 +12,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.common.crafting.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.particle.data.color.*;
 
 import java.awt.*;
-import java.util.*;
 import java.util.function.*;
 
 public class MalumSpiritType {

@@ -94,7 +94,7 @@ public class TouchOfDarknessHandler {
         return BlockEntityHelper.getBlockEntitiesStream(VoidConduitBlockEntity.class, livingEntity.level(), livingEntity.blockPosition(), 8).findFirst();
     }
 
-    public static void entityTick(EntityTickEvent event) {
+    public static void entityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity livingEntity) {
             Level level = livingEntity.level();
             TouchOfDarknessHandler handler = MalumLivingEntityDataCapability.getCapability(livingEntity).touchOfDarknessHandler;

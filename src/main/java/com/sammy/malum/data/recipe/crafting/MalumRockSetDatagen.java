@@ -9,8 +9,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.*;
 
-import java.util.function.*;
-
 import static com.sammy.malum.data.recipe.MalumVanillaRecipes.*;
 import static net.minecraft.data.recipes.RecipeBuilder.*;
 import static net.minecraft.data.recipes.ShapedRecipeBuilder.*;

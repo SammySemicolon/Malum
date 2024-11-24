@@ -9,7 +9,6 @@ import team.lodestar.lodestone.systems.particle.world.*;
 import team.lodestar.lodestone.systems.particle.world.behaviors.*;
 import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 
-import java.lang.*;
 import java.lang.Math;
 
 public class PointyDirectionalParticleBehavior implements LodestoneParticleBehavior {

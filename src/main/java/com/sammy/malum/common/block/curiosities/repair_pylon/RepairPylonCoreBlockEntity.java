@@ -1,6 +1,5 @@
 package com.sammy.malum.common.block.curiosities.repair_pylon;
 
-import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.block.*;
 import com.sammy.malum.common.block.storage.*;
 import com.sammy.malum.common.item.spirit.*;
@@ -36,7 +35,6 @@ import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.multiblock.*;
 
 import javax.annotation.Nullable;
-import javax.annotation.*;
 import java.util.*;
 import java.util.function.*;
 

@@ -1,18 +1,18 @@
 package com.sammy.malum.common.item.curiosities;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.registry.common.item.*;
-import net.minecraft.nbt.*;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 
-import java.util.*;
 
 public class TemporarilyDisabledItem extends Item {
-
-    public static final String DISABLED = "malum:disabled";
 
     public TemporarilyDisabledItem(Properties pProperties) {
         super(pProperties);
@@ -22,14 +22,12 @@ public class TemporarilyDisabledItem extends Item {
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if (pEntity instanceof ServerPlayer player) {
-            if (pStack.hasTag()) {
-                CompoundTag tag = pStack.getTag();
-                if (tag.contains(DISABLED)) {
-                    long time = tag.getLong(DISABLED);
-                    if (pLevel.getGameTime() >= time) {
-                        enable(player, pSlotId);
-                        return;
-                    }
+            var disabled = pStack.get(DataComponentRegistry.DISABLED);
+            if (disabled != null) {
+                long time = disabled.time();
+                if (pLevel.getGameTime() >= time) {
+                    enable(player, pSlotId);
+                    return;
                 }
             }
         }
@@ -42,11 +40,7 @@ public class TemporarilyDisabledItem extends Item {
     public static void disable(ServerPlayer player, int slot, Item disabledItemType) {
         var inventory = player.getInventory();
         var disabled = disabledItemType.getDefaultInstance();
-        var disabledTag = disabled.getOrCreateTag();
-        var itemTag = new CompoundTag();
-        disabledTag.putLong(DISABLED, player.level().getGameTime() + 300);
-        inventory.getItem(slot).save(itemTag);
-        disabledTag.put("item", itemTag);
+        disabled.set(DataComponentRegistry.DISABLED, new Disabled(inventory.getItem(slot), player.level().getGameTime() + 300));
         inventory.setItem(slot, disabled);
     }
 
@@ -54,12 +48,26 @@ public class TemporarilyDisabledItem extends Item {
     public static void enable(ServerPlayer player, int slot) {
         var inventory = player.getInventory();
         var disabledItem = inventory.getItem(slot);
-        if (disabledItem.hasTag()) {
-            var tag = disabledItem.getTag();
-            if (tag.contains("item")) {
-                var original = ItemStack.of(tag.getCompound("item"));
+        var disabled = disabledItem.get(DataComponentRegistry.DISABLED);
+        if (disabled != null) {
+            var original = disabled.item();
+            if (!original.isEmpty()) {
                 inventory.setItem(slot, original);
             }
         }
+    }
+    public record Disabled(ItemStack item, long time) {
+        public static Codec<TemporarilyDisabledItem.Disabled> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ItemStack.OPTIONAL_CODEC.fieldOf("item").forGetter(TemporarilyDisabledItem.Disabled::item),
+                Codec.LONG.fieldOf("time").forGetter(TemporarilyDisabledItem.Disabled::time)
+        ).apply(instance, TemporarilyDisabledItem.Disabled::new));
+
+        public static StreamCodec<RegistryFriendlyByteBuf, TemporarilyDisabledItem.Disabled> STREAM_CODEC = StreamCodec.composite(
+                ItemStack.OPTIONAL_STREAM_CODEC,
+                p -> p.item,
+                ByteBufCodecs.VAR_LONG,
+                p -> p.time,
+                TemporarilyDisabledItem.Disabled::new
+        );
     }
 }

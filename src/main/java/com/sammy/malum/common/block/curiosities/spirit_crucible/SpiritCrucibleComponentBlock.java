@@ -2,7 +2,6 @@ package com.sammy.malum.common.block.curiosities.spirit_crucible;
 
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -15,14 +14,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 import team.lodestar.lodestone.systems.multiblock.MultiBlockComponentEntity;
 import team.lodestar.lodestone.systems.multiblock.MultiblockComponentBlock;
-
-import java.util.Optional;
 
 public class SpiritCrucibleComponentBlock extends MultiblockComponentBlock {
     public static final VoxelShape SHAPE = makeShape();

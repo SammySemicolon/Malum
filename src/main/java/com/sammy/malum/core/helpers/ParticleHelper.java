@@ -8,9 +8,7 @@ import com.sammy.malum.visual_effects.networked.slash.*;
 import net.minecraft.server.level.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import team.lodestar.lodestone.helpers.*;
 
 public class ParticleHelper {
 

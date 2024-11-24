@@ -30,6 +30,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.IRuntimeRegistration;
 import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
@@ -37,6 +38,8 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.crafting.ICustomIngredient;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.apache.commons.compress.utils.Lists;
 
 import javax.annotation.Nonnull;
@@ -57,7 +60,6 @@ public class JEIHandler implements IModPlugin {
     public static final RecipeType<RunicWorkbenchRecipe> RUNEWORKING = new RecipeType<>(RuneworkingRecipeCategory.UID, RunicWorkbenchRecipe.class);
 
     public JEIHandler() {
-        HiddenTagRegistry.blankOutHidingTags();
     }
 
     public static void addItemsToJei(IRecipeLayoutBuilder iRecipeLayout, RecipeIngredientRole role, int left, int top, boolean vertical, List<? extends Ingredient> components) {
@@ -73,6 +75,41 @@ public class JEIHandler implements IModPlugin {
             int oTop = top + 1 + (vertical ? offset : 0);
             iRecipeLayout.addSlot(role, oLeft, oTop).addItemStacks(List.of(components.get(i).getItems()));
         }
+    }
+
+    public static void addCustomIngredientToJei(IRecipeLayoutBuilder iRecipeLayout, RecipeIngredientRole role, int left, int top, boolean vertical, List<? extends ICustomIngredient> components) {
+        int slots = components.size();
+        if (vertical) {
+            top -= 10 * (slots - 1);
+        } else {
+            left -= 10 * (slots - 1);
+        }
+        for (int i = 0; i < slots; i++) {
+            int offset = i * 20;
+            int oLeft = left + 1 + (vertical ? 0 : offset);
+            int oTop = top + 1 + (vertical ? offset : 0);
+            iRecipeLayout.addSlot(role, oLeft, oTop).addItemStacks(components.get(i).getItems().toList());
+        }
+    }
+
+    public static void addSizedIngredientsToJei(IRecipeLayoutBuilder iRecipeLayout, RecipeIngredientRole role, int left, int top, boolean vertical, List<SizedIngredient> components) {
+        int slots = components.size();
+        if (vertical) {
+            top -= 10 * (slots - 1);
+        } else {
+            left -= 10 * (slots - 1);
+        }
+        for (int i = 0; i < slots; i++) {
+            int offset = i * 20;
+            int oLeft = left + 1 + (vertical ? 0 : offset);
+            int oTop = top + 1 + (vertical ? offset : 0);
+            iRecipeLayout.addSlot(role, oLeft, oTop).addItemStacks(List.of(components.get(i).getItems()));
+        }
+    }
+
+    @Override
+    public void registerRuntime(IRuntimeRegistration registration) {
+        HiddenTagRegistry.blankOutHidingTags();
     }
 
     @Override

@@ -8,13 +8,10 @@ import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.multiplayer.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.Level;
 
-import java.util.*;
 import java.util.function.Predicate;
 
 import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.*;

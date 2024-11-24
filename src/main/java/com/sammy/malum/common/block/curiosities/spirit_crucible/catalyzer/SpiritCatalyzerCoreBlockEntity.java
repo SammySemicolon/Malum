@@ -2,7 +2,6 @@ package com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer;
 
 import com.sammy.malum.common.block.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
-import com.sammy.malum.common.item.BlazingQuartzItem;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.systems.spirit.*;
@@ -21,9 +20,7 @@ import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
-import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.items.IItemHandler;
-import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.multiblock.*;

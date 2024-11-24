@@ -1,12 +1,9 @@
 package com.sammy.malum.common.block.curiosities.ritual_plinth;
 
-import com.sammy.malum.common.block.curiosities.spirit_altar.*;
 import net.minecraft.core.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.shapes.*;
-import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import team.lodestar.lodestone.systems.block.*;
 

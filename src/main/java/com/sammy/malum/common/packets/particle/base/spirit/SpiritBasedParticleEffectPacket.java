@@ -1,7 +1,6 @@
 package com.sammy.malum.common.packets.particle.base.spirit;
 
 import com.sammy.malum.common.packets.particle.base.PositionBasedParticleEffectPacket;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.phys.Vec3;
@@ -11,7 +10,6 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 public abstract class SpiritBasedParticleEffectPacket extends PositionBasedParticleEffectPacket {
     protected final List<String> spirits;

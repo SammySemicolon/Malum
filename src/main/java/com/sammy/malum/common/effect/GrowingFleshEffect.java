@@ -2,7 +2,6 @@ package com.sammy.malum.common.effect;
 
 import com.sammy.malum.*;
 import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import team.lodestar.lodestone.helpers.*;
 

@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
-import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.systems.multiblock.*;
 

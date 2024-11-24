@@ -8,7 +8,6 @@ import com.sammy.malum.common.recipe.spirit.transmutation.*;
 import com.sammy.malum.common.recipe.void_favor.*;
 import com.sammy.malum.core.systems.recipe.*;
 import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
 import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.registries.*;
 

@@ -9,8 +9,6 @@ import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
-import java.util.function.*;
-
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 
 public class MalumSpiritRepairRecipes implements IConditionBuilder {

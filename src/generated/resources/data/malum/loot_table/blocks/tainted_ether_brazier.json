@@ -1,0 +1,47 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_components",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_custom_data",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "firstColor",
+                  "target": "display.firstColor"
+                },
+                {
+                  "op": "replace",
+                  "source": "secondColor",
+                  "target": "display.secondColor"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "malum:tainted_ether_brazier"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "malum:blocks/tainted_ether_brazier"
+}

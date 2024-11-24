@@ -3,7 +3,7 @@ import java.util.*
 plugins {
     id("java-library")
     id("maven-publish")
-    id("net.neoforged.moddev") version "1.0.17"
+    id("net.neoforged.moddev") version "2.0.30-beta"
 }
 
 version = "${property("minecraft_version")}-${property("mod_version")}"
@@ -105,6 +105,10 @@ repositories {
         url = uri("https://maven.blamejared.com/")
     }
     maven {
+        name = "KosmX's maven"
+        url = uri("https://maven.kosmx.dev/")
+    }
+    maven {
         name = "Curse Maven"
         url = uri("https://cursemaven.com")
         content {
@@ -154,17 +158,19 @@ dependencies {
 //    compileOnly(("se.mickelus.mutil:mutil:${property("mutil_version")}"))
 
     // FD Optional Dependency
-    compileOnly(("curse.maven:farmers-delight-398521:5566383"))
+    compileOnly(("curse.maven:farmers-delight-398521:5878217"))
 
     // Iron's Spellbooks Optional Dependency
-//    runtimeOnly(("software.bernie.geckolib:geckolib-neoforge-${property("minecraft_version")}:${property("gecko_lib_version")}"))
-//    runtimeOnly(("dev.kosmx.player-anim:player-animation-lib-forge:${property("player_animator_version")}"))
+    runtimeOnly(("software.bernie.geckolib:geckolib-neoforge-${property("minecraft_version")}:${property("gecko_lib_version")}"))
+    runtimeOnly(("dev.kosmx.player-anim:player-animation-lib-forge:${property("player_animator_version")}"))
     implementation(("curse.maven:irons-spells-n-spellbooks-855414:5863590"))
 
-    runtimeOnly(("curse.maven:jeed-532286:5634312"))
-    runtimeOnly(("curse.maven:spark-361579:4587309"))
-    runtimeOnly(("curse.maven:attributefix-280510:4911084"))
-    runtimeOnly(("curse.maven:overloaded-armor-bar-314002:4631133"))
+    runtimeOnly(("curse.maven:jeed-532286:5693385"))
+    runtimeOnly(("curse.maven:spark-361579:5759671"))
+    runtimeOnly(("curse.maven:attributefix-280510:5824104"))
+    runtimeOnly(("curse.maven:bookshelf-228525:5824127")) //Required for AttributeFix
+    runtimeOnly(("curse.maven:prickle-1023259:5836410")) //Required for AttributeFix
+    runtimeOnly(("curse.maven:overloaded-armor-bar-314002:5537850"))
 }
 
 val generateModMetadata by tasks.registering(ProcessResources::class) {
@@ -198,7 +204,7 @@ sourceSets["main"].resources.srcDir(generateModMetadata)
 neoForge.ideSyncTask(generateModMetadata)
 
 java {
-    withJavadocJar()
+//    withJavadocJar()
     withSourcesJar()
 }
 

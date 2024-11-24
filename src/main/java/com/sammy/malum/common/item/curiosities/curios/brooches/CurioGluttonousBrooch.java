@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class CurioGluttonousBrooch extends MalumCurioItem {

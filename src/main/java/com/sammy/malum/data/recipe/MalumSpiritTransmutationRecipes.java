@@ -3,7 +3,6 @@ package com.sammy.malum.data.recipe;
 import com.mojang.datafixers.util.*;
 import com.sammy.malum.data.recipe.builder.*;
 import net.minecraft.data.recipes.*;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.registries.DeferredHolder;
 

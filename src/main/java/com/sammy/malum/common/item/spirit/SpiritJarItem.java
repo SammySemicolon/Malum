@@ -2,20 +2,16 @@ package com.sammy.malum.common.item.spirit;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sammy.malum.client.renderer.item.SpiritJarItemRenderer;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.List;
 
@@ -49,15 +45,6 @@ public class SpiritJarItem extends BlockItem {
             pTooltip.add(spirit.getSpiritJarCounterComponent(contents.count()));
         }
     }
-
-    public static IClientItemExtensions CUSTOM_RENDERER = new IClientItemExtensions() {
-        BlockEntityWithoutLevelRenderer renderer = new SpiritJarItemRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
-
-        @Override
-        public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-            return this.renderer;
-        }
-    };
 
     public record Contents(String spirit, int count) {
         public static Codec<Contents> CODEC = RecordCodecBuilder.create(instance -> instance.group(

@@ -15,7 +15,6 @@ import team.lodestar.lodestone.helpers.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.sammy.malum.registry.common.PacketRegistry.MALUM_CHANNEL;
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 
 public class EldritchWickedRiteType extends TotemicRiteType {

@@ -6,6 +6,7 @@ import com.sammy.malum.config.CommonConfig;
 import com.sammy.malum.core.listeners.ReapingDataReloadListener;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -33,7 +34,7 @@ public class EsotericReapingHandler {
             attacker = target.getLastHurtByMob();
         }
         if (CommonConfig.AWARD_CODEX_ON_KILL.getConfigValue()) {
-            if (target.getMobType().equals(MobType.UNDEAD) && attacker instanceof Player player) {
+            if (target.getType().is(EntityTypeTags.UNDEAD) && attacker instanceof Player player) {
                 MalumPlayerDataCapability.getCapabilityOptional(player).ifPresent(c -> {
                     if (!c.obtainedEncyclopedia) {
                         if (player.getRandom().nextFloat() < 0.1f) {

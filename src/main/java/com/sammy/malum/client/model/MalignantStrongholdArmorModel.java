@@ -9,17 +9,11 @@ import com.mojang.blaze3d.vertex.*;
 import com.sammy.malum.*;
 import com.sammy.malum.common.item.curiosities.curios.runes.*;
 import com.sammy.malum.core.systems.spirit.*;
-import com.sammy.malum.registry.client.*;
-import net.minecraft.client.*;
 import net.minecraft.client.model.*;
 import net.minecraft.client.model.geom.*;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.phys.*;
-import team.lodestar.lodestone.handlers.*;
-import team.lodestar.lodestone.helpers.*;
-import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.model.*;
 import team.lodestar.lodestone.systems.rendering.rendeertype.*;
@@ -27,7 +21,6 @@ import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
-import java.util.stream.*;
 
 public class MalignantStrongholdArmorModel extends LodestoneArmorModel {
     public static final ModelLayerLocation LAYER = new ModelLayerLocation(MalumMod.malumPath("malignant_lead_armor"), "main");

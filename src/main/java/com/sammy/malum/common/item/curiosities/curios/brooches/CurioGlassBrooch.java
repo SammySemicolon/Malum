@@ -9,8 +9,6 @@ import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import top.theillusivec4.curios.api.*;
 
-import java.util.*;
-
 public class CurioGlassBrooch extends MalumCurioItem {
 
     public static final ResourceLocation GLASS_BROOCH_RUNE = MalumMod.malumPath("glass_brooch_rune");

@@ -11,8 +11,6 @@ import com.sammy.malum.common.recipe.vanilla.NodeCookingSerializer;
 import com.sammy.malum.common.recipe.void_favor.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCookingSerializer;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 

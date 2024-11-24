@@ -2,10 +2,8 @@ package com.sammy.malum.common.effect.aura;
 
 import com.sammy.malum.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
-import net.minecraft.resources.*;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import team.lodestar.lodestone.helpers.ColorHelper;

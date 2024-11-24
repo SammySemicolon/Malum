@@ -2,15 +2,10 @@ package com.sammy.malum.core.handlers.enchantment;
 
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
-import com.sammy.malum.common.item.curiosities.weapons.staff.*;
-import com.sammy.malum.common.packets.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
+import com.sammy.malum.mixin.AccessorLivingEntity;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
 import net.minecraft.stats.*;
 import net.minecraft.util.*;
@@ -20,19 +15,11 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.bus.api.*;
-import net.neoforged.fml.common.*;
 import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.network.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
-import team.lodestar.lodestone.registry.common.tag.*;
-
-import java.util.*;
 
 import static com.sammy.malum.registry.common.item.EnchantmentRegistry.getEnchantmentLevel;
 
@@ -43,7 +30,7 @@ public class AscensionHandler {
         player.resetFallDistance();
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
-            player.setDeltaMovement(motion.x, player.getJumpPower() * 2f, motion.z);
+            player.setDeltaMovement(motion.x, ((AccessorLivingEntity)player).malum$getJumpPower() * 2f, motion.z);
             if (player.isSprinting()) {
                 float f = player.getYRot() * 0.017453292F;
                 float x = -Mth.sin(f);

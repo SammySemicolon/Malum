@@ -1,0 +1,11 @@
+{
+  "type": "malum:spirit_transmutation",
+  "group": "",
+  "ingredient": {
+    "item": "minecraft:clay"
+  },
+  "output": {
+    "count": 1,
+    "id": "minecraft:prismarine"
+  }
+}

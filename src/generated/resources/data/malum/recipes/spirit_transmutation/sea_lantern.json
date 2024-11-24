@@ -1,9 +1,0 @@
-{
-  "type": "malum:spirit_transmutation",
-  "input": {
-    "item": "minecraft:prismarine"
-  },
-  "output": {
-    "item": "minecraft:sea_lantern"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#malum:has_rare_earths",
-  "features": "malum:cthonic_gold_ore",
-  "step": "underground_ores"
-}

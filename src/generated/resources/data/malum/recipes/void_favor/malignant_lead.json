@@ -1,9 +1,0 @@
-{
-  "type": "malum:favor_of_the_void",
-  "input": {
-    "item": "malum:cthonic_gold"
-  },
-  "output": {
-    "item": "malum:malignant_lead"
-  }
-}

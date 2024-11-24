@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "malum:tainted_rock_tiles"
-  },
-  "result": "malum:tainted_rock_tiles_slab"
-}

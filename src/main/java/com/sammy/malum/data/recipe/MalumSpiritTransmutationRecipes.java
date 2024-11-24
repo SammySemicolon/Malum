@@ -67,67 +67,67 @@ public class MalumSpiritTransmutationRecipes {
         }
 
         new SpiritTransmutationRecipeBuilder(Blocks.STONE, Blocks.COBBLESTONE)
-                .save(recipeOutput);
+                .save(recipeOutput, "stone_to_cobblestone");
 
         new SpiritTransmutationRecipeBuilder(Blocks.COBBLESTONE, Blocks.GRAVEL)
-                .save(recipeOutput);
+                .save(recipeOutput, "cobblestone_to_gravel");
 
         new SpiritTransmutationRecipeBuilder(Blocks.GRAVEL, Blocks.SAND)
-                .save(recipeOutput);
+                .save(recipeOutput, "gravel_to_sand");
 
         new SpiritTransmutationRecipeBuilder(Blocks.SAND, BLIGHTED_SOIL.get())
-                .save(recipeOutput);
+                .save(recipeOutput, "sand_to_blighted_soil");
 
         new SpiritTransmutationRecipeBuilder(Blocks.ANDESITE, Blocks.TUFF)
-                .save(recipeOutput);
+                .save(recipeOutput, "andesite_to_tuff");
 
         new SpiritTransmutationRecipeBuilder(Blocks.TUFF, Blocks.STONE)
                 .save(recipeOutput, "tuff_block_to_stone");
 
         new SpiritTransmutationRecipeBuilder(Blocks.GRANITE, Blocks.DRIPSTONE_BLOCK)
-                .save(recipeOutput);
+                .save(recipeOutput, "granite_to_dripstone_block");
 
         new SpiritTransmutationRecipeBuilder(Blocks.DRIPSTONE_BLOCK, Blocks.STONE)
                 .save(recipeOutput, "dripstone_block_to_stone");
 
         new SpiritTransmutationRecipeBuilder(Blocks.DIORITE, Blocks.CALCITE)
-                .save(recipeOutput);
+                .save(recipeOutput, "diorite_to_calcite");
 
         new SpiritTransmutationRecipeBuilder(Blocks.CALCITE, Blocks.STONE)
                 .save(recipeOutput, "calcite_to_stone");
 
         new SpiritTransmutationRecipeBuilder(Blocks.DEEPSLATE, Blocks.COBBLED_DEEPSLATE)
-                .save(recipeOutput);
+                .save(recipeOutput, "deepslate_to_cobbled_deepslate");
 
         new SpiritTransmutationRecipeBuilder(Blocks.COBBLED_DEEPSLATE, Blocks.BASALT)
-                .save(recipeOutput);
+                .save(recipeOutput, "cobbled_deepslate_to_basalt");
 
         new SpiritTransmutationRecipeBuilder(Blocks.BASALT, Blocks.NETHERRACK)
-                .save(recipeOutput);
+                .save(recipeOutput, "basalt_to_netherrack");
 
         new SpiritTransmutationRecipeBuilder(Blocks.NETHERRACK, Blocks.SOUL_SAND)
-                .save(recipeOutput);
+                .save(recipeOutput, "netherrack_to_soul_sand");
 
         new SpiritTransmutationRecipeBuilder(Blocks.SOUL_SAND, Blocks.RED_SAND)
-                .save(recipeOutput);
+                .save(recipeOutput, "soul_sand_to_red_sand");
 
         new SpiritTransmutationRecipeBuilder(Blocks.RED_SAND, BLIGHTED_SOIL.get())
                 .save(recipeOutput, "red_sand_to_blighted_soil");
 
         new SpiritTransmutationRecipeBuilder(Blocks.SMOOTH_BASALT, Blocks.CLAY)
-                .save(recipeOutput);
+                .save(recipeOutput, "smooth_basalt_to_clay");
 
         new SpiritTransmutationRecipeBuilder(Blocks.CLAY, Blocks.PRISMARINE)
-                .save(recipeOutput);
+                .save(recipeOutput, "clay_to_prismarine");
 
         new SpiritTransmutationRecipeBuilder(Blocks.PRISMARINE, Blocks.SEA_LANTERN)
-                .save(recipeOutput);
+                .save(recipeOutput, "prismarine_to_sea_lantern");
 
         new SpiritTransmutationRecipeBuilder(Blocks.SEA_LANTERN, Blocks.SNOW_BLOCK)
-                .save(recipeOutput);
+                .save(recipeOutput, "sea_lantern_to_snow_block");
 
         new SpiritTransmutationRecipeBuilder(Blocks.SNOW_BLOCK, Blocks.ICE)
-                .save(recipeOutput);
+                .save(recipeOutput, "snow_block_to_ice");
 
         new SpiritTransmutationRecipeBuilder(Blocks.ICE, BLIGHTED_SOIL.get())
                 .save(recipeOutput, "ice_to_blighted_soil");

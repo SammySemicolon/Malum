@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#malum:has_soulstone",
-  "features": "malum:ore_soulstone",
-  "step": "underground_ores"
-}

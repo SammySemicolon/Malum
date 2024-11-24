@@ -1,9 +1,0 @@
-{
-  "type": "malum:spirit_transmutation",
-  "input": {
-    "item": "minecraft:stone"
-  },
-  "output": {
-    "item": "minecraft:cobblestone"
-  }
-}

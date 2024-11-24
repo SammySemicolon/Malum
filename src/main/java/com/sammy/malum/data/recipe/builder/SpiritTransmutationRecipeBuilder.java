@@ -18,7 +18,7 @@ public class SpiritTransmutationRecipeBuilder implements AutonamedRecipeBuilder<
     private final ItemStack output;
 
     @Nullable
-    private String group = null;
+    private String group = "";
 
     public SpiritTransmutationRecipeBuilder(Ingredient input, ItemStack output) {
         ingredient = input;

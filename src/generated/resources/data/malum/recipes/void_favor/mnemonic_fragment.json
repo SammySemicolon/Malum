@@ -1,9 +1,0 @@
-{
-  "type": "malum:favor_of_the_void",
-  "input": {
-    "item": "malum:chunk_of_brilliance"
-  },
-  "output": {
-    "item": "malum:mnemonic_fragment"
-  }
-}

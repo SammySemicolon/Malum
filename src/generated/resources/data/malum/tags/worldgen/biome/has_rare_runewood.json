@@ -1,6 +1,6 @@
 {
   "remove": [
-    "#forge:is_snowy"
+    "#c:is_snowy"
   ],
   "values": [
     "#minecraft:is_forest"

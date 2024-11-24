@@ -1,0 +1,11 @@
+{
+  "type": "malum:spirit_transmutation",
+  "group": "",
+  "ingredient": {
+    "item": "minecraft:smooth_basalt"
+  },
+  "output": {
+    "count": 1,
+    "id": "minecraft:clay"
+  }
+}

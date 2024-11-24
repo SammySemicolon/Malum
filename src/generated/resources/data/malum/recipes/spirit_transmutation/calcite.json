@@ -1,9 +1,0 @@
-{
-  "type": "malum:spirit_transmutation",
-  "input": {
-    "item": "minecraft:diorite"
-  },
-  "output": {
-    "item": "minecraft:calcite"
-  }
-}

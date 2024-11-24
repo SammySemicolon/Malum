@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#malum:has_brilliant",
-  "features": "malum:ore_brilliant",
-  "step": "underground_ores"
-}

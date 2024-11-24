@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "malum:polished_tainted_rock"
-  },
-  "result": "malum:polished_tainted_rock_slab"
-}

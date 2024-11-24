@@ -1,0 +1,21 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.malum.spirit_plunder"
+  },
+  "max_cost": {
+    "base": 6,
+    "per_level_above_first": 10
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 10
+  },
+  "primary_items": "#malum:soul_hunter_weapon",
+  "slots": [
+    "hand"
+  ],
+  "supported_items": "#malum:soul_hunter_weapon",
+  "weight": 10
+}

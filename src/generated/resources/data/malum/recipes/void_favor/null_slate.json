@@ -1,9 +1,0 @@
-{
-  "type": "malum:favor_of_the_void",
-  "input": {
-    "item": "malum:processed_soulstone"
-  },
-  "output": {
-    "item": "malum:null_slate"
-  }
-}

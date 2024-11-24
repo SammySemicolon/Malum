@@ -1,0 +1,10 @@
+{
+  "type": "malum:favor_of_the_void",
+  "ingredient": {
+    "item": "malum:processed_soulstone"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:null_slate"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#malum:has_runewood",
+  "features": "malum:runewood_tree",
+  "step": "vegetal_decoration"
+}

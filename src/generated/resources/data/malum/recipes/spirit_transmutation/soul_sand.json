@@ -1,9 +1,0 @@
-{
-  "type": "malum:spirit_transmutation",
-  "input": {
-    "item": "minecraft:netherrack"
-  },
-  "output": {
-    "item": "minecraft:soul_sand"
-  }
-}

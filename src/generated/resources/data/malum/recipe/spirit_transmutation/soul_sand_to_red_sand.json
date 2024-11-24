@@ -1,0 +1,11 @@
+{
+  "type": "malum:spirit_transmutation",
+  "group": "",
+  "ingredient": {
+    "item": "minecraft:soul_sand"
+  },
+  "output": {
+    "count": 1,
+    "id": "minecraft:red_sand"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "malum:spirit_transmutation",
+  "group": "",
+  "ingredient": {
+    "item": "minecraft:sea_lantern"
+  },
+  "output": {
+    "count": 1,
+    "id": "minecraft:snow_block"
+  }
+}

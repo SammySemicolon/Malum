@@ -1,9 +1,0 @@
-{
-  "type": "malum:spirit_transmutation",
-  "input": {
-    "item": "minecraft:clay"
-  },
-  "output": {
-    "item": "minecraft:prismarine"
-  }
-}

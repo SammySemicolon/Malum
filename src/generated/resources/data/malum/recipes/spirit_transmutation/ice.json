@@ -1,9 +1,0 @@
-{
-  "type": "malum:spirit_transmutation",
-  "input": {
-    "item": "minecraft:snow_block"
-  },
-  "output": {
-    "item": "minecraft:ice"
-  }
-}

@@ -44,7 +44,6 @@ public class TemporarilyDisabledItem extends Item {
         inventory.setItem(slot, disabled);
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static void enable(ServerPlayer player, int slot) {
         var inventory = player.getInventory();
         var disabledItem = inventory.getItem(slot);

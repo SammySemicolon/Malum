@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "c:rods/wooden"
+    },
+    "X": {
+      "tag": "c:ingots/iron"
+    },
+    "Y": {
+      "item": "malum:processed_soulstone"
+    }
+  },
+  "pattern": [
+    "XXY",
+    " #X",
+    "#  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:crude_scythe"
+  }
+}

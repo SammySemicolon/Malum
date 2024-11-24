@@ -1,0 +1,33 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1.0,
+  "inputs": [
+    "malum:cracked_iron_impetus",
+    "malum:cracked_gold_impetus",
+    "malum:cracked_copper_impetus",
+    "malum:cracked_lead_impetus",
+    "malum:cracked_silver_impetus",
+    "malum:cracked_aluminum_impetus",
+    "malum:cracked_nickel_impetus",
+    "malum:cracked_uranium_impetus",
+    "malum:cracked_osmium_impetus",
+    "malum:cracked_zinc_impetus",
+    "malum:cracked_tin_impetus"
+  ],
+  "itemIdRegex": ".*",
+  "modIdRegex": ".*",
+  "repairMaterial": {
+    "count": 2,
+    "item": "malum:cthonic_gold_fragment"
+  },
+  "spirits": [
+    {
+      "type": "infernal",
+      "count": 16
+    },
+    {
+      "type": "earthen",
+      "count": 16
+    }
+  ]
+}

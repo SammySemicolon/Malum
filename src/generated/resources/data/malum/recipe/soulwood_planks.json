@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "malum:soulwood_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "malum:soulwood_planks"
+  }
+}

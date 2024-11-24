@@ -1,0 +1,28 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 8,
+      "item": "malum:null_slate"
+    },
+    {
+      "count": 8,
+      "item": "malum:void_salts"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:tainted_rock_tablet"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:void_tablet"
+  },
+  "spirits": [
+    {
+      "type": "eldritch",
+      "count": 4
+    }
+  ]
+}

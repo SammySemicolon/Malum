@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "Y": {
+      "tag": "c:glass_panes"
+    },
+    "Z": {
+      "item": "malum:hallowed_gold_ingot"
+    }
+  },
+  "pattern": [
+    "YZY",
+    "Y Y",
+    "YYY"
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:spirit_jar"
+  }
+}

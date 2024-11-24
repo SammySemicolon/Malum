@@ -1,0 +1,36 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 4,
+      "item": "malum:spirit_fabric"
+    },
+    {
+      "count": 4,
+      "item": "malum:processed_soulstone"
+    },
+    {
+      "count": 2,
+      "tag": "c:leathers"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "minecraft:leather_boots"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:soul_hunter_boots"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 8
+    },
+    {
+      "type": "earthen",
+      "count": 8
+    }
+  ]
+}

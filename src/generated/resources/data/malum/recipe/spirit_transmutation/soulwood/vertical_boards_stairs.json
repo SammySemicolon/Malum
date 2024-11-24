@@ -1,0 +1,11 @@
+{
+  "type": "malum:spirit_transmutation",
+  "group": "soulwood",
+  "ingredient": {
+    "item": "malum:vertical_runewood_boards_stairs"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:vertical_soulwood_boards_stairs"
+  }
+}

@@ -4,6 +4,7 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.vanilla.*;
 import com.sammy.malum.registry.common.item.*;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.Holder;
@@ -23,6 +24,7 @@ import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import team.lodestar.lodestone.recipe.NBTCarryRecipe;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.*;
@@ -79,14 +81,14 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         smeltingWithCount(Ingredient.of(ItemRegistry.COPPER_NODE.get()), RecipeCategory.MISC, ItemRegistry.COPPER_NUGGET.get(), 6, 0.25f, 200).unlockedBy("has_impetus", has(ItemRegistry.COPPER_IMPETUS.get())).save(output, malumPath("copper_from_node_smelting"));
         blastingWithCount(Ingredient.of(ItemRegistry.COPPER_NODE.get()), RecipeCategory.MISC, ItemRegistry.COPPER_NUGGET.get(), 6, 0.25f, 100).unlockedBy("has_impetus", has(ItemRegistry.COPPER_IMPETUS.get())).save(output, malumPath("copper_from_node_blasting"));
 
-        nodeSmelting(output, ItemRegistry.LEAD_IMPETUS, ItemRegistry.LEAD_NODE, NUGGETS_LEAD);
-        nodeSmelting(output, ItemRegistry.SILVER_IMPETUS, ItemRegistry.SILVER_NODE, NUGGETS_SILVER);
-        nodeSmelting(output, ItemRegistry.ALUMINUM_IMPETUS, ItemRegistry.ALUMINUM_NODE, NUGGETS_ALUMINUM);
-        nodeSmelting(output, ItemRegistry.NICKEL_IMPETUS, ItemRegistry.NICKEL_NODE, NUGGETS_NICKEL);
-        nodeSmelting(output, ItemRegistry.URANIUM_IMPETUS, ItemRegistry.URANIUM_NODE, NUGGETS_URANIUM);
-        nodeSmelting(output, ItemRegistry.OSMIUM_IMPETUS, ItemRegistry.OSMIUM_NODE, NUGGETS_OSMIUM);
-        nodeSmelting(output, ItemRegistry.ZINC_IMPETUS, ItemRegistry.ZINC_NODE, NUGGETS_ZINC);
-        nodeSmelting(output, ItemRegistry.TIN_IMPETUS, ItemRegistry.TIN_NODE, NUGGETS_TIN);
+        nodeSmelting(output, ItemRegistry.LEAD_NODE, NUGGETS_LEAD);
+        nodeSmelting(output, ItemRegistry.SILVER_NODE, NUGGETS_SILVER);
+        nodeSmelting(output, ItemRegistry.ALUMINUM_NODE, NUGGETS_ALUMINUM);
+        nodeSmelting(output, ItemRegistry.NICKEL_NODE, NUGGETS_NICKEL);
+        nodeSmelting(output, ItemRegistry.URANIUM_NODE, NUGGETS_URANIUM);
+        nodeSmelting(output, ItemRegistry.OSMIUM_NODE, NUGGETS_OSMIUM);
+        nodeSmelting(output, ItemRegistry.ZINC_NODE, NUGGETS_ZINC);
+        nodeSmelting(output, ItemRegistry.TIN_NODE, NUGGETS_TIN);
         //TOOLS
         shaped(RecipeCategory.MISC, ItemRegistry.SOUL_STAINED_STEEL_HOE.get()).define('#', Tags.Items.RODS_WOODEN).define('X', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).pattern("XX").pattern(" #").pattern(" #").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.SOUL_STAINED_STEEL_PICKAXE.get()).define('#', Tags.Items.RODS_WOODEN).define('X', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).pattern("XXX").pattern(" # ").pattern(" # ").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output);
@@ -254,15 +256,17 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         shapeless(RecipeCategory.MISC, output.get()).requires(ItemRegistry.ESOTERIC_SPOOL.get()).requires(sideItem).unlockedBy("has_spool", has(ItemRegistry.ESOTERIC_SPOOL.get())).save(consumer);
     }
 
-    private static void nodeSmelting(RecipeOutput recipeoutput, DeferredHolder<Item, ? extends ImpetusItem> impetus, DeferredHolder<Item, ? extends Item> node, TagKey<Item> tag) {
+    private static void nodeSmelting(RecipeOutput recipeoutput, DeferredHolder<Item, ? extends Item> node, TagKey<Item> tag) {
         String name = BuiltInRegistries.ITEM.getKey(node.get()).getPath().replaceFirst("_node", "");
 
         RecipeOutput conditionOutput = recipeoutput.withConditions(new ICondition[]{
                 new NotCondition(new TagEmptyCondition(tag.location().toString()))
         });
         MetalNodeCookingRecipeBuilder.smelting(SizedIngredient.of(tag, 6).ingredient(), RecipeCategory.MISC, node.get(), 0.25f, 200)
+                .unlockedBy("has_crucible", has(ItemRegistry.SPIRIT_CRUCIBLE.get()))
                 .save(conditionOutput, MalumMod.malumPath(name + "_from_node_smelting"));
         MetalNodeCookingRecipeBuilder.blasting(SizedIngredient.of(tag, 6).ingredient(), RecipeCategory.MISC, node.get(), 0.25f, 100)
+                .unlockedBy("has_crucible", has(ItemRegistry.SPIRIT_CRUCIBLE.get()))
                 .save(conditionOutput, MalumMod.malumPath(name + "_from_node_blasting"));
 
 //        smeltingWithTag(SizedIngredient.of(tag, 6), Ingredient.of(node.get()), 0.25f, 200)
@@ -353,24 +357,29 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         shaped(RecipeCategory.MISC, sign, 3).group("sign").define('#', input).define('X', Tags.Items.RODS_WOODEN).pattern("###").pattern("###").pattern(" X ").unlockedBy("has_" + s, has(input)).save(recipeoutput);
     }
 
-
-    protected static Criterion<EnterBlockTrigger.TriggerInstance> insideOf(Block pBlock) {
-        return new Criterion<>(new EnterBlockTrigger(), new EnterBlockTrigger.TriggerInstance(Optional.empty(), Optional.of(Holder.direct(pBlock)), Optional.empty()));
+    public static Criterion<EnterBlockTrigger.TriggerInstance> insideOf(Block block) {
+        return CriteriaTriggers.ENTER_BLOCK
+                .createCriterion(new EnterBlockTrigger.TriggerInstance(Optional.empty(), Optional.of(block.builtInRegistryHolder()), Optional.empty()));
     }
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> has(MinMaxBounds.Ints pCount, ItemLike pItem) {
-        return inventoryTrigger(ItemPredicate.Builder.item().of(pItem).withCount(pCount).build());
+    public static Criterion<InventoryChangeTrigger.TriggerInstance> has(MinMaxBounds.Ints count, ItemLike item) {
+        return inventoryTrigger(ItemPredicate.Builder.item().of(item).withCount(count));
     }
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> has(ItemLike pItemLike) {
-        return inventoryTrigger(ItemPredicate.Builder.item().of(pItemLike).build());
+    public static Criterion<InventoryChangeTrigger.TriggerInstance> has(ItemLike itemLike) {
+        return inventoryTrigger(ItemPredicate.Builder.item().of(itemLike));
     }
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> has(TagKey<Item> pTag) {
-        return inventoryTrigger(ItemPredicate.Builder.item().of(pTag).build());
+    public static Criterion<InventoryChangeTrigger.TriggerInstance> has(TagKey<Item> tag) {
+        return inventoryTrigger(ItemPredicate.Builder.item().of(tag));
     }
 
-    public static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate... pPredicates) {
-        return new Criterion<>(new InventoryChangeTrigger(), new InventoryChangeTrigger.TriggerInstance(Optional.empty(), InventoryChangeTrigger.TriggerInstance.Slots.ANY, List.of(pPredicates)));
+    public static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate.Builder... items) {
+        return inventoryTrigger(Arrays.stream(items).map(ItemPredicate.Builder::build).toArray(ItemPredicate[]::new));
+    }
+
+    public static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate... predicates) {
+        return CriteriaTriggers.INVENTORY_CHANGED
+                .createCriterion(new InventoryChangeTrigger.TriggerInstance(Optional.empty(), InventoryChangeTrigger.TriggerInstance.Slots.ANY, List.of(predicates)));
     }
 }

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredient": {
+    "item": "malum:cluster_of_brilliance"
+  },
+  "result": {
+    "count": 2,
+    "id": "malum:chunk_of_brilliance"
+  }
+}

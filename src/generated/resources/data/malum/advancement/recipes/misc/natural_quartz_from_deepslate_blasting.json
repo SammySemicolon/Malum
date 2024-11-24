@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_natural_quartz": {
+      "conditions": {
+        "items": [
+          {
+            "items": "malum:natural_quartz"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "malum:natural_quartz_from_deepslate_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_natural_quartz"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "malum:natural_quartz_from_deepslate_blasting"
+    ]
+  }
+}

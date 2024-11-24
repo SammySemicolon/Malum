@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 2,
+      "item": "malum:astral_weave"
+    },
+    {
+      "count": 2,
+      "item": "malum:processed_soulstone"
+    }
+  ],
+  "ingredient": {
+    "count": 4,
+    "item": "malum:alchemical_calx"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:accelerating_inlay"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 4
+    }
+  ]
+}

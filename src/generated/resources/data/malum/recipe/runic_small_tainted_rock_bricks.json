@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "malum:small_tainted_rock_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:runic_small_tainted_rock_bricks"
+  }
+}

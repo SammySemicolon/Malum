@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "c:strings"
+    },
+    "Y": {
+      "item": "malum:spirit_fabric"
+    },
+    "Z": {
+      "tag": "minecraft:soul_fire_base_blocks"
+    }
+  },
+  "pattern": [
+    " X ",
+    "YZY",
+    " Y "
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:spirit_pouch"
+  }
+}

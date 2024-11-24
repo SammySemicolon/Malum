@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "forge:nuggets/zinc"
+      }
+    }
+  ],
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "ingredient": {
+    "tag": "forge:nuggets/zinc"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:zinc_node"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "lodestone:nbt_carry",
+  "copyFrom": {
+    "item": "malum:ether"
+  },
+  "recipe": {
+    "category": "building",
+    "key": {
+      "#": {
+        "tag": "c:rods/wooden"
+      },
+      "X": {
+        "item": "malum:ether"
+      }
+    },
+    "pattern": [
+      "X",
+      "#"
+    ],
+    "result": {
+      "count": 4,
+      "id": "malum:ether_torch"
+    }
+  }
+}

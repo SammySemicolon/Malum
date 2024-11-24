@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "forge:nuggets/zinc"
+      }
+    }
+  ],
+  "type": "malum:spirit_focusing",
+  "durabilityCost": 2,
+  "ingredient": {
+    "item": "malum:zinc_impetus"
+  },
+  "output": {
+    "count": 3,
+    "id": "malum:zinc_node"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 2
+    },
+    {
+      "type": "infernal",
+      "count": 2
+    }
+  ],
+  "time": 900
+}

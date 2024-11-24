@@ -1,0 +1,15 @@
+{
+  "type": "malum:runeworking",
+  "primaryInput": {
+    "count": 1,
+    "item": "malum:runewood_tablet"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:rune_of_motion"
+  },
+  "secondaryInput": {
+    "type": "aerial",
+    "count": 32
+  }
+}

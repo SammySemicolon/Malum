@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:block_of_grim_talc"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "malum:grim_talc"
+  }
+}

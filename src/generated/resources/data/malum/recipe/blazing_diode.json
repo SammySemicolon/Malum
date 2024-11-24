@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 2,
+      "item": "malum:blazing_quartz"
+    },
+    {
+      "count": 2,
+      "item": "malum:processed_soulstone"
+    }
+  ],
+  "ingredient": {
+    "count": 4,
+    "item": "malum:alchemical_calx"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:blazing_diode"
+  },
+  "spirits": [
+    {
+      "type": "infernal",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 4
+    }
+  ]
+}

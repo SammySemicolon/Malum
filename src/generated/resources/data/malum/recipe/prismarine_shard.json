@@ -1,0 +1,22 @@
+{
+  "type": "malum:spirit_focusing",
+  "durabilityCost": 1,
+  "ingredient": {
+    "item": "malum:alchemical_impetus"
+  },
+  "output": {
+    "count": 8,
+    "id": "minecraft:prismarine_shard"
+  },
+  "spirits": [
+    {
+      "type": "aqueous",
+      "count": 2
+    },
+    {
+      "type": "arcane",
+      "count": 2
+    }
+  ],
+  "time": 300
+}

@@ -1,0 +1,36 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 6,
+      "tag": "c:ingots/iron"
+    },
+    {
+      "count": 4,
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:blaze_powder"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:ornate_ring"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:ring_of_the_demolitionist"
+  },
+  "spirits": [
+    {
+      "type": "infernal",
+      "count": 32
+    },
+    {
+      "type": "eldritch",
+      "count": 4
+    }
+  ]
+}

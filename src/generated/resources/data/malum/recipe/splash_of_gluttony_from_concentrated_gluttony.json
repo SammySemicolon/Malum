@@ -1,0 +1,24 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 1,
+      "tag": "c:gunpowders"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:concentrated_gluttony"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:splash_of_gluttony"
+  },
+  "spirits": [
+    {
+      "type": "aqueous",
+      "count": 1
+    }
+  ]
+}

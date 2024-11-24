@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "malum:twisted_rock"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:twisted_rock_pressure_plate"
+  }
+}

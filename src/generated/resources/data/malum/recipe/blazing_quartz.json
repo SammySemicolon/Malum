@@ -1,0 +1,22 @@
+{
+  "type": "malum:spirit_focusing",
+  "durabilityCost": 1,
+  "ingredient": {
+    "item": "malum:alchemical_impetus"
+  },
+  "output": {
+    "count": 4,
+    "id": "malum:blazing_quartz"
+  },
+  "spirits": [
+    {
+      "type": "infernal",
+      "count": 2
+    },
+    {
+      "type": "arcane",
+      "count": 2
+    }
+  ],
+  "time": 300
+}

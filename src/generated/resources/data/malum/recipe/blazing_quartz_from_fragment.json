@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:blazing_quartz_fragment"
+    },
+    {
+      "item": "malum:blazing_quartz_fragment"
+    },
+    {
+      "item": "malum:blazing_quartz_fragment"
+    },
+    {
+      "item": "malum:blazing_quartz_fragment"
+    },
+    {
+      "item": "malum:blazing_quartz_fragment"
+    },
+    {
+      "item": "malum:blazing_quartz_fragment"
+    },
+    {
+      "item": "malum:blazing_quartz_fragment"
+    },
+    {
+      "item": "malum:blazing_quartz_fragment"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:blazing_quartz"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "malum:runeworking",
+  "primaryInput": {
+    "count": 1,
+    "item": "malum:tainted_rock_tablet"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:rune_of_idle_restoration"
+  },
+  "secondaryInput": {
+    "type": "sacred",
+    "count": 16
+  }
+}

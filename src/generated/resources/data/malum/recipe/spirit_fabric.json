@@ -1,0 +1,36 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 2,
+      "tag": "c:strings"
+    },
+    {
+      "count": 1,
+      "item": "malum:hex_ash"
+    }
+  ],
+  "ingredient": {
+    "count": 2,
+    "tag": "minecraft:wool"
+  },
+  "output": {
+    "count": 4,
+    "id": "malum:spirit_fabric"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 2
+    },
+    {
+      "type": "earthen",
+      "count": 1
+    },
+    {
+      "type": "aerial",
+      "count": 1
+    }
+  ]
+}

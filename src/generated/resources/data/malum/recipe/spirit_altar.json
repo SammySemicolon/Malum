@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "malum:runewood_planks"
+    },
+    "Y": {
+      "item": "malum:processed_soulstone"
+    },
+    "Z": {
+      "tag": "c:ingots/gold"
+    }
+  },
+  "pattern": [
+    " Y ",
+    "ZXZ",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:spirit_altar"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "malum:cut_tainted_rock"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:checkered_tainted_rock"
+  }
+}

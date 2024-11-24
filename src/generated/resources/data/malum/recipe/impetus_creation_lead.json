@@ -1,0 +1,36 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 4,
+      "tag": "c:gunpowders"
+    },
+    {
+      "count": 1,
+      "item": "malum:cthonic_gold"
+    },
+    {
+      "count": 6,
+      "tag": "forge:ingots/lead"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:alchemical_impetus"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:lead_impetus"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 8
+    },
+    {
+      "type": "infernal",
+      "count": 8
+    }
+  ]
+}

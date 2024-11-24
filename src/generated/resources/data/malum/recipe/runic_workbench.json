@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 4,
+      "item": "malum:runewood_planks"
+    },
+    {
+      "count": 2,
+      "item": "malum:hallowed_gold_ingot"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:runewood_item_pedestal"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:runic_workbench"
+  },
+  "spirits": [
+    {
+      "type": "aqueous",
+      "count": 16
+    },
+    {
+      "type": "sacred",
+      "count": 8
+    }
+  ]
+}

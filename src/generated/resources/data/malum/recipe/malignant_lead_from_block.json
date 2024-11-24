@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:block_of_malignant_lead"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "malum:malignant_lead"
+  }
+}

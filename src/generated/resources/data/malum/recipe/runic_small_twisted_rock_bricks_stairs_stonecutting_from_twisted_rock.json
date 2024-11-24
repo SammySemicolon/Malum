@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "malum:twisted_rock"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:runic_small_twisted_rock_bricks_stairs"
+  }
+}

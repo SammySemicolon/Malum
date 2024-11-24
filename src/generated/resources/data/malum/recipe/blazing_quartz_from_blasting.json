@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "blocks",
+  "cookingtime": 100,
+  "experience": 0.25,
+  "ingredient": {
+    "item": "malum:blazing_quartz_ore"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:blazing_quartz"
+  }
+}

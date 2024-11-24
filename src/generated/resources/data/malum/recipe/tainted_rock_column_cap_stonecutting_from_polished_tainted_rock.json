@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "malum:polished_tainted_rock"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:tainted_rock_column_cap"
+  }
+}

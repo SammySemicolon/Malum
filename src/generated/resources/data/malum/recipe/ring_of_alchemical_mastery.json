@@ -1,0 +1,40 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 2,
+      "item": "malum:hex_ash"
+    },
+    {
+      "count": 4,
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "count": 1,
+      "item": "minecraft:fermented_spider_eye"
+    },
+    {
+      "count": 4,
+      "item": "malum:alchemical_calx"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:gilded_ring"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:ring_of_alchemical_mastery"
+  },
+  "spirits": [
+    {
+      "type": "arcane",
+      "count": 16
+    },
+    {
+      "type": "aqueous",
+      "count": 16
+    }
+  ]
+}

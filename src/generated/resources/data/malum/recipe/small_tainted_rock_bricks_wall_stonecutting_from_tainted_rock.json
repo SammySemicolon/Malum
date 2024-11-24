@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "malum:tainted_rock"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:small_tainted_rock_bricks_wall"
+  }
+}

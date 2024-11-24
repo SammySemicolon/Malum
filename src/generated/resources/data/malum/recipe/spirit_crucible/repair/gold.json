@@ -1,0 +1,27 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "inputs": [
+    "minecraft:golden_leggings",
+    "minecraft:golden_boots",
+    "minecraft:golden_helmet",
+    "minecraft:golden_hoe",
+    "minecraft:golden_shovel",
+    "minecraft:golden_pickaxe",
+    "minecraft:golden_sword",
+    "minecraft:golden_axe",
+    "minecraft:golden_chestplate"
+  ],
+  "itemIdRegex": ".*",
+  "modIdRegex": ".*",
+  "repairMaterial": {
+    "count": 2,
+    "tag": "c:ingots/gold"
+  },
+  "spirits": [
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:esoteric_spool"
+    },
+    {
+      "item": "minecraft:arrow"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:aro_prideweave"
+  }
+}

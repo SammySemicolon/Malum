@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:esoteric_spool"
+    },
+    {
+      "item": "minecraft:azalea"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:intersex_prideweave"
+  }
+}

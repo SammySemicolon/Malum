@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_null_slate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "malum:null_slate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "malum:block_of_null_slate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_null_slate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "malum:block_of_null_slate"
+    ]
+  }
+}

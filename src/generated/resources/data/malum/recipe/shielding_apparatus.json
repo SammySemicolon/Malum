@@ -1,0 +1,28 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 2,
+      "item": "malum:soul_stained_steel_plating"
+    },
+    {
+      "count": 2,
+      "item": "malum:processed_soulstone"
+    }
+  ],
+  "ingredient": {
+    "count": 4,
+    "item": "malum:alchemical_calx"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:shielding_apparatus"
+  },
+  "spirits": [
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 1,
+      "item": "malum:fused_consciousness"
+    },
+    {
+      "count": 8,
+      "item": "malum:auric_embers"
+    },
+    {
+      "count": 8,
+      "item": "malum:void_salts"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:mnemonic_hex_staff"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:staff_of_the_auric_flame"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 32
+    },
+    {
+      "type": "arcane",
+      "count": 16
+    },
+    {
+      "type": "infernal",
+      "count": 16
+    },
+    {
+      "type": "eldritch",
+      "count": 16
+    }
+  ]
+}

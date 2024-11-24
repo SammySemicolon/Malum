@@ -1,0 +1,28 @@
+{
+  "type": "lodestone:nbt_carry",
+  "copyFrom": {
+    "item": "malum:ether"
+  },
+  "recipe": {
+    "category": "building",
+    "key": {
+      "#": {
+        "item": "malum:twisted_rock"
+      },
+      "S": {
+        "tag": "c:rods/wooden"
+      },
+      "X": {
+        "item": "malum:ether"
+      }
+    },
+    "pattern": [
+      "#X#",
+      "S#S"
+    ],
+    "result": {
+      "count": 2,
+      "id": "malum:twisted_ether_brazier"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "malum:hallowed_gold_ingot"
+    },
+    "X": {
+      "tag": "c:leathers"
+    },
+    "Y": {
+      "item": "malum:processed_soulstone"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "#Y#",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:gilded_belt"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "forge:nuggets/tin"
+      }
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crucible": {
+      "conditions": {
+        "items": [
+          {
+            "items": "malum:spirit_crucible"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "malum:tin_from_node_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crucible"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "malum:tin_from_node_blasting"
+    ]
+  }
+}

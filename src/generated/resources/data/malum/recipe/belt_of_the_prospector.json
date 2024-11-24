@@ -1,0 +1,44 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 1,
+      "item": "malum:cthonic_gold"
+    },
+    {
+      "count": 4,
+      "item": "minecraft:raw_gold"
+    },
+    {
+      "count": 4,
+      "item": "minecraft:raw_iron"
+    },
+    {
+      "count": 4,
+      "item": "minecraft:raw_copper"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:gilded_belt"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:belt_of_the_prospector"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 32
+    },
+    {
+      "type": "infernal",
+      "count": 32
+    },
+    {
+      "type": "arcane",
+      "count": 16
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "inputs": [],
+  "itemIdRegex": ".*",
+  "modIdRegex": ".*",
+  "repairMaterial": {
+    "count": 2,
+    "tag": "c:ingots/copper"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 6
+    }
+  ]
+}

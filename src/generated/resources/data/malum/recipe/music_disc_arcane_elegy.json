@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [],
+  "ingredient": {
+    "count": 1,
+    "tag": "malum:arcane_elegy_component"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:music_disc_arcane_elegy"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 4
+    },
+    {
+      "type": "aqueous",
+      "count": 4
+    },
+    {
+      "type": "earthen",
+      "count": 4
+    },
+    {
+      "type": "infernal",
+      "count": 4
+    }
+  ]
+}

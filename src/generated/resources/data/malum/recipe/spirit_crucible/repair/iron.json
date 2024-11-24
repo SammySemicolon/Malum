@@ -1,0 +1,28 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "inputs": [
+    "malum:crude_scythe",
+    "minecraft:iron_shovel",
+    "minecraft:iron_helmet",
+    "minecraft:iron_chestplate",
+    "minecraft:iron_axe",
+    "minecraft:iron_sword",
+    "minecraft:iron_boots",
+    "minecraft:iron_hoe",
+    "minecraft:iron_leggings",
+    "minecraft:iron_pickaxe"
+  ],
+  "itemIdRegex": ".*",
+  "modIdRegex": ".*",
+  "repairMaterial": {
+    "count": 2,
+    "tag": "c:ingots/iron"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 8
+    }
+  ]
+}

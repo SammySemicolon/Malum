@@ -1,0 +1,24 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 1,
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "ingredient": {
+    "count": 16,
+    "tag": "c:glass_blocks"
+  },
+  "output": {
+    "count": 16,
+    "id": "malum:aqueous_spirited_glass"
+  },
+  "spirits": [
+    {
+      "type": "aqueous",
+      "count": 2
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 2,
+      "item": "malum:hex_ash"
+    },
+    {
+      "count": 8,
+      "item": "malum:tainted_rock"
+    },
+    {
+      "count": 8,
+      "item": "malum:twisted_rock"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "minecraft:furnace"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:spirit_crucible"
+  },
+  "spirits": [
+    {
+      "type": "infernal",
+      "count": 12
+    },
+    {
+      "type": "arcane",
+      "count": 4
+    }
+  ]
+}

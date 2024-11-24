@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "malum:soulwood_boards"
+    }
+  },
+  "pattern": [
+    " # ",
+    "# #",
+    " # "
+  ],
+  "result": {
+    "count": 4,
+    "id": "malum:vertical_soulwood_boards"
+  }
+}

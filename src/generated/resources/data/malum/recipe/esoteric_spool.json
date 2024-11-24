@@ -1,0 +1,24 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 2,
+      "item": "malum:hex_ash"
+    }
+  ],
+  "ingredient": {
+    "count": 4,
+    "tag": "c:ingots/iron"
+  },
+  "output": {
+    "count": 4,
+    "id": "malum:esoteric_spool"
+  },
+  "spirits": [
+    {
+      "type": "arcane",
+      "count": 4
+    }
+  ]
+}

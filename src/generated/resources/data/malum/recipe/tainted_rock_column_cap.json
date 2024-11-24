@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "malum:polished_tainted_rock"
+    },
+    "Y": {
+      "item": "malum:tainted_rock_column"
+    }
+  },
+  "pattern": [
+    "X",
+    "Y"
+  ],
+  "result": {
+    "count": 2,
+    "id": "malum:tainted_rock_column_cap"
+  }
+}

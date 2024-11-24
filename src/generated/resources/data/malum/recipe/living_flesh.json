@@ -1,0 +1,23 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [],
+  "ingredient": {
+    "count": 4,
+    "item": "minecraft:rotten_flesh"
+  },
+  "output": {
+    "count": 2,
+    "id": "malum:living_flesh"
+  },
+  "spirits": [
+    {
+      "type": "sacred",
+      "count": 2
+    },
+    {
+      "type": "wicked",
+      "count": 2
+    }
+  ]
+}

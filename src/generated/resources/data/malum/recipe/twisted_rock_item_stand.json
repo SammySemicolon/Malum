@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "malum:twisted_rock"
+    },
+    "Y": {
+      "item": "malum:twisted_rock_slab"
+    }
+  },
+  "pattern": [
+    "YYY",
+    " X ",
+    "YYY"
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:twisted_rock_item_stand"
+  }
+}

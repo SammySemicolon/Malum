@@ -1,0 +1,36 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 1,
+      "tag": "c:storage_blocks/iron"
+    },
+    {
+      "count": 2,
+      "tag": "c:ingots/iron"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:ornate_necklace"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:necklace_of_the_narrow_edge"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 16
+    },
+    {
+      "type": "earthen",
+      "count": 16
+    },
+    {
+      "type": "eldritch",
+      "count": 2
+    }
+  ]
+}

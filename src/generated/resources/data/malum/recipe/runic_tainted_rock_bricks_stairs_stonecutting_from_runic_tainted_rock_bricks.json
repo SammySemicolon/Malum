@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "malum:runic_tainted_rock_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:runic_tainted_rock_bricks_stairs"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:cthonic_gold_fragment"
+    },
+    {
+      "item": "malum:cthonic_gold_fragment"
+    },
+    {
+      "item": "malum:cthonic_gold_fragment"
+    },
+    {
+      "item": "malum:cthonic_gold_fragment"
+    },
+    {
+      "item": "malum:cthonic_gold_fragment"
+    },
+    {
+      "item": "malum:cthonic_gold_fragment"
+    },
+    {
+      "item": "malum:cthonic_gold_fragment"
+    },
+    {
+      "item": "malum:cthonic_gold_fragment"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:cthonic_gold"
+  }
+}

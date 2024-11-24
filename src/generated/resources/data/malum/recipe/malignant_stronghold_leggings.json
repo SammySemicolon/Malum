@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 3,
+      "item": "malum:malignant_pewter_plating"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:soul_stained_steel_leggings"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:malignant_stronghold_leggings"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 32
+    },
+    {
+      "type": "wicked",
+      "count": 32
+    },
+    {
+      "type": "eldritch",
+      "count": 16
+    }
+  ]
+}

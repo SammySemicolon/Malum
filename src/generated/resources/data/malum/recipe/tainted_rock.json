@@ -1,0 +1,23 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [],
+  "ingredient": {
+    "count": 16,
+    "tag": "minecraft:stone_tool_materials"
+  },
+  "output": {
+    "count": 16,
+    "id": "malum:tainted_rock"
+  },
+  "spirits": [
+    {
+      "type": "sacred",
+      "count": 1
+    },
+    {
+      "type": "arcane",
+      "count": 1
+    }
+  ]
+}

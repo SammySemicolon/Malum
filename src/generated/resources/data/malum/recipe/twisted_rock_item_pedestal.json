@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "malum:twisted_rock"
+    },
+    "Y": {
+      "item": "malum:twisted_rock_slab"
+    }
+  },
+  "pattern": [
+    "YYY",
+    "XXX"
+  ],
+  "result": {
+    "count": 2,
+    "id": "malum:twisted_rock_item_pedestal"
+  }
+}

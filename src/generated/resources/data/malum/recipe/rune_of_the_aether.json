@@ -1,0 +1,15 @@
+{
+  "type": "malum:runeworking",
+  "primaryInput": {
+    "count": 1,
+    "item": "malum:soulwood_tablet"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:rune_of_the_aether"
+  },
+  "secondaryInput": {
+    "type": "aerial",
+    "count": 32
+  }
+}

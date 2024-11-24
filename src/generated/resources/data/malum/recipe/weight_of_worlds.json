@@ -1,0 +1,32 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 2,
+      "item": "malum:malignant_pewter_ingot"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:soul_stained_steel_axe"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:weight_of_worlds"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 32
+    },
+    {
+      "type": "wicked",
+      "count": 32
+    },
+    {
+      "type": "eldritch",
+      "count": 16
+    }
+  ]
+}

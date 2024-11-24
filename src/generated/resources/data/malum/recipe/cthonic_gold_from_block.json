@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:block_of_cthonic_gold"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "malum:cthonic_gold"
+  }
+}

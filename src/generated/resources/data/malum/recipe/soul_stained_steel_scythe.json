@@ -1,0 +1,40 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 4,
+      "item": "malum:soul_stained_steel_ingot"
+    },
+    {
+      "count": 2,
+      "item": "malum:hex_ash"
+    },
+    {
+      "count": 4,
+      "item": "malum:processed_soulstone"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:crude_scythe"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:soul_stained_steel_scythe"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 16
+    },
+    {
+      "type": "wicked",
+      "count": 8
+    },
+    {
+      "type": "arcane",
+      "count": 8
+    }
+  ]
+}

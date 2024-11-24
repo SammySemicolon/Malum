@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_soulwood_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#malum:soulwood_logs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "malum:arcane_charcoal_from_soulwood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_soulwood_planks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "malum:arcane_charcoal_from_soulwood"
+    ]
+  }
+}

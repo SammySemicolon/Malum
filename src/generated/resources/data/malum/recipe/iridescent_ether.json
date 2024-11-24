@@ -1,0 +1,28 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 1,
+      "item": "minecraft:prismarine_crystals"
+    },
+    {
+      "count": 1,
+      "item": "malum:arcane_charcoal"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:ether"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:iridescent_ether"
+  },
+  "spirits": [
+    {
+      "type": "aqueous",
+      "count": 2
+    }
+  ]
+}

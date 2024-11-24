@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "malum:vertical_rustic_runewood_planks"
+    }
+  },
+  "pattern": [
+    " # ",
+    "# #",
+    " # "
+  ],
+  "result": {
+    "count": 4,
+    "id": "malum:rustic_runewood_tiles"
+  }
+}

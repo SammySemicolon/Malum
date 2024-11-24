@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 0.5,
+  "inputs": [
+    "minecraft:diamond_pickaxe",
+    "minecraft:diamond_shovel",
+    "minecraft:diamond_hoe",
+    "minecraft:diamond_boots",
+    "minecraft:diamond_sword",
+    "minecraft:diamond_leggings",
+    "minecraft:diamond_axe",
+    "minecraft:diamond_chestplate",
+    "minecraft:diamond_helmet"
+  ],
+  "itemIdRegex": ".*",
+  "modIdRegex": ".*",
+  "repairMaterial": {
+    "count": 2,
+    "tag": "c:gems/diamond"
+  },
+  "spirits": [
+    {
+      "type": "arcane",
+      "count": 16
+    },
+    {
+      "type": "earthen",
+      "count": 8
+    }
+  ]
+}

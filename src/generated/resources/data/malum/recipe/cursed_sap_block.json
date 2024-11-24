@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:cursed_sap"
+    },
+    {
+      "item": "malum:cursed_sap"
+    },
+    {
+      "item": "malum:cursed_sap"
+    },
+    {
+      "item": "malum:cursed_sap"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "id": "malum:cursed_sap_block"
+  }
+}

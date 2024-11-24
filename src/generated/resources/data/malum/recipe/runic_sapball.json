@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:runic_sap"
+    },
+    {
+      "item": "malum:runic_sap"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:runic_sapball"
+  }
+}

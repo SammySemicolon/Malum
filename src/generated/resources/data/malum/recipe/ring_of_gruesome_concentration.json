@@ -1,0 +1,40 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 16,
+      "item": "malum:null_slate"
+    },
+    {
+      "count": 8,
+      "item": "malum:void_salts"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:ring_of_desperate_voracity"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:ring_of_gruesome_concentration"
+  },
+  "spirits": [
+    {
+      "type": "sacred",
+      "count": 16
+    },
+    {
+      "type": "wicked",
+      "count": 16
+    },
+    {
+      "type": "arcane",
+      "count": 16
+    },
+    {
+      "type": "eldritch",
+      "count": 8
+    }
+  ]
+}

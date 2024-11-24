@@ -1,0 +1,28 @@
+{
+  "type": "lodestone:nbt_carry",
+  "copyFrom": {
+    "item": "malum:iridescent_ether"
+  },
+  "recipe": {
+    "category": "building",
+    "key": {
+      "#": {
+        "item": "malum:tainted_rock"
+      },
+      "S": {
+        "tag": "c:rods/wooden"
+      },
+      "X": {
+        "item": "malum:iridescent_ether"
+      }
+    },
+    "pattern": [
+      "#X#",
+      "S#S"
+    ],
+    "result": {
+      "count": 2,
+      "id": "malum:tainted_iridescent_ether_brazier"
+    }
+  }
+}

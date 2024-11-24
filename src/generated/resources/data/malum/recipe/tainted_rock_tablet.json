@@ -1,0 +1,40 @@
+{
+  "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [
+    {
+      "count": 8,
+      "item": "malum:processed_soulstone"
+    }
+  ],
+  "ingredient": {
+    "count": 4,
+    "item": "malum:tainted_rock"
+  },
+  "output": {
+    "count": 2,
+    "id": "malum:tainted_rock_tablet"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 8
+    },
+    {
+      "type": "aqueous",
+      "count": 8
+    },
+    {
+      "type": "earthen",
+      "count": 8
+    },
+    {
+      "type": "infernal",
+      "count": 8
+    },
+    {
+      "type": "eldritch",
+      "count": 2
+    }
+  ]
+}

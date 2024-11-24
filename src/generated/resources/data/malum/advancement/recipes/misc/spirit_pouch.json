@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_spirit_fabric": {
+      "conditions": {
+        "items": [
+          {
+            "items": "malum:spirit_fabric"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "malum:spirit_pouch"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_spirit_fabric"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "malum:spirit_pouch"
+    ]
+  }
+}

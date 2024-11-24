@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "malum:block_of_brilliance"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "malum:cluster_of_brilliance"
+  }
+}

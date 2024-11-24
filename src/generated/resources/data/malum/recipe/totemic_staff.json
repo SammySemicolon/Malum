@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "c:rods/wooden"
+    },
+    "Y": {
+      "tag": "malum:runewood_planks"
+    }
+  },
+  "pattern": [
+    "  Y",
+    " X ",
+    "X  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:totemic_staff"
+  }
+}

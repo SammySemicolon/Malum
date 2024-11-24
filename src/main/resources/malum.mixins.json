@@ -8,6 +8,7 @@
     "AccessorEvent$PostDamage",
     "AccessorFeatureFlagSet",
     "AccessorLivingEntity",
+    "BlockBehaviorMixin",
     "ExplosionMixin",
     "FeatureFlagSetMixin",
     "FishingHookEntityMixin",

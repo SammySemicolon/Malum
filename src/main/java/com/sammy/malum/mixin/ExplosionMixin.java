@@ -40,11 +40,6 @@ public abstract class ExplosionMixin {
     @Nullable
     public abstract LivingEntity getIndirectSourceEntity();
 
-    @ModifyArg(method = "finalizeExplosion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getDrops(Lnet/minecraft/world/level/storage/loot/LootParams$Builder;)Ljava/util/List;"))
-    private LootParams.Builder malum$getBlockDrops(LootParams.Builder builder) {
-        return CurioProspectorBelt.applyFortune(getIndirectSourceEntity(), builder);
-    }
-
     @Inject(method = "<init>(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/damagesource/DamageSource;Lnet/minecraft/world/level/ExplosionDamageCalculator;DDDFZLnet/minecraft/world/level/Explosion$BlockInteraction;Lnet/minecraft/core/particles/ParticleOptions;Lnet/minecraft/core/particles/ParticleOptions;Lnet/minecraft/core/Holder;)V", at = @At(value = "RETURN"))
     private void malum$modifyExplosionStats(Level level, Entity source, DamageSource damageSource, ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, Explosion.BlockInteraction blockInteraction, ParticleOptions smallExplosionParticles, ParticleOptions largeExplosionParticles, Holder explosionSound, CallbackInfo ci) {
         this.radius = CurioDemolitionistRing.increaseExplosionRadius(getIndirectSourceEntity(), radius);

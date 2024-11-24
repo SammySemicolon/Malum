@@ -16,8 +16,6 @@ import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
 import net.neoforged.neoforge.common.crafting.ConditionalRecipeOutput;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import java.util.function.*;
-
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 import static team.lodestar.lodestone.registry.common.tag.LodestoneItemTags.*;
 

@@ -15,8 +15,8 @@ public class LivingEntityMixin {
 
     @Inject(method = "eat", at = @At("HEAD"))
     private void malum$eat(Level pLevel, ItemStack pFood, CallbackInfoReturnable<ItemStack> cir) {
-        if (pFood.isEdible()) {
-            LivingEntity livingEntity = (LivingEntity) ((Object)(this));
+        LivingEntity livingEntity = (LivingEntity) ((Object)(this));
+        if (pFood.getFoodProperties(livingEntity) != null) {
             CurioVoraciousRing.onEat(pLevel, livingEntity, pFood);
             CurioGruesomeConcentrationRing.onEat(pLevel, livingEntity, pFood);
         }

@@ -1,7 +1,6 @@
 package com.sammy.malum.common.entity.activator;
 
 import com.sammy.malum.common.entity.*;
-import com.sammy.malum.common.item.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.entity.*;

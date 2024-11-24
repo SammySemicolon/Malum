@@ -4,12 +4,10 @@ import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.compability.irons_spellbooks.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.events.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
 
 import java.util.function.*;
 

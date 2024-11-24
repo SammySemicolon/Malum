@@ -21,7 +21,7 @@ public class ClientRuntimeEvents {
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void lateRenderTick(RenderFrameEvent event) {
+    public static void lateRenderTick(RenderFrameEvent.Post event) {
     }
 
     @SubscribeEvent

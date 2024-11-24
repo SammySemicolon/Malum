@@ -1,6 +1,5 @@
 package com.sammy.malum.common.block.curiosities.repair_pylon;
 
-import com.sammy.malum.common.block.curiosities.spirit_altar.*;
 import com.sammy.malum.registry.common.*;
 import team.lodestar.lodestone.systems.sound.*;
 

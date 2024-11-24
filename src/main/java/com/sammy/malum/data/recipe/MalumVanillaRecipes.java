@@ -19,7 +19,6 @@ import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import net.neoforged.neoforge.common.conditions.NotCondition;
 import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
-import net.neoforged.neoforge.common.crafting.ConditionalRecipeOutput;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import team.lodestar.lodestone.recipe.NBTCarryRecipe;
@@ -29,7 +28,6 @@ import java.util.Optional;
 import java.util.function.*;
 
 import static com.sammy.malum.MalumMod.*;
-import static com.sammy.malum.data.recipe.builder.vanilla.MetalNodeCookingRecipeBuilder.*;
 import static net.minecraft.data.recipes.ShapedRecipeBuilder.*;
 import static net.minecraft.data.recipes.ShapelessRecipeBuilder.*;
 import static net.minecraft.data.recipes.SimpleCookingRecipeBuilder.*;
@@ -216,7 +214,7 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         etherBrazier(output, ItemRegistry.TWISTED_IRIDESCENT_ETHER_BRAZIER.get(), ItemRegistry.TWISTED_ROCK.get(), ItemRegistry.IRIDESCENT_ETHER.get());
 
         //THE DEVICE
-        TheDeviceRecipeBuilder.shaped(ItemRegistry.THE_DEVICE.get()).define('X', ItemRegistry.TWISTED_ROCK.get()).define('Y', ItemRegistry.TAINTED_ROCK.get()).pattern("XYX").pattern("YXY").pattern("XYX").unlockedBy("has_bedrock", has(Items.BEDROCK)).save(output);
+        TheDeviceRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.THE_DEVICE.get()).define('X', ItemRegistry.TWISTED_ROCK.get()).define('Y', ItemRegistry.TAINTED_ROCK.get()).pattern("XYX").pattern("YXY").pattern("XYX").unlockedBy("has_bedrock", has(Items.BEDROCK)).save(output);
 
         weaveRecipe(output, ItemRegistry.BLIGHTED_GUNK.get(), ItemRegistry.ANCIENT_WEAVE);
         weaveRecipe(output, Items.IRON_INGOT, ItemRegistry.CORNERED_WEAVE);
@@ -244,6 +242,14 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         weaveRecipe(output, Items.EGG, ItemRegistry.TRANS_PRIDEWEAVE);
     }
 
+    private static RecipeBuilder smeltingWithCount(Ingredient ingredient, RecipeCategory category, Item resultItem, int resultCount, float experience, int time) {
+        return smelting(ingredient, category, new ItemStack(resultItem, resultCount), experience, time);
+    }
+
+    private static RecipeBuilder blastingWithCount(Ingredient ingredient, RecipeCategory category, Item resultItem, int resultCount, float experience, int time) {
+        return blasting(ingredient, category, new ItemStack(resultItem, resultCount), experience, time);
+    }
+
     private static void weaveRecipe(RecipeOutput consumer, Item sideItem, Supplier<? extends Item> output) {
         shapeless(RecipeCategory.MISC, output.get()).requires(ItemRegistry.ESOTERIC_SPOOL.get()).requires(sideItem).unlockedBy("has_spool", has(ItemRegistry.ESOTERIC_SPOOL.get())).save(consumer);
     }
@@ -251,15 +257,23 @@ public class MalumVanillaRecipes implements IConditionBuilder {
     private static void nodeSmelting(RecipeOutput recipeoutput, DeferredHolder<Item, ? extends ImpetusItem> impetus, DeferredHolder<Item, ? extends Item> node, TagKey<Item> tag) {
         String name = BuiltInRegistries.ITEM.getKey(node.get()).getPath().replaceFirst("_node", "");
 
-        smeltingWithTag(SizedIngredient.of(tag, 6), Ingredient.of(node.get()), 0.25f, 200)
-                .build(new ConditionalRecipeOutput(recipeoutput, new ICondition[]{
-                        new NotCondition(new TagEmptyCondition(tag.location().toString()))
-                }), MalumMod.malumPath(name + "_from_node_smelting"));
+        RecipeOutput conditionOutput = recipeoutput.withConditions(new ICondition[]{
+                new NotCondition(new TagEmptyCondition(tag.location().toString()))
+        });
+        MetalNodeCookingRecipeBuilder.smelting(SizedIngredient.of(tag, 6).ingredient(), RecipeCategory.MISC, node.get(), 0.25f, 200)
+                .save(conditionOutput, MalumMod.malumPath(name + "_from_node_smelting"));
+        MetalNodeCookingRecipeBuilder.blasting(SizedIngredient.of(tag, 6).ingredient(), RecipeCategory.MISC, node.get(), 0.25f, 100)
+                .save(conditionOutput, MalumMod.malumPath(name + "_from_node_blasting"));
 
-        blastingWithTag(SizedIngredient.of(tag, 6), Ingredient.of(node.get()), 0.25f, 100)
-                .build(new ConditionalRecipeOutput(recipeoutput, new ICondition[]{
-                        new NotCondition(new TagEmptyCondition(tag.location().toString()))
-                }), MalumMod.malumPath(name + "_from_node_blasting"));
+//        smeltingWithTag(SizedIngredient.of(tag, 6), Ingredient.of(node.get()), 0.25f, 200)
+//                .build(new ConditionalRecipeOutput(recipeoutput, new ICondition[]{
+//                        new NotCondition(new TagEmptyCondition(tag.location().toString()))
+//                }), MalumMod.malumPath(name + "_from_node_smelting"));
+//
+//        blastingWithTag(SizedIngredient.of(tag, 6), Ingredient.of(node.get()), 0.25f, 100)
+//                .build(new ConditionalRecipeOutput(recipeoutput, new ICondition[]{
+//                        new NotCondition(new TagEmptyCondition(tag.location().toString()))
+//                }), MalumMod.malumPath(name + "_from_node_blasting"));
 
     }
 

@@ -17,8 +17,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static com.sammy.malum.registry.common.PacketRegistry.MALUM_CHANNEL;
-
 public abstract class ParticleEffectType {
 
     public final String id;

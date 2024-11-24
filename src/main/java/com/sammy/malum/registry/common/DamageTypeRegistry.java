@@ -3,12 +3,7 @@ package com.sammy.malum.registry.common;
 import com.sammy.malum.MalumMod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
 
 public class DamageTypeRegistry {
 

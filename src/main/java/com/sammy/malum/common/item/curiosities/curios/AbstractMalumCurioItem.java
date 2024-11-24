@@ -2,16 +2,12 @@ package com.sammy.malum.common.item.curiosities.curios;
 
 import com.google.common.collect.*;
 import com.sammy.malum.registry.common.*;
-import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.*;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
 import team.lodestar.lodestone.helpers.*;
 import top.theillusivec4.curios.api.*;
 import top.theillusivec4.curios.api.type.capability.*;

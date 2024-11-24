@@ -3,14 +3,12 @@ package com.sammy.malum.data.recipe;
 import com.sammy.malum.data.recipe.crafting.*;
 import com.sammy.malum.data.recipe.infusion.*;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.*;
 import net.minecraft.data.recipes.*;
 import net.minecraft.data.recipes.packs.*;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.*;
 
 public class MalumRecipes extends VanillaRecipeProvider {
 
@@ -25,7 +23,7 @@ public class MalumRecipes extends VanillaRecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput recipeOutput) {
+    protected void buildRecipes(RecipeOutput recipeOutput, Provider holderlookup) {
         vanillaRecipeReplacements.buildRecipes(recipeOutput);
         MalumVanillaRecipes.buildRecipes(recipeOutput);
         MalumWoodSetDatagen.buildRecipes(recipeOutput);

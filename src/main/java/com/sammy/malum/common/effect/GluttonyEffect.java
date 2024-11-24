@@ -3,8 +3,6 @@ package com.sammy.malum.common.effect;
 import com.sammy.malum.*;
 import com.sammy.malum.compability.irons_spellbooks.IronsSpellsCompat;
 import com.sammy.malum.registry.common.MobEffectRegistry;
-import com.sammy.malum.registry.common.SoundRegistry;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;

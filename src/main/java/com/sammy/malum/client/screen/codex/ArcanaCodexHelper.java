@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.*;
 import com.mojang.blaze3d.vertex.*;
 import com.sammy.malum.client.screen.codex.screens.*;
 import com.sammy.malum.common.spiritrite.*;
-import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.client.*;

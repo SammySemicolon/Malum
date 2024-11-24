@@ -6,13 +6,10 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.packets.CodecUtil;
 import com.sammy.malum.common.packets.SyncMalumPlayerCapabilityDataPacket;
 import com.sammy.malum.core.handlers.*;
-import com.sammy.malum.registry.common.PacketRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.capabilities.EntityCapability;
 import net.neoforged.neoforge.capabilities.ICapabilityProvider;
@@ -21,7 +18,6 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.function.Consumer;
 

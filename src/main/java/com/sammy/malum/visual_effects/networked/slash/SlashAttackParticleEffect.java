@@ -12,7 +12,6 @@ import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
-import team.lodestar.lodestone.systems.particle.render_types.*;
 
 import java.util.function.*;
 

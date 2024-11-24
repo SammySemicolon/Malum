@@ -1,7 +1,6 @@
 package com.sammy.malum.common.recipe;
 
 import com.sammy.malum.core.systems.recipe.*;
-import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 

@@ -8,8 +8,6 @@ import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
-import java.util.function.*;
-
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 
 public class MiscSpiritInfusionRecipes {

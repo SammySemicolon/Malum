@@ -3,7 +3,6 @@ package com.sammy.malum.common.item.curiosities.armor;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.cosmetic.*;
 import com.sammy.malum.common.item.cosmetic.skins.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.client.*;
@@ -17,7 +16,6 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import team.lodestar.lodestone.registry.common.*;
 import team.lodestar.lodestone.systems.model.*;
 
 import java.util.*;

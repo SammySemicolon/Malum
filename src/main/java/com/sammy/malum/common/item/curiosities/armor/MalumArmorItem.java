@@ -2,14 +2,11 @@ package com.sammy.malum.common.item.curiosities.armor;
 
 import com.sammy.malum.client.cosmetic.*;
 import com.sammy.malum.common.item.cosmetic.skins.*;
-import net.minecraft.*;
 import net.minecraft.core.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.systems.item.*;
-
-import java.util.*;
 
 public abstract class MalumArmorItem extends LodestoneArmorItem {
 

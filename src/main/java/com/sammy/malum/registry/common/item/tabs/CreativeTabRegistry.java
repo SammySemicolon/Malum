@@ -1,12 +1,10 @@
 package com.sammy.malum.registry.common.item.tabs;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.common.item.spirit.RitualShardItem;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;

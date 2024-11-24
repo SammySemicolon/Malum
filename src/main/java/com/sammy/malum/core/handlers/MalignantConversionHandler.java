@@ -22,7 +22,7 @@ public class MalignantConversionHandler {
     public final HashMap<Holder<Attribute>, Double> cachedAttributeValues = new HashMap<>();
     public boolean skipConversionLogic;
 
-    public static void checkForAttributeChanges(EntityTickEvent event) {
+    public static void checkForAttributeChanges(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity livingEntity) {
             if (!livingEntity.level().isClientSide) {
                 var handler = MalumLivingEntityDataCapability.getCapability(livingEntity).malignantConversionHandler;

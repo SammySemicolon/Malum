@@ -1,12 +1,10 @@
 package com.sammy.malum.data;
 
 import com.sammy.malum.*;
-import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.HolderLookup.*;
 import net.minecraft.data.*;
 import net.minecraft.data.tags.*;
-import net.minecraft.resources.*;
 import net.neoforged.neoforge.common.data.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 

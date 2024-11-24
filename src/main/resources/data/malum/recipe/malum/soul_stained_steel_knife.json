@@ -1,0 +1,31 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "farmersdelight",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          " X",
+          "# "
+        ],
+        "key": {
+          "#": {
+            "tag": "forge:rods/wooden"
+          },
+          "X": {
+            "item": "malum:soul_stained_steel_ingot"
+          }
+        },
+        "result": {
+          "id": "malum:soul_stained_steel_knife"
+        }
+      }
+    }
+  ]
+}

@@ -1,10 +1,8 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.miracle;
 
 import com.sammy.malum.common.item.curiosities.curios.runes.*;
-import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

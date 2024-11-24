@@ -11,7 +11,6 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 public abstract class SpiritBasedBlockParticleEffectPacket extends BlockBasedParticleEffectPacket {
     protected final List<String> spirits;

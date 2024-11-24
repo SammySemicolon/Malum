@@ -9,8 +9,6 @@ import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import top.theillusivec4.curios.api.*;
 
-import java.util.*;
-
 public class CurioElaborateBrooch extends MalumCurioItem {
 
     public static final ResourceLocation ELABORATE_BROOCH_NECKLACE = MalumMod.malumPath("elaborate_brooch_necklace");

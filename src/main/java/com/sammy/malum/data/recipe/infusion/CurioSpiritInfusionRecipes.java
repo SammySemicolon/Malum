@@ -4,11 +4,8 @@ import com.sammy.malum.data.recipe.builder.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.common.crafting.*;
-
-import java.util.function.*;
 
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 

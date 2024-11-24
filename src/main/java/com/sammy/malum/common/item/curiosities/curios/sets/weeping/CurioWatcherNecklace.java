@@ -52,7 +52,7 @@ public class CurioWatcherNecklace extends MalumCurioItem implements IMalumEventR
         }
     }
 
-    public static void entityTick(EntityTickEvent event) {
+    public static void entityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity entity) {
             MalumLivingEntityDataCapability.getCapabilityOptional(entity).ifPresent(c -> {
                 if (c.watcherNecklaceCooldown > 0) {

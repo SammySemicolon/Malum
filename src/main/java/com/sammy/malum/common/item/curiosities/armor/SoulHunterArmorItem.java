@@ -23,7 +23,6 @@ import team.lodestar.lodestone.registry.common.LodestoneAttributes;
 import team.lodestar.lodestone.systems.model.LodestoneArmorModel;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 import static com.sammy.malum.registry.common.item.ArmorTiers.SPIRIT_HUNTER;

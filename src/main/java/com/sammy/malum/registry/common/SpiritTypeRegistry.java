@@ -1,11 +1,8 @@
 package com.sammy.malum.registry.common;
 
-import com.sammy.malum.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.item.*;
 
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.common.EventBusSubscriber;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.easing.*;
 
@@ -13,7 +10,6 @@ import java.awt.*;
 import java.util.List;
 import java.util.*;
 
-@EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class SpiritTypeRegistry {
 
     public static Map<String, MalumSpiritType> SPIRITS = new LinkedHashMap<>(); //convert to deferred register

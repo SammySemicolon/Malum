@@ -4,10 +4,8 @@ import com.sammy.malum.common.item.IMalumEventResponderItem;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.core.systems.events.*;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.*;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
 import team.lodestar.lodestone.helpers.*;
 
 import java.util.function.Consumer;

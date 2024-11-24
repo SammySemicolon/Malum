@@ -1,7 +1,6 @@
 package com.sammy.malum.registry.common.block;
 
 import com.sammy.malum.*;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.*;
 import net.minecraft.tags.*;

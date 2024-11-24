@@ -1,15 +1,11 @@
 package com.sammy.malum.common.block.curiosities.repair_pylon;
 
 import net.minecraft.core.*;
-import net.minecraft.world.item.context.*;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.shapes.*;
 import net.neoforged.neoforge.items.*;
 import team.lodestar.lodestone.systems.block.*;
-
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.*;
 
 public class RepairPylonCoreBlock<T extends RepairPylonCoreBlockEntity> extends WaterLoggedEntityBlock<T> {
 

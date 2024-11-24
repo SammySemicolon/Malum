@@ -1,0 +1,16 @@
+{
+  "values": [
+    "#c:ores",
+    "#c:storage_blocks",
+    "#c:ingots",
+    "#c:nuggets",
+    "#c:gems",
+    "#c:raw_materials",
+    "#minecraft:coals",
+    "#malum:metal_nodes",
+    {
+      "id": "tetra:geode",
+      "required": false
+    }
+  ]
+}

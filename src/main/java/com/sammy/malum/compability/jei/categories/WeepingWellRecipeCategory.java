@@ -1,6 +1,5 @@
 package com.sammy.malum.compability.jei.categories;
 
-import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.recipe.void_favor.FavorOfTheVoidRecipe;
 import com.sammy.malum.compability.jei.JEIHandler;
 import com.sammy.malum.registry.common.item.ItemRegistry;
@@ -31,7 +30,7 @@ public class WeepingWellRecipeCategory implements IRecipeCategory<FavorOfTheVoid
 
     public WeepingWellRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createBlankDrawable(142, 185);
-        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MALUM, "textures/gui/weeping_well_jei.png"), 0, 0, 142, 183);
+        overlay = guiHelper.createDrawable(malumPath("textures/gui/weeping_well_jei.png"), 0, 0, 142, 183);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.VOID_DEPOT.get()));
     }
 

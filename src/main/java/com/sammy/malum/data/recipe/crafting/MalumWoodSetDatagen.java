@@ -10,11 +10,9 @@ import net.minecraft.world.level.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.common.conditions.*;
 
-import java.util.function.*;
-
 import static com.sammy.malum.MalumMod.*;
-import static com.sammy.malum.data.recipe.MalumVanillaRecipes.*;
 import static net.minecraft.data.recipes.RecipeBuilder.*;
+import static com.sammy.malum.data.recipe.MalumVanillaRecipes.*;
 import static net.minecraft.data.recipes.ShapedRecipeBuilder.*;
 import static net.minecraft.data.recipes.ShapelessRecipeBuilder.*;
 

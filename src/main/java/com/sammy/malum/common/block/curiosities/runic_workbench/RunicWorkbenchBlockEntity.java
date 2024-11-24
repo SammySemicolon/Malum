@@ -21,12 +21,9 @@ import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.network.PacketDistributor;
-import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.helpers.block.*;
 
 import java.util.*;
-
-import static com.sammy.malum.registry.common.PacketRegistry.*;
 
 public class RunicWorkbenchBlockEntity extends MalumItemHolderBlockEntity {
 

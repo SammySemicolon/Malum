@@ -27,7 +27,6 @@ import org.lwjgl.opengl.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.registry.common.*;
-import team.lodestar.lodestone.registry.common.tag.LodestoneDamageTypeTags;
 import team.lodestar.lodestone.systems.rendering.*;
 import team.lodestar.lodestone.systems.rendering.shader.*;
 
@@ -124,7 +123,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             });
         }
     }
-    public static void entityTick(EntityTickEvent event) {
+    public static void entityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity entity) {
             var level = entity.level();
             MalumLivingEntityDataCapability.getCapabilityOptional(entity).ifPresent(c -> {

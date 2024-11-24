@@ -31,8 +31,8 @@ public class FishingHookEntityMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/Level;II)V", at = @At("RETURN"))
     private void malumModifyFishingLuckStatsMixin(Player p_37106_, Level p_37107_, int p_37108_, int p_37109_, CallbackInfo ci) {
-        if (malum$player.hasEffect(MobEffectRegistry.ANGLERS_LURE.get())) {
-            float bonus = (malum$player.getEffect(MobEffectRegistry.ANGLERS_LURE.get()).getAmplifier() / 2f);
+        if (malum$player.hasEffect(MobEffectRegistry.ANGLERS_LURE)) {
+            float bonus = (malum$player.getEffect(MobEffectRegistry.ANGLERS_LURE).getAmplifier() / 2f);
             luck += bonus * 2f;
             lureSpeed += bonus + 0.5f;
         }

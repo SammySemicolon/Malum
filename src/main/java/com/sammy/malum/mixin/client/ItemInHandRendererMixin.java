@@ -1,7 +1,6 @@
 package com.sammy.malum.mixin.client;
 
 import com.sammy.malum.common.item.curiosities.*;
-import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.world.item.*;
 import org.spongepowered.asm.mixin.*;

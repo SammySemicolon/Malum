@@ -6,13 +6,9 @@ import com.sammy.malum.client.screen.codex.pages.*;
 import com.sammy.malum.core.systems.recipe.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
-
-import java.util.Optional;
 
 import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.renderItem;
 

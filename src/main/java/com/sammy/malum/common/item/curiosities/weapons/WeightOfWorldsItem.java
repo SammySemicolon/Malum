@@ -1,17 +1,13 @@
 package com.sammy.malum.common.item.curiosities.weapons;
 
-import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.core.helpers.*;
-import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
-import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.item.tools.*;
 
 public class WeightOfWorldsItem extends LodestoneAxeItem implements ItemEventHandler.IEventResponderItem {

@@ -3,12 +3,12 @@ package com.sammy.malum.registry.common.item;
 import com.mojang.serialization.Codec;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.*;
+import com.sammy.malum.common.item.curiosities.TemporarilyDisabledItem.Disabled;
 import com.sammy.malum.common.item.spirit.RitualShardItem;
 import com.sammy.malum.common.item.spirit.SpiritJarItem;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.util.*;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -32,6 +32,10 @@ public interface DataComponentRegistry {
 
     DeferredHolder<DataComponentType<?>, DataComponentType<DyedItemColor>> SECONDARY_DYE_COLOR = register("secondary_dye_color", builder ->
             builder.persistent(DyedItemColor.CODEC).networkSynchronized(DyedItemColor.STREAM_CODEC)
+    );
+
+    DeferredHolder<DataComponentType<?>, DataComponentType<Disabled>> DISABLED = register("disabled", builder ->
+            builder.persistent(Disabled.CODEC).networkSynchronized(Disabled.STREAM_CODEC)
     );
 
 

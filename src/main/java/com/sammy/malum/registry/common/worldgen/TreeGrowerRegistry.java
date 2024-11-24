@@ -1,6 +1,5 @@
 package com.sammy.malum.registry.common.worldgen;
 
-import net.minecraft.data.worldgen.features.*;
 import net.minecraft.world.level.block.grower.*;
 
 import java.util.*;

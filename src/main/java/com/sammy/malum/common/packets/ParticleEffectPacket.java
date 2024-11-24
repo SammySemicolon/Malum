@@ -14,7 +14,6 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import team.lodestar.lodestone.systems.network.OneSidedPayloadData;
 
 import javax.annotation.Nullable;
-import java.util.function.Supplier;
 
 public class ParticleEffectPacket extends OneSidedPayloadData {
 

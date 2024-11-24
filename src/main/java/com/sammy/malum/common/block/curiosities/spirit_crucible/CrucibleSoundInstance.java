@@ -1,8 +1,6 @@
 package com.sammy.malum.common.block.curiosities.spirit_crucible;
 
-import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.registry.common.SoundRegistry;
-import net.minecraft.client.Minecraft;
 import team.lodestar.lodestone.systems.sound.*;
 
 public class CrucibleSoundInstance extends CachedBlockEntitySoundInstance<SpiritCrucibleCoreBlockEntity> {

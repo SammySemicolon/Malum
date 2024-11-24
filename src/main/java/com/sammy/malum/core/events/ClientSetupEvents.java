@@ -1,12 +1,14 @@
 package com.sammy.malum.core.events;
 
 import com.sammy.malum.*;
+import com.sammy.malum.client.renderer.item.SpiritJarItemRenderer;
 import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
-import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.handlers.client.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.item.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -18,10 +20,22 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ClientSetupEvents {
 
+    public static IClientItemExtensions SPIRIT_JAR_RENDERER = new IClientItemExtensions() {
+        BlockEntityWithoutLevelRenderer renderer;
+
+        @Override
+        public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+            if (renderer != null) {
+                return renderer = new SpiritJarItemRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                        Minecraft.getInstance().getEntityModels());
+            }
+            return renderer;
+        }
+    };
 
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        event.registerItem(SpiritJarItem.CUSTOM_RENDERER, ItemRegistry.SPIRIT_JAR.get());
+        event.registerItem(SPIRIT_JAR_RENDERER, ItemRegistry.SPIRIT_JAR.get());
     }
 
     @SubscribeEvent

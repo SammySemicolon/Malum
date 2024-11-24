@@ -424,7 +424,7 @@ public class RitualPlinthParticleEffects {
 
     public static void riteActivePlinthParticles(RitualPlinthBlockEntity plinth) {
         Level level = plinth.getLevel();
-        MalumSpiritType spiritType = plinth.type.spirit;
+        MalumSpiritType spiritType = plinth.ritualType.spirit;
         RandomSource random = level.random;
 
         Vec3 ritualIconPos = plinth.getRitualIconPos();

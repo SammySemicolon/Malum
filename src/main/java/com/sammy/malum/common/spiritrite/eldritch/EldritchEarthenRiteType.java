@@ -4,7 +4,6 @@ import com.sammy.malum.common.block.curiosities.totem.*;
 import com.sammy.malum.common.packets.particle.rite.generic.BlockSparkleParticlePacket;
 import com.sammy.malum.common.spiritrite.*;
 import net.minecraft.server.level.*;
-import net.minecraft.world.item.*;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;

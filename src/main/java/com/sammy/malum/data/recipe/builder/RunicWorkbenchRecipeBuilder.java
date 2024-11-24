@@ -2,6 +2,8 @@ package com.sammy.malum.data.recipe.builder;
 
 import com.sammy.malum.*;
 import com.sammy.malum.common.recipe.RunicWorkbenchRecipe;
+import com.sammy.malum.core.systems.recipe.SpiritIngredient;
+import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.*;
@@ -14,7 +16,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class RunicWorkbenchRecipeBuilder implements AutonamedRecipeBuilder<RunicWorkbenchRecipe> {
-    private ItemStack primaryInput, secondaryInput;
+    private ItemStack primaryInput;
+    private SpiritIngredient secondaryInput;
     private final ItemStack output;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
@@ -35,15 +38,10 @@ public class RunicWorkbenchRecipeBuilder implements AutonamedRecipeBuilder<Runic
         return setPrimaryInput(new ItemStack(primaryInput, primaryInputCount));
     }
 
-    public RunicWorkbenchRecipeBuilder setSecondaryInput(ItemStack primaryInput) {
-        this.secondaryInput = primaryInput;
+    public RunicWorkbenchRecipeBuilder setSecondaryInput(MalumSpiritType type, int amount) {
+        this.secondaryInput = new SpiritIngredient(type, amount);
         return this;
     }
-
-    public RunicWorkbenchRecipeBuilder setSecondaryInput(ItemLike primaryInput, int primaryInputCount) {
-        return setSecondaryInput(new ItemStack(primaryInput, primaryInputCount));
-    }
-
 
     @Override
     public Item getResult() {

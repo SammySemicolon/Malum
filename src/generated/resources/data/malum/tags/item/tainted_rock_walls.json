@@ -1,0 +1,13 @@
+{
+  "values": [
+    "malum:tainted_rock_wall",
+    "malum:smooth_tainted_rock_wall",
+    "malum:polished_tainted_rock_wall",
+    "malum:tainted_rock_bricks_wall",
+    "malum:tainted_rock_tiles_wall",
+    "malum:small_tainted_rock_bricks_wall",
+    "malum:runic_tainted_rock_bricks_wall",
+    "malum:runic_tainted_rock_tiles_wall",
+    "malum:runic_small_tainted_rock_bricks_wall"
+  ]
+}

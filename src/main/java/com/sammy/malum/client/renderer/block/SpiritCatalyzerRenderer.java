@@ -17,7 +17,6 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
-import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
 import java.util.*;
 

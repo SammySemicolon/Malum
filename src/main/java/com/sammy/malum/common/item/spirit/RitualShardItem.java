@@ -9,8 +9,6 @@ import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import com.sammy.malum.visual_effects.*;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.*;
-import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

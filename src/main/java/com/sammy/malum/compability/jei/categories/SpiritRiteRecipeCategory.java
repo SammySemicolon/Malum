@@ -1,6 +1,5 @@
 package com.sammy.malum.compability.jei.categories;
 
-import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.screen.codex.ArcanaCodexHelper;
 import com.sammy.malum.compability.jei.JEIHandler;
 import com.sammy.malum.common.spiritrite.TotemicRiteType;
@@ -35,7 +34,7 @@ public class SpiritRiteRecipeCategory implements IRecipeCategory<TotemicRiteType
 
     public SpiritRiteRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createBlankDrawable(142, 185);
-        overlay = guiHelper.createDrawable(new ResourceLocation(MalumMod.MALUM, "textures/gui/spirit_rite_jei.png"), 0, 0, 142, 183);
+        overlay = guiHelper.createDrawable(malumPath("textures/gui/spirit_rite_jei.png"), 0, 0, 142, 183);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.RUNEWOOD_TOTEM_BASE.get()));
         font = Minecraft.getInstance().font;
     }
@@ -74,7 +73,7 @@ public class SpiritRiteRecipeCategory implements IRecipeCategory<TotemicRiteType
     public void setRecipe(IRecipeLayoutBuilder builder, TotemicRiteType rite, IFocusGroup focuses) {
         for (int i = 0; i < rite.spirits.size(); i++) {
             builder.addSlot(RecipeIngredientRole.CATALYST, 63, 121 - 20 * i)
-                    .addItemStack(rite.spirits.get(i).spiritShard.get().getDefaultInstance());
+                    .addItemStack(rite.spirits.get(i).getSpiritShard().getDefaultInstance());
         }
     }
 }

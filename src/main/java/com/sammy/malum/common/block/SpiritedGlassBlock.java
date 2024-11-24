@@ -1,7 +1,6 @@
 package com.sammy.malum.common.block;
 
 import net.minecraft.core.*;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 

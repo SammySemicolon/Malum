@@ -9,6 +9,7 @@ import com.sammy.malum.core.handlers.hiding.flags.FeatureFlagExpandedUniverseSet
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.network.protocol.configuration.ClientboundUpdateEnabledFeaturesPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -40,12 +41,12 @@ public class HiddenTagRegistry {
 	public static void hideItems(BuildCreativeModeTabContentsEvent event) {
 		List<TagKey<Item>> disabledTags = HiddenTagHandler.tagsToHide();
 
-		var iterator = event.getEntries().iterator();
+		var iterator = event.getParentEntries().iterator();
 		while (iterator.hasNext()) {
 			var entry = iterator.next();
 
 			for (TagKey<Item> disabledTag : disabledTags) {
-				if (entry.getKey().is(disabledTag)) {
+				if (entry.is(disabledTag)) {
 					iterator.remove();
 					break;
 				}
@@ -80,7 +81,7 @@ public class HiddenTagRegistry {
 		if (connection != null) {
 			var cachedFlags = ((FeatureFlagCacher) connection).malum$cachedFeatureFlags();
 			if (cachedFlags != null)
-				connection.handleEnabledFeatures(new ClientboundUpdateEnabledFeaturesPacket(Sets.newHashSet(cachedFlags)));
+				connection.send(new ClientboundUpdateEnabledFeaturesPacket(Sets.newHashSet(cachedFlags)));
 		}
 	}
 }

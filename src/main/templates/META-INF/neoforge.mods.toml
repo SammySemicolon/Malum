@@ -1,36 +1,36 @@
 modLoader="javafml"
-loaderVersion="${loaderVersionRange}"
-license="${modLicense}"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
 
 [[mods]]
 modId="malum"
-version="${modVersion}"
-displayName="${modName}"
-authors="${modAuthors}"
-description='''${modDescription}'''
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
 
 [[dependencies.malum]]
 modId="neoforge"
 type="required"
-versionRange="${forgeVersionRange}"
+versionRange="${neo_version_range}"
 ordering="NONE"
 side="BOTH"
 [[dependencies.malum]]
 modId="minecraft"
 type="required"
-versionRange="${minecraftVersionRange}"
+versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
 [[dependencies.malum]]
 modId = "lodestone"
 type="required"
-versionRange = "[1.20.1-1.6.4,)"
+versionRange = "[1.7.0,)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.malum]]
 modId = "curios"
 type="required"
-versionRange = "[5.7.0,)"
+versionRange = "[9,)"
 ordering = "NONE"
 side = "BOTH"
 

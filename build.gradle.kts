@@ -140,7 +140,6 @@ repositories {
 }
 
 dependencies {
-
     // JEI Dependency
     compileOnly(("mezz.jei:jei-${property("minecraft_version")}-neoforge-api:${property("jei_version")}"))
     runtimeOnly(("mezz.jei:jei-${property("minecraft_version")}-neoforge:${property("jei_version")}"))
@@ -161,9 +160,9 @@ dependencies {
     compileOnly(("curse.maven:farmers-delight-398521:5878217"))
 
     // Iron's Spellbooks Optional Dependency
-    runtimeOnly(("software.bernie.geckolib:geckolib-neoforge-${property("minecraft_version")}:${property("gecko_lib_version")}"))
-    runtimeOnly(("dev.kosmx.player-anim:player-animation-lib-forge:${property("player_animator_version")}"))
-    implementation(("curse.maven:irons-spells-n-spellbooks-855414:5863590"))
+    compileOnly(("software.bernie.geckolib:geckolib-neoforge-${property("minecraft_version")}:${property("gecko_lib_version")}"))
+    compileOnly(("dev.kosmx.player-anim:player-animation-lib-forge:${property("player_animator_version")}"))
+    compileOnly(("curse.maven:irons-spells-n-spellbooks-855414:5863590"))
 
     runtimeOnly(("curse.maven:jeed-532286:5693385"))
     runtimeOnly(("curse.maven:spark-361579:5759671"))

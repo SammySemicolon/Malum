@@ -5,8 +5,8 @@
     "minecraft:stone_sword",
     "minecraft:stone_shovel",
     "minecraft:stone_axe",
-    "minecraft:stone_hoe",
-    "minecraft:stone_pickaxe"
+    "minecraft:stone_pickaxe",
+    "minecraft:stone_hoe"
   ],
   "itemIdRegex": ".*",
   "modIdRegex": ".*",

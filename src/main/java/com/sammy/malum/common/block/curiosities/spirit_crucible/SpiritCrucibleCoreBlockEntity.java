@@ -168,7 +168,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
             if (item.equals(ItemRegistry.TUNING_FORK.get())) {
                 tuningType = tuningType.next(tuningType, this);
                 recalibrateAccelerators(level, worldPosition);
-                level.playSound(null, worldPosition, SoundRegistry.TUNING_FORK_TINKERS.get(), SoundSource.BLOCKS, 1.25f+level.random.nextFloat()*0.5f, 0.75f+level.random.nextFloat()*0.5f);
+                level.playSound(null, worldPosition, SoundRegistry.TUNING_FORK_TINKER.get(), SoundSource.BLOCKS, 1.25f+level.random.nextFloat()*0.5f, 0.75f+level.random.nextFloat()*0.5f);
                 BlockStateHelper.updateAndNotifyState(level, worldPosition);
                 return ItemInteractionResult.SUCCESS;
             }

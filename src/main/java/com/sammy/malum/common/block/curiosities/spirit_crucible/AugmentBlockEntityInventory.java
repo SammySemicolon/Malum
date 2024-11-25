@@ -19,11 +19,11 @@ public class AugmentBlockEntityInventory extends MalumBlockEntityInventory {
 
     @Override
     public SoundEvent getInsertSound(ItemStack stack) {
-        return SoundRegistry.APPLY_AUGMENT.get();
+        return SoundRegistry.CRUCIBLE_AUGMENT_APPLY.get();
     }
 
     @Override
     public SoundEvent getExtractSound(ItemStack stack) {
-        return SoundRegistry.REMOVE_AUGMENT.get();
+        return SoundRegistry.CRUCIBLE_AUGMENT_REMOVE.get();
     }
 }

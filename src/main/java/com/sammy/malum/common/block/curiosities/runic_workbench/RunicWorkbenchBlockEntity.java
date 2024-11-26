@@ -57,7 +57,7 @@ public class RunicWorkbenchBlockEntity extends MalumItemHolderBlockEntity {
                     primaryInput.shrink(recipe.primaryInput.count());
                     secondaryInput.shrink(recipe.secondaryInput.getCount());
                     level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, recipe.output.copy()));
-                    level.playSound(null, worldPosition, SoundRegistry.ALTERATION_PLINTH_ALTERS.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.25f);
+                    level.playSound(null, worldPosition, SoundRegistry.RUNIC_WORKBENCH_CRAFT.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.25f);
                     if (secondaryInput.getItem() instanceof SpiritShardItem spirit) {
                         PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(spirit.type.getIdentifier()), itemPos));
                     }

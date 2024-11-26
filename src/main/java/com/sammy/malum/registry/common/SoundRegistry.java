@@ -105,6 +105,7 @@ public class SoundRegistry {
     public static final DeferredHolder<SoundEvent, SoundEvent> ALTAR_SPEED_UP = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_altar_speeds_up")));
 
     public static final DeferredHolder<SoundEvent, SoundEvent> RUNIC_WORKBENCH_CRAFT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("runic_workbench_crafts")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WEAVERS_WORKBENCH_CRAFT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("weavers_workbench_weaves")));
 
     public static final DeferredHolder<SoundEvent, SoundEvent> RITUAL_BEGINS = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("ritual_begins")));
     public static final DeferredHolder<SoundEvent, SoundEvent> RITUAL_ABSORBS_ITEM = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("ritual_absorbs_item")));
@@ -128,8 +129,6 @@ public class SoundRegistry {
     public static final DeferredHolder<SoundEvent, SoundEvent> REPAIR_PYLON_LOOP = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("repair_pylon_eagerly_hums")));
     public static final DeferredHolder<SoundEvent, SoundEvent> REPAIR_PYLON_REPAIR_START = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("repair_pylon_begins_repairing")));
     public static final DeferredHolder<SoundEvent, SoundEvent> REPAIR_PYLON_REPAIR_FINISH = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("repair_pylon_finishes_repairing")));
-
-    public static final DeferredHolder<SoundEvent, SoundEvent> ALTERATION_PLINTH_ALTERS = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("alteration_plinth_alters")));
 
     public static final DeferredHolder<SoundEvent, SoundEvent> UNCANNY_VALLEY = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("the_unknown_weeps")));
     public static final DeferredHolder<SoundEvent, SoundEvent> VOID_HEARTBEAT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("the_void_heart_beats")));

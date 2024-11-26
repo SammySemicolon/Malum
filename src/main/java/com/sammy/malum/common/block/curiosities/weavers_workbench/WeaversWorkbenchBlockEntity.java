@@ -57,7 +57,7 @@ public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity implements
         if (!level.isClientSide) {
             Vec3 itemPos = getItemPos();
             PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(ARCANE_SPIRIT.getIdentifier()), itemPos));
-            level.playSound(null, getBlockPos(), SoundRegistry.ALTERATION_PLINTH_ALTERS.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.25f);
+            level.playSound(null, getBlockPos(), SoundRegistry.WEAVERS_WORKBENCH_CRAFT.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.25f);
         }
         itemHandler.getStackInSlot(0).shrink(1);
         itemHandler.getStackInSlot(1).shrink(1);

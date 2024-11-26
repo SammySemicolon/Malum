@@ -69,6 +69,61 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.SOUL_WARD_GROW, s -> definition(s).with(sounds("curiosities/soul_ward/dmg", 4)));
         this.add(SoundRegistry.SOUL_WARD_CHARGE, s -> definition(s).with(sounds("curiosities/soul_ward/full", 2)));
         this.add(SoundRegistry.SOUL_WARD_DEPLETE, s -> definition(s).with(sounds("curiosities/soul_ward/break", 2)));
+
+        this.add(SoundRegistry.SCYTHE_SWEEP, s -> definition(s).with(sounds("curiosities/weapons/scythe/sweep", 7)));
+        this.add(SoundRegistry.SCYTHE_CUT, s -> definition(s).with(sounds("curiosities/weapons/scythe/sweep", 7)));
+        this.add(SoundRegistry.EDGE_OF_DELIVERANCE_SWEEP, s -> definition(s).with(sounds("curiosities/weapons/scythe/sweep", 7)));
+        this.add(SoundRegistry.EDGE_OF_DELIVERANCE_CUT, s -> definition(s).with(sounds("curiosities/weapons/scythe/sweep", 7)));
+
+        this.add(SoundRegistry.SCYTHE_ASCENSION, s -> definition(s).with(sounds("curiosities/weapons/scythe/throw", 3)));
+        this.add(SoundRegistry.SCYTHE_THROW, s -> definition(s).with(sounds("curiosities/weapons/scythe/throw", 3)));
+        this.add(SoundRegistry.SCYTHE_SPINS, s -> definition(s).with(sound("curiosities/weapons/scythe/spin")));
+        this.add(SoundRegistry.SCYTHE_CATCH, s -> definition(s).with(sounds("curiosities/weapons/scythe/catch", 3)));
+
+        this.add(SoundRegistry.HIDDEN_BLADE_CHARGED, s -> definition(s).with(sound("curiosities/trinkets/hidden_blade/charge")));
+        this.add(SoundRegistry.HIDDEN_BLADE_PRIMED, s -> definition(s).with(sound("curiosities/trinkets/hidden_blade/charge")));
+        this.add(SoundRegistry.HIDDEN_BLADE_DISRUPTED, s -> definition(s).with(sound("curiosities/trinkets/hidden_blade/charge")));
+        this.add(SoundRegistry.HIDDEN_BLADE_UNLEASHED, s -> definition(s).with(sounds("curiosities/trinkets/hidden_blade/flurry", 2)));
+
+        this.add(SoundRegistry.TYRVING_SLASH, s -> definition(s).with(sounds("curiosities/weapons/tyrving/hit", 5)));
+        this.add(SoundRegistry.WEIGHT_OF_WORLDS_CUT, s -> definition(s).with(sounds("curiosities/weapons/scythe/sweep", 7)));
+
+        this.add(SoundRegistry.STAFF_FIRES, s -> definition(s).with(sounds("curiosities/weapons/staff/fire", 2)));
+        this.add(SoundRegistry.STAFF_POWERS_UP, s -> definition(s).with(sounds("curiosities/weapons/staff/charge", 2)));
+        this.add(SoundRegistry.STAFF_SIZZLES, s -> definition(s).with(sounds("curiosities/weapons/staff/sizzle", 2)));
+        this.add(SoundRegistry.STAFF_CHARGED, s -> definition(s).with(sounds("curiosities/weapons/staff/sizzle", 2)));
+        this.add(SoundRegistry.STAFF_STRIKES, s -> definition(s).with(sounds("curiosities/weapons/staff/hit", 4)));
+
+        this.add(SoundRegistry.AURIC_FLAME_MOTIF, s -> definition(s).with(sounds("curiosities/motifs/auric_cinders", 3)));
+        this.add(SoundRegistry.DRAINING_MOTIF, s -> definition(s).with(sounds("curiosities/motifs/draining_bubbling", 3)));
+        this.add(SoundRegistry.MALIGNANT_METAL_MOTIF, s -> definition(s).with(sounds("curiosities/motifs/malignant_crit", 3)));
+
+        this.add(SoundRegistry.ALTAR_LOOP, s -> definition(s).with(sound("altar/altar_loop")));
+        this.add(SoundRegistry.ALTAR_CRAFT, s -> definition(s).with(sounds("altar/altar_craft", 2)));
+        this.add(SoundRegistry.ALTAR_CONSUME, s -> definition(s).with(sounds("altar/altar_speedup", 2)));
+        this.add(SoundRegistry.ALTAR_SPEED_UP, s -> definition(s).with(sounds("altar/altar_consume", 2)));
+
+        this.add(SoundRegistry.CRUCIBLE_LOOP, s -> definition(s).with(sound("crucible/crucible_loop")));
+        this.add(SoundRegistry.CRUCIBLE_CRAFT, s -> definition(s).with(sounds("crucible/crucible_craft", 3)));
+        this.add(SoundRegistry.IMPETUS_CRACK, s -> definition(s).with(sounds("crucible/impetus_crack", 3)));
+
+        this.add(SoundRegistry.REPAIR_PYLON_LOOP, s -> definition(s).with(sound("repair_pylon/repair_pylon_loop")));
+        this.add(SoundRegistry.REPAIR_PYLON_REPAIR_START, s -> definition(s).with(sounds("repair_pylon/repair_pylon_send", 4)));
+        this.add(SoundRegistry.REPAIR_PYLON_REPAIR_FINISH, s -> definition(s).with(sounds("repair_pylon/repair_pylon_fix", 4)));
+
+        this.add(SoundRegistry.RUNIC_WORKBENCH_CRAFT, s -> definition(s).with(sounds("runic_workbench/craft", 2)));
+        this.add(SoundRegistry.WEAVERS_WORKBENCH_CRAFT, s -> definition(s).with(sounds("runic_workbench/craft", 2)));
+
+        this.add(SoundRegistry.RITUAL_BEGINS, s -> definition(s).with(sound("ritual/ritual_start")));
+        this.add(SoundRegistry.RITUAL_ABSORBS_ITEM, s -> definition(s).with(sounds("ritual/ritual_absorb_item", 3)));
+        this.add(SoundRegistry.RITUAL_FORMS, s -> definition(s).with(sound("ritual/ritual_stage2")));
+        this.add(SoundRegistry.RITUAL_ABSORBS_SPIRIT, s -> definition(s).with(sounds("ritual/ritual_absorb_spirit", 3)));
+        this.add(SoundRegistry.RITUAL_EVOLVES, s -> definition(s).with(sounds("ritual/ritual_level_up", 2)));
+        this.add(SoundRegistry.RITUAL_COMPLETED, s -> definition(s).with(sound("ritual/ritual_level_up_max")));
+        this.add(SoundRegistry.RITUAL_BEGINNING_AMBIENCE, s -> definition(s).with(sound("ritual/ritual_loop1")));
+        this.add(SoundRegistry.RITUAL_EVOLUTION_AMBIENCE, s -> definition(s).with(sound("ritual/ritual_loop2")));
+        this.add(SoundRegistry.COMPLETED_RITUAL_AMBIENCE, s -> definition(s).with(sound("ritual/ritual_loop3")));
+
     }
 
     protected SoundDefinition definition(SoundEvent soundEvent) {
@@ -79,10 +134,14 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         add(soundEvent, definition.apply(soundEvent.get()));
     }
 
+    public static SoundDefinition.Sound sound(String name) {
+        return sound(malumPath(name));
+    }
+
     public SoundDefinition.Sound[] sounds(String name, int variants) {
         SoundDefinition.Sound[] sounds = new SoundDefinition.Sound[variants];
         for (int i = 0; i < variants; i++) {
-            sounds[i] = sound(malumPath(name + i));
+            sounds[i] = sound(malumPath(name + (i+1)));
         }
         return sounds;
     }

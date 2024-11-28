@@ -114,6 +114,12 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.RUNIC_WORKBENCH_CRAFT, s -> definition(s).with(sounds("runic_workbench/craft", 2)));
         this.add(SoundRegistry.WEAVERS_WORKBENCH_CRAFT, s -> definition(s).with(sounds("runic_workbench/craft", 2)));
 
+        this.add(SoundRegistry.TOTEM_CHARGE, s -> definition(s).with(sounds("totem/totem_charge", 3)));
+        this.add(SoundRegistry.TOTEM_ACTIVATED, s -> definition(s).with(sound("totem/totem_activate")));
+        this.add(SoundRegistry.TOTEM_CANCELLED, s -> definition(s).with(sound("totem/totem_cancel")));
+        this.add(SoundRegistry.TOTEM_ENGRAVE, s -> definition(s).with(sounds("totem/totem_engrave", 3)));
+        this.add(SoundRegistry.TOTEM_AERIAL_MAGIC, s -> definition(s).with(sounds("minecraft:mob/phantom/flap", 6)));
+
         this.add(SoundRegistry.RITUAL_BEGINS, s -> definition(s).with(sound("ritual/ritual_start")));
         this.add(SoundRegistry.RITUAL_ABSORBS_ITEM, s -> definition(s).with(sounds("ritual/ritual_absorb_item", 3)));
         this.add(SoundRegistry.RITUAL_FORMS, s -> definition(s).with(sound("ritual/ritual_stage2")));
@@ -123,6 +129,13 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.RITUAL_BEGINNING_AMBIENCE, s -> definition(s).with(sound("ritual/ritual_loop1")));
         this.add(SoundRegistry.RITUAL_EVOLUTION_AMBIENCE, s -> definition(s).with(sound("ritual/ritual_loop2")));
         this.add(SoundRegistry.COMPLETED_RITUAL_AMBIENCE, s -> definition(s).with(sound("ritual/ritual_loop3")));
+
+        this.add(SoundRegistry.UNCANNY_VALLEY, s -> definition(s).with(sounds("weeping_well/uncanny_valley", 2)));
+        this.add(SoundRegistry.VOID_HEARTBEAT, s -> definition(s).with(sound("weeping_well/void_heartbeat")));
+        this.add(SoundRegistry.SONG_OF_THE_VOID, s -> definition(s).with(sounds("weeping_well/song_of_the_void", 3)));
+        this.add(SoundRegistry.VOID_REJECTION, s -> definition(s).with(sound("weeping_well/void_rejection")));
+        this.add(SoundRegistry.VOID_TRANSMUTATION, s -> definition(s).with(sounds("weeping_well/void_transmutation", 2)));
+        this.add(SoundRegistry.VOID_EATS_GUNK, s -> definition(s).with(sounds("curiosities/trinkets/starved/nom", 4)));
 
     }
 
@@ -141,7 +154,8 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
     public SoundDefinition.Sound[] sounds(String name, int variants) {
         SoundDefinition.Sound[] sounds = new SoundDefinition.Sound[variants];
         for (int i = 0; i < variants; i++) {
-            sounds[i] = sound(malumPath(name + (i+1)));
+            var resourceLocation = name.contains(":") ? ResourceLocation.parse(name + (i + 1)) : malumPath(name + (i + 1));
+            sounds[i] = sound(resourceLocation);
         }
         return sounds;
     }

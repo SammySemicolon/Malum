@@ -5,7 +5,6 @@ import com.sammy.malum.compability.farmersdelight.*;
 import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.config.*;
-import com.sammy.malum.registry.common.MalumDataComponentRegistry;
 import com.sammy.malum.registry.common.item.tabs.*;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
@@ -59,7 +58,6 @@ public class MalumMod {
         FEATURE_TYPES.register(modBus);
         STRUCTURES.register(modBus);
         CREATIVE_MODE_TABS.register(modBus);
-        MalumDataComponentRegistry.DATA.register(modBus);
 
         TetraCompat.init();
         FarmersDelightCompat.init();

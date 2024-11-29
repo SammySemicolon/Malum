@@ -1,5 +1,7 @@
 package com.sammy.malum.core.systems.ritual;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.sammy.malum.common.block.curiosities.ritual_plinth.*;
 import net.minecraft.resources.*;
 
@@ -17,6 +19,15 @@ public class MalumRitualTier {
     public static final MalumRitualTier BRIGHT = create(new MalumRitualTier(malumPath("bright"), 4096, 4));
     public static final MalumRitualTier VIVID = create(new MalumRitualTier(malumPath("vivid"), 16384, 5));
     public static final MalumRitualTier RADIANT = create(new MalumRitualTier(malumPath("radiant"), 65536, 6));
+
+    public static final Codec<MalumRitualTier> CODEC = ResourceLocation.CODEC.flatXmap(
+            id -> TIERS.stream()
+                    .filter(tier -> tier.identifier.equals(id))
+                    .findFirst()
+                    .map(DataResult::success)
+                    .orElseThrow(),
+            tier -> DataResult.success(tier.identifier)
+    );
 
     public final ResourceLocation identifier;
     public final int spiritThreshold;

@@ -1,8 +1,6 @@
 {
   "type": "jeed:effect_provider",
-  "effect":{
-    "id": "malum:zephyrs_courage"
-  },
+  "effect": "malum:zephyrs_courage",
   "providers": [
     {
       "item": "malum:runewood_totem_base"

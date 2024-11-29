@@ -1,8 +1,6 @@
 {
   "type": "jeed:effect_provider",
-  "effect":{
-    "id": "malum:gaias_bulwark"
-  },
+  "effect":"malum:gaias_bulwark",
   "providers": [
     {
       "item": "malum:runewood_totem_base"

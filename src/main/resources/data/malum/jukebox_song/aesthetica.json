@@ -4,5 +4,5 @@
     "translate": "jukebox_song.malum.aesthetica"
   },
   "length_in_seconds": 7920.0,
-  "sound_event": "malum:music_disc.malum.aesthetica"
+  "sound_event": "malum:aesthetica"
 }

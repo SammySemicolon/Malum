@@ -4,7 +4,7 @@
       "type": "neoforge:not",
       "value": {
         "type": "neoforge:tag_empty",
-        "tag": "forge:nuggets/silver"
+        "tag": "neoforge:nuggets/silver"
       }
     }
   ],
@@ -13,7 +13,7 @@
   "cookingtime": 200,
   "experience": 0.25,
   "ingredient": {
-    "tag": "forge:nuggets/silver"
+    "tag": "neoforge:nuggets/silver"
   },
   "result": {
     "count": 1,

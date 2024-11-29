@@ -6,11 +6,15 @@ import com.sammy.malum.common.sound.QuartzClusterSoundType;
 import com.sammy.malum.common.sound.QuartzSoundType;
 import com.sammy.malum.common.sound.RareEarthSoundType;
 import net.minecraft.core.registries.*;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.level.block.SoundType;
 import net.neoforged.neoforge.common.util.*;
 import net.neoforged.neoforge.registries.*;
+
+import java.util.function.Supplier;
 
 import static com.sammy.malum.MalumMod.MALUM;
 
@@ -264,6 +268,10 @@ public class SoundRegistry {
     public static final DeferredHolder<SoundEvent, SoundEvent> ARCANE_ELEGY = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("arcane_elegy")));
     public static final DeferredHolder<SoundEvent, SoundEvent> AESTHETICA = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("aesthetica")));
 
+    public static final ResourceKey<JukeboxSong> ARCANE_ELEGY_KEY =  register("arcane_elegy");
+    public static final ResourceKey<JukeboxSong> AESTHETICA_KEY =  register("aesthetica");
+
+
     public static final SoundType SOULSTONE = new DeferredSoundType(1.0F, 1.0F, SOULSTONE_BREAK, SOULSTONE_STEP, SOULSTONE_PLACE, SOULSTONE_HIT, () -> SoundEvents.STONE_FALL);
     public static final SoundType DEEPSLATE_SOULSTONE = new DeferredSoundType(1.0F, 1.0F, DEEPSLATE_SOULSTONE_BREAK, DEEPSLATE_SOULSTONE_STEP, DEEPSLATE_SOULSTONE_PLACE, DEEPSLATE_SOULSTONE_HIT, () -> SoundEvents.DEEPSLATE_FALL);
     public static final SoundType BLAZING_QUARTZ_ORE = new DeferredSoundType(1.0F, 1.0F, BLAZING_QUARTZ_ORE_BREAK, () -> SoundEvents.NETHER_ORE_STEP, BLAZING_QUARTZ_ORE_PLACE, () -> SoundEvents.NETHER_ORE_HIT, () -> SoundEvents.NETHER_GOLD_ORE_FALL);
@@ -307,5 +315,9 @@ public class SoundRegistry {
 
     public static DeferredHolder<SoundEvent, SoundEvent> register(SoundEvent soundEvent) {
         return SOUNDS.register(soundEvent.getLocation().getPath(), () -> soundEvent);
+    }
+
+    public static ResourceKey<JukeboxSong> register(String name){
+        return ResourceKey.create(Registries.JUKEBOX_SONG, MalumMod.malumPath(name));
     }
 }

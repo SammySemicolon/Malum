@@ -1,7 +1,7 @@
 {
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "occultism"
     }
   ],
@@ -13,7 +13,7 @@
     "occultism:chalk_purple"
   ],
   "repairMaterial": {
-    "tag": "forge:dusts/obsidian",
+    "tag": "neoforge:dusts/obsidian",
     "count": 2
   },
   "spirits": [

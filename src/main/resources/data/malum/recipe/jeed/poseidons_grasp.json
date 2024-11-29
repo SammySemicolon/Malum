@@ -1,8 +1,6 @@
 {
   "type": "jeed:effect_provider",
-  "effect":{
-    "id": "malum:poseidons_grasp"
-  },
+  "effect": "malum:poseidons_grasp",
   "providers": [
     {
       "item": "malum:runewood_totem_base"

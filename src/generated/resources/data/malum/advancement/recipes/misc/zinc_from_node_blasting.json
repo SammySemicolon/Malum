@@ -4,7 +4,7 @@
       "type": "neoforge:not",
       "value": {
         "type": "neoforge:tag_empty",
-        "tag": "forge:nuggets/zinc"
+        "tag": "neoforge:nuggets/zinc"
       }
     }
   ],

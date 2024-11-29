@@ -64,7 +64,7 @@ neoForge {
         }
 
         configureEach {
-            systemProperty("forge.logging.markers", "REGISTRIES")
+            systemProperty("neoforge.logging.markers", "REGISTRIES")
             logLevel = org.slf4j.event.Level.DEBUG
         }
     }

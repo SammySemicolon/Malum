@@ -1,8 +1,8 @@
 {
-  "comparator_output": 62,
+  "comparator_output": 15,
   "description": {
     "translate": "jukebox_song.malum.arcane_elegy"
   },
   "length_in_seconds": 5320.0,
-  "sound_event": "malum:music_disc.malum.arcane_elegy"
+  "sound_event": "malum:arcane_elegy"
 }

@@ -46,6 +46,6 @@ public class BlockTagRegistry {
     }
 
     private static TagKey<Block> forgeTag(String name) {
-        return BlockTags.create(ResourceLocation.fromNamespaceAndPath("forge", name));
+        return BlockTags.create(ResourceLocation.fromNamespaceAndPath("neoforge", name));
     }
 }

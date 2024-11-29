@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
-  "loader": "forge:separate_transforms",
+  "loader": "neoforge:separate_transforms",
   "base": {
     "parent": "malum:item/soul_stained_steel_scythe_handheld"
   },

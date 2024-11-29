@@ -1,8 +1,6 @@
 {
   "type": "jeed:effect_provider",
-  "effect":{
-    "id": "malum:aethers_charm"
-  },
+  "effect": "malum:aethers_charm",
   "providers": [
     {
       "item": "malum:soulwood_totem_base"

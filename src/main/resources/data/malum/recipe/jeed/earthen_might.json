@@ -1,8 +1,6 @@
 {
   "type": "jeed:effect_provider",
-  "effect":{
-    "id": "malum:earthen_might"
-  },
+  "effect":"malum:earthen_might",
   "providers": [
     {
       "item": "malum:soulwood_totem_base"

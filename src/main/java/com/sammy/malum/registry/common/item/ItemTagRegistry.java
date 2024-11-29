@@ -79,6 +79,6 @@ public class ItemTagRegistry {
     }
 
     private static TagKey<Item> forgeTag(String name) {
-        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", name));
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("neoforge", name));
     }
 }

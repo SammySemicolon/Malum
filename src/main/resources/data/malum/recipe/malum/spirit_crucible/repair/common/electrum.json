@@ -1,11 +1,11 @@
 {
-  "conditions": [
+  "neoforge:conditions": [
     {
       "value": {
-        "tag": "forge:ingots/electrum",
-        "type": "forge:tag_empty"
+        "tag": "neoforge:ingots/electrum",
+        "type": "neoforge:tag_empty"
       },
-      "type": "forge:not"
+      "type": "neoforge:not"
     }
   ],
   "type": "malum:spirit_repair",
@@ -15,7 +15,7 @@
   "inputs": [
   ],
   "repairMaterial": {
-    "tag": "forge:ingots/electrum",
+    "tag": "neoforge:ingots/electrum",
     "count": 2
   },
   "spirits": [

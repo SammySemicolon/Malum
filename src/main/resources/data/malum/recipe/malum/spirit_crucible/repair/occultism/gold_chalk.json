@@ -1,7 +1,7 @@
 {
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "occultism"
     }
   ],
@@ -13,7 +13,7 @@
     "occultism:chalk_gold"
   ],
   "repairMaterial": {
-    "tag": "forge:dusts/gold",
+    "tag": "neoforge:dusts/gold",
     "count": 1
   },
   "spirits": [

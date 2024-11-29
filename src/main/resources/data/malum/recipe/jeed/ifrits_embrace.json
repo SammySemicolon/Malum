@@ -1,8 +1,6 @@
 {
   "type": "jeed:effect_provider",
-  "effect":{
-    "id": "malum:ifrits_embrace"
-  },
+  "effect": "malum:ifrits_embrace",
   "providers": [
     {
       "item": "malum:soulwood_totem_base"

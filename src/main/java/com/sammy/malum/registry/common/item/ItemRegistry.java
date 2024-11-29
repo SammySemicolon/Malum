@@ -10,7 +10,6 @@ import com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer.*;
 import com.sammy.malum.common.block.nature.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.*;
-import com.sammy.malum.common.item.ArcaneElegyMusicDiscItem;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.augment.core.*;
 import com.sammy.malum.common.item.codex.*;

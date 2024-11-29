@@ -1,11 +1,11 @@
 {
-  "conditions": [
+  "neoforge:conditions": [
     {
       "value": {
-        "tag": "forge:ingots/osmium",
-        "type": "forge:tag_empty"
+        "tag": "neoforge:ingots/osmium",
+        "type": "neoforge:tag_empty"
       },
-      "type": "forge:not"
+      "type": "neoforge:not"
     }
   ],
   "type": "malum:spirit_repair",
@@ -15,7 +15,7 @@
   "inputs": [
   ],
   "repairMaterial": {
-    "tag": "forge:ingots/osmium",
+    "tag": "neoforge:ingots/osmium",
     "count": 2
   },
   "spirits": [

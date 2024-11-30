@@ -3,15 +3,15 @@
   "durabilityPercentage": 0.5,
   "inputs": [
     "malum:crude_scythe",
-    "minecraft:iron_helmet",
-    "minecraft:iron_shovel",
-    "minecraft:iron_leggings",
+    "minecraft:iron_sword",
     "minecraft:iron_chestplate",
-    "minecraft:iron_axe",
-    "minecraft:iron_hoe",
     "minecraft:iron_pickaxe",
+    "minecraft:iron_shovel",
     "minecraft:iron_boots",
-    "minecraft:iron_sword"
+    "minecraft:iron_axe",
+    "minecraft:iron_helmet",
+    "minecraft:iron_hoe",
+    "minecraft:iron_leggings"
   ],
   "itemIdRegex": ".*",
   "modIdRegex": ".*",

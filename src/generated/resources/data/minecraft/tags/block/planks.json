@@ -1,22 +1,22 @@
 {
   "values": [
-    "malum:cut_soulwood_planks",
-    "malum:runewood_tiles",
-    "malum:runewood_boards",
-    "malum:vertical_soulwood_boards",
-    "malum:rustic_runewood_tiles",
     "malum:vertical_rustic_runewood_planks",
-    "malum:vertical_runewood_boards",
-    "malum:rustic_runewood_planks",
-    "malum:runewood_planks",
+    "malum:rustic_soulwood_planks",
+    "malum:vertical_soulwood_boards",
     "malum:vertical_rustic_soulwood_planks",
     "malum:soulwood_planks",
-    "malum:vertical_runewood_planks",
-    "malum:cut_runewood_planks",
-    "malum:rustic_soulwood_planks",
-    "malum:rustic_soulwood_tiles",
-    "malum:soulwood_tiles",
+    "malum:runewood_boards",
     "malum:vertical_soulwood_planks",
-    "malum:soulwood_boards"
+    "malum:rustic_runewood_tiles",
+    "malum:soulwood_boards",
+    "malum:runewood_planks",
+    "malum:soulwood_tiles",
+    "malum:cut_soulwood_planks",
+    "malum:cut_runewood_planks",
+    "malum:vertical_runewood_boards",
+    "malum:vertical_runewood_planks",
+    "malum:rustic_soulwood_tiles",
+    "malum:runewood_tiles",
+    "malum:rustic_runewood_planks"
   ]
 }

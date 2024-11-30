@@ -2,7 +2,7 @@
   "values": [
     "malum:soulwood_sign",
     "malum:soulwood_wall_sign",
-    "malum:runewood_wall_sign",
-    "malum:runewood_sign"
+    "malum:runewood_sign",
+    "malum:runewood_wall_sign"
   ]
 }

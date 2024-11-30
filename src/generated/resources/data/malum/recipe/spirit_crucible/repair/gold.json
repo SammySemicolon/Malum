@@ -2,15 +2,15 @@
   "type": "malum:spirit_repair",
   "durabilityPercentage": 0.5,
   "inputs": [
+    "minecraft:golden_axe",
+    "minecraft:golden_boots",
+    "minecraft:golden_hoe",
+    "minecraft:golden_pickaxe",
+    "minecraft:golden_shovel",
+    "minecraft:golden_leggings",
     "minecraft:golden_helmet",
     "minecraft:golden_sword",
-    "minecraft:golden_boots",
-    "minecraft:golden_shovel",
-    "minecraft:golden_hoe",
-    "minecraft:golden_chestplate",
-    "minecraft:golden_pickaxe",
-    "minecraft:golden_leggings",
-    "minecraft:golden_axe"
+    "minecraft:golden_chestplate"
   ],
   "itemIdRegex": ".*",
   "modIdRegex": ".*",

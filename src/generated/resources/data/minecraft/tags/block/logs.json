@@ -1,17 +1,17 @@
 {
   "values": [
-    "malum:exposed_runewood_log",
     "malum:exposed_soulwood_log",
-    "malum:soulwood",
-    "malum:soulwood_log",
-    "malum:stripped_runewood",
-    "malum:stripped_soulwood_log",
-    "malum:revealed_runewood_log",
-    "malum:revealed_soulwood_log",
-    "malum:runewood",
     "malum:stripped_soulwood",
-    "malum:stripped_runewood_log",
+    "malum:revealed_runewood_log",
+    "malum:soulwood",
     "malum:blighted_soulwood",
+    "malum:stripped_soulwood_log",
+    "malum:stripped_runewood",
+    "malum:soulwood_log",
+    "malum:stripped_runewood_log",
+    "malum:revealed_soulwood_log",
+    "malum:exposed_runewood_log",
+    "malum:runewood",
     "malum:runewood_log"
   ]
 }

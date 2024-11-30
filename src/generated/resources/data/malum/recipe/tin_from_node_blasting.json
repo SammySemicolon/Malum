@@ -4,7 +4,7 @@
       "type": "neoforge:not",
       "value": {
         "type": "neoforge:tag_empty",
-        "tag": "neoforge:nuggets/tin"
+        "tag": "c:nuggets/tin"
       }
     }
   ],
@@ -13,7 +13,7 @@
   "cookingtime": 100,
   "experience": 0.25,
   "ingredient": {
-    "tag": "neoforge:nuggets/tin"
+    "tag": "c:nuggets/tin"
   },
   "result": {
     "count": 1,

@@ -47,9 +47,9 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.RUNE_TRINKET_EQUIP, s -> definition(s).with(sounds("equip_sounds/rune/equip_rune", 3)));
         this.add(SoundRegistry.VOID_TRINKET_EQUIP, s -> definition(s).with(sounds("equip_sounds/void/equip_void", 3)));
 
-        this.add(SoundRegistry.HUNGRY_BELT_FEEDS, s -> definition(s).with(sounds("curiosities/trinkets/starved/nom4", 4)));
-        this.add(SoundRegistry.VORACIOUS_RING_FEEDS, s -> definition(s).with(sounds("curiosities/trinkets/starved/nom4", 4)));
-        this.add(SoundRegistry.GRUESOME_RING_FEEDS, s -> definition(s).with(sounds("curiosities/trinkets/starved/nom4", 4)));
+        this.add(SoundRegistry.HUNGRY_BELT_FEEDS, s -> definition(s).with(sounds("curiosities/trinkets/starved/nom", 4)));
+        this.add(SoundRegistry.VORACIOUS_RING_FEEDS, s -> definition(s).with(sounds("curiosities/trinkets/starved/nom", 4)));
+        this.add(SoundRegistry.GRUESOME_RING_FEEDS, s -> definition(s).with(sounds("curiosities/trinkets/starved/nom", 4)));
         this.add(SoundRegistry.FLESH_RING_ABSORBS, s -> definition(s).with(sounds("curiosities/trinkets/cancer_ring/grow", 3)));
         this.add(SoundRegistry.ECHOING_RING_ABSORBS, s -> definition(s).with(sounds("curiosities/trinkets/cancer_ring/grow", 3))); //TODO: this needs a unique sound
 
@@ -62,8 +62,8 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.SHIELDING_APPARATUS_SHIELDS, s -> definition(s).with(sounds("curiosities/augments/shielding_apparatus_shields", 2)));
 
         this.add(SoundRegistry.ARCANE_WHISPERS, s -> definition(s).with(sounds("curiosities/spirit/spirit_idle", 4)));
-        this.add(SoundRegistry.SPIRIT_PICKUP, s -> definition(s).with(sounds("curiosities/spirit/spirit_pickup4", 4)));
-        this.add(SoundRegistry.SOUL_SHATTER, s -> definition(s).with(sounds("curiosities/spirit/soul_shatter", 3)));
+        this.add(SoundRegistry.SPIRIT_PICKUP, s -> definition(s).with(sounds("curiosities/spirit/spirit_pickup", 4)));
+        this.add(SoundRegistry.SOUL_SHATTER, s -> definition(s).with(sounds("curiosities/soul_shatter", 3)));
 
         this.add(SoundRegistry.SOUL_WARD_HIT, s -> definition(s).with(sounds("curiosities/soul_ward/grow", 4)));
         this.add(SoundRegistry.SOUL_WARD_GROW, s -> definition(s).with(sounds("curiosities/soul_ward/dmg", 4)));
@@ -78,7 +78,7 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.SCYTHE_ASCENSION, s -> definition(s).with(sounds("curiosities/weapons/scythe/throw", 3)));
         this.add(SoundRegistry.SCYTHE_THROW, s -> definition(s).with(sounds("curiosities/weapons/scythe/throw", 3)));
         this.add(SoundRegistry.SCYTHE_SPINS, s -> definition(s).with(sound("curiosities/weapons/scythe/spin")));
-        this.add(SoundRegistry.SCYTHE_CATCH, s -> definition(s).with(sounds("curiosities/weapons/scythe/catch", 3)));
+        this.add(SoundRegistry.SCYTHE_CATCH, s -> definition(s).with(sounds("curiosities/weapons/scythe/catch", 2)));
 
         this.add(SoundRegistry.HIDDEN_BLADE_CHARGED, s -> definition(s).with(sound("curiosities/trinkets/hidden_blade/charge")));
         this.add(SoundRegistry.HIDDEN_BLADE_PRIMED, s -> definition(s).with(sound("curiosities/trinkets/hidden_blade/charge")));
@@ -136,6 +136,150 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.VOID_REJECTION, s -> definition(s).with(sound("weeping_well/void_rejection")));
         this.add(SoundRegistry.VOID_TRANSMUTATION, s -> definition(s).with(sounds("weeping_well/void_transmutation", 2)));
         this.add(SoundRegistry.VOID_EATS_GUNK, s -> definition(s).with(sounds("curiosities/trinkets/starved/nom", 4)));
+
+
+        this.add(SoundRegistry.QUARTZ_CLUSTER_BLOCK_BREAK, s -> definition(s).with(sounds("blocks/gemstone/break", 4)));
+        this.add(SoundRegistry.QUARTZ_CLUSTER_BLOCK_STEP, s -> definition(s).with(sounds("blocks/gemstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+        this.add(SoundRegistry.QUARTZ_CLUSTER_BLOCK_PLACE, s -> definition(s).with(sounds("blocks/gemstone/break", 4)));
+        this.add(SoundRegistry.QUARTZ_CLUSTER_BLOCK_HIT, s -> definition(s).with(sounds("blocks/gemstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+
+
+        this.add(SoundRegistry.CATALYST_LOBBER_UNLOCKED, s -> definition(s).with(sounds("curiosities/catalyst_lobber/open", 2)));
+        this.add(SoundRegistry.CATALYST_LOBBER_LOCKED, s -> definition(s).with(sounds("curiosities/catalyst_lobber/open", 2)));
+        this.add(SoundRegistry.CATALYST_LOBBER_PRIMED, s -> definition(s).with(sounds("curiosities/catalyst_lobber/load", 2)));
+        this.add(SoundRegistry.CATALYST_LOBBER_FIRED, s -> definition(s).with(sounds("curiosities/catalyst_lobber/fire", 2)));
+
+        this.add(SoundRegistry.THE_DEEP_BECKONS, s -> definition(s).with(sound("suspicious_sound")));
+        this.add(SoundRegistry.THE_HEAVENS_SIGN, s -> definition(s).with(sound("heavenly_organs")));
+
+
+        this.add(SoundRegistry.RUNEWOOD_BREAK, s -> definition(s).with(sounds("blocks/runewood/break", 6)));
+        this.add(SoundRegistry.RUNEWOOD_STEP, s -> definition(s).with(sounds("blocks/runewood/hit", 6)));
+        this.add(SoundRegistry.RUNEWOOD_PLACE, s -> definition(s).with(sounds("blocks/runewood/break", 6)));
+        this.add(SoundRegistry.RUNEWOOD_HIT, s -> definition(s).with(sounds("blocks/runewood/hit", 6)));
+
+        this.add(SoundRegistry.RUNEWOOD_HANGING_SIGN_BREAK, s -> definition(s).with(sounds("blocks/runewood/hanging_sign/break", 4)));
+        this.add(SoundRegistry.RUNEWOOD_HANGING_SIGN_STEP, s -> definition(s).with(sounds("blocks/runewood/hanging_sign/step", 4)));
+        this.add(SoundRegistry.RUNEWOOD_HANGING_SIGN_PLACE, s -> definition(s).with(sounds("blocks/runewood/hanging_sign/break", 4)));
+        this.add(SoundRegistry.RUNEWOOD_HANGING_SIGN_HIT, s -> definition(s).with(sounds("blocks/runewood/hanging_sign/step", 4)));
+
+
+        this.add(SoundRegistry.RUNEWOOD_BUTTON_CLICK_OFF, s -> definition(s).with(sound("blocks/runewood/button/runewood_button")));
+        this.add(SoundRegistry.RUNEWOOD_BUTTON_CLICK_ON, s -> definition(s).with(sound("blocks/runewood/button/runewood_button")));
+        this.add(SoundRegistry.RUNEWOOD_PRESSURE_PLATE_CLICK_OFF, s -> definition(s).with(sound("blocks/runewood/button/runewood_button")));
+        this.add(SoundRegistry.RUNEWOOD_PRESSURE_PLATE_CLICK_ON, s -> definition(s).with(sound("blocks/runewood/button/runewood_button")));
+        this.add(SoundRegistry.RUNEWOOD_FENCE_GATE_CLOSE, s -> definition(s).with(sounds("blocks/runewood/fence_gate/toggle", 3)));
+        this.add(SoundRegistry.RUNEWOOD_FENCE_GATE_OPEN, s -> definition(s).with(sounds("blocks/runewood/fence_gate/toggle", 3)));
+        this.add(SoundRegistry.RUNEWOOD_DOOR_CLOSE, s -> definition(s).with(sounds("blocks/runewood/door/toggle", 3)));
+        this.add(SoundRegistry.RUNEWOOD_DOOR_OPEN, s -> definition(s).with(sounds("blocks/runewood/door/toggle", 3)));
+        this.add(SoundRegistry.RUNEWOOD_TRAPDOOR_CLOSE, s -> definition(s).with(sounds("blocks/runewood/trapdoor/toggle", 3)));
+        this.add(SoundRegistry.RUNEWOOD_TRAPDOOR_OPEN, s -> definition(s).with(sounds("blocks/runewood/trapdoor/toggle", 3)));
+
+        this.add(SoundRegistry.SOULWOOD_BREAK, s -> definition(s).with(sounds("blocks/runewood/break", 6)));
+        this.add(SoundRegistry.SOULWOOD_STEP, s -> definition(s).with(sounds("blocks/runewood/hit", 6)));
+        this.add(SoundRegistry.SOULWOOD_PLACE, s -> definition(s).with(sounds("blocks/runewood/break", 6)));
+        this.add(SoundRegistry.SOULWOOD_HIT, s -> definition(s).with(sounds("blocks/runewood/hit", 6)));
+
+        this.add(SoundRegistry.SOULWOOD_HANGING_SIGN_BREAK, s -> definition(s).with(sounds("blocks/runewood/hanging_sign/break", 4)));
+        this.add(SoundRegistry.SOULWOOD_HANGING_SIGN_STEP, s -> definition(s).with(sounds("blocks/runewood/hanging_sign/step", 4)));
+        this.add(SoundRegistry.SOULWOOD_HANGING_SIGN_PLACE, s -> definition(s).with(sounds("blocks/runewood/hanging_sign/break", 4)));
+        this.add(SoundRegistry.SOULWOOD_HANGING_SIGN_HIT, s -> definition(s).with(sounds("blocks/runewood/hanging_sign/step", 4)));
+
+
+        this.add(SoundRegistry.SOULWOOD_BUTTON_CLICK_OFF, s -> definition(s).with(sound("blocks/runewood/button/runewood_button")));
+        this.add(SoundRegistry.SOULWOOD_BUTTON_CLICK_ON, s -> definition(s).with(sound("blocks/runewood/button/runewood_button")));
+        this.add(SoundRegistry.SOULWOOD_PRESSURE_PLATE_CLICK_OFF, s -> definition(s).with(sound("blocks/runewood/button/runewood_button")));
+        this.add(SoundRegistry.SOULWOOD_PRESSURE_PLATE_CLICK_ON, s -> definition(s).with(sound("blocks/runewood/button/runewood_button")));
+        this.add(SoundRegistry.SOULWOOD_FENCE_GATE_CLOSE, s -> definition(s).with(sounds("blocks/runewood/fence_gate/toggle", 3)));
+        this.add(SoundRegistry.SOULWOOD_FENCE_GATE_OPEN, s -> definition(s).with(sounds("blocks/runewood/fence_gate/toggle", 3)));
+        this.add(SoundRegistry.SOULWOOD_DOOR_CLOSE, s -> definition(s).with(sounds("blocks/runewood/door/toggle", 3)));
+        this.add(SoundRegistry.SOULWOOD_DOOR_OPEN, s -> definition(s).with(sounds("blocks/runewood/door/toggle", 3)));
+        this.add(SoundRegistry.SOULWOOD_TRAPDOOR_CLOSE, s -> definition(s).with(sounds("blocks/runewood/trapdoor/toggle", 3)));
+        this.add(SoundRegistry.SOULWOOD_TRAPDOOR_OPEN, s -> definition(s).with(sounds("blocks/runewood/trapdoor/toggle", 3)));
+
+
+        this.add(SoundRegistry.ARCANE_ROCK_BREAK, s -> definition(s).with(sounds("blocks/arcane_rock/break", 6)));
+        this.add(SoundRegistry.ARCANE_ROCK_STEP, s -> definition(s).with(sounds("blocks/arcane_rock/hit", 6)).with(sounds("minecraft:block/basalt/step", 6)));
+        this.add(SoundRegistry.ARCANE_ROCK_PLACE, s -> definition(s).with(sounds("blocks/arcane_rock/break", 6)));
+        this.add(SoundRegistry.ARCANE_ROCK_HIT, s -> definition(s).with(sounds("blocks/arcane_rock/hit", 6)).with(sounds("minecraft:block/basalt/step", 6)));
+
+        this.add(SoundRegistry.ARCANE_ROCK_BRICKS_BREAK, s -> definition(s).with(sounds("blocks/arcane_rock/bricks/break", 6)));
+        this.add(SoundRegistry.ARCANE_ROCK_BRICKS_STEP, s -> definition(s).with(sounds("blocks/arcane_rock/bricks/hit", 6)).with(sounds("minecraft:block/basalt/step", 6)));
+        this.add(SoundRegistry.ARCANE_ROCK_BRICKS_PLACE, s -> definition(s).with(sounds("blocks/arcane_rock/bricks/break", 6)));
+        this.add(SoundRegistry.ARCANE_ROCK_BRICKS_HIT, s -> definition(s).with(sounds("blocks/arcane_rock/bricks/hit", 6)).with(sounds("minecraft:block/basalt/step", 6)));
+
+        this.add(SoundRegistry.SOULSTONE_BREAK, s -> definition(s).with(sounds("blocks/soulstone/break", 4)));
+        this.add(SoundRegistry.SOULSTONE_STEP, s -> definition(s).with(sounds("blocks/soulstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+        this.add(SoundRegistry.SOULSTONE_PLACE, s -> definition(s).with(sounds("blocks/soulstone/break", 4)));
+        this.add(SoundRegistry.SOULSTONE_HIT, s -> definition(s).with(sounds("blocks/soulstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+
+        this.add(SoundRegistry.DEEPSLATE_SOULSTONE_BREAK, s -> definition(s).with(sounds("blocks/soulstone/deepslate/break", 4)));
+        this.add(SoundRegistry.DEEPSLATE_SOULSTONE_STEP, s -> definition(s).with(sounds("blocks/soulstone/deepslate/break", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+        this.add(SoundRegistry.DEEPSLATE_SOULSTONE_PLACE, s -> definition(s).with(sounds("blocks/soulstone/deepslate/place", 6)));
+        this.add(SoundRegistry.DEEPSLATE_SOULSTONE_HIT, s -> definition(s).with(sounds("blocks/soulstone/deepslate/place", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+
+
+        this.add(SoundRegistry.BLAZING_QUARTZ_ORE_BREAK, s -> definition(s).with(sounds("blocks/blazing_quartz/break", 4)));
+        this.add(SoundRegistry.BLAZING_QUARTZ_ORE_PLACE, s -> definition(s).with(sounds("blocks/blazing_quartz/break", 4)));
+
+
+        this.add(SoundRegistry.BLAZING_QUARTZ_BLOCK_BREAK, s -> definition(s).with(sounds("blocks/gemstone/break", 4)));
+        this.add(SoundRegistry.BLAZING_QUARTZ_BLOCK_STEP, s -> definition(s).with(sounds("blocks/gemstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+        this.add(SoundRegistry.BLAZING_QUARTZ_BLOCK_PLACE, s -> definition(s).with(sounds("blocks/gemstone/break", 4)));
+        this.add(SoundRegistry.BLAZING_QUARTZ_BLOCK_HIT, s -> definition(s).with(sounds("blocks/gemstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+
+        this.add(SoundRegistry.BRILLIANCE_BLOCK_BREAK, s -> definition(s).with(sounds("blocks/gemstone/break", 4)));
+        this.add(SoundRegistry.BRILLIANCE_BLOCK_STEP, s -> definition(s).with(sounds("blocks/gemstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+        this.add(SoundRegistry.BRILLIANCE_BLOCK_PLACE, s -> definition(s).with(sounds("blocks/gemstone/break", 4)));
+        this.add(SoundRegistry.BRILLIANCE_BLOCK_HIT, s -> definition(s).with(sounds("blocks/gemstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+
+
+        this.add(SoundRegistry.CTHONIC_GOLD_BREAK, s -> definition(s).with(sounds("blocks/cthonic_gold/break", 4)));
+        this.add(SoundRegistry.CTHONIC_GOLD_PLACE, s -> definition(s).with(sounds("blocks/cthonic_gold/break", 4)));
+
+
+        this.add(SoundRegistry.ARCANE_CHARCOAL_BLOCK_BREAK, s -> definition(s).with(sounds("blocks/gemstone/break", 4)));
+        this.add(SoundRegistry.ARCANE_CHARCOAL_BLOCK_STEP, s -> definition(s).with(sounds("blocks/gemstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+        this.add(SoundRegistry.ARCANE_CHARCOAL_BLOCK_PLACE, s -> definition(s).with(sounds("blocks/gemstone/break", 4)));
+        this.add(SoundRegistry.ARCANE_CHARCOAL_BLOCK_HIT, s -> definition(s).with(sounds("blocks/gemstone/hit", 4)).with(sounds("minecraft:block/basalt/step", 6)));
+
+        this.add(SoundRegistry.HALLOWED_GOLD_BREAK, s -> definition(s).with(sounds("blocks/hallowed_gold/break", 4)));
+        this.add(SoundRegistry.HALLOWED_GOLD_STEP, s -> definition(s).with(sounds("blocks/hallowed_gold/hit", 4)));
+        this.add(SoundRegistry.HALLOWED_GOLD_PLACE, s -> definition(s).with(sounds("blocks/hallowed_gold/break", 4)));
+        this.add(SoundRegistry.HALLOWED_GOLD_HIT, s -> definition(s).with(sounds("blocks/hallowed_gold/hit", 4)));
+
+        this.add(SoundRegistry.SOUL_STAINED_STEEL_BREAK, s -> definition(s).with(sounds("blocks/soul_stained_steel/break", 4)));
+        this.add(SoundRegistry.SOUL_STAINED_STEEL_STEP, s -> definition(s).with(sounds("blocks/soul_stained_steel/hit", 4)));
+        this.add(SoundRegistry.SOUL_STAINED_STEEL_PLACE, s -> definition(s).with(sounds("blocks/soul_stained_steel/break", 4)));
+        this.add(SoundRegistry.SOUL_STAINED_STEEL_HIT, s -> definition(s).with(sounds("blocks/soul_stained_steel/hit", 4)));
+
+
+        this.add(SoundRegistry.MAJOR_BLIGHT_MOTIF, s -> definition(s).with(sounds("blocks/blight/blight_motif", 6)));
+        this.add(SoundRegistry.MINOR_BLIGHT_MOTIF, s -> definition(s).with(sounds("blocks/blight/minor_blight_motif", 6)));
+
+
+
+        this.add(SoundRegistry.CALCIFIED_BLIGHT_BREAK, s -> definition(s).with(sounds("blocks/calcified_blight/break", 4)));
+        this.add(SoundRegistry.CALCIFIED_BLIGHT_STEP, s -> definition(s).with(sounds("blocks/calcified_blight/hit", 4)));
+        this.add(SoundRegistry.CALCIFIED_BLIGHT_PLACE, s -> definition(s).with(sounds("blocks/calcified_blight/break", 4)));
+        this.add(SoundRegistry.CALCIFIED_BLIGHT_HIT, s -> definition(s).with(sounds("blocks/calcified_blight/hit", 4)));
+
+        this.add(SoundRegistry.ETHER_BREAK, s -> definition(s).with(sounds("blocks/ether/break", 4)));
+        this.add(SoundRegistry.ETHER_PLACE, s -> definition(s).with(sounds("blocks/ether/break", 4)));
+
+
+        this.add(SoundRegistry.RUNEWOOD_LEAVES_BREAK, s -> definition(s).with(sounds("minecraft:block/azalea_leaves/break", 7)));
+        this.add(SoundRegistry.RUNEWOOD_LEAVES_STEP, s -> definition(s).with(sounds("minecraft:block/azalea_leaves/step", 5)));
+        this.add(SoundRegistry.RUNEWOOD_LEAVES_PLACE, s -> definition(s).with(sounds("minecraft:block/azalea_leaves/break", 7)));
+        this.add(SoundRegistry.RUNEWOOD_LEAVES_HIT, s -> definition(s).with(sounds("minecraft:block/azalea_leaves/step", 5)));
+
+        this.add(SoundRegistry.SOULWOOD_LEAVES_BREAK, s -> definition(s).with(sounds("minecraft:block/azalea_leaves/break", 7)));
+        this.add(SoundRegistry.SOULWOOD_LEAVES_STEP, s -> definition(s).with(sounds("minecraft:block/azalea_leaves/step", 5)));
+        this.add(SoundRegistry.SOULWOOD_LEAVES_PLACE, s -> definition(s).with(sounds("minecraft:block/azalea_leaves/break", 7)));
+        this.add(SoundRegistry.SOULWOOD_LEAVES_HIT, s -> definition(s).with(sounds("minecraft:block/azalea_leaves/step", 5)));
+
+        this.add(SoundRegistry.ARCANE_ELEGY, s -> definition(s).with(sound("arcane_elegy")));
+        this.add(SoundRegistry.AESTHETICA, s -> definition(s).with(sound("aesthetica")));
 
     }
 

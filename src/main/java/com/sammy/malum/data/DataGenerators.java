@@ -50,5 +50,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), new MalumCuriosThings(output, helper, provider));
 
+        generator.addProvider(event.includeDev(), new MalumSoundDatagen(output, helper));
+
     }
 }

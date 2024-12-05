@@ -34,8 +34,8 @@ public class MalumLivingEntityDataCapability {
             TouchOfDarknessHandler.CODEC.fieldOf("darknessAfflictionData").forGetter(c -> c.touchOfDarknessHandler),
             Codec.INT.fieldOf("watcherNecklaceCooldown").forGetter(c -> c.watcherNecklaceCooldown),
             Codec.INT.fieldOf("hiddenBladeNecklaceCooldown").forGetter(c -> c.hiddenBladeNecklaceCooldown),
-            Codec.list(ItemStack.CODEC).fieldOf("soulsToApplyToDrops").forGetter(c -> c.soulsToApplyToDrops),
-            UUIDUtil.CODEC.fieldOf("killerUUID").forGetter(c -> c.killerUUID)
+            Codec.list(ItemStack.CODEC).optionalFieldOf("soulsToApplyToDrops", null).forGetter(c -> c.soulsToApplyToDrops),
+            UUIDUtil.CODEC.optionalFieldOf("killerUUID", null).forGetter(c -> c.killerUUID)
     ).apply(obj, MalumLivingEntityDataCapability::new));
 
     public SoulDataHandler soulData = new SoulDataHandler();

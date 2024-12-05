@@ -53,6 +53,7 @@ public class MalumLivingEntityDataCapability {
     public MalumLivingEntityDataCapability(SoulDataHandler soulData, TouchOfDarknessHandler touchOfDarknessHandler, int watcherNecklaceCooldown, int hiddenBladeNecklaceCooldown, List<ItemStack> soulsToApplyToDrops, UUID killerUUID) {
         this.soulData = soulData;
         this.touchOfDarknessHandler = touchOfDarknessHandler;
+        this.watcherNecklaceCooldown = watcherNecklaceCooldown;
         this.hiddenBladeNecklaceCooldown = hiddenBladeNecklaceCooldown;
         this.soulsToApplyToDrops = soulsToApplyToDrops;
         this.killerUUID = killerUUID;

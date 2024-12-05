@@ -1,4 +1,4 @@
-package com.sammy.malum.common.item.curiosities.curios.sets.soulward;
+ package com.sammy.malum.common.item.curiosities.curios.sets.soulward;
 
 import com.google.common.collect.Multimap;
 import com.sammy.malum.MalumMod;

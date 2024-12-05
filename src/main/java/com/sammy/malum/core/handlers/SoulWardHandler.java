@@ -74,7 +74,7 @@ public class SoulWardHandler {
         }
         if (event.getEntity() instanceof Player player) {
             var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
-            handler.addCooldown(player, 4);
+            handler.addCooldown(player, 4f);
             if (!handler.isDepleted()) {
                 var source = event.getSource();
                 float amount = event.getOriginalDamage();

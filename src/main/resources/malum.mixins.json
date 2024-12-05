@@ -12,8 +12,11 @@
     "ExplosionMixin",
     "FeatureFlagSetMixin",
     "FishingHookEntityMixin",
+    "HolderSetNamedMixin",
     "ItemStackMixin",
+    "MappedRegistryMixin",
     "PlayerMixin",
+    "TagKeyMixin",
     "VanillaRecipeProviderMixin",
     "VanillaRecipeProviderMixin$RecipeBuilderMixin",
     "AccessorEvent.PostDamage"

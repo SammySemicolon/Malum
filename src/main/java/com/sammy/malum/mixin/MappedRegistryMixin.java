@@ -21,7 +21,7 @@ public class MappedRegistryMixin {
     private void gsdg(Map<TagKey<?>, List<Holder<?>>> tagMap, CallbackInfo ci) {
 
     }
-    @Inject(method = "createTag", at = @At("HEAD"))
+    @Inject(method = "createTag", at = @At("RETURN"))
     private void gsdgdd(TagKey<?> key, CallbackInfoReturnable<HolderSet.Named<?>> cir) {
         MalumMod.innfddddsdjh(key);
     }

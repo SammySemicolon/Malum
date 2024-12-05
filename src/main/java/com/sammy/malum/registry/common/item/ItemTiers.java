@@ -1,5 +1,7 @@
 package com.sammy.malum.registry.common.item;
 
+import com.google.common.base.Suppliers;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tier;
@@ -8,57 +10,56 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
 
-public class ItemTiers {
-    public enum ItemTierEnum implements Tier {
-        SOUL_STAINED_STEEL(1250, 7.5f, 2.5f, 3, 16, ItemRegistry.SOUL_STAINED_STEEL_INGOT),
-        MALIGNANT_ALLOY(2500, 8f, 4f, 3, 24, ItemRegistry.MALIGNANT_PEWTER_INGOT),
-        TYRVING(1500, 8f, 1f, 3, 16, ItemRegistry.TWISTED_ROCK),
-        HEX_STAFF(1250, 8f, 2.5f, 3, 16, ItemRegistry.MNEMONIC_FRAGMENT),
-        AURIC_STAFF(2500, 8f, 2.5f, 3, 16, ItemRegistry.AURIC_EMBERS);
-        private final int maxUses;
-        private final float efficiency;
-        private final float attackDamage;
-        private final int harvestLevel;
-        private final int enchantability;
-        private final Supplier<Item> repairItem;
+public enum ItemTiers implements Tier{
+    SOUL_STAINED_STEEL(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1250, 7.5f, 2.5f, 16, ItemRegistry.SOUL_STAINED_STEEL_INGOT),
+    MALIGNANT_ALLOY(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2500, 8f, 4f, 24, ItemRegistry.MALIGNANT_PEWTER_INGOT),
+    TYRVING(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1500, 8f, 1f, 16, ItemRegistry.TWISTED_ROCK),
+    HEX_STAFF(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1250, 8f, 2.5f, 16, ItemRegistry.MNEMONIC_FRAGMENT),
+    AURIC_STAFF(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2500, 8f, 2.5f, 16, ItemRegistry.AURIC_EMBERS);
+    
+    private final TagKey<Block> incorrectBlocksForDrops;
+    private final int uses;
+    private final float speed;
+    private final float damage;
+    private final int enchantmentValue;
+    private final Supplier<Ingredient> repairIngredient;
+    
+    ItemTiers(TagKey<Block> incorrectBlockForDrops, int uses, float speed, float damage, int enchantmentValue, Supplier<Item> repairItem) {
+        this.incorrectBlocksForDrops = incorrectBlockForDrops;
+        this.uses = uses;
+        this.speed = speed;
+        this.damage = damage;
+        this.enchantmentValue = enchantmentValue;
+        this.repairIngredient = Suppliers.memoize(()->Ingredient.of(repairItem.get()));
+    }
 
-        ItemTierEnum(int maxUses, float efficiency, float attackDamage, int harvestLevel, int enchantability, Supplier<Item> repairItem) {
-            this.maxUses = maxUses;
-            this.efficiency = efficiency;
-            this.attackDamage = attackDamage;
-            this.harvestLevel = harvestLevel;
-            this.enchantability = enchantability;
-            this.repairItem = repairItem;
-        }
+    @Override
+    public int getUses() {
+        return this.uses;
+    }
 
-        @Override
-        public int getUses() {
-            return maxUses;
-        }
+    @Override
+    public float getSpeed() {
+        return this.speed;
+    }
 
-        @Override
-        public float getSpeed() {
-            return efficiency;
-        }
+    @Override
+    public float getAttackDamageBonus() {
+        return this.damage;
+    }
 
-        @Override
-        public float getAttackDamageBonus() {
-            return attackDamage;
-        }
+    @Override
+    public TagKey<Block> getIncorrectBlocksForDrops() {
+        return this.incorrectBlocksForDrops;
+    }
 
-        @Override
-        public TagKey<Block> getIncorrectBlocksForDrops() {
-            return null;
-        }
+    @Override
+    public int getEnchantmentValue() {
+        return this.enchantmentValue;
+    }
 
-        @Override
-        public int getEnchantmentValue() {
-            return enchantability;
-        }
-
-        @Override
-        public Ingredient getRepairIngredient() {
-            return Ingredient.of(repairItem.get());
-        }
+    @Override
+    public Ingredient getRepairIngredient() {
+        return this.repairIngredient.get();
     }
 }

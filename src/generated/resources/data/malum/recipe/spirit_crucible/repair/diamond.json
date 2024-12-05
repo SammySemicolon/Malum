@@ -2,15 +2,15 @@
   "type": "malum:spirit_repair",
   "durabilityPercentage": 0.5,
   "inputs": [
-    "minecraft:diamond_boots",
-    "minecraft:diamond_sword",
-    "minecraft:diamond_shovel",
-    "minecraft:diamond_axe",
-    "minecraft:diamond_hoe",
-    "minecraft:diamond_helmet",
     "minecraft:diamond_chestplate",
-    "minecraft:diamond_pickaxe",
-    "minecraft:diamond_leggings"
+    "minecraft:diamond_hoe",
+    "minecraft:diamond_axe",
+    "minecraft:diamond_sword",
+    "minecraft:diamond_helmet",
+    "minecraft:diamond_shovel",
+    "minecraft:diamond_boots",
+    "minecraft:diamond_leggings",
+    "minecraft:diamond_pickaxe"
   ],
   "itemIdRegex": ".*",
   "modIdRegex": ".*",

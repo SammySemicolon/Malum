@@ -11,6 +11,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.*;
 import java.util.function.*;

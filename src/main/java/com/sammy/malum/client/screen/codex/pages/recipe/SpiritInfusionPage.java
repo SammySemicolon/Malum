@@ -11,6 +11,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.function.Predicate;
 

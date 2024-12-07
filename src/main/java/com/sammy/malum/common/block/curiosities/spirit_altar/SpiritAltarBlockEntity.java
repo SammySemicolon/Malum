@@ -43,6 +43,7 @@ import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntityInventory;
 import team.lodestar.lodestone.systems.easing.Easing;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import javax.annotation.Nullable;
 import java.util.*;

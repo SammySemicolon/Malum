@@ -36,6 +36,7 @@ import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.multiblock.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import javax.annotation.Nullable;
 import java.util.*;

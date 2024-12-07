@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.network.PacketDistributor;
 import team.lodestar.lodestone.helpers.block.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.*;
 

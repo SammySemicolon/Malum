@@ -23,6 +23,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.*;
 

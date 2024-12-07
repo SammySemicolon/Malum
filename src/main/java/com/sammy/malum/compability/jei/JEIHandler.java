@@ -40,6 +40,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import org.apache.commons.compress.utils.Lists;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -134,7 +135,7 @@ public class JEIHandler implements IModPlugin {
             List<SpiritTransmutationRecipe> leftovers = Lists.newArrayList();
             Map<String, List<SpiritTransmutationRecipe>> groups = Maps.newLinkedHashMap();
             for (SpiritTransmutationRecipe recipe : transmutation) {
-                if (recipe.getGroup() != null) {
+                if (!recipe.getGroup().isEmpty()) {
                     var group = groups.computeIfAbsent(recipe.getGroup(), k -> Lists.newArrayList());
                     group.add(recipe);
                 } else

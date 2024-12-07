@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.*;
 
@@ -136,10 +137,7 @@ public class VoidConduitBlockEntity extends LodestoneBlockEntity {
     }
 
     public Item spitOutItem(ItemStack stack) {
-        FavorOfTheVoidRecipe recipe = LodestoneRecipeType.getRecipe(
-                level, RecipeTypeRegistry.VOID_FAVOR.get(),
-                new SingleRecipeInput(stack)
-        );
+        FavorOfTheVoidRecipe recipe = LodestoneRecipeType.getRecipe(level, RecipeTypeRegistry.VOID_FAVOR.get(), new SingleRecipeInput(stack));
         float pitch = Mth.nextFloat(level.getRandom(), 0.85f, 1.35f) + streak * 0.1f;
         if (recipe != null) {
             streak++;

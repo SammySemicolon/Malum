@@ -9,6 +9,7 @@ import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.world.item.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.function.*;
 

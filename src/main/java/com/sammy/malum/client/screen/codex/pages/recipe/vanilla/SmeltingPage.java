@@ -9,6 +9,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.renderItem;
 

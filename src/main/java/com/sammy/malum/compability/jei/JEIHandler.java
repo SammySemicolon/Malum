@@ -12,7 +12,6 @@ import com.sammy.malum.compability.farmersdelight.FarmersDelightCompat;
 import com.sammy.malum.compability.jei.categories.*;
 import com.sammy.malum.compability.jei.recipes.SpiritTransmutationWrapper;
 import com.sammy.malum.core.handlers.hiding.HiddenTagHandler;
-import com.sammy.malum.core.systems.recipe.LodestoneRecipeType;
 import com.sammy.malum.registry.client.HiddenTagRegistry;
 import com.sammy.malum.registry.common.SpiritRiteRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;

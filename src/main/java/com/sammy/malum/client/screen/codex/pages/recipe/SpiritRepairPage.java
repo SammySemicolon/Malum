@@ -4,7 +4,6 @@ import com.sammy.malum.*;
 import com.sammy.malum.client.screen.codex.pages.*;
 import com.sammy.malum.client.screen.codex.screens.*;
 import com.sammy.malum.common.recipe.*;
-import com.sammy.malum.core.systems.recipe.LodestoneRecipeType;
 import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;

@@ -3,6 +3,7 @@ package com.sammy.malum.common.recipe;
 import com.sammy.malum.core.systems.recipe.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.*;
 
@@ -14,7 +15,6 @@ public abstract class AbstractSpiritListMalumRecipe extends LodestoneInWorldReci
         super(recipeSerializer, recipeType);
         this.spirits = spirits;
     }
-
 
     public List<ItemStack> getSortedSpirits(List<ItemStack> stacks) {
         List<ItemStack> sortedStacks = new ArrayList<>();
@@ -30,7 +30,7 @@ public abstract class AbstractSpiritListMalumRecipe extends LodestoneInWorldReci
     }
 
     public boolean doSpiritsMatch(List<ItemStack> spirits) {
-        if (this.spirits.size() == 0) {
+        if (this.spirits.isEmpty()) {
             return true;
         }
         if (this.spirits.size() != spirits.size()) {

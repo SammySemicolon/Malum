@@ -10,6 +10,7 @@ import com.sammy.malum.core.systems.recipe.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.registries.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 public class RecipeTypeRegistry {
 

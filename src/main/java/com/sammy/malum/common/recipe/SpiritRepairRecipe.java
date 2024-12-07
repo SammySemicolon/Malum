@@ -19,6 +19,16 @@ import java.util.*;
 import java.util.stream.*;
 
 public class SpiritRepairRecipe extends AbstractSpiritListMalumRecipe {
+
+    public static final MapCodec<SpiritRepairRecipe> CODEC = RecordCodecBuilder.mapCodec(obj -> obj.group(
+            Codec.FLOAT.fieldOf("durabilityPercentage").forGetter(recipe -> recipe.durabilityPercentage),
+            Codec.STRING.fieldOf("itemIdRegex").forGetter(recipe -> ".*"),
+            Codec.STRING.fieldOf("modIdRegex").forGetter(recipe -> ".*"),
+            ResourceLocation.CODEC.listOf().fieldOf("inputs").forGetter(recipe -> recipe.inputs.stream().map(BuiltInRegistries.ITEM::getKey).collect(Collectors.toList())),
+            SizedIngredient.FLAT_CODEC.fieldOf("repairMaterial").forGetter(recipe -> recipe.repairMaterial),
+            SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits)
+    ).apply(obj, SpiritRepairRecipe::new));
+
     public static final String NAME = "spirit_repair";
 
     public final float durabilityPercentage;
@@ -76,28 +86,6 @@ public class SpiritRepairRecipe extends AbstractSpiritListMalumRecipe {
 
         default boolean ignoreDuringLookup() {
             return false;
-        }
-    }
-
-    public static class Serializer implements RecipeSerializer<SpiritRepairRecipe> {
-
-        public static final MapCodec<SpiritRepairRecipe> CODEC = RecordCodecBuilder.mapCodec(obj -> obj.group(
-                Codec.FLOAT.fieldOf("durabilityPercentage").forGetter(recipe -> recipe.durabilityPercentage),
-                Codec.STRING.fieldOf("itemIdRegex").forGetter(recipe -> ".*"),
-                Codec.STRING.fieldOf("modIdRegex").forGetter(recipe -> ".*"),
-                ResourceLocation.CODEC.listOf().fieldOf("inputs").forGetter(recipe -> recipe.inputs.stream().map(BuiltInRegistries.ITEM::getKey).collect(Collectors.toList())),
-                SizedIngredient.FLAT_CODEC.fieldOf("repairMaterial").forGetter(recipe -> recipe.repairMaterial),
-                SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits)
-        ).apply(obj, SpiritRepairRecipe::new));
-
-        @Override
-        public MapCodec<SpiritRepairRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, SpiritRepairRecipe> streamCodec() {
-            return ByteBufCodecs.fromCodecWithRegistries(CODEC.codec());
         }
     }
 }

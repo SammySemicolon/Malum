@@ -78,33 +78,4 @@ public class MalumMod {
     public static ResourceLocation malumPath(String path) {
         return ResourceLocation.fromNamespaceAndPath(MALUM, path);
     }
-
-
-    public static void asdas(Map<TagKey<?>, List<Holder<?>>> tagMap) {
-        System.out.print("SAFHSA");
-    }
-
-    public static void aahhhh(ResourceKey<? extends Registry<?>> registry, ResourceLocation location, TagKey<?> returnValue) {
-        if (registry == null) {
-            System.out.println("AAH");
-        }
-        if (location == null) {
-            System.out.println("AAH");
-        }
-        if (returnValue == null) {
-            System.out.println("AAH");
-        }
-    }
-
-    public static void innfsdjh(HolderOwner owner, TagKey key) {
-        if (key == null) {
-            System.out.print("AHFSD");
-        }
-    }
-    public static void innfddddsdjh(TagKey key) {
-        float f = 0;
-        if (key == null) {
-            System.out.print("AHFSD");
-        }
-    }
 }

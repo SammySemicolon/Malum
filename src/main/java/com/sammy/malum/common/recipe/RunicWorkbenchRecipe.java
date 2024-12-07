@@ -12,8 +12,16 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.*;
 import net.neoforged.neoforge.common.crafting.*;
+import team.lodestar.lodestone.systems.recipe.*;
 
 public class RunicWorkbenchRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipeInput> {
+
+    public static final MapCodec<RunicWorkbenchRecipe> CODEC = RecordCodecBuilder.mapCodec(obj -> obj.group(
+            SizedIngredient.FLAT_CODEC.fieldOf("primaryInput").forGetter(recipe -> recipe.primaryInput),
+            SpiritIngredient.CODEC.fieldOf("secondaryInput").forGetter(recipe -> recipe.secondaryInput),
+            ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output)
+    ).apply(obj, RunicWorkbenchRecipe::new));
+
     public static final String NAME = "runeworking";
 
     public final SizedIngredient primaryInput;
@@ -40,25 +48,5 @@ public class RunicWorkbenchRecipe extends LodestoneInWorldRecipe<SpiritBasedReci
     @Override
     public ItemStack getResultItem(HolderLookup.Provider registries) {
         return this.output;
-    }
-
-    public static class Serializer implements RecipeSerializer<RunicWorkbenchRecipe> {
-
-        public static final MapCodec<RunicWorkbenchRecipe> CODEC = RecordCodecBuilder.mapCodec(obj -> obj.group(
-                SizedIngredient.FLAT_CODEC.fieldOf("primaryInput").forGetter(recipe -> recipe.primaryInput),
-                SpiritIngredient.CODEC.fieldOf("secondaryInput").forGetter(recipe -> recipe.secondaryInput),
-                ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output)
-        ).apply(obj, RunicWorkbenchRecipe::new));
-
-        public static final StreamCodec<RegistryFriendlyByteBuf, RunicWorkbenchRecipe> STREAM_CODEC =
-                ByteBufCodecs.fromCodecWithRegistries(CODEC.codec());
-
-        @Override
-        public MapCodec<RunicWorkbenchRecipe> codec() { return CODEC; }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, RunicWorkbenchRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
     }
 }

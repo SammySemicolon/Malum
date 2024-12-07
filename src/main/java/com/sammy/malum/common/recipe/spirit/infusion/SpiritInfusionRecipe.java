@@ -19,9 +19,9 @@ public class SpiritInfusionRecipe extends LodestoneInWorldRecipe<SpiritBasedReci
     public static final MapCodec<SpiritInfusionRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
             SizedIngredient.FLAT_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
             ItemStack.CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
-            SizedIngredient.FLAT_CODEC.listOf().fieldOf("extraIngredients").forGetter(recipe -> recipe.extraIngredients),
+            SizedIngredient.FLAT_CODEC.listOf().optionalFieldOf("extraIngredients", List.of()).forGetter(recipe -> recipe.extraIngredients),
             SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits),
-            Codec.BOOL.fieldOf("carryOverComponentData").forGetter(recipe -> recipe.carryOverData)
+            Codec.BOOL.optionalFieldOf("carryOverComponentData", false).forGetter(recipe -> recipe.carryOverData)
     ).apply(obj, SpiritInfusionRecipe::new));
 
     public static final String NAME = "spirit_infusion";

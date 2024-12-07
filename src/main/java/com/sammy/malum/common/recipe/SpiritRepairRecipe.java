@@ -22,9 +22,9 @@ public class SpiritRepairRecipe extends AbstractSpiritListMalumRecipe {
 
     public static final MapCodec<SpiritRepairRecipe> CODEC = RecordCodecBuilder.mapCodec(obj -> obj.group(
             Codec.FLOAT.fieldOf("durabilityPercentage").forGetter(recipe -> recipe.durabilityPercentage),
-            Codec.STRING.fieldOf("itemIdRegex").forGetter(recipe -> ".*"),
-            Codec.STRING.fieldOf("modIdRegex").forGetter(recipe -> ".*"),
-            ResourceLocation.CODEC.listOf().fieldOf("inputs").forGetter(recipe -> recipe.inputs.stream().map(BuiltInRegistries.ITEM::getKey).collect(Collectors.toList())),
+            Codec.STRING.optionalFieldOf("itemIdRegex", "").forGetter(recipe -> ".*"),
+            Codec.STRING.optionalFieldOf("modIdRegex", "").forGetter(recipe -> ".*"),
+            ResourceLocation.CODEC.listOf().optionalFieldOf("inputs", List.of()).forGetter(recipe -> recipe.inputs.stream().map(BuiltInRegistries.ITEM::getKey).collect(Collectors.toList())),
             SizedIngredient.FLAT_CODEC.fieldOf("repairMaterial").forGetter(recipe -> recipe.repairMaterial),
             SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits)
     ).apply(obj, SpiritRepairRecipe::new));
@@ -43,7 +43,7 @@ public class SpiritRepairRecipe extends AbstractSpiritListMalumRecipe {
         this.itemIdRegex = itemIdRegex;
         this.modIdRegex = modIdRegex;
         this.repairMaterial = repairMaterial;
-        this.inputs = new ArrayList<>(inputs.stream().map(BuiltInRegistries.ITEM::get).collect(Collectors.toList()));
+        this.inputs = inputs.stream().map(BuiltInRegistries.ITEM::get).collect(Collectors.toCollection(ArrayList::new));
         addToInputs(this.inputs, itemIdRegex, modIdRegex);
     }
 
@@ -60,7 +60,7 @@ public class SpiritRepairRecipe extends AbstractSpiritListMalumRecipe {
         BuiltInRegistries.ITEM.entrySet().stream().map(Map.Entry::getValue).filter(i -> i.isRepairable(i.getDefaultInstance())).forEach(item -> {
             if (BuiltInRegistries.ITEM.getKey(item).getPath().matches(itemIdRegex)) {
                 iteration : {
-                    if (!modIdRegex.equals("") && !BuiltInRegistries.ITEM.getKey(item).getNamespace().matches(modIdRegex)) {
+                    if (!modIdRegex.isEmpty() && !BuiltInRegistries.ITEM.getKey(item).getNamespace().matches(modIdRegex)) {
                         break iteration;
                     }
                     if (item instanceof IRepairOutputOverride repairOutputOverride && repairOutputOverride.ignoreDuringLookup()) {

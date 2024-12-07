@@ -16,7 +16,7 @@ public class SpiritTransmutationRecipe extends LodestoneInWorldRecipe<SingleReci
     public static final MapCodec<SpiritTransmutationRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
             Ingredient.CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
             ItemStack.CODEC.fieldOf("output").forGetter((recipe) -> recipe.output),
-            Codec.STRING.fieldOf("group").forGetter((recipe) -> recipe.group)
+            Codec.STRING.optionalFieldOf("group", "").forGetter((recipe) -> recipe.group)
     ).apply(obj, SpiritTransmutationRecipe::new));
 
     public static final String NAME = "spirit_transmutation";

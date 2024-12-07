@@ -26,27 +26,15 @@ public class RunicWorkbenchRecipe extends LodestoneInWorldRecipe<SpiritBasedReci
 
     public final SizedIngredient primaryInput;
     public final SpiritIngredient secondaryInput;
-    public final ItemStack output;
 
     public RunicWorkbenchRecipe(SizedIngredient primaryInput, SpiritIngredient secondaryInput, ItemStack output) {
-        super(RecipeSerializerRegistry.RUNEWORKING_RECIPE_SERIALIZER.get(), RecipeTypeRegistry.RUNEWORKING.get());
+        super(RecipeSerializerRegistry.RUNEWORKING_RECIPE_SERIALIZER.get(), RecipeTypeRegistry.RUNEWORKING.get(), output);
         this.primaryInput = primaryInput;
         this.secondaryInput = secondaryInput;
-        this.output = output;
     }
 
     @Override
     public boolean matches(SpiritBasedRecipeInput input, Level level) {
         return input.test(primaryInput, secondaryInput);
-    }
-
-    @Override
-    public ItemStack assemble(SpiritBasedRecipeInput input, HolderLookup.Provider registries) {
-        return this.output.copy();
-    }
-
-    @Override
-    public ItemStack getResultItem(HolderLookup.Provider registries) {
-        return this.output;
     }
 }

@@ -1,4 +1,4 @@
-package com.sammy.malum.common.events;
+package com.sammy.malum.core.systems.events;
 
 
 import net.neoforged.bus.api.*;

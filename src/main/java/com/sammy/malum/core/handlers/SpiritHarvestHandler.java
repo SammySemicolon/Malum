@@ -210,8 +210,9 @@ public class SpiritHarvestHandler {
             }
             boolean noFancySpirits = CommonConfig.NO_FANCY_SPIRITS.getConfigValue();
             for (int j = 0; j < stack.getCount(); j++) {
+                final ItemStack droppedSpirit = ItemHelper.copyWithNewCount(stack, 1);
                 if (noFancySpirits) {
-                    ItemEntity itemEntity = new ItemEntity(level, position.x, position.y, position.z, stack);
+                    ItemEntity itemEntity = new ItemEntity(level, position.x, position.y, position.z, droppedSpirit);
                     itemEntity.setDefaultPickUpDelay();
                     itemEntity.setDeltaMovement(
                             Mth.nextFloat(random, -0.1F, 0.1F),
@@ -220,7 +221,7 @@ public class SpiritHarvestHandler {
                     level.addFreshEntity(itemEntity);
                     continue;
                 }
-                SpiritItemEntity entity = new SpiritItemEntity(level, attackerUUID, ItemHelper.copyWithNewCount(stack, 1),
+                SpiritItemEntity entity = new SpiritItemEntity(level, attackerUUID, droppedSpirit,
                         position.x,
                         position.y,
                         position.z,

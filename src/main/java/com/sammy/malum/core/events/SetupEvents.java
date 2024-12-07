@@ -14,6 +14,6 @@ public class SetupEvents {
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         MalumPlayerDataCapability.registerCapabilities(event);
         MalumLivingEntityDataCapability.registerCapabilities(event);
-        MalumItemDataCapability.registerCapabilities(event);
+        MalumItemDataCapability.registerItemDataCapability(event);
     }
 }

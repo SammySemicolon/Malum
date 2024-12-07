@@ -26,43 +26,31 @@ public class MalumItemDataCapability {
 
     public static final Codec<MalumItemDataCapability> CODEC = RecordCodecBuilder.create(obj -> obj.group(
             Codec.list(ItemStack.CODEC).fieldOf("soulsToDrop").forGetter(c -> c.soulsToDrop),
-            UUIDUtil.CODEC.fieldOf("attackerForSouls").forGetter(c -> c.attackerForSouls),
-            Codec.FLOAT.fieldOf("totalSoulCount").forGetter(c -> c.totalSoulCount)
+            UUIDUtil.CODEC.fieldOf("attackerForSouls").forGetter(c -> c.attackerForSouls)
     ).apply(obj, MalumItemDataCapability::new));
 
     public List<ItemStack> soulsToDrop;
     public UUID attackerForSouls;
-    public float totalSoulCount;
 
-    public MalumItemDataCapability() {}
-
-    public MalumItemDataCapability(List<ItemStack> soulsToDrop, UUID attackerForSouls, float totalSoulCount) {
+    public MalumItemDataCapability(List<ItemStack> soulsToDrop, UUID attackerForSouls) {
         this.soulsToDrop = soulsToDrop;
         this.attackerForSouls = attackerForSouls;
-        this.totalSoulCount = totalSoulCount;
     }
 
-    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerEntity(CAPABILITY, EntityType.ITEM, GET_CAPABILITY);
+    public static void registerItemDataCapability(RegisterCapabilitiesEvent event) {
+        event.registerEntity(CAPABILITY, EntityType.ITEM, (item, ctx) -> {
+            CompoundTag tag = item.getPersistentData();
+            return CodecUtil.decodeNBT(MalumItemDataCapability.CODEC, tag);
+        });
     }
-
-    public static ICapabilityProvider<ItemEntity, Void, MalumItemDataCapability> GET_CAPABILITY = (item, ctx) -> {
-        CompoundTag tag = item.getPersistentData();
-        return CodecUtil.decodeNBT(MalumItemDataCapability.CODEC, tag);
-    };
 
     public static Optional<MalumItemDataCapability> getCapabilityOptional(ItemEntity entity) {
         return Optional.ofNullable(entity.getCapability(CAPABILITY));
-    }
-
-    public static MalumItemDataCapability getCapability(ItemEntity entity) {
-        return getCapabilityOptional(entity).orElse(new MalumItemDataCapability(null, null, 0));
     }
 
     public void pullFromNBT(CompoundTag tag) {
         MalumItemDataCapability capability = CodecUtil.decodeNBT(CODEC, tag);
         this.soulsToDrop = capability.soulsToDrop;
         this.attackerForSouls = capability.attackerForSouls;
-        this.totalSoulCount = capability.totalSoulCount;
     }
 }

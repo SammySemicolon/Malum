@@ -19,7 +19,6 @@ public class RunicWorkbenchRecipeBuilder implements AutonamedRecipeBuilder<Runic
     private ItemStack primaryInput;
     private SpiritIngredient secondaryInput;
     private final ItemStack output;
-    private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
     public RunicWorkbenchRecipeBuilder(ItemStack output) {
         this.output = output;

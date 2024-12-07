@@ -16,7 +16,7 @@ import com.sammy.malum.client.screen.codex.pages.recipe.vanilla.CraftingPage;
 import com.sammy.malum.client.screen.codex.pages.text.HeadlineTextPage;
 import com.sammy.malum.client.screen.codex.pages.text.TextPage;
 import com.sammy.malum.client.screen.codex.pages.text.WeepingWellTextPage;
-import com.sammy.malum.common.events.SetupMalumCodexEntriesEvent;
+import com.sammy.malum.core.systems.events.SetupMalumCodexEntriesEvent;
 import com.sammy.malum.common.item.codex.EncyclopediaEsotericaItem;
 import com.sammy.malum.registry.common.SoundRegistry;
 import net.minecraft.client.Minecraft;

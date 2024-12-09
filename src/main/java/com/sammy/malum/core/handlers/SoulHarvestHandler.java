@@ -49,7 +49,7 @@ public class SoulHarvestHandler {
         var attacker = source.getEntity() instanceof LivingEntity living ? living : target.getLastHurtByMob();
         if (data.shouldDropSpirits()) {
             var itemAsSoul = EntitySpiritDropData.getSpiritData(target).map(s -> s.itemAsSoul).orElse(null);
-            if (itemAsSoul != null) {
+            if (itemAsSoul == null) {
                 spawnSpirits(target, attacker, source);
             } else {
                 var uuid = attacker != null ? attacker.getUUID() : null;

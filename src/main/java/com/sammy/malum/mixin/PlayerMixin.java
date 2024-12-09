@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.*;
 @Mixin(Player.class)
 public abstract class PlayerMixin {
 
-    @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getEntities(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"))
+    @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getEntities(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"), index = 1)
     private AABB malum$aiStep(AABB aabb) {
         Player player = (Player) (Object) this;
         return AqueousAura.growBoundingBox(player, aabb);

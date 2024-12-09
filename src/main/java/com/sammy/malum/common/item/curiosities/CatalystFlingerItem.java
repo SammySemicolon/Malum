@@ -87,20 +87,22 @@ public class CatalystFlingerItem extends Item {
                 sound = SoundRegistry.CATALYST_LOBBER_UNLOCKED.get();
             }
             case 1 -> {
-                ItemStack ammo = ItemStack.EMPTY;
-                for (int i = 0; i < playerIn.getInventory().getContainerSize(); i++) {
-                    ItemStack maybeAmmo = playerIn.getInventory().getItem(i);
-                    if (maybeAmmo.getItem().equals(ItemRegistry.AURIC_EMBERS.get())) {
-                        ammo = maybeAmmo;
-                        break;
+                if (!playerIn.isCreative()) {
+                    ItemStack ammo = ItemStack.EMPTY;
+                    for (int i = 0; i < playerIn.getInventory().getContainerSize(); i++) {
+                        ItemStack maybeAmmo = playerIn.getInventory().getItem(i);
+                        if (maybeAmmo.getItem().equals(ItemRegistry.AURIC_EMBERS.get())) {
+                            ammo = maybeAmmo;
+                            break;
+                        }
                     }
-                }
-                if (ammo.isEmpty()) {
-                    return InteractionResultHolder.fail(stack);
+                    if (ammo.isEmpty()) {
+                        return InteractionResultHolder.fail(stack);
+                    }
+                    ammo.shrink(1);
                 }
                 cooldown = 20;
                 state = 2;
-                ammo.shrink(1);
                 sound = SoundRegistry.CATALYST_LOBBER_PRIMED.get();
             }
             case 2 -> {

@@ -14,12 +14,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
+import java.util.function.*;
 
 public class RuneDexterityItem extends AbstractRuneCurioItem {
 
-    public static final BiFunction<Float, Float, AttributeModifier> MOVEMENT_SPEED = (health, maxHealth) -> {
+    public static final Function<LivingEntity, AttributeModifier> MOVEMENT_SPEED = (living) -> {
+        if (living == null) {
+            return 0.2f;
+        }
+        final float health = living.getHealth();
+        final float maxHealth = living.getMaxHealth();
         float value = 0.2f * (2 - (health / maxHealth));
         return new AttributeModifier(MalumMod.malumPath("curio_movement_speed"), value, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     };
@@ -35,9 +39,7 @@ public class RuneDexterityItem extends AbstractRuneCurioItem {
 
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-        addAttributeModifier(map, Attributes.MOVEMENT_SPEED, MOVEMENT_SPEED.apply(
-                slotContext.entity().getHealth(), slotContext.entity().getMaxHealth()
-        ));
+        addAttributeModifier(map, Attributes.MOVEMENT_SPEED, MOVEMENT_SPEED.apply(slotContext.entity()));
     }
 
     @Override

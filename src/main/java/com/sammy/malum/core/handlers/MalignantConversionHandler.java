@@ -98,6 +98,6 @@ public class MalignantConversionHandler {
     }
 
     private static ResourceLocation createPositiveModifierId(Holder<Attribute> attribute) {
-        return MalumMod.malumPath("malignant_conversion_buff_from_" + BuiltInRegistries.ATTRIBUTE.getKey(attribute.value()));
+        return MalumMod.malumPath("malignant_conversion_buff_from_" + BuiltInRegistries.ATTRIBUTE.getKey(attribute.value()).getPath());
     }
 }

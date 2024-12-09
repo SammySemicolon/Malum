@@ -3,10 +3,10 @@
   "durabilityPercentage": 0.5,
   "inputs": [
     "minecraft:wooden_axe",
-    "minecraft:wooden_shovel",
-    "minecraft:wooden_hoe",
     "minecraft:wooden_sword",
-    "minecraft:wooden_pickaxe"
+    "minecraft:wooden_pickaxe",
+    "minecraft:wooden_shovel",
+    "minecraft:wooden_hoe"
   ],
   "itemIdRegex": ".*",
   "modIdRegex": ".*",

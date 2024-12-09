@@ -1,6 +1,5 @@
 {
   "type": "malum:spirit_transmutation",
-  "group": "",
   "ingredient": {
     "item": "minecraft:gravel"
   },

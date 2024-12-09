@@ -6,7 +6,6 @@ import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -75,7 +74,6 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
             }
         });
     }
-
     public SoundEvent getScytheSound(boolean canSweep) {
         return canSweep ? SoundRegistry.SCYTHE_SWEEP.get() : SoundRegistry.SCYTHE_CUT.get();
     }

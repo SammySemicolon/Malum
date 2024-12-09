@@ -1,7 +1,5 @@
 {
   "type": "malum:spirit_infusion",
-  "carryOverComponentData": false,
-  "extraIngredients": [],
   "ingredient": {
     "count": 4,
     "item": "minecraft:rotten_flesh"

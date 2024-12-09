@@ -2,11 +2,11 @@
   "type": "malum:spirit_repair",
   "durabilityPercentage": 0.5,
   "inputs": [
-    "minecraft:stone_hoe",
     "minecraft:stone_axe",
+    "minecraft:stone_hoe",
     "minecraft:stone_pickaxe",
-    "minecraft:stone_sword",
-    "minecraft:stone_shovel"
+    "minecraft:stone_shovel",
+    "minecraft:stone_sword"
   ],
   "itemIdRegex": ".*",
   "modIdRegex": ".*",

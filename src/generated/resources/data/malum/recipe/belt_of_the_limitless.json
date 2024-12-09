@@ -1,6 +1,5 @@
 {
   "type": "malum:spirit_infusion",
-  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 1,

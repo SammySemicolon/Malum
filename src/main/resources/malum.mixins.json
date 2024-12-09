@@ -1,13 +1,12 @@
 {
   "required": true,
+  "minVersion": "0.8.5",
   "package": "com.sammy.malum.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_21",
   "refmap": "malum.refmap.json",
   "mixins": [
-    "AccessorEvent",
-    "AccessorEvent$PostDamage",
     "AccessorFeatureFlagSet",
-    "AccessorLivingEntity",
     "BlockBehaviorMixin",
     "ExplosionMixin",
     "FeatureFlagSetMixin",
@@ -16,7 +15,6 @@
     "PlayerMixin",
     "VanillaRecipeProviderMixin",
     "VanillaRecipeProviderMixin$RecipeBuilderMixin",
-    "AccessorEvent.PostDamage"
   ],
   "client": [
     "client.AccessorBakedGlyph",
@@ -31,6 +29,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "minVersion": "0.8.5"
+  }
 }

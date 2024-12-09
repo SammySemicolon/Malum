@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static com.sammy.malum.registry.common.block.BlockRegistry.BLOCKS;
 
 public class MalumBlockTags extends LodestoneBlockTagsProvider {
-    
+
     public MalumBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, MalumMod.MALUM, existingFileHelper);
     }

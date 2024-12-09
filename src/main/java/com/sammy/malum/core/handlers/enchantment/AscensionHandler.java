@@ -3,7 +3,6 @@ package com.sammy.malum.core.handlers.enchantment;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.core.helpers.*;
-import com.sammy.malum.mixin.AccessorLivingEntity;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.server.level.*;
@@ -30,7 +29,7 @@ public class AscensionHandler {
         player.resetFallDistance();
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
-            player.setDeltaMovement(motion.x, ((AccessorLivingEntity)player).malum$getJumpPower() * 2f, motion.z);
+            player.setDeltaMovement(motion.x, player.getJumpBoostPower() * 2f, motion.z);
             if (player.isSprinting()) {
                 float f = player.getYRot() * 0.017453292F;
                 float x = -Mth.sin(f);

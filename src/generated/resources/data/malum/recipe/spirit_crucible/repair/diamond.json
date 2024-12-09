@@ -3,12 +3,12 @@
   "durabilityPercentage": 0.5,
   "inputs": [
     "minecraft:diamond_helmet",
-    "minecraft:diamond_axe",
-    "minecraft:diamond_pickaxe",
-    "minecraft:diamond_sword",
-    "minecraft:diamond_leggings",
     "minecraft:diamond_boots",
+    "minecraft:diamond_leggings",
+    "minecraft:diamond_sword",
     "minecraft:diamond_chestplate",
+    "minecraft:diamond_pickaxe",
+    "minecraft:diamond_axe",
     "minecraft:diamond_shovel",
     "minecraft:diamond_hoe"
   ],

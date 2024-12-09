@@ -1,7 +1,7 @@
 {
   "anvil_cost": 10,
   "description": {
-    "translate": "enchantment.malum.rebound"
+    "translate": "enchantment.malum.ascension"
   },
   "max_cost": {
     "base": 200,
@@ -15,6 +15,6 @@
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#malum:enchantable/rebound",
+  "supported_items": "#malum:enchantable/ascension",
   "weight": 1
 }

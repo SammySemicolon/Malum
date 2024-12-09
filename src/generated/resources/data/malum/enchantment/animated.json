@@ -1,18 +1,18 @@
 {
   "anvil_cost": 10,
   "description": {
-    "translate": "enchantment.malum.spirit_plunder"
+    "translate": "enchantment.malum.animated"
   },
   "effects": {
     "minecraft:attributes": [
       {
         "amount": {
           "type": "minecraft:linear",
-          "base": 1.0,
-          "per_level_above_first": 1.0
+          "base": 0.15,
+          "per_level_above_first": 0.15
         },
-        "attribute": "malum:spirit_spoils",
-        "id": "malum:enchantment.spirit_spoils",
+        "attribute": "minecraft:generic.attack_speed",
+        "id": "malum:enchantment.attack_speed",
         "operation": "add_value"
       }
     ]
@@ -29,6 +29,6 @@
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#malum:enchantable/spirit_spoils",
-  "weight": 1
+  "supported_items": "#malum:enchantable/animated",
+  "weight": 2
 }

@@ -1,6 +1,5 @@
 package com.sammy.malum.common.item.curiosities.weapons.staff;
 
-import com.google.common.collect.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.registry.client.*;
@@ -16,13 +15,13 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.api.distmarker.*;
+import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
-import team.lodestar.lodestone.registry.common.LodestoneAttributes;
+import team.lodestar.lodestone.registry.common.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.item.*;
 
@@ -49,9 +48,9 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
     public abstract void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, float chargePercentage, int count);
 
     @Override
-    public ImmutableMultimap.Builder<Attribute, AttributeModifier> createExtraAttributes() {
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = new ImmutableMultimap.Builder<>();
-        builder.put(LodestoneAttributes.MAGIC_DAMAGE.get(), new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE));
+    public ItemAttributeModifiers.Builder createExtraAttributes() {
+        var builder = ItemAttributeModifiers.builder();
+        builder.add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
         return builder;
     }
 
@@ -75,7 +74,6 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
         if (projectileCount > 0) {
             InteractionHand hand = pLivingEntity.getUsedItemHand();
             if (!pLevel.isClientSide) {
-
                 float magicDamage = (float) pLivingEntity.getAttributes().getValue(LodestoneAttributes.MAGIC_DAMAGE);
                 if (magicDamage == 0) {
                     float pitch = Mth.nextFloat(pLevel.random, 0.5f, 0.8f);

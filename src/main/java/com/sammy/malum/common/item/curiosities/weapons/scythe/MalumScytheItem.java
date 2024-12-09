@@ -9,6 +9,7 @@ import net.minecraft.core.*;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
+import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
@@ -92,4 +93,10 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
                 !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get());
     }
 
+    public static DamageSource replaceDamageSource(Player player, DamageSource source) {
+        if (player.getMainHandItem().is(ItemTagRegistry.SCYTHE)) {
+            return DamageTypeHelper.create(player.level(), DamageTypeRegistry.SCYTHE_MELEE, player);
+        }
+        return source;
+    }
 }

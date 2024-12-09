@@ -1,30 +1,27 @@
 package com.sammy.malum.compability.irons_spellbooks;
 
-import com.google.common.collect.Multimap;
-import com.sammy.malum.MalumMod;
+import com.google.common.collect.*;
+import com.sammy.malum.*;
 import com.sammy.malum.common.effect.*;
-import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.config.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.common.*;
-import com.sammy.malum.registry.common.item.EnchantmentRegistry;
+import com.sammy.malum.registry.common.item.*;
 import io.redspace.ironsspellbooks.api.events.*;
 import io.redspace.ironsspellbooks.api.magic.*;
-import io.redspace.ironsspellbooks.item.weapons.*;
-import net.minecraft.core.Holder;
+import net.minecraft.core.*;
 import net.minecraft.server.level.*;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.damagesource.*;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.minecraft.world.item.component.*;
+import net.neoforged.fml.*;
+import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.event.entity.living.*;
 
-import static com.sammy.malum.registry.common.item.EnchantmentRegistry.getEnchantmentLevel;
+import static com.sammy.malum.registry.common.item.EnchantmentRegistry.*;
 
 public class IronsSpellsCompat {
 
@@ -53,9 +50,9 @@ public class IronsSpellsCompat {
             LoadedOnly.recoverSpellCooldowns(serverPlayer, enchantmentLevel);
         }
     }
-    public static void addSoulHunterSpellPower(ItemAttributeModifiers.Builder attributes) {
+    public static void addSoulHunterSpellPower(ItemAttributeModifiers.Builder attributes, EquipmentSlotGroup group) {
         if (LOADED) {
-            LoadedOnly.addSoulHunterSpellPower(attributes);
+            LoadedOnly.addSoulHunterSpellPower(attributes, group);
         }
     }
     public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Holder<Attribute>, AttributeModifier> map, float amount) {
@@ -118,10 +115,10 @@ public class IronsSpellsCompat {
             cooldowns.syncToPlayer(serverPlayer);
         }
 
-        public static void addSoulHunterSpellPower(ItemAttributeModifiers.Builder attributes) {
+        public static void addSoulHunterSpellPower(ItemAttributeModifiers.Builder attributes, EquipmentSlotGroup group) {
             attributes.add(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER,
                     new AttributeModifier(MalumMod.malumPath("spell_power"), 0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-                    EquipmentSlotGroup.ARMOR);
+                    group);
         }
 
         public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Holder<Attribute>, AttributeModifier> map, float amount) {

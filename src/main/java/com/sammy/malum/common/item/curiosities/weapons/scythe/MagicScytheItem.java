@@ -1,13 +1,13 @@
 package com.sammy.malum.common.item.curiosities.weapons.scythe;
 
-import com.google.common.collect.ImmutableMultimap;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.item.Tier;
-import team.lodestar.lodestone.registry.common.LodestoneAttributes;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.*;
+import team.lodestar.lodestone.registry.common.*;
 
 public class MagicScytheItem extends MalumScytheItem implements ISpiritAffiliatedItem {
 
@@ -19,15 +19,9 @@ public class MagicScytheItem extends MalumScytheItem implements ISpiritAffiliate
     }
 
     @Override
-    public ImmutableMultimap.Builder<Attribute, AttributeModifier> createExtraAttributes() {
-        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = new ImmutableMultimap.Builder<>();
-        builder.put(
-                LodestoneAttributes.MAGIC_DAMAGE.get(),
-                new AttributeModifier(
-                        LodestoneAttributes.MAGIC_DAMAGE.getId(),
-                        magicDamage,
-                        AttributeModifier.Operation.ADD_VALUE)
-        );
+    public ItemAttributeModifiers.Builder createExtraAttributes() {
+        var builder = ItemAttributeModifiers.builder();
+        builder.add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
         return builder;
     }
 

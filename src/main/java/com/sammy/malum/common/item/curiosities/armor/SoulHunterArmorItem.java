@@ -34,11 +34,12 @@ public class SoulHunterArmorItem extends MalumArmorItem {
 
     @Override
     public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
+        var group = EquipmentSlotGroup.bySlot(getEquipmentSlot());
         ItemAttributeModifiers.Builder attributes = ItemAttributeModifiers.builder();
         attributes.add(LodestoneAttributes.MAGIC_PROFICIENCY,
                 new AttributeModifier(MalumMod.malumPath("magic_proficiency"), 0.15f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
-                EquipmentSlotGroup.ARMOR);
-        IronsSpellsCompat.addSoulHunterSpellPower(attributes);
+                group);
+        IronsSpellsCompat.addSoulHunterSpellPower(attributes, group);
         return attributes.build().modifiers();
     }
 

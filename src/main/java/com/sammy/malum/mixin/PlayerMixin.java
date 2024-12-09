@@ -1,19 +1,17 @@
 package com.sammy.malum.mixin;
 
 import com.sammy.malum.common.effect.aura.*;
-import com.sammy.malum.registry.common.*;
-import com.sammy.malum.registry.common.item.*;
+import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.phys.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
-import team.lodestar.lodestone.helpers.*;
 
 @Mixin(Player.class)
-public class PlayerMixin {
+public abstract class PlayerMixin {
 
-    @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getEntities(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"), index = 1)
+    @ModifyArg(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getEntities(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"))
     private AABB malum$aiStep(AABB aabb) {
         Player player = (Player) (Object) this;
         return AqueousAura.growBoundingBox(player, aabb);
@@ -22,9 +20,6 @@ public class PlayerMixin {
     @ModifyArg(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
     private DamageSource malum$attack(DamageSource pSource) {
         Player player = (Player) (Object) this;
-        if (player.getMainHandItem().is(ItemTagRegistry.SCYTHE)) {
-            return DamageTypeHelper.create(player.level(), DamageTypeRegistry.SCYTHE_MELEE, player);
-        }
-        return pSource;
+        return MalumScytheItem.replaceDamageSource(player, pSource);
     }
 }

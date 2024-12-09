@@ -31,10 +31,12 @@ public class MalignantStrongholdArmorItem extends MalumArmorItem {
 
     @Override
     public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
+        var group = EquipmentSlotGroup.bySlot(getEquipmentSlot());
+        var resourcelocation = MalumMod.malumPath("armor." + type.getName());
         ItemAttributeModifiers.Builder attributes = ItemAttributeModifiers.builder();
         attributes.add(AttributeRegistry.MALIGNANT_CONVERSION,
-                new AttributeModifier(MalumMod.malumPath("malignant_conversion"), 0.25f, AttributeModifier.Operation.ADD_VALUE),
-                EquipmentSlotGroup.bySlot(getEquipmentSlot()));
+                new AttributeModifier(resourcelocation, 0.25f, AttributeModifier.Operation.ADD_VALUE),
+                group);
         return attributes.build().modifiers();
     }
 

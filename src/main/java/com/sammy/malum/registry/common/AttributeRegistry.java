@@ -21,7 +21,7 @@ public class AttributeRegistry {
 
     public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_INTEGRITY = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_integrity", (id) -> new RangedAttribute(id, 1.0D, 0.0D, 2048.0D).setSyncable(true));
     public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_RECOVERY_RATE = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_recovery_rate", (id) -> new RangedAttribute(id, 1.0D, 0.0D, 2048.0D).setSyncable(true));
-    public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_RECOVERY_MULTIPLIER = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_multiplier", (id) -> new RangedAttribute(id, 0D, 0.0D, 2048.0D).setSyncable(true));
+    public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_RECOVERY_MULTIPLIER = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_multiplier", (id) -> new RangedAttribute(id, 1.0D, 0.0D, 2048.0D).setSyncable(true));
     public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_CAPACITY = registerAttribute(ATTRIBUTES, MALUM, "soul_ward_capacity", (id) -> new RangedAttribute(id, 0D, 0.0D, 2048.0D).setSyncable(true));
 
     public static final DeferredHolder<Attribute, Attribute> RESERVE_STAFF_CHARGES = registerAttribute(ATTRIBUTES, MALUM, "reserve_staff_charges", (id) -> new RangedAttribute(id, 0D, 0.0D, 2048.0D).setSyncable(true));

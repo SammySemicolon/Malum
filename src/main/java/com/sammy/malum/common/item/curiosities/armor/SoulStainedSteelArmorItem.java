@@ -19,16 +19,17 @@ public class SoulStainedSteelArmorItem extends MalumArmorItem {
 
     @Override
     public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
-        final EquipmentSlotGroup group = EquipmentSlotGroup.bySlot(getEquipmentSlot());
+        var group = EquipmentSlotGroup.bySlot(getEquipmentSlot());
+        var resourcelocation = MalumMod.malumPath("armor." + type.getName());
         return List.of(
                 new ItemAttributeModifiers.Entry(
                         AttributeRegistry.SOUL_WARD_CAPACITY,
-                        new AttributeModifier(MalumMod.malumPath("soul_ward_cap"), 3f, AttributeModifier.Operation.ADD_VALUE),
+                        new AttributeModifier(resourcelocation, 3f, AttributeModifier.Operation.ADD_VALUE),
                         group),
 
                 new ItemAttributeModifiers.Entry(
                         AttributeRegistry.SOUL_WARD_RECOVERY_RATE,
-                        new AttributeModifier(MalumMod.malumPath("soul_ward_recovery"), 0.15f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+                        new AttributeModifier(resourcelocation, 0.15f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
                         group)
         );
     }

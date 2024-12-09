@@ -6,6 +6,7 @@ import com.sammy.malum.common.effect.*;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.config.*;
 import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import io.redspace.ironsspellbooks.api.events.*;
 import io.redspace.ironsspellbooks.api.magic.*;
@@ -35,13 +36,6 @@ public class IronsSpellsCompat {
             NeoForge.EVENT_BUS.addListener(LoadedOnly::spellDamage);
             NeoForge.EVENT_BUS.addListener(LoadedOnly::triggerReplenishing);
         }
-    }
-
-    public static boolean isStaff(ItemStack stack) {
-        if (LOADED) {
-            return LoadedOnly.isStaff(stack);
-        }
-        return false;
     }
 
     public static void generateMana(ServerPlayer collector, double amount) {
@@ -95,7 +89,7 @@ public class IronsSpellsCompat {
                     CommonConfig.IRONS_SPELLBOOKS_SPIRIT_DAMAGE.getConfigValue() :
                     CommonConfig.IRONS_SPELLBOOKS_NON_PLAYER_SPIRIT_DAMAGE.getConfigValue();
             if (canShatter) {
-                SoulDataHandler.exposeSoul(event.getEntity());
+                event.getEntity().getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).setExposed();
             }
         }
 
@@ -111,13 +105,10 @@ public class IronsSpellsCompat {
             }
         }
 
-        public static boolean isStaff(ItemStack stack) {
-            return stack.getItem() instanceof StaffItem;
-        }
-
         public static void generateMana(ServerPlayer collector, float amount) {
             var magicData = MagicData.getPlayerMagicData(collector);
             magicData.addMana(amount);
+            //TODO: this fucker
 //            UpdateClient.SendManaUpdate(collector, magicData);
         }
 

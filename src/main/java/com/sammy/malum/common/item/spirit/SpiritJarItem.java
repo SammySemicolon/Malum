@@ -2,7 +2,6 @@ package com.sammy.malum.common.item.spirit;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import io.netty.buffer.ByteBuf;
@@ -40,7 +39,7 @@ public class SpiritJarItem extends BlockItem {
     public void appendHoverText(ItemStack pStack, TooltipContext context, List<Component> pTooltip, TooltipFlag tooltipFlag) {
         if (pStack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS)) {
             Contents contents = pStack.get(DataComponentRegistry.SPIRIT_JAR_CONTENTS);
-            MalumSpiritType spirit = SpiritHarvestHandler.getSpiritType(contents.spirit());
+            MalumSpiritType spirit = MalumSpiritType.getSpiritType(contents.spirit());
             pTooltip.add(Component.translatable("malum.spirit.description.stored_spirit").withStyle(ChatFormatting.GRAY));
             pTooltip.add(spirit.getSpiritJarCounterComponent(contents.count()));
         }

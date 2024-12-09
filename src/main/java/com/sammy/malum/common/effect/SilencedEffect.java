@@ -1,9 +1,7 @@
 package com.sammy.malum.common.effect;
 
 import com.sammy.malum.*;
-import com.sammy.malum.common.capability.*;
 import com.sammy.malum.compability.irons_spellbooks.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
@@ -27,8 +25,7 @@ public class SilencedEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        TouchOfDarknessHandler handler = MalumLivingEntityDataCapability.getCapability(pLivingEntity).touchOfDarknessHandler;
-        handler.afflict((int) (20 + pAmplifier * 2.5));
+        pLivingEntity.getData(AttachmentTypeRegistry.VOID_INFLUENCE).setAfflictionLevel(20 + (pAmplifier+1) * 3);
         return true;
     }
 }

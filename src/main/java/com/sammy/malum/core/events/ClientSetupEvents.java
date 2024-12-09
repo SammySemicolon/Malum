@@ -2,8 +2,6 @@ package com.sammy.malum.core.events;
 
 import com.sammy.malum.*;
 import com.sammy.malum.client.renderer.item.SpiritJarItemRenderer;
-import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.handlers.client.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.item.*;
@@ -44,10 +42,10 @@ public class ClientSetupEvents {
                 SoulWardRenderHandler::renderSoulWard);
 
         event.registerAboveAll(MalumMod.malumPath("hidden_blade_cooldown"),
-                CurioHiddenBladeNecklace.ClientOnly::renderHiddenBladeCooldown);
+                HiddenBladeRenderHandler::renderHiddenBladeCooldown);
 
         event.registerAbove(VanillaGuiLayers.BOSS_OVERLAY, MalumMod.malumPath("touch_of_darkness"),
-                TouchOfDarknessHandler.ClientOnly::renderDarknessVignette);
+                TouchOfDarknessRenderHandler::renderDarknessVignette);
     }
 
     @SubscribeEvent

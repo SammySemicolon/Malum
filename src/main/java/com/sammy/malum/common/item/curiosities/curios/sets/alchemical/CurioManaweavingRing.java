@@ -1,10 +1,10 @@
 package com.sammy.malum.common.item.curiosities.curios.sets.alchemical;
 
-import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.core.systems.events.*;
+import com.sammy.malum.registry.common.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
@@ -27,8 +27,8 @@ public class CurioManaweavingRing extends MalumCurioItem implements IMalumEventR
     @Override
     public void spiritCollectionEvent(CollectSpiritEvent event, LivingEntity collector, double arcaneResonance) {
         if (collector instanceof ServerPlayer player) {
-            var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
-            handler.recoverSoulWard(player, arcaneResonance);
+            var data = player.getData(AttachmentTypeRegistry.SOUL_WARD);
+            data.recoverSoulWard(player, arcaneResonance);
             IronsSpellsCompat.generateMana(player, 10 * arcaneResonance);
         }
     }

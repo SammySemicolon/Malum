@@ -45,7 +45,7 @@ public class SpiritItemEntity extends FloatingItemEntity {
     public void collect() {
         ItemStack stack = getItem();
         if (stack.getItem() instanceof SpiritShardItem) {
-            SpiritHarvestHandler.pickupSpirit(owner, stack);
+            SoulHarvestHandler.pickupSpirit(owner, stack);
         } else {
             ItemHelper.giveItemToEntity(owner, stack);
         }

@@ -8,9 +8,9 @@ import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.AttributeRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import team.lodestar.lodestone.registry.common.tag.LodestoneDamageTypeTags;
 import top.theillusivec4.curios.api.SlotContext;
@@ -30,14 +30,14 @@ public class CurioMagebaneBelt extends MalumCurioItem implements IMalumEventResp
     }
 
     @Override
-    public void modifySoulWardPropertiesEvent(ModifySoulWardPropertiesEvent event, Player wardedEntity, ItemStack stack) {
+    public void modifySoulWardPropertiesEvent(ModifySoulWardPropertiesEvent event, LivingEntity wardedEntity, ItemStack stack) {
         if (event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC)) {
             event.setNewIntegrity(event.getOriginalIntegrity()*1.5f);
         }
     }
 
     @Override
-    public void soulWardDamageEvent(SoulWardDamageEvent event, Player wardedEntity, ItemStack stack) {
+    public void soulWardDamageEvent(SoulWardDamageEvent event, LivingEntity wardedEntity, ItemStack stack) {
         var handler = event.getSoulWardHandler();
 
         if (handler.isDepleted()) {

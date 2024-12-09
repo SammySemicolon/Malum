@@ -1,9 +1,8 @@
 package com.sammy.malum.visual_effects;
 
-import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.item.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.spirit.*;
+import com.sammy.malum.registry.common.*;
 import net.minecraft.client.*;
 import net.minecraft.client.player.*;
 import net.minecraft.util.*;
@@ -158,13 +157,12 @@ public class ScreenParticleEffects {
         @Override
         public void spawnEarlyParticles(ScreenParticleHolder target, Level level, float partialTick, ItemStack stack, float x, float y) {
             final LocalPlayer player = Minecraft.getInstance().player;
-            final TouchOfDarknessHandler handler = MalumLivingEntityDataCapability.getCapability(player).touchOfDarknessHandler;
-            isNearWell = handler.isNearWeepingWell;
+            isNearWell = player.getData(AttachmentTypeRegistry.VOID_INFLUENCE).isNearWeepingWell;
             if (!isNearWell) {
                 return;
             }
             if (level.getGameTime() % 20L == 0) {
-                isItemReal = Minecraft.getInstance().player.getInventory().contains(stack);
+                isItemReal = player.getInventory().contains(stack);
             }
             if (isItemReal) {
                 IVoidItem.super.spawnEarlyParticles(target, level, partialTick, stack, x, y);

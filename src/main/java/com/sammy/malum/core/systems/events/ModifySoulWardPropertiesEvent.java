@@ -1,6 +1,6 @@
 package com.sammy.malum.core.systems.events;
 
-import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.common.capabilities.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 
@@ -14,8 +14,8 @@ public class ModifySoulWardPropertiesEvent extends SoulWardEvent {
     private double newMagicDamageAbsorption;
     private double newSoulWardIntegrity;
 
-    public ModifySoulWardPropertiesEvent(LivingEntity entity, SoulWardHandler soulWardHandler, DamageSource source, double physicalDamageAbsorption, double magicDamageAbsorption, double soulWardIntegrity) {
-        super(entity, soulWardHandler, source);
+    public ModifySoulWardPropertiesEvent(LivingEntity entity, SoulWardData soulWardData, DamageSource source, double physicalDamageAbsorption, double magicDamageAbsorption, double soulWardIntegrity) {
+        super(entity, soulWardData, source);
         this.physicalDamageAbsorption = physicalDamageAbsorption;
         this.magicDamageAbsorption = magicDamageAbsorption;
         this.soulWardIntegrity = soulWardIntegrity;

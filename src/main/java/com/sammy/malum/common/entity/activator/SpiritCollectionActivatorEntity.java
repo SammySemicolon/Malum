@@ -36,7 +36,7 @@ public class SpiritCollectionActivatorEntity extends FloatingEntity {
 
     @Override
     public void collect() {
-        SpiritHarvestHandler.triggerSpiritCollection(owner);
+        SoulHarvestHandler.triggerSpiritCollection(owner);
         SoundHelper.playSound(this, SoundRegistry.SPIRIT_PICKUP.get(), 0.3f, Mth.nextFloat(random, 1.2f, 1.5f));
     }
 

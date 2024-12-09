@@ -13,14 +13,7 @@ public class MalumAttributeEventHandler {
         }
         DamageSource source = event.getSource();
         if (source.getEntity() instanceof LivingEntity attacker) {
-            var stack = SoulDataHandler.getScytheWeapon(source, attacker);
-            if (stack.isEmpty()) {
-                return;
-            }
-            if (source.is(DamageTypes.THORNS)) {
-                return;
-            }
-            if (!event.getSource().is(DamageTypeTagRegistry.IS_SCYTHE)) {
+            if (source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
                 var scytheProficiency = attacker.getAttribute(AttributeRegistry.SCYTHE_PROFICIENCY);
                 if (scytheProficiency != null) {
                     event.setNewDamage((float) (event.getNewDamage() * scytheProficiency.getValue()));

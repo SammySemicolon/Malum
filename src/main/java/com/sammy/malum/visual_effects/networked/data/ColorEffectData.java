@@ -1,7 +1,6 @@
 package com.sammy.malum.visual_effects.networked.data;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import net.minecraft.network.FriendlyByteBuf;
@@ -62,7 +61,7 @@ public class ColorEffectData {
                 colorRecordList.add(new ColorRecord(
                         new Color(buf.readInt()),
                         new Color(buf.readInt()),
-                        buf.readBoolean() ? SpiritHarvestHandler.getSpiritType(buf.readUtf()) : null
+                        buf.readBoolean() ? MalumSpiritType.getSpiritType(buf.readUtf()) : null
                 ));
             }
         }

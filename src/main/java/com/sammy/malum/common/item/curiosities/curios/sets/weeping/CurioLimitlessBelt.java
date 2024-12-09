@@ -10,9 +10,9 @@ import com.sammy.malum.registry.common.AttributeRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.*;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -38,7 +38,7 @@ public class CurioLimitlessBelt extends MalumCurioItem implements IMalumEventRes
     }
 
     @Override
-    public void modifySoulWardPropertiesEvent(ModifySoulWardPropertiesEvent event, Player wardedEntity, ItemStack stack) {
+    public void modifySoulWardPropertiesEvent(ModifySoulWardPropertiesEvent event, LivingEntity wardedEntity, ItemStack stack) {
         var handler = event.getSoulWardHandler();
 
         double capacity = wardedEntity.getAttributeValue(AttributeRegistry.SOUL_WARD_CAPACITY);

@@ -61,7 +61,7 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
         SoundHelper.playSound(attacker, getScytheSound(true), 1, 1);
         particle.mirrorRandomly(attacker.getRandom()).spawnForwardSlashingParticle(attacker);
 
-        int sweeping = stack.getEnchantmentLevel(level.holderLookup(Registries.ENCHANTMENT).getOrThrow(Enchantments.SWEEPING_EDGE));
+        int sweeping = EnchantmentRegistry.getEnchantmentLevel(level, Enchantments.SWEEPING_EDGE, stack);
         float damage = event.getOriginalDamage() * (0.66f + sweeping * 0.33f);
         float radius = 1 + sweeping * 0.25f;
         level.getEntities(attacker, target.getBoundingBox().inflate(radius)).forEach(e -> {

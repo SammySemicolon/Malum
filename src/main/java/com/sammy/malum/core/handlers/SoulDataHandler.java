@@ -1,8 +1,5 @@
 package com.sammy.malum.core.handlers;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.entity.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
@@ -21,60 +18,27 @@ import java.util.function.*;
 
 public class SoulDataHandler {
 
-    public static final String SOUL_SHATTER_ENTITY_TAG = "malum:can_shatter_souls";
-
-    public float exposedSoulDuration;
-    public boolean soulless;
-    public boolean spawnerSpawned;
-
-    public static final Codec<SoulDataHandler> CODEC = RecordCodecBuilder.create(obj -> obj.group(
-            Codec.FLOAT.fieldOf("exposedSoulDuration").forGetter(sd -> sd.exposedSoulDuration),
-            Codec.BOOL.fieldOf("soulless").forGetter(sd -> sd.soulless),
-            Codec.BOOL.fieldOf("spawnerSpawned").forGetter(sd -> sd.spawnerSpawned)
-    ).apply(obj, SoulDataHandler::new));
-
-    public SoulDataHandler() {}
-
-    public SoulDataHandler(boolean soulless, boolean spawnerSpawned) {
-        this.soulless = soulless;
-        this.spawnerSpawned = spawnerSpawned;
-    }
-
-    public SoulDataHandler(float esd, boolean soulless, boolean spawnerSpawned) {
-        this(false, false);
-        this.exposedSoulDuration = esd;
-    }
-
     public static void markAsSpawnerSpawned(MobSpawnEvent.PositionCheck event) {
         if (event.getSpawner() != null) {
-            MalumLivingEntityDataCapability.getCapabilityOptional(event.getEntity()).ifPresent(ec -> {
-                SoulDataHandler soulData = ec.soulData;
-                soulData.spawnerSpawned = true;
-            });
+            event.getEntity().getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).setSpawnerSpawned(true);
         }
     }
 
-    public static void updateAi(EntityJoinLevelEvent event) {
-        if (event.getEntity() instanceof LivingEntity livingEntity) {
-            MalumLivingEntityDataCapability.getCapabilityOptional(livingEntity).ifPresent(ec -> {
-                SoulDataHandler soulData = ec.soulData;
-                if (livingEntity instanceof Mob mob) {
-                    if (soulData.soulless) {
-                        removeSentience(mob);
-                    }
-                }
-            });
+    public static void entityJoin(EntityJoinLevelEvent event) {
+        if (event.getEntity() instanceof Mob mob) {
+            mob.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).updateSoullessBehavior(mob);
         }
     }
 
     public static void preventTargeting(LivingChangeTargetEvent event) {
         if (event.getEntity() instanceof Mob mob) {
-            MalumLivingEntityDataCapability.getCapabilityOptional(mob).ifPresent(ec -> {
-                SoulDataHandler soulData = ec.soulData;
-                if (soulData.soulless) {
-                    event.setNewAboutToBeSetTarget(null);
-                }
-            });
+            mob.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).updateSoullessTargeting(event);
+        }
+    }
+
+    public static void entityTick(EntityTickEvent.Pre event) {
+        if (event.getEntity() instanceof LivingEntity living) {
+            living.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).tickDuration();
         }
     }
 
@@ -82,40 +46,31 @@ public class SoulDataHandler {
         if (event.getOriginalDamage() <= 0) {
             return;
         }
-        LivingEntity target = event.getEntity();
-        DamageSource source = event.getSource();
+        var target = event.getEntity();
+        var source = event.getSource();
+        var data = target.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO);
         if (source.is(DamageTypeTagRegistry.SOUL_SHATTER_DAMAGE)) {
-            exposeSoul(target);
+            data.setExposed();
+            return;
+        }
+
+        var directEntity = source.getDirectEntity();
+        if (directEntity != null) {
+            var projectileData = directEntity.getData(AttachmentTypeRegistry.PROJECTILE_SOUL_INFO);
+            if (projectileData.dealsSoulDamage()) {
+                data.setExposed();
+                return;
+            }
         }
         if (source.getEntity() instanceof LivingEntity attacker) {
             ItemStack stack = getSoulHunterWeapon(source, attacker);
             if (stack.is(ItemTagRegistry.SOUL_HUNTER_WEAPON) || TetraCompat.hasSoulStrikeModifier(stack)) {
-                exposeSoul(target);
-            }
-        }
-        var directEntity = source.getDirectEntity();
-        if (directEntity != null && directEntity.getTags().contains(SOUL_SHATTER_ENTITY_TAG)) {
-            exposeSoul(target);
-        }
-    }
-    public static void exposeSoul(LivingEntity entity) {
-        SoulDataHandler soulData = MalumLivingEntityDataCapability.getCapability(entity).soulData;
-        soulData.exposedSoulDuration = 200;
-    }
-
-    public static void manageSoul(EntityTickEvent.Pre event) {
-        if (event.getEntity() instanceof LivingEntity living) {
-            SoulDataHandler soulData = MalumLivingEntityDataCapability.getCapability(living).soulData;
-            if (soulData.exposedSoulDuration > 0) {
-                soulData.exposedSoulDuration--;
+                data.setExposed();
             }
         }
     }
 
-    public static void removeSentience(Mob mob) {
-        mob.goalSelector.getAvailableGoals().removeIf(g -> g.getGoal() instanceof LookAtPlayerGoal || g.getGoal() instanceof MeleeAttackGoal || g.getGoal() instanceof SwellGoal || g.getGoal() instanceof PanicGoal || g.getGoal() instanceof RandomLookAroundGoal || g.getGoal() instanceof AvoidEntityGoal);
-    }
-
+    //TODO: move these guys
     public static ItemStack getStaffWeapon(DamageSource source, LivingEntity attacker) {
         return getSoulHunterWeapon(source, attacker, s -> s.getItem() instanceof AbstractStaffItem);
     }

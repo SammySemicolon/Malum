@@ -24,7 +24,7 @@ import com.sammy.malum.common.block.storage.jar.*;
 import com.sammy.malum.common.block.storage.pedestal.*;
 import com.sammy.malum.common.block.storage.stand.*;
 import com.sammy.malum.common.block.the_device.*;
-import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import com.sammy.malum.registry.common.worldgen.*;
@@ -490,7 +490,7 @@ public class BlockRegistry {
             }, SOULWOOD_LEAVES.get(), BUDDING_SOULWOOD_LEAVES.get(), HANGING_SOULWOOD_LEAVES.get());
 
             blockColors.register((s, l, p, c) -> {
-                var spiritType = SpiritHarvestHandler.getSpiritType(s.getValue(SpiritMoteBlock.SPIRIT_TYPE));
+                var spiritType = MalumSpiritType.getSpiritType(s.getValue(SpiritMoteBlock.SPIRIT_TYPE));
                 var color  = spiritType.getPrimaryColor();
                 int red = color.getRed();
                 int green = color.getGreen();

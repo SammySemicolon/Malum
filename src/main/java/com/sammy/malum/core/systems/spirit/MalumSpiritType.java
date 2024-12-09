@@ -53,6 +53,10 @@ public class MalumSpiritType {
         this.itemColor = itemColor;
     }
 
+    public static MalumSpiritType getSpiritType(String spirit) {
+        return SpiritTypeRegistry.SPIRITS.getOrDefault(spirit, SpiritTypeRegistry.SACRED_SPIRIT);
+    }
+
     public String getIdentifier() {
         return identifier;
     }

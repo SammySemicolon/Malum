@@ -1,6 +1,6 @@
 package com.sammy.malum.common.block.curiosities.mana_mote;
 
-import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.visual_effects.*;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.*;
@@ -19,7 +19,7 @@ public class SpiritMoteBlockClientExtension implements IClientBlockExtensions {
     @Override
     public boolean addDestroyEffects(BlockState state, Level level, BlockPos pos, ParticleEngine manager) {
         if (state.getBlock() instanceof SpiritMoteBlock) {
-            SpiritMoteParticleEffects.destroy(level, pos, state, SpiritHarvestHandler.getSpiritType(state.getValue(SpiritMoteBlock.SPIRIT_TYPE)));
+            SpiritMoteParticleEffects.destroy(level, pos, state, MalumSpiritType.getSpiritType(state.getValue(SpiritMoteBlock.SPIRIT_TYPE)));
         }
         return true;
     }

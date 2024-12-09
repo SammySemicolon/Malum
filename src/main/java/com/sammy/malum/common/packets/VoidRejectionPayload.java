@@ -1,10 +1,10 @@
 package com.sammy.malum.common.packets;
 
-import com.sammy.malum.common.capability.MalumLivingEntityDataCapability;
+import com.sammy.malum.core.handlers.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -25,8 +25,8 @@ public class VoidRejectionPayload extends OneSidedPayloadData {
     @Override
     public void handle(IPayloadContext iPayloadContext) {
         Entity entity = Minecraft.getInstance().level.getEntity(entityId);
-        if (entity instanceof LivingEntity livingEntity) {
-            MalumLivingEntityDataCapability.getCapabilityOptional(livingEntity).ifPresent(c -> c.touchOfDarknessHandler.reject(livingEntity));
+        if (entity instanceof Player player) {
+            TouchOfDarknessHandler.launchPlayer(player);
         }
     }
 

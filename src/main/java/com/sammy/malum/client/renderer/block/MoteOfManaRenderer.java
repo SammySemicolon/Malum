@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.*;
 import com.sammy.malum.*;
 import com.sammy.malum.client.*;
 import com.sammy.malum.common.block.curiosities.mana_mote.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.spirit.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.*;
@@ -24,7 +23,7 @@ public class MoteOfManaRenderer implements BlockEntityRenderer<MoteOfManaBlockEn
     @Override
     public void render(MoteOfManaBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         poseStack.pushPose();
-        MalumSpiritType spiritType = SpiritHarvestHandler.getSpiritType(blockEntityIn.getBlockState().getValue(SpiritMoteBlock.SPIRIT_TYPE));
+        MalumSpiritType spiritType = MalumSpiritType.getSpiritType(blockEntityIn.getBlockState().getValue(SpiritMoteBlock.SPIRIT_TYPE));
 
         var builder = SpiritBasedWorldVFXBuilder.create(spiritType)
                 .setRenderType(LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MOTE_OF_MANA));

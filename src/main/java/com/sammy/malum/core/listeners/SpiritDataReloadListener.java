@@ -1,11 +1,11 @@
 package com.sammy.malum.core.listeners;
 
 import com.google.gson.*;
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.JsonOps;
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
-import com.sammy.malum.core.systems.spirit.EntitySpiritDropData;
+import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -64,57 +64,42 @@ public class SpiritDataReloadListener extends SimpleJsonResourceReloadListener {
         SPIRIT_DATA.clear();
         HAS_NO_DATA.clear();
         for (JsonElement entry : objectIn.values()) {
-            JsonObject object = entry.getAsJsonObject();
-            String name = object.getAsJsonPrimitive("registry_name").getAsString();
-            ResourceLocation resourceLocation = ResourceLocation.tryParse(name);
+            var object = entry.getAsJsonObject();
+            var name = object.getAsJsonPrimitive("registry_name").getAsString();
+            var resourceLocation = ResourceLocation.tryParse(name);
             if (resourceLocation != null && !BuiltInRegistries.ENTITY_TYPE.containsKey(resourceLocation)) {
                 continue;
             }
             if (!object.has("primary_type")) {
-                MalumMod.LOGGER.info("Entity with registry name: " + name + " lacks a primary spirit type. Skipping file.");
+                MalumMod.LOGGER.warn("Entity with registry name: {} lacks a primary spirit type. This is a datapack error.", name);
                 continue;
             }
-            String primaryType = object.getAsJsonPrimitive("primary_type").getAsString();
-            boolean isEmpty = primaryType.equals("none");
-            if (SPIRIT_DATA.containsKey(resourceLocation)) {
-                if (isEmpty)
-                    MalumMod.LOGGER.info("Entity with registry name: " + name + " already has spirit data associated with it. Removing.");
-                else
-                    MalumMod.LOGGER.info("Entity with registry name: " + name + " already has spirit data associated with it. Overwriting.");
-            } else if (HAS_NO_DATA.contains(resourceLocation) && !isEmpty) {
-                MalumMod.LOGGER.info("Entity with registry name: " + name + " already has empty spirit data associated with it. Overwriting.");
-            }
+            var primaryType = object.getAsJsonPrimitive("primary_type").getAsString();
             if (primaryType.equals("none")) {
+                MalumMod.LOGGER.info("Removed spirit drops for entity with registry name: {}", name);
                 SPIRIT_DATA.remove(resourceLocation);
                 HAS_NO_DATA.add(resourceLocation);
             } else {
+                MalumMod.LOGGER.info("Added spirit drops for entity with registry name: {}", name);
                 JsonArray array = object.getAsJsonArray("spirits");
-                SPIRIT_DATA.put(resourceLocation, new EntitySpiritDropData(SpiritHarvestHandler.getSpiritType(primaryType), getSpiritData(array), getSpiritItem(object)));
+                SPIRIT_DATA.put(resourceLocation, new EntitySpiritDropData(MalumSpiritType.getSpiritType(primaryType), getSpiritDrops(array), getItemAsSoul(object)));
                 HAS_NO_DATA.remove(resourceLocation);
             }
         }
     }
 
-    private static List<SpiritIngredient> getSpiritData(JsonArray array) {
+    private static List<SpiritIngredient> getSpiritDrops(JsonArray array) {
         List<SpiritIngredient> spiritData = new ArrayList<>();
         for (JsonElement spiritElement : array) {
             JsonObject spiritObject = spiritElement.getAsJsonObject();
             String spiritName = spiritObject.getAsJsonPrimitive("spirit").getAsString();
             int count = spiritObject.getAsJsonPrimitive("count").getAsInt();
-            spiritData.add(new SpiritIngredient(SpiritHarvestHandler.getSpiritType(spiritName), count));
+            spiritData.add(new SpiritIngredient(MalumSpiritType.getSpiritType(spiritName), count));
         }
         return spiritData;
     }
 
-    private static Ingredient getSpiritItem(JsonObject object) {
-        if (!object.has("spirit_item")) {
-            return null;
-        }
-
-        try {
-            return Ingredient.CODEC.decode(JsonOps.INSTANCE, object.get("spirit_item")).getOrThrow().getFirst();
-        } catch (IllegalStateException ignored) {
-            return null;
-        }
+    private static Ingredient getItemAsSoul(JsonObject object) {
+        return object.has("spirit_item") ? Ingredient.CODEC.decode(JsonOps.INSTANCE, object.get("spirit_item")).map(Pair::getFirst).result().orElse(null) : null;
     }
 }

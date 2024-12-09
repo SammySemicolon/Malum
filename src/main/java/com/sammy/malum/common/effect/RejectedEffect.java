@@ -1,9 +1,7 @@
 package com.sammy.malum.common.effect;
 
 import com.sammy.malum.*;
-import com.sammy.malum.common.capability.MalumLivingEntityDataCapability;
-import com.sammy.malum.core.handlers.TouchOfDarknessHandler;
-import com.sammy.malum.registry.common.DamageTypeRegistry;
+import com.sammy.malum.registry.common.*;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,8 +18,7 @@ public class RejectedEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        TouchOfDarknessHandler handler = MalumLivingEntityDataCapability.getCapability(pLivingEntity).touchOfDarknessHandler;
-        handler.afflict(40);
+        pLivingEntity.getData(AttachmentTypeRegistry.VOID_INFLUENCE).setAfflictionLevel(40);
         if (pLivingEntity.level().getGameTime() % 60L == 0) {
             if (pLivingEntity instanceof Player player && player.isCreative()) {
                 return false;

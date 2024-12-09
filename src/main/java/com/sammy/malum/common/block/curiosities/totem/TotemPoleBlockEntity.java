@@ -1,7 +1,6 @@
 package com.sammy.malum.common.block.curiosities.totem;
 
 import com.sammy.malum.common.item.curiosities.tools.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
@@ -107,7 +106,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider pRegistries) {
         if (tag.contains("spirit")) {
-            spirit = SpiritHarvestHandler.getSpiritType(tag.getString("spirit"));
+            spirit = MalumSpiritType.getSpiritType(tag.getString("spirit"));
         }
         totemPoleState = tag.contains("state") ? TotemPoleState.values()[tag.getInt("state")] : TotemPoleState.INACTIVE;
         chargeProgress = tag.getInt("chargeProgress");

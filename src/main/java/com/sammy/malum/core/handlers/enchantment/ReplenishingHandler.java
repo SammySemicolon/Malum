@@ -42,7 +42,7 @@ public class ReplenishingHandler {
     public static void replenishStaffCooldown(AbstractStaffItem staff, Player player, int pLevel) {
         ItemCooldowns cooldowns = player.getCooldowns();
         int ratio = (int) (staff.getCooldownDuration(player.level(), player) * (0.25f * pLevel));
-        cooldowns.tickCount += ratio; //TODO: access transform these fellas
+        cooldowns.tickCount += ratio;
         for (Map.Entry<Item, ItemCooldowns.CooldownInstance> itemCooldownInstanceEntry : cooldowns.cooldowns.entrySet()) {
             if (itemCooldownInstanceEntry.getKey().equals(staff)) {
                 continue;

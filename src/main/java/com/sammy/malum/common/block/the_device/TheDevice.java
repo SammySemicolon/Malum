@@ -1,7 +1,6 @@
 package com.sammy.malum.common.block.the_device;
 
-import com.sammy.malum.common.capability.MalumPlayerDataCapability;
-import com.sammy.malum.registry.common.SoundRegistry;
+import com.sammy.malum.registry.common.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -29,7 +28,7 @@ public class TheDevice extends Block {
             pPlayer.swing(pHand, true);
             playSound(pLevel, pPos);
             if (pPlayer.isCreative()) {
-                MalumPlayerDataCapability.getCapabilityOptional(pPlayer).ifPresent(it -> it.hasBeenRejected = false);
+                pPlayer.getData(AttachmentTypeRegistry.PROGRESSION_DATA).hasBeenRejected = false;
             }
             return ItemInteractionResult.SUCCESS;
         }

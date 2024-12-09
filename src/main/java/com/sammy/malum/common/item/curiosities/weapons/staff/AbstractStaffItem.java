@@ -1,7 +1,6 @@
 package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.google.common.collect.*;
-import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.registry.client.*;
@@ -91,9 +90,9 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
                     player.awardStat(Stats.ITEM_USED.get(this));
                     if (!player.getAbilities().instabuild) {
                         pStack.hurtAndBreak(2, player, EquipmentSlot.MAINHAND);
-                        final MalumPlayerDataCapability capability = MalumPlayerDataCapability.getCapability(player);
-                        if (capability.reserveStaffChargeHandler.chargeCount > 0) {
-                            capability.reserveStaffChargeHandler.chargeCount--;
+                        var data = player.getData(AttachmentTypeRegistry.RESERVE_STAFF_CHARGES);
+                        if (data.reserveChargeCount > 0) {
+                            data.reserveChargeCount--;
                         }
                         else {
                             player.getCooldowns().addCooldown(this, getCooldownDuration(pLevel, pLivingEntity));

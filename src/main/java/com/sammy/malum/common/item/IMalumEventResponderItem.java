@@ -2,7 +2,6 @@ package com.sammy.malum.common.item;
 
 import com.sammy.malum.core.systems.events.*;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import team.lodestar.lodestone.handlers.*;
 
@@ -11,9 +10,9 @@ public interface IMalumEventResponderItem extends ItemEventHandler.IEventRespond
 
     }
 
-    default void modifySoulWardPropertiesEvent(ModifySoulWardPropertiesEvent event, Player wardedEntity, ItemStack stack) {
+    default void modifySoulWardPropertiesEvent(ModifySoulWardPropertiesEvent event, LivingEntity wardedEntity, ItemStack stack) {
     }
 
-    default void soulWardDamageEvent(SoulWardDamageEvent event, Player wardedEntity, ItemStack stack) {
+    default void soulWardDamageEvent(SoulWardDamageEvent event, LivingEntity wardedEntity, ItemStack stack) {
     }
 }

@@ -1,6 +1,7 @@
 package com.sammy.malum.compability.tetra;
 
 import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.registry.common.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +23,7 @@ public class TetraCompat {
         return LOADED && LoadedOnly.hasSoulStrikeModifier(stack);
     }
 
-    public static void onEntityJoin(EntityJoinLevelEvent event) {
+    public static void entityJoin(EntityJoinLevelEvent event) {
         if (LOADED) {
             LoadedOnly.fireArrow(event);
         }
@@ -49,7 +50,7 @@ public class TetraCompat {
             if (event.getEntity() instanceof Arrow arrow) {
                 if (arrow.getOwner() instanceof Player player) {
                     if (hasSoulStrikeModifier(player.getUseItem())) {
-                        arrow.addTag(SoulDataHandler.SOUL_SHATTER_ENTITY_TAG);
+                        arrow.getData(AttachmentTypeRegistry.PROJECTILE_SOUL_INFO).setSoulDamage(true);
                     }
                 }
             }

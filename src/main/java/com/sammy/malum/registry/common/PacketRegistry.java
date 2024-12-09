@@ -33,8 +33,7 @@ public class PacketRegistry {
         MALUM_CHANNEL.playToClient(registrar, "aerial_block_fall_rite_effect", AerialBlockFallRiteEffectPacket.class, AerialBlockFallRiteEffectPacket::new);
         MALUM_CHANNEL.playToClient(registrar, "spirit_rite_activation", SpiritRiteActivationEffectPacket.class, SpiritRiteActivationEffectPacket::new);
 
-        MALUM_CHANNEL.playToClient(registrar, "sync_malum_player_capability", SyncMalumPlayerCapabilityDataPacket.class, SyncMalumPlayerCapabilityDataPacket::new);
-        MALUM_CHANNEL.playToClient(registrar, "sync_living_capability_data", SyncLivingCapabilityDataPacket.class, SyncLivingCapabilityDataPacket::new);
+        MALUM_CHANNEL.playToClient(registrar, "sync_soul_ward_data", SyncSoulWardDataPayload.class, SyncSoulWardDataPayload::new);
 
         MALUM_CHANNEL.playToClient(registrar, "blight_mist_particle", BlockSparkleParticlePacket.class, BlockSparkleParticlePacket::new);
         MALUM_CHANNEL.playToClient(registrar, "blight_transformation_item_particle", BlightTransformItemParticlePacket.class, BlightTransformItemParticlePacket::new);

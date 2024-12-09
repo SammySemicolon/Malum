@@ -4,7 +4,6 @@ import com.sammy.malum.common.item.curiosities.SpiritPouchItem;
 import com.sammy.malum.common.item.spirit.SpiritJarItem;
 import com.sammy.malum.common.item.spirit.SpiritShardItem;
 import com.sammy.malum.common.packets.CodecUtil;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.common.block.BlockEntityRegistry;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
@@ -232,7 +231,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlock
     @Override
     public void loadAdditional(@NotNull CompoundTag compound, HolderLookup.Provider pRegistries) {
         if (compound.contains("spirit")) {
-            type = SpiritHarvestHandler.getSpiritType(compound.getString("spirit"));
+            type = MalumSpiritType.getSpiritType(compound.getString("spirit"));
         } else {
             type = null;
         }

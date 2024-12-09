@@ -5,6 +5,7 @@ import com.sammy.malum.compability.farmersdelight.*;
 import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.config.*;
+import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.tabs.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderOwner;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.sammy.malum.registry.client.ParticleRegistry.*;
+import static com.sammy.malum.registry.common.AttachmentTypeRegistry.ATTACHMENT_TYPES;
 import static com.sammy.malum.registry.common.AttributeRegistry.*;
 import static com.sammy.malum.registry.common.ContainerRegistry.*;
 import static com.sammy.malum.registry.common.MobEffectRegistry.*;
@@ -66,6 +68,7 @@ public class MalumMod {
         FEATURE_TYPES.register(modBus);
         STRUCTURES.register(modBus);
         CREATIVE_MODE_TABS.register(modBus);
+        ATTACHMENT_TYPES.register(modBus);
 
         TetraCompat.init();
         FarmersDelightCompat.init();

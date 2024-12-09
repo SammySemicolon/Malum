@@ -2,7 +2,6 @@ package com.sammy.malum.core.handlers.client;
 
 import com.mojang.blaze3d.systems.*;
 import com.sammy.malum.*;
-import com.sammy.malum.common.capability.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
@@ -25,8 +24,8 @@ public class SoulWardRenderHandler {
     public static void tick(ClientTickEvent event) {
         final LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
-            var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
-            if (handler.getSoulWard() >= player.getAttributeValue(AttributeRegistry.SOUL_WARD_CAPACITY)) {
+            var data = player.getData(AttachmentTypeRegistry.SOUL_WARD);
+            if (data.getSoulWard() >= player.getAttributeValue(AttributeRegistry.SOUL_WARD_CAPACITY)) {
                 if (fadeOut < 80) {
                     fadeOut++;
                 }
@@ -42,8 +41,8 @@ public class SoulWardRenderHandler {
         if (!minecraft.options.hideGui) {
             var player = minecraft.player;
             if (!player.isCreative() && !player.isSpectator()) {
-                var handler = MalumPlayerDataCapability.getCapability(player).soulWardHandler;
-                double soulWard = handler.getSoulWard();
+                var data = player.getData(AttachmentTypeRegistry.SOUL_WARD);
+                double soulWard = data.getSoulWard();
                 if (soulWard > 0) {
                     float absorb = Mth.ceil(player.getAbsorptionAmount());
                     float maxHealth = (float) player.getAttribute(Attributes.MAX_HEALTH).getValue();

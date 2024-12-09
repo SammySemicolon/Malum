@@ -1,8 +1,8 @@
 package com.sammy.malum.common.item.curiosities.weapons;
 
 import com.sammy.malum.common.item.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
+import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
@@ -29,7 +29,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
         if (!event.getSource().is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
             return;
         }
-        float damage = SpiritHarvestHandler.getSpiritData(target).map(d -> d.totalSpirits).orElse(0) * 2f;
+        float damage = EntitySpiritDropData.getSpiritData(target).map(d -> d.totalSpirits).orElse(0) * 2f;
         if (target instanceof Player) {
             damage = 4 * Math.max(1, (1 + target.getArmorValue() / 12f) * (1 + (1 - 1 / (float) target.getArmorValue())) / 12f);
         }

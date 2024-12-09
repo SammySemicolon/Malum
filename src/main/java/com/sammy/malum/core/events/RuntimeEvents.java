@@ -1,7 +1,6 @@
 package com.sammy.malum.core.events;
 
 import com.sammy.malum.common.block.storage.jar.*;
-import com.sammy.malum.common.capability.*;
 import com.sammy.malum.common.effect.*;
 import com.sammy.malum.common.effect.aura.*;
 import com.sammy.malum.common.entity.nitrate.*;
@@ -22,28 +21,24 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
-import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.item.ItemExpireEvent;
+import net.neoforged.bus.api.*;
+import net.neoforged.fml.common.*;
+import net.neoforged.neoforge.event.*;
+import net.neoforged.neoforge.event.entity.*;
+import net.neoforged.neoforge.event.entity.item.*;
 import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.level.ExplosionEvent;
-import net.neoforged.neoforge.event.tick.EntityTickEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.entity.player.*;
+import net.neoforged.neoforge.event.level.*;
+import net.neoforged.neoforge.event.tick.*;
 
 @EventBusSubscriber
 public class RuntimeEvents {
 
     @SubscribeEvent
     public static void onEntityJoin(EntityJoinLevelEvent event) {
-        MalumPlayerDataCapability.playerJoin(event);
         CurioTokenOfGratitude.giveItem(event);
-        SoulDataHandler.updateAi(event);
-        TetraCompat.onEntityJoin(event);
+        SoulDataHandler.entityJoin(event);
+        TetraCompat.entityJoin(event);
     }
 
 
@@ -92,22 +87,12 @@ public class RuntimeEvents {
 
     @SubscribeEvent
     public static void onLivingTick(EntityTickEvent.Pre event) {
-        SoulDataHandler.manageSoul(event);
-        MalignantConversionHandler.checkForAttributeChanges(event);
+        SoulDataHandler.entityTick(event);
+        SoulWardHandler.recoverSoulWard(event);
+        MalignantConversionHandler.entityTick(event);
         TouchOfDarknessHandler.entityTick(event);
         CurioWatcherNecklace.entityTick(event);
         CurioHiddenBladeNecklace.entityTick(event);
-    }
-
-    @SubscribeEvent
-    public static void onStartTracking(PlayerEvent.StartTracking event) {
-        MalumLivingEntityDataCapability.syncEntityCapability(event);
-        MalumPlayerDataCapability.syncPlayerCapability(event);
-    }
-
-    @SubscribeEvent
-    public static void onPlayerClone(PlayerEvent.Clone event) {
-        MalumPlayerDataCapability.playerClone(event);
     }
 
     @SubscribeEvent
@@ -118,8 +103,7 @@ public class RuntimeEvents {
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
-        ReserveStaffChargeHandler.recoverStaffCharges(event);
-        SoulWardHandler.recoverSoulWard(event);
+        StaffAbilityHandler.recoverStaffCharges(event);
     }
 
     @SubscribeEvent
@@ -162,18 +146,17 @@ public class RuntimeEvents {
 
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
-        EsotericReapingHandler.onDeath(event);
-        SpiritHarvestHandler.spawnSpiritsOnDeath(event);
+        SoulHarvestHandler.onDeath(event);
     }
 
     @SubscribeEvent
     public static void onDrops(LivingDropsEvent event) {
-        SpiritHarvestHandler.primeItemForShatter(event);
+        EnsouledItemHarvestHandler.onDrops(event);
     }
 
     @SubscribeEvent
     public static void onItemExpire(ItemExpireEvent event) {
-        SpiritHarvestHandler.shatterItem(event);
+        EnsouledItemHarvestHandler.onItemExpire(event);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

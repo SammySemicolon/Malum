@@ -19,12 +19,12 @@ import java.util.function.*;
 public class RuneDexterityItem extends AbstractRuneCurioItem {
 
     public static final Function<LivingEntity, AttributeModifier> MOVEMENT_SPEED = (living) -> {
-        if (living == null) {
-            return 0.2f;
+        float value = 0.2f;
+        if (living != null) {
+            final float health = living.getHealth();
+            final float maxHealth = living.getMaxHealth();
+            value = 0.2f * (2 - (health / maxHealth));
         }
-        final float health = living.getHealth();
-        final float maxHealth = living.getMaxHealth();
-        float value = 0.2f * (2 - (health / maxHealth));
         return new AttributeModifier(MalumMod.malumPath("curio_movement_speed"), value, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     };
 

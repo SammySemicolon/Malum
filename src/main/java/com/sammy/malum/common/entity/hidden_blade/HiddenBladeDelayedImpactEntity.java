@@ -77,12 +77,11 @@ public class HiddenBladeDelayedImpactEntity extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         if (getOwner() instanceof LivingEntity owner) {
             var target = result.getEntity();
-            var source = DamageTypeHelper.create(level(), DamageTypeRegistry.SCYTHE_SWEEP, this, owner);
+            var source = DamageTypeHelper.create(level(), DamageTypeRegistry.HIDDEN_BLADE_COUNTER, this, owner);
             var heldItem = owner.getMainHandItem();
             var motion = target.getDeltaMovement();
 
             owner.setItemInHand(InteractionHand.MAIN_HAND, getItem());
-            target.invulnerableTime = 0;
             boolean success = target.hurt(source, damage);
             if (success && target instanceof LivingEntity livingentity) {
                 if (magicDamage > 0) {

@@ -64,6 +64,8 @@ neoForge {
         }
 
         configureEach {
+            jvmArgument("-Dmixin.debug=true")
+            jvmArgument("-Xmx4G")
             systemProperty("neoforge.logging.markers", "REGISTRIES")
             logLevel = org.slf4j.event.Level.DEBUG
         }

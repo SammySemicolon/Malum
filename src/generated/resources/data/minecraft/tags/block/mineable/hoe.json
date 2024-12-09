@@ -1,16 +1,16 @@
 {
   "values": [
-    "malum:azure_runewood_leaves",
     "malum:blighted_soil",
-    "malum:block_of_hex_ash",
+    "malum:blighted_earth",
+    "malum:soulwood_leaves",
+    "malum:mass_of_blighted_gunk",
+    "malum:azure_runewood_leaves",
     "malum:budding_soulwood_leaves",
     "malum:hanging_azure_runewood_leaves",
-    "malum:blighted_earth",
-    "malum:mass_of_blighted_gunk",
-    "malum:runewood_leaves",
     "malum:block_of_astral_weave",
+    "malum:hanging_runewood_leaves",
     "malum:hanging_soulwood_leaves",
-    "malum:soulwood_leaves",
-    "malum:hanging_runewood_leaves"
+    "malum:block_of_hex_ash",
+    "malum:runewood_leaves"
   ]
 }

@@ -12,9 +12,7 @@
     "FeatureFlagSetMixin",
     "FishingHookEntityMixin",
     "ItemStackMixin",
-    "PlayerMixin",
-    "VanillaRecipeProviderMixin",
-    "VanillaRecipeProviderMixin$RecipeBuilderMixin",
+    "PlayerMixin"
   ],
   "client": [
     "client.AccessorBakedGlyph",

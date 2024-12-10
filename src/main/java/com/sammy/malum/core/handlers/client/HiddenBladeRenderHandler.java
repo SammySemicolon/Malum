@@ -52,7 +52,6 @@ public class HiddenBladeRenderHandler {
                     int left = guiGraphics.guiWidth() / 2 - 8;
                     int top = guiGraphics.guiHeight() - 52;
                     poseStack.pushPose();
-//                        gui.setupOverlayRenderState(true, false);
                     RenderSystem.setShaderTexture(0, getTexture());
                     RenderSystem.depthMask(true);
                     RenderSystem.enableBlend();
@@ -63,7 +62,7 @@ public class HiddenBladeRenderHandler {
                     shaderInstance.safeGetUniform("Speed").set(550f);
                     shaderInstance.safeGetUniform("Intensity").set(120f);
                     var builder = VFXBuilders.createScreen()
-                            .setPosColorTexLightmapDefaultFormat()
+                            .setPosTexColorDefaultFormat()
                             .setShader(() -> shaderInstance);
 
                     float size = 16;
@@ -72,19 +71,16 @@ public class HiddenBladeRenderHandler {
                     final boolean secondRow = delta >= 0.5f;
                     int xOffset = 16 * (Mth.floor(delta * 8)) - (secondRow ? 64 : 0);
                     int yOffset = secondRow ? 16 : 0;
-
                     if (fadeOut > 20) {
                         final boolean hasEffect = player.hasEffect(MobEffectRegistry.WICKED_INTENT);
                         builder.setAlpha((80 - fadeOut) / (hasEffect ? 10f : 60f));
                     }
-                    builder.setPosColorTexLightmapDefaultFormat()
-                            .setPositionWithWidth(left, top, size, size)
+                    builder.setPositionWithWidth(left, top, size, size)
                             .setUVWithWidth(xOffset, yOffset, 16, 16, 64)
                             .draw(poseStack);
                     if (fadeOut > 0 && fadeOut < 20) {
                         float glow = (10 - Math.abs(10 - fadeOut)) / 10f;
                         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-
                         builder.setAlpha(glow).draw(poseStack);
                     }
 

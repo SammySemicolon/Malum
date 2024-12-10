@@ -64,7 +64,7 @@ public class ArcanaCodexHelper {
         shaderInstance.safeGetUniform("Speed").set(1000f);
         Consumer<Float> setZoom = f -> shaderInstance.safeGetUniform("Zoom").set(f);
         Consumer<Float> setIntensity = f -> shaderInstance.safeGetUniform("Intensity").set(f);
-        builder.setPosTexColorDefaultFormat().setAlpha(effectAlpha).setShader(ShaderRegistry.TOUCH_OF_DARKNESS.getInstance());
+        builder.setPosColorDefaultFormat().setAlpha(effectAlpha).setShader(shaderInstance);
 
         setZoom.accept(zoom);
         setIntensity.accept(intensity);
@@ -101,7 +101,7 @@ public class ArcanaCodexHelper {
         Supplier<ShaderInstance> shaderInstanceSupplier = () -> shaderInstance;
 
         VFXBuilders.ScreenVFXBuilder builder = VFXBuilders.createScreen()
-                .setPosColorTexLightmapDefaultFormat()
+                .setPosTexColorDefaultFormat()
                 .setShader(shaderInstanceSupplier)
                 .setColor(spiritType.getPrimaryColor())
                 .setAlpha(0.9f)
@@ -139,7 +139,7 @@ public class ArcanaCodexHelper {
         Supplier<ShaderInstance> shaderInstanceSupplier = () -> shaderInstance;
 
         VFXBuilders.ScreenVFXBuilder builder = VFXBuilders.createScreen()
-                .setPosColorTexLightmapDefaultFormat()
+                .setPosTexColorDefaultFormat()
                 .setShader(shaderInstanceSupplier)
                 .setAlpha(0.7f)
                 .setZLevel(z)

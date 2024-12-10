@@ -19,7 +19,7 @@ import static net.neoforged.neoforge.event.entity.living.MobEffectEvent.Applicab
 public class GluttonyEffect extends MobEffect {
     public GluttonyEffect() {
         super(MobEffectCategory.BENEFICIAL, ColorHelper.getColor(88, 86, 60));
-        addAttributeModifier(LodestoneAttributes.MAGIC_PROFICIENCY, MalumMod.malumPath("gluttony_magic_multiplier"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        addAttributeModifier(LodestoneAttributes.MAGIC_PROFICIENCY, MalumMod.malumPath("gluttony_magic_multiplier"), 0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         IronsSpellsCompat.addGluttonySpellPower(this);
     }
 
@@ -34,7 +34,7 @@ public class GluttonyEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
         if (entityLivingBaseIn instanceof Player player) {
-            player.causeFoodExhaustion(0.004f * (amplifier + 1));
+            player.causeFoodExhaustion(0.005f * (amplifier + 1));
         }
         return true;
     }

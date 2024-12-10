@@ -37,11 +37,11 @@ public class TouchOfDarknessRenderHandler {
         Consumer<Float> setZoom = f -> shaderInstance.safeGetUniform("Zoom").set(f);
         Consumer<Float> setIntensity = f -> shaderInstance.safeGetUniform("Intensity").set(f);
         VFXBuilders.ScreenVFXBuilder builder = VFXBuilders.createScreen()
-                .setPosColorTexLightmapDefaultFormat()
+                .setPosColorDefaultFormat()
                 .setPositionWithWidth(0, 0, screenWidth, screenHeight)
                 .setColor(0, 0, 0)
                 .setAlpha(alpha)
-                .setShader(ShaderRegistry.TOUCH_OF_DARKNESS.getInstance());
+                .setShader(shaderInstance);
 
         poseStack.pushPose();
         RenderSystem.enableBlend();

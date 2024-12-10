@@ -68,7 +68,7 @@ public class SoulWardRenderHandler {
                     shaderInstance.safeGetUniform("Speed").set(550f);
                     shaderInstance.safeGetUniform("Intensity").set(120f);
                     var builder = VFXBuilders.createScreen()
-                            .setPosColorTexLightmapDefaultFormat()
+                            .setPosTexColorDefaultFormat()
                             .setShader(() -> shaderInstance);
                     if (fadeOut > 20) {
                         final boolean isDamaged = soulWard < player.getAttributeValue(AttributeRegistry.SOUL_WARD_CAPACITY);

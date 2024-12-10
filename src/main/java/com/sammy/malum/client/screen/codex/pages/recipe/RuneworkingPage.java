@@ -23,7 +23,7 @@ public class RuneworkingPage extends BookPage {
     }
 
     public RuneworkingPage(RunicWorkbenchRecipe recipe) {
-        super(MalumMod.malumPath("textures/gui/book/pages/runic_workbench_page.png"));
+        super(MalumMod.malumPath("textures/gui/book/pages/runeworking_page.png"));
         this.recipe = recipe;
     }
 

@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.weeping;
 import com.sammy.malum.common.entity.hidden_blade.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
+import com.sammy.malum.common.packets.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
+import net.neoforged.neoforge.network.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
 
@@ -44,7 +46,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         }
         if (attacked.getData(AttachmentTypeRegistry.CURIO_DATA).hiddenBladeNecklaceCooldown == 0) {
             float damage = event.getOriginalDamage();
-            int amplifier = Math.min(1 + Mth.floor(damage / 6), 10);
+            int amplifier = Math.min(Mth.floor(damage / 4), 9);
             attacked.addEffect(new MobEffectInstance(MobEffectRegistry.WICKED_INTENT, 80, amplifier));
             SoundHelper.playSound(attacked, SoundRegistry.HIDDEN_BLADE_PRIMED.get(), 1f, RandomHelper.randomBetween(attacked.level().getRandom(), 1.4f, 1.6f));
         }
@@ -68,7 +70,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
                     SoundHelper.playSound(attacker, SoundRegistry.HIDDEN_BLADE_DISRUPTED.get(), 1f, RandomHelper.randomBetween(random, 0.7f, 0.8f));
                 }
                 data.hiddenBladeNecklaceCooldown = (int) (COOLDOWN_DURATION * 1.5);
-//                MalumLivingEntityDataCapability.sync(attacker);
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(attacker, new SyncCurioDataPayload(attacker.getId(), data));
                 return;
             }
             var effect = attacker.getEffect(MobEffectRegistry.WICKED_INTENT);
@@ -81,7 +83,8 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             var direction = isRanged ? damageDealer.getDeltaMovement().normalize() : attacker.getLookAngle();
             var damageCenter = damageDealer.position().add(direction);
             var attributes = attacker.getAttributes();
-            float multiplier = (float) Mth.clamp(attributes.getValue(Attributes.ATTACK_SPEED), 0, 2) * ((effect.amplifier * 2) + 1);
+            float amplifierScalar = 1+(effect.amplifier+1)*0.2f;
+            float multiplier = (float) Mth.clamp(attributes.getValue(Attributes.ATTACK_SPEED), 0, 2) * amplifierScalar;
             int duration = 25;
 
             float physicalDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * multiplier;
@@ -92,6 +95,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             entity.setItem(scytheWeapon);
             level.addFreshEntity(entity);
             data.hiddenBladeNecklaceCooldown = 200;
+            PacketDistributor.sendToPlayersTrackingEntityAndSelf(attacker, new SyncCurioDataPayload(attacker.getId(), data));
             if (!effect.isInfiniteDuration()) {
                 attacker.removeEffect(effect.getEffect());
             }
@@ -105,7 +109,6 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             particle.setRandomSlashAngle(random)
                     .mirrorRandomly(random)
                     .spawnForwardSlashingParticle(attacker, direction);
-//            MalumLivingEntityDataCapability.sync(attacker);
         }
     }
     public static void entityTick(EntityTickEvent.Pre event) {

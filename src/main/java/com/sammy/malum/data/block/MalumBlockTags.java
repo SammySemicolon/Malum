@@ -37,6 +37,6 @@ public class MalumBlockTags extends LodestoneBlockTagsProvider {
         tag(BlockTagRegistry.ENDLESS_FLAME);
         tag(BlockTagRegistry.GREATER_AERIAL_WHITELIST);
 
-        addTagsFromBlockProperties(blocks.stream().map(DeferredHolder::get).collect(Collectors.toList()));
+        addTagsFromBlockProperties(blocks);
     }
 }

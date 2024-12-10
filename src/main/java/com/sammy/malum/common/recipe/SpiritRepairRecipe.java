@@ -57,23 +57,23 @@ public class SpiritRepairRecipe extends AbstractSpiritListMalumRecipe {
     }
 
     protected static void addToInputs(ArrayList<Item> inputs, String itemIdRegex, String modIdRegex) {
-        BuiltInRegistries.ITEM.entrySet().stream().map(Map.Entry::getValue).filter(i -> i.isRepairable(i.getDefaultInstance())).forEach(item -> {
-            if (BuiltInRegistries.ITEM.getKey(item).getPath().matches(itemIdRegex)) {
-                iteration : {
+        for (int i = 0; i < BuiltInRegistries.ITEM.size(); i++) {
+            Item item = BuiltInRegistries.ITEM.byId(i);
+            if (item.isRepairable(item.getDefaultInstance())) {
+                if (BuiltInRegistries.ITEM.getKey(item).getPath().matches(itemIdRegex)) {
                     if (!modIdRegex.isEmpty() && !BuiltInRegistries.ITEM.getKey(item).getNamespace().matches(modIdRegex)) {
-                        break iteration;
+                        break;
                     }
                     if (item instanceof IRepairOutputOverride repairOutputOverride && repairOutputOverride.ignoreDuringLookup()) {
-                        break iteration;
+                        break;
                     }
                     if (!inputs.contains(item)) {
                         inputs.add(item);
                     }
                 }
             }
-        });
         }
-
+    }
     @Override
     public boolean matches(SingleRecipeInput singleRecipeInput, Level level) {
         return inputs.contains(singleRecipeInput.item().getItem());

@@ -2,11 +2,11 @@
   "type": "malum:spirit_repair",
   "durabilityPercentage": 0.5,
   "inputs": [
-    "minecraft:wooden_pickaxe",
-    "minecraft:wooden_hoe",
-    "minecraft:wooden_axe",
+    "minecraft:wooden_sword",
     "minecraft:wooden_shovel",
-    "minecraft:wooden_sword"
+    "minecraft:wooden_pickaxe",
+    "minecraft:wooden_axe",
+    "minecraft:wooden_hoe"
   ],
   "itemIdRegex": ".*",
   "modIdRegex": ".*",

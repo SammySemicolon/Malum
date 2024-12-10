@@ -52,7 +52,9 @@ public class SpiritRepairRecipeBuilder implements LodestoneRecipeBuilder<SpiritR
     @Override
     public SpiritRepairRecipe build(ResourceLocation resourceLocation) {
         List<ResourceLocation> inputIds = new ArrayList<>();
-        inputs.forEach(i -> inputIds.add(BuiltInRegistries.ITEM.getKey(i)));
+        for (Item input : inputs) {
+            inputIds.add(BuiltInRegistries.ITEM.getKey(input));
+        }
         return new SpiritRepairRecipe(this.durabilityPercentage, this.itemIdRegex, this.modIdRegex, inputIds, this.repairMaterial, this.spirits);
     }
 

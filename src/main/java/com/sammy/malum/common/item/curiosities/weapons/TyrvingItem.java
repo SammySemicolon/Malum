@@ -4,10 +4,12 @@ import com.sammy.malum.common.item.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
+import net.minecraft.network.chat.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -15,11 +17,17 @@ import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.item.tools.*;
 
+import java.util.*;
+
 public class TyrvingItem extends LodestoneSwordItem implements IMalumEventResponderItem {
     public TyrvingItem(Tier material, int attackDamage, float attackSpeed, Properties properties) {
         super(material, attackDamage, attackSpeed, properties);
     }
 
+    @Override
+    public void modifyAttributeTooltipEvent(AddAttributeTooltipsEvent event) {
+        event.addTooltipLines(ComponentHelper.positiveEffect("soul_based_damage"));
+    }
     @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         final Level level = attacker.level();

@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.miracle;
 
 import com.sammy.malum.common.item.curiosities.curios.runes.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -20,8 +21,8 @@ public class RuneVolatileDistortionItem extends AbstractRuneCurioItem implements
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("erratic_damage"));
-        consumer.accept(positiveEffect("crits"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("erratic_damage"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("crits"));
     }
 
     @Override

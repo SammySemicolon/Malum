@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.sets.prospector;
 
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,7 +17,7 @@ public class CurioDemolitionistRing extends MalumCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("bigger_explosions"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("bigger_explosions"));
     }
 
     public static float increaseExplosionRadius(LivingEntity source, float original) {

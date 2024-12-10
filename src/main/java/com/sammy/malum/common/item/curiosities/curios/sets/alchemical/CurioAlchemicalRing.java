@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.alchemical;
 
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.events.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.effect.*;
@@ -18,7 +19,7 @@ public class CurioAlchemicalRing extends MalumCurioItem implements IMalumEventRe
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("spirits_extend_effect"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("spirits_extend_effect"));
     }
 
     @Override

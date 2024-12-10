@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.weeping;
 
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.network.chat.*;
@@ -22,7 +23,7 @@ public class CurioGruesomeConcentrationRing extends MalumCurioItem implements IV
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("rotten_gluttony"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("rotten_gluttony"));
     }
 
     public static void onEat(Level level, LivingEntity livingEntity, ItemStack food) {

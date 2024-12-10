@@ -32,10 +32,10 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("scythe_counterattack"));
-        consumer.accept(positiveEffect("enhanced_maneuvers"));
-        consumer.accept(negativeEffect("pacifist_recharge"));
-        consumer.accept(negativeEffect("no_sweep"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("scythe_counterattack"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("enhanced_maneuvers"));
+        consumer.accept(ComponentHelper.negativeCurioEffect("pacifist_recharge"));
+        consumer.accept(ComponentHelper.negativeCurioEffect("no_sweep"));
     }
 
 

@@ -1,7 +1,7 @@
 {
   "values": [
-    "malum:runewood_trapdoor",
     "malum:solid_runewood_trapdoor",
+    "malum:runewood_trapdoor",
     "malum:soulwood_trapdoor",
     "malum:solid_soulwood_trapdoor"
   ]

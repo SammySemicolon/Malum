@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.weeping;
 import com.sammy.malum.common.entity.activator.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.entity.*;
@@ -23,7 +24,7 @@ public class CurioWatcherNecklace extends MalumCurioItem implements IMalumEventR
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("full_health_fake_collection"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("full_health_fake_collection"));
     }
 
     @Override

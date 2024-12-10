@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.madness;
 
 import com.sammy.malum.common.item.curiosities.curios.runes.AbstractRuneCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +19,7 @@ public class RuneIgneousSolaceItem extends AbstractRuneCurioItem implements Item
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("burning_resistance"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("burning_resistance"));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.brooches;
 import com.google.common.collect.Multimap;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.helpers.*;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +26,7 @@ public class CurioGluttonousBrooch extends MalumCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(negativeEffect("hunger_drain"));
+        consumer.accept(ComponentHelper.negativeCurioEffect("hunger_drain"));
     }
 
     @Override

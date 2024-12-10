@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.sets.prospector;
 
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.*;
@@ -30,8 +31,8 @@ public class CurioProspectorBelt extends MalumCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer, TooltipContext context) {
-        consumer.accept(positiveEffect("enchanted_explosions", Enchantment.getFullname(context.registries().holderOrThrow(Enchantments.FORTUNE), 3).copy().withStyle(ChatFormatting.BLUE)));
-        consumer.accept(positiveEffect("explosions_spare_valuables"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("enchanted_explosions", Enchantment.getFullname(context.registries().holderOrThrow(Enchantments.FORTUNE), 3).copy().withStyle(ChatFormatting.BLUE)));
+        consumer.accept(ComponentHelper.positiveCurioEffect("explosions_spare_valuables"));
     }
 
     public static void processExplosion(ExplosionEvent.Detonate event) {

@@ -2,12 +2,16 @@ package com.sammy.malum.common.item.curiosities.weapons.scythe;
 
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
+import net.minecraft.network.chat.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
+
+import java.util.*;
 
 public class EdgeOfDeliveranceItem extends MalumScytheItem {
 
@@ -16,7 +20,14 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
     }
 
     @Override
+    public void modifyAttributeTooltipEvent(AddAttributeTooltipsEvent event) {
+        event.addTooltipLines(ComponentHelper.positiveEffect("edge_of_deliverance_crit"));
+        event.addTooltipLines(ComponentHelper.negativeEffect("edge_of_deliverance_unpowered_attack"));
+    }
+
+    @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+        super.outgoingDamageEvent(event, attacker, target, stack);
         var level = attacker.level();
         if (level.isClientSide()) {
             return;

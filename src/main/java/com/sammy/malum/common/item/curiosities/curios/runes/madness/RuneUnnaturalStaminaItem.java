@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.runes.madness;
 import com.google.common.collect.Multimap;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.curios.runes.AbstractRuneCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.core.Holder;
@@ -25,7 +26,7 @@ public class RuneUnnaturalStaminaItem extends AbstractRuneCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("always_sprint"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("always_sprint"));
     }
 
     @Override

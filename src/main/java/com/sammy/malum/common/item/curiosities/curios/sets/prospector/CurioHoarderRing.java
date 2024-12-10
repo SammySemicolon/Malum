@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.sets.prospector;
 
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -19,7 +20,7 @@ public class CurioHoarderRing extends MalumCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("explosion_drops_collected"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("explosion_drops_collected"));
     }
 
     public static boolean hasHoarderRing(LivingEntity entity) {

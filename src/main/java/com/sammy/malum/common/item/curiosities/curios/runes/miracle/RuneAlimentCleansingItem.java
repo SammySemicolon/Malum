@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.miracle;
 
 import com.sammy.malum.common.item.curiosities.curios.runes.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.network.chat.Component;
@@ -22,7 +23,7 @@ public class RuneAlimentCleansingItem extends AbstractRuneCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("shorten_negative_effect"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("shorten_negative_effect"));
     }
 
     public static void onPotionApplied(MobEffectEvent.Added event) {

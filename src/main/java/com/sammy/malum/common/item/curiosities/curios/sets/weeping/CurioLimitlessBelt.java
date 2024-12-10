@@ -5,6 +5,7 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.IMalumEventResponderItem;
 import com.sammy.malum.common.item.IVoidItem;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.AttributeRegistry;
 import net.minecraft.core.Holder;
@@ -26,8 +27,8 @@ public class CurioLimitlessBelt extends MalumCurioItem implements IMalumEventRes
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("soul_ward_complete_absorption"));
-        consumer.accept(positiveEffect("soul_ward_escalating_integrity"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("soul_ward_complete_absorption"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("soul_ward_escalating_integrity"));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.sets.rotten;
 
 import com.sammy.malum.common.item.curiosities.curios.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.network.chat.*;
@@ -24,8 +25,8 @@ public class CurioVoraciousRing extends MalumCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("eat_rotten"));
-        consumer.accept(positiveEffect("growing_gluttony"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("eat_rotten"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("growing_gluttony"));
     }
 
     public static void accelerateEating(LivingEntityUseItemEvent.Start event) {

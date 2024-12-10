@@ -23,7 +23,8 @@ public class MalumCurioItem extends AbstractMalumCurioItem implements ICurioItem
         addExtraTooltipLines(consumer);
     }
 
-    public void addExtraTooltipLines(Consumer<Component> consumer) {}
+    public void addExtraTooltipLines(Consumer<Component> consumer) {
+    }
 
 
     @Override
@@ -39,19 +40,12 @@ public class MalumCurioItem extends AbstractMalumCurioItem implements ICurioItem
                 final Map<String, ISlotType> itemStackSlots = CuriosApi.getItemStackSlots(stack, FMLLoader.getDist().isClient());
 
                 itemStackSlots.keySet().stream().findFirst().ifPresent(s ->
-                    attributesTooltip.add(Component.translatable("curios.modifiers." + s)
-                        .withStyle(ChatFormatting.GOLD)));
+                        attributesTooltip.add(Component.translatable("curios.modifiers." + s)
+                                .withStyle(ChatFormatting.GOLD)));
             }
 
             attributesTooltip.addAll(extraTooltipLines);
         }
         return attributesTooltip;
-    }
-
-    public static Component positiveEffect(String name, Object... args) {
-        return Component.translatable("malum.gui.curio.positive", Component.translatable("malum.gui.curio.effect." + name, args)).withStyle(ChatFormatting.BLUE);
-    }
-    public static Component negativeEffect(String name, Object... args) {
-        return Component.translatable("malum.gui.curio.negative", Component.translatable("malum.gui.curio.effect." + name, args)).withStyle(ChatFormatting.RED);
     }
 }

@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.misc;
 import com.google.common.collect.Multimap;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.AttributeRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -20,8 +21,8 @@ public class CurioNarrowNecklace extends MalumCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("enhanced_maneuvers"));
-        consumer.accept(negativeEffect("no_sweep"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("enhanced_maneuvers"));
+        consumer.accept(ComponentHelper.negativeCurioEffect("no_sweep"));
     }
 
     @Override

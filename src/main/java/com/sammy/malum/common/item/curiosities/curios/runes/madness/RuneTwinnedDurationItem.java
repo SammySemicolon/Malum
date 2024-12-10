@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.madness;
 
 import com.sammy.malum.common.item.curiosities.curios.runes.AbstractRuneCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.network.chat.Component;
@@ -20,7 +21,7 @@ public class RuneTwinnedDurationItem extends AbstractRuneCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("extend_positive_effect"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("extend_positive_effect"));
     }
 
     public static void onPotionApplied(MobEffectEvent.Added event) {

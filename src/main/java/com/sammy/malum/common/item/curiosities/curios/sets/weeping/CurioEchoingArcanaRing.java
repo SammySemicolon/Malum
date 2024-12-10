@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.weeping;
 
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.registry.common.*;
@@ -19,9 +20,9 @@ public class CurioEchoingArcanaRing extends MalumCurioItem implements IVoidItem,
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("spirits_weave_resonance"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("spirits_weave_resonance"));
         if (IronsSpellsCompat.LOADED) {
-            consumer.accept(positiveEffect("spirits_weave_resonance_irons_spellbooks"));
+            consumer.accept(ComponentHelper.positiveCurioEffect("spirits_weave_resonance_irons_spellbooks"));
         }
     }
 

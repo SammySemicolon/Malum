@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.rotten;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.common.item.food.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.Holder;
@@ -24,7 +25,7 @@ public class CurioStarvedBelt extends MalumCurioItem implements IMalumEventRespo
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("spirits_gluttony"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("spirits_gluttony"));
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.alchemical;
 
 import com.sammy.malum.common.item.IMalumEventResponderItem;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.events.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -17,7 +18,7 @@ public class CurioProwessRing extends MalumCurioItem implements IMalumEventRespo
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("spirits_xp"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("spirits_xp"));
     }
 
     @Override

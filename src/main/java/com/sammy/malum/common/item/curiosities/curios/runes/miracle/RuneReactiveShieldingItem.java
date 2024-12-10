@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.miracle;
 
 import com.sammy.malum.common.item.curiosities.curios.runes.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import net.minecraft.core.Holder;
@@ -23,7 +24,7 @@ public class RuneReactiveShieldingItem extends AbstractRuneCurioItem implements 
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("attacked_resistance"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("attacked_resistance"));
     }
 
     @Override

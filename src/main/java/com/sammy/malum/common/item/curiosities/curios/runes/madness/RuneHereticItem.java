@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.madness;
 
 import com.sammy.malum.common.item.curiosities.curios.runes.AbstractRuneCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
@@ -24,7 +25,7 @@ public class RuneHereticItem extends AbstractRuneCurioItem implements ItemEventH
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("silence"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("silence"));
     }
 
 

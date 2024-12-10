@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.runes.madness;
 
 import com.sammy.malum.common.item.curiosities.curios.runes.AbstractRuneCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import net.minecraft.core.Holder;
@@ -23,7 +24,7 @@ public class RuneSacrificialEmpowermentItem extends AbstractRuneCurioItem implem
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("scythe_chain"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("scythe_chain"));
     }
 
     @Override

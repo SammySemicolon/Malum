@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.sets.misc;
 
 import com.sammy.malum.common.item.curiosities.curios.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
@@ -19,7 +20,7 @@ public class CurioHarmonyNecklace extends MalumCurioItem {
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("friendly_enemies"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("friendly_enemies"));
     }
 
     public static void preventDetection(LivingVisibilityEvent event) {

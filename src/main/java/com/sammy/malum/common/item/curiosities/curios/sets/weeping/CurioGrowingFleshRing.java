@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.curios.sets.weeping;
 import com.sammy.malum.common.item.IMalumEventResponderItem;
 import com.sammy.malum.common.item.IVoidItem;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
@@ -22,7 +23,7 @@ public class CurioGrowingFleshRing extends MalumCurioItem implements IVoidItem, 
 
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
-        consumer.accept(positiveEffect("spirits_add_health"));
+        consumer.accept(ComponentHelper.positiveCurioEffect("spirits_add_health"));
     }
 
     @Override

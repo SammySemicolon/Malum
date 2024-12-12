@@ -37,7 +37,8 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
             var effect = MobEffectRegistry.IMMINENT_DELIVERANCE;
             if (target.hasEffect(effect)) {
                 event.setNewDamage(event.getNewDamage() * 2);
-                SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 2f, 1.25f);
+                SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 2f, 0.75f);
+                SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 3f, 1.25f);
                 SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 3f, 1.75f);
                 var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.EDGE_OF_DELIVERANCE_CRIT);
                 if (!canSweep(attacker)) {

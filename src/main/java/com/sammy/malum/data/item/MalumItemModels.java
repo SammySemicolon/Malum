@@ -54,6 +54,7 @@ public class MalumItemModels extends LodestoneItemModelProvider {
         ItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof NodeItem).collect(Collectors.toList()));
 
         setTexturePath("");
+        MalumItemModelSmithTypes.UMBRAL_SPIRIT_ITEM.act(data, UMBRAL_SPIRIT);
         MalumItemModelSmithTypes.SPIRIT_ITEM.act(data, items.stream().filter(i -> i.get() instanceof SpiritShardItem).collect(Collectors.toList()));
 
         ItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof DiggerItem).collect(Collectors.toList()));

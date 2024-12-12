@@ -12,8 +12,7 @@
     "minecraft:golden_leggings",
     "minecraft:golden_boots"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
+  "itemIdRegex": "golden_.+",
   "repairMaterial": {
     "count": 2,
     "tag": "c:ingots/gold"

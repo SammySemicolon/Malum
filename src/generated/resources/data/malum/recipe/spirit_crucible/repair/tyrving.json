@@ -4,11 +4,9 @@
   "inputs": [
     "malum:tyrving"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
   "repairMaterial": {
-    "count": 8,
-    "item": "malum:twisted_rock"
+    "count": 2,
+    "item": "minecraft:obsidian"
   },
   "spirits": [
     {

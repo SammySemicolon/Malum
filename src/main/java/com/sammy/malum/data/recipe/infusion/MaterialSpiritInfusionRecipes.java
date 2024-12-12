@@ -58,7 +58,6 @@ public class MaterialSpiritInfusionRecipes {
                 .addSpirit(INFERNAL_SPIRIT, 2)
                 .addSpirit(ARCANE_SPIRIT, 1)
                 .addExtraItem(ItemRegistry.BLAZING_QUARTZ.get(), 1)
-                .addExtraItem(Items.BLAZE_POWDER, 1)
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.ETHER.get(), 1, ItemRegistry.IRIDESCENT_ETHER.get(), 1)

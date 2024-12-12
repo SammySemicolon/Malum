@@ -4,19 +4,18 @@
   "inputs": [
     "malum:cracked_alchemical_impetus"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
+  "itemIdRegex": "none",
   "repairMaterial": {
     "count": 2,
     "item": "malum:alchemical_calx"
   },
   "spirits": [
     {
-      "type": "earthen",
+      "type": "arcane",
       "count": 4
     },
     {
-      "type": "arcane",
+      "type": "earthen",
       "count": 4
     }
   ]

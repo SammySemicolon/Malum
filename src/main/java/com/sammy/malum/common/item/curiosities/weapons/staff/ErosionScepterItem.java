@@ -50,6 +50,7 @@ public class ErosionScepterItem extends AbstractStaffItem {
             }
             SoundHelper.playSound(target, SoundRegistry.DRAINING_MOTIF.get(), attacker.getSoundSource(), 1, 1.25f);
         }
+        super.outgoingDamageEvent(event, attacker, target, stack);
     }
 
 

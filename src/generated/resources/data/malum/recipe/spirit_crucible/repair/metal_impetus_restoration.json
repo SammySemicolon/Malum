@@ -14,8 +14,7 @@
     "malum:cracked_zinc_impetus",
     "malum:cracked_tin_impetus"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
+  "itemIdRegex": "none",
   "repairMaterial": {
     "count": 2,
     "item": "malum:cthonic_gold_fragment"
@@ -23,11 +22,11 @@
   "spirits": [
     {
       "type": "infernal",
-      "count": 16
+      "count": 8
     },
     {
       "type": "earthen",
-      "count": 16
+      "count": 8
     }
   ]
 }

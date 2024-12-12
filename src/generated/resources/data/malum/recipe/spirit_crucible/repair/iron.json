@@ -13,8 +13,7 @@
     "minecraft:iron_leggings",
     "minecraft:iron_boots"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
+  "itemIdRegex": "iron_.+",
   "repairMaterial": {
     "count": 2,
     "tag": "c:ingots/iron"

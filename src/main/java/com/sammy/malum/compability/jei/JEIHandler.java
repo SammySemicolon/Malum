@@ -156,7 +156,7 @@ public class JEIHandler implements IModPlugin {
                 .filter(it -> !it.output.isEmpty()).collect(Collectors.toList()));
             registry.addRecipes(RITES, SpiritRiteRegistry.RITES);
             registry.addRecipes(SPIRIT_REPAIR, LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_REPAIR.get()).stream()
-                .filter(it -> !it.inputs.isEmpty()).collect(Collectors.toList()));
+                .filter(it -> !it.itemsForRepair.isEmpty()).collect(Collectors.toList()));
             registry.addRecipes(WEEPING_WELL, LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.VOID_FAVOR.get()).stream()
                 .filter(it -> !it.output.isEmpty()).collect(Collectors.toList()));
             registry.addRecipes(RUNEWORKING, LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.RUNEWORKING.get()).stream()

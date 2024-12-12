@@ -44,8 +44,8 @@ public class SpiritRepairRecipeCategory implements IRecipeCategory<SpiritRepairR
     @Override
     public void draw(SpiritRepairRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         overlay.draw(guiGraphics);
-        if (recipe.spirits.size() > 0) {
-            ArcanaCodexHelper.renderItemFrames(guiGraphics.pose(), recipe.spirits.size(), 61, 12, false);
+        if (!recipe.spirits.isEmpty()) {
+            ArcanaCodexHelper.renderItemFrames(guiGraphics, recipe.spirits.size(), 61, 12, mouseX, mouseY, false, true);
         }
     }
 
@@ -73,7 +73,7 @@ public class SpiritRepairRecipeCategory implements IRecipeCategory<SpiritRepairR
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SpiritRepairRecipe recipe, IFocusGroup focuses) {
-        List<ItemStack> repaired = recipe.inputs.stream().map(Item::getDefaultInstance).collect(Collectors.toList());
+        List<ItemStack> repaired = recipe.itemsForRepair.stream().map(Item::getDefaultInstance).collect(Collectors.toList());
         List<ItemStack> repairIngredient = Arrays.stream(recipe.repairMaterial.getItems()).toList();
 
         List<ItemStack> damaged = repaired.stream()

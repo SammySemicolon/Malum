@@ -12,8 +12,7 @@
     "minecraft:diamond_leggings",
     "minecraft:diamond_boots"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
+  "itemIdRegex": "diamond_.+",
   "repairMaterial": {
     "count": 2,
     "tag": "c:gems/diamond"
@@ -25,7 +24,7 @@
     },
     {
       "type": "earthen",
-      "count": 8
+      "count": 16
     }
   ]
 }

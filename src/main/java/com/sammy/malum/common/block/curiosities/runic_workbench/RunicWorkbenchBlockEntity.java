@@ -47,18 +47,18 @@ public class RunicWorkbenchBlockEntity extends MalumItemHolderBlockEntity {
     }
 
     @Override
-    public ItemInteractionResult onUseWithItem(Player player, ItemStack secondaryInput, InteractionHand hand) {
-        final ItemStack primaryInput = inventory.getStackInSlot(0);
+    public ItemInteractionResult onUseWithItem(Player player, ItemStack heldStack, InteractionHand hand) {
+        var primaryInput = inventory.getStackInSlot(0);
         if (!primaryInput.isEmpty()) {
-            RunicWorkbenchRecipe recipe = LodestoneRecipeType.getRecipe(player.level(), RecipeTypeRegistry.RUNEWORKING.get(), new SpiritBasedRecipeInput(primaryInput, secondaryInput));
+            var recipe = LodestoneRecipeType.getRecipe(player.level(), RecipeTypeRegistry.RUNEWORKING.get(), new SpiritBasedRecipeInput(primaryInput, heldStack));
             if (recipe != null) {
                 Vec3 itemPos = getItemPos();
                 if (!level.isClientSide) {
                     primaryInput.shrink(recipe.primaryInput.count());
-                    secondaryInput.shrink(recipe.secondaryInput.getCount());
+                    heldStack.shrink(recipe.secondaryInput.getCount());
                     level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, recipe.output.copy()));
                     level.playSound(null, worldPosition, SoundRegistry.RUNIC_WORKBENCH_CRAFT.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.25f);
-                    if (secondaryInput.getItem() instanceof SpiritShardItem spirit) {
+                    if (heldStack.getItem() instanceof SpiritShardItem spirit) {
                         PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(spirit.type.getIdentifier()), itemPos));
                     }
                     BlockStateHelper.updateAndNotifyState(level, worldPosition);
@@ -68,6 +68,6 @@ public class RunicWorkbenchBlockEntity extends MalumItemHolderBlockEntity {
         }
 
 
-        return super.onUse(player, hand);
+        return super.onUseWithItem(player, heldStack, hand);
     }
 }

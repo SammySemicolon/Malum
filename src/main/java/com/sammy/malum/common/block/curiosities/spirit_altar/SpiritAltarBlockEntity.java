@@ -197,7 +197,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
         }
-        return super.onUse(player, hand);
+        return super.onUseWithItem(player, heldStack, hand);
     }
 
     @Override
@@ -275,7 +275,8 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
 
         ItemStack stack = inventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
-            Collection<SpiritInfusionRecipe> recipes = DataHelper.getAll(LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_INFUSION.get())).stream().filter(r -> r.matches(new SpiritBasedRecipeInput(stack, spiritInventory.nonEmptyItemStacks), level)).toList();
+            final Collection<SpiritInfusionRecipe> all = DataHelper.getAll(LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_INFUSION.get()));
+            Collection<SpiritInfusionRecipe> recipes = all.stream().filter(r -> r.matches(new SpiritBasedRecipeInput(stack, spiritInventory.nonEmptyItemStacks), level)).toList();
             possibleRecipes.clear();
             IItemHandlerModifiable pedestalItems = AltarCraftingHelper.createPedestalInventoryCapture(AltarCraftingHelper.capturePedestals(level, worldPosition));
             for (SpiritInfusionRecipe recipe : recipes) {

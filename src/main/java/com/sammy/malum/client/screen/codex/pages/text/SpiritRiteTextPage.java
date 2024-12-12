@@ -38,7 +38,7 @@ public class SpiritRiteTextPage extends BookPage {
         final int riteIconY = top + 38;
         renderRiteIcon(riteType, guiGraphics.pose(), isCorrupted(), 0.4f, riteIconX, riteIconY);
         if (screen.isHovering(mouseX, mouseY, riteIconX, riteIconY, 16, 16)) {
-            screen.renderLate(()->guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, riteType.makeDetailedDescriptor(isCorrupted()), mouseX, mouseY));
+            screen.renderLater(()->guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, riteType.makeDetailedDescriptor(isCorrupted()), mouseX, mouseY));
         }
     }
 

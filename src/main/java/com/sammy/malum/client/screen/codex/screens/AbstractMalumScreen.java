@@ -6,11 +6,13 @@ import net.minecraft.client.gui.screens.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.sounds.*;
 
+import java.util.*;
 import java.util.function.*;
 
 public abstract class AbstractMalumScreen extends Screen {
 
     protected final Supplier<SoundEvent> sweetenerSound;
+    public List<Runnable> lateRendering = new ArrayList<>();
 
     protected AbstractMalumScreen(Component pTitle, Supplier<SoundEvent> sweetenerSound) {
         super(pTitle);
@@ -50,5 +52,14 @@ public abstract class AbstractMalumScreen extends Screen {
 
     public void playSound(Supplier<SoundEvent> soundEvent, float volume, float pitch) {
         Minecraft.getInstance().player.playNotifySound(soundEvent.get(), SoundSource.PLAYERS, volume, pitch);
+    }
+
+    public void renderLater(Runnable runnable) {
+        lateRendering.add(runnable);
+    }
+
+    protected void doLateRendering() {
+        lateRendering.forEach(Runnable::run);
+        lateRendering.clear();
     }
 }

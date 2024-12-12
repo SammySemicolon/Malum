@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "malum:item/spirit_shard"
+    "layer0": "malum:item/umbral_spirit_shard"
   }
 }

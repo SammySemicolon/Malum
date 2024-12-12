@@ -8,6 +8,7 @@ import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
@@ -18,6 +19,11 @@ import java.util.function.Predicate;
 import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.*;
 
 public class SpiritInfusionPage extends BookPage {
+
+    private static final Component BASE = Component.translatable("malum.gui.book.entry.page.info.spirit_infusion");
+    private static final Component SPIRIT = Component.translatable("malum.gui.book.entry.page.info.spirit_infusion.spirit");
+    private static final Component ITEM = Component.translatable("malum.gui.book.entry.page.info.spirit_infusion.item");
+
     private final SpiritInfusionRecipe recipe;
 
     public SpiritInfusionPage(Predicate<SpiritInfusionRecipe> predicate) {
@@ -55,12 +61,16 @@ public class SpiritInfusionPage extends BookPage {
 
     @Override
     public void render(EntryScreen screen, GuiGraphics guiGraphics, int left, int top, int mouseX, int mouseY, float partialTicks, boolean isRepeat) {
-        Runnable renderSpirits = () -> renderIngredients(screen, guiGraphics, recipe.spirits, left + 15, top + 59, mouseX, mouseY, true);
+        renderIngredients(screen, guiGraphics, recipe.spirits, SPIRIT, left + 15, top + 59, mouseX, mouseY, true);
         if (!recipe.extraIngredients.isEmpty()) {
-            renderIngredients(screen, guiGraphics, recipe.extraIngredients, left + 107, top + 59, mouseX, mouseY, true);
+            renderIngredients(screen, guiGraphics, recipe.extraIngredients, ITEM, left + 103, top + 59, mouseX, mouseY, true);
         }
-        renderSpirits.run();
         renderIngredient(screen, guiGraphics, recipe.ingredient, left + 63, top + 59, mouseX, mouseY);
         renderItem(screen, guiGraphics, recipe.output, left + 63, top + 126, mouseX, mouseY);
+        screen.renderLater(() -> {
+            if (screen.isHovering(mouseX, mouseY, left + 62, top + 78, 18, 18)) {
+                guiGraphics.renderTooltip(Minecraft.getInstance().font, BASE, mouseX, mouseY);
+            }
+        });
     }
 }

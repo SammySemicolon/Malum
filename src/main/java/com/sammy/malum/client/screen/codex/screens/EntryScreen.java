@@ -27,7 +27,9 @@ public class EntryScreen extends AbstractMalumScreen {
     public static EntryScreen entryScreen;
 
     public static final ResourceLocation BOOK_TEXTURE = MalumMod.malumPath("textures/gui/book/entry.png");
-    public static final ResourceLocation ELEMENT_SOCKET = MalumMod.malumPath("textures/gui/book/entry_elements/element_socket.png");
+    public static final ResourceLocation ITEM_SOCKET = MalumMod.malumPath("textures/gui/book/entry_elements/item_sockets.png");
+
+    public static float textJump;
 
     public final int bookWidth = 312;
     public final int bookHeight = 200;
@@ -36,7 +38,6 @@ public class EntryScreen extends AbstractMalumScreen {
 
     public final BookObjectHandler<EntryScreen> bookObjectHandler = new BookObjectHandler<>();
 
-    public List<Runnable> lateRendering = new ArrayList<>();
     public int grouping;
 
     public EntryScreen(BookEntry openEntry, Consumer<Boolean> onClose) {
@@ -99,10 +100,9 @@ public class EntryScreen extends AbstractMalumScreen {
                     lateRendering.add(() -> page.renderLate(this, guiGraphics, pageLeft, pageTop, mouseX, mouseY, partialTicks, isRepeat));
                 }
             }
-            lateRendering.forEach(Runnable::run);
-            lateRendering.clear();
         }
         bookObjectHandler.renderObjectsLate(this, guiGraphics, mouseX, mouseY, partialTicks);
+        doLateRendering();
     }
 
     @Override
@@ -128,8 +128,15 @@ public class EntryScreen extends AbstractMalumScreen {
                 }
             }
         }
+        textJump += 1f;
 
         return false;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        textJump = Math.max(textJump-0.1f, 0);
     }
 
     @Override
@@ -216,7 +223,7 @@ public class EntryScreen extends AbstractMalumScreen {
         return (height - bookHeight) / 2;
     }
 
-    public void renderLate(Runnable runnable) {
+    public void renderLater(Runnable runnable) {
         lateRendering.add(runnable);
     }
 }

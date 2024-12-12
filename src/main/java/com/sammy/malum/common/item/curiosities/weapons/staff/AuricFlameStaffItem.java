@@ -37,6 +37,7 @@ public class AuricFlameStaffItem extends AbstractStaffItem {
             target.setRemainingFireTicks(4 * 20);
             attacker.level().playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.AURIC_FLAME_MOTIF.get(), attacker.getSoundSource(), 1, 1.25f);
         }
+        super.outgoingDamageEvent(event, attacker, target, stack);
     }
 
     @Override

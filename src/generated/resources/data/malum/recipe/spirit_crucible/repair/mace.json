@@ -2,15 +2,15 @@
   "type": "malum:spirit_repair",
   "durabilityPercentage": 1.0,
   "inputs": [
-    "minecraft:trident"
+    "minecraft:mace"
   ],
   "repairMaterial": {
     "count": 1,
-    "item": "minecraft:heart_of_the_sea"
+    "item": "minecraft:heavy_core"
   },
   "spirits": [
     {
-      "type": "aqueous",
+      "type": "aerial",
       "count": 16
     },
     {

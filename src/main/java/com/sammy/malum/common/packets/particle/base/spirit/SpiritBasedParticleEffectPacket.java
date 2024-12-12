@@ -31,11 +31,11 @@ public abstract class SpiritBasedParticleEffectPacket extends PositionBasedParti
 
     @Override
     public void serialize(FriendlyByteBuf buf) {
+        super.serialize(buf);
         buf.writeInt(spirits.size());
         for (String string : spirits) {
             buf.writeUtf(string);
         }
-        super.serialize(buf);
     }
 
     @OnlyIn(Dist.CLIENT) @Override

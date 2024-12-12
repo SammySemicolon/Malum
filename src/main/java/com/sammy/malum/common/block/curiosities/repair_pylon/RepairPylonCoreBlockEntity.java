@@ -169,7 +169,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
             }
             return ItemInteractionResult.FAIL;
         }
-        return super.onUse(player, hand);
+        return super.onUseWithItem(player, stack, hand);
     }
 
     @Override
@@ -184,7 +184,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
         if (state.equals(RepairPylonState.COOLDOWN)) {
             return;
         }
-        recipe = LodestoneRecipeType.findRecipe(level, RecipeTypeRegistry.SPIRIT_REPAIR.get(), c -> c.matches(new SingleRecipeInput(inventory.getStackInSlot(0)), level) && c.doSpiritsMatch(spiritInventory.nonEmptyItemStacks));
+        findRecipe();
         if (recipe != null) {
             if (state.equals(RepairPylonState.IDLE)) {
                 setState(RepairPylonState.SEARCHING);
@@ -282,19 +282,13 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     }
 
     public boolean tryRepair(IMalumSpecialItemAccessPoint provider) {
-        if (!(getLevel() instanceof ServerLevel serverLevel)) {
-            return false;
-        }
         var inventoryForPylon = provider.getSuppliedInventory();
         var repairTarget = inventoryForPylon.getStackInSlot(0);
         if (repairTarget.isRepairable() && !repairTarget.isDamaged()) {
             return false;
         }
-        return LodestoneRecipeType.findRecipe(serverLevel,
-                RecipeTypeRegistry.SPIRIT_REPAIR.get(),
-                c -> c.matches(new SingleRecipeInput(repairTarget), level)
-                        && c.doesRepairMatch(inventory.getStackInSlot(0))
-                        && c.doSpiritsMatch(spiritInventory.nonEmptyItemStacks)) != null;
+        findRecipe();
+        return recipe != null && recipe.isValidItemForRepair(repairTarget);
     }
 
 
@@ -308,9 +302,9 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     }
 
     public void repairItem(IMalumSpecialItemAccessPoint provider) {
-        final LodestoneBlockEntityInventory suppliedInventory = provider.getSuppliedInventory();
-        ItemStack damagedItem = suppliedInventory.getStackInSlot(0);
-        ItemStack repairMaterial = inventory.getStackInSlot(0);
+        var suppliedInventory = provider.getSuppliedInventory();
+        var repairTarget = suppliedInventory.getStackInSlot(0);
+        var repairMaterial = inventory.getStackInSlot(0);
         repairMaterial.shrink(recipe.repairMaterial.count());
         for (SpiritIngredient spirit : recipe.spirits) {
             for (int i = 0; i < spiritInventory.slotCount; i++) {
@@ -322,9 +316,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
             }
         }
         spiritInventory.updateData();
-        ItemStack result = LodestoneRecipeType.getRecipe(
-                level, RecipeTypeRegistry.SPIRIT_REPAIR.get(), new SingleRecipeInput(damagedItem)
-        ).getResultItem(level.registryAccess());
+        var result = recipe.getResultItem(level.registryAccess());
         result.setDamageValue(Math.max(0, result.getDamageValue() - (int) (result.getMaxDamage() * recipe.durabilityPercentage)));
         suppliedInventory.setStackInSlot(0, result);
         level.playSound(null, worldPosition, SoundRegistry.REPAIR_PYLON_REPAIR_FINISH.get(), SoundSource.BLOCKS, 1.0f, 0.8f);
@@ -336,6 +328,12 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
         this.state = state;
         this.timer = state.equals(RepairPylonState.SEARCHING) ? 100 : 0;
         BlockStateHelper.updateAndNotifyState(level, worldPosition);
+    }
+
+    public void findRecipe() {
+        recipe = LodestoneRecipeType.findRecipe(level,
+                RecipeTypeRegistry.SPIRIT_REPAIR.get(),
+                c -> c.matches(new SpiritBasedRecipeInput(inventory.getStackInSlot(0), spiritInventory.nonEmptyItemStacks), level));
     }
 
     public Vec3 getItemPos() {

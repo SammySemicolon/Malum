@@ -60,7 +60,7 @@ public class SpiritBasedRecipeInput implements RecipeInput {
             return false;
         }
 
-        for (int i = 0; i < this.spirits.size(); i++) {
+        for (int i = 0; i < items.size(); i++) {
             SizedIngredient ingredient = ingredients.get(i);
             ItemStack stack = items.get(i);
             if (!ingredient.test(stack)) {

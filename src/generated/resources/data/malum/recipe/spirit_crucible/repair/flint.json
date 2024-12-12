@@ -4,8 +4,7 @@
   "inputs": [
     "minecraft:flint_and_steel"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
+  "itemIdRegex": "flint_.+",
   "repairMaterial": {
     "count": 2,
     "item": "minecraft:flint"

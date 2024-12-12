@@ -2,22 +2,27 @@
   "type": "malum:spirit_repair",
   "durabilityPercentage": 0.5,
   "inputs": [
+    "minecraft:bow",
+    "minecraft:crossbow",
     "minecraft:wooden_sword",
     "minecraft:wooden_shovel",
     "minecraft:wooden_pickaxe",
     "minecraft:wooden_axe",
     "minecraft:wooden_hoe"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
+  "itemIdRegex": "wooden_.+",
   "repairMaterial": {
     "count": 4,
     "tag": "minecraft:planks"
   },
   "spirits": [
     {
+      "type": "sacred",
+      "count": 4
+    },
+    {
       "type": "earthen",
-      "count": 2
+      "count": 4
     }
   ]
 }

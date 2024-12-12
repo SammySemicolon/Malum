@@ -83,7 +83,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
             BlockStateHelper.updateState(level, worldPosition);
             return ItemInteractionResult.SUCCESS;
         }
-        return super.onUse(player, hand);
+        return super.onUseWithItem(player, held, hand);
     }
 
     @Override

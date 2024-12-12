@@ -225,6 +225,17 @@ public class MalumLang extends LanguageProvider {
         addSimpleEntryHeader("chronicles_of_the_void", "Chronicles of the Void", "A magecraft of madness");
         addSimpleEntryHeader("chronicles_of_the_soul", "Chronicles of the Soul", "A magecraft of miracles");
 
+        add("malum.gui.book.entry.page.info.spirit_infusion", "Spirit Infusion. \nRequires a Prime Item and Spirit Arcana to be held within The Altar.");
+        add("malum.gui.book.entry.page.info.spirit_infusion.spirit", "Spirit Arcana is to be stored directly within the Spirit Altar.");
+        add("malum.gui.book.entry.page.info.spirit_infusion.item", "Additional Items must be held on nearby Item Pedestals or Stands.");
+
+        add("malum.gui.book.entry.page.info.spirit_focusing", "Spirit Focusing. \nRequires a Catalyst and Spirit Arcana to be held within The Crucible. The Catalyst is not consumed, but does get damaged.");
+        add("malum.gui.book.entry.page.info.spirit_focusing.spirit", "Spirit Arcana is to be stored directly within the Spirit Crucible.");
+
+        add("malum.gui.book.entry.page.info.spirit_repair", "Spirit Repair. \nRequires a Repair Material and Spirit Arcana to be held within The Repair Pylon.");
+        add("malum.gui.book.entry.page.info.spirit_repair.spirit", "Spirit Arcana is to be stored directly within the Repair Pylon.");
+        add("malum.gui.book.entry.page.info.spirit_repair.damaged", "The Damaged Item is to be provided within a nearby Item Pedestal, Stand, or a Spirit Crucible.");
+
         addSimpleEntryHeader("void.the_weeping_well", "The Weeping Well", "Gate to the unknown");
         addPages("void.the_weeping_well",
                 "I have discovered a... structure. One with implications beyond nearly anything I've found before, because the existence of this Weeping Well implies I am not the first to touch the arcana.",

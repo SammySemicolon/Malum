@@ -12,8 +12,7 @@
     "minecraft:netherite_leggings",
     "minecraft:netherite_boots"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
+  "itemIdRegex": "netherite_.+",
   "repairMaterial": {
     "count": 1,
     "tag": "c:ingots/netherite"
@@ -25,15 +24,11 @@
     },
     {
       "type": "arcane",
-      "count": 8
+      "count": 16
     },
     {
       "type": "earthen",
-      "count": 8
-    },
-    {
-      "type": "eldritch",
-      "count": 1
+      "count": 16
     }
   ]
 }

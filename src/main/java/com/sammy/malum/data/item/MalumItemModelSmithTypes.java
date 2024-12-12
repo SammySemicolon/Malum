@@ -58,6 +58,10 @@ public class MalumItemModelSmithTypes {
         }
     });
 
+    public static ItemModelSmith UMBRAL_SPIRIT_ITEM = new ItemModelSmith((item, provider) -> {
+        provider.createGenericModel(item, GENERATED, provider.getItemTexture("umbral_spirit_shard"));
+    });
+
     public static ItemModelSmith SPIRIT_ITEM = new ItemModelSmith((item, provider) -> {
         provider.createGenericModel(item, GENERATED, provider.getItemTexture("spirit_shard"));
     });

@@ -8,8 +8,7 @@
     "minecraft:stone_axe",
     "minecraft:stone_hoe"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
+  "itemIdRegex": "stone_.+",
   "repairMaterial": {
     "count": 2,
     "tag": "minecraft:stone_tool_materials"

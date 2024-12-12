@@ -8,23 +8,21 @@
     "malum:soul_stained_steel_leggings",
     "malum:soul_stained_steel_boots"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
   "repairMaterial": {
-    "count": 4,
+    "count": 2,
     "item": "malum:soul_stained_steel_ingot"
   },
   "spirits": [
     {
-      "type": "arcane",
-      "count": 16
-    },
-    {
-      "type": "earthen",
+      "type": "wicked",
       "count": 8
     },
     {
-      "type": "wicked",
+      "type": "arcane",
+      "count": 8
+    },
+    {
+      "type": "earthen",
       "count": 4
     }
   ]

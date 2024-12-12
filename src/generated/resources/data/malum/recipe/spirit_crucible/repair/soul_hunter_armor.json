@@ -7,23 +7,21 @@
     "malum:soul_hunter_leggings",
     "malum:soul_hunter_boots"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
   "repairMaterial": {
-    "count": 4,
+    "count": 2,
     "item": "malum:spirit_fabric"
   },
   "spirits": [
     {
-      "type": "arcane",
-      "count": 16
-    },
-    {
-      "type": "aerial",
+      "type": "wicked",
       "count": 8
     },
     {
-      "type": "wicked",
+      "type": "arcane",
+      "count": 8
+    },
+    {
+      "type": "aerial",
       "count": 4
     }
   ]

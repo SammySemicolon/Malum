@@ -9,13 +9,15 @@
     "malum:soul_stained_steel_hoe",
     "malum:soul_stained_steel_knife"
   ],
-  "itemIdRegex": ".*",
-  "modIdRegex": ".*",
   "repairMaterial": {
     "count": 2,
     "item": "malum:soul_stained_steel_ingot"
   },
   "spirits": [
+    {
+      "type": "wicked",
+      "count": 8
+    },
     {
       "type": "arcane",
       "count": 8
@@ -23,10 +25,6 @@
     {
       "type": "earthen",
       "count": 4
-    },
-    {
-      "type": "wicked",
-      "count": 2
     }
   ]
 }

@@ -38,7 +38,7 @@ public class SpiritRitualTextPage extends BookPage {
         final int riteIconY = top + 38;
         renderRitualIcon(ritualType, guiGraphics.pose(), false, 0.35f, riteIconX, riteIconY);
         if (screen.isHovering(mouseX, mouseY, riteIconX, riteIconY, 16, 16)) {
-            screen.renderLate(()->guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, ritualType.makeCodexDetailedDescriptor(), mouseX, mouseY));
+            screen.renderLater(()->guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, ritualType.makeCodexDetailedDescriptor(), mouseX, mouseY));
         }
     }
 }

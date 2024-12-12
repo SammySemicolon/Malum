@@ -19,25 +19,25 @@ public class ArtificeSpiritInfusionRecipes {
 
     public static void buildRecipes(RecipeOutput recipeOutput) {
         new SpiritInfusionRecipeBuilder(Items.FURNACE, 1, ItemRegistry.SPIRIT_CRUCIBLE.get(), 1)
-                .addSpirit(INFERNAL_SPIRIT, 12)
-                .addSpirit(ARCANE_SPIRIT, 4)
+                .addSpirit(INFERNAL_SPIRIT, 8)
+                .addSpirit(AQUEOUS_SPIRIT, 8)
                 .addExtraItem(ItemRegistry.HEX_ASH.get(), 2)
-                .addExtraItem(ItemRegistry.TAINTED_ROCK.get(), 8)
-                .addExtraItem(ItemRegistry.TWISTED_ROCK.get(), 8)
+                .addExtraItem(ItemRegistry.TAINTED_ROCK.get(), 2)
+                .addExtraItem(ItemRegistry.TWISTED_ROCK.get(), 2)
                 .save(recipeOutput);
 
-        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_CALX.get(), 8, ItemRegistry.ALCHEMICAL_IMPETUS.get(), 1)
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_CALX.get(), 4, ItemRegistry.ALCHEMICAL_IMPETUS.get(), 1)
                 .addSpirit(ARCANE_SPIRIT, 4)
                 .addSpirit(EARTHEN_SPIRIT, 4)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 3)
-                .addExtraItem(ItemRegistry.HEX_ASH.get(), 1)
+                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.HEX_ASH.get(), 2)
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(Ingredient.of(Tags.Items.INGOTS_IRON), 2, ItemRegistry.TUNING_FORK.get(), 1)
                 .addSpirit(ARCANE_SPIRIT, 8)
                 .addSpirit(AQUEOUS_SPIRIT, 8)
                 .addExtraItem(ItemRegistry.RUNEWOOD_PLANKS.get(), 2)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 1)
+                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 2)
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_CALX.get(), 4, ItemRegistry.MENDING_DIFFUSER.get(), 1)

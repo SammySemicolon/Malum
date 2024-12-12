@@ -40,8 +40,10 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
             ItemRegistry.RUNEWOOD_DOOR.get(),
             ItemRegistry.RUNEWOOD_SIGN.get(), ItemRegistry.RUNEWOOD_SIGN.get(),
             ItemRegistry.RUNEWOOD_ITEM_STAND.get(), ItemRegistry.RUNEWOOD_ITEM_PEDESTAL.get(),
+            ItemRegistry.GILDED_RUNEWOOD_ITEM_STAND.get(), ItemRegistry.GILDED_RUNEWOOD_ITEM_PEDESTAL.get(),
             ItemTagRegistry.RUNEWOOD_LOGS, ItemTagRegistry.RUNEWOOD_BOARD_INGREDIENT, ItemTagRegistry.RUNEWOOD_PLANKS, ItemTagRegistry.RUNEWOOD_STAIRS, ItemTagRegistry.RUNEWOOD_SLABS,
-            ItemRegistry.RUNEWOOD_BOAT.get()
+            ItemRegistry.RUNEWOOD_BOAT.get(),
+            ItemRegistry.HALLOWED_GOLD_NUGGET.get()
     );
 
     private static final MalumDatagenWoodSet SOULWOOD = new MalumDatagenWoodSet(
@@ -66,8 +68,10 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
             ItemRegistry.SOULWOOD_DOOR.get(),
             ItemRegistry.SOULWOOD_SIGN.get(), ItemRegistry.SOULWOOD_SIGN.get(),
             ItemRegistry.SOULWOOD_ITEM_STAND.get(), ItemRegistry.SOULWOOD_ITEM_PEDESTAL.get(),
+            ItemRegistry.ORNATE_SOULWOOD_ITEM_STAND.get(), ItemRegistry.ORNATE_SOULWOOD_ITEM_PEDESTAL.get(),
             ItemTagRegistry.SOULWOOD_LOGS, ItemTagRegistry.SOULWOOD_BOARD_INGREDIENT, ItemTagRegistry.SOULWOOD_PLANKS, ItemTagRegistry.SOULWOOD_STAIRS, ItemTagRegistry.SOULWOOD_SLABS,
-            ItemRegistry.SOULWOOD_BOAT.get()
+            ItemRegistry.SOULWOOD_BOAT.get(),
+            ItemRegistry.SOUL_STAINED_STEEL_NUGGET.get()
     );
 
     public static void addTags(MalumItemTags provider) {
@@ -163,6 +167,7 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
         shapedPanel(recipeOutput, woodSet.panel, woodSet.planksTag);
 
         var condition = has(woodSet.planksTag);
+
         shaped(RecipeCategory.MISC, woodSet.boardWall, 6)
                 .define('#', woodSet.boards)
                 .pattern("###")
@@ -197,6 +202,20 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
                 .pattern("YYY")
                 .pattern(" X ")
                 .pattern("YYY")
+                .unlockedBy("has_input", condition)
+                .save(recipeOutput);
+
+        shaped(RecipeCategory.MISC, woodSet.decoratedItemStand)
+                .define('X', woodSet.itemStand)
+                .define('Y', woodSet.metalNugget)
+                .pattern("YXY")
+                .unlockedBy("has_input", condition)
+                .save(recipeOutput);
+
+        shaped(RecipeCategory.MISC, woodSet.decoratedItemPedestal)
+                .define('X', woodSet.itemPedestal)
+                .define('Y', woodSet.metalNugget)
+                .pattern("YXY")
                 .unlockedBy("has_input", condition)
                 .save(recipeOutput);
 
@@ -392,9 +411,12 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
             Item sign, Item hangingSign,
 
             Item itemStand, Item itemPedestal,
+            Item decoratedItemStand, Item decoratedItemPedestal,
 
             TagKey<Item> logTag, TagKey<Item> boardIngredientTag, TagKey<Item> planksTag, TagKey<Item> stairsTag, TagKey<Item> slabTag,
 
-            Item boat
+            Item boat,
+
+            Item metalNugget
     ) { }
 }

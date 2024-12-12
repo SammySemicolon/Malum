@@ -1,7 +1,6 @@
 {
-  "parent": "malum:block/templates/template_wooden_item_pedestal",
+  "parent": "malum:block/templates/template_item_pedestal_wooden",
   "textures": {
-    "particle": "malum:block/runewood/runewood_planks",
     "pedestal": "malum:block/runewood/runewood_item_pedestal"
   }
 }

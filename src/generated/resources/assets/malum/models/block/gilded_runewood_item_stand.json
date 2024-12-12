@@ -1,0 +1,6 @@
+{
+  "parent": "malum:block/templates/template_item_stand_decorated",
+  "textures": {
+    "stand": "malum:block/runewood/runewood_item_stand_gilded"
+  }
+}

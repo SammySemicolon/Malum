@@ -1,0 +1,6 @@
+{
+  "parent": "malum:block/templates/template_item_pedestal_wooden_decorated",
+  "textures": {
+    "pedestal": "malum:block/soulwood/soulwood_item_pedestal_ornate"
+  }
+}

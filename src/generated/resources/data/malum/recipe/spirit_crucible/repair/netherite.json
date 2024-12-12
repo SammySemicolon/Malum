@@ -1,6 +1,5 @@
 {
   "type": "malum:spirit_repair",
-  "durabilityPercentage": 0.5,
   "inputs": [
     "minecraft:netherite_sword",
     "minecraft:netherite_shovel",

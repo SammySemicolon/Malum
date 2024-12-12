@@ -1,6 +1,5 @@
 {
   "type": "malum:spirit_repair",
-  "durabilityPercentage": 0.5,
   "itemIdRegex": "copper_.+",
   "repairMaterial": {
     "count": 2,

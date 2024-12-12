@@ -156,6 +156,7 @@ public class ArcanaCodexHelper {
         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
         renderTexture(location, stack, builder, x, y, 0, 0, textureWidth, textureHeight);
         builder.setAlpha(0.1f);
+        shaderInstance.safeGetUniform("Speed").set(2000f);
         renderTexture(location, stack, builder, x - 1, y, 0, 0, textureWidth, textureHeight);
         renderTexture(location, stack, builder, x + 1, y, 0, 0, textureWidth, textureHeight);
         renderTexture(location, stack, builder, x, y - 1, 0, 0, textureWidth, textureHeight);
@@ -204,16 +205,6 @@ public class ArcanaCodexHelper {
         RenderSystem.disableBlend();
     }
 
-    public static void renderIngredients(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<?> ingredients, Component hoverComponent, int left, int top, int mouseX, int mouseY, boolean vertical) {
-        final List<ItemStack> stacks =
-                Stream.of(
-                        ingredients.stream().filter(o -> o instanceof ICustomIngredient).flatMap(o -> ((ICustomIngredient) o).getItems()),
-                        ingredients.stream().filter(o -> o instanceof SizedIngredient).flatMap(o -> Arrays.stream(((SizedIngredient) o).getItems())),
-                        ingredients.stream().filter(o -> o instanceof Ingredient).flatMap(o -> Arrays.stream(((Ingredient) o).getItems()))
-                ).flatMap(s -> s).toList();
-        renderItemList(screen, guiGraphics, stacks, hoverComponent, left, top, mouseX, mouseY, vertical);
-    }
-
     public static void renderIngredient(AbstractMalumScreen screen, GuiGraphics guiGraphics, ICustomIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
         renderItem(screen, guiGraphics, ingredient.getItems().toList(), posX, posY, mouseX, mouseY);
     }
@@ -239,6 +230,9 @@ public class ArcanaCodexHelper {
     }
 
     public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<ItemStack> stacks, int posX, int posY, int mouseX, int mouseY) {
+        if (stacks.isEmpty()) {
+            return;
+        }
         if (stacks.size() == 1) {
             renderItem(screen, guiGraphics, stacks.getFirst(), posX, posY, mouseX, mouseY);
             return;
@@ -258,21 +252,31 @@ public class ArcanaCodexHelper {
         }
     }
 
-    public static void renderItemList(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<ItemStack> items, Component hoverComponent, int left, int top, int mouseX, int mouseY, boolean isVertical) {
+    public static void renderIngredients(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<?> ingredients, Component hoverComponent, int left, int top, int mouseX, int mouseY, boolean vertical) {
+        final List<List<ItemStack>> stackBundles =
+                Stream.of(
+                        ingredients.stream().filter(o -> o instanceof ICustomIngredient).map(o -> ((ICustomIngredient) o).getItems().toList()),
+                        ingredients.stream().filter(o -> o instanceof SizedIngredient).map(o -> Arrays.stream(((SizedIngredient) o).getItems()).toList()),
+                        ingredients.stream().filter(o -> o instanceof Ingredient).map(o -> Arrays.stream(((Ingredient) o).getItems()).toList())
+                ).flatMap(s -> s).toList();
+        renderItemList(screen, guiGraphics, stackBundles, hoverComponent, left, top, mouseX, mouseY, vertical);
+    }
+
+    public static void renderItemList(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<List<ItemStack>> items, Component hoverComponent, int left, int top, int mouseX, int mouseY, boolean isVertical) {
         int slots = items.size();
         int startingOffset = (isVertical ? 9 : 12) * (slots - 1);
-        screen.renderLater(renderItemFrames(guiGraphics, hoverComponent, slots, left, top, mouseX, mouseY, items.getFirst().getItem() instanceof SpiritShardItem, isVertical));
+        screen.renderLater(renderItemFrames(guiGraphics, hoverComponent, slots, left, top, mouseX, mouseY, items.getFirst().getFirst().getItem() instanceof SpiritShardItem, isVertical));
         if (isVertical) {
             top -= startingOffset;
         } else {
             left -= startingOffset;
         }
         for (int i = 0; i < slots; i++) {
-            ItemStack stack = items.get(i);
+            List<ItemStack> list = items.get(i);
             int offset = i * (isVertical ? 18 : 24);
             int oLeft = left + 4 + (isVertical ? 0 : offset);
             int oTop = top + (isVertical ? offset : 0);
-            renderItem(screen, guiGraphics, stack, oLeft, oTop, mouseX, mouseY);
+            renderItem(screen, guiGraphics, list, oLeft, oTop, mouseX, mouseY);
         }
     }
 

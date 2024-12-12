@@ -1,0 +1,22 @@
+{
+  "type": "malum:spirit_repair",
+  "durabilityPercentage": 1.0,
+  "inputs": [
+    "malum:cracked_silver_impetus"
+  ],
+  "repairMaterial": {
+    "count": 2,
+    "item": "malum:cthonic_gold_fragment"
+  },
+  "repairOutputOverride": "malum:silver_impetus",
+  "spirits": [
+    {
+      "type": "infernal",
+      "count": 8
+    },
+    {
+      "type": "earthen",
+      "count": 8
+    }
+  ]
+}

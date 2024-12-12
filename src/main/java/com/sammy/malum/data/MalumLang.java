@@ -635,8 +635,10 @@ public class MalumLang extends LanguageProvider {
         addSimpleEntryHeader("arcane_restoration", "Arcane Restoration", "Mystic repair");
         addPages("arcane_restoration",
                 "The Spirit Crucible has an annoying habit of breaking the tools to work with it. While a cost is to be expected, I'd rather pay it in installments. I have designed a device I call the Repair Pylon, intended to shore items up as they break down.",
-                "It works not just on an Impetus, but practically anything at all, as long as it is placed on a nearby item holder, with a combination of spirits and a repair material (iron for iron tools, for instance) placed on the pylon. Unlike an anvil, no experience is needed to fuel this.",
+                "The Repair Pylon requires a toll of Spirit Arcana as well as a properly suited repair material for the job. When fitted with items, the Pylon will search for a nearby damaged item in any Item Pedestal, Item Stand, or Crucible. It should be theoretically possible to repair an item with " + italic("just") + " Arcana.. but that's only theory-crafting at the moment.",
                 "It appears that materials in tune with spirit arcana, such as Soulstained Steel or Hallowed Gold, are more efficient in this process. They will be repaired more than their mundane counterparts would for the same cost.");
+
+        addSimpleEntryHeader("arcane_restoration.tool_repair", "Repairing Tools", "Mending for Steelwear");
 
         addSimpleEntryHeader("crucible_augmentation", "Crucible Augmentation", "Tuning the attuner");
         addPages("crucible_augmentation",
@@ -677,17 +679,21 @@ public class MalumLang extends LanguageProvider {
         addPages("intricate_assembly",
                 "The Intricate Assembly, as its name suggests, draws its power from the unbounded nature of its fractal complexity. At the cost of an increased dependency on fuel, as well as a reduced focusing speed, it enables the crucible to potentially produce double the usual amount of items during each focusing cycle.");
 
-        addEntryHeader("spirit_metals", "Spirit Metals", "Arcana refined");
-        addHeadline("spirit_metals.soulstained_steel", "Soulstained Steel");
-        addPages("spirit_metals.soulstained_steel",
+        addEntryHeader("spirit_metals.soul_stained_steel", "Spirit Metals; Soul Stained Steel", "Arcana refined");
+        addHeadline("spirit_metals.soul_stained_steel", "Soulstained Steel");
+        addPages("spirit_metals.soul_stained_steel",
                 "Iron is mundane, in a word. By attuning the metal with Soulstone, I can create a steel that is " + italic("simultaneously") + " in and out of phase with the world.",
                 "Anything made from Soulstained Steel is capable of striking the soul, without the need for specifics of engineering like with my crude scythe. Wearing the metal in its base form as armor is dangerous, as it will touch your own soul as well, so I must engineer a countermeasure.");
+
+        addEntryHeader("spirit_metals.hallowed_gold", "Spirit Metals; Hallowed Gold", "Arcana refined");
         addHeadline("spirit_metals.hallowed_gold", "Hallowed Gold");
         addPages("spirit_metals.hallowed_gold",
                 "Gold is often used as a thaumaturgical base, its natural conductivity of magic making it quite useful. Spirit arcana are no exception. In fact, using Sacred arcana, we can enhance those conductive properties.",
-                "Hallowed Gold, as a metal, acts much like its mundane counterpart. The inherent innocence of the arcana infused into the alloy makes other arcana glide through it smoothly, creating the perfect conductor for my purposes.");
-        addHeadline("spirit_metals.hallowed_gold.spirit_jar", "Spirit Jar");
-        addPages("spirit_metals.hallowed_gold.spirit_jar", "A simple application of this metal is the Spirit Jar. As spirits in their raw form don't have mass, by trapping them under Hallowed Gold you can store far more than you could physically. The capacity of these jars is near-infinite, though each only stores one type of spirit.");
+                "Hallowed Gold, as a metal, acts much like its mundane counterpart. The inherent innocence of the arcana infused into the alloy makes other arcana glide through it smoothly, creating the perfect conductor for my purposes. It also makes for some quite fashionable item peripherals.");
+
+        addEntryHeader("spirit_jar", "Spirit Storage", "Arcane Archives");
+        addHeadline("spirit_jar", "Spirit Jar");
+        addPages("spirit_jar", "A simple application of this metal is the Spirit Jar. As spirits in their raw form don't have mass, by trapping them under Hallowed Gold you can store far more than you could physically. The capacity of these jars is near-infinite, though each only stores one type of spirit.");
 
         addSimpleEntryHeader("soulstained_scythe", "Soulstained Scythe", "Reap");
         addPages("soulstained_scythe", "The scythe I created to harvest spirits was useful, but ultimately has outlived that usefulness. I have grown fond of the utility it provides, though, and so instead of discarding it I sought to improve it. With Soulstained Steel, I was able to create a more effective weapon and maintain the scythe's advantages.");

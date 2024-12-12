@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.registry.common.recipe.*;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
@@ -18,24 +19,25 @@ import java.util.stream.*;
 public class SpiritRepairRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipeInput> {
 
     public static final MapCodec<SpiritRepairRecipe> CODEC = RecordCodecBuilder.mapCodec(obj -> obj.group(
-            Codec.FLOAT.fieldOf("durabilityPercentage").forGetter(recipe -> recipe.durabilityPercentage),
+            Codec.FLOAT.optionalFieldOf("durabilityPercentage", 0.5f).forGetter(recipe -> recipe.durabilityPercentage),
             Codec.STRING.optionalFieldOf("itemIdRegex", "").forGetter(recipe -> recipe.itemIdRegex),
             Codec.STRING.optionalFieldOf("modIdRegex", "").forGetter(recipe -> recipe.modIdRegex),
             ResourceLocation.CODEC.listOf().optionalFieldOf("inputs", List.of()).forGetter(recipe -> recipe.itemsForRepair.stream().map(BuiltInRegistries.ITEM::getKey).collect(Collectors.toList())),
             SizedIngredient.FLAT_CODEC.fieldOf("repairMaterial").forGetter(recipe -> recipe.repairMaterial),
-            SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits)
+            SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits),
+            BuiltInRegistries.ITEM.byNameCodec().optionalFieldOf("repairOutputOverride", Items.AIR).forGetter(recipe -> recipe.repairOutputOverride)
     ).apply(obj, SpiritRepairRecipe::new));
 
     public static final String NAME = "spirit_repair";
-
     public final float durabilityPercentage;
     public final String itemIdRegex;
     public final String modIdRegex;
     public final ArrayList<Item> itemsForRepair;
     public final List<SpiritIngredient> spirits;
     public final SizedIngredient repairMaterial;
+    public final Item repairOutputOverride;
 
-    public SpiritRepairRecipe(float durabilityPercentage, String itemIdRegex, String modIdRegex, List<ResourceLocation> itemsForRepair, SizedIngredient repairMaterial, List<SpiritIngredient> spirits) {
+    public SpiritRepairRecipe(float durabilityPercentage, String itemIdRegex, String modIdRegex, List<ResourceLocation> itemsForRepair, SizedIngredient repairMaterial, List<SpiritIngredient> spirits, Item repairOutputOverride) {
         super(RecipeSerializerRegistry.REPAIR_RECIPE_SERIALIZER.get(), RecipeTypeRegistry.SPIRIT_REPAIR.get());
         this.durabilityPercentage = durabilityPercentage;
         this.itemIdRegex = itemIdRegex;
@@ -43,6 +45,7 @@ public class SpiritRepairRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipe
         this.repairMaterial = repairMaterial;
         this.itemsForRepair = itemsForRepair.stream().map(BuiltInRegistries.ITEM::get).collect(Collectors.toCollection(ArrayList::new));
         this.spirits = spirits;
+        this.repairOutputOverride = repairOutputOverride;
         addToInputs(this.itemsForRepair, itemIdRegex, modIdRegex);
     }
 

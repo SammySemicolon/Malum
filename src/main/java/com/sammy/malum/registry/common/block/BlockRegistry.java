@@ -300,6 +300,8 @@ public class BlockRegistry {
 
     public static final DeferredHolder<Block, Block> RUNEWOOD_ITEM_STAND = BLOCKS.register("runewood_item_stand", () -> new ItemStandBlock<>(MalumBlockProperties.RUNEWOOD().noOcclusion()).setBlockEntity(BlockEntityRegistry.ITEM_STAND));
     public static final DeferredHolder<Block, Block> RUNEWOOD_ITEM_PEDESTAL = BLOCKS.register("runewood_item_pedestal", () -> new WoodItemPedestalBlock<>(MalumBlockProperties.RUNEWOOD().noOcclusion()).setBlockEntity(BlockEntityRegistry.ITEM_PEDESTAL));
+    public static final DeferredHolder<Block, Block> GILDED_RUNEWOOD_ITEM_STAND = BLOCKS.register("gilded_runewood_item_stand", () -> new ItemStandBlock<>(MalumBlockProperties.RUNEWOOD().noOcclusion()).setBlockEntity(BlockEntityRegistry.ITEM_STAND));
+    public static final DeferredHolder<Block, Block> GILDED_RUNEWOOD_ITEM_PEDESTAL = BLOCKS.register("gilded_runewood_item_pedestal", () -> new WoodItemPedestalBlock<>(MalumBlockProperties.RUNEWOOD().noOcclusion()).setBlockEntity(BlockEntityRegistry.ITEM_PEDESTAL));
 
     public static final DeferredHolder<Block, Block> RUNEWOOD_SIGN = BLOCKS.register("runewood_sign", () -> new LodestoneStandingSignBlock(WoodTypeRegistry.RUNEWOOD, MalumBlockProperties.RUNEWOOD().addTags(SIGNS, STANDING_SIGNS).noOcclusion().noCollission()));
     public static final DeferredHolder<Block, Block> RUNEWOOD_WALL_SIGN = BLOCKS.register("runewood_wall_sign", () -> new LodestoneWallSignBlock(WoodTypeRegistry.RUNEWOOD, MalumBlockProperties.RUNEWOOD().addTags(SIGNS, WALL_SIGNS).noOcclusion().noCollission()));
@@ -369,6 +371,8 @@ public class BlockRegistry {
 
     public static final DeferredHolder<Block, Block> SOULWOOD_ITEM_STAND = BLOCKS.register("soulwood_item_stand", () -> new ItemStandBlock<>(MalumBlockProperties.SOULWOOD().noOcclusion()).setBlockEntity(BlockEntityRegistry.ITEM_STAND));
     public static final DeferredHolder<Block, Block> SOULWOOD_ITEM_PEDESTAL = BLOCKS.register("soulwood_item_pedestal", () -> new WoodItemPedestalBlock<>(MalumBlockProperties.SOULWOOD().noOcclusion()).setBlockEntity(BlockEntityRegistry.ITEM_PEDESTAL));
+    public static final DeferredHolder<Block, Block> ORNATE_SOULWOOD_ITEM_STAND = BLOCKS.register("ornate_soulwood_item_stand", () -> new ItemStandBlock<>(MalumBlockProperties.SOULWOOD().noOcclusion()).setBlockEntity(BlockEntityRegistry.ITEM_STAND));
+    public static final DeferredHolder<Block, Block> ORNATE_SOULWOOD_ITEM_PEDESTAL = BLOCKS.register("ornate_soulwood_item_pedestal", () -> new WoodItemPedestalBlock<>(MalumBlockProperties.SOULWOOD().noOcclusion()).setBlockEntity(BlockEntityRegistry.ITEM_PEDESTAL));
 
     public static final DeferredHolder<Block, Block> SOULWOOD_SIGN = BLOCKS.register("soulwood_sign", () -> new LodestoneStandingSignBlock(WoodTypeRegistry.SOULWOOD, MalumBlockProperties.SOULWOOD().addTags(SIGNS, STANDING_SIGNS).noOcclusion().noCollission()));
     public static final DeferredHolder<Block, Block> SOULWOOD_WALL_SIGN = BLOCKS.register("soulwood_wall_sign", () -> new LodestoneWallSignBlock(WoodTypeRegistry.SOULWOOD, MalumBlockProperties.SOULWOOD().addTags(SIGNS, WALL_SIGNS).noOcclusion().noCollission()));

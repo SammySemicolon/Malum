@@ -89,7 +89,7 @@ public class SoulHarvestHandler {
                 return;
             }
             data.obtainedEncyclopedia = true;
-            SoulHarvestHandler.spawnItemsAsSpirits(target, List.of(ItemRegistry.ENCYCLOPEDIA_ARCANA.get().getDefaultInstance()));
+            SoulHarvestHandler.spawnItemsAsSpirits(target, attacker, List.of(ItemRegistry.ENCYCLOPEDIA_ARCANA.get().getDefaultInstance()));
         }
     }
 
@@ -106,7 +106,11 @@ public class SoulHarvestHandler {
     }
 
     public static void spawnItemsAsSpirits(LivingEntity target, Collection<ItemStack> spirits) {
-        spawnItemsAsSpirits(target.level(), target.position().add(0, target.getBbHeight() / 2f, 0), spirits);
+        spawnItemsAsSpirits(target.level(), null, spirits);
+    }
+
+    public static void spawnItemsAsSpirits(LivingEntity target, @Nullable LivingEntity attacker, Collection<ItemStack> spirits) {
+        spawnSpirits(target.level(), attacker, target.position().add(0, target.getBbHeight() / 2f, 0), spirits);
     }
 
     public static void spawnItemsAsSpirits(Level level, Vec3 position, Collection<ItemStack> spirits) {

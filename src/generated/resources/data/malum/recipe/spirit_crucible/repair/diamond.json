@@ -1,6 +1,5 @@
 {
   "type": "malum:spirit_repair",
-  "durabilityPercentage": 0.5,
   "inputs": [
     "minecraft:diamond_sword",
     "minecraft:diamond_shovel",

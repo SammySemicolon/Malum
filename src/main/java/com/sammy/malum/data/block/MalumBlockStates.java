@@ -65,7 +65,7 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::cutRockBlockModel, CUT_TAINTED_ROCK, CHECKERED_TAINTED_ROCK);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::columnCapModel, TAINTED_ROCK_COLUMN_CAP);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::rockItemPedestalModel, TAINTED_ROCK_ITEM_PEDESTAL);
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::rockItemStandModel, TAINTED_ROCK_ITEM_STAND);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::itemStandModel, TAINTED_ROCK_ITEM_STAND);
 
         BlockStateSmithTypes.LOG_BLOCK.act(data, TAINTED_ROCK_COLUMN);
         BlockStateSmithTypes.BUTTON_BLOCK.act(data, TAINTED_ROCK_BUTTON);
@@ -99,7 +99,7 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::cutRockBlockModel, CUT_TWISTED_ROCK, CHECKERED_TWISTED_ROCK);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::columnCapModel, TWISTED_ROCK_COLUMN_CAP);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::rockItemPedestalModel, TWISTED_ROCK_ITEM_PEDESTAL);
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::rockItemStandModel, TWISTED_ROCK_ITEM_STAND);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::itemStandModel, TWISTED_ROCK_ITEM_STAND);
 
         BlockStateSmithTypes.LOG_BLOCK.act(data, TWISTED_ROCK_COLUMN);
         BlockStateSmithTypes.BUTTON_BLOCK.act(data, TWISTED_ROCK_BUTTON);
@@ -144,7 +144,9 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::simpleBlock, this::totemBaseModel, RUNEWOOD_TOTEM_BASE);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::cutWoodBlockModel, CUT_RUNEWOOD_PLANKS);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::woodenItemPedestalModel, RUNEWOOD_ITEM_PEDESTAL);
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::woodenItemStandModel, RUNEWOOD_ITEM_STAND);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::decoratedItemPedestalModel, GILDED_RUNEWOOD_ITEM_PEDESTAL);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::itemStandModel, RUNEWOOD_ITEM_STAND);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::decoratedItemStandModel, GILDED_RUNEWOOD_ITEM_STAND);
 
         setTexturePath("soulwood/");
         BlockStateSmithTypes.FULL_BLOCK.act(data,
@@ -180,7 +182,9 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::simpleBlock, this::totemBaseModel, SOULWOOD_TOTEM_BASE);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::cutWoodBlockModel, CUT_SOULWOOD_PLANKS);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::woodenItemPedestalModel, SOULWOOD_ITEM_PEDESTAL);
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::woodenItemStandModel, SOULWOOD_ITEM_STAND);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::simpleBlock, this::decoratedItemPedestalModel, ORNATE_SOULWOOD_ITEM_PEDESTAL);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::itemStandModel, SOULWOOD_ITEM_STAND);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, this::directionalBlock, this::decoratedItemStandModel, ORNATE_SOULWOOD_ITEM_STAND);
 
         setTexturePath("ores/");
         BlockStateSmithTypes.FULL_BLOCK.act(data, CTHONIC_GOLD_ORE, NATURAL_QUARTZ_ORE, DEEPSLATE_QUARTZ_ORE, SOULSTONE_ORE, DEEPSLATE_SOULSTONE_ORE);
@@ -277,35 +281,39 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
     }
 
     public ModelFile rockItemPedestalModel(Block block) {
-        return itemPedestalModel(block, "template_rock_item_pedestal", "");
+        return itemPedestalModel(block, "template_rock_item_pedestal");
     }
 
     public ModelFile woodenItemPedestalModel(Block block) {
-        return itemPedestalModel(block, "template_wooden_item_pedestal", "_planks");
+        return itemPedestalModel(block, "template_item_pedestal_wooden");
     }
 
-    public ModelFile itemPedestalModel(Block block, String template, String affix) {
+    public ModelFile decoratedItemPedestalModel(Block block) {
+        return itemPedestalModel(block, "template_item_pedestal_wooden_decorated", s -> s.substring(s.indexOf("_")+1) + "_" + s.split("_")[0]);
+    }
+
+    public ModelFile itemPedestalModel(Block block, String template) {
+        return itemPedestalModel(block, template, s -> s);
+    }
+
+    public ModelFile itemPedestalModel(Block block, String template, Function<String, String> pathFunction) {
         String name = getBlockName(block);
         ResourceLocation parent = malumPath("block/templates/" + template);
-        ResourceLocation pedestal = getBlockTexture(name);
-        ResourceLocation particle = getBlockTexture(name.replace("_item_pedestal", "") + affix);
-        return models().withExistingParent(name, parent).texture("pedestal", pedestal).texture("particle", particle);
+        ResourceLocation pedestal = getBlockTexture(pathFunction.apply(name));
+        return models().withExistingParent(name, parent).texture("pedestal", pedestal);
     }
 
-    public ModelFile rockItemStandModel(Block block) {
-        return itemStandModel(block, "");
+    public ModelFile itemStandModel(Block block) {
+        return itemStandModel(block, "template_item_stand", s -> s);
     }
-
-    public ModelFile woodenItemStandModel(Block block) {
-        return itemStandModel(block, "_planks");
+    public ModelFile decoratedItemStandModel(Block block) {
+        return itemStandModel(block, "template_item_stand_decorated", s -> s.substring(s.indexOf("_")+1) + "_" + s.split("_")[0]);
     }
-
-    public ModelFile itemStandModel(Block block, String affix) {
+    public ModelFile itemStandModel(Block block, String template, Function<String, String> pathFunction) {
         String name = getBlockName(block);
-        ResourceLocation parent = malumPath("block/templates/template_item_stand");
-        ResourceLocation stand = getBlockTexture(name);
-        ResourceLocation particle = getBlockTexture(name.replace("_item_stand", "") + affix);
-        return models().withExistingParent(name, parent).texture("stand", stand).texture("particle", particle);
+        ResourceLocation parent = malumPath("block/templates/" + template);
+        ResourceLocation stand = getBlockTexture(pathFunction.apply(name));
+        return models().withExistingParent(name, parent).texture("stand", stand);
     }
 
     public ModelFile layeredBlockModel(Block block) {

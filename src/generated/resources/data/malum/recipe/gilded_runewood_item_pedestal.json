@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "malum:runewood_item_pedestal"
+    },
+    "Y": {
+      "item": "malum:hallowed_gold_nugget"
+    }
+  },
+  "pattern": [
+    "YXY"
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:gilded_runewood_item_pedestal"
+  }
+}

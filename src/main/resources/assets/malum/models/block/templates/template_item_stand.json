@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"stand": "blank"
+		"particle": "#stand"
 	},
 	"elements": [
 		{

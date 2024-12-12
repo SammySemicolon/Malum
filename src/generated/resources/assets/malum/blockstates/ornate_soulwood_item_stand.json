@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,waterlogged=false": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 180
+    },
+    "facing=down,waterlogged=true": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 180
+    },
+    "facing=east,waterlogged=false": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east,waterlogged=true": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,waterlogged=false": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 90
+    },
+    "facing=north,waterlogged=true": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 90
+    },
+    "facing=south,waterlogged=false": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 90,
+      "y": 180
+    },
+    "facing=south,waterlogged=true": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,waterlogged=false": {
+      "model": "malum:block/ornate_soulwood_item_stand"
+    },
+    "facing=up,waterlogged=true": {
+      "model": "malum:block/ornate_soulwood_item_stand"
+    },
+    "facing=west,waterlogged=false": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 90,
+      "y": 270
+    },
+    "facing=west,waterlogged=true": {
+      "model": "malum:block/ornate_soulwood_item_stand",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

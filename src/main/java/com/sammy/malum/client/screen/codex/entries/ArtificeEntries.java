@@ -137,16 +137,28 @@ public class ArtificeEntries {
         screen.addEntry("arcane_restoration", 7, 8, b -> b
                 .configureWidget(w -> w.setIcon(REPAIR_PYLON))
                 .addPage(new HeadlineTextPage("arcane_restoration", "arcane_restoration.1"))
-                .addPage(new TextPage("arcane_restoration.2"))
                 .addPage(SpiritInfusionPage.fromOutput(REPAIR_PYLON.get()))
+                .addPage(new TextPage("arcane_restoration.2"))
                 .addPage(SpiritRepairPage.fromId("alchemical_impetus_restoration"))
-                .addPage(SpiritRepairPage.fromId("metal_impetus_restoration"))
+                .addPage(new CyclingPage(
+                        SpiritRepairPage.fromOutput(IRON_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(GOLD_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(COPPER_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(LEAD_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(SILVER_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(ALUMINUM_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(NICKEL_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(URANIUM_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(OSMIUM_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(ZINC_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(TIN_IMPETUS.get())
+                ))
                 .addReference(new EntryReference(IRON_SWORD, BookEntry.build("arcane_restoration.tool_repair")
                         .addPage(new HeadlineTextPage("arcane_restoration.tool_repair", "arcane_restoration.tool_repair.1"))
                         .addPage(SpiritRepairPage.fromId("wooden"))
                         .addPage(SpiritRepairPage.fromId("stone"))
                         .addPage(SpiritRepairPage.fromId("iron"))
-                        .addPage(SpiritRepairPage.fromId("golden"))
+                        .addPage(SpiritRepairPage.fromId("gold"))
                         .addPage(SpiritRepairPage.fromId("diamond"))
                         .addPage(SpiritRepairPage.fromId("netherite"))
                         .addPage(SpiritRepairPage.fromId("trident"))

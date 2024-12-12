@@ -17,11 +17,17 @@ public class TinkeringEntries {
     public static void setupEntries(ArcanaProgressionScreen screen) {
         Item EMPTY = ItemStack.EMPTY.getItem();
 
-        screen.addEntry("spirit_metals", -3, 6, b -> b
+        var metalReexamination = new EntryReference(UMBRAL_SPIRIT, BookEntry.build("spirit_metals.reexamination")
+                .addPage(new HeadlineTextPage("spirit_metals.reexamination", "spirit_metals.reexamination.1"))
+                .addPage(new TextPage("spirit_metals.reexamination.2"))
+                .afterUmbralCrystal()
+        );
+
+        screen.addEntry("spirit_metals.soul_stained_steel", -4, 5, b -> b
                 .configureWidget(w -> w.setIcon(SOUL_STAINED_STEEL_INGOT))
-                .addPage(new HeadlineTextItemPage("spirit_metals.soulstained_steel", "spirit_metals.soulstained_steel.1", SOUL_STAINED_STEEL_INGOT.get()))
-                .addPage(new TextPage("spirit_metals.soulstained_steel.2"))
+                .addPage(new HeadlineTextItemPage("spirit_metals.soul_stained_steel", "spirit_metals.soul_stained_steel.1", SOUL_STAINED_STEEL_INGOT.get()))
                 .addPage(SpiritInfusionPage.fromOutput(SOUL_STAINED_STEEL_INGOT.get()))
+                .addPage(new TextPage("spirit_metals.soul_stained_steel.2"))
                 .addPage(new CyclingPage(
                         CraftingPage.toolPage(SOUL_STAINED_STEEL_PICKAXE.get(), SOUL_STAINED_STEEL_INGOT.get()),
                         CraftingPage.toolPage(SOUL_STAINED_STEEL_AXE.get(), SOUL_STAINED_STEEL_INGOT.get()),
@@ -30,26 +36,42 @@ public class TinkeringEntries {
                         CraftingPage.toolPage(SOUL_STAINED_STEEL_SWORD.get(), SOUL_STAINED_STEEL_INGOT.get()),
                         CraftingPage.knifePage(SOUL_STAINED_STEEL_KNIFE.get(), SOUL_STAINED_STEEL_INGOT.get())
                 ))
-                .addPage(new HeadlineTextItemPage("spirit_metals.hallowed_gold", "spirit_metals.hallowed_gold.1", HALLOWED_GOLD_INGOT.get()))
-                .addPage(new TextPage("spirit_metals.hallowed_gold.2"))
-                .addPage(SpiritInfusionPage.fromOutput(HALLOWED_GOLD_INGOT.get()))
-                .addPage(new HeadlineTextPage("spirit_metals.hallowed_gold.spirit_jar", "spirit_metals.hallowed_gold.spirit_jar.1"))
-                .addPage(new CraftingPage(SPIRIT_JAR.get(), GLASS_PANE, HALLOWED_GOLD_INGOT.get(), GLASS_PANE, GLASS_PANE, EMPTY, GLASS_PANE, GLASS_PANE, GLASS_PANE, GLASS_PANE))
-
-                .addReference(new EntryReference(UMBRAL_SPIRIT, BookEntry.build("spirit_metals.reexamination")
-                        .addPage(new HeadlineTextPage("spirit_metals.reexamination", "spirit_metals.reexamination.1"))
-                        .addPage(new TextPage("spirit_metals.reexamination.2"))
-                        .afterUmbralCrystal()
-                ))
+                .addReference(metalReexamination)
         );
 
-        screen.addEntry("soulstained_scythe", -4, 5, b -> b
+        screen.addEntry("spirit_metals.hallowed_gold", -3, 7, b -> b
+                .configureWidget(w -> w.setIcon(HALLOWED_GOLD_INGOT))
+                .addPage(new HeadlineTextItemPage("spirit_metals.hallowed_gold", "spirit_metals.hallowed_gold.1", HALLOWED_GOLD_INGOT.get()))
+                .addPage(SpiritInfusionPage.fromOutput(HALLOWED_GOLD_INGOT.get()))
+                .addPage(new TextPage("spirit_metals.hallowed_gold.2"))
+                .addPage(new CyclingPage(
+                        new CraftingPage(GILDED_RUNEWOOD_ITEM_PEDESTAL.get(), EMPTY, EMPTY, EMPTY, HALLOWED_GOLD_NUGGET.get(), RUNEWOOD_ITEM_PEDESTAL.get(), HALLOWED_GOLD_NUGGET.get()),
+                        new CraftingPage(GILDED_RUNEWOOD_ITEM_STAND.get(), EMPTY, EMPTY, EMPTY, HALLOWED_GOLD_NUGGET.get(), RUNEWOOD_ITEM_STAND.get(), HALLOWED_GOLD_NUGGET.get())
+                ))
+                .addReference(metalReexamination)
+        );
+
+        screen.addEntry("altar_acceleration", -4, 8, b -> b
+                .configureWidget(w -> w.setIcon(RUNEWOOD_OBELISK))
+                .addPage(new HeadlineTextPage("altar_acceleration.runewood_obelisk", "altar_acceleration.runewood_obelisk.1"))
+                .addPage(SpiritInfusionPage.fromOutput(RUNEWOOD_OBELISK.get()))
+                .addPage(new HeadlineTextPage("altar_acceleration.brilliant_obelisk", "altar_acceleration.brilliant_obelisk.1"))
+                .addPage(SpiritInfusionPage.fromOutput(BRILLIANT_OBELISK.get()))
+        );
+
+        screen.addEntry("spirit_jar", -5, 8, b -> b
+                .configureWidget(w -> w.setIcon(SPIRIT_JAR))
+                .addPage(new HeadlineTextPage("spirit_jar", "spirit_jar.1"))
+                .addPage(new CraftingPage(SPIRIT_JAR.get(), GLASS_PANE, HALLOWED_GOLD_INGOT.get(), GLASS_PANE, GLASS_PANE, EMPTY, GLASS_PANE, GLASS_PANE, GLASS_PANE, GLASS_PANE))
+        );
+
+        screen.addEntry("soulstained_scythe", -5, 6, b -> b
                 .configureWidget(w -> w.setIcon(SOUL_STAINED_STEEL_SCYTHE))
                 .addPage(new HeadlineTextPage("soulstained_scythe", "soulstained_scythe.1"))
                 .addPage(SpiritInfusionPage.fromOutput(SOUL_STAINED_STEEL_SCYTHE.get()))
         );
 
-        screen.addEntry("soulstained_armor", -4, 7, b -> b
+        screen.addEntry("soulstained_armor", -6, 6, b -> b
                 .configureWidget(w -> w.setIcon(SOUL_STAINED_STEEL_HELMET))
                 .addPage(new HeadlineTextPage("soulstained_armor", "soulstained_armor.1"))
                 .addPage(new TextPage("soulstained_armor.2"))
@@ -63,17 +85,17 @@ public class TinkeringEntries {
                 .addPage(new CraftingPage(new ItemStack(SOUL_STAINED_STEEL_PLATING.get(), 2), EMPTY, SOUL_STAINED_STEEL_NUGGET.get(), EMPTY, SOUL_STAINED_STEEL_NUGGET.get(), SOUL_STAINED_STEEL_INGOT.get(), SOUL_STAINED_STEEL_NUGGET.get(), EMPTY, SOUL_STAINED_STEEL_NUGGET.get(), EMPTY))
         );
 
-        screen.addEntry("spirit_trinkets", -5, 6, b -> b
-                .configureWidget(w -> w.setIcon(ORNATE_RING))
+        screen.addEntry("spirit_trinkets", -7, 7, b -> b
+                .configureWidget(w -> w.setIcon(ORNATE_RING).setStyle(BookWidgetStyle.GILDED_RUNEWOOD))
                 .addPage(new HeadlineTextPage("spirit_trinkets", "spirit_trinkets.1"))
                 .addPage(new TextPage("spirit_trinkets.2"))
-                .addPage(CraftingPage.ringPage(GILDED_RING.get(), HALLOWED_GOLD_INGOT.get()))
-                .addPage(new CraftingPage(GILDED_BELT.get(), LEATHER, LEATHER, LEATHER, HALLOWED_GOLD_INGOT.get(), PROCESSED_SOULSTONE.get(), HALLOWED_GOLD_INGOT.get(), EMPTY, HALLOWED_GOLD_INGOT.get(), EMPTY))
                 .addPage(CraftingPage.ringPage(ORNATE_RING.get(), SOUL_STAINED_STEEL_INGOT.get()))
                 .addPage(new CraftingPage(ORNATE_NECKLACE.get(), EMPTY, STRING, EMPTY, STRING, EMPTY, STRING, EMPTY, SOUL_STAINED_STEEL_INGOT.get(), EMPTY))
+                .addPage(CraftingPage.ringPage(GILDED_RING.get(), HALLOWED_GOLD_INGOT.get()))
+                .addPage(new CraftingPage(GILDED_BELT.get(), LEATHER, LEATHER, LEATHER, HALLOWED_GOLD_INGOT.get(), PROCESSED_SOULSTONE.get(), HALLOWED_GOLD_INGOT.get(), EMPTY, HALLOWED_GOLD_INGOT.get(), EMPTY))
         );
 
-        screen.addEntry("reactive_trinkets", -7, 6, b -> b
+        screen.addEntry("reactive_trinkets",-10, 7, b -> b
                 .configureWidget(w -> w.setIcon(RING_OF_CURATIVE_TALENT))
                 .addPage(new HeadlineTextPage("reactive_trinkets.ring_of_curative_talent", "reactive_trinkets.ring_of_curative_talent.1"))
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_CURATIVE_TALENT.get()))
@@ -90,13 +112,13 @@ public class TinkeringEntries {
                                 .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_MYSTIC_MIRROR.get()))))
         );
 
-        screen.addEntry("ring_of_esoteric_spoils", -9, 5, b -> b
+        screen.addEntry("ring_of_esoteric_spoils", -12, 6, b -> b
                 .configureWidget(w -> w.setIcon(RING_OF_ESOTERIC_SPOILS))
                 .addPage(new HeadlineTextPage("ring_of_esoteric_spoils", "ring_of_esoteric_spoils.1"))
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_ESOTERIC_SPOILS.get()))
         );
 
-        screen.addEntry("belt_of_the_starved",-8, 7, b -> b
+        screen.addEntry("belt_of_the_starved",-11, 8, b -> b
                 .configureWidget(w -> w.setIcon(BELT_OF_THE_STARVED))
                 .addPage(new HeadlineTextPage("belt_of_the_starved", "belt_of_the_starved.1"))
                 .addPage(SpiritInfusionPage.fromOutput(BELT_OF_THE_STARVED.get()))
@@ -120,13 +142,13 @@ public class TinkeringEntries {
                 ))
         );
 
-        screen.addEntry("necklace_of_the_narrow_edge", -7, 8, b -> b
+        screen.addEntry("necklace_of_the_narrow_edge", -10, 9, b -> b
                 .configureWidget(w -> w.setIcon(NECKLACE_OF_THE_NARROW_EDGE))
                 .addPage(new HeadlineTextPage("necklace_of_the_narrow_edge", "necklace_of_the_narrow_edge.1"))
                 .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_NARROW_EDGE.get()))
         );
 
-        screen.addEntry("belt_of_the_prospector", -6, 5, b -> b
+        screen.addEntry("belt_of_the_prospector", -9, 6, b -> b
                 .configureWidget(w -> w.setIcon(BELT_OF_THE_PROSPECTOR))
                 .addPage(new HeadlineTextPage("belt_of_the_prospector", "belt_of_the_prospector.1"))
                 .addPage(SpiritInfusionPage.fromOutput(BELT_OF_THE_PROSPECTOR.get()))
@@ -144,7 +166,7 @@ public class TinkeringEntries {
                 ))
         );
 
-        screen.addEntry("necklace_of_blissful_harmony", -7, 4, b -> b
+        screen.addEntry("necklace_of_blissful_harmony", -10, 5, b -> b
                 .configureWidget(w -> w.setIcon(NECKLACE_OF_BLISSFUL_HARMONY))
                 .addPage(new HeadlineTextPage("necklace_of_blissful_harmony", "necklace_of_blissful_harmony.1"))
                 .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_BLISSFUL_HARMONY.get()))

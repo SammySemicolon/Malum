@@ -47,6 +47,10 @@ public class SpiritRepairPage extends BookPage {
         return recipe != null;
     }
 
+    public static SpiritRepairPage fromOutput(Item outputItem) {
+        return new SpiritRepairPage(s -> s.repairOutputOverride.equals(outputItem));
+    }
+
     public static SpiritRepairPage fromId(String recipeId) {
         return fromId(MalumMod.malumPath(recipeId));
     }

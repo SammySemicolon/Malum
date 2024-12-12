@@ -4,11 +4,11 @@
   "inputs": [
     "malum:cracked_alchemical_impetus"
   ],
-  "itemIdRegex": "none",
   "repairMaterial": {
     "count": 2,
     "item": "malum:alchemical_calx"
   },
+  "repairOutputOverride": "malum:alchemical_impetus",
   "spirits": [
     {
       "type": "arcane",

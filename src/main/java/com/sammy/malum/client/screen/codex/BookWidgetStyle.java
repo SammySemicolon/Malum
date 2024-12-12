@@ -10,6 +10,7 @@ public record BookWidgetStyle(ResourceLocation frameTexture, ResourceLocation fi
 
     public enum WidgetDesignType {
         DEFAULT("default"),
+        SPIRIT("spirit", 26, 40),
         TOTEMIC("totemic"),
         RESEARCH("research"),
         GILDED("gilded"),
@@ -52,6 +53,7 @@ public record BookWidgetStyle(ResourceLocation frameTexture, ResourceLocation fi
     public static final BookWidgetStyle FRAMELESS = new BookWidgetStyle(EMPTY_FRAME, DARK_FILLINGS, WidgetDesignType.DEFAULT);
 
     public static final BookWidgetStyle RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.DEFAULT);
+    public static final BookWidgetStyle SPIRIT_RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.DEFAULT);
     public static final BookWidgetStyle TOTEMIC_RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.TOTEMIC);
     public static final BookWidgetStyle GILDED_RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.GILDED);
     public static final BookWidgetStyle SMALL_RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.SMALL);

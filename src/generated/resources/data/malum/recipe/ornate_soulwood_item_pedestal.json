@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "malum:soulwood_item_pedestal"
+    },
+    "Y": {
+      "item": "malum:soul_stained_steel_nugget"
+    }
+  },
+  "pattern": [
+    "YXY"
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:ornate_soulwood_item_pedestal"
+  }
+}

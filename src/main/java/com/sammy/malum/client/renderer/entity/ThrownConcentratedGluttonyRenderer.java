@@ -23,8 +23,6 @@ import static com.sammy.malum.MalumMod.*;
 
 public class ThrownConcentratedGluttonyRenderer extends EntityRenderer<ThrownConcentratedGluttony> {
 
-   private static final RenderType TRANSPARENT_TRAIL_TYPE = LodestoneRenderTypes.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.apply(RenderTypeToken.createCachedToken(malumPath("textures/vfx/concentrated_trail.png")), ShaderUniformHandler.LUMITRANSPARENT);
-
    private static final Color GLUTTONY_GREEN = new Color(47, 81, 28);
    private static final Color GLUTTONY_DARK = new Color(31, 35, 30);
    private static final Color GLUTTONY_SHADE = new Color(14, 14, 16);
@@ -67,7 +65,7 @@ public class ThrownConcentratedGluttonyRenderer extends EntityRenderer<ThrownCon
          for (TrailPointBuilder trail : entity.trails) {
             RenderUtils.renderEntityTrail(poseStack, builder, trail, entity, GLUTTONY_GREEN, GLUTTONY_DARK, scale * 0.5f, scale * 0.5f, partialTicks);
          }
-         builder.setRenderType(TRANSPARENT_TRAIL_TYPE);
+         builder.setRenderType(transparent);
          for (TrailPointBuilder trail : entity.trails) {
             RenderUtils.renderEntityTrail(poseStack, builder, trail, entity, GLUTTONY_GREEN, GLUTTONY_SHADE, scale * 0.75f, scale * 2f, partialTicks);
             RenderUtils.renderEntityTrail(poseStack, builder, trail, entity, GLUTTONY_DARK, GLUTTONY_SHADE, scale, scale * 3f, partialTicks);

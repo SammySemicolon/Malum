@@ -154,7 +154,8 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("esoteric_reaping", 0, 6, b -> b
-                .configureWidget(w -> w.setIcon(ROTTING_ESSENCE))
+                .setWidgetSupplier((e, x, y) -> new IconObject(e, x, y, malumPath("textures/gui/book/icons/esoteric_reaping.png")))
+                .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_SMALL_RUNEWOOD))
                 .addPage(new HeadlineTextPage("esoteric_reaping", "esoteric_reaping.1"))
                 .addPage(new TextPage("esoteric_reaping.2"))
                 .addPage(new TextPage("esoteric_reaping.3"))
@@ -165,7 +166,7 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("primary_arcana", -2, 4, b -> b
-                .configureWidget(w -> w.setIcon(SACRED_SPIRIT))
+                .configureWidget(w -> w.setIcon(SACRED_SPIRIT).setStyle(BookWidgetStyle.SPIRIT_RUNEWOOD))
                 .addPage(new HeadlineTextItemPage("primary_arcana.sacred", "primary_arcana.sacred.1", SACRED_SPIRIT.get()))
                 .addPage(new TextPage("primary_arcana.sacred.2"))
                 .addPage(new HeadlineTextItemPage("primary_arcana.wicked", "primary_arcana.wicked.1", WICKED_SPIRIT.get()))
@@ -176,7 +177,7 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("elemental_arcana", 2, 4, b -> b
-                .configureWidget(w -> w.setIcon(EARTHEN_SPIRIT))
+                .configureWidget(w -> w.setIcon(EARTHEN_SPIRIT).setStyle(BookWidgetStyle.SPIRIT_RUNEWOOD))
                 .addPage(new HeadlineTextItemPage("elemental_arcana.aerial", "elemental_arcana.aerial.1", AERIAL_SPIRIT.get()))
                 .addPage(new TextPage("elemental_arcana.aerial.2"))
                 .addPage(new HeadlineTextItemPage("elemental_arcana.earthen", "elemental_arcana.earthen.1", EARTHEN_SPIRIT.get()))
@@ -188,17 +189,9 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("eldritch_arcana", 0, 7, b -> b
-                .configureWidget(w -> w.setIcon(ELDRITCH_SPIRIT))
+                .configureWidget(w -> w.setIcon(ELDRITCH_SPIRIT).setStyle(BookWidgetStyle.SPIRIT_RUNEWOOD))
                 .addPage(new HeadlineTextItemPage("eldritch_arcana", "eldritch_arcana.1", ELDRITCH_SPIRIT.get()))
                 .addPage(new TextPage("eldritch_arcana.2"))
-        );
-
-        screen.addEntry("altar_acceleration", -1, 8, b -> b
-                .configureWidget(w -> w.setIcon(RUNEWOOD_OBELISK))
-                .addPage(new HeadlineTextPage("altar_acceleration.runewood_obelisk", "altar_acceleration.runewood_obelisk.1"))
-                .addPage(SpiritInfusionPage.fromOutput(RUNEWOOD_OBELISK.get()))
-                .addPage(new HeadlineTextPage("altar_acceleration.brilliant_obelisk", "altar_acceleration.brilliant_obelisk.1"))
-                .addPage(SpiritInfusionPage.fromOutput(BRILLIANT_OBELISK.get()))
         );
     }
 }

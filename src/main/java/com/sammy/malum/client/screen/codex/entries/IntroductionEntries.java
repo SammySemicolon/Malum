@@ -166,7 +166,7 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("primary_arcana", -2, 4, b -> b
-                .configureWidget(w -> w.setIcon(SACRED_SPIRIT).setStyle(BookWidgetStyle.SPIRIT_RUNEWOOD))
+                .configureWidget(w -> w.setIcon(SACRED_SPIRIT))
                 .addPage(new HeadlineTextItemPage("primary_arcana.sacred", "primary_arcana.sacred.1", SACRED_SPIRIT.get()))
                 .addPage(new TextPage("primary_arcana.sacred.2"))
                 .addPage(new HeadlineTextItemPage("primary_arcana.wicked", "primary_arcana.wicked.1", WICKED_SPIRIT.get()))
@@ -177,7 +177,7 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("elemental_arcana", 2, 4, b -> b
-                .configureWidget(w -> w.setIcon(EARTHEN_SPIRIT).setStyle(BookWidgetStyle.SPIRIT_RUNEWOOD))
+                .configureWidget(w -> w.setIcon(EARTHEN_SPIRIT))
                 .addPage(new HeadlineTextItemPage("elemental_arcana.aerial", "elemental_arcana.aerial.1", AERIAL_SPIRIT.get()))
                 .addPage(new TextPage("elemental_arcana.aerial.2"))
                 .addPage(new HeadlineTextItemPage("elemental_arcana.earthen", "elemental_arcana.earthen.1", EARTHEN_SPIRIT.get()))
@@ -189,7 +189,7 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("eldritch_arcana", 0, 7, b -> b
-                .configureWidget(w -> w.setIcon(ELDRITCH_SPIRIT).setStyle(BookWidgetStyle.SPIRIT_RUNEWOOD))
+                .configureWidget(w -> w.setIcon(ELDRITCH_SPIRIT))
                 .addPage(new HeadlineTextItemPage("eldritch_arcana", "eldritch_arcana.1", ELDRITCH_SPIRIT.get()))
                 .addPage(new TextPage("eldritch_arcana.2"))
         );

@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"stand": "malum:block/runewood/runewood_item_stand_gilded"
+		"particle": "#stand"
 	},
 	"elements": [
 		{

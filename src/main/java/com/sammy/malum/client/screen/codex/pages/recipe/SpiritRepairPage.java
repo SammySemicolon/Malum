@@ -39,7 +39,7 @@ public class SpiritRepairPage extends BookPage {
         super(MalumMod.malumPath("textures/gui/book/pages/spirit_repair_page.png"));
         this.recipe = recipe;
         this.damagedStacks = recipe.itemsForRepair.stream().map(Item::getDefaultInstance).peek(s -> s.setDamageValue(Mth.floor(s.getMaxDamage() * recipe.durabilityPercentage))).collect(Collectors.toList());
-        this.repairedStacks = recipe.itemsForRepair.stream().map(Item::getDefaultInstance).collect(Collectors.toList());
+        this.repairedStacks = recipe.itemsForRepair.stream().map(Item::getDefaultInstance).map(recipe::getResultItem).collect(Collectors.toList());
     }
 
     @Override
@@ -67,9 +67,9 @@ public class SpiritRepairPage extends BookPage {
 
     @Override
     public void render(EntryScreen screen, GuiGraphics guiGraphics, int left, int top, int mouseX, int mouseY, float partialTicks, boolean isRepeat) {
-        renderIngredients(screen, guiGraphics, recipe.spirits, SPIRIT, left + 63, top + 16, mouseX, mouseY, false);
+        renderIngredients(screen, guiGraphics, recipe.spirits, SPIRIT, left + 59, top + 16, mouseX, mouseY, false);
         renderItem(screen, guiGraphics, damagedStacks, left + 82, top + 59, mouseX, mouseY);
-        renderIngredient(screen, guiGraphics, recipe.repairMaterial.ingredient(), left + 44, top + 59, mouseX, mouseY);
+        renderIngredient(screen, guiGraphics, recipe.repairMaterial, left + 44, top + 59, mouseX, mouseY);
         renderItem(screen, guiGraphics, repairedStacks, left + 63, top + 126, mouseX, mouseY);
         screen.renderLater(() -> {
             if (screen.isHovering(mouseX, mouseY, left + 43, top + 78, 18, 18)) {

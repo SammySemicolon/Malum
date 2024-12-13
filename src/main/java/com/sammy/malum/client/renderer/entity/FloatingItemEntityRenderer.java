@@ -94,7 +94,6 @@ public class FloatingItemEntityRenderer extends EntityRenderer<FloatingItemEntit
 
         poseStack.pushPose();
         poseStack.mulPose(minecraft.getEntityRenderDispatcher().cameraOrientation());
-        poseStack.mulPose(Axis.YP.rotationDegrees(180f));
         builder.setAlpha(0.6f * alphaScalar)
                 .setColor(primaryColor)
                 .setRenderType(star)

@@ -131,7 +131,7 @@ public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibl
             poseStack.pushPose();
             poseStack.translate(0.5f, 2f, 0.55f);
             poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
-            poseStack.mulPose(Axis.YP.rotationDegrees(180f));
+//            poseStack.mulPose(Axis.YP.rotationDegrees(180f));
             for (int i = 0; i < validValues.size(); i++) {
                 CrucibleTuning.CrucibleAttributeType tuningType = validValues.get(i);
                 String dataPrint = tuningType.statDisplayFunction.apply(blockEntityIn.getAccelerationData());

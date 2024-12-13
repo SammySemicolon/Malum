@@ -49,13 +49,29 @@ public class SpiritRepairRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipe
         addToInputs(this.itemsForRepair, itemIdRegex, modIdRegex);
     }
 
+    public boolean isValidItemForRepair(ItemStack input) {
+        return this.itemsForRepair.stream().anyMatch(i -> i.equals(input.getItem()));
+    }
+
+    public ItemStack getResultItem(ItemStack repaired) {
+        if (repairOutputOverride != Items.AIR) {
+            var output = repairOutputOverride.getDefaultInstance();
+            output.applyComponents(repaired.getComponents());
+            return output;
+        }
+        var output = repaired.copy();
+        output.setDamageValue(Math.max(0, repaired.getDamageValue() - (int) (output.getMaxDamage() * durabilityPercentage)));
+        return output;
+    }
+
     @Override
     public boolean matches(SpiritBasedRecipeInput input, Level level) {
         return input.test(repairMaterial, spirits);
     }
 
-    public boolean isValidItemForRepair(ItemStack input) {
-        return this.itemsForRepair.stream().anyMatch(i -> i.equals(input.getItem()));
+    @Override
+    public final ItemStack getResultItem(HolderLookup.Provider registries) {
+        throw new UnsupportedOperationException();
     }
 
     protected static void addToInputs(ArrayList<Item> inputs, String itemIdRegex, String modIdRegex) {

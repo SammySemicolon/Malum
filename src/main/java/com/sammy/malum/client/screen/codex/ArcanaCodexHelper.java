@@ -104,7 +104,7 @@ public class ArcanaCodexHelper {
         ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.DISTORTED_TEXTURE.getInstance().get();
         shaderInstance.safeGetUniform("YFrequency").set(corrupted ? 5f : 11f);
         shaderInstance.safeGetUniform("XFrequency").set(corrupted ? 12f : 17f);
-        shaderInstance.safeGetUniform("Speed").set(2000f * (corrupted ? -0.75f : 1));
+        shaderInstance.safeGetUniform("Speed").set(1500f * (corrupted ? -0.75f : 1));
         shaderInstance.safeGetUniform("Intensity").set(corrupted ? 14f : 50f);
         Supplier<ShaderInstance> shaderInstanceSupplier = () -> shaderInstance;
 
@@ -542,17 +542,18 @@ public class ArcanaCodexHelper {
             int g = (int) Mth.lerp(color, 44, 39);
             int b = (int) Mth.lerp(color, 60, 228);
             RenderSystem.enableBlend();
+            final LodestoneBufferWrapper buffer = WRAPPER_FUNCTION.apply(guiGraphics);
             font.drawInBatch(text, x, y, color(alpha, r, g, b), false, guiGraphics.pose().last().pose(),
-                    WRAPPER_FUNCTION.apply(guiGraphics), Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
+                    buffer, Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
 
             font.drawInBatch(text, x+1f, y, color(alpha/2, r, g, b), false, guiGraphics.pose().last().pose(),
-                    WRAPPER_FUNCTION.apply(guiGraphics), Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
+                    buffer, Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
             font.drawInBatch(text, x-1f, y, color(alpha/3, r, g, b), false, guiGraphics.pose().last().pose(),
-                    WRAPPER_FUNCTION.apply(guiGraphics), Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
+                    buffer, Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
             font.drawInBatch(text, x, y+1f, color(alpha/2, r, g, b), false, guiGraphics.pose().last().pose(),
-                    WRAPPER_FUNCTION.apply(guiGraphics), Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
+                    buffer, Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
             font.drawInBatch(text, x, y-1f, color(alpha/3, r, g, b), false, guiGraphics.pose().last().pose(),
-                    WRAPPER_FUNCTION.apply(guiGraphics), Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
+                    buffer, Font.DisplayMode.NORMAL, 0, 15728880, font.isBidirectional());
 
 
             RenderSystem.defaultBlendFunc();

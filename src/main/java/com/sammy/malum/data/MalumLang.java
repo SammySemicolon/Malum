@@ -635,11 +635,11 @@ public class MalumLang extends LanguageProvider {
         addSimpleEntryHeader("arcane_restoration", "Arcane Restoration", "Mystic repair");
         addPages("arcane_restoration",
                 "The Spirit Crucible has an annoying habit of breaking the tools to work with it. While a cost is to be expected, I'd rather pay it in installments. I have designed a device I call the Repair Pylon, intended to shore items up as they break down.",
-                "The Repair Pylon requires a toll of Spirit Arcana as well as a properly suited repair material for the job. When fitted with items, the Pylon will search for a nearby damaged item in any Item Pedestal, Item Stand, or Crucible. It should be theoretically possible to repair an item with " + italic("just") + " Arcana.. but that's only theory-crafting at the moment.",
-                "It appears that materials in tune with spirit arcana, such as Soulstained Steel or Hallowed Gold, are more efficient in this process. They will be repaired more than their mundane counterparts would for the same cost.");
+                "The Repair Pylon requires a toll of Spirit Arcana as well as a properly suited repair material for the job. When fitted with items, the Pylon will search for a nearby damaged item in any Item Pedestal, Item Stand, or Crucible. It should be theoretically possible to repair an item with " + italic("just") + " Arcana.. but that's only theory-crafting at the moment.");
 
         addSimpleEntryHeader("arcane_restoration.tool_repair", "Repairing Tools", "Mending for Steelwear");
-
+        addPages("arcane_restoration.tool_repair",
+                "");
         addSimpleEntryHeader("crucible_augmentation", "Crucible Augmentation", "Tuning the attuner");
         addPages("crucible_augmentation",
                 "The Spirit Crucible is a machine of great, but largely unrealized, potential. Through a process I call Augmentation, revolving around foci of Alchemical Calx, this potential can be extracted.",

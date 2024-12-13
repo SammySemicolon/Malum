@@ -67,7 +67,7 @@ public class GearSpiritInfusionRecipes {
         new SpiritInfusionRecipeBuilder(ItemRegistry.CRUDE_SCYTHE.get(), 1, ItemRegistry.SOUL_STAINED_STEEL_SCYTHE.get(), 1)
                 .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), 4)
                 .addExtraItem(ItemRegistry.HEX_ASH.get(), 2)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addSpirit(EARTHEN_SPIRIT, 16)
                 .addSpirit(WICKED_SPIRIT, 8)
                 .addSpirit(ARCANE_SPIRIT, 8)
@@ -75,7 +75,7 @@ public class GearSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(Items.IRON_HELMET, 1, ItemRegistry.SOUL_STAINED_STEEL_HELMET.get(), 1)
                 .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get(), 6)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(ItemRegistry.TWISTED_ROCK.get(), 8)
                 .addSpirit(EARTHEN_SPIRIT, 16)
                 .addSpirit(WICKED_SPIRIT, 8)
@@ -84,7 +84,7 @@ public class GearSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(Items.IRON_CHESTPLATE, 1, ItemRegistry.SOUL_STAINED_STEEL_CHESTPLATE.get(), 1)
                 .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get(), 6)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(ItemRegistry.TWISTED_ROCK.get(), 8)
                 .addSpirit(EARTHEN_SPIRIT, 16)
                 .addSpirit(WICKED_SPIRIT, 8)
@@ -93,7 +93,7 @@ public class GearSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(Items.IRON_LEGGINGS, 1, ItemRegistry.SOUL_STAINED_STEEL_LEGGINGS.get(), 1)
                 .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get(), 6)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(ItemRegistry.TWISTED_ROCK.get(), 8)
                 .addSpirit(EARTHEN_SPIRIT, 16)
                 .addSpirit(WICKED_SPIRIT, 8)
@@ -102,7 +102,7 @@ public class GearSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(Items.IRON_BOOTS, 1, ItemRegistry.SOUL_STAINED_STEEL_BOOTS.get(), 1)
                 .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get(), 6)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(ItemRegistry.TWISTED_ROCK.get(), 8)
                 .addSpirit(EARTHEN_SPIRIT, 16)
                 .addSpirit(WICKED_SPIRIT, 8)
@@ -111,7 +111,7 @@ public class GearSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(Items.LEATHER_HELMET, 1, ItemRegistry.SOUL_HUNTER_CLOAK.get(), 1)
                 .addExtraItem(ItemRegistry.SPIRIT_FABRIC.get(), 4)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.LEATHERS, 2))
                 .addSpirit(AERIAL_SPIRIT, 8)
                 .addSpirit(EARTHEN_SPIRIT, 8)
@@ -119,7 +119,7 @@ public class GearSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(Items.LEATHER_CHESTPLATE, 1, ItemRegistry.SOUL_HUNTER_ROBE.get(), 1)
                 .addExtraItem(ItemRegistry.SPIRIT_FABRIC.get(), 4)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.LEATHERS, 2))
                 .addSpirit(AERIAL_SPIRIT, 8)
                 .addSpirit(EARTHEN_SPIRIT, 8)
@@ -127,7 +127,7 @@ public class GearSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(Items.LEATHER_LEGGINGS, 1, ItemRegistry.SOUL_HUNTER_LEGGINGS.get(), 1)
                 .addExtraItem(ItemRegistry.SPIRIT_FABRIC.get(), 4)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.LEATHERS, 2))
                 .addSpirit(AERIAL_SPIRIT, 8)
                 .addSpirit(EARTHEN_SPIRIT, 8)
@@ -135,7 +135,7 @@ public class GearSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(Items.LEATHER_BOOTS, 1, ItemRegistry.SOUL_HUNTER_BOOTS.get(), 1)
                 .addExtraItem(ItemRegistry.SPIRIT_FABRIC.get(), 4)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.LEATHERS, 2))
                 .addSpirit(AERIAL_SPIRIT, 8)
                 .addSpirit(EARTHEN_SPIRIT, 8)

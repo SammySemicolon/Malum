@@ -76,7 +76,7 @@ public class MalumSpiritRepairRecipes implements IConditionBuilder {
                 .unlockedBy("has_crucible", has)
                 .save(recipeOutput, "trident");
 
-        new SpiritRepairRecipeBuilder(1.0f, Ingredient.of(Items.HEAVY_CORE), 1)
+        new SpiritRepairRecipeBuilder(1.0f, Ingredient.of(Items.BREEZE_ROD), 1)
                 .addItem(Items.MACE)
                 .addSpirit(AERIAL_SPIRIT, 16)
                 .addSpirit(ARCANE_SPIRIT, 16)

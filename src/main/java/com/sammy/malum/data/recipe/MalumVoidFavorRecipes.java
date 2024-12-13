@@ -23,7 +23,7 @@ public class MalumVoidFavorRecipes {
         new VoidFavorRecipeBuilder(Ingredient.of(ItemRegistry.COMPLETE_DESIGN.get()), ItemRegistry.FUSED_CONSCIOUSNESS.get(), 1)
                 .save(recipeOutput);
 
-        new VoidFavorRecipeBuilder(ItemRegistry.PROCESSED_SOULSTONE.get(), ItemRegistry.NULL_SLATE.get(), 1)
+        new VoidFavorRecipeBuilder(ItemRegistry.REFINED_SOULSTONE.get(), ItemRegistry.NULL_SLATE.get(), 1)
                 .save(recipeOutput);
 
         new VoidFavorRecipeBuilder(ItemRegistry.HEX_ASH.get(), ItemRegistry.VOID_SALTS.get(), 1)

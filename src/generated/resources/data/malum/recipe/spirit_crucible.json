@@ -6,11 +6,11 @@
       "item": "malum:hex_ash"
     },
     {
-      "count": 8,
+      "count": 2,
       "item": "malum:tainted_rock"
     },
     {
-      "count": 8,
+      "count": 2,
       "item": "malum:twisted_rock"
     }
   ],
@@ -25,11 +25,11 @@
   "spirits": [
     {
       "type": "infernal",
-      "count": 12
+      "count": 8
     },
     {
-      "type": "arcane",
-      "count": 4
+      "type": "aqueous",
+      "count": 8
     }
   ]
 }

@@ -112,11 +112,11 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("soulstone", -1, 2, b -> b
-                .configureWidget(w -> w.setIcon(PROCESSED_SOULSTONE))
-                .addPage(new HeadlineTextItemPage("soulstone", "soulstone.1", PROCESSED_SOULSTONE.get()))
+                .configureWidget(w -> w.setIcon(REFINED_SOULSTONE))
+                .addPage(new HeadlineTextItemPage("soulstone", "soulstone.1", REFINED_SOULSTONE.get()))
                 .addPage(new TextPage("soulstone.2"))
-                .addPage(new SmeltingPage(new ItemStack(RAW_SOULSTONE.get()), new ItemStack(PROCESSED_SOULSTONE.get(), 2)))
-                .addPage(CraftingPage.fullPage(BLOCK_OF_SOULSTONE.get(), PROCESSED_SOULSTONE.get()))
+                .addPage(new SmeltingPage(new ItemStack(RAW_SOULSTONE.get()), new ItemStack(REFINED_SOULSTONE.get(), 2)))
+                .addPage(CraftingPage.fullPage(BLOCK_OF_SOULSTONE.get(), REFINED_SOULSTONE.get()))
                 .addPage(CraftingPage.fullPage(BLOCK_OF_RAW_SOULSTONE.get(), RAW_SOULSTONE.get()))
                 .addReference(new EntryReference(UMBRAL_SPIRIT, soulstoneAndBrillianceReexamination))
         );
@@ -124,7 +124,7 @@ public class IntroductionEntries {
         screen.addEntry("scythes", 0, 3, b -> b
                 .configureWidget(w -> w.setIcon(CRUDE_SCYTHE))
                 .addPage(new HeadlineTextPage("scythes", "scythes.1"))
-                .addPage(CraftingPage.scythePage(ItemRegistry.CRUDE_SCYTHE.get(), Items.IRON_INGOT, PROCESSED_SOULSTONE.get()))
+                .addPage(CraftingPage.scythePage(ItemRegistry.CRUDE_SCYTHE.get(), Items.IRON_INGOT, REFINED_SOULSTONE.get()))
                 .addPage(new TextPage("scythes.2"))
                 .addReference(new EntryReference(ENCHANTED_BOOK,
                         BookEntry.build("scythes.enchanting")
@@ -140,7 +140,7 @@ public class IntroductionEntries {
         screen.addEntry("spirit_infusion", 0, 5, b -> b
                 .configureWidget(w -> w.setIcon(SPIRIT_ALTAR).setStyle(BookWidgetStyle.GILDED_RUNEWOOD))
                 .addPage(new HeadlineTextPage("spirit_infusion", "spirit_infusion.1"))
-                .addPage(new CraftingPage(SPIRIT_ALTAR.get(), AIR, PROCESSED_SOULSTONE.get(), AIR, GOLD_INGOT, RUNEWOOD_PLANKS.get(), GOLD_INGOT, RUNEWOOD_PLANKS.get(), RUNEWOOD_PLANKS.get(), RUNEWOOD_PLANKS.get()))
+                .addPage(new CraftingPage(SPIRIT_ALTAR.get(), AIR, REFINED_SOULSTONE.get(), AIR, GOLD_INGOT, RUNEWOOD_PLANKS.get(), GOLD_INGOT, RUNEWOOD_PLANKS.get(), RUNEWOOD_PLANKS.get(), RUNEWOOD_PLANKS.get()))
                 .addPage(new TextPage("spirit_infusion.2"))
                 .addPage(new TextPage("spirit_infusion.3"))
                 .addPage(CraftingPage.itemPedestalPage(RUNEWOOD_ITEM_PEDESTAL.get(), RUNEWOOD_PLANKS.get(), RUNEWOOD_PLANKS_SLAB.get()))

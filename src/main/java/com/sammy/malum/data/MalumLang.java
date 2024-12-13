@@ -693,7 +693,7 @@ public class MalumLang extends LanguageProvider {
 
         addEntryHeader("spirit_jar", "Spirit Storage", "Arcane Archives");
         addHeadline("spirit_jar", "Spirit Jar");
-        addPages("spirit_jar", "A simple application of this metal is the Spirit Jar. As spirits in their raw form don't have mass, by trapping them under Hallowed Gold you can store far more than you could physically. The capacity of these jars is near-infinite, though each only stores one type of spirit.");
+        addPages("spirit_jar", "A simple application of hallowed gold is the Spirit Jar. As spirits in their raw form don't have mass, by trapping them under Hallowed Gold you can store far more than you could physically. The capacity of these jars is near-infinite, though each only stores one type of spirit.");
 
         addSimpleEntryHeader("soulstained_scythe", "Soulstained Scythe", "Reap");
         addPages("soulstained_scythe", "The scythe I created to harvest spirits was useful, but ultimately has outlived that usefulness. I have grown fond of the utility it provides, though, and so instead of discarding it I sought to improve it. With Soulstained Steel, I was able to create a more effective weapon and maintain the scythe's advantages.");

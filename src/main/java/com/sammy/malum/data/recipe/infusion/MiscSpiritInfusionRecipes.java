@@ -58,7 +58,7 @@ public class MiscSpiritInfusionRecipes {
                 .addSpirit(ARCANE_SPIRIT, 8)
                 .addSpirit(INFERNAL_SPIRIT, 8)
                 .addExtraItem(ItemRegistry.RUNEWOOD_PLANKS.get(), 2)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 1)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 1)
                 .save(consumer);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.LAMPLIGHTERS_TONGS.get(), 1, ItemRegistry.CATALYST_LOBBER.get(), 1)

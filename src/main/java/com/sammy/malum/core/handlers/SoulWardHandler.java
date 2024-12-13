@@ -59,7 +59,7 @@ public class SoulWardHandler {
             float amount = event.getOriginalDamage();
             double magicDamageAbsorption = CommonConfig.SOUL_WARD_MAGIC.getConfigValue();
             double physicalDamageAbsorption = CommonConfig.SOUL_WARD_PHYSICAL.getConfigValue();
-            double integrity = living.getAttributeValue(AttributeRegistry.SOUL_WARD_INTEGRITY);
+            double integrity = living.getAttributeValue(AttributeRegistry.SOUL_WARD_INTEGRITY)*2;
             var eventResponders = getEventResponders(living);
             var propertiesEvent = new ModifySoulWardPropertiesEvent(living, data, source, magicDamageAbsorption, physicalDamageAbsorption, integrity);
             eventResponders.forEach(lookup -> lookup.run(IMalumEventResponderItem.class, (eventResponderItem, stack) ->

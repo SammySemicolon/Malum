@@ -26,7 +26,7 @@ public class CurioSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_RING.get(), 1, ItemRegistry.RING_OF_ESOTERIC_SPOILS.get(), 1)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 8)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 8)
                 .addSpirit(WICKED_SPIRIT, 8)
                 .addSpirit(ARCANE_SPIRIT, 8)
                 .addSpirit(ELDRITCH_SPIRIT, 2)
@@ -51,7 +51,7 @@ public class CurioSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_RING.get(), 1, ItemRegistry.RING_OF_MANAWEAVING.get(), 1)
                 .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get(), 6)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addSpirit(ARCANE_SPIRIT, 16)
                 .addSpirit(EARTHEN_SPIRIT, 16)
                 .save(recipeOutput);
@@ -102,7 +102,7 @@ public class CurioSpiritInfusionRecipes {
                 .addExtraItem(Items.BONE, 4)
                 .addExtraItem(ItemRegistry.GRIM_TALC.get(), 8)
                 .addExtraItem(ItemRegistry.ROTTING_ESSENCE.get(), 4)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addSpirit(WICKED_SPIRIT, 32)
                 .addSpirit(AQUEOUS_SPIRIT, 16)
                 .addSpirit(ARCANE_SPIRIT, 16)

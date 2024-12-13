@@ -1,7 +1,7 @@
 {
   "type": "malum:favor_of_the_void",
   "ingredient": {
-    "item": "malum:processed_soulstone"
+    "item": "malum:refined_soulstone"
   },
   "output": {
     "count": 1,

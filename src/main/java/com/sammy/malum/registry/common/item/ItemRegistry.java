@@ -438,7 +438,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SOULSTONE_ORE = register("soulstone_ore", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULSTONE_ORE.get(), p));
     public static final DeferredHolder<Item, Item> RAW_SOULSTONE = register("raw_soulstone", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> CRUSHED_SOULSTONE = register("crushed_soulstone", DEFAULT_PROPERTIES(), Item::new);
-    public static final DeferredHolder<Item, Item> PROCESSED_SOULSTONE = register("processed_soulstone", DEFAULT_PROPERTIES(), Item::new);
+    public static final DeferredHolder<Item, Item> REFINED_SOULSTONE = register("refined_soulstone", DEFAULT_PROPERTIES(), Item::new);
 
     public static final DeferredHolder<Item, Item> BLOCK_OF_BRILLIANCE = register("block_of_brilliance", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BLOCK_OF_BRILLIANCE.get(), p));
     public static final DeferredHolder<Item, Item> BRILLIANT_DEEPSLATE = register("brilliant_deepslate", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BRILLIANT_DEEPSLATE.get(), p));

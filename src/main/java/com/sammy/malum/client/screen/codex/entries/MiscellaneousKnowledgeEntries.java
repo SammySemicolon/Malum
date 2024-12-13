@@ -12,7 +12,7 @@ import static com.sammy.malum.registry.common.item.ItemRegistry.*;
 public class MiscellaneousKnowledgeEntries {
 
     public static void setupEntries(ArcanaProgressionScreen screen) {
-        screen.addEntry("spirited_glass", -12, 12, b -> b
+        screen.addEntry("spirited_glass", -8, 10, b -> b
                 .configureWidget(w -> w.setIcon(WICKED_SPIRITED_GLASS))
                 .addPage(new HeadlineTextPage("spirited_glass", "spirited_glass.1"))
                 .addPage(new CyclingPage(
@@ -27,7 +27,7 @@ public class MiscellaneousKnowledgeEntries {
                 ))
         );
 
-        screen.addEntry("mote_making", 12, 12, b -> b
+        screen.addEntry("mote_making", 8, 10    , b -> b
                 .configureWidget(w -> w.setIcon(LAMPLIGHTERS_TONGS))
                 .addPage(new HeadlineTextItemPage("mote_making", "mote_making.1", LAMPLIGHTERS_TONGS.get()))
                 .addPage(new TextPage("mote_making.2"))

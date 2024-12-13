@@ -49,11 +49,13 @@ public class ProgressionEntryObject extends BookObject<AbstractProgressionCodexS
         final PoseStack poseStack = guiGraphics.pose();
         int posX = getOffsetXPosition() - (style.textureWidth() - 32) / 2;
         int posY = getOffsetYPosition() - (style.textureHeight() - 32) / 2;
-        renderTexture(WIDGET_FADE_TEXTURE, poseStack, posX - 13, posY - 13, 0, 0, 58, 58);
+        final int centerX = posX + style.textureWidth() / 2;
+        final int centerY = posY + style.textureHeight() / 2;
+        renderTexture(WIDGET_FADE_TEXTURE, poseStack, centerX - 29, centerY - 29, 0, 0, 58, 58);
         renderTexture(style.frameTexture(), poseStack, posX, posY, 0, 0, style.textureWidth(), style.textureHeight());
         renderTexture(style.fillingTexture(), poseStack, posX, posY, 0, 0, style.textureWidth(), style.textureHeight());
         if (iconStack != null) {
-            guiGraphics.renderItem(iconStack, posX + 8, posY + 8);
+            guiGraphics.renderItem(iconStack, centerX - style.itemXOffset(), centerY - style.itemYOffset());
         }
     }
 

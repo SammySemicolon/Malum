@@ -3,38 +3,58 @@ package com.sammy.malum.client.screen.codex;
 import net.minecraft.resources.*;
 
 import java.util.*;
+import java.util.function.*;
 
 import static com.sammy.malum.MalumMod.malumPath;
 
-public record BookWidgetStyle(ResourceLocation frameTexture, ResourceLocation fillingTexture, int textureWidth, int textureHeight) {
+public record BookWidgetStyle(ResourceLocation frameTexture, ResourceLocation fillingTexture, int textureWidth, int textureHeight, int itemXOffset, int itemYOffset) {
 
     public enum WidgetDesignType {
         DEFAULT("default"),
-        SPIRIT("spirit", 26, 40),
+        SPIRIT("spirit", w -> w.setItemOffset(8, 9).setTextureSize(40)),
         TOTEMIC("totemic"),
         RESEARCH("research"),
         GILDED("gilded"),
         SMALL("small"),
-        GRAND("grand", 40);
+        GRAND("grand", w -> w.setTextureSize(40));
         public final String id;
-        public final int textureWidth;
-        public final int textureHeight;
+        public int textureWidth;
+        public int textureHeight;
+        public int itemXOffset;
+        public int itemYOffset;
 
         WidgetDesignType(String id) {
-            this(id, 32);
+            this(id, w -> w.setTextureSize(32).setItemOffset(8));
         }
-        WidgetDesignType(String id, int dimensions) {
-            this(id, dimensions, dimensions);
-        }
-        WidgetDesignType(String id, int textureWidth, int textureHeight) {
+
+        WidgetDesignType(String id, Consumer<WidgetDesignType> consumer) {
             this.id = id;
+            consumer.accept(this);
+        }
+
+        public WidgetDesignType setTextureSize(int dimensions) {
+            return setTextureSize(dimensions, dimensions);
+        }
+
+        public WidgetDesignType setTextureSize(int textureWidth, int textureHeight) {
             this.textureWidth = textureWidth;
             this.textureHeight = textureHeight;
+            return this;
+        }
+
+        public WidgetDesignType setItemOffset(int dimensions) {
+            return setItemOffset(dimensions, dimensions);
+        }
+
+        public WidgetDesignType setItemOffset(int itemXOffset, int itemYOffset) {
+            this.itemXOffset = itemXOffset;
+            this.itemYOffset = itemYOffset;
+            return this;
         }
     }
 
     public BookWidgetStyle(WidgetStylePreset framePreset, WidgetStylePreset fillingPreset, WidgetDesignType type) {
-        this(framePreset.getTexture(type), fillingPreset.getTexture(type), type.textureWidth, type.textureHeight);
+        this(framePreset.getTexture(type), fillingPreset.getTexture(type), type.textureWidth, type.textureHeight, type.itemXOffset, type.itemYOffset);
     }
 
     private static final WidgetStylePreset RUNEWOOD_FRAMES = new WidgetStylePreset("runewood_frame");
@@ -53,7 +73,7 @@ public record BookWidgetStyle(ResourceLocation frameTexture, ResourceLocation fi
     public static final BookWidgetStyle FRAMELESS = new BookWidgetStyle(EMPTY_FRAME, DARK_FILLINGS, WidgetDesignType.DEFAULT);
 
     public static final BookWidgetStyle RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.DEFAULT);
-    public static final BookWidgetStyle SPIRIT_RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.DEFAULT);
+    public static final BookWidgetStyle SPIRIT_RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.SPIRIT);
     public static final BookWidgetStyle TOTEMIC_RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.TOTEMIC);
     public static final BookWidgetStyle GILDED_RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.GILDED);
     public static final BookWidgetStyle SMALL_RUNEWOOD = new BookWidgetStyle(RUNEWOOD_FRAMES, PAPER_FILLINGS, WidgetDesignType.SMALL);

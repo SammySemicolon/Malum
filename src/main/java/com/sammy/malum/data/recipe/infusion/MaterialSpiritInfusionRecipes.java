@@ -73,7 +73,7 @@ public class MaterialSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(Items.IRON_INGOT, 1, ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), 1)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addSpirit(WICKED_SPIRIT, 3)
                 .addSpirit(EARTHEN_SPIRIT, 1)
                 .addSpirit(ARCANE_SPIRIT, 1)
@@ -119,7 +119,7 @@ public class MaterialSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.TAINTED_ROCK.get(), 4, ItemRegistry.TAINTED_ROCK_TABLET.get(), 2)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 8)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 8)
                 .addSpirit(AERIAL_SPIRIT, 8)
                 .addSpirit(AQUEOUS_SPIRIT, 8)
                 .addSpirit(EARTHEN_SPIRIT, 8)
@@ -134,7 +134,7 @@ public class MaterialSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.RUNEWOOD_LOG.get(), 2, ItemRegistry.RUNEWOOD_TABLET.get(), 2)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 8)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 8)
                 .addExtraItem(ItemRegistry.RUNEWOOD_PLANKS.get(), 4)
                 .addExtraItem(ItemRegistry.HEX_ASH.get(), 2)
                 .addSpirit(AERIAL_SPIRIT, 8)
@@ -145,7 +145,7 @@ public class MaterialSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.SOULWOOD_LOG.get(), 2, ItemRegistry.SOULWOOD_TABLET.get(), 2)
-                .addExtraItem(ItemRegistry.PROCESSED_SOULSTONE.get(), 8)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 8)
                 .addExtraItem(ItemRegistry.SOULWOOD_PLANKS.get(), 4)
                 .addExtraItem(ItemRegistry.HEX_ASH.get(), 2)
                 .addSpirit(AERIAL_SPIRIT, 8)

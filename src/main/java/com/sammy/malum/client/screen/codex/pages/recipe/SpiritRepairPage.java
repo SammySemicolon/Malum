@@ -67,7 +67,7 @@ public class SpiritRepairPage extends BookPage {
 
     @Override
     public void render(EntryScreen screen, GuiGraphics guiGraphics, int left, int top, int mouseX, int mouseY, float partialTicks, boolean isRepeat) {
-        renderIngredients(screen, guiGraphics, recipe.spirits, SPIRIT, left + 59, top + 16, mouseX, mouseY, false);
+        renderIngredients(screen, guiGraphics, recipe.spirits, SPIRIT, left + 63, top + 16, mouseX, mouseY, false);
         renderItem(screen, guiGraphics, damagedStacks, left + 82, top + 59, mouseX, mouseY);
         renderIngredient(screen, guiGraphics, recipe.repairMaterial.ingredient(), left + 44, top + 59, mouseX, mouseY);
         renderItem(screen, guiGraphics, repairedStacks, left + 63, top + 126, mouseX, mouseY);

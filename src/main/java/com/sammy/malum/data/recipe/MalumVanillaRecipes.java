@@ -1,13 +1,11 @@
 package com.sammy.malum.data.recipe;
 
 import com.sammy.malum.*;
-import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.vanilla.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.*;
@@ -39,9 +37,9 @@ public class MalumVanillaRecipes implements IConditionBuilder {
 
     protected static void buildRecipes(RecipeOutput output) {
         //KEY ITEMS
-        shapeless(RecipeCategory.MISC, ItemRegistry.ENCYCLOPEDIA_ARCANA.get()).requires(Items.BOOK).requires(ItemRegistry.PROCESSED_SOULSTONE.get()).unlockedBy("has_soulstone", has(ItemRegistry.PROCESSED_SOULSTONE.get())).save(output);
-        shaped(RecipeCategory.MISC, ItemRegistry.CRUDE_SCYTHE.get()).define('#', Tags.Items.RODS_WOODEN).define('Y', ItemRegistry.PROCESSED_SOULSTONE.get()).define('X', Tags.Items.INGOTS_IRON).pattern("XXY").pattern(" #X").pattern("#  ").unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output);
-        shaped(RecipeCategory.MISC, ItemRegistry.SPIRIT_ALTAR.get()).define('Z', Tags.Items.INGOTS_GOLD).define('Y', ItemRegistry.PROCESSED_SOULSTONE.get()).define('X', ItemRegistry.RUNEWOOD_PLANKS.get()).pattern(" Y ").pattern("ZXZ").pattern("XXX").unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output);
+        shapeless(RecipeCategory.MISC, ItemRegistry.ENCYCLOPEDIA_ARCANA.get()).requires(Items.BOOK).requires(ItemRegistry.REFINED_SOULSTONE.get()).unlockedBy("has_soulstone", has(ItemRegistry.REFINED_SOULSTONE.get())).save(output);
+        shaped(RecipeCategory.MISC, ItemRegistry.CRUDE_SCYTHE.get()).define('#', Tags.Items.RODS_WOODEN).define('Y', ItemRegistry.REFINED_SOULSTONE.get()).define('X', Tags.Items.INGOTS_IRON).pattern("XXY").pattern(" #X").pattern("#  ").unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output);
+        shaped(RecipeCategory.MISC, ItemRegistry.SPIRIT_ALTAR.get()).define('Z', Tags.Items.INGOTS_GOLD).define('Y', ItemRegistry.REFINED_SOULSTONE.get()).define('X', ItemRegistry.RUNEWOOD_PLANKS.get()).pattern(" Y ").pattern("ZXZ").pattern("XXX").unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.SPIRIT_JAR.get()).define('Z', ItemRegistry.HALLOWED_GOLD_INGOT.get()).define('Y', Tags.Items.GLASS_PANES).pattern("YZY").pattern("Y Y").pattern("YYY").unlockedBy("has_hallowed_gold", has(ItemRegistry.HALLOWED_GOLD_INGOT.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.SPIRIT_POUCH.get()).define('X', Tags.Items.STRINGS).define('Y', ItemRegistry.SPIRIT_FABRIC.get()).define('Z', ItemTags.SOUL_FIRE_BASE_BLOCKS).pattern(" X ").pattern("YZY").pattern(" Y ").unlockedBy("has_spirit_fabric", has(ItemRegistry.SPIRIT_FABRIC.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.WEAVERS_WORKBENCH.get()).define('Z', ItemRegistry.HALLOWED_GOLD_INGOT.get()).define('Y', ItemRegistry.HEX_ASH.get()).define('X', ItemRegistry.RUNEWOOD_PLANKS.get()).pattern("XYX").pattern("XZX").unlockedBy("has_hex_ash", has(ItemRegistry.HEX_ASH.get())).save(output);
@@ -97,7 +95,7 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         shaped(RecipeCategory.MISC, ItemRegistry.SOUL_STAINED_STEEL_SWORD.get()).define('#', Tags.Items.RODS_WOODEN).define('X', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).pattern("X").pattern("X").pattern("#").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output);
 
         //TRINKETS
-        shaped(RecipeCategory.MISC, ItemRegistry.GILDED_BELT.get()).define('#', ItemRegistry.HALLOWED_GOLD_INGOT.get()).define('X', Tags.Items.LEATHERS).define('Y', ItemRegistry.PROCESSED_SOULSTONE.get()).pattern("XXX").pattern("#Y#").pattern(" # ").unlockedBy("has_hallowed_gold", has(ItemRegistry.HALLOWED_GOLD_INGOT.get())).save(output);
+        shaped(RecipeCategory.MISC, ItemRegistry.GILDED_BELT.get()).define('#', ItemRegistry.HALLOWED_GOLD_INGOT.get()).define('X', Tags.Items.LEATHERS).define('Y', ItemRegistry.REFINED_SOULSTONE.get()).pattern("XXX").pattern("#Y#").pattern(" # ").unlockedBy("has_hallowed_gold", has(ItemRegistry.HALLOWED_GOLD_INGOT.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.GILDED_RING.get()).define('#', ItemRegistry.HALLOWED_GOLD_INGOT.get()).define('X', Tags.Items.LEATHERS).pattern("#X ").pattern("X X").pattern(" X ").unlockedBy("has_hallowed_gold", has(ItemRegistry.HALLOWED_GOLD_INGOT.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.ORNATE_NECKLACE.get()).define('#', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).define('X', Tags.Items.STRINGS).pattern(" X ").pattern("X X").pattern(" # ").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.ORNATE_RING.get()).define('#', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).define('X', Tags.Items.LEATHERS).pattern("#X ").pattern("X X").pattern(" X ").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output);
@@ -130,19 +128,19 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         blastingWithCount(Ingredient.of(ItemRegistry.BRILLIANT_STONE.get()), RecipeCategory.MISC, ItemRegistry.CHUNK_OF_BRILLIANCE.get(), 2, 1, 100).unlockedBy("has_brilliance", has(ItemRegistry.CLUSTER_OF_BRILLIANCE.get())).save(output, malumPath("brilliance_from_blasting"));
         smeltingWithCount(Ingredient.of(ItemRegistry.BRILLIANT_DEEPSLATE.get()), RecipeCategory.MISC, ItemRegistry.CHUNK_OF_BRILLIANCE.get(), 2, 1, 200).unlockedBy("has_brilliance", has(ItemRegistry.CLUSTER_OF_BRILLIANCE.get())).save(output, malumPath("brilliance_from_deepslate_smelting"));
         blastingWithCount(Ingredient.of(ItemRegistry.BRILLIANT_DEEPSLATE.get()), RecipeCategory.MISC, ItemRegistry.CHUNK_OF_BRILLIANCE.get(), 2, 1, 100).unlockedBy("has_brilliance", has(ItemRegistry.CLUSTER_OF_BRILLIANCE.get())).save(output, malumPath("brilliance_from_deepslate_blasting"));
-        smeltingWithCount(Ingredient.of(ItemRegistry.SOULSTONE_ORE.get()), RecipeCategory.MISC, ItemRegistry.PROCESSED_SOULSTONE.get(), 2, 0.25f, 200).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_smelting"));
-        blastingWithCount(Ingredient.of(ItemRegistry.SOULSTONE_ORE.get()), RecipeCategory.MISC, ItemRegistry.PROCESSED_SOULSTONE.get(), 2, 0.25f, 100).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_blasting"));
-        smeltingWithCount(Ingredient.of(ItemRegistry.DEEPSLATE_SOULSTONE_ORE.get()), RecipeCategory.MISC, ItemRegistry.PROCESSED_SOULSTONE.get(), 2, 0.25f, 200).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_deepslate_smelting"));
-        blastingWithCount(Ingredient.of(ItemRegistry.DEEPSLATE_SOULSTONE_ORE.get()), RecipeCategory.MISC, ItemRegistry.PROCESSED_SOULSTONE.get(), 2, 0.25f, 100).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_deepslate_blasting"));
+        smeltingWithCount(Ingredient.of(ItemRegistry.SOULSTONE_ORE.get()), RecipeCategory.MISC, ItemRegistry.REFINED_SOULSTONE.get(), 2, 0.25f, 200).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_smelting"));
+        blastingWithCount(Ingredient.of(ItemRegistry.SOULSTONE_ORE.get()), RecipeCategory.MISC, ItemRegistry.REFINED_SOULSTONE.get(), 2, 0.25f, 100).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_blasting"));
+        smeltingWithCount(Ingredient.of(ItemRegistry.DEEPSLATE_SOULSTONE_ORE.get()), RecipeCategory.MISC, ItemRegistry.REFINED_SOULSTONE.get(), 2, 0.25f, 200).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_deepslate_smelting"));
+        blastingWithCount(Ingredient.of(ItemRegistry.DEEPSLATE_SOULSTONE_ORE.get()), RecipeCategory.MISC, ItemRegistry.REFINED_SOULSTONE.get(), 2, 0.25f, 100).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_deepslate_blasting"));
 
         smeltingWithCount(Ingredient.of(ItemRegistry.CLUSTER_OF_BRILLIANCE.get()), RecipeCategory.MISC, ItemRegistry.CHUNK_OF_BRILLIANCE.get(), 2, 1, 200).unlockedBy("has_brilliance", has(ItemRegistry.CLUSTER_OF_BRILLIANCE.get())).save(output, malumPath("brilliance_from_raw_smelting"));
         blastingWithCount(Ingredient.of(ItemRegistry.CLUSTER_OF_BRILLIANCE.get()), RecipeCategory.MISC, ItemRegistry.CHUNK_OF_BRILLIANCE.get(), 2, 1, 100).unlockedBy("has_brilliance", has(ItemRegistry.CLUSTER_OF_BRILLIANCE.get())).save(output, malumPath("brilliance_from_raw_blasting"));
         smeltingWithCount(Ingredient.of(ItemRegistry.CRUSHED_BRILLIANCE.get()), RecipeCategory.MISC, ItemRegistry.CHUNK_OF_BRILLIANCE.get(), 2, 1, 200).unlockedBy("has_brilliance", has(ItemRegistry.CLUSTER_OF_BRILLIANCE.get())).save(output, malumPath("brilliance_from_crushed_smelting"));
         blastingWithCount(Ingredient.of(ItemRegistry.CRUSHED_BRILLIANCE.get()), RecipeCategory.MISC, ItemRegistry.CHUNK_OF_BRILLIANCE.get(), 2, 1, 100).unlockedBy("has_brilliance", has(ItemRegistry.CLUSTER_OF_BRILLIANCE.get())).save(output, malumPath("brilliance_from_crushed_blasting"));
-        smeltingWithCount(Ingredient.of(ItemRegistry.RAW_SOULSTONE.get()), RecipeCategory.MISC, ItemRegistry.PROCESSED_SOULSTONE.get(), 2, 0.25f, 200).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_raw_smelting"));
-        blastingWithCount(Ingredient.of(ItemRegistry.RAW_SOULSTONE.get()), RecipeCategory.MISC, ItemRegistry.PROCESSED_SOULSTONE.get(), 2, 0.25f, 100).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_raw_blasting"));
-        smeltingWithCount(Ingredient.of(ItemRegistry.CRUSHED_SOULSTONE.get()), RecipeCategory.MISC, ItemRegistry.PROCESSED_SOULSTONE.get(), 2, 0.25f, 200).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_crushed_smelting"));
-        blastingWithCount(Ingredient.of(ItemRegistry.CRUSHED_SOULSTONE.get()), RecipeCategory.MISC, ItemRegistry.PROCESSED_SOULSTONE.get(), 2, 0.25f, 100).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_crushed_blasting"));
+        smeltingWithCount(Ingredient.of(ItemRegistry.RAW_SOULSTONE.get()), RecipeCategory.MISC, ItemRegistry.REFINED_SOULSTONE.get(), 2, 0.25f, 200).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_raw_smelting"));
+        blastingWithCount(Ingredient.of(ItemRegistry.RAW_SOULSTONE.get()), RecipeCategory.MISC, ItemRegistry.REFINED_SOULSTONE.get(), 2, 0.25f, 100).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_raw_blasting"));
+        smeltingWithCount(Ingredient.of(ItemRegistry.CRUSHED_SOULSTONE.get()), RecipeCategory.MISC, ItemRegistry.REFINED_SOULSTONE.get(), 2, 0.25f, 200).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_crushed_smelting"));
+        blastingWithCount(Ingredient.of(ItemRegistry.CRUSHED_SOULSTONE.get()), RecipeCategory.MISC, ItemRegistry.REFINED_SOULSTONE.get(), 2, 0.25f, 100).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_crushed_blasting"));
 
         //RAW ORE BLOCKS
         shaped(RecipeCategory.MISC, ItemRegistry.BLOCK_OF_RAW_SOULSTONE.get()).define('#', ItemRegistry.RAW_SOULSTONE.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("raw_soulstone_block"));
@@ -155,8 +153,8 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         shapeless(RecipeCategory.MISC, ItemRegistry.ARCANE_CHARCOAL.get(), 9).requires(ItemRegistry.BLOCK_OF_ARCANE_CHARCOAL.get()).unlockedBy("has_arcane_charcoal", has(ItemRegistry.ARCANE_CHARCOAL.get())).save(output, malumPath("arcane_charcoal_from_block"));
         shaped(RecipeCategory.MISC, ItemRegistry.BLOCK_OF_BRILLIANCE.get()).define('#', ItemRegistry.CLUSTER_OF_BRILLIANCE.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_brilliance", has(ItemRegistry.CLUSTER_OF_BRILLIANCE.get())).save(output, malumPath("block_of_brilliance"));
         shapeless(RecipeCategory.MISC, ItemRegistry.CLUSTER_OF_BRILLIANCE.get(), 9).requires(ItemRegistry.BLOCK_OF_BRILLIANCE.get()).unlockedBy("has_brilliance", has(ItemRegistry.CLUSTER_OF_BRILLIANCE.get())).save(output, malumPath("brilliance_from_block"));
-        shaped(RecipeCategory.MISC, ItemRegistry.BLOCK_OF_SOULSTONE.get()).define('#', ItemRegistry.PROCESSED_SOULSTONE.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("block_of_soulstone"));
-        shapeless(RecipeCategory.MISC, ItemRegistry.PROCESSED_SOULSTONE.get(), 9).requires(ItemRegistry.BLOCK_OF_SOULSTONE.get()).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_block"));
+        shaped(RecipeCategory.MISC, ItemRegistry.BLOCK_OF_SOULSTONE.get()).define('#', ItemRegistry.REFINED_SOULSTONE.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("block_of_soulstone"));
+        shapeless(RecipeCategory.MISC, ItemRegistry.REFINED_SOULSTONE.get(), 9).requires(ItemRegistry.BLOCK_OF_SOULSTONE.get()).unlockedBy("has_soulstone", has(ItemRegistry.RAW_SOULSTONE.get())).save(output, malumPath("soulstone_from_block"));
 
         shaped(RecipeCategory.MISC, ItemRegistry.BLOCK_OF_CTHONIC_GOLD.get()).define('#', ItemRegistry.CTHONIC_GOLD.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_cthonic_gold", has(ItemRegistry.CTHONIC_GOLD.get())).save(output, malumPath("block_of_cthonic_gold"));
         shapeless(RecipeCategory.MISC, ItemRegistry.CTHONIC_GOLD.get(), 9).requires(ItemRegistry.BLOCK_OF_CTHONIC_GOLD.get()).unlockedBy("has_cthonic_gold", has(ItemRegistry.CTHONIC_GOLD.get())).save(output, malumPath("cthonic_gold_from_block"));

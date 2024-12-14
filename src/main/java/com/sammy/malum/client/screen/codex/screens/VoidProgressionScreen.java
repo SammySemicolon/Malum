@@ -316,7 +316,6 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
         addEntry("void.runes", 0, 11, b -> b
             .configureWidget(w -> w.setIcon(RUNE_OF_THE_HERETIC).setStyle(BookWidgetStyle.SOULWOOD))
             .addPage(new HeadlineTextPage("void.runes", "void.runes.1"))
-            .addPage(SpiritInfusionPage.fromOutput(VOID_TABLET.get()))
             .addPage(new TextPage("void.runes.2"))
             .addPage(new EntrySelectorPage(item -> {
                 final String translationKey = "void." + BuiltInRegistries.ITEM.getKey(item).getPath();

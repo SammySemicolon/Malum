@@ -19,6 +19,7 @@ import team.lodestar.lodestone.handlers.screenparticle.ParticleEmitterHandler.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.*;
+import team.lodestar.lodestone.systems.particle.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
@@ -71,12 +72,13 @@ public class RitualShardItem extends Item implements ItemParticleSupplier {
                     double xOffset = Math.sin(time) * distance;
                     double yOffset = Math.cos(time) * distance * 0.5f;
                     ScreenParticleBuilder.create(LodestoneScreenParticleTypes.WISP, target)
-                            .setTransparencyData(GenericParticleData.create(0.2f, 0f).setEasing(Easing.SINE_IN_OUT).build())
+                            .setTransparencyData(GenericParticleData.create(0.3f, 0.5f, 0f).setEasing(Easing.SINE_IN_OUT).build())
                             .setSpinData(SpinParticleData.create(RandomHelper.randomBetween(rand, 0.2f, 0.4f)).setEasing(Easing.EXPO_OUT).build())
-                            .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(rand, 0.2f, 0.3f)*scalar, 0).setEasing(Easing.EXPO_OUT).build())
+                            .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(rand, 0.1f, 0.2f)*scalar, 0).setEasing(Easing.EXPO_OUT).build())
                             .setColorData(type.createColorData().build())
-                            .setLifetime(RandomHelper.randomBetween(rand, 80, 120))
+                            .setLifetime(RandomHelper.randomBetween(rand, 60, 80))
                             .setRandomOffset(0.1f)
+                            .setDiscardFunction(SimpleParticleOptions.ParticleDiscardFunctionType.ENDING_CURVE_INVISIBLE)
                             .spawnOnStack(xOffset, yOffset);
                     if (!ritualTier.isGreaterThan(MalumRitualTier.BRIGHT)) {
                         break;

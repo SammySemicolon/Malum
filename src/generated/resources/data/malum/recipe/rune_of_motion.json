@@ -1,8 +1,8 @@
 {
   "type": "malum:runeworking",
   "primaryInput": {
-    "count": 1,
-    "item": "malum:runewood_tablet"
+    "count": 4,
+    "item": "malum:runewood_planks"
   },
   "result": {
     "count": 1,

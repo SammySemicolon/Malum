@@ -517,10 +517,6 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SPECTRAL_LENS = register("spectral_lens", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> SPECTRAL_OPTIC = register("spectral_optic", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> POPPET = register("poppet", DEFAULT_PROPERTIES(), Item::new);
-    public static final DeferredHolder<Item, Item> RUNEWOOD_TABLET = register("runewood_tablet", DEFAULT_PROPERTIES(), Item::new);
-    public static final DeferredHolder<Item, Item> SOULWOOD_TABLET = register("soulwood_tablet", DEFAULT_PROPERTIES(), Item::new);
-    public static final DeferredHolder<Item, Item> TAINTED_ROCK_TABLET = register("tainted_rock_tablet", DEFAULT_PROPERTIES(), Item::new);
-    public static final DeferredHolder<Item, Item> VOID_TABLET = register("void_tablet", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> ANOMALOUS_DESIGN = register("anomalous_design", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> COMPLETE_DESIGN = register("complete_design", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> FUSED_CONSCIOUSNESS = register("fused_consciousness", DEFAULT_PROPERTIES(), (p) -> new FusedConsciousnessItem(p.rarity(RARE)));

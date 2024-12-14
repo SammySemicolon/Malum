@@ -20,7 +20,6 @@ public class RuneWorkingEntries {
                 .addPage(new TextPage("runeworking.2"))
                 .addPage(new TextPage("runeworking.3"))
                 .addPage(SpiritInfusionPage.fromOutput(RUNIC_WORKBENCH.get()))
-                .addPage(SpiritInfusionPage.fromOutput(TAINTED_ROCK_TABLET.get()))
         );
 
         screen.addEntry("runic_brooch", -13, 10, b -> b

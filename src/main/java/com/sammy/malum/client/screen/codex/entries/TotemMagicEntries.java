@@ -44,10 +44,6 @@ public class TotemMagicEntries {
         screen.addEntry("totemic_runes", -4, 15, b -> b
                 .configureWidget(w -> w.setIcon(RUNE_OF_THE_ARENA).setStyle(BookWidgetStyle.SOULWOOD))
                 .addPage(new HeadlineTextPage("totemic_runes", "totemic_runes.1"))
-                .addPage(new CyclingPage(
-                        SpiritInfusionPage.fromOutput(RUNEWOOD_TABLET.get()),
-                        SpiritInfusionPage.fromOutput(SOULWOOD_TABLET.get())
-                ))
                 .addPage(new TextPage("totemic_runes.2"))
                 .addPage(new EntrySelectorPage(item -> {
                     final String translationKey = BuiltInRegistries.ITEM.getKey(item).getPath();

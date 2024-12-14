@@ -159,8 +159,7 @@ public class MalumItemTags extends ItemTagsProvider {
                         EROSION_SCEPTER.get(),
                         MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get())
                 // Runes
-                .add(VOID_TABLET.get(),
-                        RUNE_OF_BOLSTERING.get(), RUNE_OF_SACRIFICIAL_EMPOWERMENT.get(),
+                .add(RUNE_OF_BOLSTERING.get(), RUNE_OF_SACRIFICIAL_EMPOWERMENT.get(),
                         RUNE_OF_SPELL_MASTERY.get(), RUNE_OF_THE_HERETIC.get(),
                         RUNE_OF_UNNATURAL_STAMINA.get(), RUNE_OF_TWINNED_DURATION.get(),
                         RUNE_OF_TOUGHNESS.get(), RUNE_OF_IGNEOUS_SOLACE.get())

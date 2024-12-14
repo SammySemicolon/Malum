@@ -1,8 +1,8 @@
 {
   "type": "malum:runeworking",
   "primaryInput": {
-    "count": 1,
-    "item": "malum:void_tablet"
+    "count": 4,
+    "item": "malum:null_slate"
   },
   "result": {
     "count": 1,

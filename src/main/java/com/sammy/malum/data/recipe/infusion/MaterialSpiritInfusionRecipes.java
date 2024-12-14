@@ -117,43 +117,6 @@ public class MaterialSpiritInfusionRecipes {
                 .addSpirit(EARTHEN_SPIRIT, 16)
                 .addSpirit(ELDRITCH_SPIRIT, 4)
                 .save(recipeOutput);
-
-        new SpiritInfusionRecipeBuilder(ItemRegistry.TAINTED_ROCK.get(), 4, ItemRegistry.TAINTED_ROCK_TABLET.get(), 2)
-                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 8)
-                .addSpirit(AERIAL_SPIRIT, 8)
-                .addSpirit(AQUEOUS_SPIRIT, 8)
-                .addSpirit(EARTHEN_SPIRIT, 8)
-                .addSpirit(INFERNAL_SPIRIT, 8)
-                .addSpirit(ELDRITCH_SPIRIT, 2)
-                .save(recipeOutput);
-
-        new SpiritInfusionRecipeBuilder(ItemRegistry.TAINTED_ROCK_TABLET.get(), 1, ItemRegistry.VOID_TABLET.get(), 1)
-                .addExtraItem(ItemRegistry.NULL_SLATE.get(), 8)
-                .addExtraItem(ItemRegistry.VOID_SALTS.get(), 8)
-                .addSpirit(ELDRITCH_SPIRIT, 4)
-                .save(recipeOutput);
-
-        new SpiritInfusionRecipeBuilder(ItemRegistry.RUNEWOOD_LOG.get(), 2, ItemRegistry.RUNEWOOD_TABLET.get(), 2)
-                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 8)
-                .addExtraItem(ItemRegistry.RUNEWOOD_PLANKS.get(), 4)
-                .addExtraItem(ItemRegistry.HEX_ASH.get(), 2)
-                .addSpirit(AERIAL_SPIRIT, 8)
-                .addSpirit(AQUEOUS_SPIRIT, 8)
-                .addSpirit(EARTHEN_SPIRIT, 8)
-                .addSpirit(INFERNAL_SPIRIT, 8)
-                .addSpirit(ELDRITCH_SPIRIT, 2)
-                .save(recipeOutput);
-
-        new SpiritInfusionRecipeBuilder(ItemRegistry.SOULWOOD_LOG.get(), 2, ItemRegistry.SOULWOOD_TABLET.get(), 2)
-                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 8)
-                .addExtraItem(ItemRegistry.SOULWOOD_PLANKS.get(), 4)
-                .addExtraItem(ItemRegistry.HEX_ASH.get(), 2)
-                .addSpirit(AERIAL_SPIRIT, 8)
-                .addSpirit(AQUEOUS_SPIRIT, 8)
-                .addSpirit(EARTHEN_SPIRIT, 8)
-                .addSpirit(INFERNAL_SPIRIT, 8)
-                .addSpirit(ELDRITCH_SPIRIT, 2)
-                .save(recipeOutput);
     }
 
     public static void spiritedGlassRecipe(RecipeOutput recipeOutput, MalumSpiritType spirit, Item glass) {

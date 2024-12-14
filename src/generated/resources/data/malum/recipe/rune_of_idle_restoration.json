@@ -1,8 +1,8 @@
 {
   "type": "malum:runeworking",
   "primaryInput": {
-    "count": 1,
-    "item": "malum:tainted_rock_tablet"
+    "count": 4,
+    "item": "malum:tainted_rock"
   },
   "result": {
     "count": 1,

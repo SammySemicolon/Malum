@@ -600,14 +600,16 @@ public class MalumLang extends LanguageProvider {
                 "As if this was not enough, I have found a way to imbue a second color into my Ether, creating Iridescent Ether. When created, this form of Ether locks in its original color, leaving a new, " + italic("second") + " color open to dyeing. The light will shift from the original color into the new color towards the peak of the flames.",
                 "Getting the right coloring for this can be tricky, though. As stated, once Ether is made Iridescent, its original color can no longer be changed. This is hardly an issue, but should be kept in mind when tinting your flames.");
 
-        addSimpleEntryHeader("spirit_fabric", "Spirit Fabric", "Wicked weaves");
-        addPages("spirit_fabric", "Spirit Fabric is a light yet sturdy material that acts as an insulator for spirit energies. While other materials have the same properties, it's not exactly practical to craft a pouch or clothing from stone. I'm not willing to go quite so far for my research as to try wearing something like " + italic("that") + ".");
-        addHeadline("spirit_fabric.pouch", "Spirit Pouch");
-        // addPages("spirit_fabric.pouch", "But this fabric works wonderfully for storing spirit crystals. It keeps the arcana condensed within in a massless state, and will even store spirits I pick up before they so much as clutter my pockets. The amount of crystals it can store is near-infinite, making it incredibly convenient to carry around.");
-        addPages("spirit_fabric.pouch", "But this fabric works wonderfully for storing spirit crystals. It keeps the arcana condensed within, and will even store spirits I pick up before they so much as clutter my pockets. It can store as many spirits as a single chest, making it quite convenient to carry around.");
+        addSimpleEntryHeader("soulwoven_silk", "Soulwoven Silk", "Wicked weaves");
+        addPages("soulwoven_silk", "Soulwoven Silk is a light yet sturdy material that acts as an insulator for spirit energies. While other materials do exhibit matching interactions with the arcane, this bond between magic and cloth should make for a unique material.");
+        addPages("soulwoven_silk.soulwoven_banner", "To further study and confirm the insulating properties of the cloth, I've heft together a set of Soulwoven Banners with patterns based on each of the spirits I've been met with thus far. If further imbued with Spirit Arcana, the Banners will gain a dim, and them powerful glow with two shards infused.");
 
-        addSimpleEntryHeader("soulhunter_gear", "Soulhunter Gear", "Glass cannon");
-        addPages("soulhunter_gear",
+        addSimpleEntryHeader("soulwoven_pouch", "Soulwoven Pouch", "[Soulwoven Pouch Tooltip]");
+        addPages("soulwoven_pouch", "But this fabric works wonderfully for storing spirit crystals. It keeps the arcana condensed within, and will even store spirits I pick up before they so much as clutter my pockets. It can store as many spirits as a single chest, making it quite convenient to carry around.");
+        addHeadline("spirit_fabric.pouch", "Spirit Pouch");
+
+        addSimpleEntryHeader("soulhunter_armor", "Soulhunter Armor", "Shaped like glass");
+        addPages("soulhunter_armor",
                 "Spirit Fabric is an insulator, but that doesn't mean it has to dampen magic. This set of armor is designed to focus that magic, effectively amplifying the user's arcane abilities. Unfortunately, it's not exactly the strongest of materials, and it protects me just about as much as leather clothing.");
 
         addSimpleEntryHeader("spirit_focusing", "Spirit Focusing", "Mystic replication");

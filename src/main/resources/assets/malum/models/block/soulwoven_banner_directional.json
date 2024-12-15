@@ -3,7 +3,7 @@
 	"parent": "block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"wood": "malum:block/soulwoven_banner",
+		"wood": "malum:block/soulwoven_banner_holder",
 		"particle": "malum:block/runewood/runewood_planks"
 	},
 	"elements": [
@@ -12,10 +12,10 @@
 			"to": [16, 13, 2],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 11, 0]},
 			"faces": {
-				"north": {"uv": [0, 4, 16, 6], "texture": "#wood"},
-				"east": {"uv": [0, 0, 2, 2], "texture": "#wood"},
+				"north": {"uv": [0, 4, 16, 6], "texture": "#wood", "cullface": "north"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#wood", "cullface": "east"},
 				"south": {"uv": [0, 4, 16, 6], "texture": "#wood"},
-				"west": {"uv": [14, 0, 16, 2], "texture": "#wood"},
+				"west": {"uv": [14, 0, 16, 2], "texture": "#wood", "cullface": "west"},
 				"up": {"uv": [0, 2, 16, 4], "texture": "#wood"},
 				"down": {"uv": [0, 0, 16, 2], "texture": "#wood"}
 			}
@@ -25,7 +25,7 @@
 			"to": [16, 11, 0],
 			"rotation": {"angle": 0, "axis": "y", "origin": [7, 9, 0]},
 			"faces": {
-				"north": {"uv": [0, 6, 16, 16], "texture": "#wood"},
+				"north": {"uv": [0, 6, 16, 16], "texture": "#wood", "cullface": "north"},
 				"south": {"uv": [0, 6, 16, 16], "texture": "#wood"}
 			}
 		},

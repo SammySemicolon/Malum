@@ -81,10 +81,8 @@ public class MaterialSpiritInfusionRecipes {
 
         new SpiritInfusionRecipeBuilder(Ingredient.of(ItemTags.WOOL), 2, ItemRegistry.SOULWOVEN_SILK.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.STRINGS, 2))
-                .addExtraItem(ItemRegistry.HEX_ASH.get(), 1)
-                .addSpirit(WICKED_SPIRIT, 2)
-                .addSpirit(EARTHEN_SPIRIT, 1)
-                .addSpirit(AERIAL_SPIRIT, 1)
+                .addSpirit(AERIAL_SPIRIT, 3)
+                .addSpirit(EARTHEN_SPIRIT, 3)
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(Items.HAY_BLOCK, 1, ItemRegistry.POPPET.get(), 2)

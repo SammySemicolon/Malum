@@ -169,8 +169,11 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> INFERNAL_SPIRITED_GLASS = register("infernal_spirited_glass", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.INFERNAL_SPIRITED_GLASS.get(), p));
     public static final DeferredHolder<Item, Item> EARTHEN_SPIRITED_GLASS = register("earthen_spirited_glass", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.EARTHEN_SPIRITED_GLASS.get(), p));
 
-    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_SIGIL = register("soulwoven_banner_sigil", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_SIGIL.get(), p));
+    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER = register("soulwoven_banner", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER.get(), p));
     public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_HORNS = register("soulwoven_banner_horns", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_HORNS.get(), p));
+    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_SIGIL = register("soulwoven_banner_sigil", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_SIGIL.get(), p));
+    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_BREEZE = register("soulwoven_banner_breeze", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_BREEZE.get(), p));
+    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_FRACTAL = register("soulwoven_banner_fractal", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_FRACTAL.get(), p));
     //endregion
 
     //region tainted rock

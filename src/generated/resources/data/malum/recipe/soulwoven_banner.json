@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "tag": "malum:runewood_planks"
+    },
+    "Y": {
+      "item": "malum:soulwoven_silk"
+    }
+  },
+  "pattern": [
+    "X",
+    "Y",
+    "Y"
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:soulwoven_banner"
+  }
+}

@@ -28,6 +28,7 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 public class SoulwovenBannerBlock extends LodestoneEntityBlock<SoulwovenBannerBlockEntity> {
     public static final EnumProperty<BannerType> BANNER_TYPE = EnumProperty.create("banner_type", BannerType.class);
     public final ResourceLocation texture;
+    private static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 12.0, 16.0, 12.0);
 
     public SoulwovenBannerBlock(String id, Properties properties) {
         this(MalumMod.malumPath("textures/block/soulwoven_banner_" + id + ".png"), properties);

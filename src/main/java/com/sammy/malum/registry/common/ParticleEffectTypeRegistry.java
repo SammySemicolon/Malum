@@ -75,6 +75,7 @@ public class ParticleEffectTypeRegistry {
 
     //Misc vfx
     public static final ParticleEffectType SPIRIT_MOTE_SPARKLES = new SpiritMotePlaceParticleEffect("spirit_mote_sparkles");
+    public static final ParticleEffectType SOULWOVEN_BANNER_ACTIVATED = new TotemPoleActivatedParticleEffect("soulwoven_banner_activated");
     public static final ParticleEffectType SAP_COLLECTED = new SapCollectionParticleEffect("sap_collected");
 
 }

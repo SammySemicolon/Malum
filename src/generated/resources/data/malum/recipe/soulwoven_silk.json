@@ -4,10 +4,6 @@
     {
       "count": 2,
       "tag": "c:strings"
-    },
-    {
-      "count": 1,
-      "item": "malum:hex_ash"
     }
   ],
   "ingredient": {
@@ -20,16 +16,12 @@
   },
   "spirits": [
     {
-      "type": "wicked",
-      "count": 2
+      "type": "aerial",
+      "count": 3
     },
     {
       "type": "earthen",
-      "count": 1
-    },
-    {
-      "type": "aerial",
-      "count": 1
+      "count": 3
     }
   ]
 }

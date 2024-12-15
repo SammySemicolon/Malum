@@ -1,6 +1,7 @@
 package com.sammy.malum.data.block;
 
 import com.sammy.malum.*;
+import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.data.item.*;
 import com.sammy.malum.registry.common.block.*;
 import net.minecraft.data.*;
@@ -8,6 +9,7 @@ import net.minecraft.resources.*;
 import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.*;
+import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.datagen.*;
 import team.lodestar.lodestone.systems.datagen.providers.*;
 import team.lodestar.lodestone.systems.datagen.statesmith.*;
@@ -37,7 +39,7 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
 
         AbstractBlockStateSmith.StateSmithData data = new AbstractBlockStateSmith.StateSmithData(this, blocks::remove);
 
-        MalumBlockStateSmithTypes.SOULWOVEN_BANNER.act(data, SOULWOVEN_BANNER_SIGIL, SOULWOVEN_BANNER_HORNS);
+        MalumBlockStateSmithTypes.SOULWOVEN_BANNER.act(data, DataHelper.takeAll(blocks, b -> b.get() instanceof SoulwovenBannerBlock));
         setTexturePath("spirited_glass/");
         BlockStateSmithTypes.FULL_BLOCK.act(data,
                 SACRED_SPIRITED_GLASS, WICKED_SPIRITED_GLASS, ARCANE_SPIRITED_GLASS, ELDRITCH_SPIRITED_GLASS,

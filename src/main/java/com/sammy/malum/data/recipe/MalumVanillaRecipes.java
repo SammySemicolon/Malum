@@ -49,6 +49,17 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         shaped(RecipeCategory.MISC, ItemRegistry.SPECTRAL_LENS.get()).define('X', ItemRegistry.HEX_ASH.get()).define('Y', Tags.Items.GLASS_PANES).pattern(" X ").pattern("XYX").pattern(" X ").unlockedBy("has_hex_ash", has(ItemRegistry.HEX_ASH.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.SPECTRAL_OPTIC.get(), 2).define('#', ItemRegistry.HALLOWED_GOLD_INGOT.get()).define('X', ItemRegistry.RUNEWOOD_PLANKS.get()).define('Y', ItemRegistry.SPECTRAL_LENS.get()).pattern(" X ").pattern("#Y#").pattern(" X ").unlockedBy("has_hallowed_gold", has(ItemRegistry.HALLOWED_GOLD_INGOT.get())).save(output);
 
+        //ETHER
+        etherTorch(output, ItemRegistry.ETHER_TORCH.get(), ItemRegistry.ETHER.get());
+        etherBrazier(output, ItemRegistry.TAINTED_ETHER_BRAZIER.get(), ItemRegistry.TAINTED_ROCK.get(), ItemRegistry.ETHER.get());
+        etherBrazier(output, ItemRegistry.TWISTED_ETHER_BRAZIER.get(), ItemRegistry.TWISTED_ROCK.get(), ItemRegistry.ETHER.get());
+        etherTorch(output, ItemRegistry.IRIDESCENT_ETHER_TORCH.get(), ItemRegistry.IRIDESCENT_ETHER.get());
+        etherBrazier(output, ItemRegistry.TAINTED_IRIDESCENT_ETHER_BRAZIER.get(), ItemRegistry.TAINTED_ROCK.get(), ItemRegistry.IRIDESCENT_ETHER.get());
+        etherBrazier(output, ItemRegistry.TWISTED_IRIDESCENT_ETHER_BRAZIER.get(), ItemRegistry.TWISTED_ROCK.get(), ItemRegistry.IRIDESCENT_ETHER.get());
+
+        //BANNERS
+        shaped(RecipeCategory.MISC, ItemRegistry.SOULWOVEN_BANNER.get()).define('X', ItemTagRegistry.RUNEWOOD_PLANKS).define('Y', ItemRegistry.SOULWOVEN_SILK.get()).pattern("X").pattern("Y").pattern("Y").unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(output);
+
         //SPIRIT METALS
         shaped(RecipeCategory.MISC, ItemRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get()).define('#', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).define('#', ItemRegistry.SOUL_STAINED_STEEL_NUGGET.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output, malumPath("soul_stained_steel_from_nuggets"));
@@ -204,14 +215,6 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         smelting(Ingredient.of(ItemTagRegistry.SOULWOOD_LOGS), RecipeCategory.MISC, ItemRegistry.ARCANE_CHARCOAL.get(), 0.25f, 200).unlockedBy("has_soulwood_planks", has(ItemTagRegistry.SOULWOOD_LOGS)).save(output, malumPath("arcane_charcoal_from_soulwood"));
         shapeless(RecipeCategory.MISC, ItemRegistry.CURSED_SAPBALL.get()).requires(ItemRegistry.CURSED_SAP.get(), 2).unlockedBy("has_cursed_sap", has(ItemRegistry.CURSED_SAP.get())).save(output);
         shapeless(RecipeCategory.MISC, ItemRegistry.CURSED_SAP_BLOCK.get(), 8).requires(ItemRegistry.CURSED_SAP.get(), 4).unlockedBy("has_cursed_sap", has(ItemRegistry.CURSED_SAP.get())).save(output);
-
-        //ETHER
-        etherTorch(output, ItemRegistry.ETHER_TORCH.get(), ItemRegistry.ETHER.get());
-        etherBrazier(output, ItemRegistry.TAINTED_ETHER_BRAZIER.get(), ItemRegistry.TAINTED_ROCK.get(), ItemRegistry.ETHER.get());
-        etherBrazier(output, ItemRegistry.TWISTED_ETHER_BRAZIER.get(), ItemRegistry.TWISTED_ROCK.get(), ItemRegistry.ETHER.get());
-        etherTorch(output, ItemRegistry.IRIDESCENT_ETHER_TORCH.get(), ItemRegistry.IRIDESCENT_ETHER.get());
-        etherBrazier(output, ItemRegistry.TAINTED_IRIDESCENT_ETHER_BRAZIER.get(), ItemRegistry.TAINTED_ROCK.get(), ItemRegistry.IRIDESCENT_ETHER.get());
-        etherBrazier(output, ItemRegistry.TWISTED_IRIDESCENT_ETHER_BRAZIER.get(), ItemRegistry.TWISTED_ROCK.get(), ItemRegistry.IRIDESCENT_ETHER.get());
 
         //THE DEVICE
         TheDeviceRecipeBuilder.shaped(RecipeCategory.MISC, ItemRegistry.THE_DEVICE.get()).define('X', ItemRegistry.TWISTED_ROCK.get()).define('Y', ItemRegistry.TAINTED_ROCK.get()).pattern("XYX").pattern("YXY").pattern("XYX").unlockedBy("has_bedrock", has(Items.BEDROCK)).save(output);

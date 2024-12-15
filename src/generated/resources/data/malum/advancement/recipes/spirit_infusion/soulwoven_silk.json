@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "malum:spirit_fabric"
+        "recipe": "malum:soulwoven_silk"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -15,7 +15,7 @@
   ],
   "rewards": {
     "recipes": [
-      "malum:spirit_fabric"
+      "malum:soulwoven_silk"
     ]
   }
 }

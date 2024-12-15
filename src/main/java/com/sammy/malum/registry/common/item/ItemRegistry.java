@@ -168,6 +168,9 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> AQUEOUS_SPIRITED_GLASS = register("aqueous_spirited_glass", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.AQUEOUS_SPIRITED_GLASS.get(), p));
     public static final DeferredHolder<Item, Item> INFERNAL_SPIRITED_GLASS = register("infernal_spirited_glass", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.INFERNAL_SPIRITED_GLASS.get(), p));
     public static final DeferredHolder<Item, Item> EARTHEN_SPIRITED_GLASS = register("earthen_spirited_glass", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.EARTHEN_SPIRITED_GLASS.get(), p));
+
+    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_SIGIL = register("soulwoven_banner_sigil", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_SIGIL.get(), p));
+    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_HORNS = register("soulwoven_banner_horns", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_HORNS.get(), p));
     //endregion
 
     //region tainted rock
@@ -513,7 +516,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> AURIC_EMBERS = register("auric_embers", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> MALIGNANT_LEAD = register("malignant_lead", DEFAULT_PROPERTIES().rarity(RARE), Item::new);
 
-    public static final DeferredHolder<Item, Item> SPIRIT_FABRIC = register("spirit_fabric", DEFAULT_PROPERTIES(), Item::new);
+    public static final DeferredHolder<Item, Item> SOULWOVEN_SILK = register("soulwoven_silk", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> SPECTRAL_LENS = register("spectral_lens", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> SPECTRAL_OPTIC = register("spectral_optic", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> POPPET = register("poppet", DEFAULT_PROPERTIES(), Item::new);

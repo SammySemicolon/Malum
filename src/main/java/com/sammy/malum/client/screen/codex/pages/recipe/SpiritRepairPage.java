@@ -73,10 +73,10 @@ public class SpiritRepairPage extends BookPage {
         renderItem(screen, guiGraphics, repairedStacks, left + 63, top + 126, mouseX, mouseY);
         screen.renderLater(() -> {
             if (screen.isHovering(mouseX, mouseY, left + 43, top + 78, 18, 18)) {
-                guiGraphics.renderTooltip(Minecraft.getInstance().font, BASE, mouseX, mouseY);
+                guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, wrapComponent(BASE, 180), mouseX, mouseY);
             }
             if (screen.isHovering(mouseX, mouseY, left + 82, top + 78, 18, 18)) {
-                guiGraphics.renderTooltip(Minecraft.getInstance().font, DAMAGED, mouseX, mouseY);
+                guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, wrapComponent(DAMAGED, 180), mouseX, mouseY);
             }
         });
     }

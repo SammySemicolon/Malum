@@ -110,7 +110,7 @@ public class GearSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(Items.LEATHER_HELMET, 1, ItemRegistry.SOUL_HUNTER_CLOAK.get(), 1)
-                .addExtraItem(ItemRegistry.SPIRIT_FABRIC.get(), 4)
+                .addExtraItem(ItemRegistry.SOULWOVEN_SILK.get(), 4)
                 .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.LEATHERS, 2))
                 .addSpirit(AERIAL_SPIRIT, 8)
@@ -118,7 +118,7 @@ public class GearSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(Items.LEATHER_CHESTPLATE, 1, ItemRegistry.SOUL_HUNTER_ROBE.get(), 1)
-                .addExtraItem(ItemRegistry.SPIRIT_FABRIC.get(), 4)
+                .addExtraItem(ItemRegistry.SOULWOVEN_SILK.get(), 4)
                 .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.LEATHERS, 2))
                 .addSpirit(AERIAL_SPIRIT, 8)
@@ -126,7 +126,7 @@ public class GearSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(Items.LEATHER_LEGGINGS, 1, ItemRegistry.SOUL_HUNTER_LEGGINGS.get(), 1)
-                .addExtraItem(ItemRegistry.SPIRIT_FABRIC.get(), 4)
+                .addExtraItem(ItemRegistry.SOULWOVEN_SILK.get(), 4)
                 .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.LEATHERS, 2))
                 .addSpirit(AERIAL_SPIRIT, 8)
@@ -134,7 +134,7 @@ public class GearSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(Items.LEATHER_BOOTS, 1, ItemRegistry.SOUL_HUNTER_BOOTS.get(), 1)
-                .addExtraItem(ItemRegistry.SPIRIT_FABRIC.get(), 4)
+                .addExtraItem(ItemRegistry.SOULWOVEN_SILK.get(), 4)
                 .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.LEATHERS, 2))
                 .addSpirit(AERIAL_SPIRIT, 8)

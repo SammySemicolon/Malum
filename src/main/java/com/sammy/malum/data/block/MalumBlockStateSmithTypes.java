@@ -1,6 +1,7 @@
 package com.sammy.malum.data.block;
 
 import com.sammy.malum.common.block.blight.*;
+import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.block.curiosities.totem.TotemPoleBlock;
 import com.sammy.malum.common.block.curiosities.weeping_well.PrimordialSoupBlock;
@@ -8,6 +9,7 @@ import com.sammy.malum.common.block.ether.EtherBrazierBlock;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.data.item.MalumItemModelSmithTypes;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import net.minecraft.core.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
@@ -36,6 +38,18 @@ public class MalumBlockStateSmithTypes {
                     .texture("top", top)
                     .texture("front", front);
             return ConfiguredModel.builder().modelFile(pole).rotationY(((int) s.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) % 360).build();
+        });
+    });
+
+    public static BlockStateSmith<SoulwovenBannerBlock> SOULWOVEN_BANNER = new BlockStateSmith<>(SoulwovenBannerBlock.class, ItemModelSmithTypes.GENERATED_ITEM, (block, provider) -> {
+        ResourceLocation hanging = malumPath("block/soulwoven_banner");
+        ResourceLocation mounted = malumPath("block/soulwoven_banner_directional");
+        provider.getVariantBuilder(block).forAllStates(s -> {
+            var value = s.getValue(SoulwovenBannerBlock.BANNER_TYPE);
+            boolean isVertical = value.direction.getAxis().isVertical();
+            Direction direction = isVertical ? (value.equals(SoulwovenBannerBlock.BannerType.HANGING_Z) ? Direction.NORTH : Direction.WEST) : value.direction;
+            ResourceLocation model = isVertical ? hanging : mounted;
+            return ConfiguredModel.builder().modelFile(provider.models().getExistingFile(model)).rotationY(((int) direction.toYRot()) % 360).build();
         });
     });
 

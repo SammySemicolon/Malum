@@ -1,0 +1,42 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"wood": "malum:block/soulwoven_banner",
+		"particle": "malum:block/runewood/runewood_planks"
+	},
+	"elements": [
+		{
+			"from": [0, 11, 0],
+			"to": [16, 13, 2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 11, 0]},
+			"faces": {
+				"north": {"uv": [0, 4, 16, 6], "texture": "#wood"},
+				"east": {"uv": [0, 0, 2, 2], "texture": "#wood"},
+				"south": {"uv": [0, 4, 16, 6], "texture": "#wood"},
+				"west": {"uv": [14, 0, 16, 2], "texture": "#wood"},
+				"up": {"uv": [0, 2, 16, 4], "texture": "#wood"},
+				"down": {"uv": [0, 0, 16, 2], "texture": "#wood"}
+			}
+		},
+		{
+			"from": [0, 1, 0],
+			"to": [16, 11, 0],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 9, 0]},
+			"faces": {
+				"north": {"uv": [0, 6, 16, 16], "texture": "#wood"},
+				"south": {"uv": [0, 6, 16, 16], "texture": "#wood"}
+			}
+		},
+		{
+			"from": [0, 1, 2],
+			"to": [16, 11, 2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 9, 2]},
+			"faces": {
+				"north": {"uv": [0, 6, 16, 16], "texture": "#wood"},
+				"south": {"uv": [0, 6, 16, 16], "texture": "#wood"}
+			}
+		}
+	]
+}

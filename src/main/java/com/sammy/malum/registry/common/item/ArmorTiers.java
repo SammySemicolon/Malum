@@ -24,7 +24,7 @@ public class ArmorTiers {
         defense.put(ArmorItem.Type.CHESTPLATE, 4);
         defense.put(ArmorItem.Type.HELMET, 2);
         defense.put(ArmorItem.Type.BODY, 2);
-    }), 16, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.of(ItemRegistry.SPIRIT_FABRIC.get()));
+    }), 16, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F, () -> Ingredient.of(ItemRegistry.SOULWOVEN_SILK.get()));
 
     public static final Holder<ArmorMaterial> SOUL_STAINED_STEEL = register("soul_stained_steel", Util.make(new EnumMap<>(ArmorItem.Type.class), defense -> {
         defense.put(ArmorItem.Type.BOOTS, 2);

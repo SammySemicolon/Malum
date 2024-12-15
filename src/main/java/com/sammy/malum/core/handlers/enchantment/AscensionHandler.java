@@ -29,7 +29,7 @@ public class AscensionHandler {
         player.resetFallDistance();
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
-            player.setDeltaMovement(motion.x, player.getJumpBoostPower() * 2f, motion.z);
+            player.setDeltaMovement(motion.x, player.getJumpPower() * 2f, motion.z);
             if (player.isSprinting()) {
                 float f = player.getYRot() * 0.017453292F;
                 float x = -Mth.sin(f);

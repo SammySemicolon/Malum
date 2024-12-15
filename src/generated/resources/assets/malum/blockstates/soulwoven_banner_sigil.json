@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "banner_type=hanging_x": {
+      "model": "malum:block/soulwoven_banner",
+      "y": 90
+    },
+    "banner_type=hanging_z": {
+      "model": "malum:block/soulwoven_banner",
+      "y": 180
+    },
+    "banner_type=mounted_east": {
+      "model": "malum:block/soulwoven_banner_mounted",
+      "y": 270
+    },
+    "banner_type=mounted_north": {
+      "model": "malum:block/soulwoven_banner_mounted",
+      "y": 180
+    },
+    "banner_type=mounted_south": {
+      "model": "malum:block/soulwoven_banner_mounted"
+    },
+    "banner_type=mounted_west": {
+      "model": "malum:block/soulwoven_banner_mounted",
+      "y": 90
+    }
+  }
+}

@@ -79,7 +79,7 @@ public class MaterialSpiritInfusionRecipes {
                 .addSpirit(ARCANE_SPIRIT, 1)
                 .save(recipeOutput);
 
-        new SpiritInfusionRecipeBuilder(Ingredient.of(ItemTags.WOOL), 2, ItemRegistry.SPIRIT_FABRIC.get(), 4)
+        new SpiritInfusionRecipeBuilder(Ingredient.of(ItemTags.WOOL), 2, ItemRegistry.SOULWOVEN_SILK.get(), 4)
                 .addExtraItem(SizedIngredient.of(Tags.Items.STRINGS, 2))
                 .addExtraItem(ItemRegistry.HEX_ASH.get(), 1)
                 .addSpirit(WICKED_SPIRIT, 2)

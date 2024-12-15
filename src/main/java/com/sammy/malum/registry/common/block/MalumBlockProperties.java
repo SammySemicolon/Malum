@@ -113,6 +113,12 @@ public class MalumBlockProperties {
                 .noOcclusion();
     }
 
+    public static LodestoneBlockProperties SOULWOVEN_BANNER() {
+        return RUNEWOOD()
+                .noOcclusion()
+                .setCutoutRenderType();
+    }
+
     public static LodestoneBlockProperties SOULWOOD() {
         return new LodestoneBlockProperties()
                 .mapColor(MapColor.TERRACOTTA_PURPLE)

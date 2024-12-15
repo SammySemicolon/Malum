@@ -307,7 +307,7 @@ public class ArcanaCodexHelper {
         return () -> {
             if (hoverComponent != null) {
                 if (isHovering(mouseX, mouseY, crownLeft + 3, plaqueTop + 2, 10, 11)) {
-                    guiGraphics.renderTooltip(Minecraft.getInstance().font, hoverComponent, (int) mouseX, (int) mouseY);
+                    guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, wrapComponent(hoverComponent, 180), (int) mouseX, (int) mouseY);
                 }
             }
         };
@@ -385,9 +385,33 @@ public class ArcanaCodexHelper {
         return raw;
     }
 
-    public static void renderWrappingText(GuiGraphics guiGraphics, String text, int x, int y, int w) {
+    public static void renderTooltip() {
+
+    }
+
+    public static void renderWrappingText(GuiGraphics guiGraphics, String text, int x, int y, int width) {
+        renderWrappingText(guiGraphics, Component.translatable(text), x, y, width);
+    }
+    public static void renderWrappingText(GuiGraphics guiGraphics, Component text, int x, int y, int width) {
         Font font = Minecraft.getInstance().font;
-        text = Component.translatable(text).getString() + "\n";
+        final List<String> lines = wrapText(text, width);
+        for (int i = 0; i < lines.size(); i++) {
+            String currentLine = lines.get(i);
+            renderRawText(guiGraphics, currentLine, x, y + i * (font.lineHeight + 1), 0.2f);
+        }
+    }
+    public static List<Component> wrapComponent(String text, int width) {
+        return wrapText(text, width).stream().map(Component::literal).map(Component.class::cast).toList();
+    }
+    public static List<Component> wrapComponent(Component component, int width) {
+        return wrapText(component, width).stream().map(Component::literal).map(Component.class::cast).toList();
+    }
+    public static List<String> wrapText(String text, int width) {
+        return wrapText(Component.translatable(text), width);
+    }
+    public static List<String> wrapText(Component component, int width) {
+        Font font = Minecraft.getInstance().font;
+        String text = component.getString() + "\n";
         List<String> lines = new ArrayList<>();
 
         boolean italic = false;
@@ -402,7 +426,7 @@ public class ArcanaCodexHelper {
             char chr = text.charAt(i);
             if (chr == ' ' || chr == '\n') {
                 if (!word.isEmpty()) {
-                    if (font.width(line.toString()) + font.width(word.toString()) > w) {
+                    if (font.width(line.toString()) + font.width(word.toString()) > width) {
                         line = newLine(lines, italic, bold, strikethrough, underline, obfuscated, line);
                     }
                     line.append(word).append(' ');
@@ -463,11 +487,7 @@ public class ArcanaCodexHelper {
                 word.append(chr);
             }
         }
-
-        for (int i = 0; i < lines.size(); i++) {
-            String currentLine = lines.get(i);
-            renderRawText(guiGraphics, currentLine, x, y + i * (font.lineHeight + 1), 0.2f);
-        }
+        return lines;
     }
 
     private static StringBuilder commitComponent(MutableComponent component, boolean italic, boolean bold, boolean strikethrough, boolean underline, boolean obfuscated, StringBuilder line, UnaryOperator<Style> styleModifier) {

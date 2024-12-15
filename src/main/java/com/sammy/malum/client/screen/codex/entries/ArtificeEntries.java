@@ -55,11 +55,11 @@ public class ArtificeEntries {
         );
 
         screen.addEntry("spirit_fabric", 4, 5, b -> b
-                .configureWidget(w -> w.setIcon(SPIRIT_FABRIC))
+                .configureWidget(w -> w.setIcon(SOULWOVEN_SILK))
                 .addPage(new HeadlineTextPage("spirit_fabric", "spirit_fabric.1"))
-                .addPage(SpiritInfusionPage.fromOutput(SPIRIT_FABRIC.get()))
+                .addPage(SpiritInfusionPage.fromOutput(SOULWOVEN_SILK.get()))
                 .addPage(new HeadlineTextPage("spirit_fabric.pouch", "spirit_fabric.pouch.1"))
-                .addPage(new CraftingPage(SPIRIT_POUCH.get(), EMPTY, STRING, EMPTY, SPIRIT_FABRIC.get(), SOUL_SAND, SPIRIT_FABRIC.get(), EMPTY, SPIRIT_FABRIC.get(), EMPTY))
+                .addPage(new CraftingPage(SPIRIT_POUCH.get(), EMPTY, STRING, EMPTY, SOULWOVEN_SILK.get(), SOUL_SAND, SOULWOVEN_SILK.get(), EMPTY, SOULWOVEN_SILK.get(), EMPTY))
         );
 
         screen.addEntry("soulhunter_gear", 4, 7, b -> b

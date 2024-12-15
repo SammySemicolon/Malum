@@ -2,6 +2,7 @@ package com.sammy.malum.data.block;
 
 import com.sammy.malum.*;
 import com.sammy.malum.data.item.*;
+import com.sammy.malum.registry.common.block.*;
 import net.minecraft.data.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.level.block.*;
@@ -36,11 +37,11 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
 
         AbstractBlockStateSmith.StateSmithData data = new AbstractBlockStateSmith.StateSmithData(this, blocks::remove);
 
+        MalumBlockStateSmithTypes.SOULWOVEN_BANNER.act(data, SOULWOVEN_BANNER_SIGIL, SOULWOVEN_BANNER_HORNS);
         setTexturePath("spirited_glass/");
         BlockStateSmithTypes.FULL_BLOCK.act(data,
                 SACRED_SPIRITED_GLASS, WICKED_SPIRITED_GLASS, ARCANE_SPIRITED_GLASS, ELDRITCH_SPIRITED_GLASS,
                 AERIAL_SPIRITED_GLASS, AQUEOUS_SPIRITED_GLASS, INFERNAL_SPIRITED_GLASS, EARTHEN_SPIRITED_GLASS);
-
 
         setTexturePath("arcane_rock/tainted/");
         BlockStateSmithTypes.FULL_BLOCK.act(data,

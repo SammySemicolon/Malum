@@ -3,9 +3,6 @@ package com.sammy.malum.data.recipe;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.*;
 import com.sammy.malum.registry.common.item.*;
-import net.minecraft.advancements.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.*;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
@@ -117,7 +114,7 @@ public class MalumSpiritRepairRecipes implements IConditionBuilder {
                 .unlockedBy("has_crucible", has)
                 .save(recipeOutput, "soul_stained_steel");
 
-        new SpiritRepairRecipeBuilder(0.75f, Ingredient.of(ItemRegistry.SPIRIT_FABRIC.get()), 2)
+        new SpiritRepairRecipeBuilder(0.75f, Ingredient.of(ItemRegistry.SOULWOVEN_SILK.get()), 2)
                 .addItem(ItemRegistry.SOUL_HUNTER_CLOAK.get())
                 .addItem(ItemRegistry.SOUL_HUNTER_ROBE.get())
                 .addItem(ItemRegistry.SOUL_HUNTER_LEGGINGS.get())

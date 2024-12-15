@@ -1,6 +1,7 @@
 package com.sammy.malum.client.screen.codex.pages.recipe;
 
 import com.sammy.malum.MalumMod;
+import com.sammy.malum.client.screen.codex.*;
 import com.sammy.malum.client.screen.codex.pages.BookPage;
 import com.sammy.malum.client.screen.codex.screens.EntryScreen;
 import com.sammy.malum.common.recipe.spirit.infusion.SpiritInfusionRecipe;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.*;
 import team.lodestar.lodestone.systems.recipe.*;
 
+import java.util.*;
 import java.util.function.Predicate;
 
 import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.*;
@@ -69,7 +71,7 @@ public class SpiritInfusionPage extends BookPage {
         renderItem(screen, guiGraphics, recipe.output, left + 63, top + 126, mouseX, mouseY);
         screen.renderLater(() -> {
             if (screen.isHovering(mouseX, mouseY, left + 62, top + 78, 18, 18)) {
-                guiGraphics.renderTooltip(Minecraft.getInstance().font, BASE, mouseX, mouseY);
+                guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, wrapComponent(BASE, 180), mouseX, mouseY);
             }
         });
     }

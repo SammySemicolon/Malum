@@ -3,6 +3,7 @@ package com.sammy.malum.registry.common.block;
 import com.sammy.malum.*;
 import com.sammy.malum.common.block.*;
 import com.sammy.malum.common.block.blight.*;
+import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.common.block.curiosities.mana_mote.*;
 import com.sammy.malum.common.block.curiosities.obelisk.*;
 import com.sammy.malum.common.block.curiosities.obelisk.brilliant.*;
@@ -121,6 +122,9 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> INFERNAL_SPIRITED_GLASS = BLOCKS.register("infernal_spirited_glass", () -> new SpiritedGlassBlock(MalumBlockProperties.SPIRITED_GLASS()));
     public static final DeferredHolder<Block, Block> EARTHEN_SPIRITED_GLASS = BLOCKS.register("earthen_spirited_glass", () -> new SpiritedGlassBlock(MalumBlockProperties.SPIRITED_GLASS()));
     //endregion
+
+    public static final DeferredHolder<Block, Block> SOULWOVEN_BANNER_SIGIL = BLOCKS.register("soulwoven_banner_sigil", () -> new SoulwovenBannerBlock("sigil", MalumBlockProperties.SOULWOVEN_BANNER()).setBlockEntity(BlockEntityRegistry.SOULWOVEN_BANNER));
+    public static final DeferredHolder<Block, Block> SOULWOVEN_BANNER_HORNS = BLOCKS.register("soulwoven_banner_horns", () -> new SoulwovenBannerBlock("horns", MalumBlockProperties.SOULWOVEN_BANNER()).setBlockEntity(BlockEntityRegistry.SOULWOVEN_BANNER));
 
     //region tainted rock
     public static final DeferredHolder<Block, Block> TAINTED_ROCK = BLOCKS.register("tainted_rock", () -> new Block(MalumBlockProperties.TAINTED_ROCK().addTag(TAINTED_BLOCKS)));

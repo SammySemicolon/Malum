@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "malum:item/spirit_fabric"
+    "layer0": "malum:item/soulwoven_banner_sigil"
   }
 }

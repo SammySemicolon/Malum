@@ -1,6 +1,9 @@
 package com.sammy.malum.data.item;
 
 import com.sammy.malum.*;
+import com.sammy.malum.common.block.curiosities.banner.*;
+import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.crafting.*;
@@ -40,6 +43,7 @@ public class MalumItemTags extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        var items = ITEMS.getEntries();
         MalumWoodSetDatagen.addTags(this);
         MalumRockSetDatagen.addTags(this);
 
@@ -71,36 +75,19 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(Tags.Items.GEMS_QUARTZ).add(NATURAL_QUARTZ.get());
         tag(Tags.Items.ORES_QUARTZ).add(NATURAL_QUARTZ_ORE.get(), DEEPSLATE_QUARTZ_ORE.get());
 
-        tag(ItemTagRegistry.SAPBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
-        tag(ItemTagRegistry.GROSS_FOODS).add(Items.ROTTEN_FLESH, ROTTING_ESSENCE.get(), CONCENTRATED_GLUTTONY.get());
-
-        ITEMS.getEntries().stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::get).forEach(i -> {
-            tag(ItemTagRegistry.METAL_NODES).add(i);
-        });
-        tag(ItemTagRegistry.PROSPECTORS_TREASURE)
-                .addTags(Tags.Items.ORES, Tags.Items.STORAGE_BLOCKS, Tags.Items.INGOTS, Tags.Items.NUGGETS, Tags.Items.GEMS, Tags.Items.RAW_MATERIALS, ItemTags.COALS, ItemTagRegistry.METAL_NODES)
-                .addOptional(ResourceLocation.parse("tetra:geode"));
-
-        tag(ItemTagRegistry.ASPECTED_SPIRITS).add(
-                SACRED_SPIRIT.get(), WICKED_SPIRIT.get(), ARCANE_SPIRIT.get(), ELDRITCH_SPIRIT.get(),
-                AERIAL_SPIRIT.get(), AQUEOUS_SPIRIT.get(), EARTHEN_SPIRIT.get(), INFERNAL_SPIRIT.get());
-        tag(ItemTagRegistry.SPIRITS).addTag(ItemTagRegistry.ASPECTED_SPIRITS).add(UMBRAL_SPIRIT.get());
-
-        tag(ItemTagRegistry.MAGIC_CAPABLE_WEAPON).add(
+        tag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS).add(
                 CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), CREATIVE_SCYTHE.get(),
                 MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
 
-        tag(ItemTagRegistry.SCYTHE).add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), EDGE_OF_DELIVERANCE.get(), CREATIVE_SCYTHE.get());
-        tag(ItemTagRegistry.STAFF).add(MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
+        tag(ItemTagRegistry.SCYTHES).add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), EDGE_OF_DELIVERANCE.get(), CREATIVE_SCYTHE.get());
+        tag(ItemTagRegistry.STAVES).add(MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
 
-        tag(ItemTagRegistry.SOUL_HUNTER_WEAPON)
-                .addTags(ItemTagRegistry.SCYTHE, ItemTagRegistry.STAFF)
-                //unique weapons
+        tag(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS)
+                .addTags(ItemTagRegistry.SCYTHES, ItemTagRegistry.STAVES)
                 .add(TYRVING.get(), WEIGHT_OF_WORLDS.get())
-                //soul stained steel gear
                 .add(SOUL_STAINED_STEEL_AXE.get(), SOUL_STAINED_STEEL_PICKAXE.get(), SOUL_STAINED_STEEL_SHOVEL.get(), SOUL_STAINED_STEEL_SWORD.get(), SOUL_STAINED_STEEL_HOE.get(), SOUL_STAINED_STEEL_KNIFE.get());
 
-        tag(ItemTagRegistry.SOUL_HUNTER_WEAPON)
+        tag(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS)
                 .addOptional(ResourceLocation.parse("irons_spellbooks:graybeard_staff"))
                 .addOptional(ResourceLocation.parse("irons_spellbooks:artificer_cane"))
                 .addOptional(ResourceLocation.parse("irons_spellbooks:lightning_rod"))
@@ -111,15 +98,59 @@ public class MalumItemTags extends ItemTagsProvider {
                 .addOptional(ResourceLocation.parse("irons_spellbooks:spellbreaker"))
                 .addOptional(ResourceLocation.parse("irons_spellbooks:amethyst_rapier"));
 
-        tag(ItemTagRegistry.ANIMATED_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHE);
-        tag(ItemTagRegistry.REBOUND_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHE);
-        tag(ItemTagRegistry.ASCENSION_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHE);
-        tag(ItemTagRegistry.REPLENISHING_ENCHANTABLE).addTag(ItemTagRegistry.STAFF);
-        tag(ItemTagRegistry.HAUNTED_ENCHANTABLE).addTag(ItemTagRegistry.MAGIC_CAPABLE_WEAPON);
-        tag(ItemTagRegistry.SPIRIT_SPOILS_ENCHANTABLE).addTag(ItemTagRegistry.SOUL_HUNTER_WEAPON);
+        tag(ItemTagRegistry.ANIMATED_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);
+        tag(ItemTagRegistry.REBOUND_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);
+        tag(ItemTagRegistry.ASCENSION_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);
+        tag(ItemTagRegistry.REPLENISHING_ENCHANTABLE).addTag(ItemTagRegistry.STAVES);
+        tag(ItemTagRegistry.HAUNTED_ENCHANTABLE).addTag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS);
+        tag(ItemTagRegistry.SPIRIT_SPOILS_ENCHANTABLE).addTag(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS);
+
+        tag(ItemTagRegistry.ASPECTED_SPIRITS).add(
+                SACRED_SPIRIT.get(), WICKED_SPIRIT.get(), ARCANE_SPIRIT.get(), ELDRITCH_SPIRIT.get(),
+                AERIAL_SPIRIT.get(), AQUEOUS_SPIRIT.get(), EARTHEN_SPIRIT.get(), INFERNAL_SPIRIT.get());
+        tag(ItemTagRegistry.SPIRITS).addTag(ItemTagRegistry.ASPECTED_SPIRITS).add(UMBRAL_SPIRIT.get());
+        tag(ItemTagRegistry.MOB_DROPS).add(
+                ROTTING_ESSENCE.get(), GRIM_TALC.get(), ASTRAL_WEAVE.get(), WARP_FLUX.get(),
+                Items.ROTTEN_FLESH, Items.SPIDER_EYE, Items.BONE, Items.GUNPOWDER, Items.STRING, Items.SLIME_BALL,
+                Items.MAGMA_CREAM, Items.BLAZE_ROD, Items.BREEZE_ROD,
+                Items.LEATHER, Items.RABBIT_HIDE, Items.FEATHER, Items.INK_SAC);
+        tag(ItemTagRegistry.MATERIALS).add(
+                ROTTING_ESSENCE.get(), GRIM_TALC.get(), ASTRAL_WEAVE.get(), WARP_FLUX.get(),
+                HEX_ASH.get(),LIVING_FLESH.get(), ALCHEMICAL_CALX.get(), BLIGHTED_GUNK.get(),
+                SOULWOVEN_SILK.get(), ETHER.get(), IRIDESCENT_ETHER.get(),
+                SOUL_STAINED_STEEL_INGOT.get(), SOUL_STAINED_STEEL_NUGGET.get(), SOUL_STAINED_STEEL_PLATING.get(),
+                HALLOWED_GOLD_INGOT.get(), HALLOWED_GOLD_NUGGET.get(),
+                MALIGNANT_PEWTER_INGOT.get(), MALIGNANT_PEWTER_NUGGET.get(), MALIGNANT_PEWTER_PLATING.get(),
+                NULL_SLATE.get(), VOID_SALTS.get(), MNEMONIC_FRAGMENT.get(), AURIC_EMBERS.get(), MALIGNANT_LEAD.get(),
+                ANOMALOUS_DESIGN.get(), COMPLETE_DESIGN.get(), FUSED_CONSCIOUSNESS.get());
+        tag(ItemTagRegistry.MINERALS).add(
+                RAW_SOULSTONE.get(), CRUSHED_SOULSTONE.get(), REFINED_SOULSTONE.get(),
+                RAW_BRILLIANCE.get(), CRUSHED_BRILLIANCE.get(), REFINED_BRILLIANCE.get(),
+                BLAZING_QUARTZ.get(), ARCANE_CHARCOAL.get(),
+                NATURAL_QUARTZ.get(), CTHONIC_GOLD.get(), CTHONIC_GOLD_FRAGMENT.get());
+
+        tag(ItemTagRegistry.AUGMENTS).addAll(items.stream().filter(i -> i.get() instanceof AbstractAugmentItem).map(DeferredHolder::getKey).toList());
+        tag(ItemTagRegistry.METAL_NODES).addAll(items.stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::getKey).toList());
+        tag(ItemTagRegistry.SOULWOVEN_BANNERS).addAll(items.stream().filter(i -> i.get() instanceof SoulwovenBannerItem).map(DeferredHolder::getKey).toList());
+
+        tag(ItemTagRegistry.SAPBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
+        tag(ItemTagRegistry.GROSS_FOODS).add(Items.ROTTEN_FLESH, ROTTING_ESSENCE.get(), CONCENTRATED_GLUTTONY.get());
+
+        tag(ItemTagRegistry.PROSPECTORS_TREASURE)
+                .addTags(Tags.Items.ORES, Tags.Items.STORAGE_BLOCKS, Tags.Items.INGOTS, Tags.Items.NUGGETS, Tags.Items.GEMS, Tags.Items.RAW_MATERIALS, ItemTags.COALS, ItemTagRegistry.METAL_NODES)
+                .addOptional(ResourceLocation.parse("tetra:geode"));
+
+        tag(ItemTagRegistry.SOULHUNTERS_TREASURE)
+                .addTags(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS, ItemTagRegistry.SPIRITS, ItemTagRegistry.MOB_DROPS, ItemTagRegistry.MATERIALS, ItemTagRegistry.MINERALS)
+                .addTags(ItemTagRegistry.AUGMENTS, ItemTagRegistry.METAL_NODES, ItemTagRegistry.SOULWOVEN_BANNERS)
+                .addTags(ItemTagRegistry.RING, ItemTagRegistry.NECKLACE, ItemTagRegistry.BELT, ItemTagRegistry.BROOCH, ItemTagRegistry.RUNE)
+                .add(TUNING_FORK.get(), LAMPLIGHTERS_TONGS.get(), CATALYST_LOBBER.get())
+                .add(ENCYCLOPEDIA_ARCANA.get(), ENCYCLOPEDIA_ESOTERICA.get());
+        tag(ItemTagRegistry.SOULWOVEN_POUCH_AUTOCOLLECT)
+                .addTags(ItemTagRegistry.SPIRITS, ItemTagRegistry.MOB_DROPS, ItemTagRegistry.MATERIALS, ItemTagRegistry.MINERALS);
 
         tag(Tags.Items.NUGGETS).add(COPPER_NUGGET.get(), HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get());
-        tag(Tags.Items.GEMS).add(NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), CLUSTER_OF_BRILLIANCE.get());
+        tag(Tags.Items.GEMS).add(NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), RAW_BRILLIANCE.get());
         tag(Tags.Items.INGOTS).add(SOUL_STAINED_STEEL_INGOT.get(), HALLOWED_GOLD_INGOT.get());
 
         tag(ItemTagRegistry.KNIVES).add(SOUL_STAINED_STEEL_KNIFE.get());
@@ -172,7 +203,7 @@ public class MalumItemTags extends ItemTagsProvider {
                 // Aesthetica
                 .add(AESTHETICA.get());
 
-        for (DeferredHolder<Item, ? extends Item> i : ITEMS.getEntries()) {
+        for (DeferredHolder<Item, ? extends Item> i : items) {
             if (i.get() instanceof MalumCurioItem) {
                 final Item item = i.get();
                 final ResourceLocation id = i.getId();

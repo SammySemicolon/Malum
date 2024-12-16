@@ -16,6 +16,7 @@ import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 
+import javax.annotation.*;
 import java.util.function.*;
 
 import static com.sammy.malum.visual_effects.SpiritLightSpecs.*;
@@ -37,7 +38,7 @@ public class RepairPylonParticleEffects {
         return spiritItem.type;
     }
 
-    public static void passiveRepairPylonParticles(RepairPylonCoreBlockEntity pylon) {
+    public static void passiveRepairPylonParticles(RepairPylonCoreBlockEntity pylon, @Nullable IMalumSpecialItemAccessPoint holder) {
         MalumSpiritType activeSpiritType = getCentralSpiritType(pylon);
         if (activeSpiritType == null) {
             return;
@@ -48,8 +49,15 @@ public class RepairPylonParticleEffects {
         LodestoneBlockEntityInventory spiritInventory = pylon.spiritInventory;
         SpiritRepairRecipe recipe = pylon.recipe;
         final RepairPylonCoreBlockEntity.RepairPylonState state = pylon.state;
-        if (recipe != null && !state.equals(RepairPylonCoreBlockEntity.RepairPylonState.COOLDOWN)) {
-            SpiritLightSpecs.rotatingLightSpecs(level, itemPos, activeSpiritType, 0.5f, 3, b -> b.multiplyLifetime(1.2f).modifyData(b::getScaleData, d -> d.multiplyValue(1.2f)));
+        if (recipe != null) {
+            if (!state.equals(RepairPylonCoreBlockEntity.RepairPylonState.COOLDOWN)) {
+                SpiritLightSpecs.rotatingLightSpecs(level, itemPos, activeSpiritType, 0.5f, 3, b -> b.multiplyLifetime(1.2f).modifyData(b::getScaleData, d -> d.multiplyValue(1.2f)));
+            }
+            if (state.equals(RepairPylonCoreBlockEntity.RepairPylonState.CHARGING) && holder != null) {
+                Vec3 targetItemPos = holder.getItemPos();
+                SpiritLightSpecs.rotatingLightSpecs(level, targetItemPos, activeSpiritType, 0.5f, 2, b -> b.multiplyLifetime(0.6f).modifyData(b::getScaleData, d -> d.multiplyValue(1.2f)));
+                SpiritLightSpecs.rotatingLightSpecs(level, targetItemPos, activeSpiritType, 0.75f, 3, b -> b.multiplyLifetime(1.2f).modifyData(b::getScaleData, d -> d.multiplyValue(0.8f)));
+            }
         }
 
         int spiritsRendered = 0;

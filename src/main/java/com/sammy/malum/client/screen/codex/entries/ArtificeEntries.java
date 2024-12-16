@@ -64,14 +64,20 @@ public class ArtificeEntries {
                 .addPage(new TextPage("soulwoven_silk.soulwoven_banner.1"))
                 .addPage(new CraftingPage(new ItemStack(SOULWOVEN_BANNER.get(), 2), EMPTY, RUNEWOOD_PLANKS.get(), EMPTY, EMPTY, SOULWOVEN_SILK.get(), EMPTY, EMPTY, SOULWOVEN_SILK.get()))
                 .addPage(new CyclingPage(
-                        SpiritInfusionPage.fromOutput(SOULWOVEN_BANNER_HORNS.get()),
-                        SpiritInfusionPage.fromOutput(SOULWOVEN_BANNER_SIGIL.get()),
-                        SpiritInfusionPage.fromOutput(SOULWOVEN_BANNER_BREEZE.get()),
-                        SpiritInfusionPage.fromOutput(SOULWOVEN_BANNER_FRACTAL.get())
+                        new CraftingPage(SOULWOVEN_BANNER_HORNS.get(), SOULWOVEN_BANNER.get(), GRIM_TALC.get()),
+                        new CraftingPage(SOULWOVEN_BANNER_SIGIL.get(), SOULWOVEN_BANNER.get(), SOUL_STAINED_STEEL_PLATING.get()),
+                        new CraftingPage(SOULWOVEN_BANNER_BREEZE.get(), SOULWOVEN_BANNER.get(), WIND_CHARGE),
+                        new CraftingPage(SOULWOVEN_BANNER_FRACTAL.get(), SOULWOVEN_BANNER.get(), EMERALD)
                 ))
         );
 
-        screen.addEntry("something1", 5, 6, b -> {});
+        screen.addEntry("soulwoven_pouch", 5, 6, b -> b
+                .configureWidget(w -> w.setIcon(SOULWOVEN_POUCH))
+                .addPage(new HeadlineTextPage("soulwoven_pouch", "soulwoven_pouch.1"))
+                .addPage(new CraftingPage(new ItemStack(SOULWOVEN_POUCH.get(), 2), EMPTY, STRING, EMPTY, EMPTY, SOULWOVEN_SILK.get()))
+        );
+
+
         screen.addEntry("soulhunter_armor", 6, 6, b -> b
                 .configureWidget(w -> w.setIcon(SOUL_HUNTER_CLOAK))
                 .addPage(new HeadlineTextPage("soulhunter_armor", "soulhunter_armor.1"))

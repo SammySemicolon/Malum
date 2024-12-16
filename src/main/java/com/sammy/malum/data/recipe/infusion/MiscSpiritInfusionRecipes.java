@@ -21,7 +21,7 @@ public class MiscSpiritInfusionRecipes {
                 .save(consumer);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.RUNEWOOD_PLANKS.get(), 2, ItemRegistry.BRILLIANT_OBELISK.get(), 1)
-                .addExtraItem(ItemRegistry.CLUSTER_OF_BRILLIANCE.get(), 2)
+                .addExtraItem(ItemRegistry.RAW_BRILLIANCE.get(), 2)
                 .addExtraItem(ItemRegistry.HEX_ASH.get(), 1)
                 .addSpirit(AERIAL_SPIRIT, 16)
                 .addSpirit(AQUEOUS_SPIRIT, 8)

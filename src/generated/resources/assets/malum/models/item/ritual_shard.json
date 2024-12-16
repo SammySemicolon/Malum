@@ -4,31 +4,31 @@
     {
       "model": "malum:item/ritual_shard_dim",
       "predicate": {
-        "minecraft:stored_ritual": 2.0
+        "malum:tier": 2.0
       }
     },
     {
       "model": "malum:item/ritual_shard_vague",
       "predicate": {
-        "minecraft:stored_ritual": 3.0
+        "malum:tier": 3.0
       }
     },
     {
       "model": "malum:item/ritual_shard_bright",
       "predicate": {
-        "minecraft:stored_ritual": 4.0
+        "malum:tier": 4.0
       }
     },
     {
       "model": "malum:item/ritual_shard_vivid",
       "predicate": {
-        "minecraft:stored_ritual": 5.0
+        "malum:tier": 5.0
       }
     },
     {
       "model": "malum:item/ritual_shard_radiant",
       "predicate": {
-        "minecraft:stored_ritual": 6.0
+        "malum:tier": 6.0
       }
     }
   ],

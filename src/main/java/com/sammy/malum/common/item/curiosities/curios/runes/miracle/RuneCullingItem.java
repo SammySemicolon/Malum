@@ -6,6 +6,7 @@ import com.sammy.malum.common.item.curiosities.curios.runes.*;
 import com.sammy.malum.compability.irons_spellbooks.IronsSpellsCompat;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.registry.common.*;
@@ -19,8 +20,9 @@ public class RuneCullingItem extends AbstractRuneCurioItem {
 
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-        addAttributeModifier(map, LodestoneAttributes.MAGIC_PROFICIENCY,
-                new AttributeModifier(MalumMod.malumPath("curio_magic_proficiency"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-        IronsSpellsCompat.addSpellPowerToCurio(this, map, 0.2f);
+        var id = MalumMod.malumPath("rune_of_culling");
+        addAttributeModifier(map, AttributeRegistry.SCYTHE_PROFICIENCY,
+                new AttributeModifier(id, 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        IronsSpellsCompat.addSpellPowerToCurio(this, map, id, 0.2f);
     }
 }

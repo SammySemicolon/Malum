@@ -32,7 +32,7 @@ public class RuneUnnaturalStaminaItem extends AbstractRuneCurioItem {
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, Attributes.MOVEMENT_SPEED,
-                new AttributeModifier(MalumMod.malumPath("curio_movement_speed"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                new AttributeModifier(MalumMod.malumPath("unnatural_stamina_rune"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 
     public static boolean forceSprint(LivingEntity livingEntity) {

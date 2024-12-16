@@ -20,7 +20,7 @@ import java.awt.*;
 
 import static com.sammy.malum.MalumMod.RANDOM;
 
-public class MalumLeavesBlock extends LeavesBlock implements iGradientedLeavesBlock {
+public class MalumLeavesBlock extends LeavesBlock implements IGradientedLeavesBlock {
 
     public static final IntegerProperty COLOR = IntegerProperty.create("color", 0, 4);
     public final Color maxColor;

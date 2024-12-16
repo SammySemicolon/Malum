@@ -1,6 +1,6 @@
 package com.sammy.malum.common.block.storage.jar;
 
-import com.sammy.malum.common.item.curiosities.SpiritPouchItem;
+import com.sammy.malum.common.item.curiosities.SoulwovenPouchItem;
 import com.sammy.malum.common.item.spirit.SpiritJarItem;
 import com.sammy.malum.common.item.spirit.SpiritShardItem;
 import com.sammy.malum.common.packets.CodecUtil;
@@ -181,7 +181,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlock
 
     public int insertFromStack(ItemStack stack) {
         int inserted = 0;
-        if (stack.getItem() instanceof SpiritPouchItem) {
+        if (stack.getItem() instanceof SoulwovenPouchItem) {
             if (type != null) {
 //                ItemInventory inventory = SpiritPouchItem.getInventory(stack);
 //                for (int i = 0; i < inventory.getContainerSize(); i++) {

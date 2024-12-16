@@ -56,16 +56,16 @@ public class MalumEnchantments extends DatapackBuiltinEntriesProvider {
         )).build(MalumMod.malumPath("haunted")));
 
         context.register(rKey("replenishing"), new Enchantment.Builder(Enchantment.definition(
-                itemGetter.getOrThrow(ItemTagRegistry.STAFF),
-                itemGetter.getOrThrow(ItemTagRegistry.STAFF),
+                itemGetter.getOrThrow(ItemTagRegistry.STAVES),
+                itemGetter.getOrThrow(ItemTagRegistry.STAVES),
                 Weights.COMMON, 2, LEGACY_LOWEST, LEGACY_HIGHEST,
                 1,
                 EquipmentSlotGroup.HAND
         )).build(MalumMod.malumPath("replenishing")));
 
         context.register(rKey("spirit_plunder"), new Enchantment.Builder(Enchantment.definition(
-                itemGetter.getOrThrow(ItemTagRegistry.SOUL_HUNTER_WEAPON),
-                itemGetter.getOrThrow(ItemTagRegistry.SOUL_HUNTER_WEAPON),
+                itemGetter.getOrThrow(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS),
+                itemGetter.getOrThrow(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS),
                 Weights.COMMON, 2, LEGACY_LOWEST, LEGACY_HIGHEST,
                 1,
                 EquipmentSlotGroup.HAND

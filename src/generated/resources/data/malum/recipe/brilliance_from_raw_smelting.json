@@ -4,10 +4,10 @@
   "cookingtime": 200,
   "experience": 1.0,
   "ingredient": {
-    "item": "malum:cluster_of_brilliance"
+    "item": "malum:raw_brilliance"
   },
   "result": {
     "count": 2,
-    "id": "malum:chunk_of_brilliance"
+    "id": "malum:refined_brilliance"
   }
 }

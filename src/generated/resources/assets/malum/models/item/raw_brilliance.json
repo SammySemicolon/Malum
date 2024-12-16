@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "malum:item/spirit_pouch"
+    "layer0": "malum:item/raw_brilliance"
   }
 }

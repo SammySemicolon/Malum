@@ -11,16 +11,15 @@ import top.theillusivec4.curios.api.*;
 
 public class CurioGlassBrooch extends MalumCurioItem {
 
-    public static final ResourceLocation GLASS_BROOCH_RUNE = MalumMod.malumPath("glass_brooch_rune");
-
     public CurioGlassBrooch(Properties builder) {
         super(builder, MalumTrinketType.METALLIC);
     }
 
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-        CuriosApi.addSlotModifier(map, "rune", GLASS_BROOCH_RUNE, 2, AttributeModifier.Operation.ADD_VALUE);
+        var id = MalumMod.malumPath("glass_brooch");
+        CuriosApi.addSlotModifier(map, "rune", id, 2, AttributeModifier.Operation.ADD_VALUE);
         addAttributeModifier(map, Attributes.MAX_HEALTH,
-                new AttributeModifier(MalumMod.malumPath("curio_max_health"), -0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                new AttributeModifier(id, -0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 }

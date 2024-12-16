@@ -204,7 +204,8 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
             if (state.equals(RepairPylonState.COOLDOWN) && timer < 1200) {
                 timer++;
             }
-            RepairPylonParticleEffects.passiveRepairPylonParticles(this);
+            var blockEntity = repairablePosition != null ? Optional.ofNullable(level.getBlockEntity(repairablePosition)).map(b -> b instanceof IMalumSpecialItemAccessPoint accessPoint ? accessPoint : null).orElse(null) : null;
+            RepairPylonParticleEffects.passiveRepairPylonParticles(this, blockEntity);
         }
         else {
             if (!state.equals(RepairPylonState.IDLE) && !state.equals(RepairPylonState.COOLDOWN)) {

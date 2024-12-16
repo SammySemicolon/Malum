@@ -1,0 +1,22 @@
+{
+  "values": [
+    "#malum:soul_shatter_capable_weapons",
+    "#malum:spirits",
+    "#malum:mob_drops",
+    "#malum:materials",
+    "#malum:minerals",
+    "#malum:augments",
+    "#malum:metal_nodes",
+    "#malum:soulwoven_banners",
+    "#curios:ring",
+    "#curios:necklace",
+    "#curios:belt",
+    "#curios:brooch",
+    "#curios:rune",
+    "malum:tuning_fork",
+    "malum:lamplighters_tongs",
+    "malum:catalyst_lobber",
+    "malum:encyclopedia_arcana",
+    "malum:encyclopedia_esoterica"
+  ]
+}

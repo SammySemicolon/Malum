@@ -13,7 +13,7 @@ import team.lodestar.lodestone.helpers.*;
 public class RejectedEffect extends MobEffect {
     public RejectedEffect() {
         super(MobEffectCategory.NEUTRAL, ColorHelper.getColor(20, 14, 22));
-        addAttributeModifier(Attributes.MOVEMENT_SPEED, MalumMod.malumPath("rejection"), -0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        addAttributeModifier(Attributes.MOVEMENT_SPEED, MalumMod.malumPath("rejected"), -0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class SoulStainedSteelArmorItem extends MalumArmorItem {
     @Override
     public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
         var group = EquipmentSlotGroup.bySlot(getEquipmentSlot());
-        var resourcelocation = MalumMod.malumPath("armor." + type.getName());
+        var resourcelocation = MalumMod.malumPath("soul_stained_steel_armor." + type.getName());
         return List.of(
                 new ItemAttributeModifiers.Entry(
                         AttributeRegistry.SOUL_WARD_CAPACITY,

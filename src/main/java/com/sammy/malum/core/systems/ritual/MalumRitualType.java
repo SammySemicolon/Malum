@@ -1,8 +1,11 @@
 package com.sammy.malum.core.systems.ritual;
 
+import com.google.gson.*;
+import com.mojang.serialization.*;
 import com.sammy.malum.common.block.curiosities.ritual_plinth.*;
-import com.sammy.malum.common.item.spirit.*;
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.core.systems.spirit.*;
+import com.sammy.malum.registry.common.*;
 import net.minecraft.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
@@ -14,12 +17,21 @@ import java.util.*;
 import java.util.function.*;
 
 public abstract class MalumRitualType {
+
+    public static final Codec<MalumRitualType> CODEC = ResourceLocation.CODEC.comapFlatMap(s -> {
+        var ritual = RitualRegistry.get(s);
+        if (ritual == null) {
+            throw new JsonParseException("No Such Spirit Type: " + s);
+        }
+        return DataResult.success(ritual);
+    }, r -> r.id);
+
     public final MalumSpiritType spirit;
-    public final ResourceLocation identifier;
+    public final ResourceLocation id;
     protected MalumRitualRecipeData recipeData;
 
-    public MalumRitualType(ResourceLocation identifier, MalumSpiritType spirit) {
-        this.identifier = identifier;
+    public MalumRitualType(ResourceLocation id, MalumSpiritType spirit) {
+        this.id = id;
         this.spirit = spirit;
     }
 
@@ -41,15 +53,15 @@ public abstract class MalumRitualType {
     }
 
     public String translationIdentifier() {
-        return identifier.getNamespace() + ".gui.ritual." + identifier.getPath();
+        return id.getNamespace() + ".gui.ritual." + id.getPath();
     }
 
     public ResourceLocation getIcon() {
-        return identifier.withPrefix("textures/vfx/ritual/").withSuffix(".png");
+        return id.withPrefix("textures/vfx/ritual/").withSuffix(".png");
     }
 
-    public RitualShardItem.Props createShardProps(MalumRitualTier tier) {
-        return new RitualShardItem.Props(identifier.toString(), tier.spiritThreshold);
+    public RitualData createDataComponent(MalumRitualTier tier) {
+        return new RitualData(this, tier);
     }
 
     public List<Component> makeRitualShardDescriptor(MalumRitualTier ritualTier) {
@@ -64,7 +76,7 @@ public abstract class MalumRitualType {
         List<Component> tooltip = new ArrayList<>();
         var spiritStyleModifier = spirit.getItemRarity().getStyleModifier();
         tooltip.add(Component.translatable(translationIdentifier()).withStyle(spiritStyleModifier));
-        tooltip.add(makeDescriptorComponent("malum.gui.rite.effect", "malum.gui.book.entry.page.text." + identifier + ".hover"));
+        tooltip.add(makeDescriptorComponent("malum.gui.rite.effect", "malum.gui.book.entry.page.text." + id + ".hover"));
         return tooltip;
     }
 

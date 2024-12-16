@@ -36,18 +36,15 @@ public class CurioWatcherNecklace extends MalumCurioItem implements IMalumEventR
                 final Level level = attacker.level();
                 var random = level.getRandom();
                 Vec3 position = target.position().add(0, target.getBbHeight() / 2f, 0);
-                int amount = target instanceof Player ? 5 : 2;
+                int amount = target instanceof Player ? 2 : 1;
+
                 for (int i = 0; i < amount; i++) {
                     SpiritCollectionActivatorEntity entity = new SpiritCollectionActivatorEntity(level, attacker.getUUID(),
-                            position.x,
-                            position.y,
-                            position.z,
-                            RandomHelper.randomBetween(random, -speed, speed),
-                            RandomHelper.randomBetween(random, 0.05f, 0.06f),
-                            RandomHelper.randomBetween(random, -speed, speed));
+                            position.x, position.y, position.z,
+                            RandomHelper.randomBetween(random, -speed, speed), RandomHelper.randomBetween(random, 0.05f, 0.06f), RandomHelper.randomBetween(random, -speed, speed));
                     level.addFreshEntity(entity);
                 }
-                data.watcherNecklaceCooldown = 100;
+                data.watcherNecklaceCooldown = 400;
             }
         }
     }

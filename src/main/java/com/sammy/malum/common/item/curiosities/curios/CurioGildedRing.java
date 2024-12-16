@@ -16,6 +16,6 @@ public class CurioGildedRing extends MalumCurioItem {
 
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-        addAttributeModifier(map, Attributes.ARMOR, new AttributeModifier(MalumMod.malumPath("curio_armor_ring"), 1f, AttributeModifier.Operation.ADD_VALUE));
+        addAttributeModifier(map, Attributes.ARMOR, new AttributeModifier(MalumMod.malumPath("gilded_ring"), 1f, AttributeModifier.Operation.ADD_VALUE));
     }
 }

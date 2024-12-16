@@ -18,6 +18,6 @@ public class CurioGildedBelt extends MalumCurioItem {
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, Attributes.ARMOR,
-                new AttributeModifier(MalumMod.malumPath("curio_armor"), 2f, AttributeModifier.Operation.ADD_VALUE));
+                new AttributeModifier(MalumMod.malumPath("gilded_belt"), 2f, AttributeModifier.Operation.ADD_VALUE));
     }
 }

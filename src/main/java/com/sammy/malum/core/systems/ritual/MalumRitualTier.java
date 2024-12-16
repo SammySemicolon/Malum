@@ -61,7 +61,7 @@ public class MalumRitualTier {
     }
 
     public static MalumRitualTier figureOutTier(int spiritAmount) {
-        final List<MalumRitualTier> collect = TIERS.stream().filter(t -> (spiritAmount) >= t.spiritThreshold).toList();
-        return collect.isEmpty() ? null : collect.get(collect.size()-1);
+        var reachedThresholds = TIERS.stream().filter(t -> (spiritAmount) >= t.spiritThreshold).toList();
+        return reachedThresholds.isEmpty() ? null : reachedThresholds.getLast();
     }
 }

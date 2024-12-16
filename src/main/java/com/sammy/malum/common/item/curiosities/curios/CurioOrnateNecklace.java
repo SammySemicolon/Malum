@@ -17,6 +17,6 @@ public class CurioOrnateNecklace extends MalumCurioItem {
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, Attributes.ARMOR_TOUGHNESS,
-                new AttributeModifier(MalumMod.malumPath("curio_armor_toughness"), 2f, AttributeModifier.Operation.ADD_VALUE));
+                new AttributeModifier(MalumMod.malumPath("ornate_necklace"), 2f, AttributeModifier.Operation.ADD_VALUE));
     }
 }

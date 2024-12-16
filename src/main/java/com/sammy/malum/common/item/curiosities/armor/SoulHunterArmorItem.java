@@ -25,17 +25,17 @@ import team.lodestar.lodestone.systems.model.LodestoneArmorModel;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static com.sammy.malum.registry.common.item.ArmorTiers.SPIRIT_HUNTER;
+import static com.sammy.malum.registry.common.item.ArmorTiers.SOUL_HUNTER;
 
 public class SoulHunterArmorItem extends MalumArmorItem {
     public SoulHunterArmorItem(ArmorItem.Type slot, Properties builder) {
-        super(SPIRIT_HUNTER, slot, builder);
+        super(SOUL_HUNTER, slot, builder);
     }
 
     @Override
     public List<ItemAttributeModifiers.Entry> createExtraAttributes() {
         var group = EquipmentSlotGroup.bySlot(getEquipmentSlot());
-        var resourcelocation = MalumMod.malumPath("armor." + type.getName());
+        var resourcelocation = MalumMod.malumPath("soul_hunter_armor." + type.getName());
         ItemAttributeModifiers.Builder attributes = ItemAttributeModifiers.builder();
         attributes.add(LodestoneAttributes.MAGIC_PROFICIENCY,
                 new AttributeModifier(resourcelocation, 0.15f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
@@ -50,7 +50,7 @@ public class SoulHunterArmorItem extends MalumArmorItem {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public LodestoneArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-                float pticks = (float)(Minecraft.getInstance().getFrameTimeNs() / 20000000000L);
+                float pticks = (float) (Minecraft.getInstance().getFrameTimeNs() / 20000000000L);
                 float f = Mth.rotLerp(pticks, entity.yBodyRotO, entity.yBodyRot);
                 float f1 = Mth.rotLerp(pticks, entity.yHeadRotO, entity.yHeadRot);
                 float netHeadYaw = f1 - f;

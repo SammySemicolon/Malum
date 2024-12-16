@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 
 public class ArmorTiers {
 
-    public static final Holder<ArmorMaterial> SPIRIT_HUNTER = register("spirit_hunter", Util.make(new EnumMap<>(ArmorItem.Type.class), defense -> {
+    public static final Holder<ArmorMaterial> SOUL_HUNTER = register("spirit_hunter", Util.make(new EnumMap<>(ArmorItem.Type.class), defense -> {
         defense.put(ArmorItem.Type.BOOTS, 1);
         defense.put(ArmorItem.Type.LEGGINGS, 3);
         defense.put(ArmorItem.Type.CHESTPLATE, 4);
@@ -43,13 +43,8 @@ public class ArmorTiers {
     }), 32, SoundEvents.ARMOR_EQUIP_NETHERITE, 2.0F, 0.1f, () -> Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_PLATING.get()));
 
     private static Holder<ArmorMaterial> register(
-            String name,
-            EnumMap<ArmorItem.Type, Integer> defense,
-            int enchantmentValue,
-            Holder<SoundEvent> equipSound,
-            float toughness,
-            float knockbackResistance,
-            Supplier<Ingredient> repairIngredient
+            String name, EnumMap<ArmorItem.Type, Integer> defense, int enchantmentValue,
+            Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient
     ) {
         List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(ResourceLocation.withDefaultNamespace(name)));
         EnumMap<ArmorItem.Type, Integer> enummap = new EnumMap<>(ArmorItem.Type.class);

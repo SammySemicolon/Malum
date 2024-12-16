@@ -18,6 +18,6 @@ public class RuneBolsteringItem extends AbstractRuneCurioItem {
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, Attributes.MAX_HEALTH,
-                new AttributeModifier(MalumMod.malumPath("curio_max_health"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                new AttributeModifier(MalumMod.malumPath("bolstering_rune"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 }

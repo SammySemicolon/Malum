@@ -63,7 +63,7 @@ public class CreativeTabRegistry {
                         for (MalumRitualType ritualType : RitualRegistry.RITUALS) {
                             for (MalumRitualTier ritualTier : MalumRitualTier.TIERS) {
                                 ItemStack shard = new ItemStack(RITUAL_SHARD.get());
-                                shard.set(DataComponentRegistry.RITUAL_SHARD_PROPS, ritualType.createShardProps(ritualTier));
+                                shard.set(DataComponentRegistry.RITUAL_DATA, ritualType.createDataComponent(ritualTier));
                                 o.accept(shard);
                             }
                         }

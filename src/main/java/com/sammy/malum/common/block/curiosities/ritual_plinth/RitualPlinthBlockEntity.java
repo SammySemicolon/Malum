@@ -96,7 +96,7 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
             compound.putFloat("activeDuration", activeDuration);
         }
         if (ritualType != null) {
-            compound.putString("ritualType", ritualType.identifier.toString());
+            compound.putString("ritualType", ritualType.id.toString());
         }
         inventory.save(pRegistries, compound);
         extrasInventory.save(pRegistries, compound, "extrasInventory");
@@ -121,8 +121,8 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
         inventory.dumpItems(level, worldPosition);
         extrasInventory.dumpItems(level, worldPosition);
         if (ritualType != null && ritualTier != null) {
-            ItemStack shard = new ItemStack(ItemRegistry.RITUAL_SHARD.get());
-            shard.set(DataComponentRegistry.RITUAL_SHARD_PROPS, ritualType.createShardProps(ritualTier));
+            var shard = new ItemStack(ItemRegistry.RITUAL_SHARD.get());
+            shard.set(DataComponentRegistry.RITUAL_DATA, ritualType.createDataComponent(ritualTier));
             level.addFreshEntity(new ItemEntity(level, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), shard));
         }
     }
@@ -130,16 +130,17 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
     @Override
     public ItemInteractionResult onUseWithItem(Player player, ItemStack stack, InteractionHand hand) {
         if (ritualType != null) {
-            ItemInteractionResult interactionResult = ritualType.onUsePlinth(this, player, hand);
-            if (!interactionResult.equals(ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION)) {
-                return interactionResult;
+            var result = ritualType.onUsePlinth(this, player, hand);
+            if (!result.equals(ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION)) {
+                return result;
             }
         }
         else if (inventory.getStackInSlot(0).isEmpty() && extrasInventory.isEmpty()) {
-            if (stack.getItem() instanceof RitualShardItem) {
+            var ritualData = stack.get(DataComponentRegistry.RITUAL_DATA);
+            if (ritualData != null) {
                 if (!level.isClientSide) {
-                    ritualType = RitualShardItem.getRitualType(stack);
-                    ritualTier = RitualShardItem.getRitualTier(stack);
+                    ritualType = ritualData.ritualType();
+                    ritualTier = ritualData.ritualTier();
                     spiritAmount = ritualTier.spiritThreshold;
                     setupComplete = true;
                     ParticleEffectTypeRegistry.RITUAL_PLINTH_BEGINS_CHARGING.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), new ColorEffectData(ritualType.spirit));

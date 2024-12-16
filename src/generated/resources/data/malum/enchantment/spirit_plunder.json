@@ -1,34 +1,21 @@
 {
-  "anvil_cost": 10,
+  "anvil_cost": 1,
   "description": {
     "translate": "enchantment.malum.spirit_plunder"
   },
-  "effects": {
-    "minecraft:attributes": [
-      {
-        "amount": {
-          "type": "minecraft:linear",
-          "base": 1.0,
-          "per_level_above_first": 1.0
-        },
-        "attribute": "malum:spirit_spoils",
-        "id": "malum:enchantment.spirit_spoils",
-        "operation": "add_value"
-      }
-    ]
-  },
   "max_cost": {
-    "base": 200,
-    "per_level_above_first": 0
+    "base": 6,
+    "per_level_above_first": 10
   },
   "max_level": 2,
   "min_cost": {
-    "base": 55,
-    "per_level_above_first": 0
+    "base": 1,
+    "per_level_above_first": 10
   },
+  "primary_items": "#malum:soul_shatter_capable_weapons",
   "slots": [
-    "mainhand"
+    "hand"
   ],
-  "supported_items": "#malum:enchantable/spirit_spoils",
-  "weight": 1
+  "supported_items": "#malum:soul_shatter_capable_weapons",
+  "weight": 10
 }

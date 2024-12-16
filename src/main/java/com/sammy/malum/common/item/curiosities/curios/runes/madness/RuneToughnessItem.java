@@ -18,6 +18,6 @@ public class RuneToughnessItem extends AbstractRuneCurioItem {
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, Attributes.ARMOR_TOUGHNESS,
-                new AttributeModifier(MalumMod.malumPath("curio_armor_toughness"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                new AttributeModifier(MalumMod.malumPath("toughness_rune"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 }

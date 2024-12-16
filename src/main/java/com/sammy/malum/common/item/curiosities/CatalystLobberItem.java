@@ -1,44 +1,34 @@
 package com.sammy.malum.common.item.curiosities;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.sounds.*;
 import net.minecraft.stats.*;
-import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
 
 import java.util.function.*;
 
-public class CatalystFlingerItem extends Item {
-
-    public record FlingerData(int timer, int state, int stashedState) {
-
-        public FlingerData() {
-            this(0, 0, 0);
-        }
-
-        public static Codec<FlingerData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ExtraCodecs.NON_NEGATIVE_INT.fieldOf("malum:timer").forGetter(FlingerData::timer),
-                ExtraCodecs.NON_NEGATIVE_INT.fieldOf("malum:state").forGetter(FlingerData::state),
-                ExtraCodecs.NON_NEGATIVE_INT.fieldOf("malum:stashed_state").forGetter(FlingerData::stashedState)
-        ).apply(instance, FlingerData::new));
-
-    }
+public class CatalystLobberItem extends Item {
 
     public final Function<Player, AbstractNitrateEntity> entitySupplier;
-    public CatalystFlingerItem(Properties pProperties, Function<Player, AbstractNitrateEntity> entitySupplier) {
+    public CatalystLobberItem(Properties pProperties, Function<Player, AbstractNitrateEntity> entitySupplier) {
         super(pProperties);
         this.entitySupplier = entitySupplier;
     }
 
+    public static int getStateDisplay(ItemStack stack) {
+        var data = stack.get(DataComponentRegistry.CATALYST_LOBBER_STATE);
+        if (data == null) {
+            return -1;
+        }
+        return data.state();
+    }
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
         return repairCandidate.getItem().equals(ItemRegistry.MALIGNANT_LEAD.get()) || super.isValidRepairItem(stack, repairCandidate);
@@ -46,13 +36,12 @@ public class CatalystFlingerItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        var stateComponent = DataComponentRegistry.CATALYST_FLINGER_DATA;
-        if (pStack.has(stateComponent)) {
-            var data = pStack.get(stateComponent);
-            int state = data.state;
+        var data = pStack.get(DataComponentRegistry.CATALYST_LOBBER_STATE);
+        if (data != null) {
+            int state = data.state();
             if (state != 0) {
-                int timer = data.timer;
-                int stashedState = data.stashedState;
+                int timer = data.timer();
+                int stashedState = data.stashedState();
                 if (!pIsSelected) {
                     timer++;
                 } else if (timer > 0) {
@@ -64,7 +53,7 @@ public class CatalystFlingerItem extends Item {
                     state = 0;
                     pEntity.playSound(SoundRegistry.CATALYST_LOBBER_LOCKED.get(), 1.2f, 0.8f);
                 }
-                pStack.set(stateComponent, new FlingerData(timer, state, stashedState));
+                pStack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState(timer, state, stashedState));
             }
         }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
@@ -73,11 +62,10 @@ public class CatalystFlingerItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
-        var stateComponent = stack.getOrDefault(DataComponentRegistry.CATALYST_FLINGER_DATA, new FlingerData());
-
-        int timer = stateComponent.timer();
-        int state = stateComponent.state();
-        int stashedState = stateComponent.stashedState();
+        var component = stack.getOrDefault(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState());
+        int timer = component.timer();
+        int state = component.state();
+        int stashedState = component.stashedState();
         int cooldown = 0;
         SoundEvent sound;
         switch (state) {
@@ -88,7 +76,7 @@ public class CatalystFlingerItem extends Item {
             }
             case 1 -> {
                 if (!playerIn.isCreative()) {
-                    ItemStack ammo = ItemStack.EMPTY;
+                    var ammo = ItemStack.EMPTY;
                     for (int i = 0; i < playerIn.getInventory().getContainerSize(); i++) {
                         ItemStack maybeAmmo = playerIn.getInventory().getItem(i);
                         if (maybeAmmo.getItem().equals(ItemRegistry.AURIC_EMBERS.get())) {
@@ -107,9 +95,9 @@ public class CatalystFlingerItem extends Item {
             }
             case 2 -> {
                 if (!worldIn.isClientSide) {
-                    AbstractNitrateEntity bombEntity = entitySupplier.apply(playerIn);
+                    var bombEntity = entitySupplier.apply(playerIn);
                     int angle = handIn == InteractionHand.MAIN_HAND ? 225 : 90;
-                    Vec3 pos = playerIn.position().add(playerIn.getLookAngle().scale(0.5)).add(0.5 * Math.sin(Math.toRadians(angle - playerIn.yHeadRot)), playerIn.getBbHeight() * 2 / 3, 0.5 * Math.cos(Math.toRadians(angle - playerIn.yHeadRot)));
+                    var pos = playerIn.position().add(playerIn.getLookAngle().scale(0.5)).add(0.5 * Math.sin(Math.toRadians(angle - playerIn.yHeadRot)), playerIn.getBbHeight() * 2 / 3, 0.5 * Math.cos(Math.toRadians(angle - playerIn.yHeadRot)));
                     float pitch = -10.0F;
                     bombEntity.shootFromRotation(playerIn, playerIn.getXRot(), playerIn.getYRot(), pitch, 1.25F, 0.9F);
                     bombEntity.setPos(pos);
@@ -123,11 +111,11 @@ public class CatalystFlingerItem extends Item {
                 sound = SoundRegistry.CATALYST_LOBBER_FIRED.get();
             }
             default -> {
-                stack.set(DataComponentRegistry.CATALYST_FLINGER_DATA, new FlingerData());
+                stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState());
                 throw new IllegalStateException("Catalyst lobber used with an invalid state.");
             }
         }
-        stack.set(DataComponentRegistry.CATALYST_FLINGER_DATA, new FlingerData(timer, state, stashedState));
+        stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState(timer, state, stashedState));
         if (cooldown != 0) {
             playerIn.getCooldowns().addCooldown(this, cooldown);
         }

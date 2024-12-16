@@ -90,11 +90,11 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("brilliance", -3, 1, b -> b
-                .configureWidget(w -> w.setIcon(CLUSTER_OF_BRILLIANCE).setStyle(BookWidgetStyle.SMALL_RUNEWOOD))
-                .addPage(new HeadlineTextItemPage("brilliance", "brilliance.1", CLUSTER_OF_BRILLIANCE.get()))
+                .configureWidget(w -> w.setIcon(RAW_BRILLIANCE).setStyle(BookWidgetStyle.SMALL_RUNEWOOD))
+                .addPage(new HeadlineTextItemPage("brilliance", "brilliance.1", RAW_BRILLIANCE.get()))
                 .addPage(new TextPage("brilliance.2"))
-                .addPage(CraftingPage.fullPage(BLOCK_OF_BRILLIANCE.get(), CLUSTER_OF_BRILLIANCE.get()))
-                .addPage(new SmeltingPage(new ItemStack(CLUSTER_OF_BRILLIANCE.get()), new ItemStack(CHUNK_OF_BRILLIANCE.get(), 2)))
+                .addPage(CraftingPage.fullPage(BLOCK_OF_BRILLIANCE.get(), RAW_BRILLIANCE.get()))
+                .addPage(new SmeltingPage(new ItemStack(RAW_BRILLIANCE.get()), new ItemStack(REFINED_BRILLIANCE.get(), 2)))
                 .addReference(new EntryReference(UMBRAL_SPIRIT, soulstoneAndBrillianceReexamination))
         );
 

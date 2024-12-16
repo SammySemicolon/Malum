@@ -57,7 +57,7 @@ public class CurioSpiritInfusionRecipes {
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_RING.get(), 1, ItemRegistry.RING_OF_ARCANE_PROWESS.get(), 1)
-                .addExtraItem(ItemRegistry.CLUSTER_OF_BRILLIANCE.get(), 4)
+                .addExtraItem(ItemRegistry.RAW_BRILLIANCE.get(), 4)
                 .addExtraItem(ItemRegistry.ALCHEMICAL_CALX.get(), 4)
                 .addSpirit(ARCANE_SPIRIT, 32)
                 .save(recipeOutput);

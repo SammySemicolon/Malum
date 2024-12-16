@@ -73,7 +73,6 @@ public class RitualPlinthRenderer implements BlockEntityRenderer<RitualPlinthBlo
             poseStack.pushPose();
             poseStack.translate(offset.x, offset.y, offset.z);
             poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
-            poseStack.mulPose(Axis.YP.rotationDegrees(180f));
             worldVFXBuilder.setRenderType(icon).renderQuad(poseStack, scale);
             if (hasDecor) {
                 worldVFXBuilder.setRenderType(decorGlow).renderQuad(poseStack, scale*2.5f);

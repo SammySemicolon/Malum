@@ -29,9 +29,9 @@ public class MalumVoidFavorRecipes {
         new VoidFavorRecipeBuilder(ItemRegistry.HEX_ASH.get(), ItemRegistry.VOID_SALTS.get(), 1)
                 .save(recipeOutput);
 
-        new VoidFavorRecipeBuilder(ItemRegistry.CHUNK_OF_BRILLIANCE.get(), ItemRegistry.MNEMONIC_FRAGMENT.get(), 1)
+        new VoidFavorRecipeBuilder(ItemRegistry.REFINED_BRILLIANCE.get(), ItemRegistry.MNEMONIC_FRAGMENT.get(), 1)
                 .save(recipeOutput);
-        new VoidFavorRecipeBuilder(ItemRegistry.CLUSTER_OF_BRILLIANCE.get(), ItemRegistry.MNEMONIC_FRAGMENT.get(), 2)
+        new VoidFavorRecipeBuilder(ItemRegistry.RAW_BRILLIANCE.get(), ItemRegistry.MNEMONIC_FRAGMENT.get(), 2)
                 .save(recipeOutput, MalumMod.malumPath("mnemonic_fragment_from_cluster"));
 
         new VoidFavorRecipeBuilder(Items.BLAZE_POWDER, ItemRegistry.AURIC_EMBERS.get(), 1)

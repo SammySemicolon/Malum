@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "malum:item/chunk_of_brilliance"
+    "layer0": "malum:item/refined_brilliance"
   }
 }

@@ -18,7 +18,7 @@ import java.awt.*;
 
 import static com.sammy.malum.MalumMod.RANDOM;
 
-public class MalumHangingLeavesBlock extends Block implements SimpleWaterloggedBlock, iGradientedLeavesBlock {
+public class MalumHangingLeavesBlock extends Block implements SimpleWaterloggedBlock, IGradientedLeavesBlock {
 
     protected static final VoxelShape SHAPE = Block.box(3.0D, 3.0D, 3.0D, 13.0D, 16.0D, 13.0D);
 

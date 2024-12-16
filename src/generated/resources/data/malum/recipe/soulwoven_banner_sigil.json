@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "malum:soulwoven_banner"
+    },
+    {
+      "item": "malum:soul_stained_steel_plating"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "malum:soulwoven_banner_sigil"
+  }
+}

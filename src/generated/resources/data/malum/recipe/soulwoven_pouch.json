@@ -7,18 +7,14 @@
     },
     "Y": {
       "item": "malum:soulwoven_silk"
-    },
-    "Z": {
-      "tag": "minecraft:soul_fire_base_blocks"
     }
   },
   "pattern": [
-    " X ",
-    "YZY",
-    " Y "
+    "X",
+    "Y"
   ],
   "result": {
     "count": 1,
-    "id": "malum:spirit_pouch"
+    "id": "malum:soulwoven_pouch"
   }
 }

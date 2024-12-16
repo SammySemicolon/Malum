@@ -479,7 +479,7 @@ public class BlockRegistry {
                 float color = s.getValue(colorProperty);
                 float pct = (colorMax - (color / colorMax));
                 float value = Easing.SINE_IN_OUT.ease(pct, 0, 1, 1);
-                var leaves = (iGradientedLeavesBlock) s.getBlock();
+                var leaves = (IGradientedLeavesBlock) s.getBlock();
                 int red = (int) Mth.lerp(value, leaves.getMinColor().getRed(), leaves.getMaxColor().getRed());
                 int green = (int) Mth.lerp(value, leaves.getMinColor().getGreen(), leaves.getMaxColor().getGreen());
                 int blue = (int) Mth.lerp(value, leaves.getMinColor().getBlue(), leaves.getMaxColor().getBlue());
@@ -493,7 +493,7 @@ public class BlockRegistry {
                 float color = s.getValue(colorProperty);
                 float pct = Math.max((distanceMax - distance) / distanceMax, color / colorMax);
                 float value = Easing.SINE_IN_OUT.ease(pct, 0, 1, 1);
-                var leaves = (iGradientedLeavesBlock) s.getBlock();
+                var leaves = (IGradientedLeavesBlock) s.getBlock();
                 int red = (int) Mth.lerp(value, leaves.getMinColor().getRed(), leaves.getMaxColor().getRed());
                 int green = (int) Mth.lerp(value, leaves.getMinColor().getGreen(), leaves.getMaxColor().getGreen());
                 int blue = (int) Mth.lerp(value, leaves.getMinColor().getBlue(), leaves.getMaxColor().getBlue());

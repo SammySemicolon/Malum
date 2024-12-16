@@ -7,6 +7,8 @@ import net.minecraft.resources.*;
 import java.util.*;
 
 public class RitualRegistry {
+
+    //TODO: convert to deferred register
     public static List<MalumRitualType> RITUALS = new ArrayList<>();
 
     public static MalumRitualType RITUAL_OF_IDLE_MENDING = create(new IdleMendingRitualType());
@@ -24,6 +26,6 @@ public class RitualRegistry {
     }
 
     public static MalumRitualType get(ResourceLocation resourceLocation) {
-        return RITUALS.stream().filter(r -> r.identifier.equals(resourceLocation)).findFirst().orElse(null);
+        return RITUALS.stream().filter(r -> r.id.equals(resourceLocation)).findFirst().orElse(null);
     }
 }

@@ -94,7 +94,7 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
     }
 
     public static DamageSource replaceDamageSource(Player player, DamageSource source) {
-        if (player.getMainHandItem().is(ItemTagRegistry.SCYTHE)) {
+        if (player.getMainHandItem().is(ItemTagRegistry.SCYTHES)) {
             return DamageTypeHelper.create(player.level(), DamageTypeRegistry.SCYTHE_MELEE, player);
         }
         return source;

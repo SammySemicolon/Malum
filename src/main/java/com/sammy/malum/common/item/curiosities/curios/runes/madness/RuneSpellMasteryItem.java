@@ -6,6 +6,7 @@ import com.sammy.malum.common.item.curiosities.curios.runes.*;
 import com.sammy.malum.compability.irons_spellbooks.IronsSpellsCompat;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.registry.common.*;
@@ -19,11 +20,12 @@ public class RuneSpellMasteryItem extends AbstractRuneCurioItem {
 
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+        var id = MalumMod.malumPath("spell_mastery_rune");
         addAttributeModifier(map, LodestoneAttributes.MAGIC_PROFICIENCY,
-                new AttributeModifier(MalumMod.malumPath("curio_magic_proficiency"), 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                new AttributeModifier(id, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         addAttributeModifier(map, AttributeRegistry.RESERVE_STAFF_CHARGES,
-                new AttributeModifier(MalumMod.malumPath("curio_reserve_staff_charges"), 2f, AttributeModifier.Operation.ADD_VALUE));
+                new AttributeModifier(id, 2f, AttributeModifier.Operation.ADD_VALUE));
 
-        IronsSpellsCompat.addSpellPowerToCurio(this, map, 0.1f);
+        IronsSpellsCompat.addSpellPowerToCurio(this, map, id,0.1f);
     }
 }

@@ -10,6 +10,7 @@ import com.sammy.malum.registry.common.item.*;
 import io.redspace.ironsspellbooks.api.events.*;
 import io.redspace.ironsspellbooks.api.magic.*;
 import net.minecraft.core.*;
+import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
@@ -55,9 +56,9 @@ public class IronsSpellsCompat {
             LoadedOnly.addSoulHunterSpellPower(attributes, group);
         }
     }
-    public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Holder<Attribute>, AttributeModifier> map, float amount) {
+    public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Holder<Attribute>, AttributeModifier> map, ResourceLocation id, float amount) {
         if (LOADED) {
-            LoadedOnly.addSpellPowerToCurio(item, map, amount);
+            LoadedOnly.addSpellPowerToCurio(item, map, id, amount);
         }
     }
 
@@ -117,13 +118,13 @@ public class IronsSpellsCompat {
 
         public static void addSoulHunterSpellPower(ItemAttributeModifiers.Builder attributes, EquipmentSlotGroup group) {
             attributes.add(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER,
-                    new AttributeModifier(MalumMod.malumPath("spell_power"), 0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+                    new AttributeModifier(MalumMod.malumPath("soul_hunter_armor"), 0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
                     group);
         }
 
-        public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Holder<Attribute>, AttributeModifier> map, float amount) {
+        public static void addSpellPowerToCurio(MalumCurioItem item, Multimap<Holder<Attribute>, AttributeModifier> map, ResourceLocation id, float amount) {
             item.addAttributeModifier(map, io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER,
-                    new AttributeModifier(MalumMod.malumPath("spell_power"), amount, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                    new AttributeModifier(id, amount, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         }
 
         public static void addEchoingArcanaSpellCooldown(EchoingArcanaEffect effect) {
@@ -131,7 +132,7 @@ public class IronsSpellsCompat {
         }
 
         public static void addGluttonySpellPower(GluttonyEffect effect) {
-            effect.addAttributeModifier(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER, MalumMod.malumPath("gluttony_spell_power_multiplier"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            effect.addAttributeModifier(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER, MalumMod.malumPath("gluttony"), 0.05f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         }
 
         public static void addSilencedNegativeAttributeModifiers(SilencedEffect effect) {

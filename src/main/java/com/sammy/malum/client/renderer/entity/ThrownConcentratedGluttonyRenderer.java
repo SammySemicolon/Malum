@@ -54,7 +54,6 @@ public class ThrownConcentratedGluttonyRenderer extends EntityRenderer<ThrownCon
             poseStack.pushPose();
             poseStack.scale(this.scale, this.scale, this.scale);
             poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-            poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
             this.itemRenderer.renderStatic(entity.getItem(), ItemDisplayContext.GROUND, packedLightIn, OverlayTexture.NO_OVERLAY, poseStack, RenderHandler.DELAYED_RENDER.getTarget(), entity.level(), entity.getId());
             poseStack.popPose();
          }

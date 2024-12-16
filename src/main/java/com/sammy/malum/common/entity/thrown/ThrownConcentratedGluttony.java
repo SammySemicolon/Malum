@@ -126,6 +126,7 @@ public class ThrownConcentratedGluttony extends ThrowableItemProjectile {
         var impactedEntity = pResult instanceof EntityHitResult entityHitResult ? entityHitResult.getEntity() : null;
         getEntityData().set(DATA_FADING_AWAY, true);
         setDeltaMovement(getDeltaMovement().scale(0.05f));
+        setNoGravity(true);
         level.levelEvent(2002, blockPosition(), MobEffectRegistry.GLUTTONY.get().getColor());
         level.playSound(null, blockPosition(), SoundRegistry.CONCENTRATED_GLUTTONY_DRINK.get(), SoundSource.PLAYERS, 0.5f, 1.25f + level.random.nextFloat() * 0.25f);
         ParticleEffectTypeRegistry.THROWN_GLUTTONY_IMPACT.createPositionedEffect(level, new PositionEffectData(position()));

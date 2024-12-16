@@ -26,7 +26,7 @@ public class RuneDexterityItem extends AbstractRuneCurioItem {
             final float maxHealth = living.getMaxHealth();
             value = 0.2f * (2 - (health / maxHealth));
         }
-        return new AttributeModifier(MalumMod.malumPath("curio_movement_speed"), value, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        return new AttributeModifier(MalumMod.malumPath("rune_of_dexterity"), value, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     };
 
     public RuneDexterityItem(Properties builder) {

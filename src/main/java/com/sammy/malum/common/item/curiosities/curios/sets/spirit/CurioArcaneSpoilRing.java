@@ -19,6 +19,6 @@ public class CurioArcaneSpoilRing extends MalumCurioItem {
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, AttributeRegistry.SPIRIT_SPOILS,
-                new AttributeModifier(MalumMod.malumPath("curio_spirit_spoils"), 1f, AttributeModifier.Operation.ADD_VALUE));
+                new AttributeModifier(MalumMod.malumPath("arcane_spoil_ring"), 1f, AttributeModifier.Operation.ADD_VALUE));
     }
 }

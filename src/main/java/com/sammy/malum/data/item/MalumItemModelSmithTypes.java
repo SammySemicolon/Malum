@@ -24,7 +24,7 @@ public class MalumItemModelSmithTypes {
     public static ItemModelSmith IMPETUS_ITEM = new ItemModelSmith((item, provider) -> {
         String name = provider.getItemName(item);
         List<String> split = DataHelper.reverseOrder(new ArrayList<>(), Arrays.asList(name.split("_")));
-        split.remove(0);
+        split.removeFirst();
         String alteredName = String.join("_", split);
         provider.createGenericModel(item, GENERATED, provider.getItemTexture(alteredName));
     });
@@ -39,12 +39,20 @@ public class MalumItemModelSmithTypes {
             String path = ritualTier.identifier.getPath();
             ResourceLocation itemTexturePath = provider.getItemTexture(base + "_" + path);
             provider.getBuilder(BuiltInRegistries.ITEM.getKey(item).getPath()).override()
-                    .predicate(ResourceLocation.withDefaultNamespace(RitualShardItem.RITUAL_TYPE), ritualTier.potency)
+                    .predicate(MalumMod.malumPath("tier"), ritualTier.potency)
                     .model(provider.withExistingParent(provider.getItemName(item) + "_" + path, GENERATED).texture("layer0", itemTexturePath))
                     .end();
         }
     });
-
+    public static ItemModelSmith SOULWOVEN_POUCH = new ItemModelSmith((item, provider) -> {
+        String base = provider.getItemName(item);
+        final ResourceLocation texture = provider.getItemTexture(base);
+        provider.createGenericModel(item, GENERATED, texture);
+        provider.getBuilder(BuiltInRegistries.ITEM.getKey(item).getPath()).override()
+                .predicate(MalumMod.malumPath("filled"), 1)
+                .model(provider.withExistingParent(base + "_filled", HANDHELD).texture("layer0", texture.withSuffix("_filled")))
+                .end();
+    });
     public static ItemModelSmith CATALYST_LOBBER = new ItemModelSmith((item, provider) -> {
         String base = provider.getItemName(item);
         provider.createGenericModel(item, HANDHELD, provider.getItemTexture(base));

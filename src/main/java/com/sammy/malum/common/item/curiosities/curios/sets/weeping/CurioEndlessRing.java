@@ -18,6 +18,6 @@ public class CurioEndlessRing extends MalumCurioItem implements IVoidItem {
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, AttributeRegistry.RESERVE_STAFF_CHARGES,
-                new AttributeModifier(MalumMod.malumPath("curio_reserve_staff_charges"), 3f, AttributeModifier.Operation.ADD_VALUE));
+                new AttributeModifier(MalumMod.malumPath("endless_well_ring"), 3f, AttributeModifier.Operation.ADD_VALUE));
     }
 }

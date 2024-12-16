@@ -2,7 +2,7 @@ package com.sammy.malum.common.block.nature;
 
 import java.awt.*;
 
-public interface iGradientedLeavesBlock {
+public interface IGradientedLeavesBlock {
 
     Color getMaxColor();
 

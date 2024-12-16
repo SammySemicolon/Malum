@@ -152,7 +152,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.ritual.tier", "Ritual Tier: ");
 
         for (MalumRitualType ritualType : RitualRegistry.RITUALS) {
-            final String id = ritualType.identifier.getPath();
+            final String id = ritualType.id.getPath();
             String name = DataHelper.toTitleCase(id, "_");
             add("malum.gui.ritual." + id, name);
         }
@@ -602,11 +602,10 @@ public class MalumLang extends LanguageProvider {
 
         addSimpleEntryHeader("soulwoven_silk", "Soulwoven Silk", "Wicked weaves");
         addPages("soulwoven_silk", "Soulwoven Silk is a light yet sturdy material that acts as an insulator for spirit energies. While other materials do exhibit matching interactions with the arcane, this bond between magic and cloth should make for a unique material.");
-        addPages("soulwoven_silk.soulwoven_banner", "To further study and confirm the insulating properties of the cloth, I've heft together a set of Soulwoven Banners with patterns based on each of the spirits I've been met with thus far. If further imbued with Spirit Arcana, the Banners will gain a dim, and them powerful glow with two shards infused.");
+        addPages("soulwoven_silk.soulwoven_banner", "To further study and confirm the insulating properties of the cloth, I've heft together a set of Soulwoven Banners with patterns based on each of the spirits I've been met with thus far. If further imbued with Arcana, the Banners will gain a dim, and them powerful glow when met with an additional shard.");
 
-        addSimpleEntryHeader("soulwoven_pouch", "Soulwoven Pouch", "[Soulwoven Pouch Tooltip]");
-        addPages("soulwoven_pouch", "But this fabric works wonderfully for storing spirit crystals. It keeps the arcana condensed within, and will even store spirits I pick up before they so much as clutter my pockets. It can store as many spirits as a single chest, making it quite convenient to carry around.");
-        addHeadline("spirit_fabric.pouch", "Spirit Pouch");
+        addSimpleEntryHeader("soulwoven_pouch", "Soulwoven Pouch", "Made real through supposition");
+        addPages("soulwoven_pouch", "In my studies one of the most cumbersome experiences so far has been the sheer amount of magical reagents and residue I have to deal with. To solve this issue, I've designed the Soulwoven Pouch with the bundle's design in mind. The pouch hungers for the magically aligned, reserving extra room for and collecting it habitually.");
 
         addSimpleEntryHeader("soulhunter_armor", "Soulhunter Armor", "Shaped like glass");
         addPages("soulhunter_armor",

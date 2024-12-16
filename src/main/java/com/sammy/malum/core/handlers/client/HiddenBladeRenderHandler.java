@@ -61,9 +61,7 @@ public class HiddenBladeRenderHandler {
                     shaderInstance.safeGetUniform("XFrequency").set(15f);
                     shaderInstance.safeGetUniform("Speed").set(550f);
                     shaderInstance.safeGetUniform("Intensity").set(120f);
-                    var builder = VFXBuilders.createScreen()
-                            .setPosTexColorDefaultFormat()
-                            .setShader(() -> shaderInstance);
+                    var builder = VFXBuilders.createScreen().setShader(() -> shaderInstance);
 
                     float size = 16;
                     double delta = Mth.clamp((CurioHiddenBladeNecklace.COOLDOWN_DURATION - cooldown) / (float) CurioHiddenBladeNecklace.COOLDOWN_DURATION, 0, 1);
@@ -77,11 +75,11 @@ public class HiddenBladeRenderHandler {
                     }
                     builder.setPositionWithWidth(left, top, size, size)
                             .setUVWithWidth(xOffset, yOffset, 16, 16, 64)
-                            .draw(poseStack);
+                            .blit(poseStack);
                     if (fadeOut > 0 && fadeOut < 20) {
                         float glow = (10 - Math.abs(10 - fadeOut)) / 10f;
                         RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-                        builder.setAlpha(glow).draw(poseStack);
+                        builder.setAlpha(glow).blit(poseStack);
                     }
 
                     shaderInstance.setUniformDefaults();

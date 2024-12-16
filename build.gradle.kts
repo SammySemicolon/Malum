@@ -31,7 +31,7 @@ neoForge {
     }
 
     accessTransformers.from(
-        project.files("src/main/resources/META-INF/recipebuilders.cfg", "src/main/resources/META-INF/blockproperties.cfg")
+        project.files("src/main/resources/META-INF/accesstransformer.cfg", "src/main/resources/META-INF/recipebuilders.cfg", "src/main/resources/META-INF/blockproperties.cfg")
     )
 
     runs {

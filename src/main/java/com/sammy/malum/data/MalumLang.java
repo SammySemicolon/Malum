@@ -229,6 +229,8 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.book.entry.page.info.spirit_infusion.spirit", "Spirit Arcana is to be stored directly within the Spirit Altar.");
         add("malum.gui.book.entry.page.info.spirit_infusion.item", "Additional Items must be held on nearby Item Pedestals or Stands.");
 
+        add("malum.gui.book.entry.page.info.runeworking", "Runeworking. \nRequires a slate for the inscription process. Spirit Arcana must be inserted afterwards.");
+
         add("malum.gui.book.entry.page.info.spirit_focusing", "Spirit Focusing. \nRequires a Catalyst and Spirit Arcana to be held within The Crucible. The Catalyst is not consumed, but does get damaged.");
         add("malum.gui.book.entry.page.info.spirit_focusing.spirit", "Spirit Arcana is to be stored directly within the Spirit Crucible.");
 
@@ -602,7 +604,7 @@ public class MalumLang extends LanguageProvider {
 
         addSimpleEntryHeader("soulwoven_silk", "Soulwoven Silk", "Wicked weaves");
         addPages("soulwoven_silk", "Soulwoven Silk is a light yet sturdy material that acts as an insulator for spirit energies. While other materials do exhibit matching interactions with the arcane, this bond between magic and cloth should make for a unique material.");
-        addPages("soulwoven_silk.soulwoven_banner", "To further study and confirm the insulating properties of the cloth, I've heft together a set of Soulwoven Banners with patterns based on each of the spirits I've been met with thus far. If further imbued with Arcana, the Banners will gain a dim, and them powerful glow when met with an additional shard.");
+        addPages("soulwoven_silk.soulwoven_banner", "To further study and confirm the insulating properties of the cloth, I've heft together a set of Soulwoven Banners with patterns based on each of the spirits I've been met with thus far. When imbued with Arcana, the Banners will gain a dim, and them powerful glow when met with an additional shard.");
 
         addSimpleEntryHeader("soulwoven_pouch", "Soulwoven Pouch", "Made real through supposition");
         addPages("soulwoven_pouch", "In my studies one of the most cumbersome experiences so far has been the sheer amount of magical reagents and residue I have to deal with. To solve this issue, I've designed the Soulwoven Pouch with the bundle's design in mind. The pouch hungers for the magically aligned, reserving extra room for and collecting it habitually.");

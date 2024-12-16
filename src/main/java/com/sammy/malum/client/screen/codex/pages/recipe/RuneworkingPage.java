@@ -8,6 +8,7 @@ import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
+import net.minecraft.network.chat.*;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.systems.recipe.*;
 
@@ -16,6 +17,8 @@ import java.util.function.*;
 import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.*;
 
 public class RuneworkingPage extends BookPage {
+    private static final Component BASE = Component.translatable("malum.gui.book.entry.page.info.runeworking");
+
     private final RunicWorkbenchRecipe recipe;
 
     public RuneworkingPage(Predicate<RunicWorkbenchRecipe> predicate) {
@@ -32,6 +35,11 @@ public class RuneworkingPage extends BookPage {
         renderIngredient(screen, guiGraphics, recipe.primaryInput, left + 63, top + 59, mouseX, mouseY);
         renderIngredient(screen, guiGraphics, recipe.secondaryInput, left + 63, top + 16, mouseX, mouseY);
         renderItem(screen, guiGraphics, recipe.output, left + 63, top + 126, mouseX, mouseY);
+        screen.renderLater(() -> {
+            if (screen.isHovering(mouseX, mouseY, left + 62, top + 78, 18, 18)) {
+                guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, wrapComponent(BASE, 180), mouseX, mouseY);
+            }
+        });
     }
 
     @Override

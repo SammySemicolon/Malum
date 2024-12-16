@@ -37,7 +37,7 @@ public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBan
             return;
         }
         var token = RenderTypeToken.createCachedToken(block.texture);
-        var banner = LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(token);
+        var banner = LodestoneRenderTypes.CUTOUT_TEXTURE.applyAndCache(token);
         var builder = VFXBuilders.createWorld().setRenderType(banner).setLight(combinedLightIn);
         var pos = blockEntityIn.getBlockPos();
         var spirit = blockEntityIn.spirit;

@@ -277,9 +277,9 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
     }
 
     public void craft() {
-        ItemStack stack = inventory.getStackInSlot(0);
-        ItemStack outputStack = recipe.output.copy();
-        Vec3 itemPos = getItemPos();
+        var stack = inventory.getStackInSlot(0);
+        var outputStack = recipe.output.copy();
+        var itemPos = getItemPos();
         final RandomSource random = level.random;
         float processingSpeed = acceleratorData.focusingSpeed.getValue(acceleratorData);
         float damageChance = acceleratorData.damageChance.getValue(acceleratorData);

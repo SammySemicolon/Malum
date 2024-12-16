@@ -59,10 +59,7 @@ public class MalumVanillaRecipes implements IConditionBuilder {
 
         //BANNERS
         shaped(RecipeCategory.BUILDING_BLOCKS, ItemRegistry.SOULWOVEN_BANNER.get()).define('X', ItemTagRegistry.RUNEWOOD_PLANKS).define('Y', ItemRegistry.SOULWOVEN_SILK.get()).pattern("X").pattern("Y").pattern("Y").unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(output);
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ItemRegistry.SOULWOVEN_BANNER_HORNS.get()).requires(ItemRegistry.SOULWOVEN_BANNER.get()).requires(ItemRegistry.GRIM_TALC.get()).unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(output);
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ItemRegistry.SOULWOVEN_BANNER_SIGIL.get()).requires(ItemRegistry.SOULWOVEN_BANNER.get()).requires(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()).unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(output);
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ItemRegistry.SOULWOVEN_BANNER_BREEZE.get()).requires(ItemRegistry.SOULWOVEN_BANNER.get()).requires(Items.WIND_CHARGE).unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(output);
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ItemRegistry.SOULWOVEN_BANNER_FRACTAL.get()).requires(ItemRegistry.SOULWOVEN_BANNER.get()).requires(Tags.Items.GEMS_EMERALD).unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(output);
+
         //SPIRIT METALS
         shaped(RecipeCategory.MISC, ItemRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get()).define('#', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).define('#', ItemRegistry.SOUL_STAINED_STEEL_NUGGET.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output, malumPath("soul_stained_steel_from_nuggets"));

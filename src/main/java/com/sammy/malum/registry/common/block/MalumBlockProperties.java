@@ -116,6 +116,7 @@ public class MalumBlockProperties {
     public static LodestoneBlockProperties SOULWOVEN_BANNER() {
         return RUNEWOOD()
                 .noOcclusion()
+                .noCollission()
                 .setCutoutRenderType();
     }
 

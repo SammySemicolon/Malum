@@ -6,6 +6,7 @@ import com.sammy.malum.registry.common.item.*;
 import net.minecraft.client.gui.screens.inventory.tooltip.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
+import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.inventory.tooltip.*;
@@ -123,7 +124,11 @@ public final class SoulwovenPouchContents implements TooltipComponent {
         private int findStackIndex(ItemStack stack) {
             if (stack.isStackable()) {
                 for (int i = 0; i < this.items.size(); i++) {
-                    if (ItemStack.isSameItemSameComponents(this.items.get(i), stack)) {
+                    final ItemStack compare = this.items.get(i);
+                    if (compare.getCount() >= compare.getMaxStackSize()) {
+                        continue;
+                    }
+                    if (ItemStack.isSameItemSameComponents(compare, stack)) {
                         return i;
                     }
                 }
@@ -142,15 +147,22 @@ public final class SoulwovenPouchContents implements TooltipComponent {
                 if (i == 0) {
                     return 0;
                 } else {
-                    this.weight = this.weight.add(SoulwovenPouchContents.getWeight(stack).multiplyBy(Fraction.getFraction(i, 1)));
-                    int j = this.findStackIndex(stack);
+                    weight = weight.add(SoulwovenPouchContents.getWeight(stack).multiplyBy(Fraction.getFraction(i, 1)));
+                    int j = findStackIndex(stack);
                     if (j != -1) {
-                        var itemstack = this.items.remove(j);
-                        var copy = itemstack.copyWithCount(itemstack.getCount() + i);
-                        stack.shrink(i);
-                        this.items.addFirst(copy);
+                        var itemstack = items.remove(j);
+                        int transferSize = Math.min(i, stack.getMaxStackSize()-itemstack.getCount());
+                        items.addFirst(itemstack.copyWithCount(itemstack.getCount() + transferSize));
+                        stack.shrink(transferSize);
+                        if (!stack.isEmpty()) //Split remainder into separate stack
+                        {
+                            int remainder = stack.getCount();
+                            weight = weight.add(SoulwovenPouchContents.getWeight(stack).multiplyBy(Fraction.getFraction(remainder, 1)));
+                            items.addFirst(itemstack.copyWithCount(remainder));
+                            stack.shrink(remainder);
+                        }
                     } else {
-                        this.items.addFirst(stack.split(i));
+                        items.addFirst(stack.split(i));
                     }
 
                     return i;

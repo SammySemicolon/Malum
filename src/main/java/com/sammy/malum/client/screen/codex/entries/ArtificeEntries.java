@@ -74,7 +74,7 @@ public class ArtificeEntries {
         screen.addEntry("soulwoven_pouch", 5, 6, b -> b
                 .configureWidget(w -> w.setIcon(SOULWOVEN_POUCH))
                 .addPage(new HeadlineTextPage("soulwoven_pouch", "soulwoven_pouch.1"))
-                .addPage(new CraftingPage(new ItemStack(SOULWOVEN_POUCH.get(), 2), EMPTY, STRING, EMPTY, EMPTY, SOULWOVEN_SILK.get()))
+                .addPage(new CraftingPage(SOULWOVEN_POUCH.get(), EMPTY, STRING, EMPTY, EMPTY, SOULWOVEN_SILK.get()))
         );
 
 

@@ -6,6 +6,7 @@ import com.sammy.malum.*;
 import com.sammy.malum.client.*;
 import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.common.block.curiosities.mana_mote.*;
+import com.sammy.malum.common.block.curiosities.spirit_altar.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.client.renderer.*;
@@ -14,6 +15,7 @@ import net.minecraft.core.*;
 import net.minecraft.util.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.phys.*;
 import org.joml.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.registry.client.*;
@@ -37,7 +39,7 @@ public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBan
             return;
         }
         var token = RenderTypeToken.createCachedToken(block.texture);
-        var banner = LodestoneRenderTypes.CUTOUT_TEXTURE.applyAndCache(token);
+        var banner = LodestoneRenderTypes.CUTOUT_TEXTURE.applyWithModifierAndCache(token, b -> b.setCullState(RenderStateShard.NO_CULL));
         var builder = VFXBuilders.createWorld().setRenderType(banner).setLight(combinedLightIn);
         var pos = blockEntityIn.getBlockPos();
         var spirit = blockEntityIn.spirit;
@@ -45,9 +47,6 @@ public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBan
         var direction = type.direction.getAxis().isVertical() ? type.equals(SoulwovenBannerBlock.BannerType.HANGING_Z) ? Direction.NORTH : Direction.WEST : type.direction;
         float sway = ((float) Math.floorMod((pos.getX() * 7L + pos.getY() * 9L + pos.getZ() * 13L) + blockEntityIn.getLevel().getGameTime(), 100L) + partialTicks) / 100.0F;
         float swayRotation = (0.01F * Mth.cos((float) (Math.PI * 2) * sway)) * (float) Math.PI;
-        if (spirit == SpiritTypeRegistry.AERIAL_SPIRIT) {
-            swayRotation*=2f;
-        }
 
         poseStack.pushPose();
         poseStack.translate(0.5f, 0.5f, 0.5f);
@@ -67,25 +66,28 @@ public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBan
         float yStart = -2;
         float yEnd = 0;
         var vertices = new Vector3f[]{new Vector3f(xEnd, yStart, 0), new Vector3f(xStart, yStart, 0), new Vector3f(xStart, yEnd, 0), new Vector3f(xEnd, yEnd, 0)};
-        var reversedVertices = new Vector3f[]{vertices[1], vertices[0], vertices[3], vertices[2]};
 
         builder.renderQuad(poseStack, vertices, 1f);
-        builder.renderQuad(poseStack, reversedVertices, 1f);
         if (spirit != null) {
             var spiritGlow = blockEntityIn.intense ?
-                    LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(token) :
-                    LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(token, ShaderUniformHandler.LUMITRANSPARENT);
+                    LodestoneRenderTypes.ADDITIVE_TEXTURE.applyWithModifierAndCache(token, b -> b.setCullState(RenderStateShard.NO_CULL)) :
+                    LodestoneRenderTypes.ADDITIVE_TEXTURE.applyWithModifierAndCache(token, ShaderUniformHandler.LUMITRANSPARENT, b -> b.setCullState(RenderStateShard.NO_CULL));
             var spiritBuilder = VFXBuilders.createWorld().setRenderType(spiritGlow).setColor(spirit.getPrimaryColor());
-            for (int i = 0; i < 4; i++) {
-                int offset = 3 - i * 2;
+            for (int i = 1; i < 4; i++) {
                 poseStack.pushPose();
-                poseStack.translate(0, 0, 0.001f * offset);
-                spiritBuilder.setAlpha(0.8f * Mth.abs(offset));
-                spiritBuilder.renderQuad(poseStack, vertices, 1f);
-                spiritBuilder.renderQuad(poseStack, reversedVertices, 1f);
+                poseStack.translate(0, 0, 0.001f * i);
+                spiritBuilder.setAlpha(0.9f).renderQuad(poseStack, vertices, 1f);
+                poseStack.translate(0, 0, -0.002f * i);
+                spiritBuilder.setAlpha(0.9f).renderQuad(poseStack, vertices, 1f);
                 poseStack.popPose();
             }
         }
         poseStack.popPose();
+    }
+
+    @Override
+    public AABB getRenderBoundingBox(SoulwovenBannerBlockEntity altar) {
+        var pos = altar.getBlockPos();
+        return new AABB(pos.getX(), pos.getY() - 1, pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
     }
 }

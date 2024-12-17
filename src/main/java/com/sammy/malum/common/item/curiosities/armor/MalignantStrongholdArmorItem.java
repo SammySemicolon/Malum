@@ -78,6 +78,6 @@ public class MalignantStrongholdArmorItem extends MalumArmorItem {
 
     @Override
     public ResourceLocation getArmorTexture() {
-        return MalumMod.malumPath("textures/armor/malignant_stronghold");
+        return MalumMod.malumPath("textures/armor/malignant_stronghold.png");
     }
 }

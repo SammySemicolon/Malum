@@ -74,8 +74,6 @@ public class MalumMod {
         FarmersDelightCompat.init();
         AttributeLibCompat.init();
         IronsSpellsCompat.init();
-
-        modBus.addListener(CreativeTabRegistry::populateItemGroups);
     }
 
     public static ResourceLocation malumPath(String path) {

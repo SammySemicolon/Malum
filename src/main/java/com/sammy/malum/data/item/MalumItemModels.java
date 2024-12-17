@@ -65,7 +65,6 @@ public class MalumItemModels extends LodestoneItemModelProvider {
         MalumItemModelSmithTypes.CATALYST_LOBBER.act(data, CATALYST_LOBBER);
         MalumItemModelSmithTypes.SOULWOVEN_POUCH.act(data, SOULWOVEN_POUCH);
 
-
         MalumItemModelSmithTypes.ARMOR_ITEM.act(data,
                 SOUL_HUNTER_CLOAK, SOUL_HUNTER_ROBE, SOUL_HUNTER_LEGGINGS, SOUL_HUNTER_BOOTS,
                 SOUL_STAINED_STEEL_HELMET, SOUL_STAINED_STEEL_CHESTPLATE, SOUL_STAINED_STEEL_LEGGINGS, SOUL_STAINED_STEEL_BOOTS);

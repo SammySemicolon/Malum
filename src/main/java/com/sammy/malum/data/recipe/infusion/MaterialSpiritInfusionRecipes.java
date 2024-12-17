@@ -24,6 +24,15 @@ public class MaterialSpiritInfusionRecipes {
         spiritedGlassRecipe(recipeOutput, EARTHEN_SPIRIT, ItemRegistry.EARTHEN_SPIRITED_GLASS.get());
         spiritedGlassRecipe(recipeOutput, INFERNAL_SPIRIT, ItemRegistry.INFERNAL_SPIRITED_GLASS.get());
 
+//        soulwovenBannerRecipe(recipeOutput, SACRED_SPIRIT, ItemRegistry.SACRED_SPIRITED_GLASS.get());
+//        soulwovenBannerRecipe(recipeOutput, WICKED_SPIRIT, ItemRegistry.WICKED_SPIRITED_GLASS.get());
+//        soulwovenBannerRecipe(recipeOutput, ARCANE_SPIRIT, ItemRegistry.ARCANE_SPIRITED_GLASS.get());
+//        soulwovenBannerRecipe(recipeOutput, ELDRITCH_SPIRIT, ItemRegistry.ELDRITCH_SPIRITED_GLASS.get());
+//        soulwovenBannerRecipe(recipeOutput, AERIAL_SPIRIT, ItemRegistry.AERIAL_SPIRITED_GLASS.get());
+//        soulwovenBannerRecipe(recipeOutput, AQUEOUS_SPIRIT, ItemRegistry.AQUEOUS_SPIRITED_GLASS.get());
+//        soulwovenBannerRecipe(recipeOutput, EARTHEN_SPIRIT, ItemRegistry.EARTHEN_SPIRITED_GLASS.get());
+//        soulwovenBannerRecipe(recipeOutput, INFERNAL_SPIRIT, ItemRegistry.INFERNAL_SPIRITED_GLASS.get());
+
         new SpiritInfusionRecipeBuilder(Items.GUNPOWDER, 1, ItemRegistry.HEX_ASH.get(), 1)
                 .addSpirit(ARCANE_SPIRIT, 1)
                 .save(recipeOutput);
@@ -121,6 +130,12 @@ public class MaterialSpiritInfusionRecipes {
         new SpiritInfusionRecipeBuilder(Ingredient.of(Tags.Items.GLASS_BLOCKS), 16, glass, 16)
                 .addSpirit(spirit, 2)
                 .addExtraItem(Items.IRON_INGOT, 1)
+                .save(recipeOutput);
+    }
+
+    public static void soulwovenBannerRecipe(RecipeOutput recipeOutput, MalumSpiritType spirit, Item banner) {
+        new SpiritInfusionRecipeBuilder(ItemRegistry.SOULWOVEN_BANNER.get(), 1, banner, 1)
+                .addSpirit(spirit, 1)
                 .save(recipeOutput);
     }
 }

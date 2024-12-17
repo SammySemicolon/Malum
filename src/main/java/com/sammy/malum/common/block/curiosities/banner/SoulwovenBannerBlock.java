@@ -6,14 +6,18 @@ import com.sammy.malum.common.block.blight.*;
 import com.sammy.malum.common.block.curiosities.mana_mote.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
+import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.*;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
 import net.neoforged.neoforge.client.extensions.common.*;
 import org.jetbrains.annotations.*;
@@ -27,21 +31,24 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 
 public class SoulwovenBannerBlock extends LodestoneEntityBlock<SoulwovenBannerBlockEntity> {
     public static final EnumProperty<BannerType> BANNER_TYPE = EnumProperty.create("banner_type", BannerType.class);
-    public final ResourceLocation texture;
     private static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 12.0, 16.0, 12.0);
 
-    public SoulwovenBannerBlock(String id, Properties properties) {
-        this(MalumMod.malumPath("textures/block/soulwoven_banner_" + id + ".png"), properties);
-    }
-
-    public SoulwovenBannerBlock(ResourceLocation texture, Properties properties) {
+    public SoulwovenBannerBlock(Properties properties) {
         super(properties);
-        this.texture = texture;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(BANNER_TYPE);
+    }
+
+    @Override
+    public @NotNull ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+        final ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
+        if (level.getBlockEntity(pos) instanceof SoulwovenBannerBlockEntity banner) {
+            stack.set(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN, banner.patternData);
+        }
+        return stack;
     }
 
     @Override

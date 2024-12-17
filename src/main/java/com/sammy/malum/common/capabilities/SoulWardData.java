@@ -2,8 +2,10 @@ package com.sammy.malum.common.capabilities;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.config.*;
 import com.sammy.malum.registry.common.*;
+import io.netty.buffer.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.util.*;
@@ -21,10 +23,7 @@ public class SoulWardData {
             Codec.DOUBLE.fieldOf("soulWardProgress").forGetter(sw -> sw.soulWardCooldown)
     ).apply(obj, SoulWardData::new));
 
-    public static StreamCodec<FriendlyByteBuf, SoulWardData> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.DOUBLE, p -> p.soulWard,
-            ByteBufCodecs.DOUBLE, p -> p.soulWardCooldown,
-            SoulWardData::new);
+    public static StreamCodec<ByteBuf, SoulWardData> STREAM_CODEC = ByteBufCodecs.fromCodec(SoulWardData.CODEC);
 
     private double soulWard;
     private double soulWardCooldown;

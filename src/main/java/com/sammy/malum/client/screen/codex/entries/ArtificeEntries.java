@@ -63,12 +63,12 @@ public class ArtificeEntries {
                 .addPage(SpiritInfusionPage.fromOutput(SOULWOVEN_SILK.get()))
                 .addPage(new TextPage("soulwoven_silk.soulwoven_banner.1"))
                 .addPage(new CraftingPage(new ItemStack(SOULWOVEN_BANNER.get(), 2), EMPTY, RUNEWOOD_PLANKS.get(), EMPTY, EMPTY, SOULWOVEN_SILK.get(), EMPTY, EMPTY, SOULWOVEN_SILK.get()))
-                .addPage(new CyclingPage(
-                        new CraftingPage(SOULWOVEN_BANNER_HORNS.get(), SOULWOVEN_BANNER.get(), GRIM_TALC.get()),
-                        new CraftingPage(SOULWOVEN_BANNER_SIGIL.get(), SOULWOVEN_BANNER.get(), SOUL_STAINED_STEEL_PLATING.get()),
-                        new CraftingPage(SOULWOVEN_BANNER_BREEZE.get(), SOULWOVEN_BANNER.get(), WIND_CHARGE),
-                        new CraftingPage(SOULWOVEN_BANNER_FRACTAL.get(), SOULWOVEN_BANNER.get(), EMERALD)
-                ))
+//                .addPage(new CyclingPage(
+//                        new CraftingPage(SOULWOVEN_BANNER_HORNS.get(), SOULWOVEN_BANNER.get(), GRIM_TALC.get()),
+//                        new CraftingPage(SOULWOVEN_BANNER_SIGIL.get(), SOULWOVEN_BANNER.get(), ROTTING_ESSENCE.get()),
+//                        new CraftingPage(SOULWOVEN_BANNER_BREEZE.get(), SOULWOVEN_BANNER.get(), ASTRAL_WEAVE.get()),
+//                        new CraftingPage(SOULWOVEN_BANNER_FRACTAL.get(), SOULWOVEN_BANNER.get(), WARP_FLUX.get())
+//                ))
         );
 
         screen.addEntry("soulwoven_pouch", 5, 6, b -> b

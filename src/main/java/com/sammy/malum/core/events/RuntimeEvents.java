@@ -41,7 +41,6 @@ public class RuntimeEvents {
         TetraCompat.entityJoin(event);
     }
 
-
     @SubscribeEvent
     public static void playerLeftClick(PlayerInteractEvent.LeftClickBlock event) {
         BlockPos pos = event.getPos();

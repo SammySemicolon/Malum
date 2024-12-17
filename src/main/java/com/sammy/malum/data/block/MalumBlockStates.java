@@ -39,6 +39,7 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
 
         AbstractBlockStateSmith.StateSmithData data = new AbstractBlockStateSmith.StateSmithData(this, blocks::remove);
 
+        setTexturePath("banners/");
         MalumBlockStateSmithTypes.SOULWOVEN_BANNER.act(data, DataHelper.takeAll(blocks, b -> b.get() instanceof SoulwovenBannerBlock));
         setTexturePath("spirited_glass/");
         BlockStateSmithTypes.FULL_BLOCK.act(data,

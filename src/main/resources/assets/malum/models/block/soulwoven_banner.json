@@ -3,7 +3,7 @@
 	"parent": "block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"wood": "malum:block/soulwoven_banner_holder",
+		"wood": "malum:block/banners/soulwoven_banner_holder",
 		"particle": "malum:block/runewood/runewood_planks"
 	},
 	"elements": [

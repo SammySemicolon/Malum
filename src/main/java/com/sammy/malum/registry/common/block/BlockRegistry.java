@@ -123,11 +123,7 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> EARTHEN_SPIRITED_GLASS = BLOCKS.register("earthen_spirited_glass", () -> new SpiritedGlassBlock(MalumBlockProperties.SPIRITED_GLASS()));
     //endregion
 
-    public static final DeferredHolder<Block, Block> SOULWOVEN_BANNER = BLOCKS.register("soulwoven_banner", () -> new SoulwovenBannerBlock("default", MalumBlockProperties.SOULWOVEN_BANNER()).setBlockEntity(BlockEntityRegistry.SOULWOVEN_BANNER));
-    public static final DeferredHolder<Block, Block> SOULWOVEN_BANNER_HORNS = BLOCKS.register("soulwoven_banner_horns", () -> new SoulwovenBannerBlock("horns", MalumBlockProperties.SOULWOVEN_BANNER()).setBlockEntity(BlockEntityRegistry.SOULWOVEN_BANNER));
-    public static final DeferredHolder<Block, Block> SOULWOVEN_BANNER_SIGIL = BLOCKS.register("soulwoven_banner_sigil", () -> new SoulwovenBannerBlock("sigil", MalumBlockProperties.SOULWOVEN_BANNER()).setBlockEntity(BlockEntityRegistry.SOULWOVEN_BANNER));
-    public static final DeferredHolder<Block, Block> SOULWOVEN_BANNER_BREEZE = BLOCKS.register("soulwoven_banner_breeze", () -> new SoulwovenBannerBlock("breeze", MalumBlockProperties.SOULWOVEN_BANNER()).setBlockEntity(BlockEntityRegistry.SOULWOVEN_BANNER));
-    public static final DeferredHolder<Block, Block> SOULWOVEN_BANNER_FRACTAL = BLOCKS.register("soulwoven_banner_fractal", () -> new SoulwovenBannerBlock("fractal", MalumBlockProperties.SOULWOVEN_BANNER()).setBlockEntity(BlockEntityRegistry.SOULWOVEN_BANNER));
+    public static final DeferredHolder<Block, Block> SOULWOVEN_BANNER = BLOCKS.register("soulwoven_banner", () -> new SoulwovenBannerBlock(MalumBlockProperties.SOULWOVEN_BANNER()).setBlockEntity(BlockEntityRegistry.SOULWOVEN_BANNER));
 
     //region tainted rock
     public static final DeferredHolder<Block, Block> TAINTED_ROCK = BLOCKS.register("tainted_rock", () -> new Block(MalumBlockProperties.TAINTED_ROCK().addTag(TAINTED_BLOCKS)));

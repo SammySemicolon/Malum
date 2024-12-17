@@ -131,7 +131,7 @@ public class MalumItemTags extends ItemTagsProvider {
 
         tag(ItemTagRegistry.AUGMENTS).addAll(items.stream().filter(i -> i.get() instanceof AbstractAugmentItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.METAL_NODES).addAll(items.stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::getKey).toList());
-        tag(ItemTagRegistry.SOULWOVEN_BANNERS).addAll(items.stream().filter(i -> i.get() instanceof SoulwovenBannerItem).map(DeferredHolder::getKey).toList());
+        tag(ItemTagRegistry.SOULWOVEN_BANNERS).addAll(items.stream().filter(i -> i.get() instanceof SoulwovenBannerBlockItem).map(DeferredHolder::getKey).toList());
 
         tag(ItemTagRegistry.SAPBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
         tag(ItemTagRegistry.GROSS_FOODS).add(Items.ROTTEN_FLESH, ROTTING_ESSENCE.get(), CONCENTRATED_GLUTTONY.get());

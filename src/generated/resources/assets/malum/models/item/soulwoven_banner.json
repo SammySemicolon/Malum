@@ -1,6 +1,56 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "malum:item/soulwoven_banner_sequence",
+      "predicate": {
+        "malum:pattern": 1.0
+      }
+    },
+    {
+      "model": "malum:item/soulwoven_banner_sanity",
+      "predicate": {
+        "malum:pattern": 2.0
+      }
+    },
+    {
+      "model": "malum:item/soulwoven_banner_breeze",
+      "predicate": {
+        "malum:pattern": 3.0
+      }
+    },
+    {
+      "model": "malum:item/soulwoven_banner_breath",
+      "predicate": {
+        "malum:pattern": 4.0
+      }
+    },
+    {
+      "model": "malum:item/soulwoven_banner_fractal",
+      "predicate": {
+        "malum:pattern": 5.0
+      }
+    },
+    {
+      "model": "malum:item/soulwoven_banner_hunger",
+      "predicate": {
+        "malum:pattern": 6.0
+      }
+    },
+    {
+      "model": "malum:item/soulwoven_banner_horns",
+      "predicate": {
+        "malum:pattern": 7.0
+      }
+    },
+    {
+      "model": "malum:item/soulwoven_banner_hallucination",
+      "predicate": {
+        "malum:pattern": 8.0
+      }
+    }
+  ],
   "textures": {
-    "layer0": "malum:item/soulwoven_banner"
+    "layer0": "malum:item/soulwoven_banner_default"
   }
 }

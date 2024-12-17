@@ -5,16 +5,11 @@ import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.Objects;
 
 import static com.sammy.malum.registry.common.item.ItemRegistry.*;
 
@@ -77,13 +72,4 @@ public class CreativeTabRegistry {
                     .withTabsBefore(RITUAL_SHARDS.getId())
                     .icon(() -> ItemRegistry.WEAVERS_WORKBENCH.get().getDefaultInstance()).build()
     );
-
-    public static void populateItemGroups(BuildCreativeModeTabContentsEvent event) {
-        final ResourceKey<CreativeModeTab> tabKey = event.getTabKey();
-        if (TAB_SORTING.containsKey(tabKey)) {
-            TAB_SORTING.get(tabKey).stream().map(BuiltInRegistries.ITEM::get)
-                .filter(Objects::nonNull)
-                .forEach(event::accept);
-        }
-    }
 }

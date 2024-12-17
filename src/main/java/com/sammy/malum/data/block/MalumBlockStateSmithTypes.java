@@ -41,7 +41,7 @@ public class MalumBlockStateSmithTypes {
         });
     });
 
-    public static BlockStateSmith<SoulwovenBannerBlock> SOULWOVEN_BANNER = new BlockStateSmith<>(SoulwovenBannerBlock.class, ItemModelSmithTypes.GENERATED_ITEM, (block, provider) -> {
+    public static BlockStateSmith<SoulwovenBannerBlock> SOULWOVEN_BANNER = new BlockStateSmith<>(SoulwovenBannerBlock.class, MalumItemModelSmithTypes.SOULWOVEN_BANNER, (block, provider) -> {
         ResourceLocation hanging = malumPath("block/soulwoven_banner");
         ResourceLocation mounted = malumPath("block/soulwoven_banner_directional");
         provider.getVariantBuilder(block).forAllStates(s -> {

@@ -8,6 +8,7 @@ import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer.*;
 import com.sammy.malum.common.block.nature.*;
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
@@ -79,20 +80,6 @@ import static net.minecraft.world.item.Rarity.*;
 public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, MALUM);
 
-    public static final Map<ResourceKey<CreativeModeTab>, List<ResourceLocation>> TAB_SORTING = new HashMap<>();
-
-    public static class LodestoneItemProperties extends Item.Properties {
-        public final ResourceKey<CreativeModeTab> tab;
-
-        public LodestoneItemProperties(DeferredHolder<CreativeModeTab, CreativeModeTab> registryObject) {
-            this(registryObject.getKey());
-        }
-
-        public LodestoneItemProperties(ResourceKey<CreativeModeTab> tab) {
-            this.tab = tab;
-        }
-    }
-
     public static final List<Item> CONTENT = new ArrayList<>();
 
     public static Item.Properties DEFAULT_PROPERTIES() {
@@ -128,9 +115,7 @@ public class ItemRegistry {
     }
 
     public static <T extends Item> DeferredHolder<Item, T> register(String name, Item.Properties properties, Function<Item.Properties, T> function) {
-        if (properties instanceof LodestoneItemProperties lodestoneItemProperties) {
-            TAB_SORTING.computeIfAbsent(lodestoneItemProperties.tab, (key) -> new ArrayList<>()).add(MalumMod.malumPath(name));
-        }
+        LodestoneItemProperties.addToTabSorting(MalumMod.malumPath(name), properties);
         return ITEMS.register(name, () -> function.apply(properties));
     }
 
@@ -171,11 +156,8 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> INFERNAL_SPIRITED_GLASS = register("infernal_spirited_glass", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.INFERNAL_SPIRITED_GLASS.get(), p));
     public static final DeferredHolder<Item, Item> EARTHEN_SPIRITED_GLASS = register("earthen_spirited_glass", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.EARTHEN_SPIRITED_GLASS.get(), p));
 
-    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER = register("soulwoven_banner", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER.get(), p));
-    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_HORNS = register("soulwoven_banner_horns", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_HORNS.get(), p));
-    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_SIGIL = register("soulwoven_banner_sigil", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_SIGIL.get(), p));
-    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_BREEZE = register("soulwoven_banner_breeze", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_BREEZE.get(), p));
-    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER_FRACTAL = register("soulwoven_banner_fractal", BUILDING_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOVEN_BANNER_FRACTAL.get(), p));
+    public static final DeferredHolder<Item, Item> SOULWOVEN_BANNER = register("soulwoven_banner", BUILDING_PROPERTIES(), SoulwovenBannerBlockItem::new);
+
     //endregion
 
     //region tainted rock
@@ -823,8 +805,11 @@ public class ItemRegistry {
             ItemProperties.register(
                     SOULWOVEN_POUCH.get(),
                     MalumMod.malumPath("filled"),
-                    (stack, level, holder, holderID) -> SoulwovenPouchItem.getFullnessDisplay(stack)
-            );
+                    (stack, level, holder, holderID) -> SoulwovenPouchItem.getFullnessDisplay(stack));
+            ItemProperties.register(
+                    SOULWOVEN_BANNER.get(),
+                    MalumMod.malumPath("pattern"),
+                    (stack, level, holder, holderID) -> SoulwovenBannerBlockItem.getBannerPattern(stack));
             ItemProperties.register(
                     RITUAL_SHARD.get(),
                     MalumMod.malumPath("tier"),

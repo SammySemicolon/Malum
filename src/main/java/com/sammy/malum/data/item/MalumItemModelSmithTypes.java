@@ -1,8 +1,8 @@
 package com.sammy.malum.data.item;
 
 import com.sammy.malum.MalumMod;
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.item.cosmetic.skins.ArmorSkin;
-import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.registry.common.item.ArmorSkinRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -44,6 +44,7 @@ public class MalumItemModelSmithTypes {
                     .end();
         }
     });
+
     public static ItemModelSmith SOULWOVEN_POUCH = new ItemModelSmith((item, provider) -> {
         String base = provider.getItemName(item);
         final ResourceLocation texture = provider.getItemTexture(base);
@@ -53,6 +54,24 @@ public class MalumItemModelSmithTypes {
                 .model(provider.withExistingParent(base + "_filled", HANDHELD).texture("layer0", texture.withSuffix("_filled")))
                 .end();
     });
+
+    public static ItemModelSmith SOULWOVEN_BANNER = new ItemModelSmith((item, provider) -> {
+        String base = provider.getItemName(item);
+        provider.createGenericModel(item, GENERATED, provider.getItemTexture(base + "_default"));
+        for (SoulwovenBannerPatternData pattern : SoulwovenBannerPatternData.REGISTERED_PATTERNS) {
+            final int i = SoulwovenBannerPatternData.REGISTERED_PATTERNS.indexOf(pattern);
+            if (pattern.equals(SoulwovenBannerPatternData.DEFAULT)) {
+                continue;
+            }
+            final String path = base + "_" + pattern.type().getPath();
+            ResourceLocation itemTexturePath = provider.getItemTexture(path);
+            provider.getBuilder(BuiltInRegistries.ITEM.getKey(item).getPath()).override()
+                    .predicate(MalumMod.malumPath("pattern"), i)
+                    .model(provider.withExistingParent(path, GENERATED).texture("layer0", itemTexturePath))
+                    .end();
+        }
+    });
+
     public static ItemModelSmith CATALYST_LOBBER = new ItemModelSmith((item, provider) -> {
         String base = provider.getItemName(item);
         provider.createGenericModel(item, HANDHELD, provider.getItemTexture(base));

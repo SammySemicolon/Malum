@@ -2,29 +2,19 @@ package com.sammy.malum.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
-import com.sammy.malum.*;
-import com.sammy.malum.client.*;
 import com.sammy.malum.common.block.curiosities.banner.*;
-import com.sammy.malum.common.block.curiosities.mana_mote.*;
-import com.sammy.malum.common.block.curiosities.spirit_altar.*;
-import com.sammy.malum.core.systems.spirit.*;
-import com.sammy.malum.registry.common.*;
+import com.sammy.malum.common.data_components.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.*;
 import net.minecraft.core.*;
 import net.minecraft.util.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import org.joml.*;
-import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.rendering.*;
 import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
 import java.lang.Math;
-
-import static com.sammy.malum.client.RenderUtils.*;
 
 
 public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBannerBlockEntity> {
@@ -35,10 +25,8 @@ public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBan
     @Override
     public void render(SoulwovenBannerBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         var blockState = blockEntityIn.getBlockState();
-        if (!(blockState.getBlock() instanceof SoulwovenBannerBlock block)) {
-            return;
-        }
-        var token = RenderTypeToken.createCachedToken(block.texture);
+        final SoulwovenBannerPatternData patternData = blockEntityIn.patternData;
+        var token = RenderTypeToken.createCachedToken(patternData.texturePath());
         var banner = LodestoneRenderTypes.CUTOUT_TEXTURE.applyWithModifierAndCache(token, b -> b.setCullState(RenderStateShard.NO_CULL));
         var builder = VFXBuilders.createWorld().setRenderType(banner).setLight(combinedLightIn);
         var pos = blockEntityIn.getBlockPos();

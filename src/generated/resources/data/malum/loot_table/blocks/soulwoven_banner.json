@@ -11,6 +11,19 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "malum:soulwoven_banner_pattern"
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "malum:soulwoven_banner"
         }
       ],

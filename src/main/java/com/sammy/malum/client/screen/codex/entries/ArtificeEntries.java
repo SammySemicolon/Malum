@@ -6,6 +6,7 @@ import com.sammy.malum.client.screen.codex.pages.recipe.*;
 import com.sammy.malum.client.screen.codex.pages.recipe.vanilla.*;
 import com.sammy.malum.client.screen.codex.pages.text.*;
 import com.sammy.malum.client.screen.codex.screens.*;
+import com.sammy.malum.common.data_components.*;
 import net.minecraft.world.item.*;
 
 import static com.sammy.malum.registry.common.item.ItemRegistry.*;
@@ -63,12 +64,22 @@ public class ArtificeEntries {
                 .addPage(SpiritInfusionPage.fromOutput(SOULWOVEN_SILK.get()))
                 .addPage(new TextPage("soulwoven_silk.soulwoven_banner.1"))
                 .addPage(new CraftingPage(new ItemStack(SOULWOVEN_BANNER.get(), 2), EMPTY, RUNEWOOD_PLANKS.get(), EMPTY, EMPTY, SOULWOVEN_SILK.get(), EMPTY, EMPTY, SOULWOVEN_SILK.get()))
-//                .addPage(new CyclingPage(
-//                        new CraftingPage(SOULWOVEN_BANNER_HORNS.get(), SOULWOVEN_BANNER.get(), GRIM_TALC.get()),
-//                        new CraftingPage(SOULWOVEN_BANNER_SIGIL.get(), SOULWOVEN_BANNER.get(), ROTTING_ESSENCE.get()),
-//                        new CraftingPage(SOULWOVEN_BANNER_BREEZE.get(), SOULWOVEN_BANNER.get(), ASTRAL_WEAVE.get()),
-//                        new CraftingPage(SOULWOVEN_BANNER_FRACTAL.get(), SOULWOVEN_BANNER.get(), WARP_FLUX.get())
-//                ))
+                .addPage(new CyclingPage(
+                        CraftingPage.bannerPage(ROTTING_ESSENCE.get(), SoulwovenBannerPatternData.HUNGER),
+                        CraftingPage.bannerPage(GRIM_TALC.get(), SoulwovenBannerPatternData.HORNS),
+//                        CraftingPage.bannerPage(ASTRAL_WEAVE.get(), SoulwovenBannerPatternData.HUNGER),
+                        CraftingPage.bannerPage(WARP_FLUX.get(), SoulwovenBannerPatternData.HALLUCINATION)
+                ))
+                .addPage(new CyclingPage(
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.SACRED.getRecipeId()),
+//                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.WICKED.getRecipeId()),
+//                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.ARCANE.getRecipeId()),
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.ELDRITCH.getRecipeId()),
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.AERIAL.getRecipeId()),
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.AQUEOUS.getRecipeId()),
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.EARTHEN.getRecipeId())//,
+//                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.INFERNAL.getRecipeId())
+                ))
         );
 
         screen.addEntry("soulwoven_pouch", 5, 6, b -> b
@@ -76,7 +87,6 @@ public class ArtificeEntries {
                 .addPage(new HeadlineTextPage("soulwoven_pouch", "soulwoven_pouch.1"))
                 .addPage(new CraftingPage(SOULWOVEN_POUCH.get(), EMPTY, STRING, EMPTY, EMPTY, SOULWOVEN_SILK.get()))
         );
-
 
         screen.addEntry("soulhunter_armor", 6, 6, b -> b
                 .configureWidget(w -> w.setIcon(SOUL_HUNTER_CLOAK))

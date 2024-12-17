@@ -3,6 +3,8 @@ package com.sammy.malum.client.screen.codex.pages.recipe.vanilla;
 import com.sammy.malum.*;
 import com.sammy.malum.client.screen.codex.pages.*;
 import com.sammy.malum.client.screen.codex.screens.*;
+import com.sammy.malum.common.data_components.*;
+import com.sammy.malum.registry.common.item.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.world.item.*;
 import net.neoforged.fml.*;
@@ -52,12 +54,20 @@ public class CraftingPage extends BookPage {
         renderItem(screen, guiGraphics, outputStack, left + 63, top + 126, mouseX, mouseY);
     }
 
+    public static CraftingPage shapeless(Item output, Item... inputs) {
+        return new CraftingPage(output.getDefaultInstance(), inputs);
+    }
+
     public static CraftingPage fullPage(Item output, Item input) {
         return fullPage(output.getDefaultInstance(), input.getDefaultInstance());
     }
 
     public static CraftingPage fullPage(ItemStack output, ItemStack input) {
         return new CraftingPage(output, input, input, input, input, input, input, input, input, input);
+    }
+
+    public static CraftingPage bannerPage(Item input, SoulwovenBannerPatternData pattern) {
+        return new CraftingPage(pattern.getDefaultStack(), ItemRegistry.SOULWOVEN_BANNER.get(), input);
     }
 
     public static CraftingPage scythePage(Item scythe, Item metal, Item reagent) {
@@ -113,22 +123,19 @@ public class CraftingPage extends BookPage {
     public static CraftingPage toolPage(ItemStack tool, ItemStack metal) {
         ItemStack stick = Items.STICK.getDefaultInstance();
         ItemStack empty = Items.AIR.getDefaultInstance();
-        if (tool.getItem() instanceof SwordItem) {
-            return new CraftingPage(tool, empty, metal, empty, empty, metal, empty, empty, stick, empty);
-        }
-        if (tool.getItem() instanceof AxeItem) {
-            return new CraftingPage(tool, metal, metal, empty, metal, stick, empty, empty, stick, empty);
-        }
-        if (tool.getItem() instanceof HoeItem) {
-            return new CraftingPage(tool, metal, metal, empty, empty, stick, empty, empty, stick, empty);
-        }
-        if (tool.getItem() instanceof ShovelItem) {
-            return new CraftingPage(tool, empty, metal, empty, empty, stick, empty, empty, stick, empty);
-        }
-        if (tool.getItem() instanceof PickaxeItem) {
-            return new CraftingPage(tool, metal, metal, metal, empty, stick, empty, empty, stick, empty);
-        }
-        return null;
+        return switch (tool.getItem()) {
+            case SwordItem swordItem ->
+                    new CraftingPage(tool, empty, metal, empty, empty, metal, empty, empty, stick, empty);
+            case AxeItem axeItem ->
+                    new CraftingPage(tool, metal, metal, empty, metal, stick, empty, empty, stick, empty);
+            case HoeItem hoeItem ->
+                    new CraftingPage(tool, metal, metal, empty, empty, stick, empty, empty, stick, empty);
+            case ShovelItem shovelItem ->
+                    new CraftingPage(tool, empty, metal, empty, empty, stick, empty, empty, stick, empty);
+            case PickaxeItem pickaxeItem ->
+                    new CraftingPage(tool, metal, metal, metal, empty, stick, empty, empty, stick, empty);
+            default -> null;
+        };
     }
 
     public static CraftingPage knifePage(Item tool, Item metal) {

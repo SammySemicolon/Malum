@@ -1,0 +1,23 @@
+{
+  "type": "malum:spirit_infusion",
+  "ingredient": {
+    "count": 1,
+    "item": "malum:soulwoven_banner"
+  },
+  "output": {
+    "components": {
+      "malum:soulwoven_banner_pattern": {
+        "type": "malum:fractal",
+        "texture": "malum:textures/block/banners/soulwoven_banner_fractal.png"
+      }
+    },
+    "count": 1,
+    "id": "malum:soulwoven_banner"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 1
+    }
+  ]
+}

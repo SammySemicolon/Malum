@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "malum:soulwoven_banner"
+    },
+    {
+      "item": "malum:grim_talc"
+    }
+  ],
+  "result": {
+    "components": {
+      "malum:soulwoven_banner_pattern": {
+        "type": "malum:horns",
+        "texture": "malum:textures/block/banners/soulwoven_banner_horns.png"
+      }
+    },
+    "count": 1,
+    "id": "malum:soulwoven_banner"
+  }
+}

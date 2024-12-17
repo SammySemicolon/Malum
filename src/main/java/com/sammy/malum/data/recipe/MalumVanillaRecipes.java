@@ -1,6 +1,7 @@
 package com.sammy.malum.data.recipe;
 
 import com.sammy.malum.*;
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.data.recipe.builder.vanilla.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -59,6 +60,10 @@ public class MalumVanillaRecipes implements IConditionBuilder {
 
         //BANNERS
         shaped(RecipeCategory.BUILDING_BLOCKS, ItemRegistry.SOULWOVEN_BANNER.get()).define('X', ItemTagRegistry.RUNEWOOD_PLANKS).define('Y', ItemRegistry.SOULWOVEN_SILK.get()).pattern("X").pattern("Y").pattern("Y").unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(output);
+        bannerRecipe(output, ItemRegistry.ROTTING_ESSENCE.get(), SoulwovenBannerPatternData.HUNGER);
+        bannerRecipe(output, ItemRegistry.GRIM_TALC.get(), SoulwovenBannerPatternData.HORNS);
+        bannerRecipe(output, ItemRegistry.WARP_FLUX.get(), SoulwovenBannerPatternData.HALLUCINATION);
+
 
         //SPIRIT METALS
         shaped(RecipeCategory.MISC, ItemRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get()).define('#', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(output);
@@ -251,6 +256,10 @@ public class MalumVanillaRecipes implements IConditionBuilder {
 
     private static RecipeBuilder blastingWithCount(Ingredient ingredient, RecipeCategory category, Item resultItem, int resultCount, float experience, int time) {
         return blasting(ingredient, category, new ItemStack(resultItem, resultCount), experience, time);
+    }
+
+    private static void bannerRecipe(RecipeOutput consumer, Item material, SoulwovenBannerPatternData pattern) {
+        shapeless(RecipeCategory.BUILDING_BLOCKS, pattern.getDefaultStack()).requires(ItemRegistry.SOULWOVEN_BANNER.get()).requires(material).unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(consumer, pattern.getRecipeId());
     }
 
     private static void weaveRecipe(RecipeOutput consumer, Item sideItem, Supplier<? extends Item> output) {

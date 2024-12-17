@@ -1,5 +1,6 @@
 package com.sammy.malum.data.recipe.infusion;
 
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.data.recipe.builder.*;
 import com.sammy.malum.registry.common.item.*;
@@ -24,14 +25,14 @@ public class MaterialSpiritInfusionRecipes {
         spiritedGlassRecipe(recipeOutput, EARTHEN_SPIRIT, ItemRegistry.EARTHEN_SPIRITED_GLASS.get());
         spiritedGlassRecipe(recipeOutput, INFERNAL_SPIRIT, ItemRegistry.INFERNAL_SPIRITED_GLASS.get());
 
-//        soulwovenBannerRecipe(recipeOutput, SACRED_SPIRIT, ItemRegistry.SACRED_SPIRITED_GLASS.get());
-//        soulwovenBannerRecipe(recipeOutput, WICKED_SPIRIT, ItemRegistry.WICKED_SPIRITED_GLASS.get());
-//        soulwovenBannerRecipe(recipeOutput, ARCANE_SPIRIT, ItemRegistry.ARCANE_SPIRITED_GLASS.get());
-//        soulwovenBannerRecipe(recipeOutput, ELDRITCH_SPIRIT, ItemRegistry.ELDRITCH_SPIRITED_GLASS.get());
-//        soulwovenBannerRecipe(recipeOutput, AERIAL_SPIRIT, ItemRegistry.AERIAL_SPIRITED_GLASS.get());
-//        soulwovenBannerRecipe(recipeOutput, AQUEOUS_SPIRIT, ItemRegistry.AQUEOUS_SPIRITED_GLASS.get());
-//        soulwovenBannerRecipe(recipeOutput, EARTHEN_SPIRIT, ItemRegistry.EARTHEN_SPIRITED_GLASS.get());
-//        soulwovenBannerRecipe(recipeOutput, INFERNAL_SPIRIT, ItemRegistry.INFERNAL_SPIRITED_GLASS.get());
+        soulwovenBannerRecipe(recipeOutput, SACRED_SPIRIT, SoulwovenBannerPatternData.SACRED);
+//        soulwovenBannerRecipe(recipeOutput, WICKED_SPIRIT, SoulwovenBannerPatternData.WICKED);
+//        soulwovenBannerRecipe(recipeOutput, ARCANE_SPIRIT, SoulwovenBannerPatternData.ARCANE);
+        soulwovenBannerRecipe(recipeOutput, ELDRITCH_SPIRIT, SoulwovenBannerPatternData.ELDRITCH);
+        soulwovenBannerRecipe(recipeOutput, AERIAL_SPIRIT, SoulwovenBannerPatternData.AERIAL);
+        soulwovenBannerRecipe(recipeOutput, AQUEOUS_SPIRIT, SoulwovenBannerPatternData.AQUEOUS);
+        soulwovenBannerRecipe(recipeOutput, EARTHEN_SPIRIT, SoulwovenBannerPatternData.EARTHEN);
+//        soulwovenBannerRecipe(recipeOutput, INFERNAL_SPIRIT, SoulwovenBannerPatternData.INFERNAL);
 
         new SpiritInfusionRecipeBuilder(Items.GUNPOWDER, 1, ItemRegistry.HEX_ASH.get(), 1)
                 .addSpirit(ARCANE_SPIRIT, 1)
@@ -133,9 +134,9 @@ public class MaterialSpiritInfusionRecipes {
                 .save(recipeOutput);
     }
 
-    public static void soulwovenBannerRecipe(RecipeOutput recipeOutput, MalumSpiritType spirit, Item banner) {
-        new SpiritInfusionRecipeBuilder(ItemRegistry.SOULWOVEN_BANNER.get(), 1, banner, 1)
+    public static void soulwovenBannerRecipe(RecipeOutput recipeOutput, MalumSpiritType spirit, SoulwovenBannerPatternData pattern) {
+        new SpiritInfusionRecipeBuilder(ItemRegistry.SOULWOVEN_BANNER.get(), pattern.getDefaultStack())
                 .addSpirit(spirit, 1)
-                .save(recipeOutput);
+                .save(recipeOutput, pattern.getRecipeId());
     }
 }

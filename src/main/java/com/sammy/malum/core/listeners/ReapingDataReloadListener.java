@@ -9,7 +9,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,10 +21,6 @@ public class ReapingDataReloadListener extends SimpleJsonResourceReloadListener 
 
     public ReapingDataReloadListener() {
         super(GSON, "reaping_data");
-    }
-
-    public static void register(AddReloadListenerEvent event) {
-        event.addListener(new ReapingDataReloadListener());
     }
 
     @Override

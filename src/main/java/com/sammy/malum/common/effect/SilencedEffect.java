@@ -1,7 +1,6 @@
 package com.sammy.malum.common.effect;
 
 import com.sammy.malum.*;
-import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
@@ -20,12 +19,11 @@ public class SilencedEffect extends MobEffect {
         addAttributeModifier(AttributeRegistry.SOUL_WARD_RECOVERY_MULTIPLIER, MalumMod.malumPath("silenced"), -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
         addAttributeModifier(AttributeRegistry.ARCANE_RESONANCE, MalumMod.malumPath("silenced"), -0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-        IronsSpellsCompat.addSilencedNegativeAttributeModifiers(this);
     }
 
     @Override
     public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        pLivingEntity.getData(AttachmentTypeRegistry.VOID_INFLUENCE).setAfflictionLevel(20 + (pAmplifier+1) * 3);
+        pLivingEntity.getAttachedOrCreate(AttachmentTypeRegistry.VOID_INFLUENCE).setAfflictionLevel(20 + (pAmplifier+1) * 3);
         return true;
     }
 }

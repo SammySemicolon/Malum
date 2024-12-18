@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 import com.sammy.malum.client.renderer.entity.FloatingItemEntityRenderer;
 import com.sammy.malum.common.block.curiosities.spirit_altar.SpiritAltarBlockEntity;
 import com.sammy.malum.common.item.spirit.SpiritShardItem;
+import io.github.fabricators_of_create.porting_lib.block.CustomRenderBoundingBoxBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -20,7 +21,7 @@ import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntityInventory
 
 import static net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY;
 
-public class SpiritAltarRenderer implements BlockEntityRenderer<SpiritAltarBlockEntity> {
+public class SpiritAltarRenderer implements BlockEntityRenderer<SpiritAltarBlockEntity>, CustomRenderBoundingBoxBlockEntity {
     public SpiritAltarRenderer(BlockEntityRendererProvider.Context context) {
     }
 
@@ -57,9 +58,10 @@ public class SpiritAltarRenderer implements BlockEntityRenderer<SpiritAltarBlock
         }
     }
 
+
     @Override
-    public AABB getRenderBoundingBox(SpiritAltarBlockEntity altar) {
-        var pos = altar.getBlockPos();
+    public AABB getRenderBoundingBox() {
+        var pos = self().getBlockPos();
         return new AABB(pos.getX() - 1, pos.getY(), pos.getZ() - 1, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2);
     }
 }

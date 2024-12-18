@@ -6,7 +6,9 @@
   ],
   "repairMaterial": {
     "count": 2,
-    "item": "malum:cthonic_gold_fragment"
+    "ingredient": {
+      "item": "malum:cthonic_gold_fragment"
+    }
   },
   "repairOutputOverride": "malum:gold_impetus",
   "spirits": [

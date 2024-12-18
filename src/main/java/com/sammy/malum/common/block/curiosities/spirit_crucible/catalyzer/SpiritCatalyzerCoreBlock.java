@@ -2,19 +2,18 @@ package com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
 import team.lodestar.lodestone.systems.block.WaterLoggedEntityBlock;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
@@ -48,9 +47,9 @@ public class SpiritCatalyzerCoreBlock<T extends SpiritCatalyzerCoreBlockEntity> 
 
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
-        if (pLevel.getBlockEntity(pPos) instanceof SpiritCatalyzerCoreBlockEntity catalyzer) {
-            IItemHandler inv = Capabilities.ItemHandler.BLOCK.getCapability(pLevel, pPos, pState, catalyzer, null);
-            if (inv != null) return ItemHandlerHelper.calcRedstoneFromInventory(inv);
+        BlockEntity be = pLevel.getBlockEntity(pPos);
+        if (be instanceof SpiritCatalyzerCoreBlockEntity altarBlockEntity) {
+            return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(altarBlockEntity);
         }
         return 0;
     }

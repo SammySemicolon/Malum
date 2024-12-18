@@ -3,6 +3,7 @@ package com.sammy.malum.client.renderer.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.sammy.malum.common.block.storage.MalumItemHolderBlockEntity;
+import io.github.fabricators_of_create.porting_lib.block.CustomRenderBoundingBoxBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -16,7 +17,7 @@ import net.minecraft.world.phys.*;
 import static net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY;
 
 
-public class MalumItemHolderRenderer implements BlockEntityRenderer<MalumItemHolderBlockEntity> {
+public class MalumItemHolderRenderer implements BlockEntityRenderer<MalumItemHolderBlockEntity>, CustomRenderBoundingBoxBlockEntity {
     public MalumItemHolderRenderer(BlockEntityRendererProvider.Context context) {
     }
 
@@ -37,8 +38,8 @@ public class MalumItemHolderRenderer implements BlockEntityRenderer<MalumItemHol
     }
 
     @Override
-    public AABB getRenderBoundingBox(MalumItemHolderBlockEntity blockEntity) {
-        var pos = blockEntity.getBlockPos();
+    public AABB getRenderBoundingBox() {
+        var pos = self().getBlockPos();
         return new AABB(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1, pos.getX() + 2, pos.getY() + 2, pos.getZ() + 2);
     }
 }

@@ -9,7 +9,9 @@
   ],
   "repairMaterial": {
     "count": 2,
-    "item": "malum:soulwoven_silk"
+    "ingredient": {
+      "item": "malum:soulwoven_silk"
+    }
   },
   "spirits": [
     {

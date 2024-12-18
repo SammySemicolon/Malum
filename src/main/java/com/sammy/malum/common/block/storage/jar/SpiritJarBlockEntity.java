@@ -54,7 +54,7 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity {
     private long lastClickTime;
     private UUID lastClickUUID;
 
-    private final Supplier<IItemHandler> inventory = () -> new IItemHandler() {
+    public final Supplier<IItemHandler> inventory = () -> new IItemHandler() {
         @Override
         public int getSlots() {
             return 2;

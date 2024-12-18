@@ -29,7 +29,7 @@ public class TotemPoleBlock<T extends TotemPoleBlockEntity> extends LodestoneEnt
     public final boolean isSoulwood;
 
     public TotemPoleBlock(Properties properties, Supplier<? extends Block> logBlock, boolean isSoulwood) {
-        super(properties.lootFrom(logBlock));
+        super(properties);
         this.logBlock = logBlock;
         this.isSoulwood = isSoulwood;
         this.registerDefaultState(this.stateDefinition.any().setValue(HORIZONTAL_FACING, Direction.NORTH).setValue(SPIRIT_TYPE, "sacred"));
@@ -49,10 +49,9 @@ public class TotemPoleBlock<T extends TotemPoleBlockEntity> extends LodestoneEnt
         return 0;
     }
 
-
     @Override
-    public @NotNull ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader world, BlockPos pos, Player player) {
-        return logBlock.get().getCloneItemStack(world, pos, state);
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+        return logBlock.get().getCloneItemStack(level, pos, state);
     }
 
     @Override

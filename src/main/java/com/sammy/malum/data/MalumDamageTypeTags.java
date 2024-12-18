@@ -23,15 +23,14 @@ public class MalumDamageTypeTags extends FabricTagProvider<DamageType> {
 
     @Override
     protected void addTags(Provider pProvider) {
-        tag(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP);
-
-        tag(LodestoneDamageTypeTags.IS_MAGIC).add(DamageTypeRegistry.VOODOO_PLAYERLESS, DamageTypeRegistry.VOODOO);
-        tag(DamageTypeTagRegistry.SOUL_SHATTER_DAMAGE).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP, DamageTypeRegistry.VOODOO_PLAYERLESS, DamageTypeRegistry.VOODOO, DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
-
-        tag(DamageTypeTagRegistry.IS_SCYTHE).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP, DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
-        tag(DamageTypeTagRegistry.IS_SCYTHE_MELEE).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP);
-
-
-        tag(DamageTypeTags.BYPASSES_COOLDOWN).add(DamageTypeRegistry.VOODOO, DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
+        getOrCreateTagBuilder(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC).addOptional(DamageTypeRegistry.SCYTHE_MELEE).addOptional(DamageTypeRegistry.SCYTHE_SWEEP);
+        getOrCreateTagBuilder(LodestoneDamageTypeTags.IS_MAGIC).addOptional(DamageTypeRegistry.VOODOO);
+        getOrCreateTagBuilder(DamageTypeTagRegistry.SOUL_SHATTER_DAMAGE).addOptional(DamageTypeRegistry.SCYTHE_MELEE)
+                .addOptional(DamageTypeRegistry.VOODOO)
+                .addOptional(DamageTypeRegistry.SCYTHE_SWEEP)
+                .addOptional(DamageTypeRegistry.HIDDEN_BLADE_COUNTER
+                );
+        getOrCreateTagBuilder(DamageTypeTagRegistry.IS_SCYTHE).addOptional(DamageTypeRegistry.SCYTHE_MELEE).addOptional(DamageTypeRegistry.SCYTHE_SWEEP).addOptional(DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
+        getOrCreateTagBuilder(DamageTypeTagRegistry.IS_SCYTHE_MELEE).addOptional(DamageTypeRegistry.SCYTHE_MELEE).addOptional(DamageTypeRegistry.SCYTHE_SWEEP);
     }
 }

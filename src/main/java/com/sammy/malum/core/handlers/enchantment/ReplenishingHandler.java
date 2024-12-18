@@ -2,14 +2,13 @@ package com.sammy.malum.core.handlers.enchantment;
 
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.common.packets.*;
-import com.sammy.malum.compability.irons_spellbooks.*;
+import com.sammy.malum.registry.common.PacketRegistry;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.network.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 
 import java.util.*;
@@ -27,13 +26,10 @@ public class ReplenishingHandler {
                     if (cooldowns.isOnCooldown(staff) && player.getAttackStrengthScale(0) > 0.8f) {
                         replenishStaffCooldown(staff, player, level);
                         if (player instanceof ServerPlayer serverPlayer) {
-                            PacketDistributor.sendToPlayer(serverPlayer, new ReplenishingCooldownUpdatePayload(staff, level));
+                            PacketRegistry.sendToPlayer(serverPlayer, new ReplenishingCooldownUpdatePayload(staff, level));
                         }
                     }
                     return;
-                }
-                if (player instanceof ServerPlayer serverPlayer) {
-                    IronsSpellsCompat.recoverSpellCooldowns(serverPlayer, level);
                 }
             }
         }

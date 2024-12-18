@@ -13,12 +13,6 @@ import team.lodestar.lodestone.systems.recipe.*;
 
 public class SpiritTransmutationRecipe extends LodestoneInWorldRecipe<SingleRecipeInput> {
 
-    public static final MapCodec<SpiritTransmutationRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
-            Ingredient.CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
-            ItemStack.CODEC.fieldOf("output").forGetter((recipe) -> recipe.output),
-            Codec.STRING.optionalFieldOf("group", "").forGetter((recipe) -> recipe.group)
-    ).apply(obj, SpiritTransmutationRecipe::new));
-
     public static final String NAME = "spirit_transmutation";
 
     public final Ingredient ingredient;
@@ -37,5 +31,27 @@ public class SpiritTransmutationRecipe extends LodestoneInWorldRecipe<SingleReci
     @Override
     public boolean matches(SingleRecipeInput input, Level level) {
         return this.ingredient.test(input.item());
+    }
+
+    public static class Serializer implements RecipeSerializer<SpiritTransmutationRecipe> {
+
+        public static final MapCodec<SpiritTransmutationRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
+                Ingredient.CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
+                ItemStack.CODEC.fieldOf("output").forGetter((recipe) -> recipe.output),
+                Codec.STRING.fieldOf("group").forGetter((recipe) -> recipe.group)
+        ).apply(obj, SpiritTransmutationRecipe::new));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, SpiritTransmutationRecipe> STREAM_CODEC =
+                ByteBufCodecs.fromCodecWithRegistries(CODEC.codec());
+
+        @Override
+        public MapCodec<SpiritTransmutationRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, SpiritTransmutationRecipe> streamCodec() {
+            return STREAM_CODEC;
+        }
     }
 }

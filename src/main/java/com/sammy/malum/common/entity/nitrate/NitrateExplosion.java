@@ -8,9 +8,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
-import net.neoforged.neoforge.event.level.ExplosionEvent;
 import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.*;
+
+import java.util.List;
 
 public class NitrateExplosion extends Explosion {
 
@@ -18,9 +19,9 @@ public class NitrateExplosion extends Explosion {
         super(level, source, damageSource, damageCalculator, x, y, z, radius, fire, blockInteraction, smallExplosionParticles, largeExplosionParticles, explosionSound);
     }
 
-    public static void processExplosion(ExplosionEvent.Detonate event) {
-        if (event.getExplosion() instanceof NitrateExplosion) {
-            event.getAffectedEntities().removeIf(e -> e instanceof AbstractNitrateEntity || e instanceof Player player && player.isCreative());
+    public static void processExplosion(Level level, Explosion explosion, List<Entity> entities) {
+        if (explosion instanceof NitrateExplosion) {
+            entities.removeIf(e -> e instanceof AbstractNitrateEntity || e instanceof Player player && player.isCreative());
         }
     }
 
@@ -40,7 +41,6 @@ public class NitrateExplosion extends Explosion {
                 level.getGameRules().getBoolean(GameRules.RULE_TNT_EXPLOSION_DROP_DECAY) ? BlockInteraction.DESTROY_WITH_DECAY : BlockInteraction.DESTROY,
                 ParticleTypes.EXPLOSION, ParticleTypes.EXPLOSION_EMITTER, SoundEvents.GENERIC_EXPLODE
         );
-        if (net.neoforged.neoforge.event.EventHooks.onExplosionStart(level, explosion)) return explosion;
         explosion.explode();
         explosion.finalizeExplosion(spawnParticles);
         return explosion;

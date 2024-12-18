@@ -14,13 +14,11 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredient;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.crafting.*;
-
-import javax.annotation.Nonnull;
 
 import static com.sammy.malum.MalumMod.malumPath;
 
@@ -55,13 +53,13 @@ public class SpiritFocusingRecipeCategory implements IRecipeCategory<SpiritFocus
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getBackground() {
         return background;
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getIcon() {
         return icon;
@@ -69,7 +67,7 @@ public class SpiritFocusingRecipeCategory implements IRecipeCategory<SpiritFocus
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SpiritFocusingRecipe recipe, IFocusGroup focuses) {
-        JEIHandler.addItemsToJei(builder, RecipeIngredientRole.INPUT, 62, 13, false, recipe.spirits.stream().map(ICustomIngredient::toVanilla).toList());
+        JEIHandler.addItemsToJei(builder, RecipeIngredientRole.INPUT, 62, 13, false, recipe.spirits.stream().map(CustomIngredient::toVanilla).toList());
 
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 57)
                 .addIngredients(recipe.ingredient);

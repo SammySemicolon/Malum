@@ -2,6 +2,8 @@ package com.sammy.malum.common.item.curiosities.curios;
 
 import com.google.common.collect.*;
 import com.sammy.malum.registry.common.*;
+import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.TrinketItem;
 import net.minecraft.core.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.*;
@@ -9,12 +11,10 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.helpers.*;
-import top.theillusivec4.curios.api.*;
-import top.theillusivec4.curios.api.type.capability.*;
 
 import java.util.function.*;
 
-public abstract class AbstractMalumCurioItem extends Item implements ICurioItem {
+public abstract class AbstractMalumCurioItem extends TrinketItem {
 
     public enum MalumTrinketType {
         CLOTH(SoundRegistry.CLOTH_TRINKET_EQUIP),
@@ -39,24 +39,25 @@ public abstract class AbstractMalumCurioItem extends Item implements ICurioItem 
         this.type = type;
     }
 
-    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-    }
-
     @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+    public Multimap<Holder<Attribute>, AttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, ResourceLocation slotIdentifier) {
         Multimap<Holder<Attribute>, AttributeModifier> map = LinkedHashMultimap.create();
-        addAttributeModifiers(map, slotContext, stack);
+        addAttributeModifiers(map, slot, stack, entity);
         return map;
     }
 
+    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotReference slot, ItemStack stack, LivingEntity entity){
+
+    };
+
     @Override
-    public void onEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        final LivingEntity livingEntity = slotContext.entity();
-        livingEntity.level().playSound(null, livingEntity.blockPosition(), type.sound.get(), SoundSource.PLAYERS, 1.0f, RandomHelper.randomBetween(livingEntity.getRandom(), 0.9f, 1.1f));
+    public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
+        entity.level().playSound(null, entity.blockPosition(), type.sound.get(), SoundSource.PLAYERS, 1.0f, RandomHelper.randomBetween(entity.getRandom(), 0.9f, 1.1f));
+        super.onEquip(stack, slot, entity);
     }
 
     @Override
-    public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
+    public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
         return true;
     }
 

@@ -5,8 +5,9 @@
     "minecraft:mace"
   ],
   "repairMaterial": {
-    "count": 1,
-    "item": "minecraft:breeze_rod"
+    "ingredient": {
+      "item": "minecraft:breeze_rod"
+    }
   },
   "spirits": [
     {

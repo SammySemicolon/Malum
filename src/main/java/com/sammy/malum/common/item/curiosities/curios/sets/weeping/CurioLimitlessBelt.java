@@ -8,6 +8,7 @@ import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.AttributeRegistry;
+import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.*;
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
-import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.function.Consumer;
 
@@ -32,7 +32,7 @@ public class CurioLimitlessBelt extends MalumCurioItem implements IMalumEventRes
     }
 
     @Override
-    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotReference slot, ItemStack stack, LivingEntity living) {
         var id = MalumMod.malumPath("belt_of_the_limitless");
         addAttributeModifier(map, AttributeRegistry.SOUL_WARD_CAPACITY, new AttributeModifier(id, 1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         addAttributeModifier(map, AttributeRegistry.SOUL_WARD_RECOVERY_RATE, new AttributeModifier(id, -0.25f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));

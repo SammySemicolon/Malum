@@ -81,7 +81,7 @@ public class EtherBlockEntity extends LodestoneBlockEntity {
     }
 
     @Override
-    public ItemStack onClone(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
+    public ItemStack onClone(BlockState state, BlockGetter level, BlockPos pos) {
         ItemStack stack = state.getBlock().asItem().getDefaultInstance();
         AbstractEtherItem etherItem = (AbstractEtherItem) stack.getItem();
         if (firstColor != null) {
@@ -90,7 +90,7 @@ public class EtherBlockEntity extends LodestoneBlockEntity {
         if (secondColor != null) {
             etherItem.setSecondColor(stack, secondColor.getRGB());
         }
-        return super.onClone(state, target, level, pos, player);
+        return super.onClone(state, level, pos);
     }
 
     @Override

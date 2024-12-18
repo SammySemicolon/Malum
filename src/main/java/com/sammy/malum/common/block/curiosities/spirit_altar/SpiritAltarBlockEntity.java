@@ -6,6 +6,7 @@ import com.sammy.malum.common.item.spirit.SpiritShardItem;
 import com.sammy.malum.common.recipe.spirit.infusion.SpiritInfusionRecipe;
 import com.sammy.malum.core.systems.recipe.SpiritBasedRecipeInput;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
@@ -402,13 +403,5 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity {
             return 1;
         }
         return easing.ease(spiritYLevel / 30f, 0, 1, 1);
-    }
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction side) {
-        if (side == null) {
-            return internalInventory.get();
-        }
-        return exposedInventory.get();
     }
 }

@@ -2,7 +2,9 @@
   "type": "malum:runeworking",
   "primaryInput": {
     "count": 4,
-    "item": "malum:null_slate"
+    "ingredient": {
+      "item": "malum:null_slate"
+    }
   },
   "result": {
     "count": 1,

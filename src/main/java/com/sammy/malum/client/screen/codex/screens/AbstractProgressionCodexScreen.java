@@ -198,10 +198,10 @@ public abstract class AbstractProgressionCodexScreen extends AbstractMalumScreen
     }
 
     public void cut() {
-        int scale = (int) getMinecraft().getWindow().getGuiScale();
+        int scale = (int) Minecraft.getInstance().getWindow().getGuiScale();
         GL11.glScissor(
                 getInsideLeft() * scale,
-                getMinecraft().getWindow().getHeight() - (getInsideTop() + bookInsideHeight) * scale,
+                Minecraft.getInstance().getWindow().getHeight() - (getInsideTop() + bookInsideHeight) * scale,
                 bookInsideWidth * scale,
                 bookInsideHeight * scale);
     }

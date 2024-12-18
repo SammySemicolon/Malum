@@ -32,11 +32,11 @@ public class DataGenerators implements DataGeneratorEntrypoint {
         ExistingFileHelper helper = ExistingFileHelper.withResourcesFromArg();
 
         var items = pack.addProvider(((output, registriesFuture) -> new MalumItemModels(output, helper)));
-        pack.addProvider(((output, registriesFuture) -> new MalumBlockTags(output, registriesFuture)));
+        var blocks = pack.addProvider(((output, registriesFuture) -> new MalumBlockTags(output, registriesFuture)));
         pack.addProvider((output, registriesFuture) -> new MalumBlockStates(output, helper, items));
 
         pack.addProvider((output, registriesFuture) -> new MalumBlockLootTables.BlocksLoot(output, registriesFuture));
-        pack.addProvider((output, registriesFuture) -> new MalumItemTags(output, registriesFuture));
+        pack.addProvider((output, registriesFuture) -> new MalumItemTags(output, registriesFuture, blocks));
 
         pack.addProvider((output, registriesFuture) -> new MalumRecipes(output, registriesFuture));
         pack.addProvider((output, registriesFuture) -> new MalumEnchantments(output, registriesFuture));

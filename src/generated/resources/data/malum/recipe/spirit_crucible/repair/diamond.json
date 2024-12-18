@@ -9,12 +9,15 @@
     "minecraft:diamond_helmet",
     "minecraft:diamond_chestplate",
     "minecraft:diamond_leggings",
-    "minecraft:diamond_boots"
+    "minecraft:diamond_boots",
+    "farmersdelight:diamond_knife"
   ],
   "itemIdRegex": "diamond_.+",
   "repairMaterial": {
     "count": 2,
-    "tag": "c:gems/diamond"
+    "ingredient": {
+      "tag": "c:gems/diamond"
+    }
   },
   "spirits": [
     {

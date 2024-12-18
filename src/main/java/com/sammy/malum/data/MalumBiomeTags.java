@@ -25,14 +25,14 @@ public class MalumBiomeTags extends FabricTagProvider<Biome> {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         //super.addTags(pProvider);
-        getOrCreateTagBuilder(BiomeTagRegistry.HAS_SOULSTONE).addTag(BiomeTags.IS_OVERWORLD);
-        getOrCreateTagBuilder(BiomeTagRegistry.HAS_BRILLIANT).addTag(BiomeTags.IS_OVERWORLD);
-        getOrCreateTagBuilder(BiomeTagRegistry.HAS_BLAZING_QUARTZ).addTag(BiomeTags.IS_NETHER);
-        getOrCreateTagBuilder(BiomeTagRegistry.HAS_QUARTZ).addTag(BiomeTags.IS_OVERWORLD);
-        getOrCreateTagBuilder(BiomeTagRegistry.HAS_CTHONIC).addTag(BiomeTags.IS_OVERWORLD);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_SOULSTONE).addOptionalTag(BiomeTags.IS_OVERWORLD);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_BRILLIANT).addOptionalTag(BiomeTags.IS_OVERWORLD);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_BLAZING_QUARTZ).addOptionalTag(BiomeTags.IS_NETHER);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_QUARTZ).addOptionalTag(BiomeTags.IS_OVERWORLD);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_CTHONIC).addOptionalTag(BiomeTags.IS_OVERWORLD);
 
-        getOrCreateTagBuilder(BiomeTagRegistry.HAS_RUNEWOOD).addTag(Tags.Biomes.IS_PLAINS).addTag(Tags.Biomes.IS_MOUNTAIN).addTag(BiomeTags.IS_HILL);
-        getOrCreateTagBuilder(BiomeTagRegistry.HAS_RARE_RUNEWOOD).addTag(BiomeTags.IS_FOREST);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_RUNEWOOD).addOptionalTag(Tags.Biomes.IS_PLAINS).addOptionalTag(Tags.Biomes.IS_MOUNTAIN).addOptionalTag(BiomeTags.IS_HILL);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_RARE_RUNEWOOD).addOptionalTag(BiomeTags.IS_FOREST);
 
         getOrCreateTagBuilder(BiomeTagRegistry.HAS_AZURE_RUNEWOOD).add(Biomes.SNOWY_PLAINS).add(Biomes.SNOWY_TAIGA).add(Biomes.FROZEN_RIVER).add(Biomes.SNOWY_BEACH);
         getOrCreateTagBuilder(BiomeTagRegistry.HAS_RARE_AZURE_RUNEWOOD).add(Biomes.FROZEN_PEAKS).add(Biomes.JAGGED_PEAKS).add(Biomes.SNOWY_SLOPES).add(Biomes.GROVE);

@@ -5,6 +5,7 @@ import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.entity.EntityHooks;
 import net.minecraft.server.level.*;
 import net.minecraft.stats.*;
 import net.minecraft.util.*;
@@ -16,7 +17,6 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.common.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
 
@@ -44,7 +44,7 @@ public class AscensionHandler {
                 player.setDeltaMovement(newMotion);
             }
             player.hasImpulse = true;
-            CommonHooks.onLivingJump(player);
+            EntityHooks.onLivingJump(player);
         }
         if (level instanceof ServerLevel serverLevel) {
             var random = serverLevel.getRandom();

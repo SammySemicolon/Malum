@@ -14,14 +14,5 @@ public abstract class MalumArmorItem extends LodestoneArmorItem {
         super(materialIn, slot, builder);
     }
 
-    @Override
-    public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
-        ArmorSkin skin = ArmorSkin.getAppliedItemSkin(stack);
-        if (skin != null && entity instanceof LivingEntity livingEntity) {
-            return ArmorSkinRenderingData.RENDERING_DATA.apply(skin).getTexture(livingEntity);
-        }
-        return getArmorTexture();
-    }
-
     public abstract ResourceLocation getArmorTexture();
 }

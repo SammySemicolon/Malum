@@ -48,11 +48,11 @@ public class VoidFavorRecipeBuilder implements AutonamedRecipeBuilder<FavorOfThe
 
     @Override
     public void save(RecipeOutput recipeOutput, String recipeName) {
-        save(recipeOutput, MalumMod.malumPath("void_favor/" + recipeName));
+        saveRecipe(recipeOutput, MalumMod.malumPath("void_favor/" + recipeName));
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
+    public void saveRecipe(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
         defaultSaveFunc(recipeOutput, resourceLocation);
     }
 

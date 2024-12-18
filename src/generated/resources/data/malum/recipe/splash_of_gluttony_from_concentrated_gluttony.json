@@ -1,14 +1,17 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
-      "count": 1,
-      "tag": "c:gunpowders"
+      "ingredient": {
+        "tag": "c:gunpowders"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:concentrated_gluttony"
+    "ingredient": {
+      "item": "malum:concentrated_gluttony"
+    }
   },
   "output": {
     "count": 1,

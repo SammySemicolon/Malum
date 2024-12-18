@@ -20,7 +20,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,13 +58,13 @@ public class SpiritRepairRecipeCategory implements IRecipeCategory<SpiritRepairR
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getBackground() {
         return background;
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getIcon() {
         return icon;
@@ -74,7 +73,7 @@ public class SpiritRepairRecipeCategory implements IRecipeCategory<SpiritRepairR
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SpiritRepairRecipe recipe, IFocusGroup focuses) {
         List<ItemStack> repaired = recipe.itemsForRepair.stream().map(Item::getDefaultInstance).collect(Collectors.toList());
-        List<ItemStack> repairIngredient = Arrays.stream(recipe.repairMaterial.getItems()).toList();
+        List<ItemStack> repairIngredient = Arrays.stream(recipe.repairMaterial.ingredient().getItems()).toList();
 
         List<ItemStack> damaged = repaired.stream()
                 .map(ItemStack::copy)

@@ -3,9 +3,9 @@ package com.sammy.malum.core.handlers;
 import com.sammy.malum.common.entity.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
-import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import dev.architectury.event.EventResult;
 import io.github.fabricators_of_create.porting_lib.entity.events.EntityJoinLevelEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingChangeTargetEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
@@ -13,14 +13,16 @@ import io.github.fabricators_of_create.porting_lib.entity.events.tick.EntityTick
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.BaseSpawner;
+import net.minecraft.world.level.LevelAccessor;
 
 import java.util.function.*;
 
 public class SoulDataHandler {
 
-    public static void markAsSpawnerSpawned(MobSpawnEvent event) {
-        if (event.getSpawner() != null) {
-            event.getEntity().getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).setSpawnerSpawned(true);
+    public static void markAsSpawnerSpawned(LivingEntity living, BaseSpawner baseSpawner) {
+        if (baseSpawner != null) {
+            living.getAttachedOrCreate(AttachmentTypeRegistry.LIVING_SOUL_INFO).setSpawnerSpawned(true);
         }
     }
 
@@ -64,7 +66,7 @@ public class SoulDataHandler {
         }
         if (source.getEntity() instanceof LivingEntity attacker) {
             ItemStack stack = getSoulHunterWeapon(source, attacker);
-            if (stack.is(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS) || TetraCompat.hasSoulStrikeModifier(stack)) {
+            if (stack.is(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS)) {
                 data.setExposed();
             }
         }

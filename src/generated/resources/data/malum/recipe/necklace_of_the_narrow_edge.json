@@ -1,18 +1,23 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
-      "count": 1,
-      "tag": "c:storage_blocks/iron"
+      "ingredient": {
+        "tag": "c:storage_blocks/iron"
+      }
     },
     {
       "count": 2,
-      "tag": "c:ingots/iron"
+      "ingredient": {
+        "tag": "c:ingots/iron"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:ornate_necklace"
+    "ingredient": {
+      "item": "malum:ornate_necklace"
+    }
   },
   "output": {
     "count": 1,

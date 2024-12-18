@@ -1,18 +1,25 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 2,
-      "item": "malum:warp_flux"
+      "ingredient": {
+        "item": "malum:warp_flux"
+      }
     },
     {
       "count": 2,
-      "item": "malum:refined_soulstone"
+      "ingredient": {
+        "item": "malum:refined_soulstone"
+      }
     }
   ],
   "ingredient": {
     "count": 4,
-    "item": "malum:alchemical_calx"
+    "ingredient": {
+      "item": "malum:alchemical_calx"
+    }
   },
   "output": {
     "count": 1,

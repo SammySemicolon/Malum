@@ -1,6 +1,7 @@
 package com.sammy.malum.common.block.storage.jar;
 
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import io.github.fabricators_of_create.porting_lib.transfer.item.ItemHandlerHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +14,6 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.items.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.block.WaterLoggedEntityBlock;
 
@@ -37,8 +37,8 @@ public class SpiritJarBlock<T extends SpiritJarBlockEntity> extends WaterLoggedE
     public boolean handleAttack(Level pLevel, BlockPos pPos, Player pPlayer) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (be instanceof SpiritJarBlockEntity jar) {
-            IItemHandler jarHandler = jar.getCapability(pLevel, pPos, pLevel.getBlockState(pPos), jar, Direction.DOWN);
-            ItemStack item = jarHandler.extractItem(0, pPlayer.isShiftKeyDown() ? 64 : 1, false);
+            var jarHandler = jar.inventory;
+            ItemStack item = jarHandler.get().extractItem(0, pPlayer.isShiftKeyDown() ? 64 : 1, false);
             if (!item.isEmpty()) {
                 ItemHandlerHelper.giveItemToPlayer(pPlayer, item, pPlayer.getInventory().selected);
                 if (!pLevel.isClientSide) {

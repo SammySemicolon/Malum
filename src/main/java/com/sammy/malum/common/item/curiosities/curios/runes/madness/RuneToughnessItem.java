@@ -7,7 +7,6 @@ import com.sammy.malum.registry.common.*;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
-import top.theillusivec4.curios.api.*;
 
 public class RuneToughnessItem extends AbstractRuneCurioItem {
 
@@ -16,8 +15,8 @@ public class RuneToughnessItem extends AbstractRuneCurioItem {
     }
 
     @Override
-    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+    public void addAttributeModifier(Multimap<Holder<Attribute>, AttributeModifier> map, Holder<Attribute> attribute, AttributeModifier modifier) {
         addAttributeModifier(map, Attributes.ARMOR_TOUGHNESS,
-                new AttributeModifier(MalumMod.malumPath("toughness_rune"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                new AttributeModifier(MalumMod.malumPath("curio_armor_toughness"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 }

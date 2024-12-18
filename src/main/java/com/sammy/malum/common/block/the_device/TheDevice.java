@@ -28,7 +28,7 @@ public class TheDevice extends Block {
             pPlayer.swing(pHand, true);
             playSound(pLevel, pPos);
             if (pPlayer.isCreative()) {
-                pPlayer.getData(AttachmentTypeRegistry.PROGRESSION_DATA).hasBeenRejected = false;
+                pPlayer.getAttachedOrCreate(AttachmentTypeRegistry.PROGRESSION_DATA).hasBeenRejected = false;
             }
             return ItemInteractionResult.SUCCESS;
         }
@@ -55,7 +55,7 @@ public class TheDevice extends Block {
 
     public void playSound(Level level, BlockPos pos) {
 //        if (level instanceof ServerLevel serverLevel) {
-//            PacketDistributor.sendToPlayersTrackingChunk(serverLevel, new ChunkPos(pos), new PositionedScreenshakePayload(40, BlockPosHelper.fromBlockPos(pos), 4f, 10f, Easing.EXPO_OUT).setIntensity(4f, 0));
+//            PacketRegistry.sendToPlayersTrackingChunk(serverLevel, new ChunkPos(pos), new PositionedScreenshakePayload(40, BlockPosHelper.fromBlockPos(pos), 4f, 10f, Easing.EXPO_OUT).setIntensity(4f, 0));
 //        }
         level.playSound(null, pos, SoundRegistry.THE_DEEP_BECKONS.get(), SoundSource.BLOCKS, 1, 1);
     }

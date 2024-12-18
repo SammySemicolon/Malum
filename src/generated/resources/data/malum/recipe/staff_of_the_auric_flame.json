@@ -1,22 +1,29 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
-      "count": 1,
-      "item": "malum:fused_consciousness"
+      "ingredient": {
+        "item": "malum:fused_consciousness"
+      }
     },
     {
       "count": 8,
-      "item": "malum:auric_embers"
+      "ingredient": {
+        "item": "malum:auric_embers"
+      }
     },
     {
       "count": 8,
-      "item": "malum:void_salts"
+      "ingredient": {
+        "item": "malum:void_salts"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:mnemonic_hex_staff"
+    "ingredient": {
+      "item": "malum:mnemonic_hex_staff"
+    }
   },
   "output": {
     "count": 1,

@@ -1,18 +1,24 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 8,
-      "tag": "c:gems/diamond"
+      "ingredient": {
+        "tag": "c:gems/diamond"
+      }
     },
     {
       "count": 4,
-      "item": "malum:astral_weave"
+      "ingredient": {
+        "item": "malum:astral_weave"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:runic_brooch"
+    "ingredient": {
+      "item": "malum:runic_brooch"
+    }
   },
   "output": {
     "count": 1,

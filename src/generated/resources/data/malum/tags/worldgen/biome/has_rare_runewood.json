@@ -1,8 +1,8 @@
 {
-  "remove": [
-    "#c:is_snowy"
-  ],
   "values": [
-    "#minecraft:is_forest"
+    {
+      "id": "#minecraft:is_forest",
+      "required": false
+    }
   ]
 }

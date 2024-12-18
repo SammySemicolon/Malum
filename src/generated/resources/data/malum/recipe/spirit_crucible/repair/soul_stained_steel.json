@@ -11,7 +11,9 @@
   ],
   "repairMaterial": {
     "count": 2,
-    "item": "malum:soul_stained_steel_ingot"
+    "ingredient": {
+      "item": "malum:soul_stained_steel_ingot"
+    }
   },
   "spirits": [
     {

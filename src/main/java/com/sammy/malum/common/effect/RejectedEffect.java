@@ -18,7 +18,7 @@ public class RejectedEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        pLivingEntity.getData(AttachmentTypeRegistry.VOID_INFLUENCE).setAfflictionLevel(40);
+        pLivingEntity.getAttachedOrCreate(AttachmentTypeRegistry.VOID_INFLUENCE).setAfflictionLevel(40);
         if (pLivingEntity.level().getGameTime() % 60L == 0) {
             if (pLivingEntity instanceof Player player && player.isCreative()) {
                 return false;

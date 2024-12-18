@@ -5,13 +5,13 @@ import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.handlers.*;
 
@@ -30,7 +30,7 @@ public class RuneHereticItem extends AbstractRuneCurioItem implements ItemEventH
 
 
     @Override
-    public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
+    public void incomingDamageEvent(LivingDamageEvent event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
         Holder<MobEffect> silenced = MobEffectRegistry.SILENCED;
         MobEffectInstance effect = attacker.getEffect(silenced);
         if (effect == null) {

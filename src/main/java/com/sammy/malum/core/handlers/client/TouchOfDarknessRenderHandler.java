@@ -20,7 +20,7 @@ public class TouchOfDarknessRenderHandler {
         Minecraft minecraft = Minecraft.getInstance();
         PoseStack poseStack = guiGraphics.pose();
         Player player = minecraft.player;
-        var data = player.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
+        var data = player.getAttachedOrCreate(AttachmentTypeRegistry.VOID_INFLUENCE);
         if (data.voidAffliction == 0f) {
             return;
         }

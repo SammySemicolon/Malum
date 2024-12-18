@@ -32,7 +32,7 @@ public class ObeliskComponentBlock extends MultiblockComponentBlock {
     }
 
     @Override
-    public @NotNull ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
         return cloneStack.get().getDefaultInstance();
     }
 

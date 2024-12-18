@@ -1,18 +1,25 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 6,
-      "item": "malum:runewood_planks"
+      "ingredient": {
+        "item": "malum:runewood_planks"
+      }
     },
     {
       "count": 2,
-      "item": "malum:hex_ash"
+      "ingredient": {
+        "item": "malum:hex_ash"
+      }
     }
   ],
   "ingredient": {
     "count": 4,
-    "item": "malum:runewood_log"
+    "ingredient": {
+      "item": "malum:runewood_log"
+    }
   },
   "output": {
     "count": 4,

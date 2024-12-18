@@ -1,22 +1,29 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 4,
-      "tag": "c:ingots/iron"
+      "ingredient": {
+        "tag": "c:ingots/iron"
+      }
     },
     {
       "count": 2,
-      "item": "malum:soulwood_planks"
+      "ingredient": {
+        "item": "malum:soulwood_planks"
+      }
     },
     {
-      "count": 1,
-      "item": "malum:malignant_lead"
+      "ingredient": {
+        "item": "malum:malignant_lead"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:lamplighters_tongs"
+    "ingredient": {
+      "item": "malum:lamplighters_tongs"
+    }
   },
   "output": {
     "count": 1,

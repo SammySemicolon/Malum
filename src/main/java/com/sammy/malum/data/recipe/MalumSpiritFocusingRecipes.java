@@ -23,35 +23,35 @@ public class MalumSpiritFocusingRecipes {
 
         new SpiritFocusingRecipeBuilder(shortDuration, 1, Ingredient.of(ItemRegistry.ALCHEMICAL_IMPETUS.get()), Items.GUNPOWDER, 8)
                 .addSpirit(EARTHEN_SPIRIT, 1)
-                .save(recipeOutput);
+                .save(recipeOutput, ("gunpowder"));
 
         new SpiritFocusingRecipeBuilder(shortDuration, 1, Ingredient.of(ItemRegistry.ALCHEMICAL_IMPETUS.get()), Items.GLOWSTONE_DUST, 8)
                 .addSpirit(INFERNAL_SPIRIT, 1)
-                .save(recipeOutput);
+                .save(recipeOutput, ("glowstone_dust"));
 
         new SpiritFocusingRecipeBuilder(shortDuration, 1, Ingredient.of(ItemRegistry.ALCHEMICAL_IMPETUS.get()), Items.REDSTONE, 8)
                 .addSpirit(ARCANE_SPIRIT, 1)
-                .save(recipeOutput);
+                .save(recipeOutput, ("redstone"));
 
         new SpiritFocusingRecipeBuilder(shortDuration, 1, Ingredient.of(ItemRegistry.ALCHEMICAL_IMPETUS.get()), Items.QUARTZ, 4)
                 .addSpirit(EARTHEN_SPIRIT, 2)
                 .addSpirit(ARCANE_SPIRIT, 2)
-                .save(recipeOutput);
+                .save(recipeOutput, ("quartz"));
 
         new SpiritFocusingRecipeBuilder(shortDuration, 1, Ingredient.of(ItemRegistry.ALCHEMICAL_IMPETUS.get()), ItemRegistry.BLAZING_QUARTZ.get(), 4)
                 .addSpirit(INFERNAL_SPIRIT, 2)
                 .addSpirit(ARCANE_SPIRIT, 2)
-                .save(recipeOutput);
+                .save(recipeOutput, ("blazing_quartz"));
 
         new SpiritFocusingRecipeBuilder(shortDuration, 1, Ingredient.of(ItemRegistry.ALCHEMICAL_IMPETUS.get()), Items.PRISMARINE_SHARD, 8)
                 .addSpirit(AQUEOUS_SPIRIT, 2)
                 .addSpirit(ARCANE_SPIRIT, 2)
-                .save(recipeOutput);
+                .save(recipeOutput, "prismarine_shard");
 
         new SpiritFocusingRecipeBuilder(shortDuration, 1, Ingredient.of(ItemRegistry.ALCHEMICAL_IMPETUS.get()), Items.AMETHYST_SHARD, 8)
                 .addSpirit(AERIAL_SPIRIT, 2)
                 .addSpirit(ARCANE_SPIRIT, 2)
-                .save(recipeOutput);
+                .save(recipeOutput, ("amethyst_shard"));
 
         addImpetusRecipes(recipeOutput, metalDuration, ItemRegistry.IRON_IMPETUS, ItemRegistry.IRON_NODE);
         addImpetusRecipes(recipeOutput, metalDuration, ItemRegistry.GOLD_IMPETUS, ItemRegistry.GOLD_NODE);
@@ -70,7 +70,7 @@ public class MalumSpiritFocusingRecipes {
         new SpiritFocusingRecipeBuilder(duration, 2, Ingredient.of(impetus.get()), node.get(), 3)
                 .addSpirit(EARTHEN_SPIRIT, 2)
                 .addSpirit(INFERNAL_SPIRIT, 2)
-                .save(recipeOutput, MalumMod.malumPath("node_focusing_" + BuiltInRegistries.ITEM.getKey(node.get()).getPath().replace("_node", "")));
+                .saveRecipe(recipeOutput, MalumMod.malumPath("node_focusing_" + BuiltInRegistries.ITEM.getKey(node.get()).getPath().replace("_node", "")));
     }
 
     public static void addImpetusRecipes(RecipeOutput recipeOutput, int duration, DeferredHolder<Item, ImpetusItem> impetus, DeferredHolder<Item, Item> node, TagKey<Item> nugget) {

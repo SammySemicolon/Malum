@@ -5,10 +5,12 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.registry.common.*;
+import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.core.Holder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
-import top.theillusivec4.curios.api.*;
+
 
 public class CurioEndlessRing extends MalumCurioItem implements IVoidItem {
     public CurioEndlessRing(Properties builder) {
@@ -16,8 +18,8 @@ public class CurioEndlessRing extends MalumCurioItem implements IVoidItem {
     }
 
     @Override
-    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotReference slot, ItemStack stack, LivingEntity living) {
         addAttributeModifier(map, AttributeRegistry.RESERVE_STAFF_CHARGES,
-                new AttributeModifier(MalumMod.malumPath("endless_well_ring"), 3f, AttributeModifier.Operation.ADD_VALUE));
+                new AttributeModifier(MalumMod.malumPath("curio_reserve_staff_charges"), 3f, AttributeModifier.Operation.ADD_VALUE));
     }
 }

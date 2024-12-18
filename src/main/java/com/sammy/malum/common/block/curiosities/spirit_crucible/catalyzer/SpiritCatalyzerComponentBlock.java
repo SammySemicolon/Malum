@@ -3,10 +3,12 @@ package com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.HitResult;
@@ -14,8 +16,6 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.systems.multiblock.MultiBlockComponentEntity;
 import team.lodestar.lodestone.systems.multiblock.MultiblockComponentBlock;
@@ -55,7 +55,7 @@ public class SpiritCatalyzerComponentBlock extends MultiblockComponentBlock {
     }
 
     @Override
-    public @NotNull ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
         return cloneStack.get().getDefaultInstance();
     }
 
@@ -66,9 +66,9 @@ public class SpiritCatalyzerComponentBlock extends MultiblockComponentBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
-        if (pLevel.getBlockEntity(pPos) instanceof MultiBlockComponentEntity component) {
-            IItemHandler inv = Capabilities.ItemHandler.BLOCK.getCapability(pLevel, pPos, pState, component, null);
-            if (inv != null) return ItemHandlerHelper.calcRedstoneFromInventory(inv);
+        BlockEntity be = pLevel.getBlockEntity(pPos);
+        if (be instanceof MultiBlockComponentEntity altarBlockEntity) {
+            return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(altarBlockEntity);
         }
         return 0;
     }

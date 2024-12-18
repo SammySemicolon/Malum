@@ -1,8 +1,11 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [],
   "ingredient": {
-    "count": 1,
-    "item": "malum:anomalous_design"
+    "ingredient": {
+      "item": "malum:anomalous_design"
+    }
   },
   "output": {
     "count": 1,

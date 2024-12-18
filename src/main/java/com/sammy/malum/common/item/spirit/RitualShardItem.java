@@ -28,7 +28,7 @@ public class RitualShardItem extends Item implements ItemParticleSupplier {
     }
 
     public static int getStateDisplay(ItemStack stack) {
-        var data = stack.get(DataComponentRegistry.RITUAL_DATA);
+        var data = stack.get(DataComponentRegistry.RITUAL_DATA.get());
         if (data == null) {
             return -1;
         }
@@ -37,7 +37,7 @@ public class RitualShardItem extends Item implements ItemParticleSupplier {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        var data = stack.get(DataComponentRegistry.RITUAL_DATA);
+        var data = stack.get(DataComponentRegistry.RITUAL_DATA.get());
         if (data != null) {
             tooltipComponents.addAll(data.ritualType().makeRitualShardDescriptor(data.ritualTier()));
         }
@@ -45,7 +45,7 @@ public class RitualShardItem extends Item implements ItemParticleSupplier {
 
     @Override
     public void spawnLateParticles(ScreenParticleHolder target, Level level, float partialTick, ItemStack stack, float x, float y) {
-        var data = stack.get(DataComponentRegistry.RITUAL_DATA);
+        var data = stack.get(DataComponentRegistry.RITUAL_DATA.get());
         if (data != null) {
             var ritualType = data.ritualType();
             var ritualTier = data.ritualTier();

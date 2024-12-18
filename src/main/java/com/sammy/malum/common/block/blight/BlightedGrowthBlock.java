@@ -1,6 +1,7 @@
 package com.sammy.malum.common.block.blight;
 
 import com.mojang.serialization.*;
+import io.github.fabricators_of_create.porting_lib.extensions.extensions.IShearable;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
 import net.minecraft.util.*;
@@ -8,7 +9,6 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.shapes.*;
-import net.neoforged.neoforge.common.*;
 
 import static com.sammy.malum.registry.common.block.BlockTagRegistry.*;
 
@@ -31,7 +31,7 @@ public class BlightedGrowthBlock extends BushBlock implements BonemealableBlock,
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+    public boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         if (pState.is(BLIGHTED_BLOCKS)) {
             return true;
         }

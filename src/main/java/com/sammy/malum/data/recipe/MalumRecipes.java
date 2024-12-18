@@ -2,6 +2,8 @@ package com.sammy.malum.data.recipe;
 
 import com.sammy.malum.data.recipe.crafting.*;
 import com.sammy.malum.data.recipe.infusion.*;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
@@ -17,20 +19,20 @@ import net.minecraft.world.level.block.*;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-public class MalumRecipes extends VanillaRecipeProvider {
+public class MalumRecipes extends FabricRecipeProvider {
 
     MalumVanillaRecipeReplacements vanillaRecipeReplacements;
 
     public PackOutput pOutput;
 
-    public MalumRecipes(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> registries) {
+    public MalumRecipes(FabricDataOutput pOutput, CompletableFuture<HolderLookup.Provider> registries) {
         super(pOutput, registries);
         this.pOutput = pOutput;
         this.vanillaRecipeReplacements = new MalumVanillaRecipeReplacements(pOutput, registries);
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput recipeOutput, Provider holderlookup) {
+    public void buildRecipes(RecipeOutput recipeOutput) {
         vanillaRecipeReplacements.buildRecipes(recipeOutput);
         MalumVanillaRecipes.buildRecipes(recipeOutput);
         MalumWoodSetDatagen.buildRecipes(recipeOutput);

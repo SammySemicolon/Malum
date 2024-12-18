@@ -1,14 +1,19 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 2,
-      "tag": "c:strings"
+      "ingredient": {
+        "tag": "c:strings"
+      }
     }
   ],
   "ingredient": {
     "count": 2,
-    "tag": "minecraft:wool"
+    "ingredient": {
+      "tag": "minecraft:wool"
+    }
   },
   "output": {
     "count": 4,

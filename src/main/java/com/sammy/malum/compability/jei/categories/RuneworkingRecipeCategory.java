@@ -18,8 +18,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import javax.annotation.Nonnull;
-
 import java.util.*;
 
 import static com.sammy.malum.MalumMod.malumPath;
@@ -52,13 +50,13 @@ public class RuneworkingRecipeCategory implements IRecipeCategory<RunicWorkbench
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getBackground() {
         return background;
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getIcon() {
         return icon;
@@ -67,9 +65,9 @@ public class RuneworkingRecipeCategory implements IRecipeCategory<RunicWorkbench
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, RunicWorkbenchRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 14)
-                .addItemStacks(recipe.secondaryInput.getItems().toList());
+                .addItemStacks(List.of(recipe.secondaryInput.toVanilla().getItems()));
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 57)
-                .addItemStacks(Arrays.stream(recipe.primaryInput.getItems()).toList());
+                .addItemStacks(List.of((recipe.primaryInput.ingredient().getItems())));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 63, 124)
                 .addItemStack(recipe.output);
     }

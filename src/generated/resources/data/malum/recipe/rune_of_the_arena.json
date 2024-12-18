@@ -2,7 +2,9 @@
   "type": "malum:runeworking",
   "primaryInput": {
     "count": 4,
-    "item": "malum:soulwood_planks"
+    "ingredient": {
+      "item": "malum:soulwood_planks"
+    }
   },
   "result": {
     "count": 1,

@@ -1,15 +1,6 @@
 {
   "parent": "item/handheld",
-  "loader": "neoforge:separate_transforms",
-  "base": {
-    "parent": "malum:item/edge_of_deliverance_handheld"
-  },
-  "perspectives": {
-    "gui": {
-      "parent": "malum:item/edge_of_deliverance_gui"
-    },
-    "fixed": {
-      "parent": "malum:item/edge_of_deliverance_gui"
-    }
+  "textures": {
+    "layer0": "malum:item/edge_of_deliverance_huge"
   }
 }

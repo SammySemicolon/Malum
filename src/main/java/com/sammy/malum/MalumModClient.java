@@ -11,6 +11,7 @@ import com.sammy.malum.client.renderer.curio.TokenOfGratitudeRenderer;
 import com.sammy.malum.client.renderer.curio.TopHatCurioRenderer;
 import com.sammy.malum.client.renderer.item.SpiritJarItemRenderer;
 import com.sammy.malum.core.events.ClientRuntimeEvents;
+import com.sammy.malum.core.events.ClientSetupEvents;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.ContainerRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
@@ -86,6 +87,7 @@ public class MalumModClient implements ClientModInitializer {
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, RUNEWOOD_SIGN.getId()));
         SpriteIdentifierRegistry.INSTANCE.addIdentifier(new Material(Sheets.SIGN_SHEET, SOULWOOD_SIGN.getId()));
 
+        ClientSetupEvents.registerTooltipComponentManagers();
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(),
                 BlockRegistry.HANGING_SOULWOOD_LEAVES.get(),

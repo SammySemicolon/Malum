@@ -37,7 +37,7 @@ public abstract class ArmorSkin {
     }
 
     public static ArmorSkin getAppliedItemSkin(ItemStack stack) {
-        return ArmorSkinRegistry.SKINS.get(stack.get(DataComponentRegistry.ITEM_SKIN));
+        return ArmorSkinRegistry.SKINS.get(stack.get(DataComponentRegistry.ITEM_SKIN.get()));
     }
 
     public static class ArmorSkinDatagenData {

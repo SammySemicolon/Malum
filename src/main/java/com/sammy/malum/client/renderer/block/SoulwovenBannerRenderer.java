@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.common.data_components.*;
+import io.github.fabricators_of_create.porting_lib.block.CustomRenderBoundingBoxBlockEntity;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.*;
 import net.minecraft.core.*;
@@ -17,7 +18,7 @@ import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 import java.lang.Math;
 
 
-public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBannerBlockEntity> {
+public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBannerBlockEntity>, CustomRenderBoundingBoxBlockEntity {
 
     public SoulwovenBannerRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -74,8 +75,8 @@ public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBan
     }
 
     @Override
-    public AABB getRenderBoundingBox(SoulwovenBannerBlockEntity altar) {
-        var pos = altar.getBlockPos();
+    public AABB getRenderBoundingBox() {
+        var pos = self().getBlockPos();
         return new AABB(pos.getX(), pos.getY() - 1, pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
     }
 }

@@ -17,7 +17,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import javax.annotation.Nonnull;
 
 import static com.sammy.malum.MalumMod.malumPath;
 
@@ -49,13 +48,13 @@ public class WeepingWellRecipeCategory implements IRecipeCategory<FavorOfTheVoid
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getBackground() {
         return background;
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getIcon() {
         return icon;

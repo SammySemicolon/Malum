@@ -4,12 +4,12 @@ import com.sammy.malum.common.item.curiosities.curios.runes.AbstractRuneCurioIte
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
-import team.lodestar.lodestone.helpers.CurioHelper;
 import team.lodestar.lodestone.helpers.EntityHelper;
+import team.lodestar.lodestone.helpers.TrinketsHelper;
 
 import java.util.function.Consumer;
 
@@ -26,7 +26,7 @@ public class RuneTwinnedDurationItem extends AbstractRuneCurioItem {
 
     public static void onPotionApplied(MobEffectEvent.Added event) {
         LivingEntity entity = event.getEntity();
-        if (event.getOldEffectInstance() == null && CurioHelper.hasCurioEquipped(entity, ItemRegistry.RUNE_OF_TWINNED_DURATION.get())) {
+        if (event.getOldEffectInstance() == null && TrinketsHelper.hasTrinketEquipped(entity, ItemRegistry.RUNE_OF_TWINNED_DURATION.get())) {
             MobEffectInstance effect = event.getEffectInstance();
             var type = effect.getEffect().value();
             if (type.isBeneficial()) {

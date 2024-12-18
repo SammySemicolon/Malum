@@ -12,7 +12,9 @@
   "itemIdRegex": "wooden_.+",
   "repairMaterial": {
     "count": 4,
-    "tag": "minecraft:planks"
+    "ingredient": {
+      "tag": "minecraft:planks"
+    }
   },
   "spirits": [
     {

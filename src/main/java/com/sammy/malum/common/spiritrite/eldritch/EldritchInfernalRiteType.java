@@ -3,6 +3,7 @@ package com.sammy.malum.common.spiritrite.eldritch;
 import com.sammy.malum.common.block.curiosities.totem.*;
 import com.sammy.malum.common.packets.particle.rite.generic.BlockSparkleParticlePacket;
 import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.registry.common.PacketRegistry;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.item.*;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.network.PacketDistributor;
+
 
 import java.util.*;
 
@@ -39,7 +40,7 @@ public class EldritchInfernalRiteType extends TotemicRiteType {
                             BlockState newState = block.defaultBlockState();
                             level.setBlockAndUpdate(p, newState);
                             level.levelEvent(2001, p, Block.getId(newState));
-                            PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(p), new BlockSparkleParticlePacket(INFERNAL_SPIRIT.getPrimaryColor(), p));
+                            PacketRegistry.sendToPlayersTrackingChunk(level, new ChunkPos(p), new BlockSparkleParticlePacket(INFERNAL_SPIRIT.getPrimaryColor(), p));
                         }
                     }
                 });
@@ -55,7 +56,7 @@ public class EldritchInfernalRiteType extends TotemicRiteType {
                 getNearbyBlocks(totemBase, AbstractFurnaceBlock.class).map(level::getBlockEntity).filter(e -> e instanceof AbstractFurnaceBlockEntity).map(e -> (AbstractFurnaceBlockEntity) e).forEach(f -> {
                     if (f.isLit()) {
                         BlockPos blockPos = f.getBlockPos();
-                        //    MALUM_CHANNEL.send(PacketDistributor.TRACKING_CHUNK.with(() -> level().getChunkAt(blockPos)), new InfernalAccelerationRiteEffectPacket(INFERNAL_SPIRIT.getPrimaryColor(), blockPos));
+                        //    MALUM_CHANNEL.send(PacketRegistry.TRACKING_CHUNK.with(() -> level().getChunkAt(blockPos)), new InfernalAccelerationRiteEffectPacket(INFERNAL_SPIRIT.getPrimaryColor(), blockPos));
                         f.cookingProgress = Math.min(f.cookingProgress + 20, f.cookingTotalTime - 1);
                     }
                 });

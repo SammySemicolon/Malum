@@ -9,9 +9,9 @@ import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.*;
 
-import javax.annotation.*;
 import java.util.*;
 import java.util.function.*;
 
@@ -42,12 +42,12 @@ public class ConcentratedGluttonyItem extends BottledDrinkItem {
         int duration = 20;
 
         if (source instanceof LivingEntity livingEntity) {
-            if (CurioHelper.hasCurioEquipped(livingEntity, ItemRegistry.RING_OF_GRUESOME_CONCENTRATION.get())) {
+            if (TrinketsHelper.hasTrinketEquipped(livingEntity, ItemRegistry.RING_OF_GRUESOME_CONCENTRATION.get())) {
                 amplifier++;
                 duration += 40;
             }
             for (Supplier<Item> rottenTrinket : ROTTEN_TRINKETS) {
-                if (CurioHelper.hasCurioEquipped(livingEntity, rottenTrinket.get())) {
+                if (TrinketsHelper.hasTrinketEquipped(livingEntity, rottenTrinket.get())) {
                     amplifier++;
                     duration += 10;
                 }

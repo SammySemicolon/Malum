@@ -3,11 +3,11 @@ package com.sammy.malum.common.item.curiosities.curios.brooches;
 import com.google.common.collect.*;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.curios.*;
+import dev.emi.trinkets.api.SlotAttributes;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
-import top.theillusivec4.curios.api.*;
 
 public class CurioElaborateBrooch extends MalumCurioItem {
 
@@ -19,8 +19,8 @@ public class CurioElaborateBrooch extends MalumCurioItem {
     }
 
     @Override
-    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-        CuriosApi.addSlotModifier(map, "belt", ELABORATE_BROOCH_BELT, 1, AttributeModifier.Operation.ADD_VALUE);
-        CuriosApi.addSlotModifier(map, "necklace", ELABORATE_BROOCH_NECKLACE, -1, AttributeModifier.Operation.ADD_VALUE);
+    public void addAttributeModifier(Multimap<Holder<Attribute>, AttributeModifier> map, Holder<Attribute> attribute, AttributeModifier modifier) {
+        SlotAttributes.addSlotModifier(map, "legs/belt", ELABORATE_BROOCH_BELT, 1, AttributeModifier.Operation.ADD_VALUE);
+        SlotAttributes.addSlotModifier(map, "head/necklace", ELABORATE_BROOCH_NECKLACE, -1, AttributeModifier.Operation.ADD_VALUE);
     }
 }

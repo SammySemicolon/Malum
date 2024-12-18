@@ -41,4 +41,5 @@ accessible method net/minecraft/data/recipes/SimpleCookingRecipeBuilder <init> (
 accessible method net/minecraft/data/tags/TagsProvider tag (Lnet/minecraft/tags/TagKey;)Lnet/minecraft/data/tags/TagsProvider$TagAppender;
 accessible field net/minecraft/world/entity/animal/allay/Allay duplicationCooldown J
 accessible method net/minecraft/data/tags/TagsProvider$TagAppender add ([Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/data/tags/TagsProvider$TagAppender;
+accessible method net/minecraft/world/entity/LivingEntity getJumpPower ()F
 

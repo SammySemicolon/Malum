@@ -9,12 +9,14 @@
     "minecraft:netherite_helmet",
     "minecraft:netherite_chestplate",
     "minecraft:netherite_leggings",
-    "minecraft:netherite_boots"
+    "minecraft:netherite_boots",
+    "farmersdelight:netherite_knife"
   ],
   "itemIdRegex": "netherite_.+",
   "repairMaterial": {
-    "count": 1,
-    "tag": "c:ingots/netherite"
+    "ingredient": {
+      "tag": "c:ingots/netherite"
+    }
   },
   "spirits": [
     {

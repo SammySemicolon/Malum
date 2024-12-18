@@ -8,15 +8,14 @@ import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.tick.EntityTickEvent;
 import net.minecraft.network.chat.*;
 import net.minecraft.util.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.tick.*;
-import net.neoforged.neoforge.network.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
 
@@ -40,12 +39,12 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
 
 
     @Override
-    public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
+    public void incomingDamageEvent(LivingDamageEvent event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
         if (attacked.level().isClientSide()) {
             return;
         }
-        if (attacked.getData(AttachmentTypeRegistry.CURIO_DATA).hiddenBladeNecklaceCooldown == 0) {
-            float damage = event.getOriginalDamage();
+        if (attacked.getAttachedOrCreate(AttachmentTypeRegistry.CURIO_DATA).hiddenBladeNecklaceCooldown == 0) {
+            float damage = event.getAmount();
             int amplifier = Math.min(Mth.floor(damage / 4), 9);
             attacked.addEffect(new MobEffectInstance(MobEffectRegistry.WICKED_INTENT, 80, amplifier));
             SoundHelper.playSound(attacked, SoundRegistry.HIDDEN_BLADE_PRIMED.get(), 1f, RandomHelper.randomBetween(attacked.level().getRandom(), 1.4f, 1.6f));
@@ -53,7 +52,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
     }
 
     @Override
-    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         var source = event.getSource();
         var level = attacker.level();
         if (level.isClientSide()) {
@@ -62,15 +61,15 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         if (!source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
             return;
         }
-        if (CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get())) {
-            var data = target.getData(AttachmentTypeRegistry.CURIO_DATA);
+        if (TrinketsHelper.hasTrinketEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get())) {
+            var data = target.getAttachedOrCreate(AttachmentTypeRegistry.CURIO_DATA);
             var random = level.getRandom();
             if (data.hiddenBladeNecklaceCooldown != 0) {
                 if (data.hiddenBladeNecklaceCooldown <= COOLDOWN_DURATION) {
                     SoundHelper.playSound(attacker, SoundRegistry.HIDDEN_BLADE_DISRUPTED.get(), 1f, RandomHelper.randomBetween(random, 0.7f, 0.8f));
                 }
                 data.hiddenBladeNecklaceCooldown = (int) (COOLDOWN_DURATION * 1.5);
-                PacketDistributor.sendToPlayersTrackingEntityAndSelf(attacker, new SyncCurioDataPayload(attacker.getId(), data));
+                PacketRegistry.sendToPlayersTrackingEntityAndSelf(attacker, new SyncCurioDataPayload(attacker.getId(), data));
                 return;
             }
             var effect = attacker.getEffect(MobEffectRegistry.WICKED_INTENT);
@@ -95,7 +94,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             entity.setItem(scytheWeapon);
             level.addFreshEntity(entity);
             data.hiddenBladeNecklaceCooldown = 200;
-            PacketDistributor.sendToPlayersTrackingEntityAndSelf(attacker, new SyncCurioDataPayload(attacker.getId(), data));
+            PacketRegistry.sendToPlayersTrackingEntityAndSelf(attacker, new SyncCurioDataPayload(attacker.getId(), data));
             if (!effect.isInfiniteDuration()) {
                 attacker.removeEffect(effect.getEffect());
             }
@@ -114,7 +113,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
     public static void entityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity entity) {
             var level = entity.level();
-            var data = entity.getData(AttachmentTypeRegistry.CURIO_DATA);
+            var data = entity.getAttachedOrCreate(AttachmentTypeRegistry.CURIO_DATA);
             if (data.hiddenBladeNecklaceCooldown > 0) {
                 data.hiddenBladeNecklaceCooldown--;
                 if (!level.isClientSide()) {

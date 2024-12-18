@@ -10,8 +10,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import team.lodestar.lodestone.systems.sound.ExtendedSoundType;
 
 import java.util.function.Supplier;
@@ -37,7 +35,6 @@ public class QuartzClusterSoundType extends ExtendedSoundType {
     }
 
     @Override
-    @OnlyIn(value = Dist.CLIENT)
     public void onPlayHitSound(BlockPos pos) {
         Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(SoundEvents.AMETHYST_CLUSTER_HIT, SoundSource.BLOCKS, (getVolume() + 2.0F) / 16.0F, getPitch() * 1.65F, MalumMod.RANDOM, pos));
     }

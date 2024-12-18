@@ -12,16 +12,11 @@ public class WeepingWellBlock extends HorizontalDirectionalBlock {
     MapCodec<WeepingWellBlock> CODEC = simpleCodec(WeepingWellBlock::new);
 
     public WeepingWellBlock(Properties pProperties) {
-        super(pProperties);
+        super(pProperties.pushReaction(PushReaction.IGNORE));
     }
 
     @Override
     protected MapCodec<? extends HorizontalDirectionalBlock> codec() { return CODEC; }
-
-    @Override
-    public PushReaction getPistonPushReaction(BlockState pState) {
-        return PushReaction.IGNORE;
-    }
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());

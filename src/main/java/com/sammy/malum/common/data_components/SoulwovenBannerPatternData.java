@@ -10,6 +10,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 

@@ -29,7 +29,7 @@ public abstract class AbstractEtherItem extends BlockItem implements ParticleEmi
     public static Properties applyColor(Properties builder, boolean iridescent) {
         builder.component(DataComponents.DYED_COLOR, DEFAULT_FIRST_COLOR);
         if (iridescent) {
-            builder.component(DataComponentRegistry.SECONDARY_DYE_COLOR, DEFAULT_SECOND_COLOR);
+            builder.component(DataComponentRegistry.SECONDARY_DYE_COLOR.get(), DEFAULT_SECOND_COLOR);
         }
         return builder;
     }

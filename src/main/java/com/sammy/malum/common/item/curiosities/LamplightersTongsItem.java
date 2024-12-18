@@ -38,7 +38,7 @@ public class LamplightersTongsItem extends Item {
             return super.useOn(context);
         }
         var pPos = context.getClickedPos();
-        SoundType soundtype = spiritMote.getSoundType(level, pPos, player);
+        SoundType soundtype = spiritMote.getSoundType();
         level.setBlock(pPos, spiritMote, 3);
         level.levelEvent(2001, pPos, Block.getId(spiritMote));
         level.playSound(player, pPos, SoundRegistry.SPIRIT_MOTE_CREATED.get(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, Mth.nextFloat(level.random, 1.1f, 1.4f));

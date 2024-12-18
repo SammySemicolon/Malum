@@ -50,7 +50,7 @@ public class SoulHunterArmorModel extends LodestoneArmorModel {
 
     @Override
     public void setupAnim(LivingEntity pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        float pPartialTicks = Minecraft.getInstance().timer.getGameTimeDeltaTicks();
+        float pPartialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
         lowered_hood.visible = pEntity.getItemBySlot(EquipmentSlot.HEAD).isEmpty();
         if (pEntity instanceof AbstractClientPlayer clientPlayer) {
             double d0 = Mth.lerp(pPartialTicks, clientPlayer.xCloakO, clientPlayer.xCloak) - Mth.lerp(pPartialTicks, pEntity.xo, pEntity.getX());

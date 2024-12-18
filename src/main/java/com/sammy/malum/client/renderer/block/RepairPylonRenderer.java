@@ -5,6 +5,7 @@ import com.mojang.math.*;
 import com.sammy.malum.client.renderer.entity.*;
 import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.item.spirit.*;
+import io.github.fabricators_of_create.porting_lib.block.CustomRenderBoundingBoxBlockEntity;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.*;
@@ -18,15 +19,15 @@ import team.lodestar.lodestone.systems.blockentity.*;
 import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 
 
-public class RepairPylonRenderer implements BlockEntityRenderer<RepairPylonCoreBlockEntity> {
+public class RepairPylonRenderer implements BlockEntityRenderer<RepairPylonCoreBlockEntity>, CustomRenderBoundingBoxBlockEntity {
 
 
     public RepairPylonRenderer(BlockEntityRendererProvider.Context context) {
     }
 
     @Override
-    public AABB getRenderBoundingBox(RepairPylonCoreBlockEntity blockEntityIn) {
-        var pos = blockEntityIn.getBlockPos();
+    public AABB getRenderBoundingBox() {
+        var pos = self().getBlockPos();
         return new AABB(pos.getX() - 1, pos.getY(), pos.getZ() - 1, pos.getX() + 2, pos.getY() + 5, pos.getZ() + 2);
     }
 

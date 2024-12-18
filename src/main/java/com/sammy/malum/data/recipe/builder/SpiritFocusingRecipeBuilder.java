@@ -48,8 +48,12 @@ public class SpiritFocusingRecipeBuilder implements AutonamedRecipeBuilder<Spiri
         return new SpiritFocusingRecipe(time, durabilityCost, input, output, spirits);
     }
 
+    public void save(RecipeOutput recipeOutput, String recipeName) {
+        saveRecipe(recipeOutput, MalumMod.malumPath("spirit_crucible/focus/" + recipeName));
+    }
+
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation id) {
+    public void saveRecipe(RecipeOutput recipeOutput, ResourceLocation id) {
         defaultSaveFunc(recipeOutput, MalumMod.malumPath(id.getPath()));
     }
 

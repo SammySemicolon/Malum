@@ -13,9 +13,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import team.lodestar.lodestone.systems.model.*;
 
 import java.util.*;
@@ -38,42 +35,6 @@ public class MalignantStrongholdArmorItem extends MalumArmorItem {
                 new AttributeModifier(resourcelocation, 0.25f, AttributeModifier.Operation.ADD_VALUE),
                 group);
         return attributes.build().modifiers();
-    }
-
-    
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            @Override
-            public LodestoneArmorModel getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel _default) {
-                float pticks = (float)(Minecraft.getInstance().getFrameTimeNs() / 20000000000L);
-                float f = Mth.rotLerp(pticks, entity.yBodyRotO, entity.yBodyRot);
-                float f1 = Mth.rotLerp(pticks, entity.yHeadRotO, entity.yHeadRot);
-                float netHeadYaw = f1 - f;
-                float netHeadPitch = Mth.lerp(pticks, entity.xRotO, entity.getXRot());
-                ArmorSkin skin = ArmorSkin.getAppliedItemSkin(itemStack);
-                LodestoneArmorModel model = ModelRegistry.MALIGNANT_LEAD_ARMOR;
-                if (skin != null) {
-                    model = ArmorSkinRenderingData.RENDERING_DATA.apply(skin).getModel(entity);
-                }
-//                if (model instanceof MalignantStrongholdArmorModel malignantStrongholdArmorModel) {
-//                    final LazyOptional<ICuriosItemHandler> curiosInventory = CuriosApi.getCuriosInventory(entity);
-//                    if (curiosInventory.isPresent()) {
-//                        final List<AbstractRuneCurioItem> equippedRunes = curiosInventory
-//                                .map(i -> i.findCurios(s -> s.getItem() instanceof AbstractRuneCurioItem))
-//                                .map(l -> l.stream()
-//                                        .filter(c -> c.slotContext().visible())
-//                                        .map(c -> (AbstractRuneCurioItem) c.stack().getItem()).collect(Collectors.toList()))
-//                                .orElse(Collections.emptyList());
-//                        malignantStrongholdArmorModel.updateGlow(equippedRunes);
-//                    }
-//                }
-                model.slot = armorSlot;
-                model.copyFromDefault(_default);
-                model.setupAnim(entity, entity.walkAnimation.position(), entity.walkAnimation.speed(), entity.tickCount + pticks, netHeadYaw, netHeadPitch);
-                return model;
-            }
-        });
     }
 
     @Override

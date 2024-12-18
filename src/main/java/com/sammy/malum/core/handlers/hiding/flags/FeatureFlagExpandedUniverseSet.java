@@ -2,8 +2,8 @@ package com.sammy.malum.core.handlers.hiding.flags;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlagSet;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 
 public interface FeatureFlagExpandedUniverseSet {
 	@Nullable

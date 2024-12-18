@@ -23,7 +23,7 @@ public class CatalystLobberItem extends Item {
     }
 
     public static int getStateDisplay(ItemStack stack) {
-        var data = stack.get(DataComponentRegistry.CATALYST_LOBBER_STATE);
+        var data = stack.get(DataComponentRegistry.CATALYST_LOBBER_STATE.get());
         if (data == null) {
             return -1;
         }
@@ -36,7 +36,7 @@ public class CatalystLobberItem extends Item {
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
-        var data = pStack.get(DataComponentRegistry.CATALYST_LOBBER_STATE);
+        var data = pStack.get(DataComponentRegistry.CATALYST_LOBBER_STATE.get());
         if (data != null) {
             int state = data.state();
             if (state != 0) {
@@ -53,7 +53,7 @@ public class CatalystLobberItem extends Item {
                     state = 0;
                     pEntity.playSound(SoundRegistry.CATALYST_LOBBER_LOCKED.get(), 1.2f, 0.8f);
                 }
-                pStack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState(timer, state, stashedState));
+                pStack.set(DataComponentRegistry.CATALYST_LOBBER_STATE.get(), new CatalystFlingerState(timer, state, stashedState));
             }
         }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
@@ -62,7 +62,7 @@ public class CatalystLobberItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
-        var component = stack.getOrDefault(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState());
+        var component = stack.getOrDefault(DataComponentRegistry.CATALYST_LOBBER_STATE.get(), new CatalystFlingerState());
         int timer = component.timer();
         int state = component.state();
         int stashedState = component.stashedState();
@@ -111,11 +111,11 @@ public class CatalystLobberItem extends Item {
                 sound = SoundRegistry.CATALYST_LOBBER_FIRED.get();
             }
             default -> {
-                stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState());
+                stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE.get(), new CatalystFlingerState());
                 throw new IllegalStateException("Catalyst lobber used with an invalid state.");
             }
         }
-        stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState(timer, state, stashedState));
+        stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE.get(), new CatalystFlingerState(timer, state, stashedState));
         if (cooldown != 0) {
             playerIn.getCooldowns().addCooldown(this, cooldown);
         }

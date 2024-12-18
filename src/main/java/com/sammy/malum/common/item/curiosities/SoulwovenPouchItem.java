@@ -25,11 +25,11 @@ public class SoulwovenPouchItem extends Item {
     private static final int BAR_COLOR = Mth.color(0.4F, 0.4F, 1.0F);
 
     public SoulwovenPouchItem(Item.Properties properties) {
-        super(properties.component(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY));
+        super(properties.component(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get(), SoulwovenPouchContents.EMPTY));
     }
 
     public static float getFullnessDisplay(ItemStack stack) {
-        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get(), SoulwovenPouchContents.EMPTY);
         return contents.weight().floatValue();
     }
 
@@ -38,7 +38,7 @@ public class SoulwovenPouchItem extends Item {
         if (stack.getCount() != 1 || action != ClickAction.SECONDARY) {
             return false;
         } else {
-            var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS);
+            var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get());
             if (contents == null) {
                 return false;
             } else {
@@ -58,7 +58,7 @@ public class SoulwovenPouchItem extends Item {
                     }
                 }
 
-                stack.set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, mutable.toImmutable());
+                stack.set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get(), mutable.toImmutable());
                 return true;
             }
         }
@@ -70,7 +70,7 @@ public class SoulwovenPouchItem extends Item {
             return false;
         }
         if (action == ClickAction.SECONDARY && slot.allowModification(player)) {
-            var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS);
+            var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get());
             if (contents == null) {
                 return false;
             } else {
@@ -88,7 +88,7 @@ public class SoulwovenPouchItem extends Item {
                     }
                 }
 
-                stack.set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, mutable.toImmutable());
+                stack.set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get(), mutable.toImmutable());
                 return true;
             }
         } else {
@@ -110,13 +110,13 @@ public class SoulwovenPouchItem extends Item {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get(), SoulwovenPouchContents.EMPTY);
         return contents.weight().compareTo(Fraction.ZERO) > 0;
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get(), SoulwovenPouchContents.EMPTY);
         return Math.min(1 + Mth.mulAndTruncate(contents.weight(), 12), 13);
     }
 
@@ -126,9 +126,9 @@ public class SoulwovenPouchItem extends Item {
     }
 
     private static boolean dropContents(ItemStack stack, Player player) {
-        var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS);
+        var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get());
         if (contents != null && !contents.isEmpty()) {
-            stack.set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+            stack.set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get(), SoulwovenPouchContents.EMPTY);
             if (player instanceof ServerPlayer) {
                 contents.itemsCopy().forEach(item -> player.drop(item, true));
             }
@@ -142,13 +142,13 @@ public class SoulwovenPouchItem extends Item {
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
         return !stack.has(DataComponents.HIDE_TOOLTIP) && !stack.has(DataComponents.HIDE_ADDITIONAL_TOOLTIP)
-                ? Optional.ofNullable(stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS))
+                ? Optional.ofNullable(stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get()))
                 : Optional.empty();
     }
 
     @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS);
+        var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get());
         if (contents != null) {
             int i = Mth.mulAndTruncate(contents.weight(), 512);
             tooltipComponents.add(Component.translatable("item.minecraft.bundle.fullness", i, 512).withStyle(ChatFormatting.GRAY));
@@ -157,9 +157,9 @@ public class SoulwovenPouchItem extends Item {
 
     @Override
     public void onDestroyed(ItemEntity itemEntity) {
-        var contents = itemEntity.getItem().get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS);
+        var contents = itemEntity.getItem().get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get());
         if (contents != null) {
-            itemEntity.getItem().set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+            itemEntity.getItem().set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get(), SoulwovenPouchContents.EMPTY);
             ItemUtils.onContainerDestroyed(itemEntity, contents.itemsCopy());
         }
     }

@@ -1,8 +1,12 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [],
   "ingredient": {
     "count": 4,
-    "item": "minecraft:clay_ball"
+    "ingredient": {
+      "item": "minecraft:clay_ball"
+    }
   },
   "output": {
     "count": 4,

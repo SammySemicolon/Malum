@@ -1,18 +1,25 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 4,
-      "item": "malum:refined_soulstone"
+      "ingredient": {
+        "item": "malum:refined_soulstone"
+      }
     },
     {
       "count": 2,
-      "item": "malum:hex_ash"
+      "ingredient": {
+        "item": "malum:hex_ash"
+      }
     }
   ],
   "ingredient": {
     "count": 4,
-    "item": "malum:alchemical_calx"
+    "ingredient": {
+      "item": "malum:alchemical_calx"
+    }
   },
   "output": {
     "count": 1,

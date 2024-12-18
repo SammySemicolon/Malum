@@ -1,18 +1,24 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 2,
-      "item": "malum:hallowed_gold_ingot"
+      "ingredient": {
+        "item": "malum:hallowed_gold_ingot"
+      }
     },
     {
-      "count": 1,
-      "item": "malum:hex_ash"
+      "ingredient": {
+        "item": "malum:hex_ash"
+      }
     }
   ],
   "ingredient": {
     "count": 2,
-    "item": "malum:runewood_planks"
+    "ingredient": {
+      "item": "malum:runewood_planks"
+    }
   },
   "output": {
     "count": 1,

@@ -3,12 +3,12 @@ package com.sammy.malum.common.effect.aura;
 import com.sammy.malum.*;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import io.github.fabricators_of_create.porting_lib.entity.events.player.PlayerEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import team.lodestar.lodestone.helpers.ColorHelper;
 
 public class InfernalAura extends MobEffect {

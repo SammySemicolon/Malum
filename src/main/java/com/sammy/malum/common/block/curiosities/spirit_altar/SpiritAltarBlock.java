@@ -1,5 +1,6 @@
 package com.sammy.malum.common.block.curiosities.spirit_altar;
 
+import com.sammy.malum.common.block.curiosities.repair_pylon.RepairPylonCoreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -9,7 +10,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import team.lodestar.lodestone.forge_stuff.ItemHandlerHelper;
 import team.lodestar.lodestone.systems.block.WaterLoggedEntityBlock;
 
 public class SpiritAltarBlock<T extends SpiritAltarBlockEntity> extends WaterLoggedEntityBlock<T> {
@@ -37,9 +38,8 @@ public class SpiritAltarBlock<T extends SpiritAltarBlockEntity> extends WaterLog
 
     @Override
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
-        BlockEntity be = pLevel.getBlockEntity(pPos);
-        if (be instanceof SpiritAltarBlockEntity altar) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(altar.inventory);
+        if (pLevel.getBlockEntity(pPos) instanceof SpiritAltarBlockEntity pylon) {
+            return ItemHandlerHelper.calcRedstoneFromInventory(pylon.inventory);
         }
         return 0;
     }

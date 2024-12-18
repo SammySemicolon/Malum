@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#malum:has_quartz",
-  "features": "malum:quartz_geode",
-  "step": "underground_decoration"
-}

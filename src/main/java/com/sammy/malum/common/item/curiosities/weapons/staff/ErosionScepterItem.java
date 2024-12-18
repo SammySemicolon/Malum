@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities.weapons.staff;
 import com.sammy.malum.common.entity.bolt.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.effect.*;
@@ -10,9 +11,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
@@ -38,7 +36,7 @@ public class ErosionScepterItem extends AbstractStaffItem {
     }
 
     @Override
-    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (!(event.getSource().getDirectEntity() instanceof AbstractBoltProjectileEntity) && !event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC)) {
             var silenced = MobEffectRegistry.SILENCED;
             MobEffectInstance effect = target.getEffect(silenced);

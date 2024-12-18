@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.Easing;
 import team.lodestar.lodestone.systems.particle.builder.ScreenParticleBuilder;
@@ -18,7 +19,6 @@ import team.lodestar.lodestone.systems.particle.data.spin.SpinParticleData;
 import team.lodestar.lodestone.systems.particle.data.spin.SpinParticleDataBuilder;
 import team.lodestar.lodestone.systems.particle.screen.ScreenParticleHolder;
 
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.Map;
 

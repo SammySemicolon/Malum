@@ -25,7 +25,7 @@ public abstract class TotemicRiteType {
 
     public List<Component> makeDetailedDescriptor(boolean corrupted) {
         List<Component> tooltip = new ArrayList<>();
-        var spiritStyleModifier = getIdentifyingSpirit().getItemRarity().getStyleModifier();
+        var spiritStyleModifier = getIdentifyingSpirit().getItemRarity().color();
         var riteEffect = getRiteEffect(corrupted);
         var riteCategory = riteEffect.category;
         tooltip.add(Component.translatable(translationIdentifier(corrupted)).withStyle(spiritStyleModifier));

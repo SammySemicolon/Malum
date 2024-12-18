@@ -1,14 +1,18 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 4,
-      "item": "malum:refined_soulstone"
+      "ingredient": {
+        "item": "malum:refined_soulstone"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "minecraft:iron_ingot"
+    "ingredient": {
+      "item": "minecraft:iron_ingot"
+    }
   },
   "output": {
     "count": 1,

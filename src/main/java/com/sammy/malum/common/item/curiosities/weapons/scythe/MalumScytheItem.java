@@ -5,6 +5,9 @@ import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.enchant.CustomEnchantingBehaviorItem;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.core.*;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
@@ -15,11 +18,10 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
-import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.item.*;
 
-public class MalumScytheItem extends ModCombatItem implements IMalumEventResponderItem {
+public class MalumScytheItem extends ModCombatItem implements IMalumEventResponderItem, CustomEnchantingBehaviorItem {
 
     public MalumScytheItem(Tier tier, float damage, float speed, Properties builderIn) {
         super(tier, damage + 3 + tier.getAttackDamageBonus(), speed - 3.2f, builderIn);
@@ -40,7 +42,7 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
     }
 
     @Override
-    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         var level = attacker.level();
         if (level.isClientSide()) {
             return;
@@ -62,7 +64,7 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
         particle.mirrorRandomly(attacker.getRandom()).spawnForwardSlashingParticle(attacker);
 
         int sweeping = EnchantmentRegistry.getEnchantmentLevel(level, Enchantments.SWEEPING_EDGE, stack);
-        float damage = event.getOriginalDamage() * (0.66f + sweeping * 0.33f);
+        float damage = event.getAmount() * (0.66f + sweeping * 0.33f);
         float radius = 1 + sweeping * 0.25f;
         level.getEntities(attacker, target.getBoundingBox().inflate(radius)).forEach(e -> {
             if (e instanceof LivingEntity livingEntity) {
@@ -80,17 +82,18 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
     }
 
     @Override
-    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+    public boolean canBeEnchantedWith(ItemStack stack, Holder<Enchantment> enchantment, EnchantingContext context) {
         if (enchantment.equals(Enchantments.SWEEPING_EDGE)) {
             return true;
         }
-        return super.supportsEnchantment(stack, enchantment);
+        return super.canBeEnchantedWith(stack, enchantment, context);
     }
+
 
     public static boolean canSweep(LivingEntity attacker) {
         //TODO: convert this to a ToolAction, or something alike
-        return !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get()) &&
-                !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get());
+        return !TrinketsHelper.hasTrinketEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get()) &&
+                !TrinketsHelper.hasTrinketEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get());
     }
 
     public static DamageSource replaceDamageSource(Player player, DamageSource source) {

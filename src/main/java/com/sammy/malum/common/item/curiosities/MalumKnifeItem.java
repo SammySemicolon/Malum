@@ -15,15 +15,15 @@ public class MalumKnifeItem extends KnifeItem {
     }
 
     @Override
-    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
-        ItemAttributeModifiers defaultModifiers = super.getDefaultAttributeModifiers(stack);
+    public ItemAttributeModifiers getDefaultAttributeModifiers() {
+        ItemAttributeModifiers defaultModifiers = super.getDefaultAttributeModifiers();
         if (attributes == null) {
             ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
             createExtraAttributes().build().modifiers().forEach(e -> builder.add(e.attribute(), e.modifier(), e.slot()));
             defaultModifiers.modifiers().forEach(e -> builder.add(e.attribute(), e.modifier(), e.slot()));
             attributes = builder.build();
         }
-        return super.getDefaultAttributeModifiers(stack);
+        return super.getDefaultAttributeModifiers();
     }
 
     public ItemAttributeModifiers.Builder createExtraAttributes() {

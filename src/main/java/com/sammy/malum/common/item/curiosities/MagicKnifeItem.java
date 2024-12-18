@@ -17,7 +17,7 @@ public class MagicKnifeItem extends MalumKnifeItem {
     @Override
     public ItemAttributeModifiers.Builder createExtraAttributes() {
         ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
-        builder.add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+        builder.add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.unwrapKey().get().location(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
         return builder;
     }
 }

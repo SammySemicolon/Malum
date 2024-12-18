@@ -1,26 +1,35 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
-      "count": 1,
-      "item": "malum:fused_consciousness"
+      "ingredient": {
+        "item": "malum:fused_consciousness"
+      }
     },
     {
       "count": 16,
-      "item": "malum:void_salts"
+      "ingredient": {
+        "item": "malum:void_salts"
+      }
     },
     {
       "count": 8,
-      "item": "malum:null_slate"
+      "ingredient": {
+        "item": "malum:null_slate"
+      }
     },
     {
       "count": 4,
-      "item": "malum:mnemonic_fragment"
+      "ingredient": {
+        "item": "malum:mnemonic_fragment"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:belt_of_the_magebane"
+    "ingredient": {
+      "item": "malum:belt_of_the_magebane"
+    }
   },
   "output": {
     "count": 1,

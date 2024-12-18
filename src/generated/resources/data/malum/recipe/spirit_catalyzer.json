@@ -1,22 +1,29 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 4,
-      "item": "malum:tainted_rock"
+      "ingredient": {
+        "item": "malum:tainted_rock"
+      }
     },
     {
-      "count": 1,
-      "item": "malum:ether"
+      "ingredient": {
+        "item": "malum:ether"
+      }
     },
     {
       "count": 4,
-      "item": "malum:twisted_rock"
+      "ingredient": {
+        "item": "malum:twisted_rock"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:twisted_rock_item_pedestal"
+    "ingredient": {
+      "item": "malum:twisted_rock_item_pedestal"
+    }
   },
   "output": {
     "count": 1,

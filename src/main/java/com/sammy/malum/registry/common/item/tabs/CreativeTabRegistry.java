@@ -18,6 +18,7 @@ import net.minecraft.world.item.*;
 import java.util.Optional;
 
 import static com.sammy.malum.registry.common.item.ItemRegistry.*;
+import static team.lodestar.lodestone.systems.item.LodestoneItemProperties.TAB_SORTING;
 
 public class CreativeTabRegistry {
 
@@ -67,4 +68,16 @@ public class CreativeTabRegistry {
                     .title(Component.translatable("itemGroup." + MalumMod.MALUM + "_cosmetics"))
                     .icon(() -> ItemRegistry.WEAVERS_WORKBENCH.get().getDefaultInstance()).build()
     );
+
+    public static void populateItemGroups() {
+        ItemGroupEvents.MODIFY_ENTRIES_ALL.register((group, entries) -> {
+            Optional<ResourceKey<CreativeModeTab>> opt = BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(group);
+            if (opt.isPresent()) {
+                if (TAB_SORTING.containsKey(opt.get())) {
+                    TAB_SORTING.get(opt.get()).stream().map(BuiltInRegistries.ITEM::get)
+                            .forEach(entries::accept);
+                }
+            }
+        });
+    }
 }

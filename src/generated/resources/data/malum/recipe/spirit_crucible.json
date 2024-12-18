@@ -1,22 +1,30 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 2,
-      "item": "malum:hex_ash"
+      "ingredient": {
+        "item": "malum:hex_ash"
+      }
     },
     {
       "count": 2,
-      "item": "malum:tainted_rock"
+      "ingredient": {
+        "item": "malum:tainted_rock"
+      }
     },
     {
       "count": 2,
-      "item": "malum:twisted_rock"
+      "ingredient": {
+        "item": "malum:twisted_rock"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "minecraft:furnace"
+    "ingredient": {
+      "item": "minecraft:furnace"
+    }
   },
   "output": {
     "count": 1,

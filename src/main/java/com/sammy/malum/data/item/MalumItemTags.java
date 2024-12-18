@@ -18,6 +18,7 @@ import net.minecraft.resources.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.systems.block.*;
 import team.lodestar.lodestone.systems.datagen.*;
 
@@ -29,8 +30,8 @@ import static team.lodestar.lodestone.registry.common.tag.LodestoneItemTags.*;
 @SuppressWarnings("unchecked")
 public class MalumItemTags extends FabricTagProvider.ItemTagProvider {
 
-    public MalumItemTags(FabricDataOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider) {
-        super(pOutput, pLookupProvider);
+    public MalumItemTags(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable FabricTagProvider.BlockTagProvider blockTagProvider) {
+        super(output, completableFuture, blockTagProvider);
     }
 
     @Override
@@ -66,8 +67,8 @@ public class MalumItemTags extends FabricTagProvider.ItemTagProvider {
         copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
 
         getOrCreateTagBuilder(Tags.Items.GEMS).add(REFINED_SOULSTONE.get(), BLAZING_QUARTZ.get());
-        getOrCreateTagBuilder(ItemTags.LOGS).addTag(ItemTagRegistry.RUNEWOOD_LOGS).addTag(ItemTagRegistry.SOULWOOD_LOGS);
-        getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN).addTag(ItemTagRegistry.RUNEWOOD_LOGS).addTag(ItemTagRegistry.SOULWOOD_LOGS);
+        getOrCreateTagBuilder(ItemTags.LOGS).addOptionalTag(ItemTagRegistry.RUNEWOOD_LOGS).addOptionalTag(ItemTagRegistry.SOULWOOD_LOGS);
+        getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN).addOptionalTag(ItemTagRegistry.RUNEWOOD_LOGS).addOptionalTag(ItemTagRegistry.SOULWOOD_LOGS);
         getOrCreateTagBuilder(Tags.Items.SLIMEBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
         getOrCreateTagBuilder(Tags.Items.GEMS_QUARTZ).add(NATURAL_QUARTZ.get());
         getOrCreateTagBuilder(Tags.Items.ORES_QUARTZ).add(NATURAL_QUARTZ_ORE.get(), DEEPSLATE_QUARTZ_ORE.get());

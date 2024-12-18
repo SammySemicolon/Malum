@@ -1,14 +1,18 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
-      "count": 1,
-      "item": "malum:blazing_quartz"
+      "ingredient": {
+        "item": "malum:blazing_quartz"
+      }
     }
   ],
   "ingredient": {
     "count": 4,
-    "item": "minecraft:glowstone_dust"
+    "ingredient": {
+      "item": "minecraft:glowstone_dust"
+    }
   },
   "output": {
     "count": 2,

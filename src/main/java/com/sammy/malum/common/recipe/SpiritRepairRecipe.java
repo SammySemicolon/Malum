@@ -8,8 +8,12 @@ import com.sammy.malum.forge_stuff.SizedIngredient;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.*;
 import team.lodestar.lodestone.systems.recipe.*;
 
@@ -27,6 +31,19 @@ public class SpiritRepairRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipe
             SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits),
             BuiltInRegistries.ITEM.byNameCodec().optionalFieldOf("repairOutputOverride", Items.AIR).forGetter(recipe -> recipe.repairOutputOverride)
     ).apply(obj, SpiritRepairRecipe::new));
+
+    public static class Serializer implements RecipeSerializer<SpiritRepairRecipe> {
+
+        @Override
+        public MapCodec<SpiritRepairRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, SpiritRepairRecipe> streamCodec() {
+            return ByteBufCodecs.fromCodecWithRegistries(CODEC.codec());
+        }
+    }
 
     public static final String NAME = "spirit_repair";
     public final float durabilityPercentage;
@@ -77,7 +94,7 @@ public class SpiritRepairRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipe
     protected static void addToInputs(ArrayList<Item> inputs, String itemIdRegex, String modIdRegex) {
         for (int i = 0; i < BuiltInRegistries.ITEM.size(); i++) {
             Item item = BuiltInRegistries.ITEM.byId(i);
-            if (item.isRepairable(item.getDefaultInstance())) {
+            if (item.getDefaultInstance().isDamageableItem()) {
                 if (BuiltInRegistries.ITEM.getKey(item).getPath().matches(itemIdRegex)) {
                     if (!modIdRegex.isEmpty() && !BuiltInRegistries.ITEM.getKey(item).getNamespace().matches(modIdRegex)) {
                         break;

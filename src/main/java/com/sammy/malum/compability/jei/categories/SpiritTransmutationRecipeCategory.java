@@ -18,7 +18,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,13 +51,13 @@ public class SpiritTransmutationRecipeCategory implements IRecipeCategory<Spirit
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getBackground() {
         return background;
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getIcon() {
         return icon;

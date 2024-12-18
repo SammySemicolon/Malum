@@ -10,16 +10,16 @@ import net.minecraft.world.entity.*;
 
 public abstract class SoulWardEvent extends LivingEvent {
 
-    private final SoulWardHandler soulWardHandler;
+    private final SoulWardData soulWardHandler;
     private final DamageSource source;
 
-    public SoulWardEvent(LivingEntity entity, SoulWardHandler soulWardHandler, DamageSource source) {
+    public SoulWardEvent(LivingEntity entity, SoulWardData soulWardHandler, DamageSource source) {
         super(entity);
         this.soulWardHandler = soulWardHandler;
         this.source = source;
     }
 
-    public SoulWardHandler getSoulWardHandler() {
+    public SoulWardData getSoulWardHandler() {
         return soulWardHandler;
     }
 

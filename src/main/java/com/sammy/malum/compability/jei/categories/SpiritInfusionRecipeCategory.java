@@ -18,8 +18,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import javax.annotation.Nonnull;
-
 import java.util.Arrays;
 
 import static com.sammy.malum.MalumMod.malumPath;
@@ -59,13 +57,13 @@ public class SpiritInfusionRecipeCategory implements IRecipeCategory<SpiritInfus
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getBackground() {
         return background;
     }
 
-    @Nonnull
+
     @Override
     public IDrawable getIcon() {
         return icon;
@@ -79,7 +77,7 @@ public class SpiritInfusionRecipeCategory implements IRecipeCategory<SpiritInfus
         JEIHandler.addSizedIngredientsToJei(builder, RecipeIngredientRole.INPUT, 104, 49+itemOffset, true, recipe.extraIngredients);
 
         builder.addSlot(RecipeIngredientRole.INPUT, 63, 57)
-                .addItemStacks(Arrays.stream(recipe.ingredient.getItems()).toList());
+                .addItemStacks(Arrays.stream(recipe.ingredient.ingredient().getItems()).toList());
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 63, 124)
                 .addItemStack(recipe.output);

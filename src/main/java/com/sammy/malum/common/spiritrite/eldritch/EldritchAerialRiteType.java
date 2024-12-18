@@ -7,6 +7,7 @@ import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
@@ -18,7 +19,7 @@ import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.network.PacketDistributor;
+
 
 import java.util.*;
 
@@ -42,7 +43,7 @@ public class EldritchAerialRiteType extends TotemicRiteType {
                         if (!state.isAir() && level.getBlockEntity(p) == null && canSilkTouch(level, pos, state)) {
                             FallingBlockEntity.fall(level, p, state);
                             level.playSound(null, p, SoundRegistry.TOTEM_AERIAL_MAGIC.get(), SoundSource.BLOCKS, 0.5f, 2.6F + (level.random.nextFloat() - level.random.nextFloat()) * 0.8F);
-                            PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(pos), new AerialBlockFallRiteEffectPacket(AERIAL_SPIRIT.getPrimaryColor(), p));
+                            PacketRegistry.sendToPlayersTrackingChunk(level, new ChunkPos(pos), new AerialBlockFallRiteEffectPacket(AERIAL_SPIRIT.getPrimaryColor(), p));
                         }
                     }
                 });
@@ -93,7 +94,7 @@ public class EldritchAerialRiteType extends TotemicRiteType {
         if (harvestToolStack.isEmpty()) {
             return false;
         }
-        harvestToolStack.enchant(level.registryAccess().holderOrThrow(Enchantments.SILK_TOUCH), 1);
+        harvestToolStack.enchant(level.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.SILK_TOUCH), 1);
         List<ItemStack> drops = Block.getDrops(state, level, pos, null, null, harvestToolStack);
         Item blockItem = state.getBlock().asItem();
         return drops.stream().anyMatch(s -> s.getItem() == blockItem);

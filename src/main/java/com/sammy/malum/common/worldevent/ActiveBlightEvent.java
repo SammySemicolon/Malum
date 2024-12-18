@@ -1,5 +1,7 @@
 package com.sammy.malum.common.worldevent;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.common.block.blight.BlightedSoilBlock;
 import com.sammy.malum.common.worldgen.tree.SoulwoodTreeFeature;
 import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
@@ -15,6 +17,7 @@ import team.lodestar.lodestone.systems.worldevent.*;
 import team.lodestar.lodestone.systems.worldgen.LodestoneBlockFiller;
 import team.lodestar.lodestone.systems.worldgen.LodestoneBlockFiller.*;
 
+import java.util.Collections;
 import java.util.Map;
 
 import static com.sammy.malum.common.worldgen.tree.SoulwoodTreeFeature.BLIGHT;
@@ -30,6 +33,25 @@ public class ActiveBlightEvent extends WorldEventInstance {
     public ActiveBlightEvent(WorldEventType type) {
         super(type);
     }
+
+    public static final Codec<ActiveBlightEvent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            WorldEventType.CODEC.fieldOf("type").forGetter(event -> event.type),
+            Codec.INT.fieldOf("blightTimer").orElse(0).forGetter(event -> event.blightTimer),
+            Codec.INT.fieldOf("intensity").orElse(0).forGetter(event -> event.intensity),
+            Codec.INT.fieldOf("rate").orElse(0).forGetter(event -> event.rate),
+            Codec.INT.fieldOf("times").orElse(0).forGetter(event -> event.times),
+            BlockPos.CODEC.fieldOf("sourcePos").forGetter(event -> event.sourcePos),
+            Codec.unboundedMap(Codec.INT, Codec.DOUBLE).fieldOf("noiseValues").orElse(Collections.emptyMap()).forGetter(event -> event.noiseValues)
+    ).apply(instance, (type, blightTimer, intensity, rate, times, sourcePos, noiseValues) -> {
+        ActiveBlightEvent event = new ActiveBlightEvent(type);
+        event.blightTimer = blightTimer;
+        event.intensity = intensity;
+        event.rate = rate;
+        event.times = times;
+        event.sourcePos = sourcePos;
+        event.noiseValues = noiseValues;
+        return event;
+    }));
 
     public ActiveBlightEvent setBlightData(int intensity, int rate, int times) {
         this.intensity = intensity;
@@ -60,13 +82,8 @@ public class ActiveBlightEvent extends WorldEventInstance {
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compoundTag) {
-
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag compoundTag) {
-
+    protected Codec<? extends WorldEventInstance> getCodec() {
+        return CODEC;
     }
 
     public void createBlight(ServerLevel level) {

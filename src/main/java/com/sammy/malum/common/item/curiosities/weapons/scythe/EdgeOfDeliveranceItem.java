@@ -2,13 +2,12 @@ package com.sammy.malum.common.item.curiosities.weapons.scythe;
 
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import net.minecraft.network.chat.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
 
 import java.util.*;
@@ -20,13 +19,14 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
     }
 
     @Override
-    public void modifyAttributeTooltipEvent(AddAttributeTooltipsEvent event) {
-        event.addTooltipLines(ComponentHelper.positiveEffect("edge_of_deliverance_crit"));
-        event.addTooltipLines(ComponentHelper.negativeEffect("edge_of_deliverance_unpowered_attack"));
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        tooltipComponents.add(ComponentHelper.positiveEffect("edge_of_deliverance_crit"));
+        tooltipComponents.add(ComponentHelper.negativeEffect("edge_of_deliverance_unpowered_attack"));
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
     @Override
-    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         super.outgoingDamageEvent(event, attacker, target, stack);
         var level = attacker.level();
         if (level.isClientSide()) {
@@ -36,7 +36,7 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
         if (source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
             var effect = MobEffectRegistry.IMMINENT_DELIVERANCE;
             if (target.hasEffect(effect)) {
-                event.setNewDamage(event.getNewDamage() * 2);
+                event.setAmount(event.getAmount() * 2);
                 SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 2f, 0.75f);
                 SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 3f, 1.25f);
                 SoundHelper.playSound(target, SoundRegistry.MALIGNANT_METAL_MOTIF.get(), 3f, 1.75f);
@@ -48,7 +48,7 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
                 target.removeEffect(effect);
             }
             else {
-                event.setNewDamage(event.getNewDamage() * 0.5f);
+                event.setAmount(event.getAmount() * 0.5f);
                 if (source.is(DamageTypeRegistry.HIDDEN_BLADE_COUNTER) && attacker.getRandom().nextFloat() >= 0.4f) {
                     return;
                 }

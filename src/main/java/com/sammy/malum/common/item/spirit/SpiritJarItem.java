@@ -21,7 +21,7 @@ public class SpiritJarItem extends BlockItem {
 
     @Override
     public String getDescriptionId(ItemStack pStack) {
-        if (pStack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS)) {
+        if (pStack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS.get())) {
             return "item.malum.filled_spirit_jar";
         }
         return super.getDescriptionId(pStack);
@@ -37,8 +37,8 @@ public class SpiritJarItem extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext context, List<Component> pTooltip, TooltipFlag tooltipFlag) {
-        if (pStack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS)) {
-            Contents contents = pStack.get(DataComponentRegistry.SPIRIT_JAR_CONTENTS);
+        if (pStack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS.get())) {
+            Contents contents = pStack.get(DataComponentRegistry.SPIRIT_JAR_CONTENTS.get());
             MalumSpiritType spirit = MalumSpiritType.getSpiritType(contents.spirit());
             pTooltip.add(Component.translatable("malum.spirit.description.stored_spirit").withStyle(ChatFormatting.GRAY));
             pTooltip.add(spirit.getSpiritJarCounterComponent(contents.count()));

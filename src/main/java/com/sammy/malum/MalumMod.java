@@ -2,16 +2,27 @@ package com.sammy.malum;
 
 import com.sammy.malum.compability.attributelib.*;
 import com.sammy.malum.compability.farmersdelight.*;
-import com.sammy.malum.compability.irons_spellbooks.*;
-import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.config.*;
+import com.sammy.malum.core.events.RuntimeEvents;
+import com.sammy.malum.core.events.SetupEvents;
+import com.sammy.malum.core.listeners.MalignantConversionReloadListener;
+import com.sammy.malum.core.listeners.ReapingDataReloadListener;
+import com.sammy.malum.core.listeners.RitualRecipeReloadListener;
+import com.sammy.malum.core.listeners.SpiritDataReloadListener;
+import com.sammy.malum.data.worldgen.BiomeModifications;
 import com.sammy.malum.registry.client.HiddenTagRegistry;
 import com.sammy.malum.registry.common.*;
+import com.sammy.malum.registry.common.item.ArmorSkinRegistry;
+import com.sammy.malum.registry.common.item.ItemRegistry;
+import com.sammy.malum.registry.common.item.tabs.CreativeTabRegistry;
 import io.github.fabricators_of_create.porting_lib.config.ConfigRegistry;
 import io.github.fabricators_of_create.porting_lib.config.ModConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.resources.*;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.util.*;
 import org.apache.logging.log4j.*;
 
@@ -46,6 +57,7 @@ public class MalumMod implements ModInitializer {
         ConfigRegistry.registerConfig(MalumMod.MALUM, ModConfig.Type.CLIENT, ClientConfig.SPEC);
         ConfigRegistry.registerConfig(MalumMod.MALUM, ModConfig.Type.COMMON, CommonConfig.SPEC);
 
+        SOUNDS.register();
         BLOCKS.register();
         BLOCK_ENTITY_TYPES.register();
         COMPONENTS.register();
@@ -53,7 +65,6 @@ public class MalumMod implements ModInitializer {
         ENTITY_TYPES.register();
         EFFECTS.register();
         PARTICLES.register();
-        SOUNDS.register();
         CONTAINERS.register();
         ATTRIBUTES.register();
         RECIPE_TYPES.register();
@@ -62,16 +73,61 @@ public class MalumMod implements ModInitializer {
         STRUCTURES.register();
         CREATIVE_MODE_TABS.register();
         AttachmentTypeRegistry.register();
-
+        PacketRegistry.registerNetworkStuff();
+        WorldEventTypes.TYPES.register();
         ItemGroupEvents.MODIFY_ENTRIES_ALL.register(HiddenTagRegistry::hideItems);
         MobEffectRegistry.registerBrewingRecipes();
-        TetraCompat.init();
+        SetupEvents.buildCreativeTabs();
+        RuntimeEvents.register();
         FarmersDelightCompat.init();
         AttributeLibCompat.init();
-        IronsSpellsCompat.init();
+
+        BiomeModifications.init();
+        ItemRegistry.Common.registerCompost();
+        ArmorSkinRegistry.registerItemSkins();
+
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new SpiritDataReloadListenerFabricImpl());
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new ReapingDataReloadListenerFabricImpl());
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new MalignantConversionReloadListenerFabricImpl());
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new RitualRecipeReloadListenerFabricImpl());
+
+        CreativeTabRegistry.populateItemGroups();
+
     }
 
     public static ResourceLocation malumPath(String path) {
         return ResourceLocation.fromNamespaceAndPath(MALUM, path);
+    }
+
+    public static class SpiritDataReloadListenerFabricImpl extends SpiritDataReloadListener implements IdentifiableResourceReloadListener {
+
+        @Override
+        public ResourceLocation getFabricId() {
+            return malumPath("spirit_data");
+        }
+    }
+
+    public static class ReapingDataReloadListenerFabricImpl extends ReapingDataReloadListener implements IdentifiableResourceReloadListener {
+
+        @Override
+        public ResourceLocation getFabricId() {
+            return malumPath("reaping_data");
+        }
+    }
+
+    public static class MalignantConversionReloadListenerFabricImpl extends MalignantConversionReloadListener implements IdentifiableResourceReloadListener {
+
+        @Override
+        public ResourceLocation getFabricId() {
+            return malumPath("malignant_conversion_data");
+        }
+    }
+
+    public static class RitualRecipeReloadListenerFabricImpl extends RitualRecipeReloadListener implements IdentifiableResourceReloadListener {
+
+        @Override
+        public ResourceLocation getFabricId() {
+            return malumPath("ritual_recipes");
+        }
     }
 }

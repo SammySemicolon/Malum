@@ -28,7 +28,7 @@ public class CurioGruesomeConcentrationRing extends MalumCurioItem implements IV
 
     public static void onEat(Level level, LivingEntity livingEntity, ItemStack food) {
         if (food.is(GROSS_FOODS)) {
-            if (CurioHelper.hasCurioEquipped(livingEntity, ItemRegistry.RING_OF_GRUESOME_CONCENTRATION.get())) {
+            if (TrinketsHelper.hasTrinketEquipped(livingEntity, ItemRegistry.RING_OF_GRUESOME_CONCENTRATION.get())) {
                 var gluttony = MobEffectRegistry.GLUTTONY;
                 var effect = livingEntity.getEffect(gluttony);
 

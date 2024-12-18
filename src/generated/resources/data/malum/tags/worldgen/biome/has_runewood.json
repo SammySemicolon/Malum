@@ -1,10 +1,16 @@
 {
-  "remove": [
-    "#c:is_snowy"
-  ],
   "values": [
-    "#c:is_plains",
-    "#c:is_mountain",
-    "#minecraft:is_hill"
+    {
+      "id": "#c:is_plains",
+      "required": false
+    },
+    {
+      "id": "#c:is_mountain",
+      "required": false
+    },
+    {
+      "id": "#minecraft:is_hill",
+      "required": false
+    }
   ]
 }

@@ -16,14 +16,6 @@ import java.util.*;
 
 public class SpiritInfusionRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipeInput> {
 
-    public static final MapCodec<SpiritInfusionRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
-            SizedIngredient.NESTED_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
-            ItemStack.CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
-            SizedIngredient.NESTED_CODEC.listOf().optionalFieldOf("extraIngredients", List.of()).forGetter(recipe -> recipe.extraIngredients),
-            SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits),
-            Codec.BOOL.optionalFieldOf("carryOverComponentData", false).forGetter(recipe -> recipe.carryOverData)
-    ).apply(obj, SpiritInfusionRecipe::new));
-
     public static final String NAME = "spirit_infusion";
 
     public final SizedIngredient ingredient;
@@ -45,5 +37,28 @@ public class SpiritInfusionRecipe extends LodestoneInWorldRecipe<SpiritBasedReci
     @Override
     public boolean matches(SpiritBasedRecipeInput input, Level level) {
         return input.test(ingredient, extraIngredients, spirits);
+    }
+
+    public static class Serializer implements RecipeSerializer<SpiritInfusionRecipe> {
+        public static final MapCodec<SpiritInfusionRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
+                SizedIngredient.NESTED_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
+                ItemStack.CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
+                SizedIngredient.NESTED_CODEC.listOf().fieldOf("extraIngredients").forGetter(recipe -> recipe.extraIngredients),
+                SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits),
+                Codec.BOOL.fieldOf("carryOverComponentData").forGetter(recipe -> recipe.carryOverData)
+        ).apply(obj, SpiritInfusionRecipe::new));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, SpiritInfusionRecipe> STREAM_CODEC =
+                ByteBufCodecs.fromCodecWithRegistries(CODEC.codec());
+
+        @Override
+        public MapCodec<SpiritInfusionRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, SpiritInfusionRecipe> streamCodec() {
+            return STREAM_CODEC;
+        }
     }
 }

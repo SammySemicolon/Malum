@@ -1,14 +1,18 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 4,
-      "tag": "c:gems/quartz"
+      "ingredient": {
+        "tag": "c:gems/quartz"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "minecraft:gold_ingot"
+    "ingredient": {
+      "item": "minecraft:gold_ingot"
+    }
   },
   "output": {
     "count": 1,

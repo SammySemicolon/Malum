@@ -1,8 +1,12 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [],
   "ingredient": {
     "count": 16,
-    "tag": "minecraft:stone_tool_materials"
+    "ingredient": {
+      "tag": "minecraft:stone_tool_materials"
+    }
   },
   "output": {
     "count": 16,

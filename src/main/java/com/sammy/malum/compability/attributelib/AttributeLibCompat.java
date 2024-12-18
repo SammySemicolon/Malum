@@ -1,14 +1,16 @@
 package com.sammy.malum.compability.attributelib;
 
 //import dev.shadowsoffire.attributeslib.client.*;
-import net.neoforged.fml.*;
+
+
+import net.fabricmc.loader.api.FabricLoader;
 
 public class AttributeLibCompat {
 
     public static boolean LOADED;
 
     public static void init() {
-        LOADED = ModList.get().isLoaded("attributeslib");
+        LOADED = FabricLoader.getInstance().isModLoaded("attributeslib");
         if (LOADED) {
             LoadedOnly.init();
         }

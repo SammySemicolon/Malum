@@ -13,7 +13,7 @@ public class ItemTagRegistry {
     public static final TagKey<Item> SCYTHES = malumTag("scythe");
     public static final TagKey<Item> STAVES = malumTag("staff");
     public static final TagKey<Item> KNIVES_FD = modTag("farmersdelight:tools/knives");
-    public static final TagKey<Item> KNIVES = forgeTag("tools/knives");
+    public static final TagKey<Item> KNIVES = cTag("tools/knives");
 
     public static final TagKey<Item> ANIMATED_ENCHANTABLE = malumTag("enchantable/animated");
     public static final TagKey<Item> REBOUND_ENCHANTABLE = malumTag("enchantable/rebound");
@@ -77,7 +77,7 @@ public class ItemTagRegistry {
     public static final TagKey<Item> TWISTED_STAIRS = malumTag("twisted_rock_stairs");
     public static final TagKey<Item> TWISTED_WALLS = malumTag("twisted_rock_walls");
 
-    public static final TagKey<Item> STRIPPED_LOGS = forgeTag("stripped_logs");
+    public static final TagKey<Item> STRIPPED_LOGS = cTag("stripped_logs");
 
 
 
@@ -89,7 +89,7 @@ public class ItemTagRegistry {
         return TagKey.create(Registries.ITEM, MalumMod.malumPath(path));
     }
 
-    private static TagKey<Item> forgeTag(String name) {
-        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("neoforge", name));
+    private static TagKey<Item> cTag(String name) {
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", name));
     }
 }

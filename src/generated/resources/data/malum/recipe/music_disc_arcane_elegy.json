@@ -1,8 +1,11 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [],
   "ingredient": {
-    "count": 1,
-    "tag": "malum:arcane_elegy_component"
+    "ingredient": {
+      "tag": "malum:arcane_elegy_component"
+    }
   },
   "output": {
     "count": 1,

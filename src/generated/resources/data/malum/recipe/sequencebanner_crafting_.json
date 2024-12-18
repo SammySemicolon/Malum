@@ -1,8 +1,11 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [],
   "ingredient": {
-    "count": 1,
-    "item": "malum:soulwoven_banner"
+    "ingredient": {
+      "item": "malum:soulwoven_banner"
+    }
   },
   "output": {
     "components": {

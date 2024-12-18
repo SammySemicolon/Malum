@@ -7,6 +7,7 @@ import com.sammy.malum.common.block.curiosities.ritual_plinth.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.core.systems.spirit.*;
+import io.github.fabricators_of_create.porting_lib.block.CustomRenderBoundingBoxBlockEntity;
 import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.*;
@@ -21,7 +22,7 @@ import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
 import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 
-public class RitualPlinthRenderer implements BlockEntityRenderer<RitualPlinthBlockEntity> {
+public class RitualPlinthRenderer implements BlockEntityRenderer<RitualPlinthBlockEntity>, CustomRenderBoundingBoxBlockEntity {
 
     public static final RenderTypeToken INCOMPLETE_RITUAL = RenderTypeToken.createToken(MalumMod.malumPath("textures/vfx/ritual/incomplete_ritual.png"));
     public static final RenderTypeToken SILHOUETTE = RenderTypeToken.createToken(MalumMod.malumPath("textures/vfx/ritual/silhouette.png"));
@@ -30,8 +31,8 @@ public class RitualPlinthRenderer implements BlockEntityRenderer<RitualPlinthBlo
     }
 
     @Override
-    public AABB getRenderBoundingBox(RitualPlinthBlockEntity blockEntityIn) {
-        var pos = blockEntityIn.getBlockPos();
+    public AABB getRenderBoundingBox() {
+        var pos = self().getBlockPos();
         return new AABB(pos.getX() - 2, pos.getY()-1, pos.getZ() - 2, pos.getX() + 3, pos.getY() + 6, pos.getZ() + 3);
     }
     

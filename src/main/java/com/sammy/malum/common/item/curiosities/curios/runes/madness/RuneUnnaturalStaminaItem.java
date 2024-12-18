@@ -13,8 +13,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
-import team.lodestar.lodestone.helpers.CurioHelper;
-import top.theillusivec4.curios.api.SlotContext;
+import team.lodestar.lodestone.helpers.TrinketsHelper;
 
 import java.util.function.Consumer;
 
@@ -29,13 +28,14 @@ public class RuneUnnaturalStaminaItem extends AbstractRuneCurioItem {
         consumer.accept(ComponentHelper.positiveCurioEffect("always_sprint"));
     }
 
+
     @Override
-    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+    public void addAttributeModifier(Multimap<Holder<Attribute>, AttributeModifier> map, Holder<Attribute> attribute, AttributeModifier modifier) {
         addAttributeModifier(map, Attributes.MOVEMENT_SPEED,
-                new AttributeModifier(MalumMod.malumPath("unnatural_stamina_rune"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                new AttributeModifier(MalumMod.malumPath("curio_movement_speed"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 
     public static boolean forceSprint(LivingEntity livingEntity) {
-        return CurioHelper.hasCurioEquipped(livingEntity, ItemRegistry.RUNE_OF_UNNATURAL_STAMINA.get());
+        return TrinketsHelper.hasTrinketEquipped(livingEntity, ItemRegistry.RUNE_OF_UNNATURAL_STAMINA.get());
     }
 }

@@ -1,8 +1,8 @@
 package com.sammy.malum.core.handlers.hiding.flags;
 
 import net.minecraft.world.flag.FeatureFlagUniverse;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collection;

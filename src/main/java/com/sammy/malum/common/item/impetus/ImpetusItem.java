@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.impetus;
 
 import com.sammy.malum.common.recipe.SpiritRepairRecipe;
+import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +26,7 @@ public class ImpetusItem extends Item implements SpiritRepairRecipe.IRepairOutpu
     }
 
     @Override
-    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+    public boolean canBeEnchantedWith(ItemStack stack, Holder<Enchantment> enchantment, EnchantingContext context) {
         return false;
     }
 

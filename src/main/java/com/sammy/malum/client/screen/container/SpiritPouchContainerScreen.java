@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 
 public class SpiritPouchContainerScreen extends AbstractContainerScreen<SpiritPouchContainer> {
@@ -22,14 +22,14 @@ public class SpiritPouchContainerScreen extends AbstractContainerScreen<SpiritPo
     }
 
     @Override
-    public void render(@Nonnull GuiGraphics poseStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull GuiGraphics poseStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(poseStack, mouseX, mouseY, partialTicks);
         super.render(poseStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(poseStack, mouseX, mouseY);
     }
 
     @Override
-    protected void renderLabels(@Nonnull GuiGraphics poseStack, int mouseX, int mouseY) {
+    protected void renderLabels(@NotNull GuiGraphics poseStack, int mouseX, int mouseY) {
         if (this.minecraft != null && this.minecraft.player != null) {
 //            Color color = textColor;
 //            Color insideColor = MalumHelper.darker(color, 3);

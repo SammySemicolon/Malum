@@ -1,26 +1,36 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 4,
-      "item": "minecraft:bone"
+      "ingredient": {
+        "item": "minecraft:bone"
+      }
     },
     {
       "count": 4,
-      "item": "malum:grim_talc"
+      "ingredient": {
+        "item": "malum:grim_talc"
+      }
     },
     {
       "count": 16,
-      "item": "minecraft:rotten_flesh"
+      "ingredient": {
+        "item": "minecraft:rotten_flesh"
+      }
     },
     {
       "count": 4,
-      "item": "malum:hex_ash"
+      "ingredient": {
+        "item": "malum:hex_ash"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:ornate_ring"
+    "ingredient": {
+      "item": "malum:ornate_ring"
+    }
   },
   "output": {
     "count": 1,

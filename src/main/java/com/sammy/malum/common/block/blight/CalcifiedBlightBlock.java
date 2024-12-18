@@ -4,6 +4,7 @@ import com.mojang.serialization.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.extensions.extensions.IShearable;
 import net.minecraft.core.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.*;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
-import net.neoforged.neoforge.common.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -54,7 +54,7 @@ public class CalcifiedBlightBlock extends BushBlock implements IShearable {
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
-            SoundType soundtype = state.getSoundType(level, pos, player);
+            SoundType soundtype = state.getSoundType();
             level.playSound(null, pos, SoundRegistry.CALCIFIED_BLIGHT_PLACE.get(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * (1 + stage * 0.1f));
             return ItemInteractionResult.SUCCESS;
         }
@@ -67,7 +67,7 @@ public class CalcifiedBlightBlock extends BushBlock implements IShearable {
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+    public boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         if (pState.is(BLIGHTED_BLOCKS)) {
             return true;
         }

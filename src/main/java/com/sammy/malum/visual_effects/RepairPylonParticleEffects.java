@@ -11,12 +11,12 @@ import net.minecraft.util.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 
-import javax.annotation.*;
 import java.util.function.*;
 
 import static com.sammy.malum.visual_effects.SpiritLightSpecs.*;

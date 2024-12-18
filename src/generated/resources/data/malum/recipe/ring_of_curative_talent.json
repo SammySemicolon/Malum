@@ -1,22 +1,29 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 4,
-      "item": "malum:living_flesh"
+      "ingredient": {
+        "item": "malum:living_flesh"
+      }
     },
     {
       "count": 4,
-      "item": "malum:alchemical_calx"
+      "ingredient": {
+        "item": "malum:alchemical_calx"
+      }
     },
     {
-      "count": 1,
-      "item": "minecraft:ghast_tear"
+      "ingredient": {
+        "item": "minecraft:ghast_tear"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:gilded_ring"
+    "ingredient": {
+      "item": "malum:gilded_ring"
+    }
   },
   "output": {
     "count": 1,

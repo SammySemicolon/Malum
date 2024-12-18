@@ -1,18 +1,24 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 2,
-      "item": "malum:runewood_planks"
+      "ingredient": {
+        "item": "malum:runewood_planks"
+      }
     },
     {
-      "count": 1,
-      "item": "malum:refined_soulstone"
+      "ingredient": {
+        "item": "malum:refined_soulstone"
+      }
     }
   ],
   "ingredient": {
     "count": 2,
-    "tag": "c:ingots/iron"
+    "ingredient": {
+      "tag": "c:ingots/iron"
+    }
   },
   "output": {
     "count": 1,

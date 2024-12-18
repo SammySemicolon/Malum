@@ -11,37 +11,62 @@ import com.sammy.malum.common.item.curiosities.curios.sets.misc.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.prospector.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.rotten.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
-import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.listeners.*;
+import dev.architectury.event.EventResult;
+import dev.architectury.event.events.common.ExplosionEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.EntityJoinLevelEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.player.PlayerEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.player.PlayerInteractEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.tick.EntityTickEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.tick.PlayerTickEvent;
+import io.github.fabricators_of_create.porting_lib.event.common.ExplosionEvents;
 import net.minecraft.core.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.bus.api.*;
-import net.neoforged.fml.common.*;
-import net.neoforged.neoforge.event.*;
-import net.neoforged.neoforge.event.entity.*;
-import net.neoforged.neoforge.event.entity.item.*;
-import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.entity.player.*;
-import net.neoforged.neoforge.event.level.*;
-import net.neoforged.neoforge.event.tick.*;
+import team.lodestar.lodestone.events.LodestoneItemEvent;
 
-@EventBusSubscriber
+import java.util.List;
+
+
 public class RuntimeEvents {
 
-    @SubscribeEvent
+    public static void register(){
+        EntityJoinLevelEvent.EVENT.register(RuntimeEvents::onEntityJoin);
+        PlayerInteractEvent.LeftClickBlock.EVENT.register(RuntimeEvents::playerLeftClick);
+        PlayerInteractEvent.LeftClickBlock.EVENT.register(RuntimeEvents::playerLeftClick);
+        LivingFallEvent.EVENT.register(RuntimeEvents::onEntityFall);
+        LivingEvent.LivingJumpEvent.EVENT.register(RuntimeEvents::onEntityJump);
+        LivingChangeTargetEvent.EVENT.register(RuntimeEvents::onLivingTarget);
+        LivingEvent.LivingVisibilityEvent.EVENT.register(RuntimeEvents::onLivingVisibility);
+        EntityTickEvent.Pre.EVENT.register(RuntimeEvents::onLivingTick);
+        PlayerEvent.BreakSpeed.EVENT.register(RuntimeEvents::onPlayerBreakSpeed);
+        PlayerTickEvent.Post.EVENT.register(RuntimeEvents::onPlayerTick);
+        MobEffectEvent.Applicable.EVENT.register(RuntimeEvents::isPotionApplicable);
+        MobEffectEvent.Added.EVENT.register(RuntimeEvents::onPotionApplied);
+        LivingEntityUseItemEvent.Start.EVENT.register(RuntimeEvents::onStartUsingItem);
+        LivingDamageEvent.DAMAGE.register(RuntimeEvents::onHurt);
+        LivingDeathEvent.EVENT.register(RuntimeEvents::onDeath);
+        LivingDropsEvent.EVENT.register(RuntimeEvents::onDrops);
+        LodestoneItemEvent.EXPIRE.register(RuntimeEvents::onItemExpire);
+        ExplosionEvents.DETONATE.register(RuntimeEvents::onExplosionDetonate);
+    }
+
     public static void onEntityJoin(EntityJoinLevelEvent event) {
         CurioTokenOfGratitude.giveItem(event);
         SoulDataHandler.entityJoin(event);
-        TetraCompat.entityJoin(event);
     }
 
-    @SubscribeEvent
+
     public static void playerLeftClick(PlayerInteractEvent.LeftClickBlock event) {
         BlockPos pos = event.getPos();
         Level level = event.getLevel();
@@ -58,33 +83,33 @@ public class RuntimeEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void onEntityJoin(MobSpawnEvent.PositionCheck event) {
-        SoulDataHandler.markAsSpawnerSpawned(event);
+
+    public static void onSpawnerSpawned(LivingEntity living, BaseSpawner baseSpawner) {
+        SoulDataHandler.markAsSpawnerSpawned(living, baseSpawner);
     }
 
-    @SubscribeEvent
+
     public static void onEntityJump(LivingEvent.LivingJumpEvent event) {
         CorruptedAerialAura.onEntityJump(event);
     }
 
-    @SubscribeEvent
+
     public static void onEntityFall(LivingFallEvent event) {
         AscensionEffect.onEntityFall(event);
         CorruptedAerialAura.onEntityFall(event);
     }
 
-    @SubscribeEvent
+
     public static void onLivingTarget(LivingChangeTargetEvent event) {
         SoulDataHandler.preventTargeting(event);
     }
 
-    @SubscribeEvent
+
     public static void onLivingVisibility(LivingEvent.LivingVisibilityEvent event) {
         CurioHarmonyNecklace.preventDetection(event);
     }
 
-    @SubscribeEvent
+
     public static void onLivingTick(EntityTickEvent.Pre event) {
         SoulDataHandler.entityTick(event);
         SoulWardHandler.recoverSoulWard(event);
@@ -94,74 +119,63 @@ public class RuntimeEvents {
         CurioHiddenBladeNecklace.entityTick(event);
     }
 
-    @SubscribeEvent
+
     public static void onPlayerBreakSpeed(PlayerEvent.BreakSpeed event) {
         InfernalAura.increaseDigSpeed(event);
         RuneFervorItem.increaseDigSpeed(event);
     }
 
-    @SubscribeEvent
+
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         StaffAbilityHandler.recoverStaffCharges(event);
     }
 
-    @SubscribeEvent
-    public static void registerListeners(AddReloadListenerEvent event) {
-        SpiritDataReloadListener.register(event);
-        ReapingDataReloadListener.register(event);
-        RitualRecipeReloadListener.register(event);
-        MalignantConversionReloadListener.register(event);
-    }
 
-    @SubscribeEvent
     public static void isPotionApplicable(MobEffectEvent.Applicable event) {
         GluttonyEffect.canApplyPotion(event);
     }
 
-    @SubscribeEvent
+
     public static void onPotionApplied(MobEffectEvent.Added event) {
         RuneTwinnedDurationItem.onPotionApplied(event);
         RuneAlimentCleansingItem.onPotionApplied(event);
     }
-    @SubscribeEvent
+
     public static void onPotionExpired(MobEffectEvent.Expired event) {
     }
 
-    @SubscribeEvent
+
     public static void onStartUsingItem(LivingEntityUseItemEvent.Start event) {
         CurioVoraciousRing.accelerateEating(event);
     }
 
-    @SubscribeEvent
-    public static void onHurt(LivingDamageEvent.Post event) {
+
+    public static void onHurt(LivingDamageEvent event) {
+        SoulWardHandler.shieldPlayer(event);
+        MalumAttributeEventHandler.processAttributes(event);
         SoulDataHandler.exposeSoul(event);
     }
 
-    @SubscribeEvent
-    public static void onHurt(LivingDamageEvent.Pre event) {
-        SoulWardHandler.shieldPlayer(event);
-        MalumAttributeEventHandler.processAttributes(event);
-    }
 
-    @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
         SoulHarvestHandler.onDeath(event);
     }
 
-    @SubscribeEvent
+
     public static void onDrops(LivingDropsEvent event) {
         EnsouledItemHarvestHandler.onDrops(event);
     }
 
-    @SubscribeEvent
-    public static void onItemExpire(ItemExpireEvent event) {
-        EnsouledItemHarvestHandler.onItemExpire(event);
+
+    private static int onItemExpire(ItemEntity itemEntity, ItemStack itemStack) {
+        EnsouledItemHarvestHandler.onItemExpire(itemEntity, itemStack);
+        return -1;
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
-        CurioProspectorBelt.processExplosion(event);
-        NitrateExplosion.processExplosion(event);
+
+    private static void onExplosionDetonate(Level level, Explosion explosion, List<Entity> entities, double v) {
+        CurioProspectorBelt.processExplosion(level, explosion, entities);
+        NitrateExplosion.processExplosion(level, explosion, entities);
     }
 }
 

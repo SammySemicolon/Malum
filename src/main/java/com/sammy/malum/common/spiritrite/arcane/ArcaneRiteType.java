@@ -8,6 +8,7 @@ import com.sammy.malum.common.packets.particle.rite.generic.BlockSparkleParticle
 import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.common.worldevent.*;
 import com.sammy.malum.core.systems.recipe.*;
+import com.sammy.malum.registry.common.PacketRegistry;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.core.*;
@@ -20,7 +21,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.network.PacketDistributor;
+
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
@@ -72,7 +73,7 @@ public class ArcaneRiteType extends TotemicRiteType {
                         if (recipe != null && !inventoryForAltar.extractItem(0, 1, true).isEmpty()) {
                             Vec3 itemPos = iMalumSpecialItemAccessPoint.getItemPos();
                             level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, recipe.output.copy()));
-                            PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(p), new BlightTransformItemParticlePacket(List.of(ARCANE_SPIRIT.getIdentifier()), itemPos));
+                            PacketRegistry.sendToPlayersTrackingChunk(level, new ChunkPos(p), new BlightTransformItemParticlePacket(List.of(ARCANE_SPIRIT.getIdentifier()), itemPos));
                             inventoryForAltar.extractItem(0, 1, false);
                             BlockStateHelper.updateAndNotifyState(level, p);
                         }
@@ -86,7 +87,7 @@ public class ArcaneRiteType extends TotemicRiteType {
                             BlockEntity entity = level.getBlockEntity(posToTransmute);
                             BlockState newState = BlockStateHelper.setBlockStateWithExistingProperties(level, posToTransmute, block.defaultBlockState(), 3);
                             level.levelEvent(2001, posToTransmute, Block.getId(newState));
-                            PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(posToTransmute), new BlockSparkleParticlePacket(ARCANE_SPIRIT.getPrimaryColor(), posToTransmute, true));
+                            PacketRegistry.sendToPlayersTrackingChunk(level, new ChunkPos(posToTransmute), new BlockSparkleParticlePacket(ARCANE_SPIRIT.getPrimaryColor(), posToTransmute, true));
                             if (block instanceof EntityBlock entityBlock) {
                                 if (entity != null) {
                                     BlockEntity newEntity = entityBlock.newBlockEntity(pos, newState);

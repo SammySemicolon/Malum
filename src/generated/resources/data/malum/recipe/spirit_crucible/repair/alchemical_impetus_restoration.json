@@ -6,7 +6,9 @@
   ],
   "repairMaterial": {
     "count": 2,
-    "item": "malum:alchemical_calx"
+    "ingredient": {
+      "item": "malum:alchemical_calx"
+    }
   },
   "repairOutputOverride": "malum:alchemical_impetus",
   "spirits": [

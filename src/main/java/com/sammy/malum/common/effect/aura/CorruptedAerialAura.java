@@ -3,13 +3,13 @@ package com.sammy.malum.common.effect.aura;
 import com.sammy.malum.*;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingFallEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import team.lodestar.lodestone.helpers.ColorHelper;
 
 public class CorruptedAerialAura extends MobEffect {

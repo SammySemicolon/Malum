@@ -10,8 +10,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import team.lodestar.lodestone.systems.sound.ExtendedSoundType;
 
 import java.util.function.Supplier;
@@ -37,7 +35,6 @@ public class BlightedSoundType extends ExtendedSoundType {
     }
 
     @Override
-    @OnlyIn(value = Dist.CLIENT)
     public void onPlayHitSound(BlockPos pos) {
         Minecraft.getInstance().getSoundManager().play(new SimpleSoundInstance(SoundRegistry.MINOR_BLIGHT_MOTIF.get(), SoundSource.BLOCKS, (getVolume() + 1.0F) * 0.05f, getPitch() * 2F, MalumMod.RANDOM, pos));
     }

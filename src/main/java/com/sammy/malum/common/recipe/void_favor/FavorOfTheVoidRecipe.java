@@ -13,11 +13,6 @@ import team.lodestar.lodestone.systems.recipe.*;
 
 public class FavorOfTheVoidRecipe extends LodestoneInWorldRecipe<SingleRecipeInput> {
 
-    public static final MapCodec<FavorOfTheVoidRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
-            Ingredient.CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
-            ItemStack.CODEC.fieldOf("output").forGetter((recipe) -> recipe.output)
-    ).apply(obj, FavorOfTheVoidRecipe::new));
-
     public static final String NAME = "favor_of_the_void";
 
     public final Ingredient ingredient;
@@ -33,5 +28,26 @@ public class FavorOfTheVoidRecipe extends LodestoneInWorldRecipe<SingleRecipeInp
     @Override
     public boolean matches(SingleRecipeInput input, Level level) {
         return this.ingredient.test(input.item());
+    }
+
+    public static class Serializer implements RecipeSerializer<FavorOfTheVoidRecipe> {
+
+        public static final MapCodec<FavorOfTheVoidRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
+                Ingredient.CODEC.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
+                ItemStack.CODEC.fieldOf("output").forGetter((recipe) -> recipe.output)
+        ).apply(obj, FavorOfTheVoidRecipe::new));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, FavorOfTheVoidRecipe> STREAM_CODEC =
+                ByteBufCodecs.fromCodecWithRegistries(CODEC.codec());
+
+        @Override
+        public MapCodec<FavorOfTheVoidRecipe> codec() {
+            return CODEC;
+        }
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, FavorOfTheVoidRecipe> streamCodec() {
+            return STREAM_CODEC;
+        }
     }
 }

@@ -1,8 +1,11 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
+  "extraIngredients": [],
   "ingredient": {
-    "count": 1,
-    "item": "minecraft:gunpowder"
+    "ingredient": {
+      "item": "minecraft:gunpowder"
+    }
   },
   "output": {
     "count": 1,

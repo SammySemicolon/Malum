@@ -1,22 +1,28 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 8,
-      "item": "malum:runewood_planks"
+      "ingredient": {
+        "item": "malum:runewood_planks"
+      }
     },
     {
-      "count": 1,
-      "item": "malum:spectral_optic"
+      "ingredient": {
+        "item": "malum:spectral_optic"
+      }
     },
     {
-      "count": 1,
-      "item": "minecraft:ender_eye"
+      "ingredient": {
+        "item": "minecraft:ender_eye"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:ornate_necklace"
+    "ingredient": {
+      "item": "malum:ornate_necklace"
+    }
   },
   "output": {
     "count": 1,

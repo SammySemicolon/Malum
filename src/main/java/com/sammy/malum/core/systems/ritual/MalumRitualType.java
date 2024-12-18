@@ -66,7 +66,7 @@ public abstract class MalumRitualType {
 
     public List<Component> makeRitualShardDescriptor(MalumRitualTier ritualTier) {
         List<Component> tooltip = new ArrayList<>();
-        var spiritStyleModifier = spirit.getItemRarity().getStyleModifier();
+        var spiritStyleModifier = spirit.getItemRarity().color();
         tooltip.add(makeDescriptorComponent("malum.gui.ritual.type", translationIdentifier(), spiritStyleModifier));
         tooltip.add(makeDescriptorComponent("malum.gui.ritual.tier", ritualTier.translationIdentifier(), spiritStyleModifier));
         return tooltip;
@@ -74,7 +74,7 @@ public abstract class MalumRitualType {
 
     public List<Component> makeCodexDetailedDescriptor() {
         List<Component> tooltip = new ArrayList<>();
-        var spiritStyleModifier = spirit.getItemRarity().getStyleModifier();
+        var spiritStyleModifier = spirit.getItemRarity().color();
         tooltip.add(Component.translatable(translationIdentifier()).withStyle(spiritStyleModifier));
         tooltip.add(makeDescriptorComponent("malum.gui.rite.effect", "malum.gui.book.entry.page.text." + id + ".hover"));
         return tooltip;
@@ -86,6 +86,11 @@ public abstract class MalumRitualType {
     }
 
     public final Component makeDescriptorComponent(String translationKey1, String translationKey2, UnaryOperator<Style> style) {
+        return Component.translatable(translationKey1).withStyle(ChatFormatting.GOLD)
+                .append(Component.translatable(translationKey2).withStyle(style));
+    }
+
+    public final Component makeDescriptorComponent(String translationKey1, String translationKey2, ChatFormatting style) {
         return Component.translatable(translationKey1).withStyle(ChatFormatting.GOLD)
                 .append(Component.translatable(translationKey2).withStyle(style));
     }

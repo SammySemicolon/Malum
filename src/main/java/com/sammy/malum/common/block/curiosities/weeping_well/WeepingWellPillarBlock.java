@@ -6,11 +6,7 @@ import team.lodestar.lodestone.systems.block.*;
 
 public class WeepingWellPillarBlock extends LodestoneDirectionalBlock {
     public WeepingWellPillarBlock(Properties pProperties) {
-        super(pProperties);
+        super(pProperties.pushReaction(PushReaction.IGNORE));
     }
 
-    @Override
-    public PushReaction getPistonPushReaction(BlockState pState) {
-        return PushReaction.IGNORE;
-    }
 }

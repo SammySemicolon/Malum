@@ -1,10 +1,11 @@
 package com.sammy.malum.common.block.curiosities.ritual_plinth;
 
 import net.minecraft.core.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.items.ItemHandlerHelper;
+import team.lodestar.lodestone.forge_stuff.ItemHandlerHelper;
 import team.lodestar.lodestone.systems.block.*;
 
 public class RitualPlinthBlock<T extends RitualPlinthBlockEntity> extends WaterLoggedEntityBlock<T> {
@@ -39,7 +40,7 @@ public class RitualPlinthBlock<T extends RitualPlinthBlockEntity> extends WaterL
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (be instanceof RitualPlinthBlockEntity plinth) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(plinth.getCapability(pLevel, pPos, pState, plinth, Direction.UP));
+            return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(plinth);
         }
         return 0;
     }

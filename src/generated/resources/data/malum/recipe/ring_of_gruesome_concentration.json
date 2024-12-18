@@ -1,18 +1,24 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 16,
-      "item": "malum:null_slate"
+      "ingredient": {
+        "item": "malum:null_slate"
+      }
     },
     {
       "count": 8,
-      "item": "malum:void_salts"
+      "ingredient": {
+        "item": "malum:void_salts"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:ring_of_desperate_voracity"
+    "ingredient": {
+      "item": "malum:ring_of_desperate_voracity"
+    }
   },
   "output": {
     "count": 1,

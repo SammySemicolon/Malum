@@ -1,14 +1,18 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 8,
-      "item": "malum:refined_soulstone"
+      "ingredient": {
+        "item": "malum:refined_soulstone"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:ornate_ring"
+    "ingredient": {
+      "item": "malum:ornate_ring"
+    }
   },
   "output": {
     "count": 1,

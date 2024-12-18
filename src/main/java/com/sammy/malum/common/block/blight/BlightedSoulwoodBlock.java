@@ -2,14 +2,16 @@ package com.sammy.malum.common.block.blight;
 
 import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.block.BlockRegistry;
+import io.github.fabricators_of_create.porting_lib.tool.ItemAbilities;
+import io.github.fabricators_of_create.porting_lib.tool.ItemAbility;
+import io.github.fabricators_of_create.porting_lib.tool.addons.ItemAbilityBlock;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.*;
 import org.jetbrains.annotations.Nullable;
 
-public class BlightedSoulwoodBlock extends Block {
+public class BlightedSoulwoodBlock extends Block implements ItemAbilityBlock {
     public BlightedSoulwoodBlock(Properties p_49795_) {
         super(p_49795_);
     }

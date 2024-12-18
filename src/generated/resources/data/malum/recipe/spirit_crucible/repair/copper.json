@@ -3,7 +3,9 @@
   "itemIdRegex": "copper_.+",
   "repairMaterial": {
     "count": 2,
-    "tag": "c:ingots/copper"
+    "ingredient": {
+      "tag": "c:ingots/copper"
+    }
   },
   "spirits": [
     {

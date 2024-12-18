@@ -2,7 +2,9 @@
   "type": "malum:runeworking",
   "primaryInput": {
     "count": 4,
-    "item": "malum:tainted_rock"
+    "ingredient": {
+      "item": "malum:tainted_rock"
+    }
   },
   "result": {
     "count": 1,

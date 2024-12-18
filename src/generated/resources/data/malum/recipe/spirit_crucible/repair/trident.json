@@ -5,8 +5,9 @@
     "minecraft:trident"
   ],
   "repairMaterial": {
-    "count": 1,
-    "item": "minecraft:heart_of_the_sea"
+    "ingredient": {
+      "item": "minecraft:heart_of_the_sea"
+    }
   },
   "spirits": [
     {

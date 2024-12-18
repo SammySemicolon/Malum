@@ -1,0 +1,299 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "team.lodestar.lodestone",
+    "module": "lodestone",
+    "version": "1.21.1-1.7.0.8-fabric",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.8"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "dev.emi",
+          "module": "trinkets",
+          "version": {
+            "requires": "3.10.0"
+          },
+          "excludes": [
+            {
+              "group": "*",
+              "module": "*"
+            }
+          ]
+        },
+        {
+          "group": "dev.onyxstudios.cardinal-components-api",
+          "module": "cardinal-components-base",
+          "version": {
+            "requires": "6.1.1"
+          }
+        },
+        {
+          "group": "dev.onyxstudios.cardinal-components-api",
+          "module": "cardinal-components-entity",
+          "version": {
+            "requires": "6.1.1"
+          }
+        },
+        {
+          "group": "dev.onyxstudios.cardinal-components-api",
+          "module": "cardinal-components-world",
+          "version": {
+            "requires": "6.1.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "accessors",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "base",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "blocks",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "core",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "data",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "extensions",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "lazy_registration",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "models",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "model_data",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lodestone-1.21.1-1.7.0.8-fabric.jar",
+          "url": "lodestone-1.21.1-1.7.0.8-fabric.jar",
+          "size": 9691689,
+          "sha512": "4d75ea6e4453843e2727f8f4d8951597d072c83661bdf364a068f459f5ae4a4b34fec6f96fe24a6e01df03e40fb48bfb59535befc2536159f44cd4be6036f629",
+          "sha256": "3c868440bfad5307f957caa457b4cdb83560902e9a637d644c6c41ae6ccd4e19",
+          "sha1": "c49de7a6061916e0f33aff6b71b06e28be2c6c3c",
+          "md5": "cd9e5c18b7f47118e80a244c4ea3ebaa"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 21,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.github.bawnorton.mixinsquared",
+          "module": "mixinsquared-fabric",
+          "version": {
+            "requires": "0.2.0"
+          }
+        },
+        {
+          "group": "dev.emi",
+          "module": "trinkets",
+          "version": {
+            "requires": "3.10.0"
+          },
+          "excludes": [
+            {
+              "group": "*",
+              "module": "*"
+            }
+          ]
+        },
+        {
+          "group": "dev.onyxstudios.cardinal-components-api",
+          "module": "cardinal-components-base",
+          "version": {
+            "requires": "6.1.1"
+          }
+        },
+        {
+          "group": "dev.onyxstudios.cardinal-components-api",
+          "module": "cardinal-components-entity",
+          "version": {
+            "requires": "6.1.1"
+          }
+        },
+        {
+          "group": "dev.onyxstudios.cardinal-components-api",
+          "module": "cardinal-components-world",
+          "version": {
+            "requires": "6.1.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "accessors",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "base",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "blocks",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "core",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "data",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "extensions",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "lazy_registration",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "models",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "io.github.fabricators_of_create.Porting-Lib",
+          "module": "model_data",
+          "version": {
+            "requires": "3.1.0-beta.47+1.21.1"
+          }
+        },
+        {
+          "group": "net.fabricmc",
+          "module": "fabric-loader",
+          "version": {
+            "requires": "0.16.9"
+          }
+        },
+        {
+          "group": "net.fabricmc.fabric-api",
+          "module": "fabric-api",
+          "version": {
+            "requires": "0.108.0+1.21.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "lodestone-1.21.1-1.7.0.8-fabric.jar",
+          "url": "lodestone-1.21.1-1.7.0.8-fabric.jar",
+          "size": 9691689,
+          "sha512": "4d75ea6e4453843e2727f8f4d8951597d072c83661bdf364a068f459f5ae4a4b34fec6f96fe24a6e01df03e40fb48bfb59535befc2536159f44cd4be6036f629",
+          "sha256": "3c868440bfad5307f957caa457b4cdb83560902e9a637d644c6c41ae6ccd4e19",
+          "sha1": "c49de7a6061916e0f33aff6b71b06e28be2c6c3c",
+          "md5": "cd9e5c18b7f47118e80a244c4ea3ebaa"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "lodestone-1.21.1-1.7.0.8-fabric-sources.jar",
+          "url": "lodestone-1.21.1-1.7.0.8-fabric-sources.jar",
+          "size": 348153,
+          "sha512": "cd4b19511f5bad3695f477ebe5a21fb607edaaba9797261affcbe5842eeb60356d25d9a7f44d9ac68e0f1b3fb2d64780a74b87c36c979321dfd8087cc26b63e6",
+          "sha256": "917e2b23b7c1d6af041ae5b2a8ded35c96fe317247031c090d4e340ae0e5a359",
+          "sha1": "04f70f3bd2aa534d214712f27b1ad62180f892d0",
+          "md5": "cc4fff23c7d89a43b61e7889cb9a83a1"
+        }
+      ]
+    }
+  ]
+}

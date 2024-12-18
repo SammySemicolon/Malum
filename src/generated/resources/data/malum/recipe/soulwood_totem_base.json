@@ -1,18 +1,25 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 6,
-      "item": "malum:soulwood_planks"
+      "ingredient": {
+        "item": "malum:soulwood_planks"
+      }
     },
     {
       "count": 2,
-      "item": "malum:hex_ash"
+      "ingredient": {
+        "item": "malum:hex_ash"
+      }
     }
   ],
   "ingredient": {
     "count": 4,
-    "item": "malum:soulwood_log"
+    "ingredient": {
+      "item": "malum:soulwood_log"
+    }
   },
   "output": {
     "count": 4,

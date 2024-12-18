@@ -4,11 +4,12 @@ import com.google.common.collect.Multimap;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.item.curiosities.curios.MalumCurioItem;
 import com.sammy.malum.registry.common.AttributeRegistry;
+import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.core.Holder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
-import top.theillusivec4.curios.api.SlotContext;
 
 public class CurioArcaneSpoilRing extends MalumCurioItem {
 
@@ -17,8 +18,8 @@ public class CurioArcaneSpoilRing extends MalumCurioItem {
     }
 
     @Override
-    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
+    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotReference slot, ItemStack stack, LivingEntity living) {
         addAttributeModifier(map, AttributeRegistry.SPIRIT_SPOILS,
-                new AttributeModifier(MalumMod.malumPath("arcane_spoil_ring"), 1f, AttributeModifier.Operation.ADD_VALUE));
+                new AttributeModifier(MalumMod.malumPath("curio_spirit_spoils"), 1f, AttributeModifier.Operation.ADD_VALUE));
     }
 }

@@ -10,7 +10,9 @@
   "itemIdRegex": "stone_.+",
   "repairMaterial": {
     "count": 2,
-    "tag": "minecraft:stone_tool_materials"
+    "ingredient": {
+      "tag": "minecraft:stone_tool_materials"
+    }
   },
   "spirits": [
     {

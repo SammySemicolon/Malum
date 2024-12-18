@@ -6,7 +6,9 @@
   ],
   "repairMaterial": {
     "count": 2,
-    "item": "minecraft:obsidian"
+    "ingredient": {
+      "item": "minecraft:obsidian"
+    }
   },
   "spirits": [
     {

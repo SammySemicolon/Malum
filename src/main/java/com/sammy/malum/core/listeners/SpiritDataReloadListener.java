@@ -13,7 +13,6 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.event.AddReloadListenerEvent;
 
 import java.util.*;
 
@@ -53,10 +52,6 @@ public class SpiritDataReloadListener extends SimpleJsonResourceReloadListener {
 
     public SpiritDataReloadListener() {
         super(GSON, "spirit_data/entity");
-    }
-
-    public static void register(AddReloadListenerEvent event) {
-        event.addListener(new SpiritDataReloadListener());
     }
 
     @Override

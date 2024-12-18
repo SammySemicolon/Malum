@@ -8,7 +8,6 @@ import net.minecraft.resources.*;
 import net.minecraft.server.packs.resources.*;
 import net.minecraft.util.profiling.*;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.neoforged.neoforge.event.*;
 
 import java.util.*;
 
@@ -20,9 +19,6 @@ public class MalignantConversionReloadListener extends SimpleJsonResourceReloadL
         super(GSON, "malignant_conversion_data");
     }
 
-    public static void register(AddReloadListenerEvent event) {
-        event.addListener(new MalignantConversionReloadListener());
-    }
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> objectIn, ResourceManager resourceManagerIn, ProfilerFiller profilerIn) {

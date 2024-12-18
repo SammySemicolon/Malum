@@ -1,14 +1,17 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
-      "count": 1,
-      "item": "malum:rotting_essence"
+      "ingredient": {
+        "item": "malum:rotting_essence"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "minecraft:honey_bottle"
+    "ingredient": {
+      "item": "minecraft:honey_bottle"
+    }
   },
   "output": {
     "count": 2,

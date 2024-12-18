@@ -1,22 +1,30 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 4,
-      "item": "malum:soulwoven_silk"
+      "ingredient": {
+        "item": "malum:soulwoven_silk"
+      }
     },
     {
       "count": 4,
-      "item": "malum:refined_soulstone"
+      "ingredient": {
+        "item": "malum:refined_soulstone"
+      }
     },
     {
       "count": 2,
-      "tag": "c:leathers"
+      "ingredient": {
+        "tag": "c:leathers"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "minecraft:leather_chestplate"
+    "ingredient": {
+      "item": "minecraft:leather_chestplate"
+    }
   },
   "output": {
     "count": 1,

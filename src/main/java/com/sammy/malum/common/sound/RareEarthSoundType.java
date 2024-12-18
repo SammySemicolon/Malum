@@ -9,8 +9,6 @@ import net.minecraft.core.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import team.lodestar.lodestone.systems.sound.*;
 
 import java.util.function.*;
@@ -31,7 +29,6 @@ public class RareEarthSoundType extends ExtendedSoundType {
     }
 
     @Override
-    @OnlyIn(value = Dist.CLIENT)
     public void onPlayHitSound(BlockPos pos) {
         MultiPlayerGameMode gameMode = Minecraft.getInstance().gameMode;
         if (gameMode != null) {

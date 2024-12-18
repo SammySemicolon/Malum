@@ -2,6 +2,7 @@ package com.sammy.malum.registry.common.item;
 
 import com.sammy.malum.MalumMod;
 import net.minecraft.core.*;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
@@ -24,7 +25,8 @@ public class EnchantmentRegistry {
     //TODO: move this to lodestone
     public static int getEnchantmentLevel(Level level, ResourceKey<Enchantment> key, ItemStack stack) {
         HolderGetter<Enchantment> enchantmentLookup = level.registryAccess().asGetterLookup().lookupOrThrow(Registries.ENCHANTMENT);
-        return stack.getEnchantmentLevel(enchantmentLookup.getOrThrow(key));
+        var opt = enchantmentLookup.get(key);
+        return opt.map(enchantmentReference -> stack.get(DataComponents.ENCHANTMENTS).getLevel(enchantmentReference)).orElse(0);
     }
 
 }

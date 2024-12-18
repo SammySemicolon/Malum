@@ -1,26 +1,36 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 6,
-      "tag": "c:ingots/iron"
+      "ingredient": {
+        "tag": "c:ingots/iron"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:phantom_membrane"
+      "ingredient": {
+        "item": "minecraft:phantom_membrane"
+      }
     },
     {
       "count": 2,
-      "item": "malum:astral_weave"
+      "ingredient": {
+        "item": "malum:astral_weave"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:diamond"
+      "ingredient": {
+        "item": "minecraft:diamond"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:ornate_necklace"
+    "ingredient": {
+      "item": "malum:ornate_necklace"
+    }
   },
   "output": {
     "count": 1,

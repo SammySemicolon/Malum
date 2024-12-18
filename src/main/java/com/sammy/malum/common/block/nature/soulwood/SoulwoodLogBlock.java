@@ -3,6 +3,9 @@ package com.sammy.malum.common.block.nature.soulwood;
 import com.sammy.malum.common.block.nature.MalumLogBLock;
 import com.sammy.malum.common.item.spirit.SpiritShardItem;
 import com.sammy.malum.registry.common.SoundRegistry;
+import io.github.fabricators_of_create.porting_lib.tool.ItemAbilities;
+import io.github.fabricators_of_create.porting_lib.tool.ItemAbility;
+import io.github.fabricators_of_create.porting_lib.tool.addons.ItemAbilityBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -13,13 +16,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.ItemAbility;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class SoulwoodLogBlock extends MalumLogBLock {
+public class SoulwoodLogBlock extends MalumLogBLock implements ItemAbilityBlock {
     public SoulwoodLogBlock(Properties properties, Supplier<Block> stripped, boolean isCorrupt) {
         super(properties, stripped, isCorrupt);
     }

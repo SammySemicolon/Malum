@@ -1,22 +1,29 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 4,
-      "tag": "c:gunpowders"
+      "ingredient": {
+        "tag": "c:gunpowders"
+      }
     },
     {
-      "count": 1,
-      "item": "malum:cthonic_gold"
+      "ingredient": {
+        "item": "malum:cthonic_gold"
+      }
     },
     {
       "count": 6,
-      "tag": "c:ingots/uranium"
+      "ingredient": {
+        "tag": "c:ingots/uranium"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:alchemical_impetus"
+    "ingredient": {
+      "item": "malum:alchemical_impetus"
+    }
   },
   "output": {
     "count": 1,

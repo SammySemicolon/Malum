@@ -5,6 +5,7 @@
   "refmap": "malum.refmap.json",
   "mixins": [
     "AccessorFeatureFlagSet",
+    "BaseSpawnerMixin",
     "BlockBehaviorMixin",
     "ExplosionMixin",
     "FeatureFlagSetMixin",
@@ -20,7 +21,7 @@
     "client.ElytraLayerMixin",
     "client.FontStringRenderOutputMixin",
     "client.GlyphRenderTypesMixin",
-    "client.MinecraftMixin",
+    "client.GuiMixin",
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
     "client.LocalPlayerMixin",

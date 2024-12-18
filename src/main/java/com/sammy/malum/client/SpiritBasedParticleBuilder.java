@@ -2,13 +2,14 @@ package com.sammy.malum.client;
 
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
-import net.neoforged.neoforge.registries.*;
+import org.jetbrains.annotations.Nullable;
 import org.joml.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.systems.particle.*;
@@ -22,7 +23,6 @@ import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 import team.lodestar.lodestone.systems.particle.world.options.*;
 import team.lodestar.lodestone.systems.particle.world.type.*;
 
-import javax.annotation.*;
 import java.util.function.*;
 
 public class SpiritBasedParticleBuilder extends WorldParticleBuilder {

@@ -1,5 +1,8 @@
 {
   "values": [
-    "#minecraft:is_overworld"
+    {
+      "id": "#minecraft:is_overworld",
+      "required": false
+    }
   ]
 }

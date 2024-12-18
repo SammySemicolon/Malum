@@ -1,18 +1,19 @@
 package com.sammy.malum.common.block.nature.soulwood;
 
 import com.sammy.malum.registry.common.SoundRegistry;
+import io.github.fabricators_of_create.porting_lib.tool.ItemAbilities;
+import io.github.fabricators_of_create.porting_lib.tool.ItemAbility;
+import io.github.fabricators_of_create.porting_lib.tool.addons.ItemAbilityBlock;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.ItemAbility;
 import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.systems.block.LodestoneLogBlock;
 
 import java.util.function.Supplier;
 
-public class SoulwoodBlock extends LodestoneLogBlock {
+public class SoulwoodBlock extends LodestoneLogBlock implements ItemAbilityBlock {
     public SoulwoodBlock(Properties properties, Supplier<Block> stripped) {
         super(properties, stripped);
     }

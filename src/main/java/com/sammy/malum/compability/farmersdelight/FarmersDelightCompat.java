@@ -5,16 +5,16 @@ import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.item.ItemTiers;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.ModList;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class FarmersDelightCompat {
     public static boolean LOADED;
 
     public static void init() {
-        LOADED = ModList.get().isLoaded("farmersdelight");
+        LOADED = FabricLoader.getInstance().isModLoaded("farmersdelight");
     }
 
     public static class LoadedOnly {

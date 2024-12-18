@@ -5,11 +5,12 @@ import com.sammy.malum.common.packets.particle.rite.generic.MajorEntityEffectPar
 import com.sammy.malum.common.spiritrite.TotemicRiteEffect;
 import com.sammy.malum.common.spiritrite.TotemicRiteType;
 import com.sammy.malum.registry.common.DamageTypeRegistry;
+import com.sammy.malum.registry.common.PacketRegistry;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.PacketDistributor;
+
 import team.lodestar.lodestone.helpers.*;
 
 import java.util.*;
@@ -29,7 +30,7 @@ public class EldritchWickedRiteType extends TotemicRiteType {
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Player)).forEach(e -> {
                     if (e.getHealth() <= 2.5f && !e.isInvulnerableTo(DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO_PLAYERLESS))) {
-                        PacketDistributor.sendToPlayersTrackingEntity(e, new MajorEntityEffectParticlePacket(getIdentifyingSpirit().getPrimaryColor(), e.getX(), e.getY() + e.getBbHeight() / 2f, e.getZ()));
+                        PacketRegistry.sendToPlayersTrackingEntity(e, new MajorEntityEffectParticlePacket(getIdentifyingSpirit().getPrimaryColor(), e.getX(), e.getY() + e.getBbHeight() / 2f, e.getZ()));
                         e.hurt(DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO_PLAYERLESS), 10f);
                     }
                 });
@@ -51,7 +52,7 @@ public class EldritchWickedRiteType extends TotemicRiteType {
                     animals.removeIf(Animal::isInLove);
                     for (Animal entity : animals) {
                         entity.hurt(DamageTypeHelper.create(entity.level(), DamageTypeRegistry.VOODOO_PLAYERLESS), entity.getMaxHealth());
-                        PacketDistributor.sendToPlayersTrackingEntity(entity, new MajorEntityEffectParticlePacket(WICKED_SPIRIT.getPrimaryColor(), entity.getX(), entity.getY() + entity.getBbHeight() / 2f, entity.getZ()));
+                        PacketRegistry.sendToPlayersTrackingEntity(entity, new MajorEntityEffectParticlePacket(WICKED_SPIRIT.getPrimaryColor(), entity.getX(), entity.getY() + entity.getBbHeight() / 2f, entity.getZ()));
                         if (maxKills-- <= 0) {
                             return;
                         }

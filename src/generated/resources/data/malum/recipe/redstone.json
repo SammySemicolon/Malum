@@ -1,18 +1,13 @@
 {
-  "type": "malum:spirit_focusing",
-  "durabilityCost": 1,
-  "ingredient": {
-    "item": "malum:alchemical_impetus"
-  },
-  "output": {
-    "count": 8,
-    "id": "minecraft:redstone"
-  },
-  "spirits": [
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
     {
-      "type": "arcane",
-      "count": 1
+      "item": "minecraft:redstone_block"
     }
   ],
-  "time": 300
+  "result": {
+    "count": 9,
+    "id": "minecraft:redstone"
+  }
 }

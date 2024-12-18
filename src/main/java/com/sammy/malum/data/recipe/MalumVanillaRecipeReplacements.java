@@ -32,7 +32,7 @@ public class MalumVanillaRecipeReplacements extends VanillaRecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput pWriter) {
+    public void buildRecipes(RecipeOutput pWriter) {
         replace(Items.QUARTZ, Tags.Items.GEMS_QUARTZ);
         replace(Items.SLIME_BALL, Tags.Items.SLIMEBALLS);
 

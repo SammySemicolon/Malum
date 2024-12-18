@@ -1,14 +1,18 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
       "count": 3,
-      "item": "malum:malignant_pewter_plating"
+      "ingredient": {
+        "item": "malum:malignant_pewter_plating"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:soul_stained_steel_chestplate"
+    "ingredient": {
+      "item": "malum:soul_stained_steel_chestplate"
+    }
   },
   "output": {
     "count": 1,

@@ -1,26 +1,35 @@
 {
   "type": "malum:spirit_infusion",
+  "carryOverComponentData": false,
   "extraIngredients": [
     {
-      "count": 1,
-      "item": "malum:cthonic_gold"
+      "ingredient": {
+        "item": "malum:cthonic_gold"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:raw_gold"
+      "ingredient": {
+        "item": "minecraft:raw_gold"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:raw_iron"
+      "ingredient": {
+        "item": "minecraft:raw_iron"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:raw_copper"
+      "ingredient": {
+        "item": "minecraft:raw_copper"
+      }
     }
   ],
   "ingredient": {
-    "count": 1,
-    "item": "malum:gilded_belt"
+    "ingredient": {
+      "item": "malum:gilded_belt"
+    }
   },
   "output": {
     "count": 1,

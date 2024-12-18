@@ -5,7 +5,7 @@ import com.sammy.malum.visual_effects.networked.data.ColorEffectData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.helpers.ColorHelper;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.Easing;
@@ -24,7 +24,7 @@ public class SpiritMotePlaceParticleEffect extends ParticleEffectType {
         super(id);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) -> {

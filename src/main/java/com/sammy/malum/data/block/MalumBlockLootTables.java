@@ -1,11 +1,11 @@
 package com.sammy.malum.data.block;
 
-import com.google.common.collect.*;
-import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.common.block.ether.*;
 import com.sammy.malum.common.block.storage.jar.*;
-import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.*;
 import net.minecraft.data.loot.*;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.parameters.*;
 import net.minecraft.world.level.storage.loot.providers.nbt.*;
 import net.minecraft.world.level.storage.loot.providers.number.*;
-import net.neoforged.neoforge.registries.*;
 import team.lodestar.lodestone.systems.block.*;
 
 import java.util.*;
@@ -30,29 +29,19 @@ import java.util.stream.*;
 import static com.sammy.malum.registry.common.block.BlockRegistry.*;
 import static team.lodestar.lodestone.helpers.DataHelper.*;
 
-public class MalumBlockLootTables extends LootTableProvider {
+public class MalumBlockLootTables   {
 
     private static final float[] MAGIC_SAPLING_DROP_CHANCE = new float[]{0.015F, 0.0225F, 0.033333336F, 0.05F};
 
-    public MalumBlockLootTables(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> provider) {
-        super(pOutput, Set.of(), List.of(
-                new SubProviderEntry(BlocksLoot::new, LootContextParamSets.BLOCK)
-        ), provider);
-    }
 
-    public static class BlocksLoot extends BlockLootSubProvider {
+    public static class BlocksLoot extends FabricBlockLootTableProvider {
 
-        protected BlocksLoot(HolderLookup.Provider provider) {
-            super(Set.of(), FeatureFlags.REGISTRY.allFlags(), provider);
+        public BlocksLoot(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+            super(dataOutput, registryLookup);
         }
 
         @Override
-        protected Iterable<Block> getKnownBlocks() {
-            return BLOCKS.getEntries().stream().map(Supplier::get).collect(Collectors.toList());
-        }
-
-        @Override
-        protected void generate() {
+        public void generate() {
             Set<DeferredHolder<Block, ? extends Block>> blocks = new HashSet<>(BLOCKS.getEntries());
 
             takeAll(blocks, b -> b.get().properties() instanceof LodestoneBlockProperties && ((LodestoneBlockProperties) b.get().properties()).getDatagenData().hasInheritedLootTable);
@@ -122,7 +111,7 @@ public class MalumBlockLootTables extends LootTableProvider {
                                                     .copy("secondColor", "display.secondColor")))));
         }
 
-        protected LootTable.Builder createBannerDrop(Block block) {
+        public LootTable.Builder createBannerDrop(Block block) {
             return LootTable.lootTable().withPool(
                     applyExplosionCondition(block,
                             LootPool.lootPool()

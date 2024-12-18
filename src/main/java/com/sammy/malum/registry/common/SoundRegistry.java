@@ -5,14 +5,15 @@ import com.sammy.malum.common.sound.BlightedSoundType;
 import com.sammy.malum.common.sound.QuartzClusterSoundType;
 import com.sammy.malum.common.sound.QuartzSoundType;
 import com.sammy.malum.common.sound.RareEarthSoundType;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
 import net.minecraft.core.registries.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.level.block.SoundType;
-import net.neoforged.neoforge.common.util.*;
-import net.neoforged.neoforge.registries.*;
+import team.lodestar.lodestone.systems.sound.ExtendedSoundType;
 
 import java.util.function.Supplier;
 
@@ -272,46 +273,46 @@ public class SoundRegistry {
     public static final ResourceKey<JukeboxSong> AESTHETICA_KEY =  register("aesthetica");
 
 
-    public static final SoundType SOULSTONE = new DeferredSoundType(1.0F, 1.0F, SOULSTONE_BREAK, SOULSTONE_STEP, SOULSTONE_PLACE, SOULSTONE_HIT, () -> SoundEvents.STONE_FALL);
-    public static final SoundType DEEPSLATE_SOULSTONE = new DeferredSoundType(1.0F, 1.0F, DEEPSLATE_SOULSTONE_BREAK, DEEPSLATE_SOULSTONE_STEP, DEEPSLATE_SOULSTONE_PLACE, DEEPSLATE_SOULSTONE_HIT, () -> SoundEvents.DEEPSLATE_FALL);
-    public static final SoundType BLAZING_QUARTZ_ORE = new DeferredSoundType(1.0F, 1.0F, BLAZING_QUARTZ_ORE_BREAK, () -> SoundEvents.NETHER_ORE_STEP, BLAZING_QUARTZ_ORE_PLACE, () -> SoundEvents.NETHER_ORE_HIT, () -> SoundEvents.NETHER_GOLD_ORE_FALL);
+    public static final SoundType SOULSTONE = new ExtendedSoundType(1.0F, 1.0F, SOULSTONE_BREAK, SOULSTONE_STEP, SOULSTONE_PLACE, SOULSTONE_HIT, () -> SoundEvents.STONE_FALL);
+    public static final SoundType DEEPSLATE_SOULSTONE = new ExtendedSoundType(1.0F, 1.0F, DEEPSLATE_SOULSTONE_BREAK, DEEPSLATE_SOULSTONE_STEP, DEEPSLATE_SOULSTONE_PLACE, DEEPSLATE_SOULSTONE_HIT, () -> SoundEvents.DEEPSLATE_FALL);
+    public static final SoundType BLAZING_QUARTZ_ORE = new ExtendedSoundType(1.0F, 1.0F, BLAZING_QUARTZ_ORE_BREAK, () -> SoundEvents.NETHER_ORE_STEP, BLAZING_QUARTZ_ORE_PLACE, () -> SoundEvents.NETHER_ORE_HIT, () -> SoundEvents.NETHER_GOLD_ORE_FALL);
     public static final SoundType NATURAL_QUARTZ = new QuartzSoundType(1.0F, 0.9f, () -> SoundEvents.STONE_BREAK, () -> SoundEvents.STONE_STEP, () -> SoundEvents.STONE_PLACE, () -> SoundEvents.STONE_HIT, () -> SoundEvents.STONE_FALL);
     public static final SoundType DEEPSLATE_QUARTZ = new QuartzSoundType(1.0F, 0.9f, () -> SoundEvents.DEEPSLATE_BREAK, () -> SoundEvents.DEEPSLATE_STEP, () -> SoundEvents.DEEPSLATE_PLACE, () -> SoundEvents.DEEPSLATE_HIT, () -> SoundEvents.DEEPSLATE_FALL);
     public static final SoundType CTHONIC_GOLD = new RareEarthSoundType(1.0F, 1.15f, SOULSTONE_BREAK, SOULSTONE_STEP, SOULSTONE_PLACE, DEEPSLATE_SOULSTONE_HIT, () -> SoundEvents.DEEPSLATE_FALL);
     public static final SoundType MALIGNANT_LEAD = new RareEarthSoundType(1.0F, 0.7f, () -> SoundEvents.DEEPSLATE_BREAK, () -> SoundEvents.DEEPSLATE_STEP, () -> SoundEvents.DEEPSLATE_PLACE, () -> SoundEvents.DEEPSLATE_HIT, () -> SoundEvents.NETHER_ORE_FALL);
 
-    public static final SoundType BRILLIANCE_BLOCK = new DeferredSoundType(1.0F, 1.4f, BRILLIANCE_BLOCK_BREAK, BRILLIANCE_BLOCK_STEP, BRILLIANCE_BLOCK_PLACE, BRILLIANCE_BLOCK_HIT, () -> SoundEvents.NETHER_GOLD_ORE_FALL);
-    public static final SoundType BLAZING_QUARTZ_BLOCK = new DeferredSoundType(1.0F, 1.25f, BLAZING_QUARTZ_BLOCK_BREAK, BLAZING_QUARTZ_BLOCK_STEP, BLAZING_QUARTZ_BLOCK_PLACE, BLAZING_QUARTZ_BLOCK_HIT, () -> SoundEvents.NETHER_GOLD_ORE_FALL);
+    public static final SoundType BRILLIANCE_BLOCK = new ExtendedSoundType(1.0F, 1.4f, BRILLIANCE_BLOCK_BREAK, BRILLIANCE_BLOCK_STEP, BRILLIANCE_BLOCK_PLACE, BRILLIANCE_BLOCK_HIT, () -> SoundEvents.NETHER_GOLD_ORE_FALL);
+    public static final SoundType BLAZING_QUARTZ_BLOCK = new ExtendedSoundType(1.0F, 1.25f, BLAZING_QUARTZ_BLOCK_BREAK, BLAZING_QUARTZ_BLOCK_STEP, BLAZING_QUARTZ_BLOCK_PLACE, BLAZING_QUARTZ_BLOCK_HIT, () -> SoundEvents.NETHER_GOLD_ORE_FALL);
     public static final SoundType BLAZING_QUARTZ_CLUSTER = new QuartzClusterSoundType(0.3F, 1.5f, BLAZING_QUARTZ_BLOCK_BREAK, BLAZING_QUARTZ_BLOCK_STEP, BLAZING_QUARTZ_BLOCK_PLACE, BLAZING_QUARTZ_BLOCK_HIT, () -> SoundEvents.AMETHYST_CLUSTER_FALL);
-    public static final SoundType ARCANE_CHARCOAL_BLOCK = new DeferredSoundType(1.0F, 0.9f, ARCANE_CHARCOAL_BLOCK_BREAK, ARCANE_CHARCOAL_BLOCK_STEP, ARCANE_CHARCOAL_BLOCK_PLACE, ARCANE_CHARCOAL_BLOCK_HIT, () -> SoundEvents.NETHER_GOLD_ORE_FALL);
+    public static final SoundType ARCANE_CHARCOAL_BLOCK = new ExtendedSoundType(1.0F, 0.9f, ARCANE_CHARCOAL_BLOCK_BREAK, ARCANE_CHARCOAL_BLOCK_STEP, ARCANE_CHARCOAL_BLOCK_PLACE, ARCANE_CHARCOAL_BLOCK_HIT, () -> SoundEvents.NETHER_GOLD_ORE_FALL);
     public static final SoundType QUARTZ_CLUSTER = new QuartzClusterSoundType(0.3F, 1.5f, QUARTZ_CLUSTER_BLOCK_BREAK, QUARTZ_CLUSTER_BLOCK_STEP, QUARTZ_CLUSTER_BLOCK_PLACE, QUARTZ_CLUSTER_BLOCK_HIT, () -> SoundEvents.AMETHYST_CLUSTER_FALL);
-    public static final SoundType HALLOWED_GOLD = new DeferredSoundType(1.0F, 1.0F, HALLOWED_GOLD_BREAK, HALLOWED_GOLD_STEP, HALLOWED_GOLD_PLACE, HALLOWED_GOLD_HIT, () -> SoundEvents.METAL_FALL);
-    public static final SoundType SOUL_STAINED_STEEL = new DeferredSoundType(1.0F, 1.0F, SOUL_STAINED_STEEL_BREAK, SOUL_STAINED_STEEL_STEP, SOUL_STAINED_STEEL_PLACE, SOUL_STAINED_STEEL_HIT, () -> SoundEvents.METAL_FALL);
+    public static final SoundType HALLOWED_GOLD = new ExtendedSoundType(1.0F, 1.0F, HALLOWED_GOLD_BREAK, HALLOWED_GOLD_STEP, HALLOWED_GOLD_PLACE, HALLOWED_GOLD_HIT, () -> SoundEvents.METAL_FALL);
+    public static final SoundType SOUL_STAINED_STEEL = new ExtendedSoundType(1.0F, 1.0F, SOUL_STAINED_STEEL_BREAK, SOUL_STAINED_STEEL_STEP, SOUL_STAINED_STEEL_PLACE, SOUL_STAINED_STEEL_HIT, () -> SoundEvents.METAL_FALL);
     public static final SoundType MALIGNANT_PEWTER = new RareEarthSoundType(1.0F, 0.7f, SOUL_STAINED_STEEL_BREAK, SOUL_STAINED_STEEL_STEP, SOUL_STAINED_STEEL_PLACE, SOUL_STAINED_STEEL_HIT, () -> SoundEvents.METAL_FALL);
 
-    public static final SoundType TAINTED_ROCK = new DeferredSoundType(1.0F, 1.1F, ARCANE_ROCK_BREAK, ARCANE_ROCK_STEP, ARCANE_ROCK_PLACE, ARCANE_ROCK_HIT, () -> SoundEvents.BASALT_FALL);
-    public static final SoundType TAINTED_ROCK_BRICKS = new DeferredSoundType(1.0F, 1.1F, ARCANE_ROCK_BRICKS_BREAK, ARCANE_ROCK_BRICKS_STEP, ARCANE_ROCK_BRICKS_PLACE, ARCANE_ROCK_BRICKS_HIT, () -> SoundEvents.BASALT_FALL);
-    public static final SoundType TWISTED_ROCK = new DeferredSoundType(1.0F, 0.85F, ARCANE_ROCK_BREAK, ARCANE_ROCK_STEP, ARCANE_ROCK_PLACE, ARCANE_ROCK_HIT, () -> SoundEvents.BASALT_FALL);
-    public static final SoundType TWISTED_ROCK_BRICKS = new DeferredSoundType(1.0F, 0.85F, ARCANE_ROCK_BRICKS_BREAK, ARCANE_ROCK_BRICKS_STEP, ARCANE_ROCK_BRICKS_PLACE, ARCANE_ROCK_BRICKS_HIT, () -> SoundEvents.BASALT_FALL);
+    public static final SoundType TAINTED_ROCK = new ExtendedSoundType(1.0F, 1.1F, ARCANE_ROCK_BREAK, ARCANE_ROCK_STEP, ARCANE_ROCK_PLACE, ARCANE_ROCK_HIT, () -> SoundEvents.BASALT_FALL);
+    public static final SoundType TAINTED_ROCK_BRICKS = new ExtendedSoundType(1.0F, 1.1F, ARCANE_ROCK_BRICKS_BREAK, ARCANE_ROCK_BRICKS_STEP, ARCANE_ROCK_BRICKS_PLACE, ARCANE_ROCK_BRICKS_HIT, () -> SoundEvents.BASALT_FALL);
+    public static final SoundType TWISTED_ROCK = new ExtendedSoundType(1.0F, 0.85F, ARCANE_ROCK_BREAK, ARCANE_ROCK_STEP, ARCANE_ROCK_PLACE, ARCANE_ROCK_HIT, () -> SoundEvents.BASALT_FALL);
+    public static final SoundType TWISTED_ROCK_BRICKS = new ExtendedSoundType(1.0F, 0.85F, ARCANE_ROCK_BRICKS_BREAK, ARCANE_ROCK_BRICKS_STEP, ARCANE_ROCK_BRICKS_PLACE, ARCANE_ROCK_BRICKS_HIT, () -> SoundEvents.BASALT_FALL);
 
-    public static final SoundType RUNEWOOD = new DeferredSoundType(1.0F, 1.3F, RUNEWOOD_BREAK, RUNEWOOD_STEP, RUNEWOOD_PLACE, RUNEWOOD_HIT, () -> SoundEvents.CHERRY_WOOD_FALL);
-    public static final SoundType RUNEWOOD_HANGING_SIGN = new DeferredSoundType(1.0F, 1.3F, RUNEWOOD_HANGING_SIGN_BREAK, RUNEWOOD_HANGING_SIGN_STEP, RUNEWOOD_HANGING_SIGN_PLACE, RUNEWOOD_HANGING_SIGN_HIT, () -> SoundEvents.CHERRY_WOOD_FALL);
-    public static final SoundType RUNEWOOD_LEAVES = new DeferredSoundType(1.0F, 1.1F, RUNEWOOD_LEAVES_BREAK, RUNEWOOD_LEAVES_STEP, RUNEWOOD_LEAVES_PLACE, RUNEWOOD_LEAVES_HIT, () -> SoundEvents.AZALEA_LEAVES_FALL);
+    public static final SoundType RUNEWOOD = new ExtendedSoundType(1.0F, 1.3F, RUNEWOOD_BREAK, RUNEWOOD_STEP, RUNEWOOD_PLACE, RUNEWOOD_HIT, () -> SoundEvents.CHERRY_WOOD_FALL);
+    public static final SoundType RUNEWOOD_HANGING_SIGN = new ExtendedSoundType(1.0F, 1.3F, RUNEWOOD_HANGING_SIGN_BREAK, RUNEWOOD_HANGING_SIGN_STEP, RUNEWOOD_HANGING_SIGN_PLACE, RUNEWOOD_HANGING_SIGN_HIT, () -> SoundEvents.CHERRY_WOOD_FALL);
+    public static final SoundType RUNEWOOD_LEAVES = new ExtendedSoundType(1.0F, 1.1F, RUNEWOOD_LEAVES_BREAK, RUNEWOOD_LEAVES_STEP, RUNEWOOD_LEAVES_PLACE, RUNEWOOD_LEAVES_HIT, () -> SoundEvents.AZALEA_LEAVES_FALL);
 
     public static final SoundType SOULWOOD = new BlightedSoundType(1.0F, 1.1f, SOULWOOD_BREAK, SOULWOOD_STEP, SOULWOOD_PLACE, SOULWOOD_HIT, () -> SoundEvents.CHERRY_WOOD_FALL);
-    public static final SoundType SOULWOOD_HANGING_SIGN = new DeferredSoundType(1.0F, 1.1f, SOULWOOD_HANGING_SIGN_BREAK, SOULWOOD_HANGING_SIGN_STEP, SOULWOOD_HANGING_SIGN_PLACE, SOULWOOD_HANGING_SIGN_HIT, () -> SoundEvents.CHERRY_WOOD_FALL);
+    public static final SoundType SOULWOOD_HANGING_SIGN = new ExtendedSoundType(1.0F, 1.1f, SOULWOOD_HANGING_SIGN_BREAK, SOULWOOD_HANGING_SIGN_STEP, SOULWOOD_HANGING_SIGN_PLACE, SOULWOOD_HANGING_SIGN_HIT, () -> SoundEvents.CHERRY_WOOD_FALL);
     public static final SoundType SOULWOOD_LEAVES = new BlightedSoundType(1.0F, 0.9F, SOULWOOD_LEAVES_BREAK, SOULWOOD_LEAVES_STEP, SOULWOOD_LEAVES_PLACE, SOULWOOD_LEAVES_HIT, () -> SoundEvents.AZALEA_LEAVES_FALL);
 
 
-    public static final SoundType WEEPING_WELL_BRICKS = new DeferredSoundType(1.0F, 0.6f, ARCANE_ROCK_BRICKS_BREAK, ARCANE_ROCK_BRICKS_STEP, ARCANE_ROCK_BRICKS_PLACE, ARCANE_ROCK_BRICKS_HIT, () -> SoundEvents.BASALT_FALL);
+    public static final SoundType WEEPING_WELL_BRICKS = new ExtendedSoundType(1.0F, 0.6f, ARCANE_ROCK_BRICKS_BREAK, ARCANE_ROCK_BRICKS_STEP, ARCANE_ROCK_BRICKS_PLACE, ARCANE_ROCK_BRICKS_HIT, () -> SoundEvents.BASALT_FALL);
 
     public static final SoundType BLIGHTED_FOLIAGE = new BlightedSoundType(1.0F, 1.0F, () -> SoundEvents.NETHER_WART_BREAK, () -> SoundEvents.STONE_STEP, () -> SoundEvents.NETHER_WART_PLANTED, () -> SoundEvents.STONE_HIT, () -> SoundEvents.STONE_FALL);
     public static final SoundType BLIGHTED_EARTH = new BlightedSoundType(1.0F, 1.0F, () -> SoundEvents.NYLIUM_BREAK, () -> SoundEvents.NYLIUM_STEP, () -> SoundEvents.NYLIUM_PLACE, () -> SoundEvents.NYLIUM_HIT, () -> SoundEvents.NYLIUM_FALL);
     public static final SoundType CURSED_SAP = new BlightedSoundType(1.0F, 0.9F, () -> SoundEvents.SLIME_BLOCK_BREAK, () -> SoundEvents.SLIME_BLOCK_STEP, () -> SoundEvents.SLIME_BLOCK_PLACE, () -> SoundEvents.SLIME_BLOCK_HIT, () -> SoundEvents.SLIME_BLOCK_FALL);
 
-    public static final SoundType CALCIFIED_BLIGHT = new DeferredSoundType(1.0F, 1.25F, CALCIFIED_BLIGHT_BREAK, CALCIFIED_BLIGHT_STEP, CALCIFIED_BLIGHT_PLACE, CALCIFIED_BLIGHT_HIT, () -> SoundEvents.BONE_BLOCK_FALL);
+    public static final SoundType CALCIFIED_BLIGHT = new ExtendedSoundType(1.0F, 1.25F, CALCIFIED_BLIGHT_BREAK, CALCIFIED_BLIGHT_STEP, CALCIFIED_BLIGHT_PLACE, CALCIFIED_BLIGHT_HIT, () -> SoundEvents.BONE_BLOCK_FALL);
 
-    public static final SoundType ETHER = new DeferredSoundType(1.0F, 1.0F, ETHER_BREAK, () -> SoundEvents.WOOL_STEP, ETHER_PLACE, () -> SoundEvents.ANCIENT_DEBRIS_HIT, () -> SoundEvents.WOOL_FALL);
+    public static final SoundType ETHER = new ExtendedSoundType(1.0F, 1.0F, ETHER_BREAK, () -> SoundEvents.WOOL_STEP, ETHER_PLACE, () -> SoundEvents.ANCIENT_DEBRIS_HIT, () -> SoundEvents.WOOL_FALL);
 
     public static DeferredHolder<SoundEvent, SoundEvent> register(SoundEvent soundEvent) {
         return SOUNDS.register(soundEvent.getLocation().getPath(), () -> soundEvent);

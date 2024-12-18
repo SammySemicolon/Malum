@@ -10,6 +10,9 @@ import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.data.LanguageProvider;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.*;
@@ -20,8 +23,6 @@ import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.WallTorchBlock;
-import net.neoforged.neoforge.common.data.LanguageProvider;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import team.lodestar.lodestone.helpers.DataHelper;
 
 import java.util.*;
@@ -1319,8 +1320,8 @@ public class MalumLang extends LanguageProvider {
         add("enchantment.malum." + enchantment.location().getPath() + ".desc", desc);
     }
 
-    public void addAttributeLibAttributeDescription(DeferredHolder<Attribute, Attribute> attribute, String desc) {
-        add("attribute.name.malum." + attribute.getId().getPath() + ".desc", desc);
+    public void addAttributeLibAttributeDescription(Holder<Attribute> attribute, String desc) {
+        add("attribute.name.malum." + attribute.value().getDescriptionId() + ".desc", desc);
     }
 
     public void addJEEDEffectDescription(Supplier<MobEffect> mobEffectSupplier, String description) {

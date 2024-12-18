@@ -9,7 +9,6 @@ import net.minecraft.client.player.*;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.neoforged.neoforge.client.event.*;
 import org.joml.*;
 import org.lwjgl.opengl.*;
 import team.lodestar.lodestone.registry.client.*;
@@ -21,10 +20,10 @@ import java.lang.Math;
 public class SoulWardRenderHandler {
     public static int fadeOut;
 
-    public static void tick(ClientTickEvent event) {
+    public static void tick(Minecraft minecraft) {
         final LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
-            var data = player.getData(AttachmentTypeRegistry.SOUL_WARD);
+            var data = player.getAttachedOrCreate(AttachmentTypeRegistry.SOUL_WARD);
             if (data.getSoulWard() >= player.getAttributeValue(AttributeRegistry.SOUL_WARD_CAPACITY)) {
                 if (fadeOut < 80) {
                     fadeOut++;
@@ -41,7 +40,7 @@ public class SoulWardRenderHandler {
         if (!minecraft.options.hideGui) {
             var player = minecraft.player;
             if (!player.isCreative() && !player.isSpectator()) {
-                var data = player.getData(AttachmentTypeRegistry.SOUL_WARD);
+                var data = player.getAttachedOrCreate(AttachmentTypeRegistry.SOUL_WARD);
                 double soulWard = data.getSoulWard();
                 if (soulWard > 0) {
                     float absorb = Mth.ceil(player.getAbsorptionAmount());

@@ -96,7 +96,7 @@ public class ErosionScepterItem extends AbstractStaffItem {
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public void spawnChargeParticles(Level pLevel, LivingEntity pLivingEntity, Vec3 pos, ItemStack pStack, float pct) {
         RandomSource random = pLevel.random;

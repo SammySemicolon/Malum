@@ -45,6 +45,10 @@ import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.entity.*;
 import com.sammy.malum.registry.common.item.tabs.*;
+import dev.emi.trinkets.api.client.TrinketRendererRegistry;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.color.item.*;
 import net.minecraft.client.renderer.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -52,20 +56,10 @@ import net.minecraft.resources.*;
 import net.minecraft.world.food.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.item.tools.magic.*;
 import team.lodestar.lodestone.systems.multiblock.*;
-import top.theillusivec4.curios.api.client.*;
 
 import java.util.List;
 import java.util.*;
@@ -751,10 +745,9 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> WEEPING_WELL_SIDE_PILLAR = register("weeping_well_side_pillar", HIDDEN_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WEEPING_WELL_SIDE_PILLAR.get(), p));
     //endregion
 
-    @EventBusSubscriber(modid = MalumMod.MALUM, bus = EventBusSubscriber.Bus.MOD)
     public static class Common {
-        @SubscribeEvent
-        public static void registerCompost(FMLCommonSetupEvent event) {
+
+        public static void registerCompost() {
             registerCompostable(RUNEWOOD_LEAVES, 0.3f);
             registerCompostable(HANGING_RUNEWOOD_LEAVES, 0.3f);
             registerCompostable(SOULWOOD_LEAVES, 0.3f);
@@ -769,20 +762,16 @@ public class ItemRegistry {
         }
     }
 
-
-    @EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
     public static class ClientOnly {
 
-        @SubscribeEvent
-        public static void registerExtras(FMLClientSetupEvent event) {
-            CuriosRendererRegistry.register(ItemRegistry.TOKEN_OF_GRATITUDE.get(), TokenOfGratitudeRenderer::new);
-            CuriosRendererRegistry.register(ItemRegistry.TOPHAT.get(), TopHatCurioRenderer::new);
+        public static void registerExtras() {
+            TrinketRendererRegistry.registerRenderer(ItemRegistry.TOKEN_OF_GRATITUDE.get(), new TokenOfGratitudeRenderer());
+            TrinketRendererRegistry.registerRenderer(ItemRegistry.TOPHAT.get(), new TopHatCurioRenderer());
 
             HiddenTagRegistry.registerHiddenTags();
         }
 
-        @SubscribeEvent(priority = EventPriority.LOWEST)
-        public static void addItemProperties(FMLClientSetupEvent event) {
+        public static void addItemProperties() {
             Set<LodestoneArmorItem> armors = ItemRegistry.ITEMS.getEntries().stream().filter(r -> r.get() instanceof LodestoneArmorItem).map(r -> (LodestoneArmorItem) r.get()).collect(Collectors.toSet());
 //            ItemPropertyFunction armorPropertyFunction = (stack, level, holder, holderID) -> {
 //                if (!stack.hasTag()) {
@@ -820,17 +809,14 @@ public class ItemRegistry {
                     (stack, level, holder, holderID) -> CatalystLobberItem.getStateDisplay(stack));
         }
 
-        @SubscribeEvent
-        public static void setItemColors(RegisterColorHandlersEvent.Item event) {
-            ItemColors itemColors = event.getItemColors();
+        public static void setItemColors() {
             HashSet<DeferredHolder<Item, ? extends Item>> items = new HashSet<>(ITEMS.getEntries());
 
             DataHelper.takeAll(items, i -> i.get() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IGradientedLeavesBlock).forEach(item -> {
                 IGradientedLeavesBlock malumLeavesBlock = (IGradientedLeavesBlock) ((BlockItem) item.get()).getBlock();
-                event.register((stack, tintIndex) -> ColorHelper.getColor(malumLeavesBlock.getMaxColor()),
-                        item.get());
+                ColorProviderRegistry.ITEM.register((s, c) -> ColorHelper.getColor(malumLeavesBlock.getMaxColor()), item.get());
             });
-            DataHelper.takeAll(items, i -> i.get() instanceof EtherTorchItem || i.get() instanceof EtherBrazierItem).forEach(i -> event.register((s, c) -> {
+            DataHelper.takeAll(items, i -> i.get() instanceof EtherTorchItem || i.get() instanceof EtherBrazierItem).forEach(i -> ColorProviderRegistry.ITEM.register((s, c) -> {
                 AbstractEtherItem etherItem = (AbstractEtherItem) s.getItem();
                 switch (c) {
                     case 2 -> {
@@ -844,21 +830,22 @@ public class ItemRegistry {
                     }
                 }
             }, i.get()));
-            DataHelper.takeAll(items, i -> i.get() instanceof EtherItem).forEach(i -> event.register((s, c) -> {
+            DataHelper.takeAll(items, i -> i.get() instanceof EtherItem).forEach(i -> ColorProviderRegistry.ITEM.register((s, c) -> {
                 AbstractEtherItem etherItem = (AbstractEtherItem) s.getItem();
                 return c == 0 ? etherItem.getFirstColor(s) : etherItem.getSecondColor(s);
             }, i.get()));
 
             DataHelper.takeAll(items, i -> i.get() instanceof SpiritShardItem).forEach(item ->
-                    event.register((s, c) -> ColorHelper.getColor(((SpiritShardItem) item.get()).type.getItemColor()), item.get()));
+                    ColorProviderRegistry.ITEM.register((s, c) -> ColorHelper.getColor(((SpiritShardItem) item.get()).type.getItemColor()), item.get()));
 
-            event.register((s, c) -> {
-                var data = s.get(DataComponentRegistry.RITUAL_DATA);
+            ColorProviderRegistry.ITEM.register((s, c) -> {
+                var data = s.get(DataComponentRegistry.RITUAL_DATA.get());
                 if (data == null) {
                     return -1;
                 }
                 return ColorHelper.getColor(data.ritualType().spirit.getItemColor());
             }, RITUAL_SHARD.get());
+
         }
     }
 }

@@ -4,12 +4,14 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.recipe.*;
+import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredient;
+import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredientSerializer;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.common.crafting.*;
 
+import java.util.List;
 import java.util.stream.*;
 
-public class SpiritIngredient implements ICustomIngredient {
+public class SpiritIngredient implements CustomIngredient {
 
     public static final MapCodec<SpiritIngredient> CODEC = RecordCodecBuilder.mapCodec(
             builder -> builder
@@ -40,21 +42,21 @@ public class SpiritIngredient implements ICustomIngredient {
     }
 
     @Override
-    public Stream<ItemStack> getItems() {
-        return Stream.of(getStack());
+    public List<ItemStack> getMatchingStacks() {
+        return List.of(getStack());
+    }
+
+    @Override
+    public boolean requiresTesting() {
+        return false;
+    }
+
+    @Override
+    public CustomIngredientSerializer<?> getSerializer() {
+        return null;
     }
 
     public ItemStack getStack() {
         return new ItemStack(spiritType.getSpiritShard(), count);
-    }
-
-    @Override
-    public boolean isSimple() {
-        return true;
-    }
-
-    @Override
-    public IngredientType<?> getType() {
-        return IngredientTypeRegistry.SPIRIT.get();
     }
 }

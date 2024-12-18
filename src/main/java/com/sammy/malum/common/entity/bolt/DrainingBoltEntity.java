@@ -13,7 +13,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.easing.*;
@@ -76,7 +76,7 @@ public class DrainingBoltEntity extends AbstractBoltProjectileEntity {
         return ItemRegistry.EROSION_SCEPTER.get();
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public void spawnParticles() {
         Level level = level();

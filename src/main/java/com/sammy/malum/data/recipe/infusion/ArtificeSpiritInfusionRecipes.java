@@ -3,14 +3,14 @@ package com.sammy.malum.data.recipe.infusion;
 import com.sammy.malum.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.*;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 import static team.lodestar.lodestone.registry.common.tag.LodestoneItemTags.*;
@@ -142,7 +142,7 @@ public class ArtificeSpiritInfusionRecipes {
                         .addExtraItem(SizedIngredient.of(Tags.Items.GUNPOWDERS, 4))
                         .addExtraItem(SizedIngredient.of(ItemRegistry.CTHONIC_GOLD.get(), 1))
                         .addExtraItem(SizedIngredient.of(ingot, 6))
-                .save(recipeOutput, MalumMod.malumPath("impetus_creation_" + ingot.location().getPath().replace("ingots/", "")));
+                .saveRecipe(recipeOutput, MalumMod.malumPath("impetus_creation_" + ingot.location().getPath().replace("ingots/", "")));
 
 //new NotCondition(new TagEmptyCondition(ingot.location().toString()))
     }

@@ -7,7 +7,7 @@ import com.sammy.malum.visual_effects.networked.ParticleEffectType;
 import com.sammy.malum.visual_effects.networked.data.NBTEffectData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.helpers.*;
 
 import java.util.function.Supplier;
@@ -24,7 +24,7 @@ public class SpiritAltarEatItemParticleEffect extends ParticleEffectType {
         return effectData;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) -> {

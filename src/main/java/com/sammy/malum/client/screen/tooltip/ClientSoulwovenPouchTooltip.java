@@ -6,7 +6,7 @@ import net.minecraft.client.gui.screens.inventory.*;
 import net.minecraft.client.gui.screens.inventory.tooltip.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
-import net.neoforged.api.distmarker.*;
+
 import org.apache.commons.lang3.math.*;
 
 public class ClientSoulwovenPouchTooltip implements ClientTooltipComponent {
@@ -78,7 +78,7 @@ public class ClientSoulwovenPouchTooltip implements ClientTooltipComponent {
         return (int) Math.ceil(((double) this.contents.size() + 1.0) / (double) this.gridSizeX());
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     enum Texture {
         BLOCKED_SLOT(ResourceLocation.withDefaultNamespace("container/bundle/blocked_slot"), 18, 20),
         SLOT(ResourceLocation.withDefaultNamespace("container/bundle/slot"), 18, 20);

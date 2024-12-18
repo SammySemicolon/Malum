@@ -1,9 +1,11 @@
 package com.sammy.malum.common.packets.particle.base;
 
 import net.minecraft.network.FriendlyByteBuf;
-import team.lodestar.lodestone.systems.network.OneSidedPayloadData;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import team.lodestar.lodestone.systems.network.LodestonePayload;
 
-public abstract class PositionBasedParticleEffectPacket extends OneSidedPayloadData {
+
+public abstract class PositionBasedParticleEffectPacket implements CustomPacketPayload, LodestonePayload {
     protected final double posX;
     protected final double posY;
     protected final double posZ;
@@ -20,8 +22,7 @@ public abstract class PositionBasedParticleEffectPacket extends OneSidedPayloadD
         this.posZ = buf.readDouble();
     }
 
-    @Override
-    public void serialize(FriendlyByteBuf buf) {
+    public void write(FriendlyByteBuf buf) {
         buf.writeDouble(posX);
         buf.writeDouble(posY);
         buf.writeDouble(posZ);

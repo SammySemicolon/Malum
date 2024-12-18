@@ -4,8 +4,8 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import net.minecraft.network.FriendlyByteBuf;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;

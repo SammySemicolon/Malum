@@ -12,7 +12,7 @@ import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.systems.rendering.trail.*;
 
 import java.awt.*;
@@ -43,7 +43,7 @@ public abstract class AbstractNitrateEntity extends ThrowableProjectile {
     public void onExplode() {
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     public abstract void spawnParticles();
 
     public abstract int getMaxPierce();

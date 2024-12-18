@@ -2,10 +2,10 @@ package com.sammy.malum.client.particles.spiritflame;
 
 import net.minecraft.client.multiplayer.*;
 import net.minecraft.client.particle.*;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.systems.particle.world.options.*;
 import team.lodestar.lodestone.systems.particle.world.type.*;
 
-import javax.annotation.*;
 
 public class SpiritFlameParticleType extends LodestoneWorldParticleType {
 

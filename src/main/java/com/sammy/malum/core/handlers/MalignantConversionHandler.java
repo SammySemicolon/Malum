@@ -5,12 +5,12 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.capabilities.*;
 import com.sammy.malum.core.listeners.*;
 import com.sammy.malum.registry.common.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.tick.EntityTickEvent;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.neoforged.neoforge.event.tick.*;
 
 import java.util.*;
 
@@ -19,10 +19,10 @@ public class MalignantConversionHandler {
     public static final ResourceLocation NEGATIVE_MODIFIER_ID = MalumMod.malumPath("malignant_conversion_tally");
     public static final HashMap<Holder<Attribute>, ResourceLocation> POSITIVE_MODIFIER_IDS = new HashMap<>();
 
-    public static void entityTick(EntityTickEvent.Pre event) {
+    public static void entityTick(EntityTickEvent event) {
         if (event.getEntity() instanceof LivingEntity livingEntity) {
             if (!livingEntity.level().isClientSide) {
-                var data = livingEntity.getData(AttachmentTypeRegistry.MALIGNANT_INFLUENCE);
+                var data = livingEntity.getAttachedOrCreate(AttachmentTypeRegistry.MALIGNANT_INFLUENCE);
                 var conversionAttribute = AttributeRegistry.MALIGNANT_CONVERSION;
                 AttributeInstance conversionInstance = livingEntity.getAttribute(conversionAttribute);
                 if (conversionInstance != null) {

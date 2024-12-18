@@ -1,6 +1,6 @@
 package com.sammy.malum.config;
 
-import net.neoforged.neoforge.common.*;
+import io.github.fabricators_of_create.porting_lib.config.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 import team.lodestar.lodestone.systems.config.LodestoneConfig;
 

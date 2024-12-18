@@ -7,7 +7,7 @@ import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.nbt.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
+
 
 import java.util.function.*;
 
@@ -28,7 +28,7 @@ public class RitualPlinthAbsorbItemParticleEffect extends ParticleEffectType {
         return effectData;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) -> {

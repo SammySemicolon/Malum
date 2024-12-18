@@ -2,11 +2,10 @@ package com.sammy.malum.common.packets.particle.base.spirit;
 
 import com.sammy.malum.common.packets.particle.base.BlockBasedParticleEffectPacket;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,22 +29,22 @@ public abstract class SpiritBasedBlockParticleEffectPacket extends BlockBasedPar
     }
 
     @Override
-    public void serialize(FriendlyByteBuf buf) {
+    public void write(FriendlyByteBuf buf) {
         buf.writeInt(spirits.size());
         for (String string : spirits) {
             buf.writeUtf(string);
         }
-        super.serialize(buf);
+        super.write(buf);
     }
 
-    @OnlyIn(Dist.CLIENT)
+
     @Override
-    public void handle(IPayloadContext iPayloadContext) {
+    public <T extends CustomPacketPayload> void handle(T t, ClientPlayNetworking.Context context) {
         for (String string : spirits) {
-            handle(iPayloadContext, MalumSpiritType.getSpiritType(string));
+            handle(context, MalumSpiritType.getSpiritType(string));
         }
     }
 
-    protected abstract void handle(IPayloadContext iPayloadContext, MalumSpiritType spiritType);
+    protected abstract void handle(ClientPlayNetworking.Context context, MalumSpiritType spiritType);
 
 }

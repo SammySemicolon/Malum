@@ -13,7 +13,6 @@ import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.particle.*;
@@ -116,7 +115,6 @@ public class AuricFlameBoltEntity extends AbstractBoltProjectileEntity {
         return ItemRegistry.STAFF_OF_THE_AURIC_FLAME.get();
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void spawnParticles() {
         Level level = level();

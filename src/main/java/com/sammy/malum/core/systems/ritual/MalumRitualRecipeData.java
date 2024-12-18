@@ -1,6 +1,7 @@
 package com.sammy.malum.core.systems.ritual;
 
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
+
+import com.sammy.malum.forge_stuff.SizedIngredient;
 
 import java.util.*;
 

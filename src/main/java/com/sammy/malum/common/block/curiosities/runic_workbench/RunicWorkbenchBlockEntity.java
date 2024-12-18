@@ -19,7 +19,6 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.network.PacketDistributor;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.recipe.*;
 
@@ -59,7 +58,7 @@ public class RunicWorkbenchBlockEntity extends MalumItemHolderBlockEntity {
                     level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, recipe.output.copy()));
                     level.playSound(null, worldPosition, SoundRegistry.RUNIC_WORKBENCH_CRAFT.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.25f);
                     if (heldStack.getItem() instanceof SpiritShardItem spirit) {
-                        PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(spirit.type.getIdentifier()), itemPos));
+                        PacketRegistry.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(spirit.type.getIdentifier()), itemPos));
                     }
                     BlockStateHelper.updateAndNotifyState(level, worldPosition);
                 }

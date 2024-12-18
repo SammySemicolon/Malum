@@ -19,10 +19,10 @@ public abstract class ColorBasedParticleEffectPacket extends PositionBasedPartic
     }
 
     @Override
-    public void serialize(FriendlyByteBuf buf) {
-        super.serialize(buf);
+    public void write(FriendlyByteBuf buf) {
         buf.writeInt(color.getRed());
         buf.writeInt(color.getGreen());
         buf.writeInt(color.getBlue());
+        super.write(buf);
     }
 }

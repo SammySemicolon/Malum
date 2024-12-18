@@ -4,11 +4,17 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.sammy.malum.MalumMod;
+import com.sammy.malum.client.model.HeadOverlayModel;
+import com.sammy.malum.client.model.TailModel;
+import com.sammy.malum.client.model.cosmetic.ScarfModel;
 import com.sammy.malum.common.item.cosmetic.curios.CurioTokenOfGratitude;
 import com.sammy.malum.registry.client.ModelRegistry;
+import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.client.TrinketRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -25,12 +31,9 @@ import net.minecraft.world.phys.Vec3;
 import team.lodestar.lodestone.helpers.RenderHelper;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.rendering.rendeertype.*;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 import java.util.UUID;
-
-public class TokenOfGratitudeRenderer implements ICurioRenderer {
+public class TokenOfGratitudeRenderer implements TrinketRenderer {
 
     private static final ResourceLocation SAMMY = MalumMod.malumPath("textures/cosmetic/sammy_tail.png");
     private static final ResourceLocation OWL_PERSON_EYES = MalumMod.malumPath("textures/cosmetic/owl_person_eyes.png");
@@ -42,32 +45,44 @@ public class TokenOfGratitudeRenderer implements ICurioRenderer {
 
     private static final ResourceLocation TRANS_SCARF = MalumMod.malumPath("textures/cosmetic/trans_scarf.png");
 
+    public static TailModel TAIL_MODEL;
+    public static ScarfModel SCARF;
+    public static HeadOverlayModel HEAD_OVERLAY_MODEL;
+
     @Override
-    public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack poseStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (slotContext.entity() instanceof AbstractClientPlayer playerEntity) {
-            if (playerEntity.getUUID().equals(CurioTokenOfGratitude.SAMMY)) {
-                renderTail(stack, SAMMY, poseStack, playerEntity, renderTypeBuffer, light, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch);
+    public void render(ItemStack itemStack, SlotReference slotReference, EntityModel<? extends LivingEntity> entityModel, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, LivingEntity livingEntity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+        if (livingEntity instanceof AbstractClientPlayer playerEntity) {
+            if (TAIL_MODEL == null) {
+                TAIL_MODEL = new TailModel(Minecraft.getInstance().getEntityModels().bakeLayer(TailModel.LAYER));
             }
-            if (playerEntity.getUUID().equals(CurioTokenOfGratitude.LOFI) || playerEntity.getUUID().equals(CurioTokenOfGratitude.CREECHURE)) {
-                renderTail(stack, LOFI, poseStack, playerEntity, renderTypeBuffer, light, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch);
+            if (SCARF == null) {
+                SCARF = new ScarfModel(Minecraft.getInstance().getEntityModels().bakeLayer(ScarfModel.LAYER));
             }
-            if (playerEntity.getUUID().equals(CurioTokenOfGratitude.OWL_PERSON)) {
-                renderGlowingEyes(playerEntity, LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(RenderTypeToken.createCachedToken(OWL_PERSON_EYES)), poseStack, renderTypeBuffer, RenderHelper.FULL_BRIGHT);
+
+            if (playerEntity.getUUID().equals(CurioTokenOfGratitude.SAMMY) && entityModel instanceof PlayerModel<? extends LivingEntity> playerModel) {
+                renderTail(playerModel, itemStack, SAMMY, poseStack, playerEntity, multiBufferSource, light, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
+            }
+            if ((playerEntity.getUUID().equals(CurioTokenOfGratitude.LOFI) || playerEntity.getUUID().equals(CurioTokenOfGratitude.CREECHURE)) && entityModel instanceof PlayerModel<? extends LivingEntity> playerModel) {
+                renderTail(playerModel, itemStack, LOFI, poseStack, playerEntity, multiBufferSource, light, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
+            }
+            if (playerEntity.getUUID().equals(CurioTokenOfGratitude.OWL_PERSON) && entityModel instanceof PlayerModel<? extends LivingEntity> playerModel) {
+                renderGlowingEyes(playerEntity, playerModel, LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(RenderTypeToken.createCachedToken(OWL_PERSON_EYES)), poseStack, multiBufferSource, RenderHelper.FULL_BRIGHT, headYaw, headPitch);
             }
             if (playerEntity.getUUID().equals(CurioTokenOfGratitude.SNAKE_SCARF_FELLA)) {
-                renderScarf(playerEntity, SNAKE_FELLA_SCARF, poseStack, renderTypeBuffer, light);
+                renderScarf(playerEntity, SNAKE_FELLA_SCARF, poseStack, multiBufferSource, light);
             }
             if (playerEntity.getUUID().equals(CurioTokenOfGratitude.BOBBU)) {
-                renderScarf(playerEntity, BOBBU_SCARF, poseStack, renderTypeBuffer, light);
+                renderScarf(playerEntity, BOBBU_SCARF, poseStack, multiBufferSource, light);
             }
             if (playerEntity.getUUID().equals(CurioTokenOfGratitude.DELLY)) {
-                renderScarf(playerEntity, DELLY_NECKLACE, poseStack, renderTypeBuffer, light);
+                renderScarf(playerEntity, DELLY_NECKLACE, poseStack, multiBufferSource, light);
             }
             if (CurioTokenOfGratitude.TRANS_SCARFS.contains(playerEntity.getUUID())) {
-                renderScarf(playerEntity, TRANS_SCARF, poseStack, renderTypeBuffer, light);
+                renderScarf(playerEntity, TRANS_SCARF, poseStack, multiBufferSource, light);
             }
         }
     }
+
 
     public static ResourceLocation getElytraTexture(UUID uuid, ResourceLocation original) {
         if (uuid.equals(CurioTokenOfGratitude.OWL_PERSON)) {
@@ -76,14 +91,20 @@ public class TokenOfGratitudeRenderer implements ICurioRenderer {
         return original;
     }
 
-    public static void renderGlowingEyes(AbstractClientPlayer playerEntity, RenderType renderType, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light) {
+    public static void renderGlowingEyes(AbstractClientPlayer playerEntity, PlayerModel entityModel, RenderType renderType, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float headYaw, float headPitch) {
         VertexConsumer vertexconsumer = renderTypeBuffer.getBuffer(renderType);
-        ICurioRenderer.followHeadRotations(playerEntity, ModelRegistry.HEAD_OVERLAY_MODEL.overlay);
-        ModelRegistry.HEAD_OVERLAY_MODEL.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 16777215);
+
+        TrinketRenderer.translateToFace(poseStack, (PlayerModel<AbstractClientPlayer>) entityModel, playerEntity, headYaw, headPitch);
+        poseStack.translate(0, 0.2, 0.3f);
+        if (HEAD_OVERLAY_MODEL == null) {
+            HEAD_OVERLAY_MODEL = new HeadOverlayModel(Minecraft.getInstance().getEntityModels().bakeLayer(HeadOverlayModel.LAYER));
+        }
+
+        HEAD_OVERLAY_MODEL.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1);
     }
 
 
-    public static void renderTail(ItemStack stack, ResourceLocation texture, PoseStack poseStack, AbstractClientPlayer playerEntity, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    public static void renderTail(PlayerModel playerModel, ItemStack stack, ResourceLocation texture, PoseStack poseStack, AbstractClientPlayer playerEntity, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         poseStack.pushPose();
         Vec3 movement = new Vec3(playerEntity.getDeltaMovement().x, 0, playerEntity.getDeltaMovement().z);
         double wagSpeed = playerEntity.getDeltaMovement().length();
@@ -102,17 +123,16 @@ public class TokenOfGratitudeRenderer implements ICurioRenderer {
         double ambientYRotation = Math.cos(playerEntity.level().getGameTime() / 24f) * -ambientFactor;
         poseStack.mulPose(Axis.YP.rotationDegrees((float) ambientYRotation));
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(texture), stack.hasFoil());
-        ModelRegistry.TAIL_MODEL.setupAnim(playerEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-        ModelRegistry.TAIL_MODEL.prepareMobModel(playerEntity, limbSwing, limbSwingAmount, partialTicks);
-        ICurioRenderer.translateIfSneaking(poseStack, playerEntity);
-        ICurioRenderer.rotateIfSneaking(poseStack, playerEntity);
-        ModelRegistry.TAIL_MODEL.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 16777215);
+        TAIL_MODEL.setupAnim(playerEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        TAIL_MODEL.prepareMobModel(playerEntity, limbSwing, limbSwingAmount, partialTicks);
+        TrinketRenderer.followBodyRotations(playerEntity, playerModel);
+        TAIL_MODEL.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1);
         poseStack.popPose();
     }
 
     public static void renderScarf(AbstractClientPlayer playerEntity, ResourceLocation texture, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light) {
         VertexConsumer vertexconsumer = renderTypeBuffer.getBuffer(RenderType.armorCutoutNoCull(texture));
-        float pticks = Minecraft.getInstance().timer.getGameTimeDeltaTicks();
+        float pticks = Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
         float f = Mth.rotLerp(pticks, playerEntity.yBodyRotO, playerEntity.yBodyRot);
         float f1 = Mth.rotLerp(pticks, playerEntity.yHeadRotO, playerEntity.yHeadRot);
         float netHeadYaw = f1 - f;
@@ -121,10 +141,11 @@ public class TokenOfGratitudeRenderer implements ICurioRenderer {
         if (render instanceof LivingEntityRenderer livingEntityRenderer) {
             EntityModel<AbstractClientPlayer> model = livingEntityRenderer.getModel();
             if (model instanceof HumanoidModel humanoidModel) {
-                ModelRegistry.SCARF.copyFromDefault(humanoidModel);
+                SCARF.copyFromDefault(humanoidModel);
             }
         }
-        ModelRegistry.SCARF.setupAnim(playerEntity, playerEntity.walkAnimation.position(), playerEntity.walkAnimation.speed(), playerEntity.tickCount + pticks, netHeadYaw, netHeadPitch);
-        ModelRegistry.SCARF.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 16777215);
+        SCARF.setupAnim(playerEntity, playerEntity.walkAnimation.position(), playerEntity.walkAnimation.speed(), playerEntity.tickCount + pticks, netHeadYaw, netHeadPitch);
+        SCARF.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1);
     }
+
 }

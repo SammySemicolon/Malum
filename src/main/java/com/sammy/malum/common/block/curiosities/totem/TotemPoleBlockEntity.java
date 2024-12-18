@@ -6,6 +6,7 @@ import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.data.*;
+import io.github.fabricators_of_create.porting_lib.tool.ItemAbilities;
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
 import net.minecraft.server.level.ServerLevel;
@@ -18,11 +19,9 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
-import net.neoforged.neoforge.common.ItemAbilities;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
-
-import javax.annotation.*;
 
 public class TotemPoleBlockEntity extends LodestoneBlockEntity {
 

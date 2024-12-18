@@ -20,15 +20,12 @@ import com.sammy.malum.common.block.ether.*;
 import com.sammy.malum.common.block.storage.jar.*;
 import com.sammy.malum.common.block.storage.pedestal.*;
 import com.sammy.malum.common.block.storage.stand.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.*;
 
@@ -86,25 +83,24 @@ public class BlockEntityRegistry {
         return matchingBlocks.toArray(new Block[0]);
     }
 
-    @EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
     public static class ClientOnly {
-        @SubscribeEvent
-        public static void registerRenderer(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(VOID_CONDUIT.get(), VoidConduitRenderer::new);
-            event.registerBlockEntityRenderer(VOID_DEPOT.get(), VoidDepotRenderer::new);
-            event.registerBlockEntityRenderer(SPIRIT_ALTAR.get(), SpiritAltarRenderer::new);
-            event.registerBlockEntityRenderer(RUNIC_WORKBENCH.get(), MalumItemHolderRenderer::new);
-            event.registerBlockEntityRenderer(SPIRIT_CRUCIBLE.get(), SpiritCrucibleRenderer::new);
-            event.registerBlockEntityRenderer(SPIRIT_CATALYZER.get(), SpiritCatalyzerRenderer::new);
-            event.registerBlockEntityRenderer(REPAIR_PYLON.get(), RepairPylonRenderer::new);
-            event.registerBlockEntityRenderer(TOTEM_BASE.get(), TotemBaseRenderer::new);
-            event.registerBlockEntityRenderer(TOTEM_POLE.get(), TotemPoleRenderer::new);
-            event.registerBlockEntityRenderer(RITUAL_PLINTH.get(), RitualPlinthRenderer::new);
-            event.registerBlockEntityRenderer(ITEM_STAND.get(), MalumItemHolderRenderer::new);
-            event.registerBlockEntityRenderer(ITEM_PEDESTAL.get(), MalumItemHolderRenderer::new);
-            event.registerBlockEntityRenderer(SPIRIT_JAR.get(), SpiritJarRenderer::new);
-            event.registerBlockEntityRenderer(SPIRIT_MOTE.get(), MoteOfManaRenderer::new);
-            event.registerBlockEntityRenderer(SOULWOVEN_BANNER.get(), SoulwovenBannerRenderer::new);
+
+        public static void registerRenderer() {
+            BlockEntityRenderers.register(VOID_CONDUIT.get(), VoidConduitRenderer::new);
+            BlockEntityRenderers.register(VOID_DEPOT.get(), VoidDepotRenderer::new);
+            BlockEntityRenderers.register(SPIRIT_ALTAR.get(), SpiritAltarRenderer::new);
+            BlockEntityRenderers.register(RUNIC_WORKBENCH.get(), MalumItemHolderRenderer::new);
+            BlockEntityRenderers.register(SPIRIT_CRUCIBLE.get(), SpiritCrucibleRenderer::new);
+            BlockEntityRenderers.register(SPIRIT_CATALYZER.get(), SpiritCatalyzerRenderer::new);
+            BlockEntityRenderers.register(REPAIR_PYLON.get(), RepairPylonRenderer::new);
+            BlockEntityRenderers.register(TOTEM_BASE.get(), TotemBaseRenderer::new);
+            BlockEntityRenderers.register(TOTEM_POLE.get(), TotemPoleRenderer::new);
+            BlockEntityRenderers.register(RITUAL_PLINTH.get(), RitualPlinthRenderer::new);
+            BlockEntityRenderers.register(ITEM_STAND.get(), MalumItemHolderRenderer::new);
+            BlockEntityRenderers.register(ITEM_PEDESTAL.get(), MalumItemHolderRenderer::new);
+            BlockEntityRenderers.register(SPIRIT_JAR.get(), SpiritJarRenderer::new);
+            BlockEntityRenderers.register(SPIRIT_MOTE.get(), MoteOfManaRenderer::new);
+            BlockEntityRenderers.register(SOULWOVEN_BANNER.get(), SoulwovenBannerRenderer::new);
         }
     }
 }

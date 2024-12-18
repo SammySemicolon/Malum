@@ -5,6 +5,7 @@ import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import net.minecraft.core.particles.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
@@ -18,8 +19,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
-import net.neoforged.neoforge.event.entity.living.*;
+
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
 import team.lodestar.lodestone.registry.common.tag.*;
@@ -39,7 +39,7 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
         this(tier, 0f, chargeDuration, magicDamage, builderIn);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     public abstract void spawnChargeParticles(Level pLevel, LivingEntity pLivingEntity, Vec3 pos, ItemStack pStack, float chargePercentage);
 
     public abstract int getCooldownDuration(Level level, LivingEntity livingEntity);
@@ -54,8 +54,9 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
         return builder;
     }
 
+
     @Override
-    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDamageEvent(LivingDamageEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (attacker instanceof Player player && event.getSource().is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
             var level = player.level();
             SoundHelper.playSound(target, SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 0.75f, RandomHelper.randomBetween(level.random, 0.5f, 1.0f));
@@ -88,7 +89,7 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
                     player.awardStat(Stats.ITEM_USED.get(this));
                     if (!player.getAbilities().instabuild) {
                         pStack.hurtAndBreak(2, player, EquipmentSlot.MAINHAND);
-                        var data = player.getData(AttachmentTypeRegistry.RESERVE_STAFF_CHARGES);
+                        var data = player.getAttachedOrCreate(AttachmentTypeRegistry.RESERVE_STAFF_CHARGES);
                         if (data.reserveChargeCount > 0) {
                             data.reserveChargeCount--;
                         }

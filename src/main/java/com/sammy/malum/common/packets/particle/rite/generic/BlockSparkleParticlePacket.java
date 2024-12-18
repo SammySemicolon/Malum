@@ -1,15 +1,17 @@
 package com.sammy.malum.common.packets.particle.rite.generic;
 
 import com.sammy.malum.common.packets.particle.base.color.ColorBasedBlockParticleEffectPacket;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import team.lodestar.lodestone.LodestoneLib;
 import team.lodestar.lodestone.helpers.ColorHelper;
 import team.lodestar.lodestone.registry.common.particle.LodestoneParticleTypes;
 import team.lodestar.lodestone.systems.easing.Easing;
@@ -22,9 +24,13 @@ import team.lodestar.lodestone.systems.particle.render_types.LodestoneWorldParti
 
 import java.awt.*;
 
+
 public class BlockSparkleParticlePacket extends ColorBasedBlockParticleEffectPacket {
 
     boolean addMist;
+    public static CustomPacketPayload.Type<BlockSparkleParticlePacket> ID = new CustomPacketPayload.Type(LodestoneLib.lodestonePath("block_sparkle"));
+    public static final StreamCodec<? super RegistryFriendlyByteBuf, BlockSparkleParticlePacket> STREAM_CODEC = CustomPacketPayload.codec(BlockSparkleParticlePacket::write, BlockSparkleParticlePacket::new);
+
 
     public BlockSparkleParticlePacket(Color col, BlockPos pos, boolean blightedMist) {
         super(col, pos);
@@ -40,9 +46,8 @@ public class BlockSparkleParticlePacket extends ColorBasedBlockParticleEffectPac
         this.addMist = buf.readBoolean();
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
-    public void handle(IPayloadContext iPayloadContext) {
+    public <T extends CustomPacketPayload> void handle(T t, ClientPlayNetworking.Context context) {
         Level level = Minecraft.getInstance().level;
         var rand = level.random;
         for (int i = 0; i < 5; i++) {
@@ -124,8 +129,13 @@ public class BlockSparkleParticlePacket extends ColorBasedBlockParticleEffectPac
     }
 
     @Override
-    public void serialize(FriendlyByteBuf buf) {
-        super.serialize(buf);
+    public void write(FriendlyByteBuf buf) {
+        super.write(buf);
         buf.writeBoolean(addMist);
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
     }
 }

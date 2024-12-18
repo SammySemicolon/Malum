@@ -6,50 +6,57 @@ import com.sammy.malum.data.item.MalumEnchantments;
 import com.sammy.malum.data.item.MalumItemModels;
 import com.sammy.malum.data.item.MalumItemTags;
 import com.sammy.malum.data.recipe.*;
+import com.sammy.malum.data.worldgen.BiomeModifications;
+import com.sammy.malum.data.worldgen.ConfiguredFeatures;
+import com.sammy.malum.data.worldgen.PlacedFeatures;
+import com.sammy.malum.data.worldgen.WorldGenProvider;
+import com.sammy.malum.registry.common.DamageTypeRegistry;
+import io.github.fabricators_of_create.porting_lib.data.ExistingFileHelper;
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = MalumMod.MALUM, bus = EventBusSubscriber.Bus.MOD)
-public class DataGenerators {
 
-    @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput output = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
-        ExistingFileHelper helper = event.getExistingFileHelper();
 
-        MalumItemModels itemModelsProvider = new MalumItemModels(output, helper);
-        MalumBlockTags blockTagsProvider = new MalumBlockTags(output, provider, helper);
+public class DataGenerators implements DataGeneratorEntrypoint {
 
-//        generator.addProvider(event.includeClient(), new MalumFusionBlockModels(output));
+    @Override
+    public void onInitializeDataGenerator(FabricDataGenerator generator) {
+        var pack = generator.createPack();
+        ExistingFileHelper helper = ExistingFileHelper.withResourcesFromArg();
 
-        generator.addProvider(event.includeClient(), new MalumBlockStates(output, helper, itemModelsProvider));
-        generator.addProvider(event.includeClient(), itemModelsProvider);
+        var items = pack.addProvider(((output, registriesFuture) -> new MalumItemModels(output, helper)));
+        pack.addProvider(((output, registriesFuture) -> new MalumBlockTags(output, registriesFuture)));
+        pack.addProvider((output, registriesFuture) -> new MalumBlockStates(output, helper, items));
 
-        generator.addProvider(event.includeServer(), blockTagsProvider);
-        generator.addProvider(event.includeServer(), new MalumBlockLootTables(output, provider));
-        generator.addProvider(event.includeServer(), new MalumItemTags(output, provider, blockTagsProvider.contentsGetter(), helper));
+        pack.addProvider((output, registriesFuture) -> new MalumBlockLootTables.BlocksLoot(output, registriesFuture));
+        pack.addProvider((output, registriesFuture) -> new MalumItemTags(output, registriesFuture));
 
-        generator.addProvider(event.includeServer(), new MalumRecipes(output, provider));
-        generator.addProvider(event.includeServer(), new MalumEnchantments(output, provider));
+        pack.addProvider((output, registriesFuture) -> new MalumRecipes(output, registriesFuture));
+        pack.addProvider((output, registriesFuture) -> new MalumEnchantments(output, registriesFuture));
 
-        generator.addProvider(event.includeServer(), new MalumBiomeTags(output, provider, helper));
-        generator.addProvider(event.includeServer(), new MalumDamageTypeTags(output, provider, helper));
+        pack.addProvider((output, registriesFuture) -> new MalumBiomeTags(output, registriesFuture, helper));
+        pack.addProvider((output, registriesFuture) -> new MalumDamageTypeTags(output, registriesFuture, helper));
 
-        generator.addProvider(event.includeServer(), new RegistryDataGenerator(output, provider));
-        generator.addProvider(event.includeClient(), new MalumLang(output));
+        pack.addProvider((output, registriesFuture) -> new MalumLang(output));
 
-        generator.addProvider(event.includeServer(), new MalumCuriosThings(output, helper, provider));
+        pack.addProvider((fabricDataOutput, completableFuture) -> new MalumSoundDatagen(fabricDataOutput, helper));
 
-        generator.addProvider(event.includeDev(), new MalumSoundDatagen(output, helper));
+        pack.addProvider((fabricDataOutput, completableFuture) -> new WorldGenProvider(fabricDataOutput, completableFuture));
+    }
+
+    @Override
+    public void buildRegistry(RegistrySetBuilder registryBuilder) {
+        registryBuilder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatures::bootstrap);
+        registryBuilder.add(Registries.PLACED_FEATURE, PlacedFeatures::bootstrap);
+        registryBuilder.add(Registries.BIOME, BiomeModifications::bootstrap);
+        registryBuilder.add(Registries.DAMAGE_TYPE, DamageTypeRegistry::bootstrap);
 
     }
 }

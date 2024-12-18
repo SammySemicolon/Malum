@@ -1,14 +1,14 @@
 package com.sammy.malum.core.handlers;
 
 import com.sammy.malum.registry.common.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 public class MalumAttributeEventHandler {
-    public static void processAttributes(LivingDamageEvent.Pre event) {
-        if (event.getOriginalDamage() <= 0) {
+    public static void processAttributes(LivingDamageEvent event) {
+        if (event.getAmount() <= 0) {
             return;
         }
         DamageSource source = event.getSource();
@@ -16,7 +16,7 @@ public class MalumAttributeEventHandler {
             if (source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
                 var scytheProficiency = attacker.getAttribute(AttributeRegistry.SCYTHE_PROFICIENCY);
                 if (scytheProficiency != null) {
-                    event.setNewDamage((float) (event.getNewDamage() * scytheProficiency.getValue()));
+                    event.setAmount((float) (event.getAmount() * scytheProficiency.getValue()));
                 }
             }
         }

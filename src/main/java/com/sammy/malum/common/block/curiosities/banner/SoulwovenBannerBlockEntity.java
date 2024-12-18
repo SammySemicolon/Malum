@@ -7,6 +7,7 @@ import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.*;
 import com.sammy.malum.visual_effects.networked.data.*;
+import io.github.fabricators_of_create.porting_lib.tool.ItemAbilities;
 import net.minecraft.core.*;
 import net.minecraft.core.component.*;
 import net.minecraft.nbt.*;
@@ -18,11 +19,10 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.common.*;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
-import javax.annotation.*;
 
 public class SoulwovenBannerBlockEntity extends LodestoneBlockEntity {
 
@@ -37,13 +37,13 @@ public class SoulwovenBannerBlockEntity extends LodestoneBlockEntity {
     @Override
     protected void collectImplicitComponents(DataComponentMap.Builder components) {
         super.collectImplicitComponents(components);
-        components.set(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN, patternData);
+        components.set(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN.get(), patternData);
     }
 
     @Override
     protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
         super.applyImplicitComponents(componentInput);
-        patternData = componentInput.get(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN);
+        patternData = componentInput.get(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN.get());
     }
     @Override
     public ItemInteractionResult onUseWithItem(Player pPlayer, ItemStack pStack, InteractionHand pHand) {

@@ -1,23 +1,13 @@
+rootProject.name = "Malum"
 pluginManagement {
     repositories {
-        gradlePluginPortal()
+        maven("https://maven.fabricmc.net/")
         mavenCentral()
-        maven("https://maven.minecraftforge.net/")
+        gradlePluginPortal()
         maven("https://maven.parchmentmc.org")
-        maven("https://repo.spongepowered.org/repository/maven-public/")
-        maven("https://maven.neoforged.net/releases")
     }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == "org.spongepowered.mixin") {
-                useModule("org.spongepowered:mixingradle:0.7-SNAPSHOT")
-            }
-        }
+    val loom_version: String by settings
+    plugins {
+        id("fabric-loom") version loom_version
     }
-}
-
-rootProject.name = "Malum"
-
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
 }

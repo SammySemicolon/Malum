@@ -10,9 +10,9 @@ import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.data.ExistingFileHelper;
 import net.minecraft.data.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.common.data.*;
 import team.lodestar.lodestone.systems.datagen.*;
 import team.lodestar.lodestone.systems.datagen.itemsmith.*;
 import team.lodestar.lodestone.systems.datagen.providers.*;
@@ -31,7 +31,7 @@ public class MalumItemModels extends LodestoneItemModelProvider {
 
     @Override
     protected void registerModels() {
-        ArmorSkinRegistry.registerItemSkins(null);
+        ArmorSkinRegistry.registerItemSkins();
         Set<Supplier<? extends Item>> items = new HashSet<>(ITEMS.getEntries());
 
         items.removeIf(i -> i.get() instanceof BlockItem);

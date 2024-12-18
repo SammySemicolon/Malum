@@ -4,9 +4,8 @@ import com.sammy.malum.data.recipe.builder.*;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.data.recipes.*;
-import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
-public class MalumRuneworkingRecipes implements IConditionBuilder {
+public class MalumRuneworkingRecipes {
 
     protected static void buildRecipes(RecipeOutput recipeOutput) {
         new RunicWorkbenchRecipeBuilder(ItemRegistry.RUNE_OF_IDLE_RESTORATION.get(), 1)

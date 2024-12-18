@@ -6,6 +6,8 @@ import com.sammy.malum.common.item.spirit.SpiritJarItem;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,26 +16,24 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-public class SpiritJarItemRenderer extends BlockEntityWithoutLevelRenderer {
+public class SpiritJarItemRenderer implements BuiltinItemRendererRegistry.DynamicItemRenderer {
 
     private final SpiritJarBlockEntity jar = new SpiritJarBlockEntity(BlockPos.ZERO, BlockRegistry.SPIRIT_JAR.get().defaultBlockState());
 
-    private final BlockEntityRenderDispatcher blockEntityRenderDispatcher;
 
-    public SpiritJarItemRenderer(BlockEntityRenderDispatcher pBlockEntityRenderDispatcher, EntityModelSet pEntityModelSet) {
-        super(pBlockEntityRenderDispatcher, pEntityModelSet);
-        this.blockEntityRenderDispatcher = pBlockEntityRenderDispatcher;
+    public SpiritJarItemRenderer() {
+
     }
 
     @Override
-    public void renderByItem(ItemStack pStack, ItemDisplayContext pTransformType, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
-        if (pStack.getItem() instanceof SpiritJarItem) {
-            if (pStack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS)) {
-                SpiritJarItem.Contents contents = pStack.get(DataComponentRegistry.SPIRIT_JAR_CONTENTS);
+    public void render(ItemStack itemStack, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int pPackedLight, int pPackedOverlay) {
+        if (itemStack.getItem() instanceof SpiritJarItem) {
+            if (itemStack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS.get())) {
+                SpiritJarItem.Contents contents = itemStack.get(DataComponentRegistry.SPIRIT_JAR_CONTENTS.get());
                 jar.type = MalumSpiritType.getSpiritType(contents.spirit());
                 jar.count = contents.count();
 
-                this.blockEntityRenderDispatcher.renderItem(jar, pPoseStack, pBuffer, pPackedLight, pPackedOverlay);
+                Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(jar, poseStack, multiBufferSource, pPackedLight, pPackedOverlay);
             }
         }
     }

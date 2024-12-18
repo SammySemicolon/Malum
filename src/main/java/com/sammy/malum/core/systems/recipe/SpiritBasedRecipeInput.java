@@ -1,8 +1,8 @@
 package com.sammy.malum.core.systems.recipe;
 
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import java.util.*;
 

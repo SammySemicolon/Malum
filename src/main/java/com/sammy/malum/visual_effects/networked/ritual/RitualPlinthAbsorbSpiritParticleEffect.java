@@ -6,7 +6,7 @@ import com.sammy.malum.visual_effects.networked.ParticleEffectType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.phys.Vec3;
 
-import net.neoforged.api.distmarker.*;
+
 
 import java.util.function.Supplier;
 
@@ -16,7 +16,7 @@ public class RitualPlinthAbsorbSpiritParticleEffect extends ParticleEffectType {
         super(id);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) -> {

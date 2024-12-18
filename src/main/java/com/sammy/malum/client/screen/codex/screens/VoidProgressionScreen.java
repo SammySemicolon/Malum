@@ -24,7 +24,6 @@ import net.minecraft.core.registries.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,7 +45,7 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
         super(SoundRegistry.ARCANA_SWEETENER_EVIL, 1024, 768);
         minecraft = Minecraft.getInstance();
         setupEntries();
-        NeoForge.EVENT_BUS.post(new SetupMalumCodexEntriesEvent());
+        SetupMalumCodexEntriesEvent.VOID_EVENT.invoker().onSetup(this, VOID_ENTRIES);
         setupObjects();
     }
 

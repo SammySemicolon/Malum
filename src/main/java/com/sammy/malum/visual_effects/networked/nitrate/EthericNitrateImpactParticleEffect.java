@@ -5,7 +5,7 @@ import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.*;
 import net.minecraft.util.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.*;
@@ -30,7 +30,7 @@ public class EthericNitrateImpactParticleEffect extends ParticleEffectType {
         super(id);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) -> {

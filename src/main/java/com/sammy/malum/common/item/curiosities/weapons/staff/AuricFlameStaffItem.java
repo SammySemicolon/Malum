@@ -10,7 +10,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
+
 import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
@@ -72,7 +72,7 @@ public class AuricFlameStaffItem extends AbstractStaffItem {
         level.addFreshEntity(entity);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public void spawnChargeParticles(Level pLevel, LivingEntity pLivingEntity, Vec3 pos, ItemStack pStack, float pct) {
         RandomSource random = pLevel.random;

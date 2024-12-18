@@ -10,28 +10,21 @@ import com.sammy.malum.common.item.cosmetic.skins.risk_of_rain.CommandoArmorSkin
 import com.sammy.malum.common.item.cosmetic.skins.risk_of_rain.ExecutionerArmorSkin;
 import com.sammy.malum.common.item.curiosities.armor.MalumArmorItem;
 import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@EventBusSubscriber(modid = MalumMod.MALUM, bus = EventBusSubscriber.Bus.MOD)
 public class ArmorSkinRegistry {
 
     public static final Map<String, ArmorSkin> SKINS = new LinkedHashMap<>();
     public static Map<ArmorSkin, ArmorSkin.ArmorSkinDatagenData> SKIN_DATAGEN_DATA = new HashMap<>();
 
-    @SubscribeEvent
-    public static void wipeCache(InterModEnqueueEvent event) {
+    public static void wipeCache() {
         SKIN_DATAGEN_DATA = null;
     }
 
-    @SubscribeEvent
-    public static void registerItemSkins(FMLCommonSetupEvent event) {
+    public static void registerItemSkins() {
         registerPridewear("ace", ItemRegistry.ACE_PRIDEWEAVE.get());
         registerPridewear("agender", ItemRegistry.AGENDER_PRIDEWEAVE.get());
         registerPridewear("aro", ItemRegistry.ARO_PRIDEWEAVE.get());

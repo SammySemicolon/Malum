@@ -2,8 +2,6 @@ package com.sammy.malum.registry.common.recipe;
 
 import com.sammy.malum.*;
 import com.sammy.malum.core.systems.recipe.*;
-import net.neoforged.neoforge.common.crafting.*;
-import net.neoforged.neoforge.registries.*;
 
 public class IngredientTypeRegistry {
 

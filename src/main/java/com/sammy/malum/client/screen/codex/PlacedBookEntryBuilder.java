@@ -4,8 +4,8 @@ import com.google.common.collect.*;
 import com.sammy.malum.client.screen.codex.objects.progression.*;
 import com.sammy.malum.client.screen.codex.pages.*;
 import net.minecraft.ChatFormatting;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.function.*;
 
 public class PlacedBookEntryBuilder extends BookEntryBuilder {

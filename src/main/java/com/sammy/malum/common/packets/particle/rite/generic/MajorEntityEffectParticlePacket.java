@@ -1,12 +1,15 @@
 package com.sammy.malum.common.packets.particle.rite.generic;
 
 import com.sammy.malum.common.packets.particle.base.color.ColorBasedParticleEffectPacket;
+import com.sammy.malum.common.packets.particle.rite.AerialBlockFallRiteEffectPacket;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import team.lodestar.lodestone.LodestoneLib;
 import team.lodestar.lodestone.helpers.ColorHelper;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.Easing;
@@ -19,6 +22,10 @@ import java.awt.*;
 
 public class MajorEntityEffectParticlePacket extends ColorBasedParticleEffectPacket {
 
+    public static CustomPacketPayload.Type<MajorEntityEffectParticlePacket> ID = new CustomPacketPayload.Type(LodestoneLib.lodestonePath("major"));
+    public static final StreamCodec<? super RegistryFriendlyByteBuf, MajorEntityEffectParticlePacket> STREAM_CODEC = CustomPacketPayload.codec(MajorEntityEffectParticlePacket::write, MajorEntityEffectParticlePacket::new);
+
+
     public MajorEntityEffectParticlePacket(Color color, double posX, double posY, double posZ) {
         super(color, posX, posY, posZ);
     }
@@ -27,9 +34,8 @@ public class MajorEntityEffectParticlePacket extends ColorBasedParticleEffectPac
         super(buf);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
-    public void handle(IPayloadContext iPayloadContext) {
+    public <T extends CustomPacketPayload> void handle(T t, ClientPlayNetworking.Context context) {
         Level level = Minecraft.getInstance().level;
         var rand = level.random;
         for (int i = 0; i <= 3; i++) {
@@ -69,5 +75,10 @@ public class MajorEntityEffectParticlePacket extends ColorBasedParticleEffectPac
                 .setRandomMotion(0.015f, 0.015f)
                 .addTickActor(p -> p.setParticleSpeed(p.getParticleSpeed().scale(0.92f)))
                 .repeat(level, posX, posY, posZ, 20);
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
     }
 }

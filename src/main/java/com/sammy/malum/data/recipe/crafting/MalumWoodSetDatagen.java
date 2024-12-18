@@ -2,13 +2,12 @@ package com.sammy.malum.data.recipe.crafting;
 
 import com.sammy.malum.data.item.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
-import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.common.conditions.*;
 
 import static com.sammy.malum.MalumMod.*;
 import static net.minecraft.data.recipes.RecipeBuilder.*;
@@ -16,7 +15,7 @@ import static com.sammy.malum.data.recipe.MalumVanillaRecipes.*;
 import static net.minecraft.data.recipes.ShapedRecipeBuilder.*;
 import static net.minecraft.data.recipes.ShapelessRecipeBuilder.*;
 
-public class MalumWoodSetDatagen implements IConditionBuilder {
+public class MalumWoodSetDatagen   {
 
     private static final MalumDatagenWoodSet RUNEWOOD = new MalumDatagenWoodSet(
             "runewood",
@@ -85,6 +84,7 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
     }
 
     protected static void addTags(MalumItemTags provider, MalumDatagenWoodSet woodSet) {
+        /*TODO
         provider.tag(woodSet.logTag).add(
                 woodSet.log, woodSet.strippedLog, woodSet.wood, woodSet.strippedWood, woodSet.sapFilledLog, woodSet.strippedSapFilledLog);
         provider.tag(woodSet.boardIngredientTag).add(woodSet.log, woodSet.wood);
@@ -106,6 +106,8 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
                 woodSet.rusticPlanksSlab, woodSet.verticalRusticPlanksSlab,
                 woodSet.tilesSlab, woodSet.rusticTilesSlab
         );
+
+         */
     }
 
     protected static void buildRecipes(RecipeOutput recipeOutput, MalumDatagenWoodSet woodSet) {

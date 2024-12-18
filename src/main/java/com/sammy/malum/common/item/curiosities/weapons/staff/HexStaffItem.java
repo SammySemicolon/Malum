@@ -27,7 +27,7 @@ public class HexStaffItem extends AbstractStaffItem {
         super(tier, 15, magicDamage, builderIn);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public void spawnChargeParticles(Level pLevel, LivingEntity pLivingEntity, Vec3 pos, ItemStack pStack, float pct) {
         RandomSource random = pLevel.random;

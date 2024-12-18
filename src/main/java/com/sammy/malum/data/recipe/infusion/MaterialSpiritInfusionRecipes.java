@@ -3,13 +3,13 @@ package com.sammy.malum.data.recipe.infusion;
 import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.data.recipe.builder.*;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 
@@ -137,6 +137,6 @@ public class MaterialSpiritInfusionRecipes {
     public static void soulwovenBannerRecipe(RecipeOutput recipeOutput, MalumSpiritType spirit, SoulwovenBannerPatternData pattern) {
         new SpiritInfusionRecipeBuilder(ItemRegistry.SOULWOVEN_BANNER.get(), pattern.getDefaultStack())
                 .addSpirit(spirit, 1)
-                .save(recipeOutput, pattern.getRecipeId());
+                .saveRecipe(recipeOutput, pattern.getRecipeId());
     }
 }

@@ -2,22 +2,22 @@ package com.sammy.malum.data.recipe.builder;
 
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.recipe.spirit.transmutation.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.recipe.builder.AutonamedRecipeBuilder;
 
-import javax.annotation.Nullable;
 
 public class SpiritTransmutationRecipeBuilder implements AutonamedRecipeBuilder<SpiritTransmutationRecipe> {
     private final Ingredient ingredient;
     private final ItemStack output;
 
-    @Nullable
+
     private String group = "";
 
     public SpiritTransmutationRecipeBuilder(Ingredient input, ItemStack output) {
@@ -66,11 +66,11 @@ public class SpiritTransmutationRecipeBuilder implements AutonamedRecipeBuilder<
 
     @Override
     public void save(RecipeOutput recipeOutput, String recipeName) {
-        save(recipeOutput, MalumMod.malumPath("spirit_transmutation/" + recipeName));
+        saveRecipe(recipeOutput, MalumMod.malumPath("spirit_transmutation/" + recipeName));
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
+    public void saveRecipe(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
         defaultSaveFunc(recipeOutput, resourceLocation);
     }
 

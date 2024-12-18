@@ -11,7 +11,6 @@ import net.minecraft.network.codec.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 
-import javax.annotation.*;
 import java.util.*;
 
 public record SoulwovenBannerPatternData(ResourceLocation type, ResourceLocation texturePath, String translationKey) {
@@ -55,7 +54,7 @@ public record SoulwovenBannerPatternData(ResourceLocation type, ResourceLocation
 
     public ItemStack getDefaultStack() {
         final ItemStack stack = ItemRegistry.SOULWOVEN_BANNER.get().getDefaultInstance();
-        stack.set(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN, this);
+        stack.set(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN.get(), this);
         return stack;
     }
 

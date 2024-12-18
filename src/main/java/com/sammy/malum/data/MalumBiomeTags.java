@@ -2,36 +2,39 @@ package com.sammy.malum.data;
 
 import com.sammy.malum.*;
 import com.sammy.malum.registry.common.worldgen.*;
+import io.github.fabricators_of_create.porting_lib.data.ExistingFileHelper;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.*;
 import net.minecraft.data.tags.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.level.biome.*;
-import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.common.data.*;
 import org.jetbrains.annotations.*;
 
 import java.util.concurrent.*;
 
-public class MalumBiomeTags extends BiomeTagsProvider {
+public class MalumBiomeTags extends FabricTagProvider<Biome> {
 
-    public MalumBiomeTags(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(pOutput, pProvider, MalumMod.MALUM, existingFileHelper);
+    public MalumBiomeTags(FabricDataOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(pOutput, Registries.BIOME, pProvider);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         //super.addTags(pProvider);
-        tag(BiomeTagRegistry.HAS_SOULSTONE).addTag(BiomeTags.IS_OVERWORLD);
-        tag(BiomeTagRegistry.HAS_BRILLIANT).addTag(BiomeTags.IS_OVERWORLD);
-        tag(BiomeTagRegistry.HAS_BLAZING_QUARTZ).addTag(BiomeTags.IS_NETHER);
-        tag(BiomeTagRegistry.HAS_QUARTZ).addTag(BiomeTags.IS_OVERWORLD);
-        tag(BiomeTagRegistry.HAS_CTHONIC).addTag(BiomeTags.IS_OVERWORLD);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_SOULSTONE).addTag(BiomeTags.IS_OVERWORLD);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_BRILLIANT).addTag(BiomeTags.IS_OVERWORLD);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_BLAZING_QUARTZ).addTag(BiomeTags.IS_NETHER);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_QUARTZ).addTag(BiomeTags.IS_OVERWORLD);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_CTHONIC).addTag(BiomeTags.IS_OVERWORLD);
 
-        tag(BiomeTagRegistry.HAS_RUNEWOOD).addTag(Tags.Biomes.IS_PLAINS).addTag(Tags.Biomes.IS_MOUNTAIN).addTag(BiomeTags.IS_HILL).remove(Tags.Biomes.IS_SNOWY);
-        tag(BiomeTagRegistry.HAS_RARE_RUNEWOOD).addTag(BiomeTags.IS_FOREST).remove(Tags.Biomes.IS_SNOWY);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_RUNEWOOD).addTag(Tags.Biomes.IS_PLAINS).addTag(Tags.Biomes.IS_MOUNTAIN).addTag(BiomeTags.IS_HILL);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_RARE_RUNEWOOD).addTag(BiomeTags.IS_FOREST);
 
-        tag(BiomeTagRegistry.HAS_AZURE_RUNEWOOD).add(Biomes.SNOWY_PLAINS).add(Biomes.SNOWY_TAIGA).add(Biomes.FROZEN_RIVER).add(Biomes.SNOWY_BEACH);
-        tag(BiomeTagRegistry.HAS_RARE_AZURE_RUNEWOOD).add(Biomes.FROZEN_PEAKS).add(Biomes.JAGGED_PEAKS).add(Biomes.SNOWY_SLOPES).add(Biomes.GROVE);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_AZURE_RUNEWOOD).add(Biomes.SNOWY_PLAINS).add(Biomes.SNOWY_TAIGA).add(Biomes.FROZEN_RIVER).add(Biomes.SNOWY_BEACH);
+        getOrCreateTagBuilder(BiomeTagRegistry.HAS_RARE_AZURE_RUNEWOOD).add(Biomes.FROZEN_PEAKS).add(Biomes.JAGGED_PEAKS).add(Biomes.SNOWY_SLOPES).add(Biomes.GROVE);
     }
 }

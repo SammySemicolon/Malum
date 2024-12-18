@@ -3,13 +3,13 @@ package com.sammy.malum.registry.client;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.particles.cut.ScytheAttackParticle;
 import com.sammy.malum.client.particles.spiritflame.SpiritFlameParticleType;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import team.lodestar.lodestone.systems.particle.world.type.*;
 
 @SuppressWarnings("unused")
@@ -42,31 +42,31 @@ public class ParticleRegistry {
     public static DeferredHolder<ParticleType<?>, LodestoneWorldParticleType> SLASH = PARTICLES.register("slash", LodestoneWorldParticleType::new);
     public static DeferredHolder<ParticleType<?>, LodestoneWorldParticleType> HEAVY_SLASH = PARTICLES.register("heavy_slash", LodestoneWorldParticleType::new);
 
-    public static void registerParticleFactory(RegisterParticleProvidersEvent event) {
-        Minecraft.getInstance().particleEngine.register(SPIRIT_FLAME_PARTICLE.get(), SpiritFlameParticleType.Factory::new);
+    public static void registerParticleFactory() {
+        ParticleFactoryRegistry.getInstance().register(SPIRIT_FLAME_PARTICLE.get(), SpiritFlameParticleType.Factory::new);
 
-        Minecraft.getInstance().particleEngine.register(WEIRD_SQUIGGLE.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(LIGHT_SPEC_SMALL.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(LIGHT_SPEC_LARGE.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(STRANGE_SMOKE.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(STAR.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(WEIRD_SQUIGGLE.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LIGHT_SPEC_SMALL.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(LIGHT_SPEC_LARGE.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(STRANGE_SMOKE.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(STAR.get(), LodestoneWorldParticleType.Factory::new);
 
-        Minecraft.getInstance().particleEngine.register(ROUND_SPARK.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(BOLT.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ROUND_SPARK.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(BOLT.get(), LodestoneWorldParticleType.Factory::new);
 
-        Minecraft.getInstance().particleEngine.register(RITUAL_CIRCLE.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(RITUAL_CIRCLE_WISP.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(SHARP_SPARK.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(HEXAGON.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(CIRCLE.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(SQUARE.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(SAW.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(RITUAL_CIRCLE.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(RITUAL_CIRCLE_WISP.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(SHARP_SPARK.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(HEXAGON.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(CIRCLE.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(SQUARE.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(SAW.get(), LodestoneWorldParticleType.Factory::new);
 
-        Minecraft.getInstance().particleEngine.register(SLASH.get(), LodestoneWorldParticleType.Factory::new);
-        Minecraft.getInstance().particleEngine.register(HEAVY_SLASH.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(SLASH.get(), LodestoneWorldParticleType.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(HEAVY_SLASH.get(), LodestoneWorldParticleType.Factory::new);
 
-        Minecraft.getInstance().particleEngine.register(SCYTHE_CUT_PARTICLE.get(), ScytheAttackParticle.Factory::new);
-        Minecraft.getInstance().particleEngine.register(SCYTHE_SWEEP_PARTICLE.get(), ScytheAttackParticle.Factory::new);
-        Minecraft.getInstance().particleEngine.register(STAFF_SLAM_PARTICLE.get(), ScytheAttackParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(SCYTHE_CUT_PARTICLE.get(), ScytheAttackParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(SCYTHE_SWEEP_PARTICLE.get(), ScytheAttackParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(STAFF_SLAM_PARTICLE.get(), ScytheAttackParticle.Factory::new);
     }
 }

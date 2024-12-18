@@ -3,13 +3,13 @@ package com.sammy.malum.common.recipe.spirit.infusion;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import com.sammy.malum.core.systems.recipe.*;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.*;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.*;
@@ -17,9 +17,9 @@ import java.util.*;
 public class SpiritInfusionRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipeInput> {
 
     public static final MapCodec<SpiritInfusionRecipe> CODEC = RecordCodecBuilder.mapCodec((obj) -> obj.group(
-            SizedIngredient.FLAT_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
+            SizedIngredient.NESTED_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
             ItemStack.CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
-            SizedIngredient.FLAT_CODEC.listOf().optionalFieldOf("extraIngredients", List.of()).forGetter(recipe -> recipe.extraIngredients),
+            SizedIngredient.NESTED_CODEC.listOf().optionalFieldOf("extraIngredients", List.of()).forGetter(recipe -> recipe.extraIngredients),
             SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits),
             Codec.BOOL.optionalFieldOf("carryOverComponentData", false).forGetter(recipe -> recipe.carryOverData)
     ).apply(obj, SpiritInfusionRecipe::new));

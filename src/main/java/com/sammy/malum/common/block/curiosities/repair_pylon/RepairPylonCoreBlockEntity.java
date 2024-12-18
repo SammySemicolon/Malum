@@ -24,10 +24,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.*;
+import team.lodestar.lodestone.forge_stuff.CombinedInvWrapper;
+import team.lodestar.lodestone.forge_stuff.IItemHandler;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
@@ -35,11 +34,10 @@ import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.multiblock.*;
 import team.lodestar.lodestone.systems.recipe.*;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.*;
 
-public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements IBlockCapabilityProvider<IItemHandler, Direction> {
+public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity {
 
     private static final Vec3 PYLON_ITEM_OFFSET = new Vec3(0.5f, 2.5f, 0.5f);
     private static final int HORIZONTAL_RANGE = 6;
@@ -359,10 +357,5 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
 
     public float getCooldownOffset(int relativeCooldown, Easing easing) {
         return easing.ease(relativeCooldown / 90f, 0, 1, 1);
-    }
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
-        return combinedInventory.get();
     }
 }

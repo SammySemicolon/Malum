@@ -1,20 +1,20 @@
 package com.sammy.malum.registry.client;
 
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.datafixers.util.Pair;
 import com.sammy.malum.*;
-import net.neoforged.api.distmarker.*;
-import net.neoforged.bus.api.*;
-import net.neoforged.fml.common.*;
-import net.neoforged.neoforge.client.event.*;
+import team.lodestar.lodestone.events.LodestoneShaderRegistrationEvent;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.rendering.shader.*;
 
-@EventBusSubscriber(value = Dist.CLIENT, modid = MalumMod.MALUM, bus = EventBusSubscriber.Bus.MOD)
+import static team.lodestar.lodestone.registry.client.LodestoneShaders.getConsumer;
+
 public class ShaderRegistry {
     public static ShaderHolder TOUCH_OF_DARKNESS = new ShaderHolder(MalumMod.malumPath("touch_of_darkness"), DefaultVertexFormat.POSITION_COLOR, "Speed", "Zoom", "Distortion", "Intensity", "Wibble");
 
-    @SubscribeEvent
-    public static void shaderRegistry(RegisterShadersEvent event) {
-        LodestoneShaders.registerShader(event, TOUCH_OF_DARKNESS);
+    public static void shaderRegistry() {
+        LodestoneShaderRegistrationEvent.EVENT.register((provider, shaderList1) -> {
+            shaderList1.add(Pair.of(TOUCH_OF_DARKNESS.createInstance(provider), getConsumer()));
+        });
     }
 }

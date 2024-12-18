@@ -3,10 +3,10 @@ package com.sammy.malum.data.recipe;
 import com.sammy.malum.*;
 import com.sammy.malum.data.recipe.builder.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
-import net.neoforged.neoforge.common.Tags;
 
 
 public class MalumVoidFavorRecipes {

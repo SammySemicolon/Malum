@@ -1,6 +1,7 @@
 package com.sammy.malum.visual_effects.networked;
 
 import com.sammy.malum.common.packets.ParticleEffectPacket;
+import com.sammy.malum.registry.common.PacketRegistry;
 import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
 import com.sammy.malum.visual_effects.networked.data.ColorEffectData;
 import com.sammy.malum.visual_effects.networked.data.NBTEffectData;
@@ -10,9 +11,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -26,7 +24,6 @@ public abstract class ParticleEffectType {
         ParticleEffectTypeRegistry.EFFECT_TYPES.put(id, this);
     }
 
-    @OnlyIn(Dist.CLIENT)
     public abstract Supplier<ParticleEffectActor> get();
 
     public void createEntityEffect(Entity entity) {
@@ -38,7 +35,7 @@ public abstract class ParticleEffectType {
     }
 
     public void createEntityEffect(Entity entity, ColorEffectData colorData, NBTEffectData nbtData) {
-        createEffect(p -> PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, p), new PositionEffectData(entity), colorData, nbtData);
+        createEffect(p -> PacketRegistry.sendToPlayersTrackingEntityAndSelf(entity, p), new PositionEffectData(entity), colorData, nbtData);
     }
 
     public void createPositionedEffect(ServerLevel level, PositionEffectData positionData) {
@@ -54,7 +51,7 @@ public abstract class ParticleEffectType {
     }
 
     public void createPositionedEffect(ServerLevel level, PositionEffectData positionData, ColorEffectData colorData, NBTEffectData nbtData) {
-        createEffect(p -> PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(positionData.getAsBlockPos()), p), positionData, colorData, nbtData);
+        createEffect(p -> PacketRegistry.sendToPlayersTrackingChunk(level, new ChunkPos(positionData.getAsBlockPos()), p), positionData, colorData, nbtData);
     }
 
     public void createEffect(Consumer<ParticleEffectPacket> sender, PositionEffectData positionData, ColorEffectData colorData, NBTEffectData nbtData) {

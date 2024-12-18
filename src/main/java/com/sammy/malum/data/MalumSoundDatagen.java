@@ -2,12 +2,12 @@ package com.sammy.malum.data;
 
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.registry.common.SoundRegistry;
+import io.github.fabricators_of_create.porting_lib.data.ExistingFileHelper;
+import io.github.fabricators_of_create.porting_lib.data.SoundDefinition;
+import io.github.fabricators_of_create.porting_lib.data.SoundDefinitionsProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.common.data.SoundDefinition;
-import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

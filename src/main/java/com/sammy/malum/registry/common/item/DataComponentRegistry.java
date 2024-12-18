@@ -5,12 +5,12 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.item.curiosities.TemporarilyDisabledItem.Disabled;
 import com.sammy.malum.common.item.spirit.SpiritJarItem;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.item.component.DyedItemColor;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.UnaryOperator;
 

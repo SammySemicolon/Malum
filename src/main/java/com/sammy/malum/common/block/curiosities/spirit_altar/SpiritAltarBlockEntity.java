@@ -32,12 +32,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import team.lodestar.lodestone.forge_stuff.CombinedInvWrapper;
+import team.lodestar.lodestone.forge_stuff.IItemHandler;
+import team.lodestar.lodestone.forge_stuff.IItemHandlerModifiable;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
@@ -45,11 +44,10 @@ import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntityInventory
 import team.lodestar.lodestone.systems.easing.Easing;
 import team.lodestar.lodestone.systems.recipe.*;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlockCapabilityProvider<IItemHandler, Direction> {
+public class SpiritAltarBlockEntity extends LodestoneBlockEntity {
 
     private static final Vec3 ALTAR_ITEM_OFFSET = new Vec3(0.5f, 1.25f, 0.5f);
     public static final int HORIZONTAL_RANGE = 4;

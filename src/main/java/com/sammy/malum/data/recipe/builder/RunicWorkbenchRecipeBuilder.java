@@ -4,16 +4,13 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.recipe.RunicWorkbenchRecipe;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import team.lodestar.lodestone.recipe.builder.AutonamedRecipeBuilder;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class RunicWorkbenchRecipeBuilder implements AutonamedRecipeBuilder<RunicWorkbenchRecipe> {
     private ItemStack primaryInput;
@@ -47,6 +44,8 @@ public class RunicWorkbenchRecipeBuilder implements AutonamedRecipeBuilder<Runic
         return output.getItem();
     }
 
+
+
     @Override
     public RunicWorkbenchRecipe build(ResourceLocation resourceLocation) {
         return new RunicWorkbenchRecipe(
@@ -55,7 +54,7 @@ public class RunicWorkbenchRecipeBuilder implements AutonamedRecipeBuilder<Runic
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation id) {
+    public void saveRecipe(RecipeOutput recipeOutput, ResourceLocation id) {
         defaultSaveFunc(recipeOutput, MalumMod.malumPath(id.getPath()));
     }
 

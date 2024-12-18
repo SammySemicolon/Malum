@@ -9,11 +9,10 @@ import com.sammy.malum.common.recipe.vanilla.MetalNodeBlastingRecipe;
 import com.sammy.malum.common.recipe.vanilla.MetalNodeSmeltingRecipe;
 import com.sammy.malum.common.recipe.vanilla.NodeCookingSerializer;
 import com.sammy.malum.common.recipe.void_favor.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import team.lodestar.lodestone.systems.recipe.*;
 
 public class RecipeSerializerRegistry {

@@ -15,9 +15,9 @@ import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.systems.rendering.trail.*;
 
-import javax.annotation.*;
 import java.util.*;
 
 public class ThrownConcentratedGluttony extends ThrowableItemProjectile {

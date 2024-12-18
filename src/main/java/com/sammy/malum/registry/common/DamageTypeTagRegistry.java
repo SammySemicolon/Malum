@@ -21,7 +21,7 @@ public class DamageTypeTagRegistry {
         return TagKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath(path));
     }
 
-    public static TagKey<DamageType> forgeTag(String path) {
-        return LodestoneDamageTypeTags.forgeTag(path);
+    public static TagKey<DamageType> cTag(String path) {
+        return LodestoneDamageTypeTags.cTag(path);
     }
 }

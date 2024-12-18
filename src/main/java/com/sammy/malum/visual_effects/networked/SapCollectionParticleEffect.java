@@ -6,7 +6,7 @@ import net.minecraft.core.*;
 import net.minecraft.nbt.*;
 import net.minecraft.util.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.particle.data.color.*;
 import team.lodestar.lodestone.systems.particle.world.*;
@@ -29,7 +29,7 @@ public class SapCollectionParticleEffect extends ParticleEffectType {
     }
 
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) -> {

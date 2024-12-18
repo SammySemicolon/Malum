@@ -3,13 +3,12 @@ package com.sammy.malum.common.recipe.spirit.focusing;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import com.sammy.malum.core.systems.recipe.*;
-import com.sammy.malum.registry.common.recipe.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
+import com.sammy.malum.forge_stuff.SizedIngredient;
+import com.sammy.malum.registry.common.recipe.RecipeSerializerRegistry;
+import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.*;
-import net.neoforged.neoforge.common.crafting.*;
 import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.*;

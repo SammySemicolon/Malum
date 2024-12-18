@@ -9,8 +9,8 @@ import net.minecraft.resources.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
 

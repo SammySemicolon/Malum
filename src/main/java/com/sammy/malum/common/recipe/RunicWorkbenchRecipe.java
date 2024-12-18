@@ -3,21 +3,17 @@ package com.sammy.malum.common.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.core.systems.recipe.*;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import com.sammy.malum.registry.common.recipe.*;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.*;
-import net.neoforged.neoforge.common.crafting.*;
 import team.lodestar.lodestone.systems.recipe.*;
 
 public class RunicWorkbenchRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipeInput> {
 
     public static final MapCodec<RunicWorkbenchRecipe> CODEC = RecordCodecBuilder.mapCodec(obj -> obj.group(
-            SizedIngredient.FLAT_CODEC.fieldOf("primaryInput").forGetter(recipe -> recipe.primaryInput),
+            SizedIngredient.NESTED_CODEC.fieldOf("primaryInput").forGetter(recipe -> recipe.primaryInput),
             SpiritIngredient.CODEC.fieldOf("secondaryInput").forGetter(recipe -> recipe.secondaryInput),
             ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output)
     ).apply(obj, RunicWorkbenchRecipe::new));

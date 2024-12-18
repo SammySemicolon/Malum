@@ -4,6 +4,10 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.data.recipe.builder.vanilla.*;
 import com.sammy.malum.registry.common.item.*;
+import com.sammy.malum.registry.common.recipe.StackedCookingRecipeBuilder;
+import com.sammy.malum.registry.common.recipe.StackedShapelessRecipeBuilder;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
@@ -14,13 +18,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.conditions.ICondition;
-import net.neoforged.neoforge.common.conditions.IConditionBuilder;
-import net.neoforged.neoforge.common.conditions.NotCondition;
-import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import team.lodestar.lodestone.recipe.NBTCarryRecipe;
 
 import java.util.Arrays;
@@ -34,7 +31,7 @@ import static net.minecraft.data.recipes.ShapelessRecipeBuilder.*;
 import static net.minecraft.data.recipes.SimpleCookingRecipeBuilder.*;
 import static team.lodestar.lodestone.registry.common.tag.LodestoneItemTags.*;
 
-public class MalumVanillaRecipes implements IConditionBuilder {
+public class MalumVanillaRecipes   {
 
     protected static void buildRecipes(RecipeOutput output) {
         //KEY ITEMS
@@ -251,15 +248,15 @@ public class MalumVanillaRecipes implements IConditionBuilder {
     }
 
     private static RecipeBuilder smeltingWithCount(Ingredient ingredient, RecipeCategory category, Item resultItem, int resultCount, float experience, int time) {
-        return smelting(ingredient, category, new ItemStack(resultItem, resultCount), experience, time);
+        return StackedCookingRecipeBuilder.smelting(ingredient, category, new ItemStack(resultItem, resultCount), experience, time);
     }
 
     private static RecipeBuilder blastingWithCount(Ingredient ingredient, RecipeCategory category, Item resultItem, int resultCount, float experience, int time) {
-        return blasting(ingredient, category, new ItemStack(resultItem, resultCount), experience, time);
+        return StackedCookingRecipeBuilder.blasting(ingredient, category, new ItemStack(resultItem, resultCount), experience, time);
     }
 
     private static void bannerRecipe(RecipeOutput consumer, Item material, SoulwovenBannerPatternData pattern) {
-        shapeless(RecipeCategory.BUILDING_BLOCKS, pattern.getDefaultStack()).requires(ItemRegistry.SOULWOVEN_BANNER.get()).requires(material).unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(consumer, pattern.getRecipeId());
+        StackedShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, pattern.getDefaultStack()).requires(ItemRegistry.SOULWOVEN_BANNER.get()).requires(material).unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(consumer, pattern.getRecipeId());
     }
 
     private static void weaveRecipe(RecipeOutput consumer, Item sideItem, Supplier<? extends Item> output) {
@@ -268,7 +265,7 @@ public class MalumVanillaRecipes implements IConditionBuilder {
 
     private static void nodeSmelting(RecipeOutput recipeoutput, DeferredHolder<Item, ? extends Item> node, TagKey<Item> tag) {
         String name = BuiltInRegistries.ITEM.getKey(node.get()).getPath().replaceFirst("_node", "");
-
+/*TODO
         RecipeOutput conditionOutput = recipeoutput.withConditions(new ICondition[]{
                 new NotCondition(new TagEmptyCondition(tag.location().toString()))
         });
@@ -278,6 +275,8 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         MetalNodeCookingRecipeBuilder.blasting(SizedIngredient.of(tag, 6).ingredient(), RecipeCategory.MISC, node.get(), 0.25f, 100)
                 .unlockedBy("has_crucible", has(ItemRegistry.SPIRIT_CRUCIBLE.get()))
                 .save(conditionOutput, MalumMod.malumPath(name + "_from_node_blasting"));
+
+ */
 
 //        smeltingWithTag(SizedIngredient.of(tag, 6), Ingredient.of(node.get()), 0.25f, 200)
 //                .build(new ConditionalRecipeOutput(recipeoutput, new ICondition[]{

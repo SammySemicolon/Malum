@@ -1,14 +1,16 @@
 package com.sammy.malum.common.packets.particle.rite;
 
 import com.sammy.malum.common.packets.particle.base.color.ColorBasedBlockParticleEffectPacket;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import team.lodestar.lodestone.LodestoneLib;
 import team.lodestar.lodestone.helpers.ColorHelper;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.Easing;
@@ -22,6 +24,10 @@ import java.awt.*;
 
 public class AerialBlockFallRiteEffectPacket extends ColorBasedBlockParticleEffectPacket {
 
+    public static CustomPacketPayload.Type<AerialBlockFallRiteEffectPacket> ID = new CustomPacketPayload.Type(LodestoneLib.lodestonePath("areal_block_fall"));
+    public static final StreamCodec<? super RegistryFriendlyByteBuf, AerialBlockFallRiteEffectPacket> STREAM_CODEC = CustomPacketPayload.codec(AerialBlockFallRiteEffectPacket::write, AerialBlockFallRiteEffectPacket::new);
+
+
     public AerialBlockFallRiteEffectPacket(Color col, BlockPos pos) {
         super(col, pos);
     }
@@ -30,9 +36,8 @@ public class AerialBlockFallRiteEffectPacket extends ColorBasedBlockParticleEffe
         super(buf);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
-    public void handle(IPayloadContext iPayloadContext) {
+    public <T extends CustomPacketPayload> void handle(T t, ClientPlayNetworking.Context context) {
         Level level = Minecraft.getInstance().level;
         RandomSource rand = level.random;
         for (int i = 0; i <= 3; i++) {
@@ -68,5 +73,10 @@ public class AerialBlockFallRiteEffectPacket extends ColorBasedBlockParticleEffe
                     .setRandomMotion(0.01f, 0.01f)
                     .repeatSurroundBlock(level, pos, 2);
         }
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
     }
 }

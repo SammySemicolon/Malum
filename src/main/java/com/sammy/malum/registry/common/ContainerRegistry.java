@@ -3,15 +3,12 @@ package com.sammy.malum.registry.common;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.screen.container.WeaversWorkbenchContainerScreen;
 import com.sammy.malum.common.container.WeaversWorkbenchContainer;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.flag.*;
 import net.minecraft.world.inventory.MenuType;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static com.sammy.malum.MalumMod.MALUM;
 
@@ -24,11 +21,10 @@ public class ContainerRegistry {
 //
 
 
-    @EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
     public static class ClientOnly {
-        @SubscribeEvent
-        public static void bindContainerRenderers(RegisterMenuScreensEvent event) {
-                event.register(ContainerRegistry.WEAVERS_WORKBENCH.get(), WeaversWorkbenchContainerScreen::new);
+
+        public static void bindContainerRenderers() {
+            MenuScreens.register(ContainerRegistry.WEAVERS_WORKBENCH.get(), WeaversWorkbenchContainerScreen::new);
         }
     }
 }

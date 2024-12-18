@@ -2,15 +2,17 @@ package com.sammy.malum.common.packets.particle.rite;
 
 import com.sammy.malum.common.packets.particle.base.spirit.SpiritBasedParticleEffectPacket;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import team.lodestar.lodestone.LodestoneLib;
 import team.lodestar.lodestone.helpers.ColorHelper;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.Easing;
@@ -26,6 +28,10 @@ import java.util.List;
 
 public class BlightTransformItemParticlePacket extends SpiritBasedParticleEffectPacket {
 
+    public static CustomPacketPayload.Type<BlightTransformItemParticlePacket> ID = new CustomPacketPayload.Type(LodestoneLib.lodestonePath("blight_transformation"));
+    public static final StreamCodec<? super RegistryFriendlyByteBuf, BlightTransformItemParticlePacket> STREAM_CODEC = CustomPacketPayload.codec(BlightTransformItemParticlePacket::write, BlightTransformItemParticlePacket::new);
+
+
     public BlightTransformItemParticlePacket(List<String> spirits, Vec3 pos) {
         super(spirits, pos);
     }
@@ -34,10 +40,9 @@ public class BlightTransformItemParticlePacket extends SpiritBasedParticleEffect
         super(buf);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
-    public void handle(IPayloadContext iPayloadContext) {
-        super.handle(iPayloadContext);
+    public <T extends CustomPacketPayload> void handle(T t, ClientPlayNetworking.Context context) {
+        super.handle(t, context);
         Level level = Minecraft.getInstance().level;
         var rand = level.random;
         for (int i = 0; i < 3; i++) {
@@ -86,9 +91,8 @@ public class BlightTransformItemParticlePacket extends SpiritBasedParticleEffect
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
-    protected void handle(IPayloadContext iPayloadContext, MalumSpiritType spiritType) {
+    protected void handle(ClientPlayNetworking.Context context, MalumSpiritType spiritType) {
         Level level = Minecraft.getInstance().level;
         RandomSource rand = level.random;
         Color color = spiritType.getPrimaryColor();
@@ -125,5 +129,10 @@ public class BlightTransformItemParticlePacket extends SpiritBasedParticleEffect
                     .setDiscardFunction(SimpleParticleOptions.ParticleDiscardFunctionType.ENDING_CURVE_INVISIBLE)
                     .repeat(level, posX, posY, posZ, 5);
         }
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
     }
 }

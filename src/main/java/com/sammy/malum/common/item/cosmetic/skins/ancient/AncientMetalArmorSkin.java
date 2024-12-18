@@ -6,7 +6,7 @@ import com.sammy.malum.common.item.cosmetic.skins.ArmorSkin;
 import com.sammy.malum.common.item.curiosities.armor.SoulStainedSteelArmorItem;
 import com.sammy.malum.registry.client.ModelRegistry;
 import net.minecraft.world.item.Item;
-import net.neoforged.api.distmarker.*;
+
 
 import static com.sammy.malum.MalumMod.malumPath;
 
@@ -15,7 +15,7 @@ public class AncientMetalArmorSkin extends ArmorSkin {
         super(id, SoulStainedSteelArmorItem.class, weaveItem);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public ArmorSkinRenderingData getRenderingData() {
         return new SimpleArmorSkinRenderingData(malumPath("textures/armor/cosmetic/ancient_soul_stained_steel.png"), ModelRegistry.ANCIENT_SOUL_STAINED_STEEL_ARMOR);

@@ -9,11 +9,14 @@ import com.sammy.malum.common.block.ether.EtherBrazierBlock;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.data.item.MalumItemModelSmithTypes;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import io.github.fabricators_of_create.porting_lib.models.generators.ConfiguredModel;
+import io.github.fabricators_of_create.porting_lib.models.generators.ModelBuilder;
+import io.github.fabricators_of_create.porting_lib.models.generators.ModelFile;
+import io.github.fabricators_of_create.porting_lib.models.generators.VariantBlockStateBuilder;
 import net.minecraft.core.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.*;
-import net.neoforged.neoforge.client.model.generators.*;
 import team.lodestar.lodestone.systems.datagen.ItemModelSmithTypes;
 import team.lodestar.lodestone.systems.datagen.statesmith.BlockStateSmith;
 

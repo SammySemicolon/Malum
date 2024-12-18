@@ -8,7 +8,6 @@ import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
-import net.neoforged.neoforge.client.event.*;
 import org.lwjgl.opengl.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.rendering.*;
@@ -18,10 +17,10 @@ public class HiddenBladeRenderHandler {
 
     public static int fadeOut;
 
-    public static void tick(ClientTickEvent event) {
+    public static void tick(Minecraft minecraft) {
         var player = Minecraft.getInstance().player;
         if (player != null) {
-            var cooldown = player.getData(AttachmentTypeRegistry.CURIO_DATA).hiddenBladeNecklaceCooldown;
+            var cooldown = player.getAttachedOrCreate(AttachmentTypeRegistry.CURIO_DATA).hiddenBladeNecklaceCooldown;
             if (cooldown == 0) {
                 if (player.hasEffect(MobEffectRegistry.WICKED_INTENT)) {
                     if (fadeOut > 30) {
@@ -47,7 +46,7 @@ public class HiddenBladeRenderHandler {
         if (!minecraft.options.hideGui) {
             var player = minecraft.player;
             if (!player.isCreative() && !player.isSpectator()) {
-                var cooldown = player.getData(AttachmentTypeRegistry.CURIO_DATA).hiddenBladeNecklaceCooldown;
+                var cooldown = player.getAttachedOrCreate(AttachmentTypeRegistry.CURIO_DATA).hiddenBladeNecklaceCooldown;
                 if (cooldown > 0 || fadeOut <= 80) {
                     int left = guiGraphics.guiWidth() / 2 - 8;
                     int top = guiGraphics.guiHeight() - 52;

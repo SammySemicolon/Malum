@@ -5,7 +5,7 @@ import com.sammy.malum.visual_effects.*;
 import net.minecraft.nbt.*;
 import net.minecraft.util.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
@@ -18,7 +18,7 @@ public class AscensionRadialSlashParticleEffect extends SlashAttackParticleEffec
         super(id);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) -> {

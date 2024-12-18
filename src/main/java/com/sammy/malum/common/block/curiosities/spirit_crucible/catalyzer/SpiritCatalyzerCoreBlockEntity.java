@@ -7,6 +7,7 @@ import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.visual_effects.*;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
 import net.minecraft.world.*;
@@ -17,19 +18,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
-import net.neoforged.neoforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.multiblock.*;
 
-import javax.annotation.*;
 import java.util.*;
 import java.util.function.*;
 
-public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity implements ICrucibleAccelerator, IBlockCapabilityProvider<IItemHandler, Direction> {
+public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity implements ICrucibleAccelerator {
 
     private static final Vec3 CATALYZER_ITEM_OFFSET = new Vec3(0.5f, 2f, 0.5f);
     private static final Vec3 CATALYZER_AUGMENT_OFFSET = new Vec3(0.5f, 2.75f, 0.5f);
@@ -154,7 +151,6 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public void addParticles(ICatalyzerAccelerationTarget target, MalumSpiritType spiritType) {
         if (burnTicks > 0) {
@@ -167,7 +163,7 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
         if (burnTicks > 0) {
             return true;
         }
-        return inventory.getStackInSlot(0).getBurnTime(RecipeType.SMELTING) > 0;
+        return FuelRegistry.INSTANCE.get(inventory.getStackInSlot(0).getItem()) > 0;
     }
 
     @Override
@@ -178,7 +174,7 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
         if (burnTicks <= 0) {
             ItemStack stack = inventory.getStackInSlot(0);
             if (!stack.isEmpty()) {
-                burnTicks = inventory.getStackInSlot(0).getBurnTime(RecipeType.SMELTING) / 2f;
+                burnTicks = FuelRegistry.INSTANCE.get(inventory.getStackInSlot(0).getItem()) / 2f;
                 stack.shrink(1);
                 inventory.updateData();
                 BlockStateHelper.updateAndNotifyState(level, worldPosition);
@@ -213,11 +209,6 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
 
     public Vec3 getAugmentOffset() {
         return CATALYZER_AUGMENT_OFFSET;
-    }
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
-        return inventory;
     }
 
     /*@Override

@@ -1,0 +1,44 @@
+accessWidener v2 named
+
+accessible field net/minecraft/world/entity/ai/goal/EatBlockGoal IS_TALL_GRASS Ljava/util/function/Predicate;
+accessible class net/minecraft/client/gui/Font$StringRenderOutput
+accessible field net/minecraft/world/entity/item/ItemEntity age I
+accessible field net/minecraft/world/entity/animal/Sheep eatBlockGoal Lnet/minecraft/world/entity/ai/goal/EatBlockGoal;
+accessible class net/minecraft/world/entity/animal/Bee$BeePollinateGoal
+accessible field net/minecraft/world/entity/animal/Bee beePollinateGoal Lnet/minecraft/world/entity/animal/Bee$BeePollinateGoal;
+accessible method net/minecraft/world/entity/animal/Bee$BeePollinateGoal canBeeUse ()Z
+accessible field net/minecraft/world/entity/animal/Bee$BeePollinateGoal successfulPollinatingTicks I
+accessible method net/minecraft/world/entity/animal/Bee$BeePollinateGoal tick ()V
+accessible method net/minecraft/world/entity/monster/Zombie startUnderWaterConversion (I)V
+accessible method net/minecraft/world/level/block/PointedDripstoneBlock isStalactiteStartPos (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/LevelReader;Lnet/minecraft/core/BlockPos;)Z
+accessible method net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity isLit ()Z
+accessible field net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity cookingProgress I
+accessible field net/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity cookingTotalTime I
+accessible field net/minecraft/world/entity/player/Inventory compartments Ljava/util/List;
+accessible field net/minecraft/world/entity/Mob goalSelector Lnet/minecraft/world/entity/ai/goal/GoalSelector;
+accessible method net/minecraft/world/item/Item getPlayerPOVHitResult (Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/ClipContext$Fluid;)Lnet/minecraft/world/phys/BlockHitResult;
+accessible method net/minecraft/core/particles/SimpleParticleType <init> (Z)V
+accessible method net/minecraft/world/level/block/state/properties/BlockSetType register (Lnet/minecraft/world/level/block/state/properties/BlockSetType;)Lnet/minecraft/world/level/block/state/properties/BlockSetType;
+
+accessible method net/minecraft/world/item/crafting/Ingredient$TagValue <init> (Lnet/minecraft/tags/TagKey;)V
+accessible field net/minecraft/world/item/ItemCooldowns tickCount I
+accessible class net/minecraft/world/item/ItemCooldowns$CooldownInstance
+accessible field net/minecraft/world/item/ItemCooldowns cooldowns Ljava/util/Map;
+accessible field net/minecraft/world/item/ItemCooldowns$CooldownInstance startTime I
+accessible field net/minecraft/world/item/ItemCooldowns$CooldownInstance endTime I
+accessible method net/minecraft/world/entity/ai/attributes/AttributeInstance setDirty ()V
+accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;
+accessible field net/minecraft/client/renderer/RenderType$CompositeRenderType state Lnet/minecraft/client/renderer/RenderType$CompositeState;
+accessible field net/minecraft/client/multiplayer/MultiPlayerGameMode destroyProgress F
+accessible method net/minecraft/world/item/ItemCooldowns$CooldownInstance <init> (II)V
+accessible field net/minecraft/network/chat/TextColor name Ljava/lang/String;
+accessible field net/minecraft/client/renderer/entity/layers/ElytraLayer WINGS_LOCATION Lnet/minecraft/resources/ResourceLocation;
+
+accessible field net/minecraft/data/tags/TagsProvider$TagAppender builder Lnet/minecraft/tags/TagBuilder;
+accessible field net/minecraft/tags/TagBuilder entries Ljava/util/List;
+accessible field net/minecraft/core/HolderSet$Named contents Ljava/util/List;
+accessible method net/minecraft/data/recipes/SimpleCookingRecipeBuilder <init> (Lnet/minecraft/data/recipes/RecipeCategory;Lnet/minecraft/world/item/crafting/CookingBookCategory;Lnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/item/crafting/Ingredient;FILnet/minecraft/world/item/crafting/AbstractCookingRecipe$Factory;)V
+accessible method net/minecraft/data/tags/TagsProvider tag (Lnet/minecraft/tags/TagKey;)Lnet/minecraft/data/tags/TagsProvider$TagAppender;
+accessible field net/minecraft/world/entity/animal/allay/Allay duplicationCooldown J
+accessible method net/minecraft/data/tags/TagsProvider$TagAppender add ([Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/data/tags/TagsProvider$TagAppender;
+

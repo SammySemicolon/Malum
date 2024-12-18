@@ -2,14 +2,16 @@ package com.sammy.malum.common.packets.particle.rite;
 
 import com.sammy.malum.common.packets.particle.base.spirit.SpiritBasedBlockParticleEffectPacket;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import team.lodestar.lodestone.LodestoneLib;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.Easing;
 import team.lodestar.lodestone.systems.particle.builder.WorldParticleBuilder;
@@ -22,6 +24,10 @@ import java.util.List;
 
 public class SacredMistRiteEffectPacket extends SpiritBasedBlockParticleEffectPacket {
 
+    public static CustomPacketPayload.Type<SacredMistRiteEffectPacket> ID = new CustomPacketPayload.Type(LodestoneLib.lodestonePath("sacred_mist"));
+    public static final StreamCodec<? super RegistryFriendlyByteBuf, SacredMistRiteEffectPacket> STREAM_CODEC = CustomPacketPayload.codec(SacredMistRiteEffectPacket::write, SacredMistRiteEffectPacket::new);
+
+
     public SacredMistRiteEffectPacket(List<String> spirits, BlockPos pos) {
         super(spirits, pos);
     }
@@ -30,9 +36,8 @@ public class SacredMistRiteEffectPacket extends SpiritBasedBlockParticleEffectPa
         super(buf);
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
-    protected void handle(IPayloadContext iPayloadContext, MalumSpiritType spiritType) {
+    protected void handle(ClientPlayNetworking.Context context, MalumSpiritType spiritType) {
         Level level = Minecraft.getInstance().level;
         Color color = spiritType.getPrimaryColor();
         Color endColor = spiritType.getSecondaryColor();
@@ -57,5 +62,10 @@ public class SacredMistRiteEffectPacket extends SpiritBasedBlockParticleEffectPa
                 .enableNoClip()
                 .setRandomMotion(0.001f, 0.002f)
                 .repeatSurroundBlock(level, pos, 8, Direction.UP, Direction.DOWN);
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
     }
 }

@@ -4,6 +4,7 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.recipe.SpiritRepairRecipe;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import net.minecraft.advancements.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,7 +12,6 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import team.lodestar.lodestone.recipe.builder.LodestoneRecipeBuilder;
 
 import java.util.*;
@@ -77,11 +77,11 @@ public class SpiritRepairRecipeBuilder implements LodestoneRecipeBuilder<SpiritR
     }
 
     public void save(RecipeOutput recipeOutput, String recipeName) {
-        save(recipeOutput, MalumMod.malumPath("spirit_crucible/repair/" + recipeName));
+        saveRecipe(recipeOutput, MalumMod.malumPath("spirit_crucible/repair/" + recipeName));
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
+    public void saveRecipe(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
         defaultSaveFunc(recipeOutput, resourceLocation);
     }
 

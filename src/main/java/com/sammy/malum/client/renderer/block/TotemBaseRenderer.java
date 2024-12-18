@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.blockentity.*;
 import net.minecraft.core.*;
 import net.minecraft.util.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
@@ -34,7 +33,7 @@ public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEnti
     public TotemBaseRenderer(BlockEntityRendererProvider.Context context) {
     }
 
-    public static void checkForTotemicStaff(ClientTickEvent.Pre event) {
+    public static void checkForTotemicStaff(Minecraft minecraft) {
         if (true) {
             final LocalPlayer player = Minecraft.getInstance().player;
             if (player == null) {

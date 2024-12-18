@@ -5,9 +5,9 @@ import com.sammy.malum.client.screen.codex.pages.*;
 import com.sammy.malum.client.screen.codex.screens.*;
 import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.registry.common.item.*;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.*;
 import net.minecraft.world.item.*;
-import net.neoforged.fml.*;
 
 import java.util.*;
 
@@ -148,7 +148,7 @@ public class CraftingPage extends BookPage {
         return new CraftingPage(tool, empty, empty, empty, empty, metal, empty, stick, empty) {
             @Override
             public boolean isValid() {
-                return ModList.get().isLoaded("farmersdelight");
+                return FabricLoader.getInstance().isModLoaded("farmersdelight");
             }
         };
     }

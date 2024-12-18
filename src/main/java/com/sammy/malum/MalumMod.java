@@ -5,26 +5,18 @@ import com.sammy.malum.compability.farmersdelight.*;
 import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.config.*;
+import com.sammy.malum.registry.client.HiddenTagRegistry;
 import com.sammy.malum.registry.common.*;
-import com.sammy.malum.registry.common.item.tabs.*;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderOwner;
-import net.minecraft.core.Registry;
+import io.github.fabricators_of_create.porting_lib.config.ConfigRegistry;
+import io.github.fabricators_of_create.porting_lib.config.ModConfig;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.resources.*;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.*;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModLoadingContext;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
 import org.apache.logging.log4j.*;
-import org.spongepowered.asm.mixin.Unique;
 
-import java.util.List;
-import java.util.Map;
 
 import static com.sammy.malum.registry.client.ParticleRegistry.*;
-import static com.sammy.malum.registry.common.AttachmentTypeRegistry.ATTACHMENT_TYPES;
 import static com.sammy.malum.registry.common.AttributeRegistry.*;
 import static com.sammy.malum.registry.common.ContainerRegistry.*;
 import static com.sammy.malum.registry.common.MobEffectRegistry.*;
@@ -41,35 +33,38 @@ import static com.sammy.malum.registry.common.worldgen.FeatureRegistry.*;
 import static com.sammy.malum.registry.common.worldgen.StructureRegistry.*;
 
 @SuppressWarnings("unused")
-@Mod(MalumMod.MALUM)
-public class MalumMod {
+public class MalumMod implements ModInitializer {
+
+
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MALUM = "malum";
     public static final RandomSource RANDOM = RandomSource.create();
 
-    public MalumMod() {
-        IEventBus modBus = ModLoadingContext.get().getActiveContainer().getEventBus();
+    @Override
+    public void onInitialize() {
 
-        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
-        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC);
+        ConfigRegistry.registerConfig(MalumMod.MALUM, ModConfig.Type.CLIENT, ClientConfig.SPEC);
+        ConfigRegistry.registerConfig(MalumMod.MALUM, ModConfig.Type.COMMON, CommonConfig.SPEC);
 
-        BLOCKS.register(modBus);
-        BLOCK_ENTITY_TYPES.register(modBus);
-        COMPONENTS.register(modBus);
-        ITEMS.register(modBus);
-        ENTITY_TYPES.register(modBus);
-        EFFECTS.register(modBus);
-        PARTICLES.register(modBus);
-        SOUNDS.register(modBus);
-        CONTAINERS.register(modBus);
-        ATTRIBUTES.register(modBus);
-        RECIPE_TYPES.register(modBus);
-        RECIPE_SERIALIZERS.register(modBus);
-        FEATURE_TYPES.register(modBus);
-        STRUCTURES.register(modBus);
-        CREATIVE_MODE_TABS.register(modBus);
-        ATTACHMENT_TYPES.register(modBus);
+        BLOCKS.register();
+        BLOCK_ENTITY_TYPES.register();
+        COMPONENTS.register();
+        ITEMS.register();
+        ENTITY_TYPES.register();
+        EFFECTS.register();
+        PARTICLES.register();
+        SOUNDS.register();
+        CONTAINERS.register();
+        ATTRIBUTES.register();
+        RECIPE_TYPES.register();
+        RECIPE_SERIALIZERS.register();
+        FEATURE_TYPES.register();
+        STRUCTURES.register();
+        CREATIVE_MODE_TABS.register();
+        AttachmentTypeRegistry.register();
 
+        ItemGroupEvents.MODIFY_ENTRIES_ALL.register(HiddenTagRegistry::hideItems);
+        MobEffectRegistry.registerBrewingRecipes();
         TetraCompat.init();
         FarmersDelightCompat.init();
         AttributeLibCompat.init();

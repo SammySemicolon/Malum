@@ -2,10 +2,10 @@ package com.sammy.malum.registry.common.worldgen;
 
 import com.sammy.malum.common.worldgen.ore.*;
 import com.sammy.malum.common.worldgen.tree.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.levelgen.feature.*;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import static com.sammy.malum.MalumMod.*;
 

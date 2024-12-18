@@ -29,6 +29,9 @@ import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import com.sammy.malum.registry.common.worldgen.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.color.block.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.*;
@@ -36,12 +39,6 @@ import net.minecraft.util.valueproviders.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.properties.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import team.lodestar.lodestone.systems.block.*;
 import team.lodestar.lodestone.systems.block.sign.*;
 import team.lodestar.lodestone.systems.easing.*;
@@ -50,9 +47,9 @@ import java.awt.*;
 
 import static com.sammy.malum.MalumMod.*;
 import static com.sammy.malum.registry.common.block.BlockTagRegistry.*;
+import static io.github.fabricators_of_create.porting_lib.tags.Tags.Blocks.FENCE_GATES_WOODEN;
+import static io.github.fabricators_of_create.porting_lib.tags.Tags.Blocks.STORAGE_BLOCKS;
 import static net.minecraft.tags.BlockTags.*;
-import static net.neoforged.neoforge.common.Tags.Blocks.FENCE_GATES_WOODEN;
-import static net.neoforged.neoforge.common.Tags.Blocks.STORAGE_BLOCKS;
 
 
 public class BlockRegistry {
@@ -68,19 +65,19 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> RUNIC_WORKBENCH = BLOCKS.register("runic_workbench", () -> new RunicWorkbenchBlock<>(MalumBlockProperties.RUNEWOOD().setCutoutRenderType().noOcclusion()).setBlockEntity(BlockEntityRegistry.RUNIC_WORKBENCH));
 
     public static final DeferredHolder<Block, Block> RUNEWOOD_OBELISK = BLOCKS.register("runewood_obelisk", () -> new RunewoodObeliskCoreBlock(MalumBlockProperties.RUNEWOOD().setCutoutRenderType().noOcclusion()));
-    public static final DeferredHolder<Block, Block> RUNEWOOD_OBELISK_COMPONENT = BLOCKS.register("runewood_obelisk_component", () -> new ObeliskComponentBlock(MalumBlockProperties.RUNEWOOD().setCutoutRenderType().lootFrom(RUNEWOOD_OBELISK).noOcclusion(), ItemRegistry.RUNEWOOD_OBELISK));
+    public static final DeferredHolder<Block, Block> RUNEWOOD_OBELISK_COMPONENT = BLOCKS.register("runewood_obelisk_component", () -> new ObeliskComponentBlock(MalumBlockProperties.RUNEWOOD().setCutoutRenderType().noOcclusion(), ItemRegistry.RUNEWOOD_OBELISK));
 
     public static final DeferredHolder<Block, Block> BRILLIANT_OBELISK = BLOCKS.register("brilliant_obelisk", () -> new BrillianceObeliskCoreBlock(MalumBlockProperties.RUNEWOOD().setCutoutRenderType().noOcclusion()));
-    public static final DeferredHolder<Block, Block> BRILLIANT_OBELISK_COMPONENT = BLOCKS.register("brilliant_obelisk_component", () -> new ObeliskComponentBlock(MalumBlockProperties.RUNEWOOD().setCutoutRenderType().lootFrom(BRILLIANT_OBELISK).noOcclusion(), ItemRegistry.BRILLIANT_OBELISK));
+    public static final DeferredHolder<Block, Block> BRILLIANT_OBELISK_COMPONENT = BLOCKS.register("brilliant_obelisk_component", () -> new ObeliskComponentBlock(MalumBlockProperties.RUNEWOOD().setCutoutRenderType().noOcclusion(), ItemRegistry.BRILLIANT_OBELISK));
 
     public static final DeferredHolder<Block, Block> SPIRIT_CRUCIBLE = BLOCKS.register("spirit_crucible", () -> new SpiritCrucibleCoreBlock<>(MalumBlockProperties.TAINTED_ROCK().setCutoutRenderType().noOcclusion()).setBlockEntity(BlockEntityRegistry.SPIRIT_CRUCIBLE));
-    public static final DeferredHolder<Block, Block> SPIRIT_CRUCIBLE_COMPONENT = BLOCKS.register("spirit_crucible_component", () -> new SpiritCrucibleComponentBlock(MalumBlockProperties.TAINTED_ROCK().setCutoutRenderType().lootFrom(SPIRIT_CRUCIBLE).noOcclusion()));
+    public static final DeferredHolder<Block, Block> SPIRIT_CRUCIBLE_COMPONENT = BLOCKS.register("spirit_crucible_component", () -> new SpiritCrucibleComponentBlock(MalumBlockProperties.TAINTED_ROCK().setCutoutRenderType().noOcclusion()));
 
     public static final DeferredHolder<Block, Block> SPIRIT_CATALYZER = BLOCKS.register("spirit_catalyzer", () -> new SpiritCatalyzerCoreBlock<>(MalumBlockProperties.TAINTED_ROCK().setCutoutRenderType().noOcclusion()).setBlockEntity(BlockEntityRegistry.SPIRIT_CATALYZER));
-    public static final DeferredHolder<Block, Block> SPIRIT_CATALYZER_COMPONENT = BLOCKS.register("spirit_catalyzer_component", () -> new SpiritCatalyzerComponentBlock(MalumBlockProperties.TAINTED_ROCK().setCutoutRenderType().lootFrom(SPIRIT_CATALYZER).noOcclusion(), ItemRegistry.SPIRIT_CATALYZER));
+    public static final DeferredHolder<Block, Block> SPIRIT_CATALYZER_COMPONENT = BLOCKS.register("spirit_catalyzer_component", () -> new SpiritCatalyzerComponentBlock(MalumBlockProperties.TAINTED_ROCK().setCutoutRenderType().noOcclusion(), ItemRegistry.SPIRIT_CATALYZER));
 
     public static final DeferredHolder<Block, Block> REPAIR_PYLON = BLOCKS.register("repair_pylon", () -> new RepairPylonCoreBlock<>(MalumBlockProperties.TAINTED_ROCK().setCutoutRenderType().noOcclusion()).setBlockEntity(BlockEntityRegistry.REPAIR_PYLON));
-    public static final DeferredHolder<Block, Block> REPAIR_PYLON_COMPONENT = BLOCKS.register("repair_pylon_component", () -> new RepairPylonComponentBlock(MalumBlockProperties.TAINTED_ROCK().setCutoutRenderType().lootFrom(REPAIR_PYLON).noOcclusion(), ItemRegistry.REPAIR_PYLON));
+    public static final DeferredHolder<Block, Block> REPAIR_PYLON_COMPONENT = BLOCKS.register("repair_pylon_component", () -> new RepairPylonComponentBlock(MalumBlockProperties.TAINTED_ROCK().setCutoutRenderType().noOcclusion(), ItemRegistry.REPAIR_PYLON));
 
     public static final DeferredHolder<Block, Block> RUNEWOOD_TOTEM_BASE = BLOCKS.register("runewood_totem_base", () -> new TotemBaseBlock<>(MalumBlockProperties.RUNEWOOD().addTag(RITE_IMMUNE).noOcclusion(), false).setBlockEntity(BlockEntityRegistry.TOTEM_BASE));
     public static final DeferredHolder<Block, Block> RUNEWOOD_TOTEM_POLE = BLOCKS.register("runewood_totem_pole", () -> new TotemPoleBlock<>(MalumBlockProperties.RUNEWOOD().addTag(RITE_IMMUNE).noOcclusion(), BlockRegistry.RUNEWOOD_LOG, false).setBlockEntity(BlockEntityRegistry.TOTEM_POLE));
@@ -395,13 +392,13 @@ public class BlockRegistry {
     //region ether
     public static final DeferredHolder<Block, Block> ETHER = BLOCKS.register("ether", () -> new EtherBlock<>(MalumBlockProperties.ETHER()).setBlockEntity(BlockEntityRegistry.ETHER));
     public static final DeferredHolder<Block, Block> ETHER_TORCH = BLOCKS.register("ether_torch", () -> new EtherTorchBlock<>(MalumBlockProperties.ETHER_TORCH().noCollission().instabreak().lightLevel((b) -> 14)).setBlockEntity(BlockEntityRegistry.ETHER));
-    public static final DeferredHolder<Block, Block> WALL_ETHER_TORCH = BLOCKS.register("wall_ether_torch", () -> new EtherWallTorchBlock<>(MalumBlockProperties.ETHER_TORCH().noCollission().instabreak().lightLevel((b) -> 14).lootFrom(ETHER_TORCH)).setBlockEntity(BlockEntityRegistry.ETHER));
+    public static final DeferredHolder<Block, Block> WALL_ETHER_TORCH = BLOCKS.register("wall_ether_torch", () -> new EtherWallTorchBlock<>(MalumBlockProperties.ETHER_TORCH().noCollission().instabreak().lightLevel((b) -> 14)).setBlockEntity(BlockEntityRegistry.ETHER));
     public static final DeferredHolder<Block, Block> TAINTED_ETHER_BRAZIER = BLOCKS.register("tainted_ether_brazier", () -> new EtherBrazierBlock<>(MalumBlockProperties.TAINTED_ETHER_BRAZIER().lightLevel((b) -> 14).noOcclusion()).setBlockEntity(BlockEntityRegistry.ETHER));
     public static final DeferredHolder<Block, Block> TWISTED_ETHER_BRAZIER = BLOCKS.register("twisted_ether_brazier", () -> new EtherBrazierBlock<>(MalumBlockProperties.TWISTED_ETHER_BRAZIER().lightLevel((b) -> 14).noOcclusion()).setBlockEntity(BlockEntityRegistry.ETHER));
 
     public static final DeferredHolder<Block, Block> IRIDESCENT_ETHER = BLOCKS.register("iridescent_ether", () -> new EtherBlock<>(MalumBlockProperties.ETHER()).setBlockEntity(BlockEntityRegistry.ETHER));
     public static final DeferredHolder<Block, Block> IRIDESCENT_ETHER_TORCH = BLOCKS.register("iridescent_ether_torch", () -> new EtherTorchBlock<>(MalumBlockProperties.ETHER_TORCH().noCollission().instabreak().lightLevel((b) -> 14)).setBlockEntity(BlockEntityRegistry.ETHER));
-    public static final DeferredHolder<Block, Block> IRIDESCENT_WALL_ETHER_TORCH = BLOCKS.register("iridescent_wall_ether_torch", () -> new EtherWallTorchBlock<>(MalumBlockProperties.ETHER_TORCH().noCollission().instabreak().lightLevel((b) -> 14).lootFrom(IRIDESCENT_ETHER_TORCH)).setBlockEntity(BlockEntityRegistry.ETHER));
+    public static final DeferredHolder<Block, Block> IRIDESCENT_WALL_ETHER_TORCH = BLOCKS.register("iridescent_wall_ether_torch", () -> new EtherWallTorchBlock<>(MalumBlockProperties.ETHER_TORCH().noCollission().instabreak().lightLevel((b) -> 14)).setBlockEntity(BlockEntityRegistry.ETHER));
     public static final DeferredHolder<Block, Block> TAINTED_IRIDESCENT_ETHER_BRAZIER = BLOCKS.register("tainted_iridescent_ether_brazier", () -> new EtherBrazierBlock<>(MalumBlockProperties.TAINTED_ETHER_BRAZIER().lightLevel((b) -> 14).noOcclusion()).setBlockEntity(BlockEntityRegistry.ETHER));
     public static final DeferredHolder<Block, Block> TWISTED_IRIDESCENT_ETHER_BRAZIER = BLOCKS.register("twisted_iridescent_ether_brazier", () -> new EtherBrazierBlock<>(MalumBlockProperties.TWISTED_ETHER_BRAZIER().lightLevel((b) -> 14).noOcclusion()).setBlockEntity(BlockEntityRegistry.ETHER));
     //endregion
@@ -453,50 +450,47 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> THE_DEVICE = BLOCKS.register("the_device", () -> new TheDevice(MalumBlockProperties.TAINTED_ROCK()));
     public static final DeferredHolder<Block, Block> THE_VESSEL = BLOCKS.register("the_vessel", () -> new TheVessel(MalumBlockProperties.TWISTED_ROCK()));
 
-    @EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
     public static class ClientOnly {
 
-        @SubscribeEvent
-        public static void setBlockColors(RegisterColorHandlersEvent.Block event) {
-            BlockColors blockColors = event.getBlockColors();
-            blockColors.register((s, l, p, c) -> {
-                BlockEntity blockEntity = l.getBlockEntity(p);
+        public static void setBlockColors() {
+            ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+                BlockEntity blockEntity = blockAndTintGetter.getBlockEntity(blockPos);
                 if (blockEntity instanceof EtherBlockEntity etherBlockEntity) {
                     if (etherBlockEntity.firstColor != null) {
-                        return c == 0 ? etherBlockEntity.firstColor.getRGB() : -1;
+                        return i == 0 ? etherBlockEntity.firstColor.getRGB() : -1;
                     }
                 }
                 return -1;
             }, ETHER.get(), IRIDESCENT_ETHER.get());
 
             var colorProperty = MalumLeavesBlock.COLOR;
-            blockColors.register((s, l, p, c) -> {
+            ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
                 float colorMax = colorProperty.getPossibleValues().size();
-                float color = s.getValue(colorProperty);
+                float color = blockState.getValue(colorProperty);
                 float pct = (colorMax - (color / colorMax));
                 float value = Easing.SINE_IN_OUT.ease(pct, 0, 1, 1);
-                var leaves = (IGradientedLeavesBlock) s.getBlock();
+                var leaves = (IGradientedLeavesBlock) blockState.getBlock();
                 int red = (int) Mth.lerp(value, leaves.getMinColor().getRed(), leaves.getMaxColor().getRed());
                 int green = (int) Mth.lerp(value, leaves.getMinColor().getGreen(), leaves.getMaxColor().getGreen());
                 int blue = (int) Mth.lerp(value, leaves.getMinColor().getBlue(), leaves.getMaxColor().getBlue());
                 return red << 16 | green << 8 | blue;
             }, RUNEWOOD_LEAVES.get(), HANGING_RUNEWOOD_LEAVES.get(), AZURE_RUNEWOOD_LEAVES.get(), HANGING_AZURE_RUNEWOOD_LEAVES.get());
 
-            blockColors.register((s, l, p, c) -> {
-                float distanceMax = MalumLeavesBlock.DISTANCE.getPossibleValues().size();
-                float distance = s.getBlock() instanceof MalumLeavesBlock ? s.getValue(MalumLeavesBlock.DISTANCE) : distanceMax;
-                float colorMax = colorProperty.getPossibleValues().size();
-                float color = s.getValue(colorProperty);
-                float pct = Math.max((distanceMax - distance) / distanceMax, color / colorMax);
-                float value = Easing.SINE_IN_OUT.ease(pct, 0, 1, 1);
-                var leaves = (IGradientedLeavesBlock) s.getBlock();
-                int red = (int) Mth.lerp(value, leaves.getMinColor().getRed(), leaves.getMaxColor().getRed());
-                int green = (int) Mth.lerp(value, leaves.getMinColor().getGreen(), leaves.getMaxColor().getGreen());
-                int blue = (int) Mth.lerp(value, leaves.getMinColor().getBlue(), leaves.getMaxColor().getBlue());
-                return red << 16 | green << 8 | blue;
+            ColorProviderRegistry.BLOCK.register((blockState, blockAndTintGetter, blockPos, i) -> {
+                        float distanceMax = MalumLeavesBlock.DISTANCE.getPossibleValues().size();
+                        float distance = blockState.getBlock() instanceof MalumLeavesBlock ? blockState.getValue(MalumLeavesBlock.DISTANCE) : distanceMax;
+                        float colorMax = colorProperty.getPossibleValues().size();
+                        float color = blockState.getValue(colorProperty);
+                        float pct = Math.max((distanceMax - distance) / distanceMax, color / colorMax);
+                        float value = Easing.SINE_IN_OUT.ease(pct, 0, 1, 1);
+                        var leaves = (IGradientedLeavesBlock) blockState.getBlock();
+                        int red = (int) Mth.lerp(value, leaves.getMinColor().getRed(), leaves.getMaxColor().getRed());
+                        int green = (int) Mth.lerp(value, leaves.getMinColor().getGreen(), leaves.getMaxColor().getGreen());
+                        int blue = (int) Mth.lerp(value, leaves.getMinColor().getBlue(), leaves.getMaxColor().getBlue());
+                        return red << 16 | green << 8 | blue;
             }, SOULWOOD_LEAVES.get(), BUDDING_SOULWOOD_LEAVES.get(), HANGING_SOULWOOD_LEAVES.get());
 
-            blockColors.register((s, l, p, c) -> {
+            ColorProviderRegistry.BLOCK.register((s, l, p, c) -> {
                 var spiritType = MalumSpiritType.getSpiritType(s.getValue(SpiritMoteBlock.SPIRIT_TYPE));
                 var color  = spiritType.getPrimaryColor();
                 int red = color.getRed();

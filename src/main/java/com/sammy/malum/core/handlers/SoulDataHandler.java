@@ -6,18 +6,19 @@ import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.EntityJoinLevelEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingChangeTargetEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.tick.EntityTickEvent;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.event.entity.*;
-import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.tick.*;
 
 import java.util.function.*;
 
 public class SoulDataHandler {
 
-    public static void markAsSpawnerSpawned(MobSpawnEvent.PositionCheck event) {
+    public static void markAsSpawnerSpawned(MobSpawnEvent event) {
         if (event.getSpawner() != null) {
             event.getEntity().getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).setSpawnerSpawned(true);
         }
@@ -25,29 +26,29 @@ public class SoulDataHandler {
 
     public static void entityJoin(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof Mob mob) {
-            mob.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).updateSoullessBehavior(mob);
+            mob.getAttachedOrCreate(AttachmentTypeRegistry.LIVING_SOUL_INFO).updateSoullessBehavior(mob);
         }
     }
 
     public static void preventTargeting(LivingChangeTargetEvent event) {
         if (event.getEntity() instanceof Mob mob) {
-            mob.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).updateSoullessTargeting(event);
+            mob.getAttachedOrCreate(AttachmentTypeRegistry.LIVING_SOUL_INFO).updateSoullessTargeting(event);
         }
     }
 
     public static void entityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity living) {
-            living.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).tickDuration();
+            living.getAttachedOrCreate(AttachmentTypeRegistry.LIVING_SOUL_INFO).tickDuration();
         }
     }
 
-    public static void exposeSoul(LivingDamageEvent.Post event) {
-        if (event.getOriginalDamage() <= 0) {
+    public static void exposeSoul(LivingDamageEvent event) {
+        if (event.getAmount() <= 0) {
             return;
         }
         var target = event.getEntity();
         var source = event.getSource();
-        var data = target.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO);
+        var data = target.getAttachedOrCreate(AttachmentTypeRegistry.LIVING_SOUL_INFO);
         if (source.is(DamageTypeTagRegistry.SOUL_SHATTER_DAMAGE)) {
             data.setExposed();
             return;
@@ -55,7 +56,7 @@ public class SoulDataHandler {
 
         var directEntity = source.getDirectEntity();
         if (directEntity != null) {
-            var projectileData = directEntity.getData(AttachmentTypeRegistry.PROJECTILE_SOUL_INFO);
+            var projectileData = directEntity.getAttachedOrCreate(AttachmentTypeRegistry.PROJECTILE_SOUL_INFO);
             if (projectileData.dealsSoulDamage()) {
                 data.setExposed();
                 return;

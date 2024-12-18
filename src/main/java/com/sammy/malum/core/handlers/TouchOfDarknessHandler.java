@@ -8,6 +8,7 @@ import com.sammy.malum.common.packets.VoidRejectionPayload;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.visual_effects.networked.data.PositionEffectData;
+import io.github.fabricators_of_create.porting_lib.entity.events.tick.EntityTickEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
@@ -20,8 +21,6 @@ import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.tick.EntityTickEvent;
-import net.neoforged.neoforge.network.*;
 import team.lodestar.lodestone.helpers.*;
 
 import java.util.*;
@@ -33,7 +32,7 @@ public class TouchOfDarknessHandler {
     public static final ResourceLocation GRAVITY_MODIFIER_ID = MalumMod.malumPath("weeping_well_reduced_gravity");
 
     public static void handlePrimordialSoupContact(LivingEntity livingEntity) {
-        var data = livingEntity.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
+        var data = livingEntity.getAttachedOrCreate(AttachmentTypeRegistry.VOID_INFLUENCE);
         if (data.isInRejectedState) {
             return;
         }
@@ -42,10 +41,10 @@ public class TouchOfDarknessHandler {
         data.setGoopStatus();
     }
 
-    public static void entityTick(EntityTickEvent.Pre event) {
+    public static void entityTick(EntityTickEvent event) {
         if (event.getEntity() instanceof LivingEntity livingEntity) {
             var level = livingEntity.level();
-            var data = livingEntity.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
+            var data = livingEntity.getAttachedOrCreate(AttachmentTypeRegistry.VOID_INFLUENCE);
             data.update(livingEntity);
             var gravity = livingEntity.getAttribute(Attributes.GRAVITY);
             if (gravity != null) {
@@ -63,7 +62,7 @@ public class TouchOfDarknessHandler {
     }
 
     public static void handleRejectionState(Level level, LivingEntity living) {
-        var data = living.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
+        var data = living.getAttachedOrCreate(AttachmentTypeRegistry.VOID_INFLUENCE);
         if (!level.isClientSide) {
             if (living instanceof Player && level.getGameTime() % 6L == 0) {
                 float volume = 0.5f + data.voidRejection * 0.02f;
@@ -86,7 +85,7 @@ public class TouchOfDarknessHandler {
     }
 
     public static void launchPlayer(Player player) {
-        var data = player.getData(AttachmentTypeRegistry.PROGRESSION_DATA);
+        var data = player.getAttachedOrCreate(AttachmentTypeRegistry.PROGRESSION_DATA);
         var level = player.level();
         if (level instanceof ServerLevel serverLevel) {
             final Optional<VoidConduitBlockEntity> voidConduitBlockEntity = VoidInfluenceData.checkForWeepingWell(player);
@@ -103,7 +102,7 @@ public class TouchOfDarknessHandler {
             if (!data.hasBeenRejected) {
                 SoulHarvestHandler.spawnSpirits(level, player, player.position(), List.of(ItemRegistry.ENCYCLOPEDIA_ARCANA.get().getDefaultInstance()));
             }
-            PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new VoidRejectionPayload(player.getId()));
+            PacketRegistry.sendToPlayersTrackingEntityAndSelf(player, new VoidRejectionPayload(player.getId()));
             SoundHelper.playSound(player, SoundRegistry.VOID_REJECTION.get(), 2f, Mth.nextFloat(player.getRandom(), 0.5f, 0.8f));
         } else {
             VoidRevelationHandler.seeTheRevelation(BLACK_CRYSTAL);
@@ -118,7 +117,7 @@ public class TouchOfDarknessHandler {
     }
 
     public static double updateEntityGravity(LivingEntity living) {
-        var data = living.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
+        var data = living.getAttachedOrCreate(AttachmentTypeRegistry.VOID_INFLUENCE);
         if (data.voidRejection > 0) {
             return -Math.min(60, data.voidRejection) / 60f;
         }

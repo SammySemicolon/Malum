@@ -3,40 +3,75 @@ package com.sammy.malum.registry.common;
 import com.sammy.malum.*;
 import com.sammy.malum.common.capabilities.*;
 import com.sammy.malum.common.capabilities.soul_data.*;
-import net.neoforged.neoforge.attachment.*;
-import net.neoforged.neoforge.registries.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 
 import java.util.function.*;
 
 public class AttachmentTypeRegistry {
 
-    public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MalumMod.MALUM);
+    public static final AttachmentType<LivingSoulData> LIVING_SOUL_INFO =
+            AttachmentRegistry.<LivingSoulData>builder()
+                    .persistent(LivingSoulData.CODEC)
+                    .initializer(LivingSoulData::new)
+                    .buildAndRegister(MalumMod.malumPath("living_soul_info"));
 
-    public static final Supplier<AttachmentType<LivingSoulData>> LIVING_SOUL_INFO = ATTACHMENT_TYPES.register(
-            "living_soul_info", () -> AttachmentType.builder(LivingSoulData::new).serialize(LivingSoulData.CODEC).build());
 
-    public static final Supplier<AttachmentType<ProjectileSoulData>> PROJECTILE_SOUL_INFO = ATTACHMENT_TYPES.register(
-            "projectile_soul_info", () -> AttachmentType.builder(ProjectileSoulData::new).serialize(ProjectileSoulData.CODEC).build());
+    public static final AttachmentType<ProjectileSoulData> PROJECTILE_SOUL_INFO =
+            AttachmentRegistry.<ProjectileSoulData>builder()
+                    .persistent(ProjectileSoulData.CODEC)
+                    .initializer(ProjectileSoulData::new)
+                    .buildAndRegister(MalumMod.malumPath("projectile_soul_info"));
 
-    public static final Supplier<AttachmentType<CachedSpiritDropsData>> CACHED_SPIRIT_DROPS = ATTACHMENT_TYPES.register(
-            "cached_spirit_drops", () -> AttachmentType.builder(CachedSpiritDropsData::new).serialize(CachedSpiritDropsData.CODEC).build());
+    public static final AttachmentType<CachedSpiritDropsData> CACHED_SPIRIT_DROPS =
+            AttachmentRegistry.<CachedSpiritDropsData>builder()
+                    .persistent(CachedSpiritDropsData.CODEC)
+                    .initializer(CachedSpiritDropsData::new)
+                    .buildAndRegister(MalumMod.malumPath("cached_spirit_drops"));
 
-    public static final Supplier<AttachmentType<ProgressionData>> PROGRESSION_DATA = ATTACHMENT_TYPES.register(
-            "progression_data", () -> AttachmentType.builder(ProgressionData::new).serialize(ProgressionData.CODEC).build());
+    public static final AttachmentType<ProgressionData> PROGRESSION_DATA =
+            AttachmentRegistry.<ProgressionData>builder()
+                    .persistent(ProgressionData.CODEC)
+                    .initializer(ProgressionData::new)
+                    .buildAndRegister(MalumMod.malumPath("progression_data"));
 
-    public static final Supplier<AttachmentType<CurioData>> CURIO_DATA = ATTACHMENT_TYPES.register(
-            "curio_data", () -> AttachmentType.builder(CurioData::new).serialize(CurioData.CODEC).build());
+    public static final AttachmentType<CurioData> CURIO_DATA =
+            AttachmentRegistry.<CurioData>builder()
+                    .persistent(CurioData.CODEC)
+                    .initializer(CurioData::new)
+                    .buildAndRegister(MalumMod.malumPath("curio_data"));
 
-    public static final Supplier<AttachmentType<SoulWardData>> SOUL_WARD = ATTACHMENT_TYPES.register(
-            "soul_ward", () -> AttachmentType.builder(SoulWardData::new).serialize(SoulWardData.CODEC).build());
+    public static final AttachmentType<SoulWardData> SOUL_WARD =
+            AttachmentRegistry.<SoulWardData>builder()
+                    .persistent(SoulWardData.CODEC)
+                    .initializer(SoulWardData::new)
+                    .buildAndRegister(MalumMod.malumPath("soul_ward"));
 
-    public static final Supplier<AttachmentType<StaffAbilityData>> RESERVE_STAFF_CHARGES = ATTACHMENT_TYPES.register(
-            "reserve_staff_charges", () -> AttachmentType.builder(StaffAbilityData::new).serialize(StaffAbilityData.CODEC).build());
+    public static final AttachmentType<StaffAbilityData> RESERVE_STAFF_CHARGES =
+            AttachmentRegistry.<StaffAbilityData>builder()
+                    .persistent(StaffAbilityData.CODEC)
+                    .initializer(StaffAbilityData::new)
+                    .buildAndRegister(MalumMod.malumPath("reserve_staff_charges"));
 
-    public static final Supplier<AttachmentType<VoidInfluenceData>> VOID_INFLUENCE = ATTACHMENT_TYPES.register(
-            "void_influence", () -> AttachmentType.builder(VoidInfluenceData::new).serialize(VoidInfluenceData.CODEC).build());
+    public static final AttachmentType<VoidInfluenceData> VOID_INFLUENCE =
+            AttachmentRegistry.<VoidInfluenceData>builder()
+                    .persistent(VoidInfluenceData.CODEC)
+                    .initializer(VoidInfluenceData::new)
+                    .buildAndRegister(MalumMod.malumPath("void_influence"));
 
-    public static final Supplier<AttachmentType<MalignantInfluenceData>> MALIGNANT_INFLUENCE = ATTACHMENT_TYPES.register(
-            "malignant_influence", () -> AttachmentType.builder(MalignantInfluenceData::new).serialize(MalignantInfluenceData.CODEC).build());
+
+    public static final AttachmentType<MalignantInfluenceData> MALIGNANT_INFLUENCE =
+            AttachmentRegistry.<MalignantInfluenceData>builder()
+                    .persistent(MalignantInfluenceData.CODEC)
+                    .initializer(MalignantInfluenceData::new)
+                    .buildAndRegister(MalumMod.malumPath("malignant_influence"));
+
+
+    public static void register(){
+
+    }
 
 }

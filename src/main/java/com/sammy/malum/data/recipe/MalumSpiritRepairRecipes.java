@@ -3,19 +3,18 @@ package com.sammy.malum.data.recipe;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.conditions.IConditionBuilder;
-import net.neoforged.neoforge.registries.*;
 
 import java.util.*;
 
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 
-public class MalumSpiritRepairRecipes implements IConditionBuilder {
+public class MalumSpiritRepairRecipes   {
 
     protected static void buildRecipes(RecipeOutput recipeOutput) {
         var has = MalumRecipes.has(ItemRegistry.SPIRIT_CRUCIBLE.get());

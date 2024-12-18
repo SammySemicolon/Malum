@@ -6,6 +6,7 @@ import com.sammy.malum.common.block.storage.jar.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.core.systems.spirit.*;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.*;
@@ -25,20 +26,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+import org.jetbrains.annotations.Nullable;
+import team.lodestar.lodestone.forge_stuff.CombinedInvWrapper;
+import team.lodestar.lodestone.forge_stuff.IItemHandler;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
 
-import javax.annotation.*;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBlockCapabilityProvider<IItemHandler, Direction> {
+public class RitualPlinthBlockEntity extends LodestoneBlockEntity {
 
     private static final Vec3 PLINTH_ITEM_OFFSET = new Vec3(0.5f, 1.375f, 0.5f);
 
@@ -122,7 +121,7 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
         extrasInventory.dumpItems(level, worldPosition);
         if (ritualType != null && ritualTier != null) {
             var shard = new ItemStack(ItemRegistry.RITUAL_SHARD.get());
-            shard.set(DataComponentRegistry.RITUAL_DATA, ritualType.createDataComponent(ritualTier));
+            shard.set(DataComponentRegistry.RITUAL_DATA.get(), ritualType.createDataComponent(ritualTier));
             level.addFreshEntity(new ItemEntity(level, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), shard));
         }
     }
@@ -136,7 +135,7 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
             }
         }
         else if (inventory.getStackInSlot(0).isEmpty() && extrasInventory.isEmpty()) {
-            var ritualData = stack.get(DataComponentRegistry.RITUAL_DATA);
+            var ritualData = stack.get(DataComponentRegistry.RITUAL_DATA.get());
             if (ritualData != null) {
                 if (!level.isClientSide) {
                     ritualType = ritualData.ritualType();
@@ -379,15 +378,6 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
         float y = blockPos.getY() + 0.875f;
         float z = blockPos.getZ() + 0.5f + direction.getStepZ()*0.51f;
         return new Vec3(x, y, z);
-    }
-
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction side) {
-        if (side == null) {
-            return internalInventory.get();
-        }
-        return exposedInventory.get();
     }
 
 //    @Override

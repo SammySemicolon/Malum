@@ -7,7 +7,7 @@ import com.sammy.malum.visual_effects.networked.*;
 import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
-import net.neoforged.api.distmarker.*;
+
 
 import java.util.function.*;
 
@@ -23,7 +23,7 @@ public class PylonPrepareRepairParticleEffect extends ParticleEffectType {
         return effectData;
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) -> {

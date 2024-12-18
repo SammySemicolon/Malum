@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.*;
-import net.neoforged.neoforge.client.extensions.common.*;
 import org.jetbrains.annotations.*;
 import team.lodestar.lodestone.systems.block.*;
 
@@ -43,13 +42,14 @@ public class SoulwovenBannerBlock extends LodestoneEntityBlock<SoulwovenBannerBl
     }
 
     @Override
-    public @NotNull ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-        final ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+        final ItemStack stack = super.getCloneItemStack(level, pos, state);
         if (level.getBlockEntity(pos) instanceof SoulwovenBannerBlockEntity banner) {
-            stack.set(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN, banner.patternData);
+            stack.set(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN.get(), banner.patternData);
         }
         return stack;
     }
+
 
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {

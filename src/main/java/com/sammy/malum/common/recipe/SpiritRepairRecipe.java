@@ -4,13 +4,13 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.core.systems.recipe.*;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import team.lodestar.lodestone.systems.recipe.*;
 
 import java.util.*;
@@ -23,7 +23,7 @@ public class SpiritRepairRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipe
             Codec.STRING.optionalFieldOf("itemIdRegex", "").forGetter(recipe -> recipe.itemIdRegex),
             Codec.STRING.optionalFieldOf("modIdRegex", "").forGetter(recipe -> recipe.modIdRegex),
             ResourceLocation.CODEC.listOf().optionalFieldOf("inputs", List.of()).forGetter(recipe -> recipe.itemsForRepair.stream().map(BuiltInRegistries.ITEM::getKey).collect(Collectors.toList())),
-            SizedIngredient.FLAT_CODEC.fieldOf("repairMaterial").forGetter(recipe -> recipe.repairMaterial),
+            SizedIngredient.NESTED_CODEC.fieldOf("repairMaterial").forGetter(recipe -> recipe.repairMaterial),
             SpiritIngredient.CODEC.codec().listOf().fieldOf("spirits").forGetter(recipe -> recipe.spirits),
             BuiltInRegistries.ITEM.byNameCodec().optionalFieldOf("repairOutputOverride", Items.AIR).forGetter(recipe -> recipe.repairOutputOverride)
     ).apply(obj, SpiritRepairRecipe::new));

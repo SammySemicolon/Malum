@@ -28,21 +28,19 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.*;
+import team.lodestar.lodestone.forge_stuff.CombinedInvWrapper;
+import team.lodestar.lodestone.forge_stuff.IItemHandler;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.multiblock.*;
 import team.lodestar.lodestone.systems.recipe.*;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.*;
 
-public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implements ICatalyzerAccelerationTarget, IMalumSpecialItemAccessPoint, IBlockCapabilityProvider<IItemHandler, Direction> {
+public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implements ICatalyzerAccelerationTarget, IMalumSpecialItemAccessPoint {
 
     private static final Vec3 CRUCIBLE_ITEM_OFFSET = new Vec3(0.5f, 1.6f, 0.5f);
     public static final Supplier<MultiBlockStructure> STRUCTURE = () -> (MultiBlockStructure.of(new MultiBlockStructure.StructurePiece(0, 1, 0, BlockRegistry.SPIRIT_CRUCIBLE_COMPONENT.get().defaultBlockState())));
@@ -419,10 +417,5 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         float distance = 0.6f + (float) Math.sin(((spiritSpin + partialTicks) % 6.28f) / 20f) * 0.025f;
         float height = 1.6f;
         return VecHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, augmentInventory.slotCount,spiritSpin + partialTicks, 240);
-    }
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
-        return combinedInventory.get();
     }
 }

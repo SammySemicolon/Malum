@@ -3,7 +3,8 @@ package com.sammy.malum.registry.common;
 import com.sammy.malum.*;
 import com.sammy.malum.common.worldevent.ActiveBlightEvent;
 import com.sammy.malum.common.worldevent.TotemCreatedBlightEvent;
-import net.neoforged.neoforge.registries.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
+import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
 import team.lodestar.lodestone.registry.common.LodestoneWorldEventTypes;
 import team.lodestar.lodestone.systems.worldevent.WorldEventType;
 

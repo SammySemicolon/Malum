@@ -7,6 +7,7 @@ import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.block.CustomRenderBoundingBoxBlockEntity;
 import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
@@ -19,7 +20,6 @@ import net.minecraft.util.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import org.joml.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
@@ -34,7 +34,7 @@ import java.util.*;
 import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 
 
-public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibleCoreBlockEntity> {
+public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibleCoreBlockEntity>, CustomRenderBoundingBoxBlockEntity {
 
     private static float tuningForkHeldTimer = 0;
     private static boolean isHoldingFork;
@@ -44,7 +44,7 @@ public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibl
     public SpiritCrucibleRenderer(BlockEntityRendererProvider.Context context) {
     }
 
-    public static void checkForTuningFork(ClientTickEvent.Pre event) {
+    public static void checkForTuningFork(Minecraft minecraft) {
         final LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) {
             return;
@@ -61,13 +61,11 @@ public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibl
         }
     }
 
-
     @Override
-    public AABB getRenderBoundingBox(SpiritCrucibleCoreBlockEntity blockEntity) {
-        var pos = blockEntity.getBlockPos();
+    public AABB getRenderBoundingBox() {
+        var pos = self().getBlockPos();
         return new AABB(pos.getX() - 1, pos.getY(), pos.getZ() - 1, pos.getX() + 1, pos.getY() + 4, pos.getZ() + 1);
     }
-
 
     @Override
     public void render(SpiritCrucibleCoreBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {

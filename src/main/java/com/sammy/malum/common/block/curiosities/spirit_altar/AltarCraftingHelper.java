@@ -4,17 +4,17 @@ import com.sammy.malum.common.block.storage.IMalumSpecialItemAccessPoint;
 import com.sammy.malum.common.recipe.spirit.infusion.SpiritInfusionRecipe;
 import com.sammy.malum.core.systems.recipe.SpiritBasedRecipeInput;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
+import team.lodestar.lodestone.forge_stuff.CombinedInvWrapper;
+import team.lodestar.lodestone.forge_stuff.IItemHandler;
+import team.lodestar.lodestone.forge_stuff.IItemHandlerModifiable;
+import team.lodestar.lodestone.forge_stuff.ItemStackHandler;
 import team.lodestar.lodestone.helpers.block.*;
 
 import java.util.Comparator;
@@ -86,7 +86,7 @@ public class AltarCraftingHelper {
 
 	private static List<SizedIngredient> convertSpiritsToIngredients(List<SpiritIngredient> ingredients) {
 		return ingredients.stream()
-			.map(ingredient -> new SizedIngredient(Ingredient.of(ingredient.getItems()), ingredient.getCount()))
+			.map(ingredient -> new SizedIngredient(Ingredient.of(ingredient.getStack()), ingredient.getCount()))
 			.toList();
 	}
 

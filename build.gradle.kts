@@ -1,99 +1,52 @@
-import java.util.*
-
 plugins {
-    id("java-library")
-    id("maven-publish")
-    id("net.neoforged.moddev") version "2.0.30-beta"
+    id("fabric-loom") version "1.9-SNAPSHOT"
+    `maven-publish`
+    java
 }
 
-version = "${property("minecraft_version")}-${property("mod_version")}"
-if (System.getenv("BUILD_NUMBER") != null) {
-    version = "${property("minecraft_version")}-${property("mod_version")}.${System.getenv("BUILD_NUMBER")}"
-}
-group = "${property("mod_group_id")}"
+val port_lib_modules: String by extra
 
-val baseArchivesName = "${property("mod_id")}"
+
+version = "${property("minecraft_version")}-${property("mod_version")}-fabric"
+
 base {
     archivesName.set("${property("mod_id")}")
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
-    }
-}
-
-neoForge {
-    version.set(project.property("neo_version").toString())
-    parchment {
-        mappingsVersion.set(project.property("parchment_mappings_version").toString())
-        minecraftVersion.set(project.property("parchment_minecraft_version").toString())
-    }
-
-    accessTransformers.from(
-        project.files(
-            "src/main/resources/META-INF/accesstransformer.cfg",
-            "src/main/resources/META-INF/recipebuilders.cfg",
-            "src/main/resources/META-INF/blockproperties.cfg",
-            "src/main/resources/META-INF/renderstates.cfg"
-        )
-    )
-
-    runs {
-        register("client") {
-            client()
-
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            systemProperty("neoforge.enabledGameTestNamespaces", project.property("mod_id").toString())
-        }
-
-        register("server") {
-            server()
-            programArgument("--nogui")
-            systemProperty("neoforge.enabledGameTestNamespaces", project.property("mod_id").toString())
-        }
-
-        register("gameTestServer") {
-            type = "gameTestServer"
-            systemProperty("neoforge.enabledGameTestNamespaces", project.property("mod_id").toString())
-        }
-
-        register("data") {
-            data()
-            programArguments.addAll(
-                "--mod", project.property("mod_id").toString(),
-                "--all",
-                "--output", file("src/generated/resources/").absolutePath,
-                "--existing", file("src/main/resources/").absolutePath
-            )
-        }
-
-        configureEach {
-            jvmArgument("-Dmixin.debug=true")
-            jvmArgument("-Xmx4G")
-            systemProperty("neoforge.logging.markers", "REGISTRIES")
-            logLevel = org.slf4j.event.Level.DEBUG
-        }
-    }
-
-    mods {
-        create("${property("mod_id")}") {
-            sourceSet(sourceSets.main.get())
-        }
-    }
-}
-
 sourceSets {
-    main {
-        resources.srcDir("src/generated/resources")
+    named("main") {
+        resources {
+            srcDir("src/generated/resources")
+        }
     }
 }
+
+
+loom {
+    accessWidenerPath = file("src/main/resources/malum.accesswidener")
+    runs {
+        create("data") {
+            client()
+            name("Data Generation")
+            vmArg("-Dfabric-api.datagen")
+            vmArg("-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}")
+            vmArg("-Dfabric-api.datagen.modid=malum")
+            //vmArg("-Dfabric-api.datagen.strict-validation")
+
+            property("porting_lib.datagen.existing_resources", file("src/main/resources").absolutePath)
+            property("malum.data.server", "false")
+
+            runDir("build/datagen")
+        }
+    }
+}
+
+
 
 repositories {
     flatDir {
         dirs("lib")
     }
-    mavenLocal()
     mavenCentral()
     maven {
         name = "Curios maven"
@@ -112,26 +65,13 @@ repositories {
         url = uri("https://maven.blamejared.com/")
     }
     maven {
-        name = "KosmX's maven"
-        url = uri("https://maven.kosmx.dev/")
-    }
-    maven {
         name = "Curse Maven"
         url = uri("https://cursemaven.com")
         content {
             includeGroup("curse.maven")
         }
     }
-    maven {
-        url = uri("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
-        content {
-            includeGroup("software.bernie.geckolib")
-        }
-    }
-    maven {
-        name = "ModMaven"
-        url = uri("https://modmaven.dev")
-    }
+    maven(url = "https://api.modrinth.com/maven")
     maven {
         name = "jitpack"
         url = uri("https://jitpack.io")
@@ -139,87 +79,111 @@ repositories {
             includeGroup("io.github")
         }
     }
-    maven {
-        name = "OctoStudios"
-        url = uri("https://maven.octo-studios.com/releases")
-    }
+    maven(url = "https://maven.ladysnake.org/releases")
+    maven("https://maven.terraformersmc.com/")
+
+    maven( "https://maven.parchmentmc.org")
+    maven("https://mvn.devos.one/snapshots/")
+    maven("https://mvn.devos.one/releases/")
+    maven("https://maven.jamieswhiteshirt.com/libs-release")
+    maven("https://maven.greenhouseteam.dev/releases/")
+    maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/") // Forge Config API Port
+    maven("https://maven.shedaniel.me/")
 
 }
 
 dependencies {
+    minecraft("com.mojang:minecraft:${property("minecraft_version")}")
+
+    mappings(loom.layered {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${property("parchment_minecraft_version")}:${property("parchment_version")}@zip")
+    })
+
+    modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
+
+    include("com.github.Chocohead:Fabric-ASM:v2.3")
+    modImplementation("com.github.Chocohead:Fabric-ASM:v2.3")
+
+    include("me.shedaniel.cloth:cloth-config-fabric:15.0.140")
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:15.0.140")
+
     // JEI Dependency
-    compileOnly(("mezz.jei:jei-${property("minecraft_version")}-neoforge-api:${property("jei_version")}"))
-    runtimeOnly(("mezz.jei:jei-${property("minecraft_version")}-neoforge:${property("jei_version")}"))
+    modCompileOnlyApi("mezz.jei:jei-${property("minecraft_version")}-common-api:${property("jei_version")}")
+    modCompileOnlyApi("mezz.jei:jei-${property("minecraft_version")}-fabric-api:${property("jei_version")}")
+    // at runtime, use the full JEI jar for Fabric
+    //modRuntimeOnly("mezz.jei:jei-${property("minecraft_version")}-fabric:${property("jei_version")}")
+    //EMI
+    modCompileOnly("dev.emi:emi-fabric:${property("emi_version")}:api")
+    modLocalRuntime("dev.emi:emi-fabric:${property("emi_version")}")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${property("rei_version")}")
+    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${property("rei_version")}")
 
-    // Curios dependency
-    implementation(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
+    // Trinkets Dependency
+    modImplementation("dev.emi:trinkets:${property("trinkets_version")}")
 
-    implementation(("team.lodestar.lodestone:lodestone:${property("minecraft_version")}-${property("lodestone_version")}"))
+    //modImplementation("team.lodestar.lodestone:lodestone:${property("minecraft_version")}-${property("lodestone_version")}-fabric")
+    modImplementation("maven.modrinth:lodestonelib:${property("minecraft_version")}-${property("lodestone_version")}-fabric")
+    modApi("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.0")
+    modApi("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.0")
+    //modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${property("cca_version")}")
+    //modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${property("cca_version")}")
 
-    //runtimeOnly(("maven.modrinth:fusion-connected-textures:${property("fusion_version")}-forge-mc${property("minecraft_version")}"))
+    include("com.terraformersmc.terraform-api:terraform-wood-api-v1:${property("terraform_api_version")}")
+    modImplementation("com.terraformersmc.terraform-api:terraform-wood-api-v1:${property("terraform_api_version")}")
+    //include("com.terraformersmc.terraform-api:terraform-wood-api-v1:${property("terraform_api_version")}")
 
-    // Tetra Optional Dependency
-
-//    compileOnly(("curse.maven:tetra-${property("tetra_version")}"))
-//    compileOnly(("se.mickelus.mutil:mutil:${property("mutil_version")}"))
-
-    // FD Optional Dependency
-    compileOnly(("curse.maven:farmers-delight-398521:5878217"))
-
-    // Iron's Spellbooks Optional Dependency
-    compileOnly(("software.bernie.geckolib:geckolib-neoforge-${property("minecraft_version")}:${property("gecko_lib_version")}"))
-    compileOnly(("dev.kosmx.player-anim:player-animation-lib-forge:${property("player_animator_version")}"))
-    compileOnly(("curse.maven:irons-spells-n-spellbooks-855414:5863590"))
-
-    runtimeOnly(("curse.maven:jeed-532286:5693385"))
-    runtimeOnly(("curse.maven:spark-361579:5759671"))
-    runtimeOnly(("curse.maven:attributefix-280510:5824104"))
-    runtimeOnly(("curse.maven:bookshelf-228525:5824127")) //Required for AttributeFix
-    runtimeOnly(("curse.maven:prickle-1023259:5836410")) //Required for AttributeFix
-    runtimeOnly(("curse.maven:overloaded-armor-bar-314002:5537850"))
-}
-
-val generateModMetadata by tasks.registering(ProcessResources::class) {
-    val replaceProperties = mapOf(
-        "minecraft_version" to project.findProperty("minecraft_version") as String,
-        "minecraft_version_range" to project.findProperty("minecraft_version_range") as String,
-        "neo_version" to project.findProperty("neo_version") as String,
-        "neo_version_range" to project.findProperty("neo_version_range") as String,
-        "loader_version_range" to project.findProperty("loader_version_range") as String,
-        "mod_id" to project.findProperty("mod_id") as String,
-        "mod_name" to project.findProperty("mod_name") as String,
-        "mod_license" to project.findProperty("mod_license") as String,
-        "mod_version" to project.findProperty("mod_version") as String,
-        "mod_authors" to project.findProperty("mod_authors") as String,
-        "mod_description" to project.findProperty("mod_description") as String
-    )
-    inputs.properties(replaceProperties)
-    expand(replaceProperties)
-
-    // Exclude .java files or any other files that shouldn't have template expansion
-    filesMatching("**/*.java") {
-        exclude()
+    port_lib_modules.split(",").forEach { module ->
+        include(("io.github.fabricators_of_create.Porting-Lib:$module:${property("port_lib_version")}"))
+        modImplementation(("io.github.fabricators_of_create.Porting-Lib:$module:${property("port_lib_version")}"))
     }
 
-    from("src/main/templates")
-    into("build/generated/sources/modMetadata")
+    //include("com.jamieswhiteshirt:reach-entity-attributes:${property("reach_entity_attributes_version")}")
+    //modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${property("reach_entity_attributes_version")}")
+
+    modImplementation("vectorwing:FarmersDelight:${property("farmers_delight_version")}")
+    //modRuntimeOnly("com.simibubi.create:create-fabric-1.20.1:0.5.1-f-build.1417+mc1.20.1")
+    //modRuntimeOnly("fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${property("forge_config_api_port_version")}")
+
+    modCompileOnly("maven.modrinth:fusion-connected-textures:${property("fusion_version")}-fabric-mc1.21")
+    //modImplementation("curse.maven:jeed-532286:5186338")
+
+    //modRuntimeOnly("curse.maven:world-stripper-250603:4578576")
+    //modRuntimeOnly("curse.maven:spark-361579:4738953")
+    //modRuntimeOnly("curse.maven:attributefix-280510:4911083")
+    //modCompileOnly("maven.modrinth:botania:${property("botania_version")}")
+    //modRuntimeOnly("curse.maven:overloaded-armor-bar-314002:5208706")
 }
-// Include the output of "generateModMetadata" as an input directory for the build.
-// This works with both building through Gradle and the IDE.
-sourceSets["main"].resources.srcDir(generateModMetadata)
-neoForge.ideSyncTask(generateModMetadata)
+
+tasks {
+
+    processResources {
+        inputs.property("version", project.version)
+        filesMatching("fabric.mod.json") {
+            expand(getProperties())
+            expand(mutableMapOf("version" to project.version))
+        }
+    }
+
+    jar {
+        from("LICENSE")
+    }
+
+    compileJava{
+        targetCompatibility = "21"
+    }
+}
 
 java {
-//    withJavadocJar()
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
     withSourcesJar()
+
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
-
-
-tasks.jar.configure {
-    archiveClassifier.set("pure")
-}
-
-
 
 //jar {
 ////    exclude 'com/sammy/malum/core/data/**'
@@ -227,29 +191,7 @@ tasks.jar.configure {
 //	exclude 'assets/malum/models/block/bbmodels/**'
 //}
 
-
-publishing {
-    publications {
-        register<MavenPublication>("mavenJava") {
-            artifactId = "${property("mod_id")}"
-            from(components["java"])
-        }
-    }
-    repositories {
-        maven {
-            url = uri("file://${System.getenv("local_maven")}")
-        }
-    }
-}
-
-idea {
-    module {
-        for (fileName in listOf("run", "out", "logs")) {
-            excludeDirs.add(file(fileName))
-        }
-    }
-}
-
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
+    options.release = 21
 }

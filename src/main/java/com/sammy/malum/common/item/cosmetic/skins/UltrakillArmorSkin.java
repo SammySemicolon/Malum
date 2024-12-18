@@ -4,7 +4,7 @@ import com.sammy.malum.client.cosmetic.ArmorSkinRenderingData;
 import com.sammy.malum.client.cosmetic.SimpleArmorSkinRenderingData;
 import com.sammy.malum.registry.client.ModelRegistry;
 import net.minecraft.world.item.Item;
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.systems.item.LodestoneArmorItem;
 
 import static com.sammy.malum.MalumMod.malumPath;
@@ -14,7 +14,7 @@ public class UltrakillArmorSkin extends ArmorSkin {
         super(id, validArmorClass, weaveItem);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public ArmorSkinRenderingData getRenderingData() {
         return new SimpleArmorSkinRenderingData(malumPath("textures/armor/cosmetic/" + id + ".png"), ModelRegistry.ULTRAKILL_MACHINE);

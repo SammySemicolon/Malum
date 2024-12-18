@@ -40,7 +40,7 @@ public class MalignantStrongholdArmorItem extends MalumArmorItem {
         return attributes.build().modifiers();
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {

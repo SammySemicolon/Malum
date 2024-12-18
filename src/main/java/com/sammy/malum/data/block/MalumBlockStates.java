@@ -4,17 +4,17 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.data.item.*;
 import com.sammy.malum.registry.common.block.*;
+import io.github.fabricators_of_create.porting_lib.data.ExistingFileHelper;
+import io.github.fabricators_of_create.porting_lib.models.generators.ModelFile;
 import net.minecraft.data.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.level.block.*;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.common.data.*;
+import org.jetbrains.annotations.NotNull;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.datagen.*;
 import team.lodestar.lodestone.systems.datagen.providers.*;
 import team.lodestar.lodestone.systems.datagen.statesmith.*;
 
-import javax.annotation.*;
 import java.util.*;
 import java.util.function.*;
 
@@ -27,7 +27,14 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         super(output, MALUM, exFileHelper, itemModelProvider);
     }
 
-    @Nonnull
+    public ModularBlockStateSmith.ModelFileSupplier fromFunction(BiFunction<String, ResourceLocation, ModelFile> modelFileFunction) {
+        return b -> {
+            String name = getBlockName(b);
+            return modelFileFunction.apply(name, getBlockTexture(name));
+        };
+    }
+
+    @NotNull
     @Override
     public String getName() {
         return "Malum BlockStates";

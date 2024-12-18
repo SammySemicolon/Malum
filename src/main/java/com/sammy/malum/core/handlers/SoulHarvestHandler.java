@@ -9,6 +9,7 @@ import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDeathEvent;
 import net.minecraft.core.registries.*;
 import net.minecraft.sounds.*;
 import net.minecraft.tags.*;
@@ -20,12 +21,10 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.event.entity.living.*;
+import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 
-import javax.annotation.*;
 import java.util.*;
 
 import static net.minecraft.world.entity.EquipmentSlot.*;
@@ -41,7 +40,7 @@ public class SoulHarvestHandler {
         if (target instanceof Player) {
             return;
         }
-        var data = target.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO);
+        var data = target.getAttachedOrCreate(AttachmentTypeRegistry.LIVING_SOUL_INFO);
         if (data.isSoulless() || (CommonConfig.SOULLESS_SPAWNERS.getConfigValue() && data.isSpawnerSpawned())) {
             return;
         }
@@ -53,7 +52,7 @@ public class SoulHarvestHandler {
                 spawnSpirits(target, attacker, source);
             } else {
                 var uuid = attacker != null ? attacker.getUUID() : null;
-                target.setData(AttachmentTypeRegistry.CACHED_SPIRIT_DROPS, new CachedSpiritDropsData(getSpiritDrops(target, attacker, source), uuid));
+                target.setAttached(AttachmentTypeRegistry.CACHED_SPIRIT_DROPS, new CachedSpiritDropsData(getSpiritDrops(target, attacker, source), uuid));
             }
             dropSpiritInfusedDrops(target);
             dropEncyclopediaArcana(target, attacker);
@@ -84,7 +83,7 @@ public class SoulHarvestHandler {
             return;
         }
         if (target.getType().is(EntityTypeTags.UNDEAD) && attacker instanceof Player player) {
-            var data = player.getData(AttachmentTypeRegistry.PROGRESSION_DATA);
+            var data = player.getAttachedOrCreate(AttachmentTypeRegistry.PROGRESSION_DATA);
             if (data.obtainedEncyclopedia) {
                 return;
             }
@@ -216,6 +215,6 @@ public class SoulHarvestHandler {
         var attribute = collector.getAttributeValue(AttributeRegistry.ARCANE_RESONANCE);
         ItemEventHandler.getEventResponders(collector).forEach(lookup -> lookup.run(IMalumEventResponderItem.class,
                 (eventResponderItem, stack) -> eventResponderItem.spiritCollectionEvent(collectionEvent, collector, attribute)));
-        NeoForge.EVENT_BUS.post(collectionEvent);
+        collectionEvent.sendEvent();
     }
 }

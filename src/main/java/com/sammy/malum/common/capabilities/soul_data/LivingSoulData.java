@@ -2,9 +2,9 @@ package com.sammy.malum.common.capabilities.soul_data;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingChangeTargetEvent;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
-import net.neoforged.neoforge.event.entity.living.*;
 
 import java.util.*;
 
@@ -44,7 +44,7 @@ public class LivingSoulData {
 
     public void updateSoullessTargeting(LivingChangeTargetEvent event) {
         if (isSoulless()) {
-            event.setNewAboutToBeSetTarget(null);
+            event.setNewTarget(null);
         }
     }
 

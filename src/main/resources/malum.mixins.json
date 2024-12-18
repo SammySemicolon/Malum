@@ -1,9 +1,7 @@
 {
   "required": true,
-  "minVersion": "0.8.5",
   "package": "com.sammy.malum.mixin",
-  "target": "@env(DEFAULT)",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "malum.refmap.json",
   "mixins": [
     "AccessorFeatureFlagSet",
@@ -12,6 +10,7 @@
     "FeatureFlagSetMixin",
     "FishingHookEntityMixin",
     "ItemStackMixin",
+    "LivingEntityMixin",
     "PlayerMixin"
   ],
   "client": [
@@ -21,11 +20,14 @@
     "client.ElytraLayerMixin",
     "client.FontStringRenderOutputMixin",
     "client.GlyphRenderTypesMixin",
+    "client.MinecraftMixin",
     "client.ItemInHandLayerMixin",
     "client.ItemInHandRendererMixin",
-    "client.LocalPlayerMixin"
+    "client.LocalPlayerMixin",
+    "client.MinecraftMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "minVersion": "0.8.5"
 }

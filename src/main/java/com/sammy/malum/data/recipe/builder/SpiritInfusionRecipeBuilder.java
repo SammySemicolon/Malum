@@ -5,6 +5,7 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.recipe.spirit.infusion.SpiritInfusionRecipe;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -12,7 +13,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import team.lodestar.lodestone.recipe.builder.AutonamedRecipeBuilder;
 
 import java.util.List;
@@ -80,13 +80,13 @@ public class SpiritInfusionRecipeBuilder implements AutonamedRecipeBuilder<Spiri
     }
 
     @Override
-    public SpiritInfusionRecipe build(ResourceLocation resourceLocation) {
-        return new SpiritInfusionRecipe(input, output, extraIngredients, spirits, false);
+    public void saveRecipe(RecipeOutput recipeOutput, ResourceLocation resourceLocation) {
+        defaultSaveFunc(recipeOutput, MalumMod.malumPath(resourceLocation.getPath()));
     }
 
     @Override
-    public void save(RecipeOutput recipeOutput, ResourceLocation id) {
-        defaultSaveFunc(recipeOutput, MalumMod.malumPath(id.getPath()));
+    public SpiritInfusionRecipe build(ResourceLocation resourceLocation) {
+        return new SpiritInfusionRecipe(input, output, extraIngredients, spirits, false);
     }
 
     @Override

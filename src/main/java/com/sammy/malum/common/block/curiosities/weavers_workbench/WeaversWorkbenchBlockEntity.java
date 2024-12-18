@@ -2,15 +2,21 @@ package com.sammy.malum.common.block.curiosities.weavers_workbench;
 
 import com.sammy.malum.common.container.WeaversWorkbenchContainer;
 import com.sammy.malum.common.packets.particle.rite.BlightTransformItemParticlePacket;
+import com.sammy.malum.registry.common.PacketRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.block.BlockEntityRegistry;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
@@ -19,9 +25,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
@@ -31,7 +34,7 @@ import java.util.List;
 import static com.sammy.malum.common.item.cosmetic.skins.ArmorSkin.getApplicableItemSkinTag;
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.ARCANE_SPIRIT;
 
-public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity implements IBlockCapabilityProvider<IItemHandler, Direction> {
+public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity {
 
     public final WeaversWorkbenchItemHandler itemHandler = new WeaversWorkbenchItemHandler(2, 1, this);
 
@@ -40,23 +43,36 @@ public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity implements
     }
 
     @Override
-    public ItemInteractionResult onUse(Player player, InteractionHand pHand) {
+    public ItemInteractionResult onUse(Player player, InteractionHand hand) {
         if (player instanceof ServerPlayer serverPlayer) {
-            MenuProvider container = new SimpleMenuProvider((w, p, pl) -> new WeaversWorkbenchContainer(w, p, ContainerLevelAccess.create(level, this.getBlockPos())), WeaversWorkbenchContainer.component);
-            serverPlayer.openMenu(container, buf -> buf.writeBlockPos(this.getBlockPos()));
+            var be = this;
+            serverPlayer.openMenu(new ExtendedScreenHandlerFactory<FriendlyByteBuf>() {
+                @Override
+                public FriendlyByteBuf getScreenOpeningData(ServerPlayer serverPlayer) {
+                    var buf = new FriendlyByteBuf(Unpooled.buffer());
+                    buf.writeBlockPos(getBlockPos());
+                    return buf;
+                }
+
+                @Override
+                public Component getDisplayName() {
+                    return WeaversWorkbenchContainer.component;
+                }
+
+                @Nullable
+                @Override
+                public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+                    return new WeaversWorkbenchContainer(i, inventory, ContainerLevelAccess.create(level, getBlockPos()));
+                }
+            });
         }
         return ItemInteractionResult.SUCCESS;
-    }
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
-        return itemHandler;
     }
 
     public void onCraft() {
         if (!level.isClientSide) {
             Vec3 itemPos = getItemPos();
-            PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(ARCANE_SPIRIT.getIdentifier()), itemPos));
+            PacketRegistry.sendToPlayersTrackingChunk((ServerLevel) level, new ChunkPos(getBlockPos()), new BlightTransformItemParticlePacket(List.of(ARCANE_SPIRIT.getIdentifier()), itemPos));
             level.playSound(null, getBlockPos(), SoundRegistry.WEAVERS_WORKBENCH_CRAFT.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.25f);
         }
         itemHandler.getStackInSlot(0).shrink(1);
@@ -75,9 +91,9 @@ public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity implements
         ItemStack target = itemHandler.getStackInSlot(0);
         ItemStack weave = itemHandler.getStackInSlot(1);
         if (!target.isEmpty() && weave.isEmpty()) {
-            if (target.has(DataComponentRegistry.ITEM_SKIN)) {
+            if (target.has(DataComponentRegistry.ITEM_SKIN.get())) {
                 ItemStack result = target.copy();
-                target.remove(DataComponentRegistry.ITEM_SKIN);
+                target.remove(DataComponentRegistry.ITEM_SKIN.get());
                 return result;
             }
         }
@@ -85,10 +101,10 @@ public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity implements
             ItemStack result = target.copy();
             String skinTag = getApplicableItemSkinTag(target, weave);
             if (skinTag != null) {
-                if (skinTag.equals(target.get(DataComponentRegistry.ITEM_SKIN))) {
+                if (skinTag.equals(target.get(DataComponentRegistry.ITEM_SKIN.get()))) {
                     return ItemStack.EMPTY;
                 }
-                result.set(DataComponentRegistry.ITEM_SKIN, skinTag);
+                result.set(DataComponentRegistry.ITEM_SKIN.get(), skinTag);
                 return result;
             }
         }

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "malum",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_authors}"
+  ],
+  "license": "${mod_license}",
+  "icon": "malum.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.sammy.malum.MalumMod"
+    ],
+    "client": [
+      "com.sammy.malum.MalumModClient"
+    ],
+    "fabric-datagen": [
+      "com.sammy.malum.data.DataGenerators"
+    ],
+    "jei_mod_plugin": [
+      "com.sammy.malum.compability.jei.JEIHandler"
+    ],
+    "emi": [
+      "com.sammy.malum.compability.emi.EMIHandler"
+    ]
+  },
+  "mixins": [
+    "malum.mixins.json"
+  ],
+  "accessWidener": "malum.accesswidener",
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=17",
+    "trinkets": "*",
+    "porting_lib_base": "*",
+    "lodestone": ">=1.21.1-1.7.0.2"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

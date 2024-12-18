@@ -1,5 +1,6 @@
 package com.sammy.malum.data.recipe;
 
+import io.github.fabricators_of_create.porting_lib.tags.Tags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -15,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.Tags;
 
 import java.lang.reflect.Field;
 import java.util.*;

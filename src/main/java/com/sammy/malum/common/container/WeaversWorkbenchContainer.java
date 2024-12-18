@@ -3,6 +3,7 @@ package com.sammy.malum.common.container;
 import com.sammy.malum.common.block.curiosities.weavers_workbench.WeaversWorkbenchBlockEntity;
 import com.sammy.malum.common.block.curiosities.weavers_workbench.WeaversWorkbenchItemHandler;
 import com.sammy.malum.common.item.cosmetic.weaves.AbstractWeaveItem;
+import com.sammy.malum.forge_stuff.SlotItemHandler;
 import com.sammy.malum.registry.common.ContainerRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -12,10 +13,8 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.SlotItemHandler;
 import team.lodestar.lodestone.systems.item.LodestoneArmorItem;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public class WeaversWorkbenchContainer extends AbstractContainerMenu {
@@ -73,7 +72,6 @@ public class WeaversWorkbenchContainer extends AbstractContainerMenu {
         }
     }
 
-    @Nonnull
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;

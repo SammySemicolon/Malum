@@ -22,12 +22,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
-import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import team.lodestar.lodestone.forge_stuff.IItemHandler;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
@@ -40,7 +37,7 @@ import java.awt.*;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlockCapabilityProvider<IItemHandler, Direction> {
+public class SpiritJarBlockEntity extends LodestoneBlockEntity {
 
     public SpiritJarBlockEntity(BlockEntityType<? extends SpiritJarBlockEntity> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -211,9 +208,9 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlock
     @SuppressWarnings("ConstantConditions")
     @Override
     public void onPlace(LivingEntity placer, ItemStack stack) {
-        if (stack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS)) {
+        if (stack.has(DataComponentRegistry.SPIRIT_JAR_CONTENTS.get())) {
             loadAdditional((CompoundTag) CodecUtil.encodeNBT(SpiritJarItem.Contents.CODEC, stack.get(
-                            DataComponentRegistry.SPIRIT_JAR_CONTENTS
+                            DataComponentRegistry.SPIRIT_JAR_CONTENTS.get()
                     )
             ), placer.level().registryAccess());
         }
@@ -256,7 +253,6 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlock
         return new Vec3(x, y, z);
     }
 
-    @OnlyIn(value = Dist.CLIENT)
     public void spawnUseParticles(Level level, BlockPos pos, MalumSpiritType type) {
         Color color = type.getPrimaryColor();
         WorldParticleBuilder.create(LodestoneParticleTypes.WISP_PARTICLE)
@@ -269,10 +265,5 @@ public class SpiritJarBlockEntity extends LodestoneBlockEntity implements IBlock
                 .setRandomOffset(0.1f, 0.1f)
                 .enableNoClip()
                 .repeat(level, pos.getX() + 0.5f, pos.getY() + 0.5f + Math.sin(level.getGameTime() / 20f) * 0.2f, pos.getZ() + 0.5f, 10);
-    }
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
-        return inventory.get();
     }
 }

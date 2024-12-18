@@ -14,7 +14,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
 import org.apache.commons.lang3.math.*;
 
-import javax.annotation.*;
 import java.util.*;
 import java.util.stream.*;
 
@@ -51,7 +50,7 @@ public final class SoulwovenPouchContents implements TooltipComponent {
     }
 
     static Fraction getWeight(ItemStack stack) {
-        var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS);
+        var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS.get());
         if (contents != null) {
             return BUNDLE_IN_BUNDLE_WEIGHT.add(contents.weight());
         } else {
@@ -178,7 +177,6 @@ public final class SoulwovenPouchContents implements TooltipComponent {
             return this.tryInsert(slot.safeTake(itemstack.getCount(), i, player));
         }
 
-        @Nullable
         public ItemStack removeOne() {
             if (this.items.isEmpty()) {
                 return null;

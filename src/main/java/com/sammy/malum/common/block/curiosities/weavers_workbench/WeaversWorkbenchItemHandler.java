@@ -1,8 +1,8 @@
 package com.sammy.malum.common.block.curiosities.weavers_workbench;
 
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
+import team.lodestar.lodestone.forge_stuff.ItemStackHandler;
 
 public class WeaversWorkbenchItemHandler extends ItemStackHandler {
 

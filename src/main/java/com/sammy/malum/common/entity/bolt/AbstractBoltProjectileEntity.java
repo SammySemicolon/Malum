@@ -13,7 +13,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.rendering.trail.*;
 
@@ -48,7 +48,7 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
+    
     public abstract void spawnParticles();
 
     public abstract int getMaxAge();

@@ -8,7 +8,9 @@ import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.core.systems.spirit.*;
+import com.sammy.malum.forge_stuff.SizedIngredient;
 import com.sammy.malum.registry.client.*;
+import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredient;
 import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
@@ -21,7 +23,7 @@ import net.minecraft.resources.*;
 import net.minecraft.util.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
-import net.neoforged.neoforge.common.crafting.*;
+import org.jetbrains.annotations.Nullable;
 import org.joml.*;
 import org.lwjgl.opengl.*;
 import team.lodestar.lodestone.registry.client.*;
@@ -29,7 +31,6 @@ import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
 import team.lodestar.lodestone.systems.rendering.shader.*;
 
-import javax.annotation.*;
 import java.awt.*;
 import java.lang.Math;
 import java.util.*;
@@ -43,7 +44,7 @@ import static net.minecraft.util.FastColor.ARGB32.*;
 public class ArcanaCodexHelper {
 
     public static final VFXBuilders.ScreenVFXBuilder VFX_BUILDER = VFXBuilders.createScreen().setPosTexDefaultFormat();
-    public static final Function<GuiGraphics, LodestoneBufferWrapper> WRAPPER_FUNCTION = Util.memoize(guiGraphics -> new LodestoneBufferWrapper(LodestoneRenderTypes.ADDITIVE_TEXT, guiGraphics.bufferSource));
+    public static final Function<GuiGraphics, LodestoneBufferWrapper> WRAPPER_FUNCTION = Util.memoize(guiGraphics -> new LodestoneBufferWrapper(LodestoneRenderTypes.ADDITIVE_TEXT, guiGraphics.bufferSource()));
 
     public enum BookTheme {
         DEFAULT, EASY_READING
@@ -205,24 +206,24 @@ public class ArcanaCodexHelper {
         RenderSystem.disableBlend();
     }
 
-    public static void renderIngredient(AbstractMalumScreen screen, GuiGraphics guiGraphics, ICustomIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
-        renderItem(screen, guiGraphics, ingredient.getItems().toList(), posX, posY, mouseX, mouseY);
+    public static void renderIngredient(AbstractMalumScreen screen, GuiGraphics guiGraphics, CustomIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
+        renderItem(screen, guiGraphics, List.of(ingredient.toVanilla().getItems()), posX, posY, mouseX, mouseY);
     }
 
     public static void renderIngredient(AbstractMalumScreen screen, GuiGraphics guiGraphics, SizedIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
-        renderItem(screen, guiGraphics, List.of(ingredient.getItems()), posX, posY, mouseX, mouseY);
+        renderItem(screen, guiGraphics, List.of(ingredient.ingredient().getItems()), posX, posY, mouseX, mouseY);
     }
 
     public static void renderIngredient(AbstractMalumScreen screen, GuiGraphics guiGraphics, Ingredient ingredient, int posX, int posY, int mouseX, int mouseY) {
         renderItem(screen, guiGraphics, List.of(ingredient.getItems()), posX, posY, mouseX, mouseY);
     }
 
-    public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, ICustomIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
-        renderItem(screen, guiGraphics, ingredient.getItems().toList(), posX, posY, mouseX, mouseY);
+    public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, CustomIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
+        renderItem(screen, guiGraphics, List.of(ingredient.toVanilla().getItems()), posX, posY, mouseX, mouseY);
     }
 
     public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, SizedIngredient ingredient, int posX, int posY, int mouseX, int mouseY) {
-        renderItem(screen, guiGraphics, List.of(ingredient.getItems()), posX, posY, mouseX, mouseY);
+        renderItem(screen, guiGraphics, List.of(ingredient.ingredient().getItems()), posX, posY, mouseX, mouseY);
     }
 
     public static void renderItem(AbstractMalumScreen screen, GuiGraphics guiGraphics, Ingredient ingredient, int posX, int posY, int mouseX, int mouseY) {
@@ -255,8 +256,8 @@ public class ArcanaCodexHelper {
     public static void renderIngredients(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<?> ingredients, Component hoverComponent, int left, int top, int mouseX, int mouseY, boolean vertical) {
         final List<List<ItemStack>> stackBundles =
                 Stream.of(
-                        ingredients.stream().filter(o -> o instanceof ICustomIngredient).map(o -> ((ICustomIngredient) o).getItems().toList()),
-                        ingredients.stream().filter(o -> o instanceof SizedIngredient).map(o -> Arrays.stream(((SizedIngredient) o).getItems()).toList()),
+                        ingredients.stream().filter(o -> o instanceof CustomIngredient).map(o -> List.of(((CustomIngredient) o).toVanilla().getItems())),
+                        ingredients.stream().filter(o -> o instanceof SizedIngredient).map(o -> Arrays.stream(((SizedIngredient) o).ingredient().getItems()).toList()),
                         ingredients.stream().filter(o -> o instanceof Ingredient).map(o -> Arrays.stream(((Ingredient) o).getItems()).toList())
                 ).flatMap(s -> s).toList();
         renderItemList(screen, guiGraphics, stackBundles, hoverComponent, left, top, mouseX, mouseY, vertical);
@@ -548,10 +549,10 @@ public class ArcanaCodexHelper {
         Color gray = new Color(138, 79, 58);
         Color dark = new Color(65, 41, 8);
 
-        guiGraphics.drawString(font, text, x - 1f, y, color(64, gray.getRGB()), false);
-        guiGraphics.drawString(font, text, x + 1f, y, color(32, gray.getRGB()), false);
-        guiGraphics.drawString(font, text, x, y - 1f, color(32, gray.getRGB()), false);
-        guiGraphics.drawString(font, text, x, y + 1f, color(92, gray.getRGB()), false);
+        guiGraphics.drawString(font, text, x - 1, y, color(64, gray.getRGB()), false);
+        guiGraphics.drawString(font, text, x + 1, y, color(32, gray.getRGB()), false);
+        guiGraphics.drawString(font, text, x, y - 1, color(32, gray.getRGB()), false);
+        guiGraphics.drawString(font, text, x, y + 1, color(92, gray.getRGB()), false);
 
         guiGraphics.drawString(font, text, x, y, color(255, dark.getRGB()), false);
 

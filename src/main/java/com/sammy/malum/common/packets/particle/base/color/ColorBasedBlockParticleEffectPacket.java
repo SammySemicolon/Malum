@@ -20,10 +20,10 @@ public abstract class ColorBasedBlockParticleEffectPacket extends BlockBasedPart
     }
 
     @Override
-    public void serialize(FriendlyByteBuf buf) {
+    public void write(FriendlyByteBuf buf) {
         buf.writeInt(color.getRed());
         buf.writeInt(color.getGreen());
         buf.writeInt(color.getBlue());
-        super.serialize(buf);
+        super.write(buf);
     }
 }

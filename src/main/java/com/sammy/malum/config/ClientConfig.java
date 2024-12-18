@@ -2,8 +2,8 @@ package com.sammy.malum.config;
 
 
 import com.sammy.malum.client.screen.codex.ArcanaCodexHelper;
-import net.neoforged.fml.config.IConfigSpec;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import io.github.fabricators_of_create.porting_lib.config.IConfigSpec;
+import io.github.fabricators_of_create.porting_lib.config.ModConfigSpec;
 import team.lodestar.lodestone.systems.config.LodestoneConfig;
 
 import static com.sammy.malum.MalumMod.MALUM;

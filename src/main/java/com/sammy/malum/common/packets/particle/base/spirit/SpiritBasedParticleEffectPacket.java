@@ -2,14 +2,14 @@ package com.sammy.malum.common.packets.particle.base.spirit;
 
 import com.sammy.malum.common.packets.particle.base.PositionBasedParticleEffectPacket;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public abstract class SpiritBasedParticleEffectPacket extends PositionBasedParticleEffectPacket {
     protected final List<String> spirits;
@@ -30,18 +30,20 @@ public abstract class SpiritBasedParticleEffectPacket extends PositionBasedParti
     }
 
     @Override
-    public void serialize(FriendlyByteBuf buf) {
-        super.serialize(buf);
+    public void write(FriendlyByteBuf buf) {
         buf.writeInt(spirits.size());
         for (String string : spirits) {
             buf.writeUtf(string);
         }
+        super.write(buf);
     }
 
-    @OnlyIn(Dist.CLIENT) @Override
-    public void handle(IPayloadContext iPayloadContext) {}
+    @Override
+    public <T extends CustomPacketPayload> void handle(T t, ClientPlayNetworking.Context context) {
 
-    protected abstract void handle(IPayloadContext iPayloadContext, MalumSpiritType spiritType);
+    }
+
+    protected abstract void handle(ClientPlayNetworking.Context context, MalumSpiritType spiritType);
 
 
     public static <T extends SpiritBasedParticleEffectPacket> T decode(PacketProvider<T> provider, FriendlyByteBuf buf) {

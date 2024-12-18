@@ -10,7 +10,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.*;
+
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.particle.*;
@@ -98,7 +98,7 @@ public class VividNitrateEntity extends AbstractNitrateEntity {
     }
 
 
-    @OnlyIn(Dist.CLIENT)
+    
     @Override
     public void spawnParticles() {
         float scalar = age > MAX_AGE - 10 ? 1f - (age - MAX_AGE + 10) / 10f : 1f;

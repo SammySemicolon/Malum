@@ -2,9 +2,9 @@ package com.sammy.malum.data.recipe;
 
 import com.mojang.datafixers.util.*;
 import com.sammy.malum.data.recipe.builder.*;
+import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.level.block.*;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.*;
 

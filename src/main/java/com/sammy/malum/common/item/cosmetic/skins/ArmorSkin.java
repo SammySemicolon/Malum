@@ -5,8 +5,6 @@ import com.sammy.malum.registry.common.item.ArmorSkinRegistry;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import team.lodestar.lodestone.systems.item.LodestoneArmorItem;
 
 import java.util.Map;
@@ -27,7 +25,6 @@ public abstract class ArmorSkin {
         this.index = indexCounter++;
     }
 
-    @OnlyIn(Dist.CLIENT)
     public abstract ArmorSkinRenderingData getRenderingData();
 
     public static String getApplicableItemSkinTag(ItemStack target, ItemStack weave) {

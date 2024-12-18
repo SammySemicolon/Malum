@@ -56,11 +56,12 @@ public class MalumMod implements ModInitializer {
 
         ConfigRegistry.registerConfig(MalumMod.MALUM, ModConfig.Type.CLIENT, ClientConfig.SPEC);
         ConfigRegistry.registerConfig(MalumMod.MALUM, ModConfig.Type.COMMON, CommonConfig.SPEC);
-
+        AttachmentTypeRegistry.register();
+        COMPONENTS.register();
         SOUNDS.register();
         BLOCKS.register();
         BLOCK_ENTITY_TYPES.register();
-        COMPONENTS.register();
+
         ITEMS.register();
         ENTITY_TYPES.register();
         EFFECTS.register();
@@ -72,7 +73,6 @@ public class MalumMod implements ModInitializer {
         FEATURE_TYPES.register();
         STRUCTURES.register();
         CREATIVE_MODE_TABS.register();
-        AttachmentTypeRegistry.register();
         PacketRegistry.registerNetworkStuff();
         WorldEventTypes.TYPES.register();
         ItemGroupEvents.MODIFY_ENTRIES_ALL.register(HiddenTagRegistry::hideItems);

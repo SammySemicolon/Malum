@@ -25,6 +25,9 @@
     ],
     "emi": [
       "com.sammy.malum.compability.emi.EMIHandler"
+    ],
+    "mixinsquared": [
+      "com.sammy.malum.core.MalumMixinDestroyer"
     ]
   },
   "mixins": [

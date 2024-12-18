@@ -89,7 +89,7 @@ repositories {
     maven("https://maven.greenhouseteam.dev/releases/")
     maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/") // Forge Config API Port
     maven("https://maven.shedaniel.me/")
-
+    maven( url = "https://maven.bawnorton.com/releases" )
 }
 
 dependencies {
@@ -138,6 +138,10 @@ dependencies {
         include(("io.github.fabricators_of_create.Porting-Lib:$module:${property("port_lib_version")}"))
         modImplementation(("io.github.fabricators_of_create.Porting-Lib:$module:${property("port_lib_version")}"))
     }
+
+    include("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
+    implementation("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
+    annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")
 
     //include("com.jamieswhiteshirt:reach-entity-attributes:${property("reach_entity_attributes_version")}")
     //modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${property("reach_entity_attributes_version")}")

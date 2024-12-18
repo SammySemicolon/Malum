@@ -67,6 +67,8 @@ public class MalumItemTags extends FabricTagProvider.ItemTagProvider {
         copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
 
         getOrCreateTagBuilder(Tags.Items.GEMS).add(REFINED_SOULSTONE.get(), BLAZING_QUARTZ.get());
+        getOrCreateTagBuilder(ItemTagRegistry.RUNEWOOD_LOGS);
+        getOrCreateTagBuilder(ItemTagRegistry.SOULWOOD_LOGS);
         getOrCreateTagBuilder(ItemTags.LOGS).addOptionalTag(ItemTagRegistry.RUNEWOOD_LOGS).addOptionalTag(ItemTagRegistry.SOULWOOD_LOGS);
         getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN).addOptionalTag(ItemTagRegistry.RUNEWOOD_LOGS).addOptionalTag(ItemTagRegistry.SOULWOOD_LOGS);
         getOrCreateTagBuilder(Tags.Items.SLIMEBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());

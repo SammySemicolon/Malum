@@ -2,28 +2,40 @@
   "ritual_identifier": "malum:warped_time",
   "input": {
     "count": 8,
-    "item": "minecraft:phantom_membrane"
+    "ingredient": {
+      "item": "minecraft:phantom_membrane"
+    }
   },
   "extra_items": [
     {
       "count": 4,
-      "item": "malum:astral_weave"
+      "ingredient": {
+        "item": "malum:astral_weave"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:white_wool"
+      "ingredient": {
+        "item": "minecraft:white_wool"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:sunflower"
+      "ingredient": {
+        "item": "minecraft:sunflower"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:charcoal"
+      "ingredient": {
+        "item": "minecraft:charcoal"
+      }
     },
     {
       "count": 1,
-      "item": "minecraft:clock"
+      "ingredient": {
+        "item": "minecraft:clock"
+      }
     }
   ]
 }

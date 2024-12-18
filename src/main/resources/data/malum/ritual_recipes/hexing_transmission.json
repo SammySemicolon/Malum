@@ -2,28 +2,40 @@
   "ritual_identifier": "malum:hexing_transmission",
   "input": {
     "count": 8,
-    "item": "malum:hex_ash"
+    "ingredient": {
+      "item": "malum:hex_ash"
+    }
   },
   "extra_items": [
     {
       "count": 1,
-      "item": "minecraft:nether_star"
+      "ingredient": {
+        "item": "minecraft:nether_star"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:ender_pearl"
+      "ingredient": {
+        "item": "minecraft:ender_pearl"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:echo_shard"
+      "ingredient": {
+        "item": "minecraft:echo_shard"
+      }
     },
     {
       "count": 2,
-      "item": "minecraft:chorus_fruit"
+      "ingredient": {
+        "item": "minecraft:chorus_fruit"
+      }
     },
     {
       "count": 1,
-      "item": "minecraft:lodestone"
+      "ingredient": {
+        "item": "minecraft:lodestone"
+      }
     }
   ]
 }

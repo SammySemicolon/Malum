@@ -1,9 +1,0 @@
-{
-  "type": "jeed:effect_provider",
-  "effect": "malum:zephyrs_courage",
-  "providers": [
-    {
-      "item": "malum:runewood_totem_base"
-    }
-  ]
-}

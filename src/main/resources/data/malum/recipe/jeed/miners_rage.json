@@ -1,9 +1,0 @@
-{
-  "type": "jeed:effect_provider",
-  "effect": "malum:miners_rage",
-  "providers": [
-    {
-      "item": "malum:runewood_totem_base"
-    }
-  ]
-}

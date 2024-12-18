@@ -2,28 +2,40 @@
   "ritual_identifier": "malum:manabound_enhancement",
   "input": {
     "count": 8,
-    "item": "malum:soul_stained_steel_plating"
+    "ingredient": {
+      "item": "malum:soul_stained_steel_plating"
+    }
   },
   "extra_items": [
     {
       "count": 4,
-      "item": "minecraft:iron_ingot"
+      "ingredient": {
+        "item": "minecraft:iron_ingot"
+      }
     },
     {
       "count": 4,
-      "item": "malum:soul_stained_steel_ingot"
+      "ingredient": {
+        "item": "malum:soul_stained_steel_ingot"
+      }
     },
     {
       "count": 4,
-      "item": "minecraft:glowstone_dust"
+      "ingredient": {
+        "item": "minecraft:glowstone_dust"
+      }
     },
     {
       "count": 2,
-      "item": "malum:arcane_charcoal"
+      "ingredient": {
+        "item": "malum:arcane_charcoal"
+      }
     },
     {
       "count": 1,
-      "item": "minecraft:iron_chestplate"
+      "ingredient": {
+        "item": "minecraft:iron_chestplate"
+      }
     }
   ]
 }

@@ -1,9 +1,0 @@
-{
-  "type": "jeed:effect_provider",
-  "effect": "malum:gluttony",
-  "providers": [
-    {
-      "item": "malum:belt_of_the_starved"
-    }
-  ]
-}

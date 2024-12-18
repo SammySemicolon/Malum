@@ -36,7 +36,7 @@ public class MalumVanillaRecipeReplacements extends VanillaRecipeProvider {
         replace(Items.QUARTZ, Tags.Items.GEMS_QUARTZ);
         replace(Items.SLIME_BALL, Tags.Items.SLIMEBALLS);
 
-        super.buildRecipes(pWriter);
+        //super.buildRecipes(pWriter);
     }
 
 

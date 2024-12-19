@@ -120,11 +120,17 @@ public class PacketRegistry {
         for (ServerPlayer player : PlayerLookup.tracking(e)) {
             ServerPlayNetworking.send(player, payload);
         }
+        if (e instanceof ServerPlayer self) {
+            ServerPlayNetworking.send(self, payload);
+        }
     }
 
     public static void sendToPlayersTrackingEntityAndSelf(Entity e, CustomPacketPayload payload) {
         for (ServerPlayer player : PlayerLookup.tracking(e)) {
             ServerPlayNetworking.send(player, payload);
+        }
+        if (e instanceof ServerPlayer self) {
+            ServerPlayNetworking.send(self, payload);
         }
     }
 

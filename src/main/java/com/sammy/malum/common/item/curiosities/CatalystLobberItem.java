@@ -24,13 +24,6 @@ public class CatalystLobberItem extends Item {
         this.entitySupplier = entitySupplier;
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        var data = stack.get(DataComponentRegistry.CATALYST_LOBBER_STATE.get());
-        tooltipComponents.add(Component.literal(String.valueOf(data.state())));
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-    }
-
     public static float getStateDisplay(ItemStack stack) {
         var data = stack.get(DataComponentRegistry.CATALYST_LOBBER_STATE.get());
         if (data == null) {

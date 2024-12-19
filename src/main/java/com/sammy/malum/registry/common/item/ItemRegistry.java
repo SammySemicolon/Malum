@@ -779,16 +779,10 @@ public class ItemRegistry {
                     SOULWOVEN_POUCH.get(),
                     MalumMod.malumPath("filled"),
                     (stack, level, holder, holderID) -> SoulwovenPouchItem.getFullnessDisplay(stack));
-            FabricModelPredicateProviderRegistry.register(
+            ItemProperties.register(
                     SOULWOVEN_BANNER.get(),
                     MalumMod.malumPath("pattern"),
-                    (stack, level, holder, holderID) -> {
-                        var data = stack.get(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN.get());
-                        //System.out.println("DATA: " + data);
-                        var v = SoulwovenBannerBlockItem.getBannerPattern(stack);
-                        //System.out.println(v);
-                        return v;
-                    });
+                    (stack, level, holder, holderID) -> SoulwovenBannerBlockItem.getBannerPattern(stack));
             ItemProperties.register(
                     RITUAL_SHARD.get(),
                     MalumMod.malumPath("tier"),

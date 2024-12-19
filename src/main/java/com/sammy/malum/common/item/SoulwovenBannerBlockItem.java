@@ -30,8 +30,8 @@ public class SoulwovenBannerBlockItem extends BlockItem {
     }
 
     public static float getBannerPattern(ItemStack stack) {
-        var pattern = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN.get(), SoulwovenBannerPatternData.DEFAULT);
-        return SoulwovenBannerPatternData.REGISTERED_PATTERNS.contains(pattern) ? SoulwovenBannerPatternData.REGISTERED_PATTERNS.indexOf(pattern) : 0;
+        var pattern = stack.get(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN.get());
+        return SoulwovenBannerPatternData.REGISTERED_PATTERNS.indexOf(pattern) ;
     }
 
     public static void addBannerVariantsToCreativeTab() {

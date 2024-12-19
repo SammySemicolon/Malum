@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "malum:item/catalyst_lobber_open"
+  }
+}

@@ -70,14 +70,6 @@ public class CreativeTabRegistry {
     );
 
     public static void populateItemGroups() {
-        ItemGroupEvents.MODIFY_ENTRIES_ALL.register((group, entries) -> {
-            Optional<ResourceKey<CreativeModeTab>> opt = BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(group);
-            if (opt.isPresent()) {
-                if (TAB_SORTING.containsKey(opt.get())) {
-                    TAB_SORTING.get(opt.get()).stream().map(BuiltInRegistries.ITEM::get)
-                            .forEach(entries::accept);
-                }
-            }
-        });
+
     }
 }

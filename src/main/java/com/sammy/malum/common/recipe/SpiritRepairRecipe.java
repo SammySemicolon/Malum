@@ -88,7 +88,7 @@ public class SpiritRepairRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipe
 
     @Override
     public final ItemStack getResultItem(HolderLookup.Provider registries) {
-        throw new UnsupportedOperationException();
+        return ItemStack.EMPTY;
     }
 
     protected static void addToInputs(ArrayList<Item> inputs, String itemIdRegex, String modIdRegex) {

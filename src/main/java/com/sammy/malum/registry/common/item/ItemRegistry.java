@@ -49,6 +49,7 @@ import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import io.github.fabricators_of_create.porting_lib.util.DeferredHolder;
 import io.github.fabricators_of_create.porting_lib.util.DeferredRegister;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.client.color.item.*;
 import net.minecraft.client.renderer.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -773,32 +774,21 @@ public class ItemRegistry {
 
         public static void addItemProperties() {
             Set<LodestoneArmorItem> armors = ItemRegistry.ITEMS.getEntries().stream().filter(r -> r.get() instanceof LodestoneArmorItem).map(r -> (LodestoneArmorItem) r.get()).collect(Collectors.toSet());
-//            ItemPropertyFunction armorPropertyFunction = (stack, level, holder, holderID) -> {
-//                if (!stack.hasTag()) {
-//                    return -1;
-//                }
-//                CompoundTag nbt = stack.getTag();
-//                if (!nbt.contains(ArmorSkin.MALUM_SKIN_TAG)) {
-//                    return -1;
-//                }
-//                ArmorSkin armorSkin = ArmorSkinRegistry.SKINS.get(nbt.getString(ArmorSkin.MALUM_SKIN_TAG));
-//                if (armorSkin == null) {
-//                    return -1;
-//                }
-//                return armorSkin.index;
-//            };
-//            for (LodestoneArmorItem armor : armors) {
-//                ItemProperties.register(armor, new ResourceLocation(ArmorSkin.MALUM_SKIN_TAG), armorPropertyFunction);
-//            }
 
             ItemProperties.register(
                     SOULWOVEN_POUCH.get(),
                     MalumMod.malumPath("filled"),
                     (stack, level, holder, holderID) -> SoulwovenPouchItem.getFullnessDisplay(stack));
-            ItemProperties.register(
+            FabricModelPredicateProviderRegistry.register(
                     SOULWOVEN_BANNER.get(),
                     MalumMod.malumPath("pattern"),
-                    (stack, level, holder, holderID) -> SoulwovenBannerBlockItem.getBannerPattern(stack));
+                    (stack, level, holder, holderID) -> {
+                        var data = stack.get(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN.get());
+                        //System.out.println("DATA: " + data);
+                        var v = SoulwovenBannerBlockItem.getBannerPattern(stack);
+                        //System.out.println(v);
+                        return v;
+                    });
             ItemProperties.register(
                     RITUAL_SHARD.get(),
                     MalumMod.malumPath("tier"),

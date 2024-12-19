@@ -4,6 +4,7 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.*;
+import com.sammy.malum.registry.common.item.tabs.CreativeTabRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.*;
 import net.minecraft.network.chat.*;
@@ -33,19 +34,17 @@ public class SoulwovenBannerBlockItem extends BlockItem {
         return SoulwovenBannerPatternData.REGISTERED_PATTERNS.contains(pattern) ? SoulwovenBannerPatternData.REGISTERED_PATTERNS.indexOf(pattern) : 0;
     }
 
-    public static void addBannerVariantsToCreativeTab(BuildCreativeModeTabContentsEvent event) {
-        final ItemStack defaultInstance = ItemRegistry.SOULWOVEN_BANNER.get().getDefaultInstance();
-        if (event.getParentEntries().contains(defaultInstance)) {
+    public static void addBannerVariantsToCreativeTab() {
+        final var defaultInstance = ItemRegistry.SOULWOVEN_BANNER.get();
+
+        ItemGroupEvents.modifyEntriesEvent(CreativeTabRegistry.BUILDING.getKey()).register(fabricItemGroupEntries -> {
             for (SoulwovenBannerPatternData pattern : SoulwovenBannerPatternData.REGISTERED_PATTERNS) {
                 if (pattern.equals(SoulwovenBannerPatternData.DEFAULT)) {
                     continue;
                 }
                 final ItemStack copy = pattern.getDefaultStack();
-                if (event.getParentEntries().contains(copy)) {
-                    continue;
-                }
-                event.insertAfter(defaultInstance, copy, PARENT_AND_SEARCH_TABS);
+                fabricItemGroupEntries.addAfter(defaultInstance, copy);
             }
-        }
+        });
     }
 }

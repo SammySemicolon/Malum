@@ -77,7 +77,7 @@ public class MalumMod implements ModInitializer {
         WorldEventTypes.TYPES.register();
         ItemGroupEvents.MODIFY_ENTRIES_ALL.register(HiddenTagRegistry::hideItems);
         MobEffectRegistry.registerBrewingRecipes();
-        SetupEvents.buildCreativeTabs();
+
         RuntimeEvents.register();
         FarmersDelightCompat.init();
         AttributeLibCompat.init();
@@ -92,7 +92,7 @@ public class MalumMod implements ModInitializer {
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new RitualRecipeReloadListenerFabricImpl());
 
         CreativeTabRegistry.populateItemGroups();
-
+        SetupEvents.buildCreativeTabs();
     }
 
     public static ResourceLocation malumPath(String path) {

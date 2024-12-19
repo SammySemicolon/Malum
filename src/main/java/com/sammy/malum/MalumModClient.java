@@ -10,6 +10,7 @@ import com.sammy.malum.client.renderer.block.TotemBaseRenderer;
 import com.sammy.malum.client.renderer.curio.TokenOfGratitudeRenderer;
 import com.sammy.malum.client.renderer.curio.TopHatCurioRenderer;
 import com.sammy.malum.client.renderer.item.SpiritJarItemRenderer;
+import com.sammy.malum.common.data_components.SoulwovenBannerPatternData;
 import com.sammy.malum.core.events.ClientRuntimeEvents;
 import com.sammy.malum.core.events.ClientSetupEvents;
 import com.sammy.malum.registry.client.*;
@@ -34,6 +35,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.network.chat.Component;
 
@@ -43,7 +45,7 @@ public class MalumModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientTickEvents.START_CLIENT_TICK.register(this::startTick);
-
+        SoulwovenBannerPatternData aDefault = SoulwovenBannerPatternData.DEFAULT;
         ParticleRegistry.registerParticleFactory();
         BlockEntityRegistry.ClientOnly.registerRenderer();
         BlockRegistry.ClientOnly.setBlockColors();
@@ -115,7 +117,9 @@ public class MalumModClient implements ClientModInitializer {
                 RUNEWOOD_DOOR.get(),
                 RUNEWOOD_TRAPDOOR.get(),
                 SOULWOOD_LEAVES.get(),
-                BUDDING_SOULWOOD_LEAVES.get()
+                BUDDING_SOULWOOD_LEAVES.get(),
+
+                SOULWOVEN_BANNER.get()
         );
 
         ArmorRenderer.register(new SoulHunterArmorRenderer(),
@@ -152,6 +156,7 @@ public class MalumModClient implements ClientModInitializer {
         );
 
         HiddenTagRegistry.registerHiddenTags();
+
     }
 
     private void startTick(Minecraft minecraft) {

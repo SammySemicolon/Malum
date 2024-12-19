@@ -7,8 +7,8 @@
   "output": {
     "components": {
       "malum:soulwoven_banner_pattern": {
-        "type": "malum:fractal",
-        "texture": "malum:textures/block/banners/soulwoven_banner_fractal.png"
+        "type": "malum:break",
+        "texture": "malum:textures/block/banners/soulwoven_banner_break.png"
       }
     },
     "count": 1,

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "malum:soulwoven_banner"
+    },
+    {
+      "item": "malum:astral_weave"
+    }
+  ],
+  "result": {
+    "components": {
+      "malum:soulwoven_banner_pattern": {
+        "type": "malum:heft",
+        "texture": "malum:textures/block/banners/soulwoven_banner_heft.png"
+      }
+    },
+    "count": 1,
+    "id": "malum:soulwoven_banner"
+  }
+}

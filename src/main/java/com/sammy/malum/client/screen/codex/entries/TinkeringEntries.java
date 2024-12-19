@@ -6,6 +6,7 @@ import com.sammy.malum.client.screen.codex.pages.recipe.*;
 import com.sammy.malum.client.screen.codex.pages.recipe.vanilla.*;
 import com.sammy.malum.client.screen.codex.pages.text.*;
 import com.sammy.malum.client.screen.codex.screens.*;
+import com.sammy.malum.registry.common.item.*;
 import net.minecraft.world.item.*;
 
 import static com.sammy.malum.MalumMod.*;
@@ -85,17 +86,21 @@ public class TinkeringEntries {
                 .addPage(new CraftingPage(new ItemStack(SOUL_STAINED_STEEL_PLATING.get(), 2), EMPTY, SOUL_STAINED_STEEL_NUGGET.get(), EMPTY, SOUL_STAINED_STEEL_NUGGET.get(), SOUL_STAINED_STEEL_INGOT.get(), SOUL_STAINED_STEEL_NUGGET.get(), EMPTY, SOUL_STAINED_STEEL_NUGGET.get(), EMPTY))
         );
 
-        screen.addEntry("spirit_trinkets", -7, 7, b -> b
-                .configureWidget(w -> w.setIcon(ORNATE_RING))
+        screen.addEntry("spirit_trinkets", -10, 7, b -> b
+                .configureWidget(w -> w.setIcon(ORNATE_RING).setStyle(BookWidgetStyle.GILDED_RUNEWOOD))
                 .addPage(new HeadlineTextPage("spirit_trinkets", "spirit_trinkets.1"))
                 .addPage(new TextPage("spirit_trinkets.2"))
                 .addPage(CraftingPage.ringPage(ORNATE_RING.get(), SOUL_STAINED_STEEL_INGOT.get()))
                 .addPage(new CraftingPage(ORNATE_NECKLACE.get(), EMPTY, STRING, EMPTY, STRING, EMPTY, STRING, EMPTY, SOUL_STAINED_STEEL_INGOT.get(), EMPTY))
                 .addPage(CraftingPage.ringPage(GILDED_RING.get(), HALLOWED_GOLD_INGOT.get()))
                 .addPage(new CraftingPage(GILDED_BELT.get(), LEATHER, LEATHER, LEATHER, HALLOWED_GOLD_INGOT.get(), REFINED_SOULSTONE.get(), HALLOWED_GOLD_INGOT.get(), EMPTY, HALLOWED_GOLD_INGOT.get(), EMPTY))
+                .addReference(new EntryReference(RING_OF_ESOTERIC_SPOILS.get(),
+                        BookEntry.build("ring_of_esoteric_spoils")
+                                .addPage(new HeadlineTextPage("ring_of_esoteric_spoils", "ring_of_esoteric_spoils.1"))
+                                .addPage(SpiritInfusionPage.fromOutput(RING_OF_ESOTERIC_SPOILS.get()))))
         );
 
-        screen.addEntry("reactive_trinkets",-10, 7, b -> b
+        screen.addEntry("reactive_trinkets",-12, 6, b -> b
                 .configureWidget(w -> w.setIcon(RING_OF_CURATIVE_TALENT))
                 .addPage(new HeadlineTextPage("reactive_trinkets.ring_of_curative_talent", "reactive_trinkets.ring_of_curative_talent.1"))
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_CURATIVE_TALENT.get()))
@@ -110,12 +115,6 @@ public class TinkeringEntries {
                         BookEntry.build("necklace_of_the_mystic_mirror")
                                 .addPage(new HeadlineTextPage("necklace_of_the_mystic_mirror", "necklace_of_the_mystic_mirror.1"))
                                 .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_MYSTIC_MIRROR.get()))))
-        );
-
-        screen.addEntry("ring_of_esoteric_spoils", -12, 6, b -> b
-                .configureWidget(w -> w.setIcon(RING_OF_ESOTERIC_SPOILS))
-                .addPage(new HeadlineTextPage("ring_of_esoteric_spoils", "ring_of_esoteric_spoils.1"))
-                .addPage(SpiritInfusionPage.fromOutput(RING_OF_ESOTERIC_SPOILS.get()))
         );
 
         screen.addEntry("belt_of_the_starved",-11, 8, b -> b

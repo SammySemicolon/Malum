@@ -40,8 +40,7 @@ public class SoulwovenBannerBlockItem extends BlockItem {
                 if (pattern.equals(SoulwovenBannerPatternData.DEFAULT)) {
                     continue;
                 }
-                final ItemStack copy = defaultInstance.copy();
-                copy.set(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN, pattern);
+                final ItemStack copy = pattern.getDefaultStack();
                 if (event.getParentEntries().contains(copy)) {
                     continue;
                 }

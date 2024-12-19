@@ -54,7 +54,6 @@ public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBan
         float yStart = -2;
         float yEnd = 0;
         var vertices = new Vector3f[]{new Vector3f(xEnd, yStart, 0), new Vector3f(xStart, yStart, 0), new Vector3f(xStart, yEnd, 0), new Vector3f(xEnd, yEnd, 0)};
-
         builder.renderQuad(poseStack, vertices, 1f);
         if (spirit != null) {
             var spiritGlow = blockEntityIn.intense ?

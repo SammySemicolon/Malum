@@ -1,62 +1,62 @@
 {
   "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "malum:item/soulwoven_banner_default"
-  },
   "overrides": [
     {
+      "model": "malum:item/soulwoven_banner_sequence",
       "predicate": {
-        "malum:pattern": 1
-      },
-      "model": "malum:item/soulwoven_banner_sequence"
+        "malum:pattern": 0.1
+      }
     },
     {
+      "model": "malum:item/soulwoven_banner_sanity",
       "predicate": {
-        "malum:pattern": 2
-      },
-      "model": "malum:item/soulwoven_banner_sanity"
+        "malum:pattern": 0.2
+      }
     },
     {
       "model": "malum:item/soulwoven_banner_breeze",
       "predicate": {
-        "malum:pattern": 3
+        "malum:pattern": 0.3
       }
     },
     {
       "model": "malum:item/soulwoven_banner_breath",
       "predicate": {
-        "malum:pattern": 4
+        "malum:pattern": 0.4
       }
     },
     {
       "model": "malum:item/soulwoven_banner_break",
       "predicate": {
-        "malum:pattern": 5
+        "malum:pattern": 0.5
       }
     },
     {
       "model": "malum:item/soulwoven_banner_hunger",
       "predicate": {
-        "malum:pattern": 6
+        "malum:pattern": 0.6
       }
     },
     {
       "model": "malum:item/soulwoven_banner_horns",
       "predicate": {
-        "malum:pattern": 7
+        "malum:pattern": 0.7
       }
     },
     {
       "model": "malum:item/soulwoven_banner_heft",
       "predicate": {
-        "malum:pattern": 8
+        "malum:pattern": 0.8
       }
     },
     {
       "model": "malum:item/soulwoven_banner_hallucination",
       "predicate": {
-        "malum:pattern": 9
+        "malum:pattern": 0.9
       }
     }
-  ]
+  ],
+  "textures": {
+    "layer0": "malum:item/soulwoven_banner_default"
+  }
 }

@@ -4,13 +4,13 @@
     {
       "model": "malum:item/catalyst_lobber_open",
       "predicate": {
-        "malum:state": 1.0
+        "malum:state": 0.2
       }
     },
     {
       "model": "malum:item/catalyst_lobber_loaded",
       "predicate": {
-        "malum:state": 2.0
+        "malum:state": 0.1
       }
     }
   ],

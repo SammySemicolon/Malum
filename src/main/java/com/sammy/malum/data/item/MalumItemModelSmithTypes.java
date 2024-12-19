@@ -39,7 +39,7 @@ public class MalumItemModelSmithTypes {
             String path = ritualTier.identifier.getPath();
             ResourceLocation itemTexturePath = provider.getItemTexture(base + "_" + path);
             provider.getBuilder(BuiltInRegistries.ITEM.getKey(item).getPath()).override()
-                    .predicate(MalumMod.malumPath("tier"), ritualTier.potency)
+                    .predicate(MalumMod.malumPath("tier"), ritualTier.potency / 10f)
                     .model(provider.withExistingParent(provider.getItemName(item) + "_" + path, GENERATED).texture("layer0", itemTexturePath))
                     .end();
         }
@@ -59,7 +59,7 @@ public class MalumItemModelSmithTypes {
         String base = provider.getItemName(item);
         provider.createGenericModel(item, GENERATED, provider.getItemTexture(base + "_default"));
         for (SoulwovenBannerPatternData pattern : SoulwovenBannerPatternData.REGISTERED_PATTERNS) {
-            final int i = SoulwovenBannerPatternData.REGISTERED_PATTERNS.indexOf(pattern);
+            final float i = SoulwovenBannerPatternData.REGISTERED_PATTERNS.indexOf(pattern) / 10f;
             if (pattern.equals(SoulwovenBannerPatternData.DEFAULT)) {
                 continue;
             }
@@ -75,11 +75,15 @@ public class MalumItemModelSmithTypes {
     public static ItemModelSmith CATALYST_LOBBER = new ItemModelSmith((item, provider) -> {
         String base = provider.getItemName(item);
         provider.createGenericModel(item, HANDHELD, provider.getItemTexture(base));
-        for (int i = 1; i <= 2; i++) {
-            String affix = i == 1 ? "open" : "loaded";
+
+        float[] states = {0.2f, 0.1f};
+        String[] affixes = {"open", "loaded"};
+
+        for (int i = 0; i < states.length; i++) {
+            String affix = affixes[i];
             ResourceLocation itemTexturePath = provider.getItemTexture(base + "_" + affix);
             provider.getBuilder(BuiltInRegistries.ITEM.getKey(item).getPath()).override()
-                    .predicate(MalumMod.malumPath("state"), i)
+                    .predicate(MalumMod.malumPath("state"), states[i])
                     .model(provider.withExistingParent(base + "_" + affix, HANDHELD).texture("layer0", itemTexturePath))
                     .end();
         }

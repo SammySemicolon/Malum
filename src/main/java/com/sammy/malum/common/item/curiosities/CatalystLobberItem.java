@@ -4,6 +4,7 @@ import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.*;
 import net.minecraft.stats.*;
 import net.minecraft.world.*;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 
+import java.util.List;
 import java.util.function.*;
 
 public class CatalystLobberItem extends Item {
@@ -22,12 +24,19 @@ public class CatalystLobberItem extends Item {
         this.entitySupplier = entitySupplier;
     }
 
-    public static int getStateDisplay(ItemStack stack) {
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        var data = stack.get(DataComponentRegistry.CATALYST_LOBBER_STATE.get());
+        tooltipComponents.add(Component.literal(String.valueOf(data.state())));
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    public static float getStateDisplay(ItemStack stack) {
         var data = stack.get(DataComponentRegistry.CATALYST_LOBBER_STATE.get());
         if (data == null) {
             return -1;
         }
-        return data.state();
+        return data.state() / 10f;
     }
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {

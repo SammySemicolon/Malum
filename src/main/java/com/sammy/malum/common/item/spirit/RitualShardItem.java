@@ -27,12 +27,12 @@ public class RitualShardItem extends Item implements ItemParticleSupplier {
         super(properties);
     }
 
-    public static int getStateDisplay(ItemStack stack) {
+    public static float getStateDisplay(ItemStack stack) {
         var data = stack.get(DataComponentRegistry.RITUAL_DATA.get());
         if (data == null) {
             return -1;
         }
-        return data.ritualTier().potency;
+        return data.ritualTier().potency / 10f;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class DataComponentRegistry {
             builder.persistent(SoulwovenPouchContents.CODEC).networkSynchronized(SoulwovenPouchContents.STREAM_CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<SoulwovenBannerPatternData>> SOULWOVEN_BANNER_PATTERN = register("soulwoven_banner_pattern", builder ->
-            builder.persistent(SoulwovenBannerPatternData.CODEC).networkSynchronized(SoulwovenBannerPatternData.STREAM_CODEC));
+            builder.persistent(SoulwovenBannerPatternData.CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<RitualData>> RITUAL_DATA = register("ritual_data", builder ->
             builder.persistent(RitualData.CODEC).networkSynchronized(RitualData.STREAM_CODEC));
@@ -30,7 +30,7 @@ public class DataComponentRegistry {
             builder.persistent(Codec.STRING).networkSynchronized(ByteBufCodecs.STRING_UTF8));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CatalystFlingerState>> CATALYST_LOBBER_STATE = register("catalyst_flinger_state", builder ->
-            builder.persistent(CatalystFlingerState.CODEC).networkSynchronized(CatalystFlingerState.STREAM_CODEC));
+            builder.persistent(CatalystFlingerState.CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpiritJarItem.Contents>> SPIRIT_JAR_CONTENTS = register("spirit_jar_contents", builder ->
             builder.persistent(SpiritJarItem.Contents.CODEC).networkSynchronized(SpiritJarItem.Contents.STREAM_CODEC));
@@ -43,9 +43,5 @@ public class DataComponentRegistry {
 
     static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builder) {
         return COMPONENTS.register(name, () -> builder.apply(DataComponentType.builder()).build());
-    }
-
-    static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name, Codec<T> codec) {
-        return COMPONENTS.register(name, () -> DataComponentType.<T>builder().persistent(codec).networkSynchronized(ByteBufCodecs.fromCodec(codec)).build());
     }
 }

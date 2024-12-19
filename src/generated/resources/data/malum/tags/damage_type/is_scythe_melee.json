@@ -1,6 +1,12 @@
 {
   "values": [
-    "malum:scythe_melee",
-    "malum:scythe_sweep"
+    {
+      "id": "malum:scythe_melee",
+      "required": false
+    },
+    {
+      "id": "malum:scythe_sweep",
+      "required": false
+    }
   ]
 }

@@ -782,7 +782,9 @@ public class ItemRegistry {
             ItemProperties.register(
                     SOULWOVEN_BANNER.get(),
                     MalumMod.malumPath("pattern"),
-                    (stack, level, holder, holderID) -> SoulwovenBannerBlockItem.getBannerPattern(stack));
+                    (stack, level, holder, holderID) -> {
+                        return SoulwovenBannerBlockItem.getBannerPattern(stack);
+                    });
             ItemProperties.register(
                     RITUAL_SHARD.get(),
                     MalumMod.malumPath("tier"),

@@ -1,20 +1,21 @@
 {
-  "anvil_cost": 10,
+  "anvil_cost": 1,
   "description": {
     "translate": "enchantment.malum.rebound"
   },
   "max_cost": {
-    "base": 200,
-    "per_level_above_first": 0
+    "base": 6,
+    "per_level_above_first": 10
   },
   "max_level": 3,
   "min_cost": {
-    "base": 55,
-    "per_level_above_first": 0
+    "base": 1,
+    "per_level_above_first": 10
   },
+  "primary_items": "#malum:enchantable/rebound",
   "slots": [
-    "mainhand"
+    "hand"
   ],
   "supported_items": "#malum:enchantable/rebound",
-  "weight": 1
+  "weight": 5
 }

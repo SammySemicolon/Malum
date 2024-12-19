@@ -1,9 +1,20 @@
 {
   "values": [
-    "malum:scythe_melee",
-    "malum:scythe_sweep",
-    "malum:voodoo_playerless",
-    "malum:voodoo",
-    "malum:hidden_blade_counter"
+    {
+      "id": "malum:scythe_melee",
+      "required": false
+    },
+    {
+      "id": "malum:voodoo",
+      "required": false
+    },
+    {
+      "id": "malum:scythe_sweep",
+      "required": false
+    },
+    {
+      "id": "malum:hidden_blade_counter",
+      "required": false
+    }
   ]
 }

@@ -1,6 +1,12 @@
 {
   "values": [
-    "#malum:runewood_logs",
-    "#malum:soulwood_logs"
+    {
+      "id": "#malum:runewood_logs",
+      "required": false
+    },
+    {
+      "id": "#malum:soulwood_logs",
+      "required": false
+    }
   ]
 }

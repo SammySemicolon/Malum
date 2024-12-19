@@ -1,6 +1,8 @@
 {
   "values": [
-    "malum:voodoo_playerless",
-    "malum:voodoo"
+    {
+      "id": "malum:voodoo",
+      "required": false
+    }
   ]
 }

@@ -1,20 +1,21 @@
 {
-  "anvil_cost": 10,
+  "anvil_cost": 1,
   "description": {
     "translate": "enchantment.malum.replenishing"
   },
   "max_cost": {
-    "base": 200,
-    "per_level_above_first": 0
+    "base": 6,
+    "per_level_above_first": 10
   },
   "max_level": 2,
   "min_cost": {
-    "base": 55,
-    "per_level_above_first": 0
+    "base": 1,
+    "per_level_above_first": 10
   },
+  "primary_items": "#malum:staff",
   "slots": [
-    "mainhand"
+    "hand"
   ],
-  "supported_items": "#malum:enchantable/replenishing",
-  "weight": 1
+  "supported_items": "#malum:staff",
+  "weight": 10
 }

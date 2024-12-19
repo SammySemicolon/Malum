@@ -1,34 +1,21 @@
 {
-  "anvil_cost": 10,
+  "anvil_cost": 1,
   "description": {
     "translate": "enchantment.malum.haunted"
   },
-  "effects": {
-    "minecraft:attributes": [
-      {
-        "amount": {
-          "type": "minecraft:linear",
-          "base": 1.0,
-          "per_level_above_first": 1.0
-        },
-        "attribute": "lodestone:magic_damage",
-        "id": "malum:enchantment.magic_damage",
-        "operation": "add_value"
-      }
-    ]
-  },
   "max_cost": {
-    "base": 200,
-    "per_level_above_first": 0
+    "base": 6,
+    "per_level_above_first": 10
   },
   "max_level": 2,
   "min_cost": {
-    "base": 55,
-    "per_level_above_first": 0
+    "base": 1,
+    "per_level_above_first": 10
   },
+  "primary_items": "#malum:enchantable/ascension",
   "slots": [
-    "mainhand"
+    "hand"
   ],
-  "supported_items": "#malum:enchantable/haunted",
-  "weight": 2
+  "supported_items": "#malum:enchantable/ascension",
+  "weight": 5
 }

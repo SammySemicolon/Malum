@@ -26,7 +26,7 @@
       }
     },
     {
-      "model": "malum:item/soulwoven_banner_fractal",
+      "model": "malum:item/soulwoven_banner_break",
       "predicate": {
         "malum:pattern": 5.0
       }
@@ -44,9 +44,15 @@
       }
     },
     {
-      "model": "malum:item/soulwoven_banner_hallucination",
+      "model": "malum:item/soulwoven_banner_heft",
       "predicate": {
         "malum:pattern": 8.0
+      }
+    },
+    {
+      "model": "malum:item/soulwoven_banner_hallucination",
+      "predicate": {
+        "malum:pattern": 9.0
       }
     }
   ],

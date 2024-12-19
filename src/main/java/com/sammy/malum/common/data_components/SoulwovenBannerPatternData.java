@@ -34,12 +34,12 @@ public record SoulwovenBannerPatternData(ResourceLocation type, ResourceLocation
 
     public static final SoulwovenBannerPatternData AERIAL = register(MalumMod.malumPath("breeze"));
     public static final SoulwovenBannerPatternData AQUEOUS = register(MalumMod.malumPath("breath"));
-    public static final SoulwovenBannerPatternData EARTHEN = register(MalumMod.malumPath("fractal"));
+    public static final SoulwovenBannerPatternData EARTHEN = register(MalumMod.malumPath("break"));
 //    public static final SoulwovenBannerPatternData INFERNAL = register(MalumMod.malumPath("burn"));
 
     public static final SoulwovenBannerPatternData HUNGER = register(MalumMod.malumPath("hunger"));
     public static final SoulwovenBannerPatternData HORNS = register(MalumMod.malumPath("horns"));
-//    public static final SoulwovenBannerPatternData ASTRAL_WEAVE = register(MalumMod.malumPath("heft"));
+    public static final SoulwovenBannerPatternData HEFT = register(MalumMod.malumPath("heft"));
     public static final SoulwovenBannerPatternData HALLUCINATION = register(MalumMod.malumPath("hallucination"));
 
 

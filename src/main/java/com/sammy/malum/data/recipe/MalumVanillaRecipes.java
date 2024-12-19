@@ -59,6 +59,7 @@ public class MalumVanillaRecipes   {
         shaped(RecipeCategory.BUILDING_BLOCKS, ItemRegistry.SOULWOVEN_BANNER.get()).define('X', ItemTagRegistry.RUNEWOOD_PLANKS).define('Y', ItemRegistry.SOULWOVEN_SILK.get()).pattern("X").pattern("Y").pattern("Y").unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(output);
         bannerRecipe(output, ItemRegistry.ROTTING_ESSENCE.get(), SoulwovenBannerPatternData.HUNGER);
         bannerRecipe(output, ItemRegistry.GRIM_TALC.get(), SoulwovenBannerPatternData.HORNS);
+        bannerRecipe(output, ItemRegistry.ASTRAL_WEAVE.get(), SoulwovenBannerPatternData.HEFT);
         bannerRecipe(output, ItemRegistry.WARP_FLUX.get(), SoulwovenBannerPatternData.HALLUCINATION);
 
 

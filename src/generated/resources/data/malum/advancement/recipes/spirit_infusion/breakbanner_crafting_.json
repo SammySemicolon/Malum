@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "malum:fractalbanner_crafting_"
+        "recipe": "malum:breakbanner_crafting_"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -15,7 +15,7 @@
   ],
   "rewards": {
     "recipes": [
-      "malum:fractalbanner_crafting_"
+      "malum:breakbanner_crafting_"
     ]
   }
 }

@@ -36,9 +36,9 @@ public class ArtificeEntries {
         );
 
         screen.addEntry("something1", 4, 8, b -> {});
-        screen.addEntry("something2", 5, 8, b -> {});
+//        screen.addEntry("something2", 5, 8, b -> {});
 
-        screen.addEntry("ether", 6, 9, b -> b
+        screen.addEntry("ether", 5, 8, b -> b
                 .configureWidget(w -> w.setIcon(ETHER))
                 .addPage(new HeadlineTextPage("ether", "ether.1"))
                 .addPage(SpiritInfusionPage.fromOutput(ETHER.get()))
@@ -67,7 +67,7 @@ public class ArtificeEntries {
                 .addPage(new CyclingPage(
                         CraftingPage.bannerPage(ROTTING_ESSENCE.get(), SoulwovenBannerPatternData.HUNGER),
                         CraftingPage.bannerPage(GRIM_TALC.get(), SoulwovenBannerPatternData.HORNS),
-//                        CraftingPage.bannerPage(ASTRAL_WEAVE.get(), SoulwovenBannerPatternData.HUNGER),
+                        CraftingPage.bannerPage(ASTRAL_WEAVE.get(), SoulwovenBannerPatternData.HEFT),
                         CraftingPage.bannerPage(WARP_FLUX.get(), SoulwovenBannerPatternData.HALLUCINATION)
                 ))
                 .addPage(new CyclingPage(
@@ -99,11 +99,11 @@ public class ArtificeEntries {
                 ))
         );
 
-        screen.addEntry("something2", 7, 7, b -> {});
+//        screen.addEntry("something2", 7, 7, b -> {});
 
 
         screen.addEntry("spirit_focusing", 10, 7, b -> b
-                .configureWidget(w -> w.setIcon(SPIRIT_CRUCIBLE))
+                .configureWidget(w -> w.setIcon(SPIRIT_CRUCIBLE).setStyle(BookWidgetStyle.GILDED_RUNEWOOD))
                 .addPage(new HeadlineTextItemPage("spirit_focusing", "spirit_focusing.1", SPIRIT_CRUCIBLE.get()))
                 .addPage(new TextPage("spirit_focusing.2"))
                 .addPage(SpiritInfusionPage.fromOutput(SPIRIT_CRUCIBLE.get()))

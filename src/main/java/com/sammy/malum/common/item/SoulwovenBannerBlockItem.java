@@ -33,24 +33,19 @@ public class SoulwovenBannerBlockItem extends BlockItem {
         return SoulwovenBannerPatternData.REGISTERED_PATTERNS.contains(pattern) ? SoulwovenBannerPatternData.REGISTERED_PATTERNS.indexOf(pattern) : 0;
     }
 
-    public static void addBannerVariantsToCreativeTab() {
-        //ItemGroupEvents.MODIFY_ENTRIES_ALL
-        /*
+    public static void addBannerVariantsToCreativeTab(BuildCreativeModeTabContentsEvent event) {
         final ItemStack defaultInstance = ItemRegistry.SOULWOVEN_BANNER.get().getDefaultInstance();
         if (event.getParentEntries().contains(defaultInstance)) {
             for (SoulwovenBannerPatternData pattern : SoulwovenBannerPatternData.REGISTERED_PATTERNS) {
                 if (pattern.equals(SoulwovenBannerPatternData.DEFAULT)) {
                     continue;
                 }
-                final ItemStack copy = defaultInstance.copy();
-                copy.set(DataComponentRegistry.SOULWOVEN_BANNER_PATTERN.get(), pattern);
+                final ItemStack copy = pattern.getDefaultStack();
                 if (event.getParentEntries().contains(copy)) {
                     continue;
                 }
                 event.insertAfter(defaultInstance, copy, PARENT_AND_SEARCH_TABS);
             }
         }
-
-         */
     }
 }

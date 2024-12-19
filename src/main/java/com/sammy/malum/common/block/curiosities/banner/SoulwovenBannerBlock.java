@@ -30,7 +30,8 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
 
 public class SoulwovenBannerBlock extends LodestoneEntityBlock<SoulwovenBannerBlockEntity> {
     public static final EnumProperty<BannerType> BANNER_TYPE = EnumProperty.create("banner_type", BannerType.class);
-    private static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 12.0, 16.0, 12.0);
+    private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 15.0, 16.0, 15.0, 16.0);
+    private static final VoxelShape MIDDLE = Block.box(0.0, 0.0, 7.0, 16.0, 15.0, 8.0);
 
     public SoulwovenBannerBlock(Properties properties) {
         super(properties);
@@ -50,6 +51,15 @@ public class SoulwovenBannerBlock extends LodestoneEntityBlock<SoulwovenBannerBl
         return stack;
     }
 
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        var type = state.getValue(BANNER_TYPE);
+        if (type.direction != Direction.DOWN) {
+            return rotateShape(Direction.NORTH, type.direction, SHAPE);
+        } else {
+            return rotateShape(Direction.NORTH, type == BannerType.HANGING_X ? Direction.WEST : Direction.NORTH, MIDDLE);
+        }
+    }
 
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
@@ -78,6 +88,25 @@ public class SoulwovenBannerBlock extends LodestoneEntityBlock<SoulwovenBannerBl
             return defaultBlockState().setValue(BANNER_TYPE, BannerType.DIRECTION_MAP.get(clickedFace));
         }
         return null;
+    }
+
+    public static VoxelShape rotateShape(Direction from, Direction to, VoxelShape shape) {
+        VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
+
+        int times = (to.get2DDataValue() - from.get2DDataValue() + 4) % 4;
+        for (int i = 0; i < times; i++) {
+            final VoxelShape currentShape = buffer[0];
+            currentShape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> {
+                buffer[1] = Shapes.join(
+                        buffer[1],
+                        Shapes.box(1 - maxZ, minY, minX, 1 - minZ, maxY, maxX),
+                        BooleanOp.OR
+                );
+            });
+            buffer[0] = buffer[1];
+            buffer[1] = Shapes.empty();
+        }
+        return buffer[0];
     }
 
     public enum BannerType implements StringRepresentable {

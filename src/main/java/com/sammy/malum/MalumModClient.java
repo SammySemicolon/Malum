@@ -94,7 +94,8 @@ public class MalumModClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutoutMipped(),
                 BlockRegistry.HANGING_SOULWOOD_LEAVES.get(),
                 BlockRegistry.HANGING_RUNEWOOD_LEAVES.get(),
-                BlockRegistry.HANGING_AZURE_RUNEWOOD_LEAVES.get()
+                BlockRegistry.HANGING_AZURE_RUNEWOOD_LEAVES.get(),
+                SOULWOVEN_BANNER.get()
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
@@ -117,9 +118,9 @@ public class MalumModClient implements ClientModInitializer {
                 RUNEWOOD_DOOR.get(),
                 RUNEWOOD_TRAPDOOR.get(),
                 SOULWOOD_LEAVES.get(),
-                BUDDING_SOULWOOD_LEAVES.get(),
+                BUDDING_SOULWOOD_LEAVES.get()
 
-                SOULWOVEN_BANNER.get()
+
         );
 
         ArmorRenderer.register(new SoulHunterArmorRenderer(),

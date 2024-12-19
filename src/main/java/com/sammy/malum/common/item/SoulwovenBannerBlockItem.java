@@ -35,7 +35,7 @@ public class SoulwovenBannerBlockItem extends BlockItem {
     }
 
     public static void addBannerVariantsToCreativeTab() {
-        final var defaultInstance = ItemRegistry.SOULWOVEN_BANNER.get();
+        final var defaultInstance = ItemRegistry.SOULWOVEN_BANNER.get().getDefaultInstance();
 
         ItemGroupEvents.modifyEntriesEvent(CreativeTabRegistry.BUILDING.getKey()).register(fabricItemGroupEntries -> {
             for (SoulwovenBannerPatternData pattern : SoulwovenBannerPatternData.REGISTERED_PATTERNS) {

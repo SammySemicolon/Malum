@@ -5,8 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
 
-public class MoteOfManaBlockEntity extends LodestoneBlockEntity {
-    public MoteOfManaBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityRegistry.SPIRIT_MOTE.get(), pos, state);
+public class ManaMoteBlockEntity extends LodestoneBlockEntity {
+    public ManaMoteBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockEntityRegistry.MANA_MOTE.get(), pos, state);
     }
 }

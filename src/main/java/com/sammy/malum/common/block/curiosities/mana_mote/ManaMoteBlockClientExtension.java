@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.client.extensions.common.IClientBlockExtensions;
 
-public class SpiritMoteBlockClientExtension implements IClientBlockExtensions {
+public class ManaMoteBlockClientExtension implements IClientBlockExtensions {
 
     @Override
     public boolean addHitEffects(BlockState state, Level level, HitResult target, ParticleEngine manager) {
@@ -18,8 +18,8 @@ public class SpiritMoteBlockClientExtension implements IClientBlockExtensions {
 
     @Override
     public boolean addDestroyEffects(BlockState state, Level level, BlockPos pos, ParticleEngine manager) {
-        if (state.getBlock() instanceof SpiritMoteBlock) {
-            SpiritMoteParticleEffects.destroy(level, pos, state, MalumSpiritType.getSpiritType(state.getValue(SpiritMoteBlock.SPIRIT_TYPE)));
+        if (state.getBlock() instanceof ManaMoteBlock) {
+            SpiritMoteParticleEffects.destroy(level, pos, state, MalumSpiritType.getSpiritType(state.getValue(ManaMoteBlock.SPIRIT_TYPE)));
         }
         return true;
     }

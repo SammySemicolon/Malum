@@ -35,10 +35,7 @@ public class ArtificeEntries {
                 ))
         );
 
-        screen.addEntry("something1", 4, 8, b -> {});
-//        screen.addEntry("something2", 5, 8, b -> {});
-
-        screen.addEntry("ether", 5, 8, b -> b
+        screen.addEntry("ether", 4, 8, b -> b
                 .configureWidget(w -> w.setIcon(ETHER))
                 .addPage(new HeadlineTextPage("ether", "ether.1"))
                 .addPage(SpiritInfusionPage.fromOutput(ETHER.get()))
@@ -56,6 +53,14 @@ public class ArtificeEntries {
                         new CraftingPage(TAINTED_IRIDESCENT_ETHER_BRAZIER.get(), EMPTY, EMPTY, EMPTY, TAINTED_ROCK.get(), IRIDESCENT_ETHER.get(), TAINTED_ROCK.get(), STICK, TAINTED_ROCK.get(), STICK),
                         new CraftingPage(TWISTED_IRIDESCENT_ETHER_BRAZIER.get(), EMPTY, EMPTY, EMPTY, TWISTED_ROCK.get(), IRIDESCENT_ETHER.get(), TWISTED_ROCK.get(), STICK, TWISTED_ROCK.get(), STICK))
                 )
+        );
+
+        screen.addEntry("basic_artifice", 5, 8, b -> b
+                .configureWidget(w -> w.setIcon(CHRONOPULSER))
+                .addPage(new HeadlineTextPage("basic_artifice", "basic_artifice.1"))
+                .addPage(new TextPage("basic_artifice.2"))
+                .addPage(new HeadlineTextPage("basic_artifice.pulsebank", "basic_artifice.pulsebank.1"))
+                .addPage(new HeadlineTextPage("basic_artifice.chronopulser", "basic_artifice.chronopulser.1"))
         );
 
         screen.addEntry("soulwoven_silk", 4, 5, b -> b

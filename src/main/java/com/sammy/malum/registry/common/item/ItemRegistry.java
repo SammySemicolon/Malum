@@ -458,9 +458,9 @@ public class ItemRegistry {
 
     //region crafting blocks
     public static final DeferredHolder<Item, Item> SPIRIT_ALTAR = register("spirit_altar", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SPIRIT_ALTAR.get(), p));
-    public static final DeferredHolder<Item, Item> RUNIC_WORKBENCH = register("runic_workbench", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUNIC_WORKBENCH.get(), p));
     public static final DeferredHolder<Item, Item> RUNEWOOD_OBELISK = register("runewood_obelisk", DEFAULT_PROPERTIES(), (p) -> new MultiBlockItem(BlockRegistry.RUNEWOOD_OBELISK.get(), p, RunewoodObeliskBlockEntity.STRUCTURE));
     public static final DeferredHolder<Item, Item> BRILLIANT_OBELISK = register("brilliant_obelisk", DEFAULT_PROPERTIES(), (p) -> new MultiBlockItem(BlockRegistry.BRILLIANT_OBELISK.get(), p, BrilliantObeliskBlockEntity.STRUCTURE));
+    public static final DeferredHolder<Item, Item> RUNIC_WORKBENCH = register("runic_workbench", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUNIC_WORKBENCH.get(), p));
     public static final DeferredHolder<Item, Item> SPIRIT_JAR = register("spirit_jar", DEFAULT_PROPERTIES(), (p) -> new SpiritJarItem(BlockRegistry.SPIRIT_JAR.get(), p));
     public static final DeferredHolder<Item, Item> SPIRIT_CRUCIBLE = register("spirit_crucible", DEFAULT_PROPERTIES(), (p) -> new MultiBlockItem(BlockRegistry.SPIRIT_CRUCIBLE.get(), p, SpiritCrucibleCoreBlockEntity.STRUCTURE));
     public static final DeferredHolder<Item, Item> SPIRIT_CATALYZER = register("spirit_catalyzer", DEFAULT_PROPERTIES(), (p) -> new MultiBlockItem(BlockRegistry.SPIRIT_CATALYZER.get(), p, SpiritCatalyzerCoreBlockEntity.STRUCTURE));
@@ -468,6 +468,9 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> RUNEWOOD_TOTEM_BASE = register("runewood_totem_base", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUNEWOOD_TOTEM_BASE.get(), p));
     public static final DeferredHolder<Item, Item> SOULWOOD_TOTEM_BASE = register("soulwood_totem_base", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_TOTEM_BASE.get(), p));
     public static final DeferredHolder<Item, Item> RITUAL_PLINTH = register("ritual_plinth", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RITUAL_PLINTH.get(), p));
+
+    public static final DeferredHolder<Item, Item> CHRONOPULSER = register("chronopulser", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.CHRONOPULSER.get(), p));
+    public static final DeferredHolder<Item, Item> PULSEBANK = register("pulsebank", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.PULSEBANK.get(), p));
 
     public static final DeferredHolder<Item, Item> WEAVERS_WORKBENCH = register("weavers_workbench", COSMETIC_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WEAVERS_WORKBENCH.get(), p));
     //endregion

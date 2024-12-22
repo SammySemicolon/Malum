@@ -10,6 +10,7 @@ import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
 import team.lodestar.lodestone.systems.rendering.trail.*;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
@@ -55,7 +56,10 @@ public class RenderUtils {
     public static void drawCube(PoseStack poseStack, VFXBuilders.WorldVFXBuilder builder, float scale, CubeVertexData cubeVertexData) {
         drawCube(poseStack, builder, builder, scale, cubeVertexData);
     }
-    public static void drawCube(PoseStack poseStack, VFXBuilders.WorldVFXBuilder builder, VFXBuilders.WorldVFXBuilder sideBuilder, float scale, CubeVertexData cubeVertexData) {
+    public static void drawCubeSides(PoseStack poseStack, VFXBuilders.WorldVFXBuilder builder, float scale, CubeVertexData cubeVertexData) {
+        drawCube(poseStack, null, builder, scale, cubeVertexData);
+    }
+    public static void drawCube(PoseStack poseStack, @Nullable VFXBuilders.WorldVFXBuilder builder, VFXBuilders.WorldVFXBuilder sideBuilder, float scale, CubeVertexData cubeVertexData) {
         Vector3f[] bottomVertices = cubeVertexData.bottomVertices;
         Vector3f[] topVertices = cubeVertexData.topVertices;
         Collection<Vector3f[]> offsetMap = cubeVertexData.offsetMap;
@@ -66,8 +70,10 @@ public class RenderUtils {
         for (Vector3f[] offsets : offsetMap) {
             drawSide(poseStack, sideBuilder, offsets);
         }
-        drawSide(poseStack, builder, new Vector3f[]{bottomVertices[3], bottomVertices[2], bottomVertices[1], bottomVertices[0]});
-        drawSide(poseStack, builder, topVertices);
+        if (builder != null) {
+            drawSide(poseStack, builder, new Vector3f[]{bottomVertices[3], bottomVertices[2], bottomVertices[1], bottomVertices[0]});
+            drawSide(poseStack, builder, topVertices);
+        }
         poseStack.popPose();
     }
 

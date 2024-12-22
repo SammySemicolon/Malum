@@ -11,6 +11,8 @@ import team.lodestar.lodestone.systems.block.*;
 
 import java.awt.*;
 
+import static net.minecraft.world.level.block.Blocks.COPPER_BLOCK;
+
 public class MalumBlockProperties {
 
     public static LodestoneBlockProperties SPIRITED_GLASS() {
@@ -319,6 +321,17 @@ public class MalumBlockProperties {
                 .addTag(BlockTagRegistry.TRAY_HEAT_SOURCES)
                 .setCutoutRenderType()
                 .lightLevel((b) -> 14);
+    }
+
+    public static LodestoneBlockProperties REDSTONE_MACHINE() {
+        return new LodestoneBlockProperties()
+                .mapColor(COPPER_BLOCK.defaultMapColor())
+                .strength(3.0F, 6.0F)
+                .sound(SoundType.COPPER_BULB)
+                .requiresCorrectToolForDrops()
+                .isRedstoneConductor(Blocks::never)
+                .needsPickaxe()
+                .needsAxe();
     }
 
     public static LodestoneBlockProperties MANA_MOTE_BLOCK() {

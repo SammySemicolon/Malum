@@ -140,6 +140,6 @@ public class MalumSpiritType {
     }
 
     public BlockState getSpiritMoteBlockState() {
-        return BlockRegistry.SPIRIT_MOTE.get().defaultBlockState().setValue(SpiritMoteBlock.SPIRIT_TYPE, identifier);
+        return BlockRegistry.SPIRIT_MOTE.get().defaultBlockState().setValue(ManaMoteBlock.SPIRIT_TYPE, identifier);
     }
 }

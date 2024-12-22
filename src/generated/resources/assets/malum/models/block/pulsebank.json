@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "malum:block/redstone/runewood_frame_bottom",
+    "side": "malum:block/redstone/pulsebank_side",
+    "top": "malum:block/redstone/runewood_frame_top"
+  }
+}

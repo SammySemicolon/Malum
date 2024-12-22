@@ -1,7 +1,7 @@
 {
     "pack": {
-        "description": "Malum resources",
-        "pack_format": 10
+        "description": "${modId} resources",
+        "pack_format": 16
     },
     "fusion": {
         "overrides_folder": "fusion"

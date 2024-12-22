@@ -13,7 +13,7 @@ import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 import static com.sammy.malum.client.RenderUtils.*;
 
 
-public class MoteOfManaRenderer implements BlockEntityRenderer<MoteOfManaBlockEntity> {
+public class MoteOfManaRenderer implements BlockEntityRenderer<ManaMoteBlockEntity> {
 
     public static final RenderTypeToken MOTE_OF_MANA = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/spirit_mote.png"));
 
@@ -21,9 +21,9 @@ public class MoteOfManaRenderer implements BlockEntityRenderer<MoteOfManaBlockEn
     }
 
     @Override
-    public void render(MoteOfManaBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(ManaMoteBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         poseStack.pushPose();
-        MalumSpiritType spiritType = MalumSpiritType.getSpiritType(blockEntityIn.getBlockState().getValue(SpiritMoteBlock.SPIRIT_TYPE));
+        MalumSpiritType spiritType = MalumSpiritType.getSpiritType(blockEntityIn.getBlockState().getValue(ManaMoteBlock.SPIRIT_TYPE));
 
         var builder = SpiritBasedWorldVFXBuilder.create(spiritType)
                 .setRenderType(LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MOTE_OF_MANA));

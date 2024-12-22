@@ -25,10 +25,12 @@ java {
 
 neoForge {
     version.set(project.property("neo_version").toString())
+
     parchment {
         mappingsVersion.set(project.property("parchment_mappings_version").toString())
         minecraftVersion.set(project.property("parchment_minecraft_version").toString())
     }
+
     setAccessTransformers(
         "src/main/resources/META-INF/accesstransformer.cfg",
         "src/main/resources/META-INF/recipebuilders.cfg",
@@ -209,11 +211,6 @@ neoForge.ideSyncTask(generateModMetadata)
 java {
 //    withJavadocJar()
     withSourcesJar()
-}
-
-
-tasks.jar.configure {
-    archiveClassifier.set("pure")
 }
 
 

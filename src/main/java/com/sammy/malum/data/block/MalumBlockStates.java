@@ -216,6 +216,9 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         MalumBlockStateSmithTypes.CALCIFIED_BLIGHT.act(data, CALCIFIED_BLIGHT);
         MalumBlockStateSmithTypes.TALL_CALCIFIED_BLIGHT.act(data, TALL_CALCIFIED_BLIGHT);
 
+        setTexturePath("redstone/");
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::simpleBlock, this::redstoneMachineBlock, CHRONOPULSER, PULSEBANK);
+
         setTexturePath("");
         itemModelProvider.setTexturePath("ether/");
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.GENERATED_ITEM, this::simpleBlock, this::etherModel, ETHER);
@@ -264,6 +267,14 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         ResourceLocation top = getBlockTexture(name + "_top");
         ResourceLocation bottom = getBlockTexture(name.replace("_cap", "") + "_top");
         ResourceLocation side = getBlockTexture(name);
+        return models().cubeBottomTop(name, side, bottom, top);
+    }
+
+    public ModelFile redstoneMachineBlock(Block block) {
+        String name = getBlockName(block);
+        ResourceLocation top = getBlockTexture("runewood_frame_top");
+        ResourceLocation bottom = getBlockTexture("runewood_frame_bottom");
+        ResourceLocation side = getBlockTexture(name + "_side");
         return models().cubeBottomTop(name, side, bottom, top);
     }
 

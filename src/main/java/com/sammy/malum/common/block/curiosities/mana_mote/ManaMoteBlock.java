@@ -9,11 +9,11 @@ import team.lodestar.lodestone.systems.block.*;
 
 import java.util.function.*;
 
-public class SpiritMoteBlock extends LodestoneEntityBlock<MoteOfManaBlockEntity> {
+public class ManaMoteBlock extends LodestoneEntityBlock<ManaMoteBlockEntity> {
 
     public static final SpiritTypeProperty SPIRIT_TYPE = SpiritTypeRegistry.SPIRIT_TYPE_PROPERTY;
 
-    public SpiritMoteBlock(Properties properties) {
+    public ManaMoteBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(SPIRIT_TYPE, "sacred"));
     }
@@ -25,6 +25,6 @@ public class SpiritMoteBlock extends LodestoneEntityBlock<MoteOfManaBlockEntity>
 
     @Override
     public void initializeClient(Consumer<IClientBlockExtensions> consumer) {
-        consumer.accept(new SpiritMoteBlockClientExtension());
+        consumer.accept(new ManaMoteBlockClientExtension());
     }
 }

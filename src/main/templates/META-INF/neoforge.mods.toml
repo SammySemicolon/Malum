@@ -9,6 +9,18 @@ displayName="${mod_name}"
 authors="${mod_authors}"
 description='''${mod_description}'''
 
+[[accessTransformers]]
+file = "META-INF/accesstransformer.cfg"
+
+[[accessTransformers]]
+file = "META-INF/blockproperties.cfg"
+
+[[accessTransformers]]
+file = "META-INF/recipebuilders.cfg"
+
+[[accessTransformers]]
+file = "META-INF/renderstates.cfg"
+
 [[mixins]]
 config="${mod_id}.mixins.json"
 

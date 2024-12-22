@@ -41,7 +41,7 @@ public class HiddenTagRegistry {
 	public static void hideItems(BuildCreativeModeTabContentsEvent event) {
 		List<TagKey<Item>> disabledTags = HiddenTagHandler.tagsToHide();
 
-		var iterator = event.getParentEntries().iterator();
+		var iterator = event.getTab().getDisplayItems().iterator();
 		while (iterator.hasNext()) {
 			var entry = iterator.next();
 

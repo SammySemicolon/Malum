@@ -8,8 +8,9 @@ import com.sammy.malum.common.block.curiosities.mana_mote.*;
 import com.sammy.malum.common.block.curiosities.obelisk.*;
 import com.sammy.malum.common.block.curiosities.obelisk.brilliant.*;
 import com.sammy.malum.common.block.curiosities.obelisk.runewood.*;
-import com.sammy.malum.common.block.curiosities.redstone.ChronopulserBlock;
-import com.sammy.malum.common.block.curiosities.redstone.PulsebankBlock;
+import com.sammy.malum.common.block.curiosities.redstone.chronopulser.ChronopulserBlock;
+import com.sammy.malum.common.block.curiosities.redstone.pulsebank.PulsebankBlock;
+import com.sammy.malum.common.block.curiosities.redstone.pulselag.PulselagBlock;
 import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.block.curiosities.ritual_plinth.*;
 import com.sammy.malum.common.block.curiosities.runic_workbench.*;
@@ -90,8 +91,10 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> SOULWOOD_TOTEM_BASE = BLOCKS.register("soulwood_totem_base", () -> new TotemBaseBlock<>(MalumBlockProperties.SOULWOOD().addTag(RITE_IMMUNE).noOcclusion(), true).setBlockEntity(BlockEntityRegistry.TOTEM_BASE));
     public static final DeferredHolder<Block, Block> SOULWOOD_TOTEM_POLE = BLOCKS.register("soulwood_totem_pole", () -> new TotemPoleBlock<>(MalumBlockProperties.SOULWOOD().addTag(RITE_IMMUNE).noOcclusion(), BlockRegistry.SOULWOOD_LOG, true).setBlockEntity(BlockEntityRegistry.TOTEM_POLE));
 
-    public static final DeferredHolder<Block, Block> CHRONOPULSER = BLOCKS.register("chronopulser", () -> new ChronopulserBlock(MalumBlockProperties.REDSTONE_MACHINE()).setBlockEntity(BlockEntityRegistry.CHRONOPULSER));
     public static final DeferredHolder<Block, Block> PULSEBANK = BLOCKS.register("pulsebank", () -> new PulsebankBlock(MalumBlockProperties.REDSTONE_MACHINE()).setBlockEntity(BlockEntityRegistry.PULSEBANK));
+
+    public static final DeferredHolder<Block, Block> PULSELAG = BLOCKS.register("pulselag", () -> new PulselagBlock(MalumBlockProperties.REDSTONE_MACHINE()).setBlockEntity(BlockEntityRegistry.PULSELAG));
+    public static final DeferredHolder<Block, Block> CHRONOPULSER = BLOCKS.register("chronopulser", () -> new ChronopulserBlock(MalumBlockProperties.REDSTONE_MACHINE()).setBlockEntity(BlockEntityRegistry.CHRONOPULSER));
 
     public static final DeferredHolder<Block, Block> SPIRIT_MOTE = BLOCKS.register("spirit_mote", () -> new ManaMoteBlock(MalumBlockProperties.MANA_MOTE_BLOCK()).setBlockEntity(BlockEntityRegistry.MANA_MOTE));
 

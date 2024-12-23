@@ -217,7 +217,7 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         MalumBlockStateSmithTypes.TALL_CALCIFIED_BLIGHT.act(data, TALL_CALCIFIED_BLIGHT);
 
         setTexturePath("redstone/");
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::simpleBlock, this::redstoneMachineBlock, CHRONOPULSER, PULSEBANK);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::simpleBlock, this::redstoneMachineBlock, PULSEBANK, PULSELAG, CHRONOPULSER);
 
         setTexturePath("");
         itemModelProvider.setTexturePath("ether/");

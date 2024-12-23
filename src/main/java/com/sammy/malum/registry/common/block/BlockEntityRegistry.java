@@ -2,14 +2,20 @@ package com.sammy.malum.registry.common.block;
 
 import com.sammy.malum.*;
 import com.sammy.malum.client.renderer.block.*;
+import com.sammy.malum.client.renderer.block.redstone.ChronopulserRenderer;
+import com.sammy.malum.client.renderer.block.redstone.PulsebankRenderer;
+import com.sammy.malum.client.renderer.block.redstone.PulselagRenderer;
+import com.sammy.malum.client.renderer.block.redstone.RedstoneMachineRenderer;
 import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.common.block.curiosities.mana_mote.*;
 import com.sammy.malum.common.block.curiosities.obelisk.brilliant.*;
 import com.sammy.malum.common.block.curiosities.obelisk.runewood.*;
-import com.sammy.malum.common.block.curiosities.redstone.ChronopulserBlock;
-import com.sammy.malum.common.block.curiosities.redstone.ChronopulserBlockEntity;
-import com.sammy.malum.common.block.curiosities.redstone.PulsebankBlock;
-import com.sammy.malum.common.block.curiosities.redstone.PulsebankBlockEntity;
+import com.sammy.malum.common.block.curiosities.redstone.chronopulser.ChronopulserBlock;
+import com.sammy.malum.common.block.curiosities.redstone.chronopulser.ChronopulserBlockEntity;
+import com.sammy.malum.common.block.curiosities.redstone.pulsebank.PulsebankBlock;
+import com.sammy.malum.common.block.curiosities.redstone.pulsebank.PulsebankBlockEntity;
+import com.sammy.malum.common.block.curiosities.redstone.pulselag.PulselagBlock;
+import com.sammy.malum.common.block.curiosities.redstone.pulselag.PulselagBlockEntity;
 import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.block.curiosities.ritual_plinth.*;
 import com.sammy.malum.common.block.curiosities.runic_workbench.*;
@@ -46,10 +52,8 @@ public class BlockEntityRegistry {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpiritAltarBlockEntity>> SPIRIT_ALTAR = BLOCK_ENTITY_TYPES.register("spirit_altar", () -> BlockEntityType.Builder.of(SpiritAltarBlockEntity::new, BlockRegistry.SPIRIT_ALTAR.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpiritJarBlockEntity>> SPIRIT_JAR = BLOCK_ENTITY_TYPES.register("spirit_jar", () -> BlockEntityType.Builder.of(SpiritJarBlockEntity::new, BlockRegistry.SPIRIT_JAR.get()).build(null));
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RitualPlinthBlockEntity>> RITUAL_PLINTH = BLOCK_ENTITY_TYPES.register("ritual_plinth", () -> BlockEntityType.Builder.of(RitualPlinthBlockEntity::new, BlockRegistry.RITUAL_PLINTH.get()).build(null));
-
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WeaversWorkbenchBlockEntity>> WEAVERS_WORKBENCH = BLOCK_ENTITY_TYPES.register("weavers_workbench", () -> BlockEntityType.Builder.of(WeaversWorkbenchBlockEntity::new, BlockRegistry.WEAVERS_WORKBENCH.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RunicWorkbenchBlockEntity>> RUNIC_WORKBENCH = BLOCK_ENTITY_TYPES.register("runic_workbench", () -> BlockEntityType.Builder.of(RunicWorkbenchBlockEntity::new, BlockRegistry.RUNIC_WORKBENCH.get()).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WeaversWorkbenchBlockEntity>> WEAVERS_WORKBENCH = BLOCK_ENTITY_TYPES.register("weavers_workbench", () -> BlockEntityType.Builder.of(WeaversWorkbenchBlockEntity::new, BlockRegistry.WEAVERS_WORKBENCH.get()).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpiritCrucibleCoreBlockEntity>> SPIRIT_CRUCIBLE = BLOCK_ENTITY_TYPES.register("spirit_crucible", () -> BlockEntityType.Builder.of(SpiritCrucibleCoreBlockEntity::new, BlockRegistry.SPIRIT_CRUCIBLE.get()).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SpiritCatalyzerCoreBlockEntity>> SPIRIT_CATALYZER = BLOCK_ENTITY_TYPES.register("spirit_catalyzer", () -> BlockEntityType.Builder.of(SpiritCatalyzerCoreBlockEntity::new, BlockRegistry.SPIRIT_CATALYZER.get()).build(null));
@@ -65,8 +69,11 @@ public class BlockEntityRegistry {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TotemBaseBlockEntity>> TOTEM_BASE = BLOCK_ENTITY_TYPES.register("totem_base", () -> BlockEntityType.Builder.of(TotemBaseBlockEntity::new, getBlocks(TotemBaseBlock.class)).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TotemPoleBlockEntity>> TOTEM_POLE = BLOCK_ENTITY_TYPES.register("totem_pole", () -> BlockEntityType.Builder.of(TotemPoleBlockEntity::new, getBlocks(TotemPoleBlock.class)).build(null));
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChronopulserBlockEntity>> CHRONOPULSER = BLOCK_ENTITY_TYPES.register("chronopulser", () -> BlockEntityType.Builder.of(ChronopulserBlockEntity::new, getBlocks(ChronopulserBlock.class)).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PulsebankBlockEntity>> PULSEBANK = BLOCK_ENTITY_TYPES.register("pulsebank", () -> BlockEntityType.Builder.of(PulsebankBlockEntity::new, getBlocks(PulsebankBlock.class)).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PulselagBlockEntity>> PULSELAG = BLOCK_ENTITY_TYPES.register("pulselag", () -> BlockEntityType.Builder.of(PulselagBlockEntity::new, getBlocks(PulselagBlock.class)).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChronopulserBlockEntity>> CHRONOPULSER = BLOCK_ENTITY_TYPES.register("chronopulser", () -> BlockEntityType.Builder.of(ChronopulserBlockEntity::new, getBlocks(ChronopulserBlock.class)).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RitualPlinthBlockEntity>> RITUAL_PLINTH = BLOCK_ENTITY_TYPES.register("ritual_plinth", () -> BlockEntityType.Builder.of(RitualPlinthBlockEntity::new, BlockRegistry.RITUAL_PLINTH.get()).build(null));
 
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SoulwovenBannerBlockEntity>> SOULWOVEN_BANNER = BLOCK_ENTITY_TYPES.register("soulwoven_banner", () -> BlockEntityType.Builder.of(SoulwovenBannerBlockEntity::new, getBlocks(SoulwovenBannerBlock.class)).build(null));
@@ -100,19 +107,30 @@ public class BlockEntityRegistry {
         public static void registerRenderer(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(VOID_CONDUIT.get(), VoidConduitRenderer::new);
             event.registerBlockEntityRenderer(VOID_DEPOT.get(), VoidDepotRenderer::new);
+
             event.registerBlockEntityRenderer(SPIRIT_ALTAR.get(), SpiritAltarRenderer::new);
             event.registerBlockEntityRenderer(RUNIC_WORKBENCH.get(), MalumItemHolderRenderer::new);
+            event.registerBlockEntityRenderer(SPIRIT_JAR.get(), SpiritJarRenderer::new);
+
             event.registerBlockEntityRenderer(SPIRIT_CRUCIBLE.get(), SpiritCrucibleRenderer::new);
             event.registerBlockEntityRenderer(SPIRIT_CATALYZER.get(), SpiritCatalyzerRenderer::new);
             event.registerBlockEntityRenderer(REPAIR_PYLON.get(), RepairPylonRenderer::new);
+
             event.registerBlockEntityRenderer(TOTEM_BASE.get(), TotemBaseRenderer::new);
             event.registerBlockEntityRenderer(TOTEM_POLE.get(), TotemPoleRenderer::new);
-            event.registerBlockEntityRenderer(CHRONOPULSER.get(), ChronopulserRenderer::new);
+
             event.registerBlockEntityRenderer(PULSEBANK.get(), PulsebankRenderer::new);
+
+            event.registerBlockEntityRenderer(PULSELAG.get(), PulselagRenderer::new);
+            event.registerBlockEntityRenderer(CHRONOPULSER.get(), ChronopulserRenderer::new);
+
             event.registerBlockEntityRenderer(RITUAL_PLINTH.get(), RitualPlinthRenderer::new);
+
             event.registerBlockEntityRenderer(ITEM_STAND.get(), MalumItemHolderRenderer::new);
             event.registerBlockEntityRenderer(ITEM_PEDESTAL.get(), MalumItemHolderRenderer::new);
-            event.registerBlockEntityRenderer(SPIRIT_JAR.get(), SpiritJarRenderer::new);
+
+
+
             event.registerBlockEntityRenderer(MANA_MOTE.get(), MoteOfManaRenderer::new);
             event.registerBlockEntityRenderer(SOULWOVEN_BANNER.get(), SoulwovenBannerRenderer::new);
         }

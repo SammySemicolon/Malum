@@ -588,7 +588,7 @@ public class MalumLang extends LanguageProvider {
                 "Eldritch arcana is a mystery to me. It has no impulse, none that I can understand, at least. And yet, it doesn't act like raw arcana. It changes, emboldens, enlightens... Raw arcana merely amplifies. This... this alters.",
                 "I am not sure I understand what impulse creates this arcana. I find it in very few beings, and those I find it in are those who already defy explanation. But if it must be the pair to raw arcana, then that would imply that it's the impulse of endings, the " + italic("last") + " principle of all things.\n\nI do not like that thought.");
 
-        addEntryHeader("spirit_stones", "Spirit Stones", "Arcana suffused");
+        addEntryHeader("spirit_stones", "Spirit Stones", "To suffuse with arcana");
         addHeadline("spirit_stones.tainted_rock", "Tainted Rock");
         addPages("spirit_stones.tainted_rock",
                 "Stone is reluctant to change, but nothing can endure the power of an unchained soul forever. By using raw arcana to force that change, I have created stones with useful magical properties. With Sacred arcana as the catalyst, it forms Tainted Rock, a stone that dissipates magic nearby.");
@@ -605,10 +605,30 @@ public class MalumLang extends LanguageProvider {
                 "As if this was not enough, I have found a way to imbue a second color into my Ether, creating Iridescent Ether. When created, this form of Ether locks in its original color, leaving a new, " + italic("second") + " color open to dyeing. The light will shift from the original color into the new color towards the peak of the flames.",
                 "Getting the right coloring for this can be tricky, though. As stated, once Ether is made Iridescent, its original color can no longer be changed. This is hardly an issue, but should be kept in mind when tinting your flames.");
 
-        addSimpleEntryHeader("soulwoven_silk", "Soulwoven Silk", "Wicked weaves");
-        addPages("soulwoven_silk", "Soulwoven Silk is a light yet sturdy material that acts as an insulator for spirit energies. While other materials do exhibit matching interactions with the arcane, this bond between magic and cloth should make for a unique material.");
-        addPages("soulwoven_silk.soulwoven_banner", "To further study and confirm the insulating properties of the cloth, I've heft together a set of Soulwoven Banners with patterns based on various arcane reagents I've had in use as well as on each of the spirits I've been met with thus far. When hung and then imbued with Arcana, the Banners will gain a dim, and then powerful glow when met with an additional shard.");
+        //TODO: this is the entry for the redstone components
+        // I had the idea of them having all the time-based-mechanics being done through using ether as a primitive slate for energy
+        // A redstone circuit prints energy onto the etheric soul slate and reads it to determine if enough time has passed
+        // Either way it uses ether :3
+        // Aerial - Pulsecharger - slowly matches output to what is input
+        // Aqueous - Pulsebank - keeps emitting the redstone signal it receives for some time
+        // Earthen - Chronopulser - redstone clock. Would be cool to change it's name to something that starts with pulse- to make it fit the bill
+        // Infernal - Pulselag - holds onto the redstone signal it receives and emits it after some time
+        // The timings of each of these blocks can be configured using the tuning fork... but the author hasn't made that yet. Not sure how to explain it in this entry
+        // Maybe editing the tuning fork entry instead would be better.
+        addSimpleEntryHeader("basic_artifice", "Basic Artifice", "All the colors of the wind");
+        addPages("basic_artifice",
+                "",
+                "",
+                "",
+                "");
 
+        //TODO: have a looksie here
+        addSimpleEntryHeader("soulwoven_silk", "Soulwoven Silk", "To weave the ephemeral");
+        addPages("soulwoven_silk", "Soulwoven Silk is a light yet sturdy material that acts as an insulator for spirit energies. While other materials do exhibit matching interactions with the arcane, this bond between magic and cloth should make for a unique material.");
+        //TODO: also one here
+        addPages("soulwoven_silk.soulwoven_banner", "To test the properties of the cloth, I've heft together a set of Soulwoven Banners with patterns based on various arcane reagents and spirit arcanas I've been met with thus far. When hung and then imbued with Arcana, the Banners will gain a dim, and then powerful glow when met with an additional shard.");
+
+        //TODO: also one here
         addSimpleEntryHeader("soulwoven_pouch", "Soulwoven Pouch", "Made real through supposition");
         addPages("soulwoven_pouch", "In my studies one of the most cumbersome experiences so far has been the sheer amount of magical reagents and residue I have to deal with. To solve this issue, I've designed the Soulwoven Pouch with the bundle's design in mind. The pouch hungers for the magically aligned, reserving extra room for and collecting it habitually.");
 
@@ -643,9 +663,12 @@ public class MalumLang extends LanguageProvider {
                 "The Spirit Crucible has an annoying habit of breaking the tools to work with it. While a cost is to be expected, I'd rather pay it in installments. I have designed a device I call the Repair Pylon, intended to shore items up as they break down.",
                 "The Repair Pylon requires a toll of Spirit Arcana as well as a properly suited repair material for the job. When fitted with items, the Pylon will search for a nearby damaged item in any Item Pedestal, Item Stand, or Crucible. It should be theoretically possible to repair an item with " + italic("just") + " Arcana.. but that's only theory-crafting at the moment.");
 
+        //TODO: this entry needs writing
+        // First page talks about repairing tools using the pylon in general, second page comments on the extra efficiency in which malum gear is repaired
         addSimpleEntryHeader("arcane_restoration.tool_repair", "Repairing Tools", "Mending for Steelwear");
         addPages("arcane_restoration.tool_repair",
-                "");
+                "",
+                        "");
         addSimpleEntryHeader("crucible_augmentation", "Crucible Augmentation", "Tuning the attuner");
         addPages("crucible_augmentation",
                 "The Spirit Crucible is a machine of great, but largely unrealized, potential. Through a process I call Augmentation, revolving around foci of Alchemical Calx, this potential can be extracted.",
@@ -685,13 +708,13 @@ public class MalumLang extends LanguageProvider {
         addPages("intricate_assembly",
                 "The Intricate Assembly, as its name suggests, draws its power from the unbounded nature of its fractal complexity. At the cost of an increased dependency on fuel, as well as a reduced focusing speed, it enables the crucible to potentially produce double the usual amount of items during each focusing cycle.");
 
-        addEntryHeader("spirit_metals.soul_stained_steel", "Spirit Metals; Soul Stained Steel", "Arcana refined");
+        addEntryHeader("spirit_metals.soul_stained_steel", "Soulstained Steel", "To alloy realities");
         addHeadline("spirit_metals.soul_stained_steel", "Soulstained Steel");
         addPages("spirit_metals.soul_stained_steel",
                 "Iron is mundane, in a word. By attuning the metal with Soulstone, I can create a steel that is " + italic("simultaneously") + " in and out of phase with the world.",
                 "Anything made from Soulstained Steel is capable of striking the soul, without the need for specifics of engineering like with my crude scythe. Wearing the metal in its base form as armor is dangerous, as it will touch your own soul as well, so I must engineer a countermeasure.");
 
-        addEntryHeader("spirit_metals.hallowed_gold", "Spirit Metals; Hallowed Gold", "Arcana refined");
+        addEntryHeader("spirit_metals.hallowed_gold", "Hallowed Gold", "To bring in tune");
         addHeadline("spirit_metals.hallowed_gold", "Hallowed Gold");
         addPages("spirit_metals.hallowed_gold",
                 "Gold is often used as a thaumaturgical base, its natural conductivity of magic making it quite useful. Spirit arcana are no exception. In fact, using Sacred arcana, we can enhance those conductive properties.",

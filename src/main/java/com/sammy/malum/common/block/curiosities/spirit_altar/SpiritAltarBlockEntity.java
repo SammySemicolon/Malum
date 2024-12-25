@@ -159,9 +159,11 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
         int amount = acceleratorData.getInt("acceleratorAmount");
         for (int i = 0; i < amount; i++) {
             BlockPos pos = NBTHelper.readBlockPos(acceleratorData.getCompound("acceleratorPosition_" + i));
-            if (level != null && level.getBlockEntity(pos) instanceof IAltarAccelerator accelerator) {
-                acceleratorPositions.add(pos);
-                accelerators.add(accelerator);
+            if (pos != null) {
+                if (level != null && level.getBlockEntity(pos) instanceof IAltarAccelerator accelerator) {
+                    acceleratorPositions.add(pos);
+                    accelerators.add(accelerator);
+                }
             }
         }
         inventory.load(pRegistries, compound);

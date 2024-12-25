@@ -26,9 +26,11 @@ public abstract class DirectionalRedstoneMachineBlockEntity extends RedstoneMach
     }
 
     public void setSignalFromCache() {
-        setSignal(cachedSignal);
-        cachedSignal = null;
-        BlockStateHelper.updateState(level, getBlockPos());
+        if (cachedSignal != null) {
+            setSignal(cachedSignal);
+            cachedSignal = null;
+            BlockStateHelper.updateState(level, getBlockPos());
+        }
     }
 
     public void setSignal(DirectionalRedstoneMachineBlock.SignalInput signalInput) {

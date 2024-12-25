@@ -1,9 +1,18 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "jeed"
+    }
+  ],
   "type": "jeed:effect_provider",
   "effect": "malum:gluttony",
   "providers": [
     {
-      "item": "malum:belt_of_the_starved"
+      "item": "malum:belt_of_the_starved",
+      "item": "malum:ring_of_gruesome_concentration",
+      "item": "malum:concentrated_gluttony",
+      "item": "malum:splash_of_gluttony"
     }
   ]
 }

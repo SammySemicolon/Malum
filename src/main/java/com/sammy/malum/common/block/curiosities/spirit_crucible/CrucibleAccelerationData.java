@@ -95,7 +95,6 @@ public class CrucibleAccelerationData {
             acceleratorTag.putInt("amount", positions.size());
             for (int i = 0; i < positions.size(); i++) {
                 BlockPos position = positions.get(i);
-
                 acceleratorTag.put("acceleratorPosition_"+i, NBTHelper.saveBlockPos(position));
             }
         }
@@ -114,11 +113,13 @@ public class CrucibleAccelerationData {
             int amount = acceleratorTag.getInt("amount");
             for (int i = 0; i < amount; i++) {
                 BlockPos pos = NBTHelper.readBlockPos(acceleratorTag.getCompound("acceleratorPosition_" + i));
-                if (level.getBlockEntity(pos) instanceof ICrucibleAccelerator accelerator) {
-                    typeCount.compute(accelerator.getAcceleratorType(), (type, count) -> count == null ? 1 : count + 1);
-                    accelerators.add(accelerator);
-                    accelerator.setTarget(target);
-                    BlockStateHelper.updateState(level, pos);
+                if (pos != null) {
+                    if (level.getBlockEntity(pos) instanceof ICrucibleAccelerator accelerator) {
+                        typeCount.compute(accelerator.getAcceleratorType(), (type, count) -> count == null ? 1 : count + 1);
+                        accelerators.add(accelerator);
+                        accelerator.setTarget(target);
+                        BlockStateHelper.updateState(level, pos);
+                    }
                 }
             }
             final CrucibleAccelerationData data = new CrucibleAccelerationData(target, typeCount, accelerators);

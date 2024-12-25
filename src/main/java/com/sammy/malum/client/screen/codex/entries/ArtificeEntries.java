@@ -68,7 +68,7 @@ public class ArtificeEntries {
                         .addPage(new HeadlineTextPage("basic_artifice.pulselag", "basic_artifice.pulselag.1"))
                         .addPage(SpiritInfusionPage.fromOutput(PULSELAG.get()))
         );
-    
+
         screen.addEntry("soulwoven_silk", 4, 5, b -> b
                 .configureWidget(w -> w.setIcon(SOULWOVEN_SILK))
                 .addPage(new HeadlineTextPage("soulwoven_silk", "soulwoven_silk.1"))

@@ -6,10 +6,10 @@
     }
   ],
   "type": "jeed:effect_provider",
-  "effect": "malum:poseidons_grasp",
+  "effect": "malum:wicked_intent",
   "providers": [
     {
-      "item": "malum:runewood_totem_base"
+      "item": "malum:necklace_of_the_hidden_blade"
     }
   ]
 }

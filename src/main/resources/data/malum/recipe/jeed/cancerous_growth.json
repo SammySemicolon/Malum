@@ -6,10 +6,10 @@
     }
   ],
   "type": "jeed:effect_provider",
-  "effect": "malum:poseidons_grasp",
+  "effect": "malum:cancerous_growth",
   "providers": [
     {
-      "item": "malum:runewood_totem_base"
+      "item": "malum:ring_of_growing_flesh"
     }
   ]
 }

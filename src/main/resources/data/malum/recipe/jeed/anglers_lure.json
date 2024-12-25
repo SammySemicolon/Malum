@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "jeed"
+    }
+  ],
   "type": "jeed:effect_provider",
   "effect": "malum:anglers_lure",
   "providers": [

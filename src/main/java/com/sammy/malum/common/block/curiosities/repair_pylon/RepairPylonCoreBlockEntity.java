@@ -129,7 +129,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
             compound.putFloat("spiritAmount", spiritAmount);
         }
         if (repairablePosition != null) {
-            compound.put("targetedBlock", NBTHelper.saveBlockPos(new CompoundTag(), repairablePosition));
+            compound.put("targetedBlock", NBTHelper.saveBlockPos(repairablePosition));
         }
         if (timer != 0) {
             compound.putInt("timer", timer);

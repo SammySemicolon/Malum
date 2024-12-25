@@ -6,10 +6,11 @@
     }
   ],
   "type": "jeed:effect_provider",
-  "effect": "malum:poseidons_grasp",
+  "effect": "malum:silenced",
   "providers": [
     {
-      "item": "malum:runewood_totem_base"
+      "item": "malum:rune_of_the_heretic",
+      "item": "malum:erosion_scepter"
     }
   ]
 }

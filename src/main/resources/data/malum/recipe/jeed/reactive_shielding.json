@@ -6,10 +6,10 @@
     }
   ],
   "type": "jeed:effect_provider",
-  "effect": "malum:poseidons_grasp",
+  "effect": "malum:reactive_shielding",
   "providers": [
     {
-      "item": "malum:runewood_totem_base"
+      "item": "malum:rune_of_reactive_shielding"
     }
   ]
 }

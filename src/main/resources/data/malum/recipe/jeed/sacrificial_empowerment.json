@@ -6,10 +6,10 @@
     }
   ],
   "type": "jeed:effect_provider",
-  "effect": "malum:poseidons_grasp",
+  "effect": "malum:sacrificial_empowerment",
   "providers": [
     {
-      "item": "malum:runewood_totem_base"
+      "item": "malum:sacrificial_empowerment"
     }
   ]
 }

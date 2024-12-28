@@ -117,8 +117,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
     }
 
     @Override
-    public void init() {
-        super.init();
+    public void loadLevel() {
         if (level.getBlockEntity(getBlockPos().mutable().setY(totemBaseYLevel)) instanceof TotemBaseBlockEntity totemBaseBlockEntity) {
             totemBase = totemBaseBlockEntity;
         }

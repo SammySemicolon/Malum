@@ -36,7 +36,7 @@ public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCataly
         ItemStack stack = blockEntityIn.inventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
             poseStack.pushPose();
-            Vec3 offset = blockEntityIn.getItemOffset();
+            Vec3 offset = SpiritCatalyzerCoreBlockEntity.CATALYZER_ITEM_OFFSET;
             poseStack.translate(offset.x, offset.y, offset.z);
             poseStack.mulPose(Axis.YP.rotationDegrees(((level.getGameTime() % 360) + partialTicks) * 3));
             poseStack.scale(0.45f, 0.45f, 0.45f);
@@ -46,23 +46,23 @@ public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCataly
         stack = blockEntityIn.augmentInventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
             poseStack.pushPose();
-            Vec3 offset = blockEntityIn.getAugmentOffset();
+            Vec3 offset = SpiritCatalyzerCoreBlockEntity.CATALYZER_AUGMENT_OFFSET;
             poseStack.translate(offset.x, offset.y, offset.z);
             poseStack.mulPose(Axis.YP.rotationDegrees(((-level.getGameTime() % 360) - partialTicks) * 3));
             poseStack.scale(0.45f, 0.45f, 0.45f);
             itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, combinedLightIn, NO_OVERLAY, poseStack, bufferIn, level, 0);
             poseStack.popPose();
         }
-        if (blockEntityIn.getTarget() != null && blockEntityIn.intensity != null) {
+        if (blockEntityIn.intensity != null && blockEntityIn.getFocusingModifierInstance().isPresent()) {
             poseStack.pushPose();
-            final BlockPos blockPos = blockEntityIn.getBlockPos();
-            Vec3 offset = blockEntityIn.getItemOffset();
+            var pos = blockEntityIn.getBlockPos();
+            Vec3 offset = SpiritCatalyzerCoreBlockEntity.CATALYZER_ITEM_OFFSET;
             for (Map.Entry<MalumSpiritType, Integer> entry : blockEntityIn.intensity.entrySet()) {
                 if (entry.getValue() > 0) {
                     final MalumSpiritType spirit = entry.getKey();
-                    poseStack.translate(-blockPos.getX(), -blockPos.getY(), -blockPos.getZ());
+                    poseStack.translate(-pos.getX(), -pos.getY(), -pos.getZ());
                     renderBeam(blockEntityIn, poseStack, spirit, entry.getValue());
-                    poseStack.translate(blockPos.getX()+offset.x, blockPos.getY()+offset.y, blockPos.getZ()+offset.z);
+                    poseStack.translate(pos.getX() + offset.x, pos.getY() + offset.y, pos.getZ() + offset.z);
                     FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, spirit, entry.getValue() / 60f, partialTicks);
                     poseStack.translate(-offset.x, -offset.y, -offset.z);
                 }
@@ -72,18 +72,18 @@ public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCataly
     }
 
     public void renderBeam(SpiritCatalyzerCoreBlockEntity catalyzer, PoseStack poseStack, MalumSpiritType spiritType, int intensity) {
-        var catalyzerPos = catalyzer.getBlockPos();
-        var startPos = catalyzer.getItemOffset().add(catalyzerPos.getX(), catalyzerPos.getY(), catalyzerPos.getZ());
-        var targetPos = catalyzer.getTarget().getVisualAccelerationPoint();
-        var difference = targetPos.subtract(startPos);
-        float distance = 0.35f + Easing.SINE_OUT.ease(intensity / 60f, 0, 0.35f, 1);
-        float alpha = intensity / 60f;
-        var midPoint = startPos.add(difference.scale(distance));
-        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
-        SpiritBasedWorldVFXBuilder.create(spiritType)
-                .setColor(spiritType.getPrimaryColor())
-                .setRenderType(renderType)
-                .setAlpha(alpha)
-                .renderBeam(poseStack.last().pose(), startPos, midPoint, 0.4f, b -> b.setColor(spiritType.getSecondaryColor()).setAlpha(0f));
+//        var catalyzerPos = catalyzer.getBlockPos();
+//        var startPos = SpiritCatalyzerCoreBlockEntity.CATALYZER_ITEM_OFFSET.add(catalyzerPos.getX(), catalyzerPos.getY(), catalyzerPos.getZ());
+//        var targetPos = catalyzer.getTarget().getVisualAccelerationPoint();
+//        var difference = targetPos.subtract(startPos);
+//        float distance = 0.35f + Easing.SINE_OUT.ease(intensity / 60f, 0, 0.35f, 1);
+//        float alpha = intensity / 60f;
+//        var midPoint = startPos.add(difference.scale(distance));
+//        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
+//        SpiritBasedWorldVFXBuilder.create(spiritType)
+//                .setColor(spiritType.getPrimaryColor())
+//                .setRenderType(renderType)
+//                .setAlpha(alpha)
+//                .renderBeam(poseStack.last().pose(), startPos, midPoint, 0.4f, b -> b.setColor(spiritType.getSecondaryColor()).setAlpha(0f));
     }
 }

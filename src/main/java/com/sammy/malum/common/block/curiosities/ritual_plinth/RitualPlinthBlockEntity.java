@@ -63,22 +63,8 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
 
     public RitualPlinthBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.RITUAL_PLINTH.get(), pos, state);
-
-        inventory = new MalumBlockEntityInventory(1, 64, t -> (ritualType != null && ritualType.isItemStackValid(this, t)) || (ritualType == null && !(t.getItem() instanceof SpiritShardItem))) {
-            @Override
-            public void onContentsChanged(int slot) {
-                super.onContentsChanged(slot);
-                needsSync = true;
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-        };
-        extrasInventory = new MalumBlockEntityInventory(8, 64) {
-            @Override
-            public void onContentsChanged(int slot) {
-                super.onContentsChanged(slot);
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-        };
+        inventory = MalumBlockEntityInventory.singleItemStack(this);
+        extrasInventory = MalumBlockEntityInventory.itemStacks(this, 8);
     }
 
     @Override
@@ -157,7 +143,7 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
     }
 
     @Override
-    public void init() {
+    public void loadLevel() {
         ItemStack stack = inventory.getStackInSlot(0);
         boolean wasLackingRecipe = ritualRecipe == null;
         ritualRecipe = RitualRegistry.RITUALS.stream().map(MalumRitualType::getRecipeData).filter(recipeData -> recipeData != null && recipeData.input.test(stack)).findAny().orElse(null);
@@ -184,6 +170,7 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
             }
         }
     }
+
 
     @Override
     public void tick() {

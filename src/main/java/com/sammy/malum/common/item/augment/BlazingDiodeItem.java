@@ -1,19 +1,13 @@
 package com.sammy.malum.common.item.augment;
 
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifier;
 import com.sammy.malum.registry.common.*;
 
-public class BlazingDiodeItem extends AbstractAugmentItem{
+public class BlazingDiodeItem extends AugmentItem {
     public BlazingDiodeItem(Properties pProperties) {
-        super(pProperties, SpiritTypeRegistry.INFERNAL_SPIRIT);
-    }
-
-    @Override
-    public float getFuelUsageRateIncrease() {
-        return -0.25f;
-    }
-
-    @Override
-    public float getSpeedIncrease() {
-        return 0.25f;
+        super(pProperties, SpiritTypeRegistry.INFERNAL_SPIRIT,
+                new ArtificeModifier(ArtificeAttributeType.FUEL_USAGE_RATE, -0.25f),
+                new ArtificeModifier(ArtificeAttributeType.FOCUSING_SPEED, 0.25f));
     }
 }

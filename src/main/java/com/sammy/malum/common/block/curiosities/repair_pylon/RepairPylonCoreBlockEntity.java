@@ -84,38 +84,8 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
 
     public RepairPylonCoreBlockEntity(BlockEntityType<? extends RepairPylonCoreBlockEntity> type, MultiBlockStructure structure, BlockPos pos, BlockState state) {
         super(type, structure, pos, state);
-        inventory = new MalumBlockEntityInventory(1, 64, t -> !(t.getItem() instanceof SpiritShardItem)) {
-            @Override
-            public void onContentsChanged(int slot) {
-                super.onContentsChanged(slot);
-                needsSync = true;
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-        };
-        spiritInventory = new MalumBlockEntityInventory(4, 64) {
-            @Override
-            public void onContentsChanged(int slot) {
-                super.onContentsChanged(slot);
-                needsSync = true;
-                spiritAmount = Math.max(1, Mth.lerp(0.15f, spiritAmount, nonEmptyItemAmount + 1));
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-
-            @Override
-            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                if (!(stack.getItem() instanceof SpiritShardItem spiritItem))
-                    return false;
-
-                for (int i = 0; i < getSlots(); i++) {
-                    if (i != slot) {
-                        ItemStack stackInSlot = getStackInSlot(i);
-                        if (!stackInSlot.isEmpty() && stackInSlot.getItem() == spiritItem)
-                            return false;
-                    }
-                }
-                return true;
-            }
-        };
+        inventory = MalumBlockEntityInventory.singleItemStack(this);
+        spiritInventory = MalumSpiritBlockEntityInventory.spiritStacks(this, 4);
     }
 
     public RepairPylonCoreBlockEntity(BlockPos pos, BlockState state) {
@@ -180,8 +150,9 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     }
 
     @Override
-    public void init() {
-        if (state.equals(RepairPylonState.COOLDOWN)) {
+    public void loadLevel() {
+        spiritAmount = Math.max(1, Mth.lerp(0.15f, spiritAmount, spiritInventory.nonEmptyItemAmount + 1));
+       if (state.equals(RepairPylonState.COOLDOWN)) {
             return;
         }
         findRecipe();

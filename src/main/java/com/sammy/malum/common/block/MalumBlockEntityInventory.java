@@ -1,27 +1,61 @@
 package com.sammy.malum.common.block;
 
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.AugmentBlockEntityInventory;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.registry.common.*;
+import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 import team.lodestar.lodestone.systems.blockentity.*;
 
 import java.util.function.*;
 
 public class MalumBlockEntityInventory extends LodestoneBlockEntityInventory {
 
-    public MalumBlockEntityInventory(int slotCount, int allowedItemSize, Predicate<ItemStack> inputPredicate, Predicate<ItemStack> outputPredicate) {
-        super(slotCount, allowedItemSize, inputPredicate, outputPredicate);
+    public static MalumBlockEntityInventory singleItem(LodestoneBlockEntity blockEntity) {
+        return new MalumBlockEntityInventory(blockEntity, 1, 1);
+    }
+    public static MalumBlockEntityInventory singleItemStack(LodestoneBlockEntity blockEntity) {
+        return new MalumBlockEntityInventory(blockEntity, 1, 64);
+    }
+    public static MalumBlockEntityInventory singleNotSpirit(LodestoneBlockEntity blockEntity) {
+        return new MalumBlockEntityInventory(blockEntity, 1, 1, p -> !p.is(ItemTagRegistry.SPIRITS));
+    }
+    public static MalumBlockEntityInventory singleStackNotSpirit(LodestoneBlockEntity blockEntity) {
+        return new MalumBlockEntityInventory(blockEntity, 1, 64, p -> !p.is(ItemTagRegistry.SPIRITS));
+    }
+    public static MalumBlockEntityInventory items(LodestoneBlockEntity blockEntity, int slotCount) {
+        return new MalumBlockEntityInventory(blockEntity, slotCount, 1);
+    }
+    public static MalumBlockEntityInventory itemStacks(LodestoneBlockEntity blockEntity, int slotCount) {
+        return new MalumBlockEntityInventory(blockEntity, slotCount, 64);
+    }
+    public static MalumBlockEntityInventory notSpirits(LodestoneBlockEntity blockEntity, int slotCount) {
+        return new MalumBlockEntityInventory(blockEntity, slotCount, 1, p -> !p.is(ItemTagRegistry.SPIRITS));
+    }
+    public static MalumBlockEntityInventory stacksNotSpirits(LodestoneBlockEntity blockEntity, int slotCount) {
+        return new MalumBlockEntityInventory(blockEntity, slotCount, 64, p -> !p.is(ItemTagRegistry.SPIRITS));
     }
 
-    public MalumBlockEntityInventory(int slotCount, int allowedItemSize, Predicate<ItemStack> inputPredicate) {
-        super(slotCount, allowedItemSize, inputPredicate);
+    protected MalumBlockEntityInventory(LodestoneBlockEntity blockEntity, int slotCount, int allowedItemSize) {
+        super(blockEntity, slotCount, allowedItemSize);
     }
 
-    public MalumBlockEntityInventory(int slotCount, int allowedItemSize) {
-        super(slotCount, allowedItemSize);
+    protected MalumBlockEntityInventory(LodestoneBlockEntity blockEntity, int slotCount, int allowedItemSize, Class<? extends Item> inputClass) {
+        super(blockEntity, slotCount, allowedItemSize, inputClass);
+    }
+
+    protected MalumBlockEntityInventory(LodestoneBlockEntity blockEntity, int slotCount, int allowedItemSize, Predicate<ItemStack> inputPredicate) {
+        super(blockEntity, slotCount, allowedItemSize, inputPredicate);
+    }
+
+    @Override
+    public void onContentsChanged(int slot) {
+        super.onContentsChanged(slot);
+        blockEntity.markDirty();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.sammy.malum.common.block.curiosities.spirit_altar;
 
 import com.sammy.malum.common.block.MalumBlockEntityInventory;
+import com.sammy.malum.common.block.MalumSpiritBlockEntityInventory;
 import com.sammy.malum.common.block.storage.IMalumSpecialItemAccessPoint;
 import com.sammy.malum.common.item.spirit.SpiritShardItem;
 import com.sammy.malum.common.recipe.spirit.infusion.SpiritInfusionRecipe;
@@ -81,47 +82,9 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
 
     public SpiritAltarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.SPIRIT_ALTAR.get(), pos, state);
-
-        inventory = new MalumBlockEntityInventory(1, 64, t -> !(t.getItem() instanceof SpiritShardItem)) {
-            @Override
-            public void onContentsChanged(int slot) {
-                super.onContentsChanged(slot);
-                needsSync = true;
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-        };
-        extrasInventory = new MalumBlockEntityInventory(8, 64) {
-            @Override
-            public void onContentsChanged(int slot) {
-                super.onContentsChanged(slot);
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-        };
-        spiritInventory = new MalumBlockEntityInventory(SpiritTypeRegistry.SPIRITS.size(), 64) {
-            @Override
-            public void onContentsChanged(int slot) {
-                super.onContentsChanged(slot);
-                needsSync = true;
-                spiritAmount = Math.max(1, Mth.lerp(0.15f, spiritAmount, nonEmptyItemAmount + 1));
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-
-            @Override
-            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                if (!(stack.getItem() instanceof SpiritShardItem spiritItem))
-                    return false;
-
-                for (int i = 0; i < getSlots(); i++) {
-                    if (i != slot) {
-                        ItemStack stackInSlot = getStackInSlot(i);
-                        if (!stackInSlot.isEmpty() && stackInSlot.getItem() == spiritItem) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            }
-        };
+        inventory = MalumBlockEntityInventory.singleStackNotSpirit(this);
+        extrasInventory = MalumBlockEntityInventory.stacksNotSpirits(this, 8);
+        spiritInventory = MalumSpiritBlockEntityInventory.spiritStacks(this, SpiritTypeRegistry.SPIRITS.size());
     }
 
     @Override
@@ -203,7 +166,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
     }
 
     @Override
-    public void init() {
+    public void loadLevel() {
         recalculateRecipes();
         if (level.isClientSide && isCrafting) {
             AltarSoundInstance.playSound(this);
@@ -358,7 +321,6 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
         ParticleEffectTypeRegistry.SPIRIT_ALTAR_CRAFTS.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits));
         level.playSound(null, worldPosition, SoundRegistry.ALTAR_CRAFT.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.2f);
         level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, outputStack));
-        init();
         recalibrateAccelerators();
         BlockStateHelper.updateAndNotifyState(level, worldPosition);
     }

@@ -4,6 +4,8 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import com.sammy.malum.client.renderer.entity.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeData;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.registry.common.item.*;
@@ -29,7 +31,6 @@ import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
 
 import java.lang.Math;
-import java.util.*;
 
 import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 
@@ -93,7 +94,7 @@ public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibl
         ItemStack stack = blockEntityIn.inventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
             poseStack.pushPose();
-            Vec3 offset = blockEntityIn.getCentralItemOffset();
+            Vec3 offset = SpiritCrucibleCoreBlockEntity.CRUCIBLE_ITEM_OFFSET;
             poseStack.translate(offset.x, offset.y, offset.z);
             poseStack.mulPose(Axis.YP.rotationDegrees(((level.getGameTime() % 360) + partialTicks) * 3));
             poseStack.scale(0.45f, 0.45f, 0.45f);
@@ -108,7 +109,7 @@ public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibl
             float time = 240;
             for (int i = 0; i < total; i++) {
                 ItemStack item = augmentInventory.getStackInSlot(i);
-                if (item.getItem() instanceof AbstractAugmentItem) {
+                if (item.getItem() instanceof AugmentItem) {
                     double angle = augmentsRendered / total * (Math.PI * 2);
                     angle -= (((long) (blockEntityIn.spiritSpin + partialTicks) % time) / time) * (Math.PI * 2);
                     poseStack.pushPose();
@@ -122,23 +123,23 @@ public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibl
             }
         }
         if (tuningForkHeldTimer > 5) {
-            final Font font = Minecraft.getInstance().font;
+            ArtificeAttributeData accelerationData = blockEntityIn.getAttributes();
+            var font = Minecraft.getInstance().font;
             float timer = Mth.clamp((tuningForkHeldTimer + (isHoldingFork ? 1 : -1) * partialTicks), 0, 20);
             float scalar = Easing.SINE_IN_OUT.ease(timer/20f, 0, 1, 1);
             float scale = 0.016F - (1-scalar)*0.004f;
-            final Font.DisplayMode display = Font.DisplayMode.NORMAL;
-            final List<CrucibleTuning.CrucibleAttributeType> validValues = CrucibleTuning.CrucibleAttributeType.getValidValues(blockEntityIn.acceleratorData);
+            var display = Font.DisplayMode.NORMAL;
+            var attributes = ArtificeAttributeType.getExistingAttributes(accelerationData);
             poseStack.pushPose();
             poseStack.translate(0.5f, 2f, 0.55f);
             poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
-//            poseStack.mulPose(Axis.YP.rotationDegrees(180f));
-            for (int i = 0; i < validValues.size(); i++) {
-                CrucibleTuning.CrucibleAttributeType tuningType = validValues.get(i);
-                String dataPrint = tuningType.statDisplayFunction.apply(blockEntityIn.getAccelerationData());
-                boolean important = tuningType.equals(blockEntityIn.tuningType);
+            for (int i = 0; i < attributes.size(); i++) {
+                var attributeType = attributes.get(i);
+                var dataPrint = attributeType.getDataPrint(accelerationData);
+                boolean important = attributeType.equals(accelerationData.tunedAttribute);
                 MutableComponent dataText = Component.literal(" <" + dataPrint + ">");
-                MutableComponent text = Component.translatable(tuningType.translation());
-                MutableComponent outlineText = Component.translatable(tuningType.translation());
+                MutableComponent text = Component.translatable(attributeType.getLangKey());
+                MutableComponent outlineText = Component.translatable(attributeType.getLangKey());
                 if (important) {
                     dataText.withStyle(ChatFormatting.BOLD);
                     text = Component.literal("[").append(text).append(Component.literal("]")).withStyle(ChatFormatting.BOLD);

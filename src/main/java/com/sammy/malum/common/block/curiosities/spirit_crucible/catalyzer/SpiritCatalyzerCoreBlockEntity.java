@@ -1,9 +1,10 @@
 package com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer;
 
 import com.sammy.malum.common.block.*;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierSource;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.AugmentBlockEntityInventory;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
 import com.sammy.malum.common.item.augment.*;
-import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.visual_effects.*;
@@ -12,54 +13,37 @@ import net.minecraft.nbt.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.items.IItemHandler;
-import team.lodestar.lodestone.helpers.block.*;
-import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.multiblock.*;
 
 import javax.annotation.*;
 import java.util.*;
 import java.util.function.*;
 
-public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity implements ICrucibleAccelerator, IBlockCapabilityProvider<IItemHandler, Direction> {
+public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity implements ArtificeModifierSource.CrucibleInfluencer, IBlockCapabilityProvider<IItemHandler, Direction> {
 
-    private static final Vec3 CATALYZER_ITEM_OFFSET = new Vec3(0.5f, 2f, 0.5f);
-    private static final Vec3 CATALYZER_AUGMENT_OFFSET = new Vec3(0.5f, 2.75f, 0.5f);
+    public static final Vec3 CATALYZER_ITEM_OFFSET = new Vec3(0.5f, 2f, 0.5f);
+    public static final Vec3 CATALYZER_AUGMENT_OFFSET = new Vec3(0.5f, 2.75f, 0.5f);
 
     public static final Supplier<HorizontalDirectionStructure> STRUCTURE = () -> (HorizontalDirectionStructure.of(new MultiBlockStructure.StructurePiece(0, 1, 0, BlockRegistry.SPIRIT_CATALYZER_COMPONENT.get().defaultBlockState())));
 
-    public LodestoneBlockEntityInventory inventory;
-    public LodestoneBlockEntityInventory augmentInventory;
+    public MalumBlockEntityInventory inventory;
+    public MalumBlockEntityInventory augmentInventory;
 
     public float burnTicks;
     public HashMap<MalumSpiritType, Integer> intensity;
-    protected ICatalyzerAccelerationTarget target;
+    public CatalyzerArtificeModifierSource modifier;
+    protected IArtificeAcceptor target;
 
     public SpiritCatalyzerCoreBlockEntity(BlockEntityType<? extends SpiritCatalyzerCoreBlockEntity> type, MultiBlockStructure structure, BlockPos pos, BlockState state) {
         super(type, structure, pos, state);
-        inventory = new MalumBlockEntityInventory(1, 64, t -> !(t.getItem() instanceof SpiritShardItem)) {
-            @Override
-            public void onContentsChanged(int slot) {
-                super.onContentsChanged(slot);
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-        };
-        augmentInventory = new AugmentBlockEntityInventory(1, 1) {
-            @Override
-            public void onContentsChanged(int slot) {
-                super.onContentsChanged(slot);
-                needsSync = true;
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-        };
+        inventory = MalumBlockEntityInventory.singleItemStack(this);
+        augmentInventory = AugmentBlockEntityInventory.augmentInventory(this, 1);
     }
 
     public SpiritCatalyzerCoreBlockEntity(BlockPos pos, BlockState state) {
@@ -67,25 +51,14 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registryLookup) {
-        if (burnTicks != 0) {
-            compound.putFloat("burnTicks", burnTicks);
-        }
-
-        inventory.save(registryLookup, compound);
-        augmentInventory.save(registryLookup, compound, "augmentInventory");
-        super.saveAdditional(compound, registryLookup);
+    public ArtificeModifierSource createFocusingModifierInstance() {
+        return modifier = new CatalyzerArtificeModifierSource(this);
     }
 
     @Override
-    public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-        burnTicks = compound.getFloat("burnTicks");
-
-        inventory.load(registries, compound);
-        augmentInventory.load(registries, compound, "augmentInventory");
-        super.loadAdditional(compound, registries);
+    public Optional<ArtificeModifierSource> getFocusingModifierInstance() {
+        return Optional.ofNullable(modifier);
     }
-
 
     @Override
     public ItemInteractionResult onUseWithItem(Player player, ItemStack heldStack, InteractionHand hand) {
@@ -93,7 +66,7 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
             return ItemInteractionResult.CONSUME;
         }
         if (hand.equals(InteractionHand.MAIN_HAND)) {
-            final boolean augmentOnly = heldStack.getItem() instanceof AbstractAugmentItem;
+            final boolean augmentOnly = heldStack.getItem() instanceof AugmentItem;
             if (augmentOnly || (heldStack.isEmpty() && inventory.isEmpty())) {
                 ItemStack stack = augmentInventory.interact(player.level(), player, hand);
                 if (!stack.isEmpty()) {
@@ -121,108 +94,49 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
 
     @Override
     public void tick() {
-        if (target != null && target.isValidAccelerationTarget()) {
-            if (burnTicks > 0) {
-                CrucibleAccelerationData data = target.getAccelerationData();
-                float ratio = data.fuelUsageRate.getValue(data);
-                if (ratio > 0) {
-                    burnTicks -= ratio;
-                }
-            }
-        }
         if (level.isClientSide) {
             if (intensity == null) {
                 intensity = new HashMap<>();
             }
-            if (target != null) {
-                boolean canBeAccelerated = target.isValidAccelerationTarget();
+            if (modifier != null && modifier.isBound()) {
                 MalumSpiritType activeSpiritType = target.getActiveSpiritType();
                 if (activeSpiritType != null) {
                     intensity.putIfAbsent(activeSpiritType, 0);
-                    if (canBeAccelerated) {
-                        intensity.put(activeSpiritType, Math.min(60, intensity.get(activeSpiritType) + 1));
-                    }
+                    intensity.put(activeSpiritType, Math.min(60, intensity.get(activeSpiritType) + 1));
                 }
                 for (MalumSpiritType spiritType : intensity.keySet()) {
-                    if (canBeAccelerated && spiritType.equals(activeSpiritType)) {
+                    if (spiritType.equals(activeSpiritType)) {
                         continue;
                     }
-                    intensity.put(spiritType, Math.max(0,intensity.get(spiritType) - 1));
+                    intensity.put(spiritType, Math.max(0, intensity.get(spiritType) - 1));
                 }
             }
             SpiritCrucibleParticleEffects.passiveSpiritCatalyzerParticles(this);
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
-    public void addParticles(ICatalyzerAccelerationTarget target, MalumSpiritType spiritType) {
-        if (burnTicks > 0) {
-            SpiritCrucibleParticleEffects.activeSpiritCatalyzerParticles(this, target, spiritType);
+    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registryLookup) {
+        if (burnTicks != 0) {
+            compound.putFloat("burnTicks", burnTicks);
         }
+
+        inventory.save(registryLookup, compound);
+        augmentInventory.save(registryLookup, compound, "augmentInventory");
+        super.saveAdditional(compound, registryLookup);
     }
 
     @Override
-    public boolean canStartAccelerating() {
-        if (burnTicks > 0) {
-            return true;
-        }
-        return inventory.getStackInSlot(0).getBurnTime(RecipeType.SMELTING) > 0;
+    public void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        burnTicks = compound.getFloat("burnTicks");
+        inventory.load(registries, compound);
+        augmentInventory.load(registries, compound, "augmentInventory");
+        super.loadAdditional(compound, registries);
     }
 
-    @Override
-    public boolean canContinueAccelerating() {
-        if (isRemoved()) {
-            return false;
-        }
-        if (burnTicks <= 0) {
-            ItemStack stack = inventory.getStackInSlot(0);
-            if (!stack.isEmpty()) {
-                burnTicks = inventory.getStackInSlot(0).getBurnTime(RecipeType.SMELTING) / 2f;
-                stack.shrink(1);
-                inventory.updateData();
-                BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-        }
-        return burnTicks != 0;
-    }
-
-    @Override
-    public CrucibleAcceleratorType getAcceleratorType() {
-        return CatalyzerAcceleratorType.CATALYZER;
-    }
-
-    @Override
-    public ItemStack getAugment() {
-        return augmentInventory.getStackInSlot(0);
-    }
-
-    @Override
-    public ICatalyzerAccelerationTarget getTarget() {
-        return target;
-    }
-
-    @Override
-    public void setTarget(ICatalyzerAccelerationTarget target) {
-        this.target = target;
-    }
-
-    public Vec3 getItemOffset() {
-        return CATALYZER_ITEM_OFFSET;
-    }
-
-    public Vec3 getAugmentOffset() {
-        return CATALYZER_AUGMENT_OFFSET;
-    }
 
     @Override
     public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
         return inventory;
     }
-
-    /*@Override
-    public AABB getRenderBoundingBox() {
-        var pos = worldPosition;
-        return new AABB(pos.getX() - 1, pos.getY(), pos.getZ() - 1, pos.getX() + 1, pos.getY() + 4, pos.getZ() + 1);
-    }*/
 }

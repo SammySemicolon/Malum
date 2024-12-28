@@ -1,24 +1,13 @@
 package com.sammy.malum.common.item.augment;
 
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifier;
 import com.sammy.malum.registry.common.*;
 
-public class ImpurityStabilizer extends AbstractAugmentItem{
+public class ImpurityStabilizer extends AugmentItem {
     public ImpurityStabilizer(Properties pProperties) {
-        super(pProperties, SpiritTypeRegistry.WICKED_SPIRIT);
-    }
-
-    @Override
-    public float getWeakestAttributeMultiplier() {
-        return 0.25f;
-    }
-
-    @Override
-    public float getFuelUsageRateIncrease() {
-        return -0.04f;
-    }
-
-    @Override
-    public float getInstabilityIncrease() {
-        return -0.02f;
+        super(pProperties, SpiritTypeRegistry.WICKED_SPIRIT,
+                new ArtificeModifier(ArtificeAttributeType.WEAKEST_BOOST, 0.25f),
+                new ArtificeModifier(ArtificeAttributeType.INSTABILITY, 0.05f));
     }
 }

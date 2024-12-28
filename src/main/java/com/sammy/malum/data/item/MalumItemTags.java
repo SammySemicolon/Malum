@@ -1,7 +1,6 @@
 package com.sammy.malum.data.item;
 
 import com.sammy.malum.*;
-import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
@@ -129,7 +128,7 @@ public class MalumItemTags extends ItemTagsProvider {
                 BLAZING_QUARTZ.get(), ARCANE_CHARCOAL.get(),
                 NATURAL_QUARTZ.get(), CTHONIC_GOLD.get(), CTHONIC_GOLD_FRAGMENT.get());
 
-        tag(ItemTagRegistry.AUGMENTS).addAll(items.stream().filter(i -> i.get() instanceof AbstractAugmentItem).map(DeferredHolder::getKey).toList());
+        tag(ItemTagRegistry.AUGMENTS).addAll(items.stream().filter(i -> i.get() instanceof AugmentItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.METAL_NODES).addAll(items.stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.SOULWOVEN_BANNERS).addAll(items.stream().filter(i -> i.get() instanceof SoulwovenBannerBlockItem).map(DeferredHolder::getKey).toList());
 

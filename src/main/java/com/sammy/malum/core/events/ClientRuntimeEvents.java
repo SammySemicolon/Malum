@@ -33,6 +33,6 @@ public class ClientRuntimeEvents {
 
     @SubscribeEvent
     public static void itemTooltipEvent(ItemTooltipEvent event) {
-        AbstractAugmentItem.addAugmentAttributeTooltip(event);
+        AugmentItem.addAugmentAttributeTooltip(event);
     }
 }

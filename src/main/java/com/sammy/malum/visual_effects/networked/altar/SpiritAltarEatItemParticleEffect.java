@@ -20,7 +20,7 @@ public class SpiritAltarEatItemParticleEffect extends ParticleEffectType {
 
     public static NBTEffectData createData(BlockPos holderPos, ItemStack stack) {
         NBTEffectData effectData = new NBTEffectData(stack);
-        effectData.compoundTag.put("position", NBTHelper.saveBlockPos(holderPos));
+        NBTHelper.saveBlockPos(effectData.compoundTag, holderPos);
         return effectData;
     }
 
@@ -31,7 +31,7 @@ public class SpiritAltarEatItemParticleEffect extends ParticleEffectType {
             if (!(level.getBlockEntity(positionData.getAsBlockPos()) instanceof SpiritAltarBlockEntity spiritAltar)) {
                 return;
             }
-            if (!(level.getBlockEntity(NBTHelper.readBlockPos(nbtData.compoundTag.get("position"))) instanceof IMalumSpecialItemAccessPoint holder)) {
+            if (!(level.getBlockEntity(NBTHelper.readBlockPos(nbtData.compoundTag)) instanceof IMalumSpecialItemAccessPoint holder)) {
                 return;
             }
             SpiritAltarParticleEffects.eatItemParticles(spiritAltar, holder, colorData, nbtData.getStack());

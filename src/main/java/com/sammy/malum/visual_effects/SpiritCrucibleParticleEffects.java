@@ -1,6 +1,9 @@
 package com.sammy.malum.visual_effects;
 
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeInfluenceData;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierSource;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.spirit.*;
@@ -24,6 +27,7 @@ import team.lodestar.lodestone.systems.particle.world.*;
 import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 import team.lodestar.lodestone.systems.particle.world.options.*;
 
+import java.util.Optional;
 import java.util.function.*;
 
 import static com.sammy.malum.visual_effects.SpiritLightSpecs.*;
@@ -42,11 +46,12 @@ public class SpiritCrucibleParticleEffects {
         LodestoneBlockEntityInventory augmentInventory = crucible.augmentInventory;
         SpiritFocusingRecipe recipe = crucible.recipe;
         if (recipe != null) {
-            for (ICrucibleAccelerator accelerator : crucible.acceleratorData.accelerators) {
-                if (accelerator != null) {
-                    accelerator.addParticles(crucible, activeSpiritType);
+            Optional<ArtificeInfluenceData> influenceData = crucible.attributes.getInfluenceData(level);
+            influenceData.ifPresent(d -> {
+                for (ArtificeModifierSource modifier : d.modifiers()) {
+                    modifier.addParticles(crucible, activeSpiritType);
                 }
-            }
+            });
         }
         if (recipe != null) {
             var lightSpecs = spiritLightSpecs(level, itemPos, activeSpiritType, new WorldParticleOptions(ParticleRegistry.STAR.get()));
@@ -90,7 +95,7 @@ public class SpiritCrucibleParticleEffects {
             int augmentsRendered = 0;
             for (int i = 0; i < augmentInventory.slotCount; i++) {
                 ItemStack item = augmentInventory.getStackInSlot(i);
-                if (item.getItem() instanceof AbstractAugmentItem augmentItem) {
+                if (item.getItem() instanceof AugmentItem augmentItem) {
                     Vec3 offset = crucible.getAugmentItemOffset(augmentsRendered++, 0);
                     var spiritType = augmentItem.spiritType;
                     BlockPos blockPos = crucible.getBlockPos();
@@ -119,10 +124,10 @@ public class SpiritCrucibleParticleEffects {
         }
     }
 
-    public static void activeSpiritCatalyzerParticles(SpiritCatalyzerCoreBlockEntity catalyzer, ICatalyzerAccelerationTarget target, MalumSpiritType spiritType) {
+    public static void activeSpiritCatalyzerParticles(SpiritCatalyzerCoreBlockEntity catalyzer, IArtificeAcceptor target, MalumSpiritType spiritType) {
         Level level = catalyzer.getLevel();
         BlockPos catalyzerPos = catalyzer.getBlockPos();
-        Vec3 startPos = catalyzer.getItemOffset().add(catalyzerPos.getX(), catalyzerPos.getY(), catalyzerPos.getZ());
+        Vec3 startPos = catalyzerPos.getBottomCenter().add(SpiritCatalyzerCoreBlockEntity.CATALYZER_ITEM_OFFSET);
         RandomSource random = level.random;
         Vec3 targetPos = target.getVisualAccelerationPoint();
         if (level.getGameTime() % 2L == 0) {
@@ -155,8 +160,8 @@ public class SpiritCrucibleParticleEffects {
 
         if (level.getGameTime() % 4L == 0) {
             ItemStack item = catalyzer.augmentInventory.getStackInSlot(0);
-            if (item.getItem() instanceof AbstractAugmentItem augmentItem) {
-                Vec3 offset = catalyzer.getAugmentOffset();
+            if (item.getItem() instanceof AugmentItem augmentItem) {
+                Vec3 offset = SpiritCatalyzerCoreBlockEntity.CATALYZER_AUGMENT_OFFSET;
                 var augmentSpiritType = augmentItem.spiritType;
                 BlockPos blockPos = catalyzer.getBlockPos();
                 Vec3 particlePosition = new Vec3(blockPos.getX() + offset.x, blockPos.getY() + offset.y, blockPos.getZ() + offset.z);
@@ -184,11 +189,11 @@ public class SpiritCrucibleParticleEffects {
         }
         Level level = crucible.getLevel();
         var random = level.random;
-        BlockPos altarPos = crucible.getBlockPos();
-        Vec3 targetPos = crucible.getCentralItemOffset().add(altarPos.getX(), altarPos.getY(), altarPos.getZ());
+        var cruciblePos = crucible.getBlockPos();
+        Vec3 crucibleItemPos = cruciblePos.getBottomCenter().add(SpiritCrucibleCoreBlockEntity.CRUCIBLE_ITEM_OFFSET);
 
         for (int i = 0; i < 2; i++) {
-            SpiritLightSpecs.coolLookingShinyThing(level, targetPos, activeSpiritType);
+            SpiritLightSpecs.coolLookingShinyThing(level, crucibleItemPos, activeSpiritType);
         }
         for (int i = 0; i < 24; i++) {
             int lifeDelay = i / 8;
@@ -198,7 +203,7 @@ public class SpiritCrucibleParticleEffects {
             float zVelocity = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, -0.075f, 0.075f);
             float gravityStrength = RandomHelper.randomBetween(random, 0.75f, 1f);
             if (random.nextFloat() < 0.85f) {
-                var sparkParticles = SparkParticleEffects.spiritMotionSparks(level, targetPos, cyclingSpiritType);
+                var sparkParticles = SparkParticleEffects.spiritMotionSparks(level, crucibleItemPos, cyclingSpiritType);
                 sparkParticles.getBuilder()
                         .disableNoClip()
                         .setLifeDelay(lifeDelay)
@@ -219,7 +224,7 @@ public class SpiritCrucibleParticleEffects {
                 xVelocity *= 1.25f;
                 yVelocity *= 0.75f;
                 zVelocity *= 1.25f;
-                var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, targetPos, cyclingSpiritType);
+                var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, crucibleItemPos, cyclingSpiritType);
                 lightSpecs.getBuilder()
                         .disableNoClip()
                         .setLifeDelay(lifeDelay)
@@ -244,7 +249,7 @@ public class SpiritCrucibleParticleEffects {
             float yVelocity = RandomHelper.randomBetween(random, 0.015f, 0.035f);
             float zVelocity = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, -0.025f, 0.025f);
             if (random.nextFloat() < 0.85f) {
-                var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, targetPos.subtract(0, 0.5f, 0), cyclingSpiritType, new WorldParticleOptions(ParticleRegistry.STRANGE_SMOKE.get()));
+                var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, crucibleItemPos.subtract(0, 0.5f, 0), cyclingSpiritType, new WorldParticleOptions(ParticleRegistry.STRANGE_SMOKE.get()));
                 lightSpecs.getBuilder()
                         .disableNoClip()
                         .setLifeDelay(i)
@@ -274,8 +279,8 @@ public class SpiritCrucibleParticleEffects {
         RandomSource random = level.random;
         if (level.getGameTime() % 16L == 0) {
             ItemStack item = catalyzer.augmentInventory.getStackInSlot(0);
-            if (item.getItem() instanceof AbstractAugmentItem augmentItem) {
-                Vec3 offset = catalyzer.getAugmentOffset().add(
+            if (item.getItem() instanceof AugmentItem augmentItem) {
+                Vec3 offset = SpiritCatalyzerCoreBlockEntity.CATALYZER_AUGMENT_OFFSET.add(
                         Mth.nextFloat(random, -0.1f, 0.1f),
                         Mth.nextFloat(random, -0.1f, 0.1f),
                         Mth.nextFloat(random, -0.1f, 0.1f));

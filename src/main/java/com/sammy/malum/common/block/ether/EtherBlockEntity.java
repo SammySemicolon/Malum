@@ -94,15 +94,7 @@ public class EtherBlockEntity extends LodestoneBlockEntity {
     }
 
     @Override
-    public void init() {
-        if (!level.isClientSide) {
-            BlockStateHelper.updateState(level, worldPosition);
-        }
-    }
-
-    @Override
     public void tick() {
-        super.tick();
         if (level.isClientSide) {
             if (firstColor == null) {
                 return;
@@ -115,16 +107,18 @@ public class EtherBlockEntity extends LodestoneBlockEntity {
             double y = worldPosition.getY() + 0.5f;
             double z = worldPosition.getZ() + 0.5f;
 
-            if (block instanceof EtherWallTorchBlock) {
-                final float offset = 0.15f;
-                Direction direction = getBlockState().getValue(WallTorchBlock.FACING);
-                x -= direction.getNormal().getX() * offset;
-                y += 0.4f;
-                z -= direction.getNormal().getZ() * offset;
-            } else if (block instanceof EtherTorchBlock) {
-                y += 0.3f;
-            } else if (block instanceof EtherBrazierBlock) {
-                y -= 0.05f;
+            switch (block) {
+                case EtherWallTorchBlock etherWallTorchBlock -> {
+                    final float offset = 0.15f;
+                    Direction direction = getBlockState().getValue(WallTorchBlock.FACING);
+                    x -= direction.getNormal().getX() * offset;
+                    y += 0.4f;
+                    z -= direction.getNormal().getZ() * offset;
+                }
+                case EtherTorchBlock etherTorchBlock -> y += 0.3f;
+                case EtherBrazierBlock etherBrazierBlock -> y -= 0.05f;
+                default -> {
+                }
             }
 
             final ColorParticleData colorData = ColorParticleData.create(firstColor, secondColor).setCoefficient(1.5f).setEasing(Easing.BOUNCE_IN_OUT).build();

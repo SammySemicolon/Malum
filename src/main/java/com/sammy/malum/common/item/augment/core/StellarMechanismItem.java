@@ -1,14 +1,14 @@
 package com.sammy.malum.common.item.augment.core;
 
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifier;
+import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.common.*;
 
-public class StellarMechanismItem extends AbstractCoreAugmentItem {
-    public StellarMechanismItem(Properties pProperties) {
-        super(pProperties, SpiritTypeRegistry.ELDRITCH_SPIRIT);
-    }
+import java.util.List;
 
-    @Override
-    public float getTuningStrengthIncrease() {
-        return 1f;
+public class StellarMechanismItem extends CoreAugmentItem {
+    public StellarMechanismItem(Properties pProperties) {
+        super(pProperties, SpiritTypeRegistry.ELDRITCH_SPIRIT, true, new ArtificeModifier(ArtificeAttributeType.TUNING_POTENCY, 1f));
     }
 }

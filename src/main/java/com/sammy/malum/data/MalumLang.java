@@ -1,7 +1,7 @@
 package com.sammy.malum.data;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
 import com.sammy.malum.common.block.ether.EtherWallTorchBlock;
 import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.item.spirit.SpiritJarItem;
@@ -50,7 +50,6 @@ public class MalumLang extends LanguageProvider {
         var entities = new HashSet<>(ENTITY_TYPES.getEntries());
         var spirits = new ArrayList<>(SpiritTypeRegistry.SPIRITS.values());
         var bannerPatterns = SoulwovenBannerPatternData.REGISTERED_PATTERNS;
-        var crucibleTuningTypes = CrucibleTuning.CrucibleAttributeType.values();
 
         add(DataHelper.take(blocks, BlockRegistry.PRIMORDIAL_SOUP).get(), "The Weeping Well");
         add(DataHelper.take(blocks, BlockRegistry.VOID_CONDUIT).get(), "The Weeping Well");
@@ -104,17 +103,12 @@ public class MalumLang extends LanguageProvider {
         spirits.forEach(s -> add(s.getSpiritDescription(), DataHelper.toTitleCase(s.getIdentifier() + "_spirit", "_")));
         bannerPatterns.forEach(b -> add(b.translationKey(), DataHelper.toTitleCase(b.type().getPath(), "_")));
 
-        for (CrucibleTuning.CrucibleAttributeType value : crucibleTuningTypes) {
-            if (value.equals(CrucibleTuning.CrucibleAttributeType.NONE)) {
-                continue;
-            }
-            final String translation = value.translation();
+        for (ArtificeAttributeType value : ArtificeAttributeType.CRUCIBLE_ATTRIBUTES) {
+            final String translation = value.getLangKey();
             String name = DataHelper.toTitleCase(value.toString().toLowerCase(Locale.ROOT), "_");
             add(translation, name);
         }
 
-        add("malum.gui.crucible.attribute.weakest_boost", "Weakest Boost");
-        add("malum.gui.crucible.attribute.tuning_potency", "Tuning Potency");
 
         add("malum.gui.augment.slot", "Slot: ");
         add("malum.gui.augment.installed", "When installed: ");

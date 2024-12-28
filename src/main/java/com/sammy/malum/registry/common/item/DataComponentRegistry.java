@@ -23,6 +23,9 @@ public class DataComponentRegistry {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<SoulwovenBannerPatternData>> SOULWOVEN_BANNER_PATTERN = register("soulwoven_banner_pattern", builder ->
             builder.persistent(SoulwovenBannerPatternData.CODEC).networkSynchronized(SoulwovenBannerPatternData.STREAM_CODEC));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ArtificeAugmentData>> ARTIFICE_AUGMENT = register("artifice_augment", builder ->
+            builder.persistent(ArtificeAugmentData.CODEC).networkSynchronized(ArtificeAugmentData.STREAM_CODEC));
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<RitualData>> RITUAL_DATA = register("ritual_data", builder ->
             builder.persistent(RitualData.CODEC).networkSynchronized(RitualData.STREAM_CODEC));
 

@@ -52,7 +52,6 @@ public class CatalyzerArtificeModifierSource extends ArtificeModifierSource {
             if (!stack.isEmpty()) {
                 stack.shrink(1);
                 catalyzer.burnTicks = stack.getBurnTime(RecipeType.SMELTING) / 2f;
-                catalyzer.inventory.updateData();
                 BlockStateHelper.updateAndNotifyState(catalyzer.getLevel(), catalyzer.getBlockPos());
             }
         }

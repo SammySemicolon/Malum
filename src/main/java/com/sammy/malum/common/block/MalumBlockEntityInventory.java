@@ -22,10 +22,10 @@ public class MalumBlockEntityInventory extends LodestoneBlockEntityInventory {
         return new MalumBlockEntityInventory(blockEntity, 1, 64);
     }
     public static MalumBlockEntityInventory singleNotSpirit(LodestoneBlockEntity blockEntity) {
-        return new MalumBlockEntityInventory(blockEntity, 1, 1, p -> !p.is(ItemTagRegistry.SPIRITS));
+        return new MalumBlockEntityInventory(blockEntity, 1, 1).setInputPredicate(p -> !p.is(ItemTagRegistry.SPIRITS));
     }
     public static MalumBlockEntityInventory singleStackNotSpirit(LodestoneBlockEntity blockEntity) {
-        return new MalumBlockEntityInventory(blockEntity, 1, 64, p -> !p.is(ItemTagRegistry.SPIRITS));
+        return new MalumBlockEntityInventory(blockEntity, 1, 64).setInputPredicate(p -> !p.is(ItemTagRegistry.SPIRITS));
     }
     public static MalumBlockEntityInventory items(LodestoneBlockEntity blockEntity, int slotCount) {
         return new MalumBlockEntityInventory(blockEntity, slotCount, 1);
@@ -34,28 +34,20 @@ public class MalumBlockEntityInventory extends LodestoneBlockEntityInventory {
         return new MalumBlockEntityInventory(blockEntity, slotCount, 64);
     }
     public static MalumBlockEntityInventory notSpirits(LodestoneBlockEntity blockEntity, int slotCount) {
-        return new MalumBlockEntityInventory(blockEntity, slotCount, 1, p -> !p.is(ItemTagRegistry.SPIRITS));
+        return new MalumBlockEntityInventory(blockEntity, slotCount, 1).setInputPredicate(p -> !p.is(ItemTagRegistry.SPIRITS));
     }
     public static MalumBlockEntityInventory stacksNotSpirits(LodestoneBlockEntity blockEntity, int slotCount) {
-        return new MalumBlockEntityInventory(blockEntity, slotCount, 64, p -> !p.is(ItemTagRegistry.SPIRITS));
+        return new MalumBlockEntityInventory(blockEntity, slotCount, 64).setInputPredicate(p -> !p.is(ItemTagRegistry.SPIRITS));
     }
 
     protected MalumBlockEntityInventory(LodestoneBlockEntity blockEntity, int slotCount, int allowedItemSize) {
         super(blockEntity, slotCount, allowedItemSize);
-    }
-
-    protected MalumBlockEntityInventory(LodestoneBlockEntity blockEntity, int slotCount, int allowedItemSize, Class<? extends Item> inputClass) {
-        super(blockEntity, slotCount, allowedItemSize, inputClass);
-    }
-
-    protected MalumBlockEntityInventory(LodestoneBlockEntity blockEntity, int slotCount, int allowedItemSize, Predicate<ItemStack> inputPredicate) {
-        super(blockEntity, slotCount, allowedItemSize, inputPredicate);
+        triggerBlockEntityUpdate();
     }
 
     @Override
-    public void onContentsChanged(int slot) {
-        super.onContentsChanged(slot);
-        blockEntity.markDirty();
+    public MalumBlockEntityInventory setInputPredicate(Predicate<ItemStack> inputPredicate) {
+        return (MalumBlockEntityInventory) super.setInputPredicate(inputPredicate);
     }
 
     @Override

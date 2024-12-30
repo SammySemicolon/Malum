@@ -1,6 +1,8 @@
 package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.sammy.malum.common.entity.bolt.*;
+import com.sammy.malum.common.item.ISpiritAffiliatedItem;
+import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.util.*;
@@ -21,10 +23,15 @@ import team.lodestar.lodestone.systems.particle.data.spin.*;
 import team.lodestar.lodestone.systems.particle.render_types.*;
 import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 
-public class HexStaffItem extends AbstractStaffItem {
+public class HexStaffItem extends AbstractStaffItem implements ISpiritAffiliatedItem {
 
     public HexStaffItem(Tier tier, float magicDamage, Properties builderIn) {
         super(tier, 15, magicDamage, builderIn);
+    }
+
+    @Override
+    public MalumSpiritType getDefiningSpiritType() {
+        return SpiritTypeRegistry.WICKED_SPIRIT;
     }
 
     @OnlyIn(Dist.CLIENT)

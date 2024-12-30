@@ -2,7 +2,6 @@ package com.sammy.malum.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
-import com.sammy.malum.*;
 import com.sammy.malum.common.block.curiosities.weeping_well.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
@@ -12,13 +11,9 @@ import org.joml.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.rendering.*;
-import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
 
 public class VoidConduitRenderer implements BlockEntityRenderer<VoidConduitBlockEntity> {
-
-    public static final RenderTypeToken VIGNETTE = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/weeping_well/primordial_soup_vignette.png"));
-    public static final RenderTypeToken NOISE_TEXTURE = RenderTypeToken.createToken(MalumMod.malumPath("textures/vfx/void_noise.png"));
 
     public VoidConduitRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -39,13 +34,13 @@ public class VoidConduitRenderer implements BlockEntityRenderer<VoidConduitBlock
             poseStack.pushPose();
             poseStack.translate(0.5f, 0.01f, 0.5f);
 
-            builder.replaceBufferSource(RenderHandler.LATE_DELAYED_RENDER.getTarget()).setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(VIGNETTE)).renderQuad(poseStack, positions, 1f);
+            builder.replaceBufferSource(RenderHandler.LATE_DELAYED_RENDER.getTarget()).setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(MalumRenderTypeTokens.VOID_VIGNETTE)).renderQuad(poseStack, positions, 1f);
             final long gameTime = voidConduit.getLevel().getGameTime();
             float uOffset = ((gameTime + partialTicks) % 4000) / 2000f;
             float vOffset = ((gameTime + 500f + partialTicks) % 8000) / 8000f;
             float alpha = 0.05f;
 
-            final LodestoneRenderType renderType = RenderTypeRegistry.ADDITIVE_DISTORTED_TEXTURE.applyAndCache(NOISE_TEXTURE);
+            final LodestoneRenderType renderType = RenderTypeRegistry.ADDITIVE_DISTORTED_TEXTURE.applyAndCache(MalumRenderTypeTokens.VOID_NOISE);
             builder.replaceBufferSource(RenderHandler.DELAYED_RENDER.getTarget());
             for (int i = 0; i < 3; i++) {
                 builder.setAlpha(alpha);

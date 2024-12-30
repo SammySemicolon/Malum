@@ -29,6 +29,7 @@ import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+import org.jetbrains.annotations.NotNull;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
@@ -115,13 +116,7 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
 
     @Override
     public ItemInteractionResult onUseWithItem(Player player, ItemStack stack, InteractionHand hand) {
-        if (ritualType != null) {
-            var result = ritualType.onUsePlinth(this, player, hand);
-            if (!result.equals(ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION)) {
-                return result;
-            }
-        }
-        else if (inventory.getStackInSlot(0).isEmpty() && extrasInventory.isEmpty()) {
+        if (inventory.getStackInSlot(0).isEmpty() && extrasInventory.isEmpty()) {
             var ritualData = stack.get(DataComponentRegistry.RITUAL_DATA);
             if (ritualData != null) {
                 if (!level.isClientSide) {
@@ -138,12 +133,26 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
                 return ItemInteractionResult.SUCCESS;
             }
         }
-        inventory.interact(player.level(), player, hand);
         return ItemInteractionResult.SUCCESS;
     }
 
     @Override
-    public void loadLevel() {
+    public ItemInteractionResult onUse(Player pPlayer, InteractionHand pHand) {
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return ItemInteractionResult.CONSUME;
+        }
+        if (ritualType != null) {
+            var result = ritualType.onUsePlinth(this, pPlayer, pHand);
+            if (!result.equals(ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION)) {
+                return result;
+            }
+        }
+        inventory.interact(serverLevel, pPlayer, pHand);
+        return ItemInteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void update(@NotNull Level level) {
         ItemStack stack = inventory.getStackInSlot(0);
         boolean wasLackingRecipe = ritualRecipe == null;
         ritualRecipe = RitualRegistry.RITUALS.stream().map(MalumRitualType::getRecipeData).filter(recipeData -> recipeData != null && recipeData.input.test(stack)).findAny().orElse(null);
@@ -225,7 +234,6 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
         if (ritualRecipe.extraItems.isEmpty()) {
             return true;
         }
-        extrasInventory.updateData();
         int extras = extrasInventory.nonEmptyItemAmount;
         if (extras < ritualRecipe.extraItems.size()) {
             Collection<IMalumSpecialItemAccessPoint> altarProviders = BlockEntityHelper.getBlockEntities(IMalumSpecialItemAccessPoint.class, level, worldPosition, 4);
@@ -237,7 +245,6 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
                     level.playSound(null, provider.getAccessPointBlockPos(), SoundRegistry.RITUAL_ABSORBS_ITEM.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.2f);
                     ParticleEffectTypeRegistry.RITUAL_PLINTH_EATS_ITEM.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), new ColorEffectData(ritualRecipe.ritualType.spirit), RitualPlinthAbsorbItemParticleEffect.createData(provider.getItemPos(), providedStack));
                     extrasInventory.insertItem(providedStack.split(requestedItem.count()));
-                    inventoryForAltar.updateData();
                     BlockStateHelper.updateAndNotifyState(level, provider.getAccessPointBlockPos());
                     break;
                 }
@@ -250,7 +257,6 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
     public void beginCharging() {
         ritualType = ritualRecipe.ritualType;
         inventory.getStackInSlot(0).shrink(ritualRecipe.input.count());
-        inventory.updateData();
         extrasInventory.clear();
         ParticleEffectTypeRegistry.RITUAL_PLINTH_BEGINS_CHARGING.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), new ColorEffectData(ritualType.spirit));
         level.playSound(null, worldPosition, SoundRegistry.RITUAL_FORMS.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.2f);
@@ -258,7 +264,6 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
     }
 
     public void eatSpirits() {
-        extrasInventory.updateData();
         Collection<IMalumSpecialItemAccessPoint> altarProviders = BlockEntityHelper.getBlockEntities(IMalumSpecialItemAccessPoint.class, level, worldPosition, 4);
         Collection<SpiritJarBlockEntity> jars = BlockEntityHelper.getBlockEntities(SpiritJarBlockEntity.class, level, worldPosition, 4);
         Collection<ItemEntity> itemEntities = level.getEntitiesOfClass(ItemEntity.class, new AABB(worldPosition).inflate(4)).stream().filter(i-> i.getItem().getItem() instanceof SpiritShardItem).toList();

@@ -143,30 +143,27 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
     }
 
     @Override
-    public ItemInteractionResult onUseWithItem(Player player, ItemStack heldStack, InteractionHand hand) {
-        if (level.isClientSide) {
-            return ItemInteractionResult.CONSUME;
-        }
-        if (hand.equals(InteractionHand.MAIN_HAND)) {;
+    public ItemInteractionResult onUse(Player pPlayer, InteractionHand pHand) {
+        if (pHand.equals(InteractionHand.MAIN_HAND)) {
             recalibrateAccelerators();
-            if (!(heldStack.getItem() instanceof SpiritShardItem)) {
-                ItemStack stack = inventory.interact(level, player, hand);
-                if (!stack.isEmpty()) {
+            if (level instanceof ServerLevel serverLevel) {
+                var itemStack = inventory.interact(serverLevel, pPlayer, pHand);
+                if (!itemStack.isEmpty()) {
+                    return ItemInteractionResult.SUCCESS;
+                }
+                var spiritStack = spiritInventory.interact(serverLevel, pPlayer, pHand);
+                if (spiritStack.isEmpty()) {
                     return ItemInteractionResult.SUCCESS;
                 }
             }
-            spiritInventory.interact(level, player, hand);
-            if (heldStack.isEmpty()) {
-                return ItemInteractionResult.SUCCESS;
-            } else {
-                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-            }
+            return ItemInteractionResult.SUCCESS;
         }
-        return super.onUseWithItem(player, heldStack, hand);
+
+        return super.onUse(pPlayer, pHand);
     }
 
     @Override
-    public void loadLevel() {
+    public void update(@NotNull Level level) {
         recalculateRecipes();
         if (level.isClientSide && isCrafting) {
             AltarSoundInstance.playSound(this);
@@ -283,12 +280,11 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
                     level.playSound(null, provider.getAccessPointBlockPos(), SoundRegistry.ALTAR_CONSUME.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.2f);
                     ParticleEffectTypeRegistry.SPIRIT_ALTAR_EATS_ITEM.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits), SpiritAltarEatItemParticleEffect.createData(provider.getAccessPointBlockPos(), providedStack));
                     extrasInventory.insertItem(inventoryForAltar.extractItem(0, nextIngredient.count(), false));
-                    inventoryForAltar.updateData();
                     BlockStateHelper.updateAndNotifyState(level, provider.getAccessPointBlockPos());
                     break;
                 }
             }
-            progress *= 0.8f;
+            progress = (int) (progress * 0.8f);
             if (extrasInventory.isEmpty()) {
                 return false;
             }
@@ -305,7 +301,6 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
             outputStack.applyComponents(stack.getComponents());
         }
         stack.shrink(recipe.ingredient.count());
-        inventory.updateData();
         for (SpiritIngredient spirit : recipe.spirits) {
             for (int i = 0; i < spiritInventory.slotCount; i++) {
                 ItemStack spiritStack = spiritInventory.getStackInSlot(i);
@@ -315,7 +310,6 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
                 }
             }
         }
-        spiritInventory.updateData();
         progress *= 0.75f;
         extrasInventory.clear();
         ParticleEffectTypeRegistry.SPIRIT_ALTAR_CRAFTS.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits));

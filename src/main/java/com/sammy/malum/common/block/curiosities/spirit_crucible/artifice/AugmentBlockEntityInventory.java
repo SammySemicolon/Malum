@@ -19,8 +19,8 @@ public class AugmentBlockEntityInventory extends MalumBlockEntityInventory {
     }
 
     public AugmentBlockEntityInventory(LodestoneBlockEntity blockEntity, int slotCount, boolean coreAugment) {
-        super(blockEntity, slotCount, 1,
-                s -> s.has(DataComponentRegistry.ARTIFICE_AUGMENT) && coreAugment == s.get(DataComponentRegistry.ARTIFICE_AUGMENT).isCoreAugment());
+        super(blockEntity, slotCount, 1);
+        setInputPredicate(s -> s.has(DataComponentRegistry.ARTIFICE_AUGMENT) && coreAugment == s.get(DataComponentRegistry.ARTIFICE_AUGMENT).isCoreAugment());
     }
 
     @Override

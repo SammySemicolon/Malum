@@ -3,8 +3,9 @@ package com.sammy.malum.core.helpers;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.visual_effects.networked.*;
+import com.sammy.malum.visual_effects.networked.attack.slam.SlamAttackParticleEffect;
 import com.sammy.malum.visual_effects.networked.data.*;
-import com.sammy.malum.visual_effects.networked.slash.*;
+import com.sammy.malum.visual_effects.networked.attack.slash.*;
 import net.minecraft.server.level.*;
 import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
@@ -12,59 +13,64 @@ import net.minecraft.world.phys.*;
 
 public class ParticleHelper {
 
-    public static SlashParticleEffectBuilder createSlashingEffect(ParticleEffectType effectType) {
-        return new SlashParticleEffectBuilder(effectType);
+    public static WeaponParticleEffectBuilder createSlashingEffect(ParticleEffectType effectType) {
+        return new WeaponParticleEffectBuilder(effectType, (d, b) -> SlashAttackParticleEffect.createData(d, b.isMirrored, b.slashAngle, b.spiritType));
+    }
+    public static WeaponParticleEffectBuilder createSlamEffect(ParticleEffectType effectType) {
+        return new WeaponParticleEffectBuilder(effectType, (d, b) -> SlamAttackParticleEffect.createData(d, b.slashAngle, b.spiritType));
     }
 
-    public static class SlashParticleEffectBuilder {
+    public static class WeaponParticleEffectBuilder {
 
         public final ParticleEffectType effectType;
+        public final EffectDataSupplier supplier;
         public float horizontalOffset;
         public float slashAngle;
         public boolean isMirrored;
         public MalumSpiritType spiritType;
 
-        public SlashParticleEffectBuilder(ParticleEffectType effectType) {
+        public WeaponParticleEffectBuilder(ParticleEffectType effectType, EffectDataSupplier supplier) {
             this.effectType = effectType;
+            this.supplier = supplier;
         }
 
-        public SlashParticleEffectBuilder setVertical() {
+        public WeaponParticleEffectBuilder setVertical() {
             return setVerticalSlashAngle().setHorizontalOffset(0.4f);
         }
 
-        public SlashParticleEffectBuilder setHorizontalOffset(float horizontalOffset) {
+        public WeaponParticleEffectBuilder setHorizontalOffset(float horizontalOffset) {
             this.horizontalOffset = horizontalOffset;
             return this;
         }
 
-        public SlashParticleEffectBuilder setVerticalSlashAngle() {
+        public WeaponParticleEffectBuilder setVerticalSlashAngle() {
             return setSlashAngle(1.57f);
         }
 
-        public SlashParticleEffectBuilder setRandomSlashAngle(RandomSource randomSource) {
+        public WeaponParticleEffectBuilder setRandomSlashAngle(RandomSource randomSource) {
             return setSlashAngle(randomSource.nextFloat() * 3.14f);
         }
 
-        public SlashParticleEffectBuilder setSlashAngle(float slashAngle) {
+        public WeaponParticleEffectBuilder setSlashAngle(float slashAngle) {
             this.slashAngle = slashAngle;
             return this;
         }
 
-        public SlashParticleEffectBuilder mirrorRandomly(RandomSource randomSource) {
+        public WeaponParticleEffectBuilder mirrorRandomly(RandomSource randomSource) {
             return setMirrored(randomSource.nextBoolean());
         }
 
-        public SlashParticleEffectBuilder setMirrored(boolean isMirrored) {
+        public WeaponParticleEffectBuilder setMirrored(boolean isMirrored) {
             this.isMirrored = isMirrored;
             return this;
         }
 
-        public SlashParticleEffectBuilder setSpiritType(ISpiritAffiliatedItem spiritAffiliatedItem) {
+        public WeaponParticleEffectBuilder setSpiritType(ISpiritAffiliatedItem spiritAffiliatedItem) {
             this.spiritType = spiritAffiliatedItem.getDefiningSpiritType();
             return this;
         }
 
-        public SlashParticleEffectBuilder setSpiritType(MalumSpiritType spiritType) {
+        public WeaponParticleEffectBuilder setSpiritType(MalumSpiritType spiritType) {
             this.spiritType = spiritType;
             return this;
         }
@@ -125,8 +131,8 @@ public class ParticleHelper {
             effectType.createPositionedEffect(level, new PositionEffectData(slashPosition), SlashAttackParticleEffect.createData(slashDirection, isMirrored, slashAngle, spiritType));
         }
 
-        public interface SlashEffectDataSupplier {
-            NBTEffectData createData(Vec3 slashPosition, boolean isMirrored, float slashAngle);
+        public interface EffectDataSupplier {
+            NBTEffectData createData(Vec3 direction, WeaponParticleEffectBuilder builder);
         }
     }
 }

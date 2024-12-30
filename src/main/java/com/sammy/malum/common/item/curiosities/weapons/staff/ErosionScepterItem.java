@@ -1,6 +1,8 @@
 package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.sammy.malum.common.entity.bolt.*;
+import com.sammy.malum.common.item.ISpiritAffiliatedItem;
+import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.util.*;
@@ -27,7 +29,7 @@ import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 
 import java.awt.*;
 
-public class ErosionScepterItem extends AbstractStaffItem {
+public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffiliatedItem {
 
     public static final Color MALIGNANT_PURPLE = new Color(68, 11, 61);
     public static final Color MALIGNANT_BLACK = new Color(12, 4, 11);
@@ -36,7 +38,10 @@ public class ErosionScepterItem extends AbstractStaffItem {
     public ErosionScepterItem(Tier tier, float magicDamage, Properties builderIn) {
         super(tier, 10, magicDamage, builderIn);
     }
-
+    @Override
+    public MalumSpiritType getDefiningSpiritType() {
+        return SpiritTypeRegistry.UMBRAL_SPIRIT;
+    }
     @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (!(event.getSource().getDirectEntity() instanceof AbstractBoltProjectileEntity) && !event.getSource().is(LodestoneDamageTypeTags.IS_MAGIC)) {

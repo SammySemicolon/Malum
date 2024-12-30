@@ -6,6 +6,7 @@ import com.sammy.malum.common.block.curiosities.redstone.RedstoneMachineBlockEnt
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import team.lodestar.lodestone.registry.client.LodestoneRenderTypes;
 import team.lodestar.lodestone.systems.easing.Easing;
@@ -23,8 +24,8 @@ public abstract class RedstoneMachineRenderer<T extends RedstoneMachineBlockEnti
     private final RenderTypeToken token;
     private static final Color COLOR = new Color(170, 15, 1);
 
-    public RedstoneMachineRenderer(BlockEntityRendererProvider.Context context, RenderTypeToken token) {
-        this.token = token;
+    public RedstoneMachineRenderer(BlockEntityRendererProvider.Context context, ResourceLocation tokenTexture) {
+        this.token = RenderTypeToken.createToken(tokenTexture);
     }
 
     public abstract float getGlowDelta(T blockEntityIn);

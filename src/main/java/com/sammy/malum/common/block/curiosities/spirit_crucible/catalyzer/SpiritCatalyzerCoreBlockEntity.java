@@ -10,6 +10,7 @@ import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.visual_effects.*;
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
@@ -61,20 +62,25 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
     }
 
     @Override
+    public ItemInteractionResult onUse(Player pPlayer, InteractionHand pHand) {
+        return super.onUse(pPlayer, pHand);
+    }
+
+    @Override
     public ItemInteractionResult onUseWithItem(Player player, ItemStack heldStack, InteractionHand hand) {
-        if (level.isClientSide) {
+        if (!(level instanceof ServerLevel serverLevel)) {
             return ItemInteractionResult.CONSUME;
         }
         if (hand.equals(InteractionHand.MAIN_HAND)) {
             final boolean augmentOnly = heldStack.getItem() instanceof AugmentItem;
             if (augmentOnly || (heldStack.isEmpty() && inventory.isEmpty())) {
-                ItemStack stack = augmentInventory.interact(player.level(), player, hand);
+                ItemStack stack = augmentInventory.interact(serverLevel, player, hand);
                 if (!stack.isEmpty()) {
                     return ItemInteractionResult.SUCCESS;
                 }
             }
             if (!augmentOnly) {
-                inventory.interact(player.level(), player, hand);
+                inventory.interact(serverLevel, player, hand);
             }
             if (heldStack.isEmpty()) {
                 return ItemInteractionResult.SUCCESS;

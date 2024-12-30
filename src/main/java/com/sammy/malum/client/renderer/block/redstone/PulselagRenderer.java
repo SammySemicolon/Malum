@@ -10,10 +10,8 @@ import team.lodestar.lodestone.systems.rendering.rendeertype.RenderTypeToken;
 
 public class PulselagRenderer extends RedstoneMachineRenderer<PulselagBlockEntity> {
 
-    private static final RenderTypeToken TOKEN = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/redstone/pulselag_overlay.png"));
-
     public PulselagRenderer(BlockEntityRendererProvider.Context context) {
-        super(context, TOKEN);
+        super(context, MalumMod.malumPath("textures/block/redstone/pulselag_overlay.png"));
     }
 
     @Override

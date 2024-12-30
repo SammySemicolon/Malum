@@ -1,7 +1,6 @@
 package com.sammy.malum.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.*;
-import com.sammy.malum.*;
 import com.sammy.malum.client.*;
 import com.sammy.malum.common.block.curiosities.totem.*;
 import com.sammy.malum.common.spiritrite.*;
@@ -19,14 +18,11 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
-import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
 import static com.sammy.malum.client.RenderUtils.*;
 
 
 public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEntity> {
-
-    public static final RenderTypeToken AREA_COVERAGE_TEXTURE = RenderTypeToken.createToken(MalumMod.malumPath("textures/vfx/area_coverage.png"));
 
     private static float totemicStaffHeldTimer = 0;
     private static boolean isHoldingStaff;
@@ -78,7 +74,7 @@ public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEnti
             float shaderHeight = height * 32;
             float distortion = 6f+height/2f;
             float sideDistortion = 6f+width/2f;
-            final LodestoneRenderType renderType = RenderTypeRegistry.ADDITIVE_DISTORTED_TEXTURE.applyWithModifierAndCache(AREA_COVERAGE_TEXTURE, b -> b.setCullState(LodestoneRenderTypes.NO_CULL));
+            final LodestoneRenderType renderType = RenderTypeRegistry.ADDITIVE_DISTORTED_TEXTURE.applyWithModifierAndCache(MalumRenderTypeTokens.AREA_COVERAGE, b -> b.setCullState(LodestoneRenderTypes.NO_CULL));
             float index = shaderWidth + distortion;
             float sideIndex = shaderWidth*shaderHeight + sideDistortion;
 

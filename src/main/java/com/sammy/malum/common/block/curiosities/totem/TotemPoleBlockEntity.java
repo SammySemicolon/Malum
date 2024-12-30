@@ -14,15 +14,19 @@ import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.common.ItemAbilities;
+import org.jetbrains.annotations.NotNull;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
 import javax.annotation.*;
+
+import static com.sammy.malum.common.block.curiosities.totem.TotemPoleBlockEntity.TotemPoleState.*;
 
 public class TotemPoleBlockEntity extends LodestoneBlockEntity {
 
@@ -34,7 +38,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
     }
 
     public MalumSpiritType spirit;
-    public TotemPoleState totemPoleState = TotemPoleState.INACTIVE;
+    public TotemPoleState totemPoleState = INACTIVE;
     public TotemBaseBlockEntity totemBase;
     public int totemBaseYLevel;
     public int chargeProgress;
@@ -57,11 +61,11 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
     @Override
     public ItemInteractionResult onUseWithItem(Player player, ItemStack held, InteractionHand hand) {
         boolean success = false;
-        if (held.getItem() instanceof TotemicStaffItem && !totemPoleState.equals(TotemPoleState.ACTIVE) && !totemPoleState.equals(TotemPoleState.CHARGING)) {
+        if (held.getItem() instanceof TotemicStaffItem && !totemPoleState.equals(ACTIVE) && !totemPoleState.equals(CHARGING)) {
             if (level.isClientSide) {
                 return ItemInteractionResult.SUCCESS;
             }
-            totemPoleState = totemPoleState.equals(TotemPoleState.INACTIVE) ? TotemPoleState.VISUAL_ONLY : TotemPoleState.INACTIVE;
+            totemPoleState = totemPoleState.equals(INACTIVE) ? VISUAL_ONLY : INACTIVE;
             success = true;
         }
         else if (held.canPerformAction(ItemAbilities.AXE_STRIP)) {
@@ -93,7 +97,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
         if (spirit != null) {
             tag.putString("spirit", spirit.getIdentifier());
         }
-        if (!totemPoleState.equals(TotemPoleState.INACTIVE)) {
+        if (!totemPoleState.equals(INACTIVE)) {
             tag.putInt("state", totemPoleState.ordinal());
         }
         if (chargeProgress != 0) {
@@ -110,14 +114,14 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
         if (tag.contains("spirit")) {
             spirit = MalumSpiritType.getSpiritType(tag.getString("spirit"));
         }
-        totemPoleState = tag.contains("state") ? TotemPoleState.values()[tag.getInt("state")] : TotemPoleState.INACTIVE;
+        totemPoleState = tag.contains("state") ? TotemPoleState.values()[tag.getInt("state")] : INACTIVE;
         chargeProgress = tag.getInt("chargeProgress");
         totemBaseYLevel = tag.getInt("totemBaseYLevel");
         super.loadAdditional(tag, pRegistries);
     }
 
     @Override
-    public void loadLevel() {
+    public void update(@NotNull Level level) {
         if (level.getBlockEntity(getBlockPos().mutable().setY(totemBaseYLevel)) instanceof TotemBaseBlockEntity totemBaseBlockEntity) {
             totemBase = totemBaseBlockEntity;
         }
@@ -126,14 +130,14 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
     @Override
     public void tick() {
         super.tick();
-        if (totemPoleState.equals(TotemPoleState.INACTIVE)) {
+        if (totemPoleState.equals(INACTIVE)) {
             chargeProgress = chargeProgress > 0 ? chargeProgress - 1 : 0;
         } else {
-            int cap = totemPoleState.equals(TotemPoleState.CHARGING) ? 10 : 20;
+            int cap = totemPoleState.equals(CHARGING) ? 10 : 20;
             chargeProgress = chargeProgress < cap ? chargeProgress + 1 : cap;
         }
         if (level.isClientSide) {
-            if (spirit != null && totemPoleState.equals(TotemPoleState.ACTIVE)) {
+            if (spirit != null && totemPoleState.equals(ACTIVE)) {
                 TotemParticleEffects.activeTotemPoleParticles(this);
             }
         }
@@ -152,7 +156,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
         level.playSound(null, worldPosition, SoundRegistry.TOTEM_CHARGE.get(), SoundSource.BLOCKS, 1, 0.9f + 0.2f * height);
         this.totemBaseYLevel = worldPosition.getY() - height;
         this.totemBase = totemBase;
-        this.totemPoleState = TotemPoleState.CHARGING;
+        this.totemPoleState = CHARGING;
         ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), new ColorEffectData(spirit));
         BlockStateHelper.updateState(level, worldPosition);
     }
@@ -167,8 +171,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
         if (level.isClientSide) {
             return;
         }
-        BlockPos basePos = new BlockPos(worldPosition.getX(), totemBaseYLevel, worldPosition.getZ());
-        if (level.getBlockEntity(basePos) instanceof TotemBaseBlockEntity base && base.isActiveOrAssembling()) {
+        if (level.getBlockEntity(getBlockPos().mutable().setY(totemBaseYLevel)) instanceof TotemBaseBlockEntity base && base.isActiveOrAssembling()) {
             base.onBreak(player);
         }
     }

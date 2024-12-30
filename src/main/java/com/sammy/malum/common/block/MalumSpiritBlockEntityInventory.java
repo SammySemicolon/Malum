@@ -19,7 +19,8 @@ public class MalumSpiritBlockEntityInventory extends MalumBlockEntityInventory{
     }
 
     protected MalumSpiritBlockEntityInventory(LodestoneBlockEntity blockEntity, int slotCount, int allowedItemSize) {
-        super(blockEntity, slotCount, allowedItemSize, p -> p.is(ItemTagRegistry.SPIRITS));
+        super(blockEntity, slotCount, allowedItemSize);
+        setInputPredicate(p -> p.is(ItemTagRegistry.SPIRITS));
     }
 
     @Override

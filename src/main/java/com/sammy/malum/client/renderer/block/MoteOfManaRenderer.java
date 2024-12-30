@@ -11,11 +11,10 @@ import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
 import static com.sammy.malum.client.RenderUtils.*;
+import static com.sammy.malum.registry.client.MalumRenderTypeTokens.MOTE_OF_MANA;
 
 
 public class MoteOfManaRenderer implements BlockEntityRenderer<ManaMoteBlockEntity> {
-
-    public static final RenderTypeToken MOTE_OF_MANA = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/spirit_mote.png"));
 
     public MoteOfManaRenderer(BlockEntityRendererProvider.Context context) {
     }

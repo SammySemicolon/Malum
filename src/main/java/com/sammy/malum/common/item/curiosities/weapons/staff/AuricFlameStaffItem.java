@@ -2,6 +2,8 @@ package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.sammy.malum.common.entity.bolt.*;
 import com.sammy.malum.common.entity.nitrate.*;
+import com.sammy.malum.common.item.ISpiritAffiliatedItem;
+import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.util.*;
@@ -23,14 +25,17 @@ import team.lodestar.lodestone.systems.particle.data.spin.*;
 import team.lodestar.lodestone.systems.particle.render_types.*;
 import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 
-public class AuricFlameStaffItem extends AbstractStaffItem {
+public class AuricFlameStaffItem extends AbstractStaffItem implements ISpiritAffiliatedItem {
 
     public static final ColorParticleData AURIC_COLOR_DATA = EthericNitrateEntity.AURIC_COLOR_DATA;
 
     public AuricFlameStaffItem(Tier tier, float magicDamage, Properties builderIn) {
         super(tier, -0.2f, 30, magicDamage, builderIn);
     }
-
+    @Override
+    public MalumSpiritType getDefiningSpiritType() {
+        return SpiritTypeRegistry.INFERNAL_SPIRIT;
+    }
     @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (!(event.getSource().getDirectEntity() instanceof AbstractBoltProjectileEntity)) {

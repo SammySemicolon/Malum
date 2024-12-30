@@ -98,7 +98,7 @@ public class TouchOfDarknessHandler {
                 ParticleEffectTypeRegistry.WEEPING_WELL_REACTS.createEntityEffect(player);
             }
             if (!player.isCreative()) {
-                player.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOODOO_PLAYERLESS), 4);
+                player.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOID), 4);
             }
             if (!data.hasBeenRejected) {
                 SoulHarvestHandler.spawnSpirits(level, player, player.position(), List.of(ItemRegistry.ENCYCLOPEDIA_ARCANA.get().getDefaultInstance()));

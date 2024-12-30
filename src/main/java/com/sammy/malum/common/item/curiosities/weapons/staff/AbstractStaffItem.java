@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.core.handlers.enchantment.*;
+import com.sammy.malum.core.helpers.ParticleHelper;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
@@ -58,9 +59,16 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (attacker instanceof Player player && event.getSource().is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
             var level = player.level();
-            SoundHelper.playSound(target, SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 0.75f, RandomHelper.randomBetween(level.random, 0.5f, 1.0f));
-            spawnSweepParticles(player, ParticleRegistry.STAFF_SLAM_PARTICLE.get());
-
+            if (!level.isClientSide) {
+                SoundHelper.playSound(target, SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 0.75f, RandomHelper.randomBetween(level.random, 0.5f, 1.0f));
+                var particle = ParticleHelper.createSlamEffect(ParticleEffectTypeRegistry.STAFF_SLAM)
+                        .setSpiritType(SpiritTypeRegistry.WICKED_SPIRIT)
+                        .setVerticalSlashAngle();
+                if (stack.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
+                    particle.setSpiritType(spiritAffiliatedItem);
+                }
+                particle.spawnTargetBoundSlashingParticle(attacker, target);
+            }
             if (EnchantmentRegistry.getEnchantmentLevel(level, EnchantmentRegistry.REPLENISHING, stack) > 0) {
                 ReplenishingHandler.triggerReplenishing(event.getSource(), attacker, stack);
             }
@@ -152,13 +160,6 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
         return UseAnim.BOW;
     }
 
-    public static void spawnSweepParticles(Player player, SimpleParticleType type) {
-        double d0 = (-Mth.sin(player.getYRot() * ((float) Math.PI / 180F)));
-        double d1 = Mth.cos(player.getYRot() * ((float) Math.PI / 180F));
-        if (player.level() instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(type, player.getX() + d0, player.getY(0.5D), player.getZ() + d1, 0, d0, 0.0D, d1, 0.0D);
-        }
-    }
     public Vec3 getProjectileSpawnPos(LivingEntity player, InteractionHand hand, float distance, float spread) {
         int angle = hand == InteractionHand.MAIN_HAND ? 225 : 90;
         double radians = Math.toRadians(angle - player.yHeadRot);

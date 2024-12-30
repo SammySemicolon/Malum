@@ -1,4 +1,4 @@
-package com.sammy.malum.visual_effects.networked.slash;
+package com.sammy.malum.visual_effects.networked.attack.slam;
 
 import com.sammy.malum.client.*;
 import com.sammy.malum.core.systems.spirit.*;
@@ -12,26 +12,26 @@ import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
+import team.lodestar.lodestone.systems.particle.world.behaviors.components.DirectionalBehaviorComponent;
 
 import java.util.function.*;
 
-public class SlashAttackParticleEffect extends ParticleEffectType {
+public class SlamAttackParticleEffect extends ParticleEffectType {
 
-    public SlashAttackParticleEffect(String id) {
+    public SlamAttackParticleEffect(String id) {
         super(id);
     }
 
-    public static NBTEffectData createData(Vec3 direction, boolean mirror, float angle) {
-        return createData(direction, mirror, angle, null);
+    public static NBTEffectData createData(Vec3 direction, float angle) {
+        return createData(direction, angle, null);
     }
-    public static NBTEffectData createData(Vec3 direction, boolean mirror, float angle, MalumSpiritType spiritType) {
+    public static NBTEffectData createData(Vec3 direction, float angle, MalumSpiritType spiritType) {
         CompoundTag tag = new CompoundTag();
         CompoundTag directionTag = new CompoundTag();
         directionTag.putDouble("x", direction.x);
         directionTag.putDouble("y", direction.y);
         directionTag.putDouble("z", direction.z);
         tag.putFloat("angle", angle);
-        tag.putBoolean("mirror", mirror);
         if (spiritType != null) {
             tag.putString("spiritType", spiritType.getIdentifier());
         }
@@ -56,13 +56,13 @@ public class SlashAttackParticleEffect extends ParticleEffectType {
             var spirit = getSpiritType(nbtData);
             float spinOffset = angle + RandomHelper.randomBetween(random, -0.5f, 0.5f) + (mirror ? 3.14f : 0);
 
-            var slash = SlashParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), spirit);
-            slash.getBuilder()
+            var slam = WeaponParticleEffects.spawnSlamParticle(level, positionData.getAsVector(), spirit);
+            slam.getBuilder()
                     .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
-                    .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(random, 2f, 3f)).build())
-                    .setMotion(direction.scale(RandomHelper.randomBetween(random, 0.3f, 0.4f)))
-                    .setBehavior(new PointyDirectionalBehaviorComponent(direction));
-            slash.spawnParticles();
+                    .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(random, 1f, 2f)).build())
+                    .setMotion(direction.scale(RandomHelper.randomBetween(random, 0.6f, 0.8f)))
+                    .setBehavior(new DirectionalBehaviorComponent(direction));
+            slam.spawnParticles();
         };
     }
 

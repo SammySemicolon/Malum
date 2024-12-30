@@ -20,10 +20,8 @@ import static com.sammy.malum.client.RenderUtils.drawCubeSides;
 
 public class PulsebankRenderer extends RedstoneMachineRenderer<PulsebankBlockEntity> {
 
-    private static final RenderTypeToken TOKEN = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/redstone/pulsebank_overlay.png"));
-
     public PulsebankRenderer(BlockEntityRendererProvider.Context context) {
-        super(context, TOKEN);
+        super(context, MalumMod.malumPath("textures/block/redstone/pulsebank_overlay.png"));
     }
 
     @Override

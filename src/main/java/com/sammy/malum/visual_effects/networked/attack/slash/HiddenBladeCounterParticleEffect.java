@@ -1,4 +1,4 @@
-package com.sammy.malum.visual_effects.networked.slash;
+package com.sammy.malum.visual_effects.networked.attack.slash;
 
 import com.sammy.malum.client.*;
 import com.sammy.malum.visual_effects.*;
@@ -45,7 +45,7 @@ public class HiddenBladeCounterParticleEffect extends SlashAttackParticleEffect 
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset),
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset),
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset)));
-                    var slash = SlashParticleEffects.spawnSlashParticle(level, position, spirit);
+                    var slash = WeaponParticleEffects.spawnSlashParticle(level, position, spirit);
                     slash.getBuilder()
                             .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
                             .setScaleData(GenericParticleData.create(scale).build())

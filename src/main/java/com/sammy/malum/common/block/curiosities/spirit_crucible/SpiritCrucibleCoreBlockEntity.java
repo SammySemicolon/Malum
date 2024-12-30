@@ -33,6 +33,7 @@ import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+import org.jetbrains.annotations.NotNull;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
@@ -130,42 +131,32 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
 
     @Override
     public ItemInteractionResult onUse(Player pPlayer, InteractionHand pHand) {
-        var heldStack = pPlayer.getItemInHand(pHand);
-        var item = heldStack.getItem();
-        boolean augmentOnly = item instanceof AugmentItem;
-        boolean isEmpty = heldStack.isEmpty();
-        if (augmentOnly || (isEmpty && inventory.isEmpty() && spiritInventory.isEmpty())) {
-            final boolean isCoreAugment = item instanceof CoreAugmentItem;
-            if ((augmentOnly && !isCoreAugment) || isEmpty) {
-                var stack = augmentInventory.interact(level, pPlayer, pHand);
-                if (!stack.isEmpty()) {
-                    return ItemInteractionResult.SUCCESS;
-                }
-            }
-            if ((augmentOnly && isCoreAugment) || isEmpty) {
-                var stack = coreAugmentInventory.interact(level, pPlayer, pHand);
-                if (!stack.isEmpty()) {
-                    return ItemInteractionResult.SUCCESS;
-                }
-            }
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return ItemInteractionResult.CONSUME;
         }
-        if (!augmentOnly) {
-            var spiritStack = spiritInventory.interact(level, pPlayer, pHand);
-            if (!spiritStack.isEmpty()) {
+        var heldStack = pPlayer.getItemInHand(pHand);
+        boolean isAugment = heldStack.has(DataComponentRegistry.ARTIFICE_AUGMENT);
+        if (!isAugment) {
+            var spiritResult = spiritInventory.interact(serverLevel, pPlayer, pHand);
+            if (!spiritResult.isEmpty()) {
                 return ItemInteractionResult.SUCCESS;
             }
-            if (!(item instanceof SpiritShardItem)) {
-                ItemStack stack = inventory.interact(level, pPlayer, pHand);
-                if (!stack.isEmpty()) {
-                    return ItemInteractionResult.SUCCESS;
-                }
+            var impetusResult = inventory.interact(serverLevel, pPlayer, pHand);
+            if (!impetusResult.isEmpty()) {
+                return ItemInteractionResult.SUCCESS;
             }
         }
-        if (isEmpty) {
-            return ItemInteractionResult.SUCCESS;
-        } else {
-            return ItemInteractionResult.FAIL;
+        if (isAugment || heldStack.isEmpty()) {
+            var augment = augmentInventory.interact(serverLevel, pPlayer, pHand);
+            if (!augment.isEmpty()) {
+                return ItemInteractionResult.SUCCESS;
+            }
+            var coreAugment = coreAugmentInventory.interact(serverLevel, pPlayer, pHand);
+            if (!coreAugment.isEmpty()) {
+                return ItemInteractionResult.SUCCESS;
+            }
         }
+        return ItemInteractionResult.FAIL;
     }
 
     @Override
@@ -177,7 +168,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
     }
 
     @Override
-    public void loadLevel() {
+    public void update(@NotNull Level level) {
         if (level.isClientSide && recipe == null) {
             CrucibleSoundInstance.playSound(this);
         }
@@ -190,22 +181,22 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
     @Override
     public void tick() {
         spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.nonEmptyItemAmount));
-        if (queuedCracks > 0) {
-            crackTimer++;
-            if (crackTimer % 5 == 0) {
-                if (crackTimer >= 15) {
-                    crackTimer = 0;
-                }
-                float pitch = 0.95f + (crackTimer - 8) * 0.015f + level.random.nextFloat() * 0.05f;
-                level.playSound(null, worldPosition, SoundRegistry.IMPETUS_CRACK.get(), SoundSource.BLOCKS, 0.7f, pitch);
-                queuedCracks--;
-                if (queuedCracks == 0) {
-                    crackTimer = 0;
-                }
-            }
-        }
         float speed = attributes.focusingSpeed.getValue(attributes);
         if (level instanceof ServerLevel serverLevel) {
+            if (queuedCracks > 0) {
+                crackTimer++;
+                if (crackTimer % 5 == 0) {
+                    if (crackTimer >= 15) {
+                        crackTimer = 0;
+                    }
+                    float pitch = RandomHelper.randomBetween(level.getRandom(), 0.9f, 1.1f) * (0.95f + (crackTimer - 8) * 0.015f);
+                    level.playSound(null, worldPosition, SoundRegistry.IMPETUS_CRACK.get(), SoundSource.BLOCKS, 0.7f, pitch);
+                    queuedCracks--;
+                    if (queuedCracks == 0) {
+                        crackTimer = 0;
+                    }
+                }
+            }
             if (recipe != null) {
                 attributes.getInfluenceData(level).ifPresent(d -> {
                     for (ArtificeModifierSource modifier : d.modifiers()) {
@@ -228,11 +219,11 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         }
     }
 
-    public void craft(ServerLevel serverLevel) {
+    public void craft(ServerLevel level) {
         var stack = inventory.getStackInSlot(0);
         var outputStack = recipe.output.copy();
         var itemPos = getItemPos();
-        var random = serverLevel.random;
+        var random = level.random;
         float processingSpeed = attributes.focusingSpeed.getValue(attributes);
         float damageChance = attributes.instability.getValue(attributes);
         float bonusYieldChance = attributes.fortuneChance.getValue(attributes);
@@ -250,14 +241,14 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
                 }
 
                 queuedCracks += durabilityCost;
-                stack.hurtAndBreak(durabilityCost, serverLevel, null, brokenStack -> {
+                stack.hurtAndBreak(durabilityCost, level, null, brokenStack -> {
                     if (brokenStack instanceof ImpetusItem impetusItem) {
                         inventory.setStackInSlot(0, impetusItem.getCrackedVariant().getDefaultInstance());
                     }
                 });
             }
         } else {
-            serverLevel.playSound(null, worldPosition, SoundRegistry.SHIELDING_APPARATUS_SHIELDS.get(), SoundSource.BLOCKS, 0.5f, 0.25f + random.nextFloat() * 0.25f);
+            level.playSound(null, worldPosition, SoundRegistry.SHIELDING_APPARATUS_SHIELDS.get(), SoundSource.BLOCKS, 0.5f, 0.25f + random.nextFloat() * 0.25f);
         }
         for (SpiritIngredient spirit : recipe.spirits) {
             for (int i = 0; i < spiritInventory.slotCount; i++) {
@@ -268,8 +259,6 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
                 }
             }
         }
-        spiritInventory.updateData();
-
         final boolean instantCompletion = instantCompletionChance > 0 && random.nextFloat() < instantCompletionChance;
         if (instantCompletion) {
             level.playSound(null, worldPosition, SoundRegistry.WARPING_ENGINE_REVERBERATES.get(), SoundSource.BLOCKS, 1.5f, 1f + random.nextFloat() * 0.25f);
@@ -284,7 +273,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
             }
             bonusYieldChance -= 1;
         }
-        ParticleEffectTypeRegistry.SPIRIT_CRUCIBLE_CRAFTS.createPositionedEffect(serverLevel, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits));
+        ParticleEffectTypeRegistry.SPIRIT_CRUCIBLE_CRAFTS.createPositionedEffect(level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits));
         recipe = LodestoneRecipeType.getRecipe(level, RecipeTypeRegistry.SPIRIT_FOCUSING.get(), new SpiritBasedRecipeInput(inventory.getStackInSlot(0), spiritInventory.nonEmptyItemStacks));
         BlockStateHelper.updateAndNotifyState(level, worldPosition);
     }

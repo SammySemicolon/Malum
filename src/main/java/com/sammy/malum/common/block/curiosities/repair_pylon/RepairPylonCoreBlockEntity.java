@@ -64,7 +64,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
         }
 
         @Override
-        public String getSerializedName() {
+        public @NotNull String getSerializedName() {
             return name;
         }
     }
@@ -121,25 +121,25 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     }
 
     @Override
-    public ItemInteractionResult onUseWithItem(Player player, ItemStack stack, InteractionHand hand) {
-        if (level.isClientSide) {
+    public ItemInteractionResult onUse(Player pPlayer, InteractionHand pHand) {
+        if (!(pPlayer.level() instanceof ServerLevel serverLevel)) {
             return ItemInteractionResult.CONSUME;
         }
-        if (hand.equals(InteractionHand.MAIN_HAND)) {
-            ItemStack heldStack = player.getMainHandItem();
-            ItemStack spiritStack = spiritInventory.interact(level, player, hand);
+        if (pHand.equals(InteractionHand.MAIN_HAND)) {
+            ItemStack heldStack = pPlayer.getMainHandItem();
+            ItemStack spiritStack = spiritInventory.interact(serverLevel, pPlayer, pHand);
             if (!spiritStack.isEmpty()) {
                 return ItemInteractionResult.SUCCESS;
             }
             if (!(heldStack.getItem() instanceof SpiritShardItem)) {
-                ItemStack finishedStack = inventory.interact(level, player, hand);
+                ItemStack finishedStack = inventory.interact(serverLevel, pPlayer, pHand);
                 if (!finishedStack.isEmpty()) {
                     return ItemInteractionResult.SUCCESS;
                 }
             }
             return ItemInteractionResult.FAIL;
         }
-        return super.onUseWithItem(player, stack, hand);
+        return super.onUse(pPlayer, pHand);
     }
 
     @Override
@@ -150,9 +150,9 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     }
 
     @Override
-    public void loadLevel() {
+    public void update(@NotNull Level level) {
         spiritAmount = Math.max(1, Mth.lerp(0.15f, spiritAmount, spiritInventory.nonEmptyItemAmount + 1));
-       if (state.equals(RepairPylonState.COOLDOWN)) {
+        if (state.equals(RepairPylonState.COOLDOWN)) {
             return;
         }
         findRecipe();
@@ -287,7 +287,6 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
                 }
             }
         }
-        spiritInventory.updateData();
         var result = recipe.getResultItem(repairTarget);
         suppliedInventory.setStackInSlot(0, result);
         level.playSound(null, worldPosition, SoundRegistry.REPAIR_PYLON_REPAIR_FINISH.get(), SoundSource.BLOCKS, 1.0f, 0.8f);

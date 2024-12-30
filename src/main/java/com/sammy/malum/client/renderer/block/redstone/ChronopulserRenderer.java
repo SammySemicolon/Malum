@@ -11,10 +11,8 @@ import static com.sammy.malum.client.RenderUtils.drawCube;
 
 public class ChronopulserRenderer extends RedstoneMachineRenderer<ChronopulserBlockEntity> {
 
-    private static final RenderTypeToken TOKEN = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/redstone/chronopulser_overlay.png"));
-
     public ChronopulserRenderer(BlockEntityRendererProvider.Context context) {
-        super(context, TOKEN);
+        super(context, MalumMod.malumPath("textures/block/redstone/chronopulser_overlay.png"));
     }
 
     @Override

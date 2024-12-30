@@ -136,7 +136,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         }
         var heldStack = pPlayer.getItemInHand(pHand);
         boolean isAugment = heldStack.has(DataComponentRegistry.ARTIFICE_AUGMENT);
-        if (!isAugment) {
+        if (!isAugment || heldStack.isEmpty()) {
             var spiritResult = spiritInventory.interact(serverLevel, pPlayer, pHand);
             if (!spiritResult.isEmpty()) {
                 return ItemInteractionResult.SUCCESS;

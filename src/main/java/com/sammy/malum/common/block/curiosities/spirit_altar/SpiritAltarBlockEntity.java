@@ -152,7 +152,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
                     return ItemInteractionResult.SUCCESS;
                 }
                 var spiritStack = spiritInventory.interact(serverLevel, pPlayer, pHand);
-                if (spiritStack.isEmpty()) {
+                if (!spiritStack.isEmpty()) {
                     return ItemInteractionResult.SUCCESS;
                 }
             }

@@ -173,7 +173,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
     @Override
     public void tick() {
         super.tick();
-        spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.nonEmptyItemAmount));
+        spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.getFilledSlotCount()));
 
         if (!inventory.getStackInSlot(0).isEmpty()) {
             idleProgress++;

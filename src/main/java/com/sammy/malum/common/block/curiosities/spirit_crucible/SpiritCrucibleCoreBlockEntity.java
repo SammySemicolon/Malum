@@ -180,7 +180,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
 
     @Override
     public void tick() {
-        spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.nonEmptyItemAmount));
+        spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.getFilledSlotCount()));
         float speed = attributes.focusingSpeed.getValue(attributes);
         if (level instanceof ServerLevel serverLevel) {
             if (queuedCracks > 0) {
@@ -296,7 +296,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
 
     @Override
     public MalumSpiritType getActiveSpiritType() {
-        int spiritCount = spiritInventory.nonEmptyItemAmount;
+        int spiritCount = spiritInventory.getFilledSlotCount();
         Item currentItem = spiritInventory.getStackInSlot(0).getItem();
         if (spiritCount > 1) {
             float duration = 60f * spiritCount;

@@ -131,11 +131,9 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
             if (!spiritStack.isEmpty()) {
                 return ItemInteractionResult.SUCCESS;
             }
-            if (!(heldStack.getItem() instanceof SpiritShardItem)) {
-                ItemStack finishedStack = inventory.interact(serverLevel, pPlayer, pHand);
-                if (!finishedStack.isEmpty()) {
-                    return ItemInteractionResult.SUCCESS;
-                }
+            ItemStack finishedStack = inventory.interact(serverLevel, pPlayer, pHand);
+            if (!finishedStack.isEmpty()) {
+                return ItemInteractionResult.SUCCESS;
             }
             return ItemInteractionResult.FAIL;
         }
@@ -151,7 +149,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
 
     @Override
     public void update(@NotNull Level level) {
-        spiritAmount = Math.max(1, Mth.lerp(0.15f, spiritAmount, spiritInventory.nonEmptyItemAmount + 1));
+        spiritAmount = Math.max(1, Mth.lerp(0.15f, spiritAmount, spiritInventory.nonEmptyItemStacks.size()+1));
         if (state.equals(RepairPylonState.COOLDOWN)) {
             return;
         }
@@ -169,7 +167,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     @Override
     public void tick() {
         super.tick();
-        spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.nonEmptyItemAmount));
+        spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.nonEmptyItemStacks.size()+1));
         if (level.isClientSide) {
             spiritSpin++;
             if (state.equals(RepairPylonState.COOLDOWN) && timer < 1200) {

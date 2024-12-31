@@ -323,11 +323,11 @@ public class MalumBlockProperties {
                 .lightLevel((b) -> 14);
     }
 
-    public static LodestoneBlockProperties REDSTONE_MACHINE() {
+    public static LodestoneBlockProperties REDSTONE_DIODE() {
         return new LodestoneBlockProperties()
                 .mapColor(COPPER_BLOCK.defaultMapColor())
                 .strength(3.0F, 6.0F)
-                .sound(SoundType.COPPER_BULB)
+                .sound(SoundRegistry.REDSTONE_DIODE)
                 .requiresCorrectToolForDrops()
                 .isRedstoneConductor(Blocks::never)
                 .needsPickaxe()

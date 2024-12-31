@@ -500,6 +500,12 @@
     ],
     "subtitle": "malum.subtitle.catalyst_lobber_unlocked"
   },
+  "chronopulser_pulses": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.chronopulser_pulses"
+  },
   "cloth_trinket_equipped": {
     "sounds": [
       "malum:equip_sounds/cloth/equip_cloth1",
@@ -820,6 +826,30 @@
     ],
     "subtitle": "malum.subtitle.pedestal_spirit_picked_up"
   },
+  "pulsebank_stores": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.pulsebank_stores"
+  },
+  "pulsecharger_charges": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.pulsecharger_charges"
+  },
+  "pulselag_releases": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.pulselag_releases"
+  },
+  "pulselag_stores": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.pulselag_stores"
+  },
   "quartz_cluster_block_break": {
     "sounds": [
       "malum:blocks/gemstone/break1",
@@ -867,6 +897,46 @@
       "block/basalt/step6"
     ],
     "subtitle": "malum.subtitle.quartz_cluster_block_step"
+  },
+  "redstone_diode_break": {
+    "sounds": [
+      "malum:blocks/redstone_diode/break1",
+      "malum:blocks/redstone_diode/break2",
+      "malum:blocks/redstone_diode/break3",
+      "malum:blocks/redstone_diode/break4"
+    ],
+    "subtitle": "malum.subtitle.redstone_diode_break"
+  },
+  "redstone_diode_hit": {
+    "sounds": [
+      "block/copper_bulb/step1",
+      "block/copper_bulb/step2",
+      "block/copper_bulb/step3",
+      "block/copper_bulb/step4",
+      "block/copper_bulb/step5",
+      "block/copper_bulb/step6"
+    ],
+    "subtitle": "malum.subtitle.redstone_diode_hit"
+  },
+  "redstone_diode_place": {
+    "sounds": [
+      "malum:blocks/redstone_diode/place1",
+      "malum:blocks/redstone_diode/place2",
+      "malum:blocks/redstone_diode/place3",
+      "malum:blocks/redstone_diode/place4"
+    ],
+    "subtitle": "malum.subtitle.redstone_diode_place"
+  },
+  "redstone_diode_step": {
+    "sounds": [
+      "block/copper_bulb/step1",
+      "block/copper_bulb/step2",
+      "block/copper_bulb/step3",
+      "block/copper_bulb/step4",
+      "block/copper_bulb/step5",
+      "block/copper_bulb/step6"
+    ],
+    "subtitle": "malum.subtitle.redstone_diode_step"
   },
   "rejected_by_the_unknown": {
     "sounds": [

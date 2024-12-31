@@ -26,7 +26,7 @@ public class SpiritAltarParticleEffects {
 
     public static MalumSpiritType getCentralSpiritType(SpiritAltarBlockEntity altar) {
         final LodestoneBlockEntityInventory spiritInventory = altar.spiritInventory;
-        int spiritCount = spiritInventory.nonEmptyItemAmount;
+        int spiritCount = spiritInventory.getFilledSlotCount();
         Item currentItem = spiritInventory.getStackInSlot(0).getItem();
         if (spiritCount > 1) {
             float duration = 30f * spiritCount;

@@ -234,7 +234,7 @@ public class RitualPlinthBlockEntity extends LodestoneBlockEntity implements IBl
         if (ritualRecipe.extraItems.isEmpty()) {
             return true;
         }
-        int extras = extrasInventory.nonEmptyItemAmount;
+        int extras = extrasInventory.getFilledSlotCount();
         if (extras < ritualRecipe.extraItems.size()) {
             Collection<IMalumSpecialItemAccessPoint> altarProviders = BlockEntityHelper.getBlockEntities(IMalumSpecialItemAccessPoint.class, level, worldPosition, 4);
             for (IMalumSpecialItemAccessPoint provider : altarProviders) {

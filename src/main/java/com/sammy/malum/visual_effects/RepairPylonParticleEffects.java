@@ -25,7 +25,7 @@ public class RepairPylonParticleEffects {
 
     public static MalumSpiritType getCentralSpiritType(RepairPylonCoreBlockEntity pylon) {
         final LodestoneBlockEntityInventory spiritInventory = pylon.spiritInventory;
-        int spiritCount = spiritInventory.nonEmptyItemAmount;
+        int spiritCount = spiritInventory.getFilledSlotCount();
         Item currentItem = spiritInventory.getStackInSlot(0).getItem();
         if (spiritCount > 1) {
             float duration = 60f * spiritCount;

@@ -616,15 +616,12 @@ public class MalumLang extends LanguageProvider {
                 "",
                 "");
 
-        //TODO: have a looksie here
         addSimpleEntryHeader("soulwoven_silk", "Soulwoven Silk", "To weave the ephemeral");
-        addPages("soulwoven_silk", "Soulwoven Silk is a light yet sturdy material that acts as an insulator for spirit energies. While other materials do exhibit matching interactions with the arcane, this bond between magic and cloth should make for a unique material.");
-        //TODO: also one here
-        addPages("soulwoven_silk.soulwoven_banner", "To test the properties of the cloth, I've heft together a set of Soulwoven Banners with patterns based on various arcane reagents and spirit arcanas I've been met with thus far. When hung and then imbued with Arcana, the Banners will gain a dim, and then powerful glow when met with an additional shard.");
+        addPages("soulwoven_silk", "Soulwoven Silk is a light, yet sturdy material imbued with soulstuff. Like a body, it naturally insulates against arcane energies. While other materials do the same, cloth is far easier to work with in designing than stone.");
+        addPages("soulwoven_silk.soulwoven_banner", "Soulstuff can glow, as a shattered soul proves. Why not activate that glow within the cloth? I have made banners to test the effect, and used differing reagents and spirits to give a variety of patterns. When imbued, they will glow dimly, or fiercely if given an additional spirit.");
 
-        //TODO: also one here
-        addSimpleEntryHeader("soulwoven_pouch", "Soulwoven Pouch", "Made real through supposition");
-        addPages("soulwoven_pouch", "In my studies one of the most cumbersome experiences so far has been the sheer amount of magical reagents and residue I have to deal with. To solve this issue, I've designed the Soulwoven Pouch with the bundle's design in mind. The pouch hungers for the magically aligned, reserving extra room for and collecting it habitually.");
+        addSimpleEntryHeader("soulwoven_pouch", "Soulwoven Pouch", "A hop, a skip, and a reach outside");
+        addPages("soulwoven_pouch", "Magical reagents and other loot can clutter the inventory. Why not solve a problem of magic with magic? This pouch acts like a bundle, but also snaps up loot as it comes. Materials with arcane resonance are additionally rotated slightly out of reality, making them take up less space.");
 
         addSimpleEntryHeader("soulhunter_armor", "Soulhunter Armor", "Shaped like glass");
         addPages("soulhunter_armor",

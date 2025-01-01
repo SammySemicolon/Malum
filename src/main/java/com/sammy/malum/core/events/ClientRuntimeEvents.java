@@ -26,9 +26,9 @@ public class ClientRuntimeEvents {
     @SubscribeEvent
     public static void clientTickEvent(ClientTickEvent.Pre event) {
         SpiritCrucibleRenderer.checkForTuningFork(event);
+        TotemBaseRenderer.checkForTotemicStaff(event);
         HiddenBladeRenderHandler.tick(event);
         SoulWardRenderHandler.tick(event);
-        TotemBaseRenderer.checkForTotemicStaff(event);
     }
 
     @SubscribeEvent

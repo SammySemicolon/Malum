@@ -18,6 +18,38 @@ import static team.lodestar.lodestone.registry.common.tag.LodestoneItemTags.*;
 public class ArtificeSpiritInfusionRecipes {
 
     public static void buildRecipes(RecipeOutput recipeOutput) {
+        new SpiritInfusionRecipeBuilder(Items.COPPER_BLOCK, 1, ItemRegistry.WAVECHARGER.get(), 1)
+                .addSpirit(AERIAL_SPIRIT, 4)
+                .addSpirit(ARCANE_SPIRIT, 2)
+                .addExtraItem(Items.REDSTONE, 4)
+                .addExtraItem(ItemTagRegistry.RUNEWOOD_PLANKS, 4)
+                .save(recipeOutput);
+        new SpiritInfusionRecipeBuilder(Items.COPPER_BLOCK, 1, ItemRegistry.WAVEBANKER.get(), 1)
+                .addSpirit(AQUEOUS_SPIRIT, 4)
+                .addSpirit(ARCANE_SPIRIT, 2)
+                .addExtraItem(Items.REDSTONE, 4)
+                .addExtraItem(ItemTagRegistry.RUNEWOOD_PLANKS, 4)
+                .save(recipeOutput);
+        new SpiritInfusionRecipeBuilder(Items.COPPER_BLOCK, 1, ItemRegistry.WAVEMAKER.get(), 1)
+                .addSpirit(EARTHEN_SPIRIT, 4)
+                .addSpirit(ARCANE_SPIRIT, 2)
+                .addExtraItem(Items.REDSTONE, 4)
+                .addExtraItem(ItemTagRegistry.RUNEWOOD_PLANKS, 4)
+                .save(recipeOutput);
+        new SpiritInfusionRecipeBuilder(Items.COPPER_BLOCK, 1, ItemRegistry.WEAVEBREAKER.get(), 1)
+                .addSpirit(INFERNAL_SPIRIT, 4)
+                .addSpirit(ARCANE_SPIRIT, 2)
+                .addExtraItem(Items.REDSTONE, 4)
+                .addExtraItem(ItemTagRegistry.RUNEWOOD_PLANKS, 4)
+                .save(recipeOutput);
+        new SpiritInfusionRecipeBuilder(Ingredient.of(Tags.Items.INGOTS_COPPER), 2, ItemRegistry.ARTIFICERS_WRENCH.get(), 1)
+                .addSpirit(EARTHEN_SPIRIT, 8)
+                .addSpirit(AQUEOUS_SPIRIT, 8)
+                .addExtraItem(ItemRegistry.RUNEWOOD_PLANKS.get(), 2)
+                .addExtraItem(Items.REDSTONE_BLOCK, 1)
+                .save(recipeOutput);
+
+
         new SpiritInfusionRecipeBuilder(Items.FURNACE, 1, ItemRegistry.SPIRIT_CRUCIBLE.get(), 1)
                 .addSpirit(INFERNAL_SPIRIT, 8)
                 .addSpirit(AQUEOUS_SPIRIT, 8)

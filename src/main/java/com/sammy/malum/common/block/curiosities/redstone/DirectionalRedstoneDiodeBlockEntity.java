@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 
 import static com.sammy.malum.common.block.curiosities.redstone.DirectionalRedstoneDiodeBlock.FACING;
 import static com.sammy.malum.common.block.curiosities.redstone.RedstoneDiodeBlock.POWERED;
@@ -16,6 +17,7 @@ public abstract class DirectionalRedstoneDiodeBlockEntity extends RedstoneDiodeB
 
     public void setPowered(boolean powered) {
         level.setBlock(getBlockPos(), getBlockState().setValue(POWERED, powered), 3);
+        BlockStateHelper.updateAndNotifyState(level, getBlockPos());
     }
 
     public abstract void receiveSignalFromNeighbor(int signalStrength);
@@ -29,7 +31,7 @@ public abstract class DirectionalRedstoneDiodeBlockEntity extends RedstoneDiodeB
         if (neighborState.getBlock() instanceof RedstoneDiodeBlock<?>) {
             return;
         }
-        Direction direction = state.getValue(FACING);
+        Direction direction = state.getValue(FACING).getOpposite();
         if (!pos.relative(direction).equals(neighbor)) {
             return;
         }

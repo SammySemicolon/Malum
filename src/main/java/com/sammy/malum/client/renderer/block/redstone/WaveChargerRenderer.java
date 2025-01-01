@@ -15,7 +15,7 @@ public class WaveChargerRenderer extends RedstoneDiodeRenderer<WaveChargerBlockE
     public float getGlowDelta(WaveChargerBlockEntity blockEntityIn) {
         int desiredSignal = blockEntityIn.desiredSignal;
         int currentSignal = blockEntityIn.currentSignal;
-        float partial = (float) blockEntityIn.timer / Math.max(Math.round(blockEntityIn.frequency / 15f), 2);
+        float partial = (float) blockEntityIn.timer / Math.max(Math.round(blockEntityIn.frequency / 15f), 1);
         if (currentSignal > desiredSignal) {
             return (currentSignal - partial) / 15f;
         } else {

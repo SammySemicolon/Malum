@@ -31,6 +31,10 @@ public class ItemTagRegistry {
     public static final TagKey<Item> METAL_NODES = malumTag("metal_nodes");
     public static final TagKey<Item> SOULWOVEN_BANNERS = malumTag("soulwoven_banners");
 
+    public static final TagKey<Item> IS_TOTEMIC_TOOL = malumTag("totemic_tool");
+    public static final TagKey<Item> IS_REDSTONE_TOOL = malumTag("redstone_tool");
+    public static final TagKey<Item> IS_ARTIFICE_TOOL = malumTag("artifice_tool");
+
     public static final TagKey<Item> SAPBALLS = malumTag("sapballs");
     public static final TagKey<Item> GROSS_FOODS = malumTag("gross_foods");
 

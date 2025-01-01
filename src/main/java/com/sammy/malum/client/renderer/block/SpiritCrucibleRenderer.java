@@ -50,8 +50,7 @@ public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibl
         if (player == null) {
             return;
         }
-        final Item tuningFork = ItemRegistry.TUNING_FORK.get();
-        if ((player.getMainHandItem().getItem().equals(tuningFork) || player.getOffhandItem().getItem().equals(tuningFork))) {
+        if ((player.getMainHandItem().is(ItemTagRegistry.IS_ARTIFICE_TOOL) || player.getOffhandItem().is(ItemTagRegistry.IS_ARTIFICE_TOOL))) {
             if (tuningForkHeldTimer < 20) {
                 tuningForkHeldTimer++;
             }

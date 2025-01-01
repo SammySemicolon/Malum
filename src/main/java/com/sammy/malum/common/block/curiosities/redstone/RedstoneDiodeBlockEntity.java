@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
 
 public abstract class RedstoneDiodeBlockEntity extends LodestoneBlockEntity {

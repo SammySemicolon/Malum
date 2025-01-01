@@ -132,7 +132,9 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(ItemTagRegistry.METAL_NODES).addAll(items.stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.SOULWOVEN_BANNERS).addAll(items.stream().filter(i -> i.get() instanceof SoulwovenBannerBlockItem).map(DeferredHolder::getKey).toList());
 
-        tag(ItemTagRegistry.SAPBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
+        tag(ItemTagRegistry.IS_TOTEMIC_TOOL).add(TOTEMIC_STAFF.get());
+        tag(ItemTagRegistry.IS_REDSTONE_TOOL).add(RUNIC_SAPBALL.get());
+
         tag(ItemTagRegistry.GROSS_FOODS).add(Items.ROTTEN_FLESH, ROTTING_ESSENCE.get(), CONCENTRATED_GLUTTONY.get());
 
         tag(ItemTagRegistry.PROSPECTORS_TREASURE)

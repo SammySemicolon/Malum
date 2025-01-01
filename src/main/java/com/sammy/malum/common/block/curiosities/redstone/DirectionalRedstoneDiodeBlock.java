@@ -39,7 +39,7 @@ public class DirectionalRedstoneDiodeBlock<T extends RedstoneDiodeBlockEntity> e
             return 0;
         }
         Direction direction = blockState.getValue(FACING);
-        return side.equals(direction) ? getActiveSignalStrength(blockState, blockAccess, pos) : 0;
+        return side.equals(direction) ? 0 : getActiveSignalStrength(blockState, blockAccess, pos);
     }
 
     @Override

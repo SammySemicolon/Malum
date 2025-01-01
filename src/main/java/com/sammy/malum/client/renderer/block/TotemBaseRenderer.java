@@ -73,7 +73,7 @@ public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEnti
             float shaderHeight = height * 32;
             float distortion = 6f + height / 2f;
             float sideDistortion = 6f + width / 2f;
-            final LodestoneRenderType renderType = RenderTypeRegistry.ADDITIVE_DISTORTED_TEXTURE.applyWithModifierAndCache(MalumRenderTypeTokens.AREA_COVERAGE, b -> b.setCullState(LodestoneRenderTypes.NO_CULL));
+            final LodestoneRenderType renderType = LodestoneRenderTypes.ADDITIVE_DISTORTED_TEXTURE.applyWithModifierAndCache(MalumRenderTypeTokens.AREA_COVERAGE, b -> b.setCullState(LodestoneRenderTypes.NO_CULL));
             float index = shaderWidth + distortion;
             float sideIndex = shaderWidth * shaderHeight + sideDistortion;
 
@@ -93,7 +93,6 @@ public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEnti
                         s.safeGetUniform("Height").set(shaderHeight);
                     }))
                     .setColor(spiritType.getPrimaryColor(), 0.7f * scalar);
-
 
             poseStack.pushPose();
             poseStack.translate(offset.getX() + 0.5f, offset.getY() + 0.5f, offset.getZ() + 0.5f);

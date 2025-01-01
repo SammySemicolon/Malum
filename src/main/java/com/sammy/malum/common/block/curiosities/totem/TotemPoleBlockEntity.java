@@ -4,6 +4,7 @@ import com.sammy.malum.common.item.curiosities.tools.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
+import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
@@ -61,7 +62,7 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
     @Override
     public ItemInteractionResult onUseWithItem(Player player, ItemStack held, InteractionHand hand) {
         boolean success = false;
-        if (held.getItem() instanceof TotemicStaffItem && !totemPoleState.equals(ACTIVE) && !totemPoleState.equals(CHARGING)) {
+        if (held.is(ItemTagRegistry.IS_TOTEMIC_TOOL) && !totemPoleState.equals(ACTIVE) && !totemPoleState.equals(CHARGING)) {
             if (level.isClientSide) {
                 return ItemInteractionResult.SUCCESS;
             }

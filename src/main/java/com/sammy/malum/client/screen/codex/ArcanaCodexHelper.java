@@ -101,7 +101,7 @@ public class ArcanaCodexHelper {
     }
 
     public static void renderRiteIcon(ResourceLocation texture, MalumSpiritType spiritType, PoseStack stack, boolean corrupted, float glowAlpha, int x, int y, int z) {
-        ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.DISTORTED_TEXTURE.getInstance().get();
+        ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.SCREEN_DISTORTED_TEXTURE.getInstance().get();
         shaderInstance.safeGetUniform("YFrequency").set(corrupted ? 5f : 11f);
         shaderInstance.safeGetUniform("XFrequency").set(corrupted ? 12f : 17f);
         shaderInstance.safeGetUniform("Speed").set(1500f * (corrupted ? -0.75f : 1));
@@ -109,7 +109,7 @@ public class ArcanaCodexHelper {
         Supplier<ShaderInstance> shaderInstanceSupplier = () -> shaderInstance;
 
         VFXBuilders.ScreenVFXBuilder builder = VFXBuilders.createScreen()
-                .setPosTexColorDefaultFormat()
+                
                 .setShader(shaderInstanceSupplier)
                 .setColor(spiritType.getPrimaryColor())
                 .setAlpha(0.9f)
@@ -138,7 +138,7 @@ public class ArcanaCodexHelper {
     }
 
     public static void renderWavyIcon(ResourceLocation location, PoseStack stack, int x, int y, int z, int textureWidth, int textureHeight) {
-        ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.DISTORTED_TEXTURE.getInstance().get();
+        ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.SCREEN_DISTORTED_TEXTURE.getInstance().get();
         shaderInstance.safeGetUniform("YFrequency").set(10f);
         shaderInstance.safeGetUniform("XFrequency").set(12f);
         shaderInstance.safeGetUniform("Speed").set(1000f);
@@ -147,7 +147,6 @@ public class ArcanaCodexHelper {
         Supplier<ShaderInstance> shaderInstanceSupplier = () -> shaderInstance;
 
         VFXBuilders.ScreenVFXBuilder builder = VFXBuilders.createScreen()
-                .setPosTexColorDefaultFormat()
                 .setShader(shaderInstanceSupplier)
                 .setAlpha(0.7f)
                 .setZLevel(z)

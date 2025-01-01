@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_infusion",
+  "extraIngredients": [
+    {
+      "count": 4,
+      "item": "minecraft:redstone"
+    },
+    {
+      "count": 4,
+      "tag": "malum:runewood_planks"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "minecraft:copper_block"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:wavebreaker"
+  },
+  "spirits": [
+    {
+      "type": "infernal",
+      "count": 4
+    },
+    {
+      "type": "arcane",
+      "count": 2
+    }
+  ]
+}

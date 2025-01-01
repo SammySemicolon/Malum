@@ -42,7 +42,7 @@ public class WaveChargerBlockEntity extends DirectionalRedstoneDiodeBlockEntity 
     public void tick() {
         super.tick();
         if (desiredSignal != currentSignal) {
-            if (timer >= Math.max(Math.round(frequency / 15f), 2)) {
+            if (timer >= Math.max(Math.round(frequency / 15f), 1)) {
                 timer = 0;
                 if (currentSignal > desiredSignal) {
                     currentSignal--;

@@ -35,8 +35,8 @@ public class WaveBreakerBlockEntity extends DirectionalRedstoneDiodeBlockEntity 
     public void receiveSignalFromNeighbor(int signalStrength) {
         if (timer <= 10) {
             level.playSound(null, getBlockPos(), SoundRegistry.PULSELAG_STORE.get(), SoundSource.BLOCKS, 0.3f, 0.9f);
-            setPowered(false);
             timer = frequency+10;
+            setPowered(false);
         }
     }
 }

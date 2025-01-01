@@ -62,10 +62,10 @@ public abstract class RedstoneDiodeRenderer<T extends RedstoneDiodeBlockEntity> 
     public RenderTypeToken getTokenForSide(BlockState state, Direction direction) {
         Direction facing = state.getValue(DirectionalRedstoneDiodeBlock.FACING);
         if (direction.equals(facing)) {
-            return output;
+            return INPUT;
         }
         if (direction.equals(facing.getOpposite())) {
-            return INPUT;
+            return output;
         }
         return LOCKED;
     }

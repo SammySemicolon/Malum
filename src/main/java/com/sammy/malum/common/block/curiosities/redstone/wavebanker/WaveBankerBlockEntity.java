@@ -33,7 +33,7 @@ public class WaveBankerBlockEntity extends DirectionalRedstoneDiodeBlockEntity {
     @Override
     public void receiveSignalFromNeighbor(int signalStrength) {
         level.playSound(null, getBlockPos(), SoundRegistry.WAVEBANKER_STORE.get(), SoundSource.BLOCKS, 0.3f, 1.2f);
-        setPowered(true);
         timer = frequency;
+        setPowered(true);
     }
 }

@@ -59,7 +59,7 @@ public class VoidDepotRenderer implements BlockEntityRenderer<VoidDepotBlockEnti
         float vOffset = ((gameTime + 500f + partialTicks) % 8000) / 8000f;
         float alpha = 0.05f;
 
-        final LodestoneRenderType renderType = RenderTypeRegistry.ADDITIVE_DISTORTED_TEXTURE.applyAndCache(VOID_NOISE);
+        final LodestoneRenderType renderType = LodestoneRenderTypes.ADDITIVE_DISTORTED_TEXTURE.applyAndCache(VOID_NOISE);
         builder.replaceBufferSource(RenderHandler.DELAYED_RENDER.getTarget());
         for (int i = 0; i < 2; i++) {
             builder.setAlpha(alpha);

@@ -29,7 +29,6 @@ import com.sammy.malum.common.item.curiosities.curios.sets.rotten.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.soulward.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.spirit.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
-import com.sammy.malum.common.item.curiosities.tools.*;
 import com.sammy.malum.common.item.curiosities.weapons.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.staff.*;
@@ -470,7 +469,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> WAVECHARGER = register("wavecharger", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVECHARGER.get(), p));
     public static final DeferredHolder<Item, Item> WAVEBANKER = register("wavebanker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEBANKER.get(), p));
     public static final DeferredHolder<Item, Item> WAVEMAKER = register("wavemaker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEMAKER.get(), p));
-    public static final DeferredHolder<Item, Item> PULSELAG = register("wavebreaker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEBREAKER.get(), p));
+    public static final DeferredHolder<Item, Item> WEAVEBREAKER = register("wavebreaker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEBREAKER.get(), p));
 
     public static final DeferredHolder<Item, Item> WEAVERS_WORKBENCH = register("weavers_workbench", COSMETIC_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WEAVERS_WORKBENCH.get(), p));
     //endregion
@@ -596,7 +595,8 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> CONCENTRATED_GLUTTONY = register("concentrated_gluttony", DEFAULT_PROPERTIES().food(FoodPropertyRegistry.CONCENTRATED_GLUTTONY), ConcentratedGluttonyItem::new);
     public static final DeferredHolder<Item, Item> SPLASH_OF_GLUTTONY = register("splash_of_gluttony", DEFAULT_PROPERTIES(), SplashOfGluttonyItem::new);
     public static final DeferredHolder<Item, Item> SOULWOVEN_POUCH = register("soulwoven_pouch", GEAR_PROPERTIES(), SoulwovenPouchItem::new);
-    public static final DeferredHolder<Item, Item> TOTEMIC_STAFF = register("totemic_staff", GEAR_PROPERTIES(), TotemicStaffItem::new);
+    public static final DeferredHolder<Item, Item> TOTEMIC_STAFF = register("totemic_staff", GEAR_PROPERTIES(), Item::new);
+    public static final DeferredHolder<Item, Item> ARTIFICERS_WRENCH = register("artificers_wrench", GEAR_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> TUNING_FORK = register("tuning_fork", GEAR_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> LAMPLIGHTERS_TONGS = register("lamplighters_tongs", GEAR_PROPERTIES(), LamplightersTongsItem::new);
 

@@ -69,9 +69,9 @@ public class SoulWardHandler {
             physicalDamageAbsorption = propertiesEvent.getNewPhysicalDamageAbsorption();
             integrity = propertiesEvent.getNewIntegrity();
 
-            double damageMultiplier = source.is(LodestoneDamageTypeTags.IS_MAGIC) ? magicDamageAbsorption : physicalDamageAbsorption;
-            double absorbedDamage = amount * damageMultiplier;
-            double soulWardDamage = (amount - absorbedDamage) / Math.max(integrity, 0.01f);
+            double absorptionMultiplier = source.is(LodestoneDamageTypeTags.IS_MAGIC) ? magicDamageAbsorption : physicalDamageAbsorption;
+            double absorbedDamage = amount * absorptionMultiplier;
+            double soulWardDamage = absorbedDamage / Math.max(integrity, 0.01f);
             data.reduceSoulWard(soulWardDamage);
 
             var damageEvent = new SoulWardDamageEvent(living, data, source, absorbedDamage, soulWardDamage);
@@ -81,7 +81,7 @@ public class SoulWardHandler {
 
             var sound = data.getSoulWard() == 0 ? SoundRegistry.SOUL_WARD_DEPLETE : SoundRegistry.SOUL_WARD_HIT;
             SoundHelper.playSound(living, sound.get(), 1, Mth.nextFloat(living.getRandom(), 1f, 1.5f));
-            event.setNewDamage((float) absorbedDamage);
+            event.setNewDamage((float) (amount - absorbedDamage));
         }
     }
 }

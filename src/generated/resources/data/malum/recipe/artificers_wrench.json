@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_infusion",
+  "extraIngredients": [
+    {
+      "count": 2,
+      "item": "malum:runewood_planks"
+    },
+    {
+      "count": 1,
+      "item": "minecraft:redstone_block"
+    }
+  ],
+  "ingredient": {
+    "count": 2,
+    "tag": "c:ingots/copper"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:artificers_wrench"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 8
+    },
+    {
+      "type": "aqueous",
+      "count": 8
+    }
+  ]
+}

@@ -62,13 +62,13 @@ public class SoulWardRenderHandler {
                     RenderSystem.depthMask(true);
                     RenderSystem.enableBlend();
                     RenderSystem.defaultBlendFunc();
-                    ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.DISTORTED_TEXTURE.getInstance().get();
+                    ExtendedShaderInstance shaderInstance = (ExtendedShaderInstance) LodestoneShaders.SCREEN_DISTORTED_TEXTURE.getInstance().get();
                     shaderInstance.safeGetUniform("YFrequency").set(15f);
                     shaderInstance.safeGetUniform("XFrequency").set(15f);
                     shaderInstance.safeGetUniform("Speed").set(550f);
                     shaderInstance.safeGetUniform("Intensity").set(120f);
                     var builder = VFXBuilders.createScreen()
-                            .setPosTexColorDefaultFormat()
+                            
                             .setShader(() -> shaderInstance);
                     if (fadeOut > 20) {
                         final boolean isDamaged = soulWard < player.getAttributeValue(AttributeRegistry.SOUL_WARD_CAPACITY);

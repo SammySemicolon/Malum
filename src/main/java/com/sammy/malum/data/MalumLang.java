@@ -335,7 +335,7 @@ public class MalumLang extends LanguageProvider {
 
         addSimpleEntryHeader("fragment.void.black_crystal", "Scribbled notes", "Incomprehensible");
         addPages("fragment.void.black_crystal",
-            italic("You attempt to read the entry, but the text seems to slide off the eyes, escaping from your mind every time you grasp it. What little fragments stick with you form an impression of something besides these materials being cast into the Well..."));
+                italic("You attempt to read the entry, but the text seems to slide off the eyes, escaping from your mind every time you grasp it. What little fragments stick with you form an impression of something besides these materials being cast into the Well..."));
 
         addSimpleEntryHeader("void.black_crystal", "A Black Crystal", "A mistake, or a boon?");
         addPages("void.black_crystal",
@@ -610,16 +610,26 @@ public class MalumLang extends LanguageProvider {
         // The timings of each of these blocks can be configured using the tuning fork... but the author hasn't made that yet. Not sure how to explain it in this entry
         // Maybe editing the tuning fork entry instead would be better.
         addSimpleEntryHeader("basic_artifice", "Basic Artifice", "An artificer's gizmo");
+
         addPages("basic_artifice",
                 "Redstone has proven to be quite a crucial assistant in my research thus far. Through the use of ether as a primitive soul slate, a ticker of sorts, I've designed a set of redstone diodes that store and/or emit a signal with unique rulesets each.",
-                "Each of these gizmos is composed of two mechanisms, one to keep track of time's passage by slowly imprinting redstone radiation into ether, and the second to read that radiation and accept it only when it becomes tangible enough for the sensory mechanism.",
-                "By modifying the circuitry responsible for the signal output with Aerial Arcana we create the Wavecharger. The gadget remembers the input signal it received and slowly matches it in output. Once reached, an opposite reaction triggers and the output signal slowly dampens.",
-                "By imbuing the signal reader through the use of Aqueous Arcana we create the Wavebanker, a gizmo that keeps track of the input signal, emitting it for much longer after being empowered with no power loss.",
-                "By utilizing Earthen Arcana in the pair of repeaters we create the Wavemaker. The pulses accepted by the ether are much stronger and sparser, activating the sensory system and producing an output signal with a set interval. Unlike other gizmos here, the Wavemaker accepts no input signal and operates on all sides.",
+                "Each of these gizmos is composed of two mechanisms, one to keep track of time's passage by slowly imprinting redstone radiation into ether, and the second to read that radiation and accept it only when it becomes tangible enough for the sensory mechanism.");
+        addHeadline("basic_artifice.wavecharger", "Wavecharger");
+        addPage("basic_artifice.wavecharger",
+                "By modifying the circuitry responsible for the signal output with Aerial Arcana we create the Wavecharger. The gadget remembers the input signal it received and slowly matches it in output. Once reached, an opposite reaction triggers and the output signal slowly dampens.");
+        addHeadline("basic_artifice.wavebanker", "Wavebanker");
+        addPage("basic_artifice.wavebanker",
+                "By imbuing the signal reader through the use of Aqueous Arcana we create the Wavebanker, a gizmo that keeps track of the input signal, emitting it for much longer after being empowered with no power loss.");
+        addHeadline("basic_artifice.wavemaker", "Wavemaker");
+        addPage("basic_artifice.wavemaker",
+                "By utilizing Earthen Arcana in the pair of repeaters we create the Wavemaker. The pulses accepted by the ether are much stronger and sparser, activating the sensory system and producing an output signal with a set interval. Unlike other gizmos here, the Wavemaker accepts no input signal and operates on all sides.");
+        addHeadline("basic_artifice.wavebreaker", "Wavebreaker");
+        addPage("basic_artifice.wavebreaker",
                 "By suffusing Infernal Arcana into the redstone wiring we create the Wavebreaker. The redstone energy received struggles much more when traveling through the wiring, creating a noticeable delay before it reaches the signal output.");
-        addSimpleEntryHeader("basic_artifice.artificers_wrench", "Artificer's Wrench", "The Gizmo Whisperer");
-        addPages("basic_artifice.artificers_wrench",
-                "To apply the desired timings to my gizmos, I thought up my own installment in the plethora of wrenches I've seen throughout my studies of the world. The Artificer's Wrench has a simple job, when aimed at a gizmo the energy released is interpreted and the internal timings the gizmo keeps track of are modified to my desire.");
+
+        addSimpleEntryHeader("basic_artifice.artificers_claw", "Artificer's Claw", "The Gizmo Whisperer");
+        addPages("basic_artifice.artificers_claw",
+                "To apply the desired timings to my gizmos, I thought up my own installment in the plethora of wrenches I've seen throughout my studies of the world. The Artificer's Claw has a simple job, when aimed at a gizmo the energy released is interpreted and the internal timings the gizmo keeps track of are modified to my desire.");
 
         addSimpleEntryHeader("soulwoven_silk", "Soulwoven Silk", "To weave the ephemeral");
         addPages("soulwoven_silk", "Soulwoven Silk is a light, yet sturdy material imbued with soulstuff. Like a body, it naturally insulates against arcane energies. While other materials do the same, cloth is far easier to work with in designing than stone.");

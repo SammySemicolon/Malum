@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "malum:artificers_wrench"
+        "recipe": "malum:artificers_claw"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -15,7 +15,7 @@
   ],
   "rewards": {
     "recipes": [
-      "malum:artificers_wrench"
+      "malum:artificers_claw"
     ]
   }
 }

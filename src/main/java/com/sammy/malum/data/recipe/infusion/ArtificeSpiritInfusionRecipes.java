@@ -42,7 +42,7 @@ public class ArtificeSpiritInfusionRecipes {
                 .addExtraItem(Items.REDSTONE, 4)
                 .addExtraItem(ItemTagRegistry.RUNEWOOD_PLANKS, 4)
                 .save(recipeOutput);
-        new SpiritInfusionRecipeBuilder(Ingredient.of(Tags.Items.INGOTS_COPPER), 2, ItemRegistry.ARTIFICERS_WRENCH.get(), 1)
+        new SpiritInfusionRecipeBuilder(Ingredient.of(Tags.Items.INGOTS_COPPER), 2, ItemRegistry.ARTIFICERS_CLAW.get(), 1)
                 .addSpirit(EARTHEN_SPIRIT, 8)
                 .addSpirit(AQUEOUS_SPIRIT, 8)
                 .addExtraItem(ItemRegistry.RUNEWOOD_PLANKS.get(), 2)

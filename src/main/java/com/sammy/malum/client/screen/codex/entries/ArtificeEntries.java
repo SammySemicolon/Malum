@@ -67,9 +67,9 @@ public class ArtificeEntries {
                 .addPage(SpiritInfusionPage.fromOutput(WAVEMAKER.get()))
                 .addPage(new HeadlineTextPage("basic_artifice.wavebreaker", "basic_artifice.wavebreaker.1"))
                 .addPage(SpiritInfusionPage.fromOutput(WEAVEBREAKER.get()))
-                .addReference(new EntryReference(ARTIFICERS_WRENCH, BookEntry.build("basic_artifice.artificers_wrench")
+                .addReference(new EntryReference(ARTIFICERS_CLAW, BookEntry.build("basic_artifice.artificers_wrench")
                         .addPage(new HeadlineTextPage("basic_artifice.artificers_wrench", "basic_artifice.artificers_wrench.1"))
-                        .addPage(SpiritInfusionPage.fromOutput(ARTIFICERS_WRENCH.get()))
+                        .addPage(SpiritInfusionPage.fromOutput(ARTIFICERS_CLAW.get()))
                 ))
         );
 

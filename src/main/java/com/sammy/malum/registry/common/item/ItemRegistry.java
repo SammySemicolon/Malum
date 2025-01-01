@@ -596,7 +596,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SPLASH_OF_GLUTTONY = register("splash_of_gluttony", DEFAULT_PROPERTIES(), SplashOfGluttonyItem::new);
     public static final DeferredHolder<Item, Item> SOULWOVEN_POUCH = register("soulwoven_pouch", GEAR_PROPERTIES(), SoulwovenPouchItem::new);
     public static final DeferredHolder<Item, Item> TOTEMIC_STAFF = register("totemic_staff", GEAR_PROPERTIES(), Item::new);
-    public static final DeferredHolder<Item, Item> ARTIFICERS_WRENCH = register("artificers_wrench", GEAR_PROPERTIES(), Item::new);
+    public static final DeferredHolder<Item, Item> ARTIFICERS_CLAW = register("artificers_claw", GEAR_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> TUNING_FORK = register("tuning_fork", GEAR_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> LAMPLIGHTERS_TONGS = register("lamplighters_tongs", GEAR_PROPERTIES(), LamplightersTongsItem::new);
 

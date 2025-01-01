@@ -7,20 +7,19 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import team.lodestar.lodestone.helpers.block.BlockEntityHelper;
 import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 
-import static com.sammy.malum.common.block.curiosities.redstone.DirectionalRedstoneMachineBlock.SIGNAL_INPUT;
+import static com.sammy.malum.common.block.curiosities.redstone.DirectionalRedstoneDiodeBlock.SIGNAL_INPUT;
 
-public abstract class DirectionalRedstoneMachineBlockEntity extends RedstoneMachineBlockEntity {
+public abstract class DirectionalRedstoneDiodeBlockEntity extends RedstoneDiodeBlockEntity {
 
-    public DirectionalRedstoneMachineBlock.SignalInput cachedSignal;
+    public DirectionalRedstoneDiodeBlock.SignalInput cachedSignal;
 
-    public DirectionalRedstoneMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public DirectionalRedstoneDiodeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    public void setSignalCache(DirectionalRedstoneMachineBlock.SignalInput cachedSignal) {
+    public void setSignalCache(DirectionalRedstoneDiodeBlock.SignalInput cachedSignal) {
         this.cachedSignal = cachedSignal;
         BlockStateHelper.updateAndNotifyState(level, getBlockPos());
     }
@@ -33,15 +32,19 @@ public abstract class DirectionalRedstoneMachineBlockEntity extends RedstoneMach
         }
     }
 
-    public void setSignal(DirectionalRedstoneMachineBlock.SignalInput signalInput) {
+    public void setSignal(DirectionalRedstoneDiodeBlock.SignalInput signalInput) {
         level.setBlock(getBlockPos(), getBlockState().setValue(SIGNAL_INPUT, signalInput), 3);
     }
 
-    public abstract void receiveSignalFromNeighbor(DirectionalRedstoneMachineBlock.SignalInput signalInput);
+    public abstract void receiveSignalFromNeighbor(DirectionalRedstoneDiodeBlock.SignalInput signalInput, int signalStrength);
 
     @Override
     public void onNeighborUpdate(BlockState state, BlockPos pos, BlockPos neighbor) {
         if (!state.getValue(SIGNAL_INPUT).equals(PulsebankBlock.SignalInput.NONE)) {
+            return;
+        }
+        BlockState neighborState = level.getBlockState(neighbor);
+        if (neighborState.getBlock() instanceof RedstoneDiodeBlock<?>) {
             return;
         }
         BlockPos offset = pos.subtract(neighbor);
@@ -51,7 +54,7 @@ public abstract class DirectionalRedstoneMachineBlockEntity extends RedstoneMach
         }
         int signal = level.getSignal(neighbor, direction.getOpposite());
         if (signal > 0) {
-            receiveSignalFromNeighbor(DirectionalRedstoneMachineBlock.SignalInput.DIRECTION_MAP.get(direction));
+            receiveSignalFromNeighbor(DirectionalRedstoneDiodeBlock.SignalInput.DIRECTION_MAP.get(direction), signal);
         }
     }
 
@@ -59,7 +62,7 @@ public abstract class DirectionalRedstoneMachineBlockEntity extends RedstoneMach
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
         if (pTag.contains("cachedSignal")) {
-            cachedSignal = DirectionalRedstoneMachineBlock.SignalInput.valueOf(pTag.getString("cachedSignal"));
+            cachedSignal = DirectionalRedstoneDiodeBlock.SignalInput.valueOf(pTag.getString("cachedSignal"));
         }
         else {
             cachedSignal = null;

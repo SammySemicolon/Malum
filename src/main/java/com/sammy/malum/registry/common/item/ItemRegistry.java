@@ -469,7 +469,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SOULWOOD_TOTEM_BASE = register("soulwood_totem_base", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_TOTEM_BASE.get(), p));
     public static final DeferredHolder<Item, Item> RITUAL_PLINTH = register("ritual_plinth", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RITUAL_PLINTH.get(), p));
 
-    //PULSECHARGER
+    public static final DeferredHolder<Item, Item> PULSECHARGER = register("pulsecharger", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.PULSECHARGER.get(), p));
     public static final DeferredHolder<Item, Item> PULSEBANK = register("pulsebank", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.PULSEBANK.get(), p));
     public static final DeferredHolder<Item, Item> CHRONOPULSER = register("chronopulser", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.CHRONOPULSER.get(), p));
     public static final DeferredHolder<Item, Item> PULSELAG = register("pulselag", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.PULSELAG.get(), p));

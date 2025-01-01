@@ -1,14 +1,11 @@
 package com.sammy.malum.client.renderer.block.redstone;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.common.block.curiosities.redstone.DirectionalRedstoneMachineBlock;
-import com.sammy.malum.common.block.curiosities.redstone.pulsebank.PulsebankBlockEntity;
 import com.sammy.malum.common.block.curiosities.redstone.pulselag.PulselagBlockEntity;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import team.lodestar.lodestone.systems.rendering.rendeertype.RenderTypeToken;
 
 
-public class PulselagRenderer extends RedstoneMachineRenderer<PulselagBlockEntity> {
+public class PulselagRenderer extends RedstoneDiodeRenderer<PulselagBlockEntity> {
 
     public PulselagRenderer(BlockEntityRendererProvider.Context context) {
         super(context, MalumMod.malumPath("textures/block/redstone/pulselag_overlay.png"));

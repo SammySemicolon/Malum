@@ -1,19 +1,16 @@
 package com.sammy.malum.common.block.curiosities.redstone.chronopulser;
 
-import com.sammy.malum.common.block.curiosities.redstone.RedstoneMachineBlock;
+import com.sammy.malum.common.block.curiosities.redstone.RedstoneDiodeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import team.lodestar.lodestone.systems.block.LodestoneEntityBlock;
 
-public class ChronopulserBlock extends RedstoneMachineBlock<ChronopulserBlockEntity> {
+public class ChronopulserBlock extends RedstoneDiodeBlock<ChronopulserBlockEntity> {
 
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 

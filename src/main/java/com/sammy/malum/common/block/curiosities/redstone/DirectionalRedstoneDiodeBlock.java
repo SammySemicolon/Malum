@@ -2,8 +2,6 @@ package com.sammy.malum.common.block.curiosities.redstone;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -16,11 +14,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class DirectionalRedstoneMachineBlock<T extends RedstoneMachineBlockEntity> extends RedstoneMachineBlock<T> {
+public class DirectionalRedstoneDiodeBlock<T extends RedstoneDiodeBlockEntity> extends RedstoneDiodeBlock<T> {
 
     public static final EnumProperty<SignalInput> SIGNAL_INPUT = EnumProperty.create("signal_input", SignalInput.class);
 
-    public DirectionalRedstoneMachineBlock(Properties properties) {
+    public DirectionalRedstoneDiodeBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(SIGNAL_INPUT, SignalInput.NONE));
     }

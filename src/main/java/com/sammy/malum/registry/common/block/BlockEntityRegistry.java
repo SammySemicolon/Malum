@@ -3,9 +3,9 @@ package com.sammy.malum.registry.common.block;
 import com.sammy.malum.*;
 import com.sammy.malum.client.renderer.block.*;
 import com.sammy.malum.client.renderer.block.redstone.ChronopulserRenderer;
+import com.sammy.malum.client.renderer.block.redstone.PulseChargerRenderer;
 import com.sammy.malum.client.renderer.block.redstone.PulsebankRenderer;
 import com.sammy.malum.client.renderer.block.redstone.PulselagRenderer;
-import com.sammy.malum.client.renderer.block.redstone.RedstoneMachineRenderer;
 import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.common.block.curiosities.mana_mote.*;
 import com.sammy.malum.common.block.curiosities.obelisk.brilliant.*;
@@ -14,6 +14,8 @@ import com.sammy.malum.common.block.curiosities.redstone.chronopulser.Chronopuls
 import com.sammy.malum.common.block.curiosities.redstone.chronopulser.ChronopulserBlockEntity;
 import com.sammy.malum.common.block.curiosities.redstone.pulsebank.PulsebankBlock;
 import com.sammy.malum.common.block.curiosities.redstone.pulsebank.PulsebankBlockEntity;
+import com.sammy.malum.common.block.curiosities.redstone.pulsecharger.PulsechargerBlock;
+import com.sammy.malum.common.block.curiosities.redstone.pulsecharger.PulsechargerBlockEntity;
 import com.sammy.malum.common.block.curiosities.redstone.pulselag.PulselagBlock;
 import com.sammy.malum.common.block.curiosities.redstone.pulselag.PulselagBlockEntity;
 import com.sammy.malum.common.block.curiosities.repair_pylon.*;
@@ -69,9 +71,10 @@ public class BlockEntityRegistry {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TotemBaseBlockEntity>> TOTEM_BASE = BLOCK_ENTITY_TYPES.register("totem_base", () -> BlockEntityType.Builder.of(TotemBaseBlockEntity::new, getBlocks(TotemBaseBlock.class)).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TotemPoleBlockEntity>> TOTEM_POLE = BLOCK_ENTITY_TYPES.register("totem_pole", () -> BlockEntityType.Builder.of(TotemPoleBlockEntity::new, getBlocks(TotemPoleBlock.class)).build(null));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PulsechargerBlockEntity>> PULSECHARGER = BLOCK_ENTITY_TYPES.register("pulsecharger", () -> BlockEntityType.Builder.of(PulsechargerBlockEntity::new, getBlocks(PulsechargerBlock.class)).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PulsebankBlockEntity>> PULSEBANK = BLOCK_ENTITY_TYPES.register("pulsebank", () -> BlockEntityType.Builder.of(PulsebankBlockEntity::new, getBlocks(PulsebankBlock.class)).build(null));
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PulselagBlockEntity>> PULSELAG = BLOCK_ENTITY_TYPES.register("pulselag", () -> BlockEntityType.Builder.of(PulselagBlockEntity::new, getBlocks(PulselagBlock.class)).build(null));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChronopulserBlockEntity>> CHRONOPULSER = BLOCK_ENTITY_TYPES.register("chronopulser", () -> BlockEntityType.Builder.of(ChronopulserBlockEntity::new, getBlocks(ChronopulserBlock.class)).build(null));
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PulselagBlockEntity>> PULSELAG = BLOCK_ENTITY_TYPES.register("pulselag", () -> BlockEntityType.Builder.of(PulselagBlockEntity::new, getBlocks(PulselagBlock.class)).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RitualPlinthBlockEntity>> RITUAL_PLINTH = BLOCK_ENTITY_TYPES.register("ritual_plinth", () -> BlockEntityType.Builder.of(RitualPlinthBlockEntity::new, BlockRegistry.RITUAL_PLINTH.get()).build(null));
 
@@ -119,10 +122,10 @@ public class BlockEntityRegistry {
             event.registerBlockEntityRenderer(TOTEM_BASE.get(), TotemBaseRenderer::new);
             event.registerBlockEntityRenderer(TOTEM_POLE.get(), TotemPoleRenderer::new);
 
+            event.registerBlockEntityRenderer(PULSECHARGER.get(), PulseChargerRenderer::new);
             event.registerBlockEntityRenderer(PULSEBANK.get(), PulsebankRenderer::new);
-
-            event.registerBlockEntityRenderer(PULSELAG.get(), PulselagRenderer::new);
             event.registerBlockEntityRenderer(CHRONOPULSER.get(), ChronopulserRenderer::new);
+            event.registerBlockEntityRenderer(PULSELAG.get(), PulselagRenderer::new);
 
             event.registerBlockEntityRenderer(RITUAL_PLINTH.get(), RitualPlinthRenderer::new);
 

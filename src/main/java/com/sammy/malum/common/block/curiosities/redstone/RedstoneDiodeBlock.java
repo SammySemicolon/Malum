@@ -6,9 +6,9 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import team.lodestar.lodestone.systems.block.LodestoneEntityBlock;
 
-public class RedstoneMachineBlock<T extends RedstoneMachineBlockEntity> extends LodestoneEntityBlock<T> {
+public class RedstoneDiodeBlock<T extends RedstoneDiodeBlockEntity> extends LodestoneEntityBlock<T> {
 
-    public RedstoneMachineBlock(Properties properties) {
+    public RedstoneDiodeBlock(Properties properties) {
         super(properties);
     }
 

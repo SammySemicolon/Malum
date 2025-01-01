@@ -4,12 +4,11 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.block.curiosities.redstone.chronopulser.ChronopulserBlockEntity;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import team.lodestar.lodestone.systems.easing.Easing;
-import team.lodestar.lodestone.systems.rendering.rendeertype.RenderTypeToken;
 
 import static com.sammy.malum.client.RenderUtils.drawCube;
 
 
-public class ChronopulserRenderer extends RedstoneMachineRenderer<ChronopulserBlockEntity> {
+public class ChronopulserRenderer extends RedstoneDiodeRenderer<ChronopulserBlockEntity> {
 
     public ChronopulserRenderer(BlockEntityRendererProvider.Context context) {
         super(context, MalumMod.malumPath("textures/block/redstone/chronopulser_overlay.png"));

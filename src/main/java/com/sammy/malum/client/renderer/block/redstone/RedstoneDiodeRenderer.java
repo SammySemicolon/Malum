@@ -2,7 +2,7 @@ package com.sammy.malum.client.renderer.block.redstone;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.sammy.malum.client.RenderUtils;
-import com.sammy.malum.common.block.curiosities.redstone.RedstoneMachineBlockEntity;
+import com.sammy.malum.common.block.curiosities.redstone.RedstoneDiodeBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -19,12 +19,12 @@ import static com.sammy.malum.client.RenderUtils.drawCube;
 import static com.sammy.malum.client.RenderUtils.drawCubeSides;
 
 
-public abstract class RedstoneMachineRenderer<T extends RedstoneMachineBlockEntity> implements BlockEntityRenderer<T> {
+public abstract class RedstoneDiodeRenderer<T extends RedstoneDiodeBlockEntity> implements BlockEntityRenderer<T> {
 
-    private final RenderTypeToken token;
-    private static final Color COLOR = new Color(170, 15, 1);
+    protected final RenderTypeToken token;
+    protected static final Color COLOR = new Color(170, 15, 1);
 
-    public RedstoneMachineRenderer(BlockEntityRendererProvider.Context context, ResourceLocation tokenTexture) {
+    public RedstoneDiodeRenderer(BlockEntityRendererProvider.Context context, ResourceLocation tokenTexture) {
         this.token = RenderTypeToken.createToken(tokenTexture);
     }
 

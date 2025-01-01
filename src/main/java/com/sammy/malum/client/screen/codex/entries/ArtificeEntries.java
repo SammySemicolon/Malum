@@ -56,17 +56,17 @@ public class ArtificeEntries {
         );
 
         screen.addEntry("basic_artifice", 5, 8, b -> b
-                        .configureWidget(w -> w.setIcon(CHRONOPULSER))
-                        .addPage(new HeadlineTextPage("basic_artifice", "basic_artifice.1"))
-                        .addPage(new TextPage("basic_artifice.2"))
-                        .addPage(new HeadlineTextPage("basic_artifice.pulsecharger", "basic_artifice.pulsecharger.1"))
-//                .addPage(SpiritInfusionPage.fromOutput(PULSECHARGER.get()))
-                        .addPage(new HeadlineTextPage("basic_artifice.pulsebank", "basic_artifice.pulsebank.1"))
-                        .addPage(SpiritInfusionPage.fromOutput(PULSEBANK.get()))
-                        .addPage(new HeadlineTextPage("basic_artifice.chronopulser", "basic_artifice.chronopulser.1"))
-                        .addPage(SpiritInfusionPage.fromOutput(CHRONOPULSER.get()))
-                        .addPage(new HeadlineTextPage("basic_artifice.pulselag", "basic_artifice.pulselag.1"))
-                        .addPage(SpiritInfusionPage.fromOutput(PULSELAG.get()))
+                .configureWidget(w -> w.setIcon(CHRONOPULSER))
+                .addPage(new HeadlineTextPage("basic_artifice", "basic_artifice.1"))
+                .addPage(new TextPage("basic_artifice.2"))
+                .addPage(new HeadlineTextPage("basic_artifice.pulsecharger", "basic_artifice.pulsecharger.1"))
+                .addPage(SpiritInfusionPage.fromOutput(PULSECHARGER.get()))
+                .addPage(new HeadlineTextPage("basic_artifice.pulsebank", "basic_artifice.pulsebank.1"))
+                .addPage(SpiritInfusionPage.fromOutput(PULSEBANK.get()))
+                .addPage(new HeadlineTextPage("basic_artifice.chronopulser", "basic_artifice.chronopulser.1"))
+                .addPage(SpiritInfusionPage.fromOutput(CHRONOPULSER.get()))
+                .addPage(new HeadlineTextPage("basic_artifice.pulselag", "basic_artifice.pulselag.1"))
+                .addPage(SpiritInfusionPage.fromOutput(PULSELAG.get()))
         );
 
         screen.addEntry("soulwoven_silk", 4, 5, b -> b

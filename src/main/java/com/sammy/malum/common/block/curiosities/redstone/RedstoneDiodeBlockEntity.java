@@ -9,12 +9,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
 
-public abstract class RedstoneMachineBlockEntity extends LodestoneBlockEntity {
+public abstract class RedstoneDiodeBlockEntity extends LodestoneBlockEntity {
 
     public int timer;
     public int frequency = 80;
 
-    public RedstoneMachineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public RedstoneDiodeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 

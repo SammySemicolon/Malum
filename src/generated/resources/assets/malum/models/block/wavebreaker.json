@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "malum:block/redstone/runewood_frame_bottom",
+    "east": "malum:block/redstone/runewood_frame_locked",
+    "north": "malum:block/redstone/runewood_frame_input",
+    "particle": "malum:block/redstone/runewood_frame_locked",
+    "south": "malum:block/redstone/wavebreaker_output",
+    "up": "malum:block/redstone/runewood_frame_top",
+    "west": "malum:block/redstone/runewood_frame_locked"
+  }
+}

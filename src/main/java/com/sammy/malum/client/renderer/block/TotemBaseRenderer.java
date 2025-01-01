@@ -18,6 +18,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
+import team.lodestar.lodestone.systems.rendering.cube.CubeVertexData;
 
 import static com.sammy.malum.client.RenderUtils.*;
 
@@ -31,21 +32,19 @@ public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEnti
     }
 
     public static void checkForTotemicStaff(ClientTickEvent.Pre event) {
-        if (true) {
-            final LocalPlayer player = Minecraft.getInstance().player;
-            if (player == null) {
-                return;
+        final LocalPlayer player = Minecraft.getInstance().player;
+        if (player == null) {
+            return;
+        }
+        final Item totemicStaff = ItemRegistry.TOTEMIC_STAFF.get();
+        if ((player.getMainHandItem().getItem().equals(totemicStaff) || player.getOffhandItem().getItem().equals(totemicStaff))) {
+            if (TotemBaseRenderer.totemicStaffHeldTimer < 20) {
+                TotemBaseRenderer.totemicStaffHeldTimer++;
             }
-            final Item totemicStaff = ItemRegistry.TOTEMIC_STAFF.get();
-            if ((player.getMainHandItem().getItem().equals(totemicStaff) || player.getOffhandItem().getItem().equals(totemicStaff))) {
-                if (TotemBaseRenderer.totemicStaffHeldTimer < 20) {
-                    TotemBaseRenderer.totemicStaffHeldTimer++;
-                }
-                isHoldingStaff = true;
-            } else if (TotemBaseRenderer.totemicStaffHeldTimer > 0) {
-                TotemBaseRenderer.totemicStaffHeldTimer--;
-                isHoldingStaff = false;
-            }
+            isHoldingStaff = true;
+        } else if (TotemBaseRenderer.totemicStaffHeldTimer > 0) {
+            TotemBaseRenderer.totemicStaffHeldTimer--;
+            isHoldingStaff = false;
         }
     }
 
@@ -72,11 +71,11 @@ public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEnti
             }
             float shaderWidth = width * 32;
             float shaderHeight = height * 32;
-            float distortion = 6f+height/2f;
-            float sideDistortion = 6f+width/2f;
+            float distortion = 6f + height / 2f;
+            float sideDistortion = 6f + width / 2f;
             final LodestoneRenderType renderType = RenderTypeRegistry.ADDITIVE_DISTORTED_TEXTURE.applyWithModifierAndCache(MalumRenderTypeTokens.AREA_COVERAGE, b -> b.setCullState(LodestoneRenderTypes.NO_CULL));
             float index = shaderWidth + distortion;
-            float sideIndex = shaderWidth*shaderHeight + sideDistortion;
+            float sideIndex = shaderWidth * shaderHeight + sideDistortion;
 
             var builder = SpiritBasedWorldVFXBuilder.create(spiritType)
                     .setRenderType(LodestoneRenderTypes.applyUniformChanges(LodestoneRenderTypes.copyAndStore(index, renderType), s -> {
@@ -97,19 +96,23 @@ public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEnti
 
 
             poseStack.pushPose();
-            poseStack.translate(offset.getX(), offset.getY(), offset.getZ());
+            poseStack.translate(offset.getX() + 0.5f, offset.getY() + 0.5f, offset.getZ() + 0.5f);
 
+            CubeVertexData cubeVertexData = CubeVertexData.makeCubePositions(width, height)
+                    .applyWobble(0, 0.5f, 0.01f)
+                    .scale(1.05f);
+            CubeVertexData inverse = CubeVertexData.makeCubePositions(-width, -height)
+                    .applyWobble(0, 0.5f, 0.01f)
+                    .scale(1.05f);
 
-            RenderUtils.CubeVertexData cubeVertexData = RenderUtils.makeCubePositions(width, height)
-                    .applyWobble(0, 0.5f, 0.01f);
-            RenderUtils.CubeVertexData inverse = RenderUtils.makeCubePositions(-width, -height)
-                    .applyWobble(0, 0.5f, 0.01f);
+            builder.drawCubeSides(poseStack, cubeVertexData, Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST);
+            sideBuilder.drawCubeSides(poseStack, cubeVertexData, Direction.UP, Direction.DOWN);
 
-            drawCube(poseStack, builder, sideBuilder, 1.05f, cubeVertexData);
             builder.setUV(0, 1, 1, 0).setColor(spiritType.getSecondaryColor(), 0.6f * scalar);
             sideBuilder.setUV(0, 1, 1, 0).setColor(spiritType.getSecondaryColor(), 0.6f * scalar);
-            drawCube(poseStack, builder, sideBuilder, 1.05f, inverse);
 
+            builder.drawCubeSides(poseStack, inverse, Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST);
+            sideBuilder.drawCubeSides(poseStack, inverse, Direction.UP, Direction.DOWN);
             poseStack.popPose();
         }
     }

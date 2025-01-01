@@ -8,6 +8,7 @@ import com.sammy.malum.core.systems.spirit.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.*;
 import team.lodestar.lodestone.registry.client.*;
+import team.lodestar.lodestone.systems.rendering.cube.CubeVertexData;
 import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
 import static com.sammy.malum.client.RenderUtils.*;
@@ -21,21 +22,26 @@ public class MoteOfManaRenderer implements BlockEntityRenderer<ManaMoteBlockEnti
 
     @Override
     public void render(ManaMoteBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        poseStack.pushPose();
         MalumSpiritType spiritType = MalumSpiritType.getSpiritType(blockEntityIn.getBlockState().getValue(ManaMoteBlock.SPIRIT_TYPE));
 
         var builder = SpiritBasedWorldVFXBuilder.create(spiritType)
                 .setRenderType(LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MOTE_OF_MANA));
 
-        RenderUtils.CubeVertexData cubeVertexData = RenderUtils.makeCubePositions(1f).applyWobble(0, 0.5f, 0.015f);
-        RenderUtils.CubeVertexData inverse = RenderUtils.makeCubePositions(-1f).applyWobble(0, 0.5f, 0.015f);
+        CubeVertexData cubeVertexData = CubeVertexData.makeCubePositions(1f).applyWobble(0, 0.5f, 0.015f);
+        CubeVertexData inverse = CubeVertexData.makeCubePositions(-1f).applyWobble(0, 0.5f, 0.015f);
 
-        drawCube(poseStack, builder.setColor(spiritType.getPrimaryColor(), 0.9f), 1f, cubeVertexData);
-        drawCube(poseStack, builder.setColor(spiritType.getPrimaryColor(), 0.5f).setUV(0.0625f, 0.0625f, 1.0625f, 1.0625f), 1.08f, cubeVertexData);
+        poseStack.pushPose();
+        poseStack.translate(0.5f, 0.5f, 0.5f);
+        builder.setRenderType(LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MOTE_OF_MANA))
+                .setColor(spiritType.getPrimaryColor(), 0.9f)
+                .drawCube(poseStack, cubeVertexData);
+        builder.setAlpha(0.5f).setUV(0.0625f, 0.0625f, 1.0625f, 1.0625f)
+                .drawCube(poseStack, cubeVertexData.scale(1.08f));
+        builder.setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(MOTE_OF_MANA))
+                .setColor(spiritType.getSecondaryColor(), 0.4f)
+                .setUV(-0.0625f, -0.0625f, 0.9375f, 0.9375f)
+                .drawCube(poseStack, inverse.scale(0.82f));
 
-        builder.setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(MOTE_OF_MANA));
-
-        drawCube(poseStack, builder.setColor(spiritType.getSecondaryColor(), 0.4f).setUV(-0.0625f, -0.0625f, 0.9375f, 0.9375f), 0.82f, inverse);
         poseStack.popPose();
     }
 }

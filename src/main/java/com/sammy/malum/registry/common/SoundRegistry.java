@@ -226,11 +226,11 @@ public class SoundRegistry {
     public static final DeferredHolder<SoundEvent, SoundEvent> REDSTONE_DIODE_STEP = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("redstone_diode_step")));
     public static final DeferredHolder<SoundEvent, SoundEvent> REDSTONE_DIODE_HIT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("redstone_diode_hit")));
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> PULSECHARGER_CHARGE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("pulsecharger_charges")));
-    public static final DeferredHolder<SoundEvent, SoundEvent> PULSEBANK_STORE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("pulsebank_stores")));
-    public static final DeferredHolder<SoundEvent, SoundEvent> PULSELAG_STORE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("pulselag_stores")));
-    public static final DeferredHolder<SoundEvent, SoundEvent> PULSELAG_RELEASE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("pulselag_releases")));
-    public static final DeferredHolder<SoundEvent, SoundEvent> CHRONOPULSER_PULSE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("chronopulser_pulses")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WAVECHARGER_CHARGE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavecharger_charges"), 8f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WAVEBANKER_STORE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebanker_stores"), 8f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> PULSELAG_STORE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebreaker_stores"), 8f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> PULSELAG_RELEASE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebreaker_releases"), 8f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WAVEMAKER_PULSE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavemaker_pulses"), 8f));
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ARCANE_ROCK_BREAK = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("arcane_rock_break")));
     public static final DeferredHolder<SoundEvent, SoundEvent> ARCANE_ROCK_PLACE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("arcane_rock_place")));

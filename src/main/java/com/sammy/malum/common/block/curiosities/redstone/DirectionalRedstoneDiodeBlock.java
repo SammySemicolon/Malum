@@ -3,10 +3,16 @@ package com.sammy.malum.common.block.curiosities.redstone;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 import java.util.Arrays;
@@ -16,21 +22,11 @@ import java.util.stream.Collectors;
 
 public class DirectionalRedstoneDiodeBlock<T extends RedstoneDiodeBlockEntity> extends RedstoneDiodeBlock<T> {
 
-    public static final EnumProperty<SignalInput> SIGNAL_INPUT = EnumProperty.create("signal_input", SignalInput.class);
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public DirectionalRedstoneDiodeBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(SIGNAL_INPUT, SignalInput.NONE));
-    }
-
-    @Override
-    protected int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-        SignalInput input = blockState.getValue(SIGNAL_INPUT);
-        if (input.equals(SignalInput.NONE)) {
-            return 0;
-        }
-        Direction direction = input.direction;
-        return !side.equals(direction) ? getActiveSignalStrength(blockState, blockAccess, pos) : 0;
+        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
     }
 
     protected int getActiveSignalStrength(BlockState blockState, BlockGetter blockAccess, BlockPos pos) {
@@ -38,31 +34,32 @@ public class DirectionalRedstoneDiodeBlock<T extends RedstoneDiodeBlockEntity> e
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(SIGNAL_INPUT);
+    protected int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
+        if (!blockState.getValue(POWERED)) {
+            return 0;
+        }
+        Direction direction = blockState.getValue(FACING);
+        return side.equals(direction) ? getActiveSignalStrength(blockState, blockAccess, pos) : 0;
     }
 
-    public enum SignalInput implements StringRepresentable {
-        NONE(null),
-        DOWN(Direction.DOWN),
-        UP(Direction.UP),
-        NORTH(Direction.NORTH),
-        SOUTH(Direction.SOUTH),
-        WEST(Direction.WEST),
-        EAST(Direction.EAST);
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());
+    }
 
-        private static final SignalInput[] VALUES = SignalInput.values();
-        public static final Map<Direction, SignalInput> DIRECTION_MAP = Arrays.stream(VALUES).filter(b -> b.direction != null && b.direction.getAxis().isHorizontal()).collect(Collectors.toMap(b -> b.direction, b -> b));
-        public final Direction direction;
-        final String name = name().toLowerCase(Locale.ROOT);
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+        super.createBlockStateDefinition(builder);
+    }
 
-        SignalInput(Direction direction) {
-            this.direction = direction;
-        }
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rot) {
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+    }
 
-        @Override
-        public String getSerializedName() {
-            return name;
-        }
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 }

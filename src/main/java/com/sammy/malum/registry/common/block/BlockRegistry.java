@@ -8,10 +8,10 @@ import com.sammy.malum.common.block.curiosities.mana_mote.*;
 import com.sammy.malum.common.block.curiosities.obelisk.*;
 import com.sammy.malum.common.block.curiosities.obelisk.brilliant.*;
 import com.sammy.malum.common.block.curiosities.obelisk.runewood.*;
-import com.sammy.malum.common.block.curiosities.redstone.chronopulser.ChronopulserBlock;
-import com.sammy.malum.common.block.curiosities.redstone.pulsebank.PulsebankBlock;
-import com.sammy.malum.common.block.curiosities.redstone.pulsecharger.PulsechargerBlock;
-import com.sammy.malum.common.block.curiosities.redstone.pulselag.PulselagBlock;
+import com.sammy.malum.common.block.curiosities.redstone.wavemaker.WaveMakerBlock;
+import com.sammy.malum.common.block.curiosities.redstone.wavebanker.WaveBankerBlock;
+import com.sammy.malum.common.block.curiosities.redstone.wavecharger.WaveChargerBlock;
+import com.sammy.malum.common.block.curiosities.redstone.wavebreaker.WaveBreakerBlock;
 import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.block.curiosities.ritual_plinth.*;
 import com.sammy.malum.common.block.curiosities.runic_workbench.*;
@@ -92,10 +92,10 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> SOULWOOD_TOTEM_BASE = BLOCKS.register("soulwood_totem_base", () -> new TotemBaseBlock<>(MalumBlockProperties.SOULWOOD().addTag(RITE_IMMUNE).noOcclusion(), true).setBlockEntity(BlockEntityRegistry.TOTEM_BASE));
     public static final DeferredHolder<Block, Block> SOULWOOD_TOTEM_POLE = BLOCKS.register("soulwood_totem_pole", () -> new TotemPoleBlock<>(MalumBlockProperties.SOULWOOD().addTag(RITE_IMMUNE).noOcclusion(), BlockRegistry.SOULWOOD_LOG, true).setBlockEntity(BlockEntityRegistry.TOTEM_POLE));
 
-    public static final DeferredHolder<Block, Block> PULSECHARGER = BLOCKS.register("pulsecharger", () -> new PulsechargerBlock(MalumBlockProperties.REDSTONE_DIODE()).setBlockEntity(BlockEntityRegistry.PULSECHARGER));
-    public static final DeferredHolder<Block, Block> PULSEBANK = BLOCKS.register("pulsebank", () -> new PulsebankBlock(MalumBlockProperties.REDSTONE_DIODE()).setBlockEntity(BlockEntityRegistry.PULSEBANK));
-    public static final DeferredHolder<Block, Block> CHRONOPULSER = BLOCKS.register("chronopulser", () -> new ChronopulserBlock(MalumBlockProperties.REDSTONE_DIODE()).setBlockEntity(BlockEntityRegistry.CHRONOPULSER));
-    public static final DeferredHolder<Block, Block> PULSELAG = BLOCKS.register("pulselag", () -> new PulselagBlock(MalumBlockProperties.REDSTONE_DIODE()).setBlockEntity(BlockEntityRegistry.PULSELAG));
+    public static final DeferredHolder<Block, Block> WAVECHARGER = BLOCKS.register("wavecharger", () -> new WaveChargerBlock(MalumBlockProperties.REDSTONE_DIODE()).setBlockEntity(BlockEntityRegistry.WAVECHARGER));
+    public static final DeferredHolder<Block, Block> WAVEBANKER = BLOCKS.register("wavebanker", () -> new WaveBankerBlock(MalumBlockProperties.REDSTONE_DIODE()).setBlockEntity(BlockEntityRegistry.WAVEBANKER));
+    public static final DeferredHolder<Block, Block> WAVEMAKER = BLOCKS.register("wavemaker", () -> new WaveMakerBlock(MalumBlockProperties.REDSTONE_DIODE()).setBlockEntity(BlockEntityRegistry.WAVEMAKER));
+    public static final DeferredHolder<Block, Block> WAVEBREAKER = BLOCKS.register("wavebreaker", () -> new WaveBreakerBlock(MalumBlockProperties.REDSTONE_DIODE()).setBlockEntity(BlockEntityRegistry.WAVEBREAKER));
 
     public static final DeferredHolder<Block, Block> SPIRIT_MOTE = BLOCKS.register("spirit_mote", () -> new ManaMoteBlock(MalumBlockProperties.MANA_MOTE_BLOCK()).setBlockEntity(BlockEntityRegistry.MANA_MOTE));
 

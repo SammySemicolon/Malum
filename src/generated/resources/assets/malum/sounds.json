@@ -500,12 +500,6 @@
     ],
     "subtitle": "malum.subtitle.catalyst_lobber_unlocked"
   },
-  "chronopulser_pulses": {
-    "sounds": [
-      "malum:blocks/redstone_diode/tick"
-    ],
-    "subtitle": "malum.subtitle.chronopulser_pulses"
-  },
   "cloth_trinket_equipped": {
     "sounds": [
       "malum:equip_sounds/cloth/equip_cloth1",
@@ -825,30 +819,6 @@
       "malum:block_interaction/pedestal_spirit_remove3"
     ],
     "subtitle": "malum.subtitle.pedestal_spirit_picked_up"
-  },
-  "pulsebank_stores": {
-    "sounds": [
-      "malum:blocks/redstone_diode/tick"
-    ],
-    "subtitle": "malum.subtitle.pulsebank_stores"
-  },
-  "pulsecharger_charges": {
-    "sounds": [
-      "malum:blocks/redstone_diode/tick"
-    ],
-    "subtitle": "malum.subtitle.pulsecharger_charges"
-  },
-  "pulselag_releases": {
-    "sounds": [
-      "malum:blocks/redstone_diode/tick"
-    ],
-    "subtitle": "malum.subtitle.pulselag_releases"
-  },
-  "pulselag_stores": {
-    "sounds": [
-      "malum:blocks/redstone_diode/tick"
-    ],
-    "subtitle": "malum.subtitle.pulselag_stores"
   },
   "quartz_cluster_block_break": {
     "sounds": [
@@ -1826,6 +1796,36 @@
       "malum:curiosities/augments/warping_engine_reverberates4"
     ],
     "subtitle": "malum.subtitle.warping_engine_reverberates"
+  },
+  "wavebanker_stores": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.wavebanker_stores"
+  },
+  "wavebreaker_releases": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.wavebreaker_releases"
+  },
+  "wavebreaker_stores": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.wavebreaker_stores"
+  },
+  "wavecharger_charges": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.wavecharger_charges"
+  },
+  "wavemaker_pulses": {
+    "sounds": [
+      "malum:blocks/redstone_diode/tick"
+    ],
+    "subtitle": "malum.subtitle.wavemaker_pulses"
   },
   "weavers_workbench_weaves": {
     "sounds": [

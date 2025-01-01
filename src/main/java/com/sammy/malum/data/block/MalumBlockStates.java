@@ -3,7 +3,6 @@ package com.sammy.malum.data.block;
 import com.sammy.malum.*;
 import com.sammy.malum.common.block.curiosities.banner.*;
 import com.sammy.malum.data.item.*;
-import com.sammy.malum.registry.common.block.*;
 import net.minecraft.data.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.level.block.*;
@@ -217,7 +216,8 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         MalumBlockStateSmithTypes.TALL_CALCIFIED_BLIGHT.act(data, TALL_CALCIFIED_BLIGHT);
 
         setTexturePath("redstone/");
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::simpleBlock, this::redstoneMachineBlock, PULSECHARGER, PULSEBANK, CHRONOPULSER, PULSELAG);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::horizontalBlock, this::directionalRedstoneMachineBlock, WAVECHARGER, WAVEBANKER, WAVEBREAKER);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::simpleBlock, this::redstoneMachineBlock, WAVEMAKER);
 
         setTexturePath("");
         itemModelProvider.setTexturePath("ether/");
@@ -274,8 +274,18 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         String name = getBlockName(block);
         ResourceLocation top = getBlockTexture("runewood_frame_top");
         ResourceLocation bottom = getBlockTexture("runewood_frame_bottom");
-        ResourceLocation side = getBlockTexture(name + "_side");
-        return models().cubeBottomTop(name, side, bottom, top);
+        ResourceLocation output = getBlockTexture(name + "_output");
+        return models().cubeBottomTop(name, output, bottom, top);
+    }
+
+    public ModelFile directionalRedstoneMachineBlock(Block block) {
+        String name = getBlockName(block);
+        ResourceLocation top = getBlockTexture("runewood_frame_top");
+        ResourceLocation bottom = getBlockTexture("runewood_frame_bottom");
+        ResourceLocation locked = getBlockTexture("runewood_frame_locked");
+        ResourceLocation input = getBlockTexture("runewood_frame_input");
+        ResourceLocation output = getBlockTexture(name + "_output");
+        return models().cube(name, bottom, top, output, input, locked, locked).texture("particle", locked);
     }
 
     public ModelFile cutRockBlockModel(Block block) {

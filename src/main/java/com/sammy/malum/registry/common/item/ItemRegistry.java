@@ -8,7 +8,6 @@ import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer.*;
 import com.sammy.malum.common.block.nature.*;
-import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
@@ -48,7 +47,6 @@ import com.sammy.malum.registry.common.item.tabs.*;
 import net.minecraft.client.color.item.*;
 import net.minecraft.client.renderer.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.*;
 import net.minecraft.world.food.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
@@ -469,10 +467,10 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SOULWOOD_TOTEM_BASE = register("soulwood_totem_base", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_TOTEM_BASE.get(), p));
     public static final DeferredHolder<Item, Item> RITUAL_PLINTH = register("ritual_plinth", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RITUAL_PLINTH.get(), p));
 
-    public static final DeferredHolder<Item, Item> PULSECHARGER = register("pulsecharger", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.PULSECHARGER.get(), p));
-    public static final DeferredHolder<Item, Item> PULSEBANK = register("pulsebank", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.PULSEBANK.get(), p));
-    public static final DeferredHolder<Item, Item> CHRONOPULSER = register("chronopulser", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.CHRONOPULSER.get(), p));
-    public static final DeferredHolder<Item, Item> PULSELAG = register("pulselag", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.PULSELAG.get(), p));
+    public static final DeferredHolder<Item, Item> WAVECHARGER = register("wavecharger", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVECHARGER.get(), p));
+    public static final DeferredHolder<Item, Item> WAVEBANKER = register("wavebanker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEBANKER.get(), p));
+    public static final DeferredHolder<Item, Item> WAVEMAKER = register("wavemaker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEMAKER.get(), p));
+    public static final DeferredHolder<Item, Item> PULSELAG = register("wavebreaker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEBREAKER.get(), p));
 
     public static final DeferredHolder<Item, Item> WEAVERS_WORKBENCH = register("weavers_workbench", COSMETIC_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WEAVERS_WORKBENCH.get(), p));
     //endregion

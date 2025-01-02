@@ -11,14 +11,16 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import team.lodestar.lodestone.systems.model.LodestoneArmorModel;
 
+import java.util.function.Supplier;
+
 /**
  * @author WireSegal
  * Created at 10:05 PM on 1/1/25.
  */
 public class ArmorClientItemExtensions implements IClientItemExtensions {
-	private final LodestoneArmorModel model;
+	private final Supplier<LodestoneArmorModel> model;
 
-	public ArmorClientItemExtensions(LodestoneArmorModel model) {
+	public ArmorClientItemExtensions(Supplier<LodestoneArmorModel> model) {
 		this.model = model;
 	}
 
@@ -30,7 +32,7 @@ public class ArmorClientItemExtensions implements IClientItemExtensions {
 		float netHeadYaw = f1 - f;
 		float netHeadPitch = Mth.lerp(pticks, entity.xRotO, entity.getXRot());
 		ArmorSkin skin = ArmorSkin.getAppliedItemSkin(itemStack);
-		LodestoneArmorModel model = this.model;
+		LodestoneArmorModel model = this.model.get();
 		if (skin != null) {
 			model = ArmorSkinRenderingData.RENDERING_DATA.apply(skin).getModel(entity);
 		}

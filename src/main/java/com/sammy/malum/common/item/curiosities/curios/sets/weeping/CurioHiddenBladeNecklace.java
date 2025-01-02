@@ -63,7 +63,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             return;
         }
         if (CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get())) {
-            var data = target.getData(AttachmentTypeRegistry.CURIO_DATA);
+            var data = attacker.getData(AttachmentTypeRegistry.CURIO_DATA);
             var random = level.getRandom();
             if (data.hiddenBladeNecklaceCooldown != 0) {
                 if (data.hiddenBladeNecklaceCooldown <= COOLDOWN_DURATION) {

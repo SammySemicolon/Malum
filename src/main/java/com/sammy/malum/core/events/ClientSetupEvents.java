@@ -29,17 +29,22 @@ public class ClientSetupEvents {
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(new SpiritJarClientItemExtensions(),
-            ItemRegistry.SPIRIT_JAR);
-        event.registerItem(new ArmorClientItemExtensions(ModelRegistry.SOUL_HUNTER_ARMOR),
-            ItemRegistry.SOUL_HUNTER_CLOAK,
-            ItemRegistry.SOUL_HUNTER_ROBE,
-            ItemRegistry.SOUL_HUNTER_LEGGINGS,
-            ItemRegistry.SOUL_HUNTER_BOOTS);
-        event.registerItem(new ArmorClientItemExtensions(ModelRegistry.MALIGNANT_LEAD_ARMOR),
-            ItemRegistry.MALIGNANT_STRONGHOLD_HELMET,
-            ItemRegistry.MALIGNANT_STRONGHOLD_CHESTPLATE,
-            ItemRegistry.MALIGNANT_STRONGHOLD_LEGGINGS,
-            ItemRegistry.MALIGNANT_STRONGHOLD_BOOTS);
+                ItemRegistry.SPIRIT_JAR);
+        event.registerItem(new ArmorClientItemExtensions(() -> ModelRegistry.SOUL_HUNTER_ARMOR),
+                ItemRegistry.SOUL_HUNTER_CLOAK,
+                ItemRegistry.SOUL_HUNTER_ROBE,
+                ItemRegistry.SOUL_HUNTER_LEGGINGS,
+                ItemRegistry.SOUL_HUNTER_BOOTS);
+        event.registerItem(new ArmorClientItemExtensions(() -> ModelRegistry.SOUL_STAINED_ARMOR),
+                ItemRegistry.SOUL_STAINED_STEEL_HELMET,
+                ItemRegistry.SOUL_STAINED_STEEL_CHESTPLATE,
+                ItemRegistry.SOUL_STAINED_STEEL_LEGGINGS,
+                ItemRegistry.SOUL_STAINED_STEEL_BOOTS);
+        event.registerItem(new ArmorClientItemExtensions(() -> ModelRegistry.MALIGNANT_LEAD_ARMOR),
+                ItemRegistry.MALIGNANT_STRONGHOLD_HELMET,
+                ItemRegistry.MALIGNANT_STRONGHOLD_CHESTPLATE,
+                ItemRegistry.MALIGNANT_STRONGHOLD_LEGGINGS,
+                ItemRegistry.MALIGNANT_STRONGHOLD_BOOTS);
 
         event.registerBlock(new ManaMoteBlockClientExtension(),
             BlockRegistry.SPIRIT_MOTE);

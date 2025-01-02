@@ -1,5 +1,7 @@
 package com.sammy.malum.common.block.curiosities.redstone;
 
+import com.sammy.malum.common.packets.SpiritDiodeUpdatePayload;
+import com.sammy.malum.common.packets.particle.rite.AerialBlockFallRiteEffectPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -7,6 +9,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -20,10 +23,14 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
+import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 import team.lodestar.lodestone.systems.block.LodestoneEntityBlock;
 
 import java.util.EnumSet;
+
+import static com.sammy.malum.registry.common.SpiritTypeRegistry.AERIAL_SPIRIT;
 
 public abstract class SpiritDiodeBlock<T extends SpiritDiodeBlockEntity> extends LodestoneEntityBlock<T> {
 
@@ -67,6 +74,9 @@ public abstract class SpiritDiodeBlock<T extends SpiritDiodeBlockEntity> extends
                 int signal = level.getSignal(pos.relative(direction), direction);
                 if (shouldUpdateWhenNeighborChanged(level, pos, state, (T) spiritDiode, signal)) {
                     level.scheduleTick(pos, this, 2 * redstoneTicksUntilUpdate(level, pos, state, (T) spiritDiode, signal));
+                    if (level instanceof ServerLevel serverLevel) {
+                        updateAnimation(serverLevel, pos, (T) spiritDiode);
+                    }
                 }
             }
         }
@@ -81,6 +91,7 @@ public abstract class SpiritDiodeBlock<T extends SpiritDiodeBlockEntity> extends
             int signal = level.getSignal(pos.relative(direction), direction);
             if (processUpdate(level, pos, state, (T) spiritDiode, signal)) {
                 level.scheduleTick(pos, this, 2 * redstoneTicksUntilUpdate(level, pos, state, (T) spiritDiode, signal));
+                updateAnimation(level, pos, (T) spiritDiode);
             }
         }
     }
@@ -101,6 +112,11 @@ public abstract class SpiritDiodeBlock<T extends SpiritDiodeBlockEntity> extends
             level.neighborChanged(blockpos, this, pos);
             level.updateNeighborsAtExceptFromFacing(blockpos, this, direction);
         }
+    }
+
+    public void updateAnimation(ServerLevel serverLevel, BlockPos pos, T diode) {
+        PacketDistributor.sendToPlayersTrackingChunk(serverLevel,
+                new ChunkPos(pos), new SpiritDiodeUpdatePayload(pos, diode.getOutputSignal(), diode.getOutputSignal() == 0));
     }
 
     public void emitRedstoneParticles(Level level, BlockPos pos) {
@@ -143,7 +159,7 @@ public abstract class SpiritDiodeBlock<T extends SpiritDiodeBlockEntity> extends
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());
+        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 
     @Override

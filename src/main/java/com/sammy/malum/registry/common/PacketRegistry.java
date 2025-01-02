@@ -32,6 +32,7 @@ public class PacketRegistry {
         MALUM_CHANNEL.playToClient(registrar, "infernal_extinguish_rite_effect", InfernalExtinguishRiteEffectPacket.class, InfernalExtinguishRiteEffectPacket::new);
         MALUM_CHANNEL.playToClient(registrar, "aerial_block_fall_rite_effect", AerialBlockFallRiteEffectPacket.class, AerialBlockFallRiteEffectPacket::new);
         MALUM_CHANNEL.playToClient(registrar, "spirit_rite_activation", SpiritRiteActivationEffectPacket.class, SpiritRiteActivationEffectPacket::new);
+        MALUM_CHANNEL.playToClient(registrar, "spirit_diode_update", SpiritDiodeUpdatePayload.class, SpiritDiodeUpdatePayload::new);
 
         MALUM_CHANNEL.playToClient(registrar, "sync_soul_ward_data", SyncSoulWardDataPayload.class, SyncSoulWardDataPayload::new);
         MALUM_CHANNEL.playToClient(registrar, "sync_curio_data", SyncCurioDataPayload.class, SyncCurioDataPayload::new);

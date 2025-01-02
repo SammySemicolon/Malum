@@ -5,14 +5,14 @@ import com.sammy.malum.common.block.curiosities.redstone.wavecharger.WaveCharger
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 
 
-public class WaveChargerRenderer extends RedstoneDiodeRenderer<WaveChargerBlockEntity> {
+public class WaveChargerRenderer extends SpiritDiodeRenderer<WaveChargerBlockEntity> {
 
     public WaveChargerRenderer(BlockEntityRendererProvider.Context context) {
         super(context, MalumMod.malumPath("textures/block/redstone/wavecharger_overlay.png"));
     }
 
     @Override
-    public float getGlowDelta(WaveChargerBlockEntity blockEntityIn) {
-        return blockEntityIn.signal/15f;
+    public float getGlowDelta(WaveChargerBlockEntity blockEntityIn, float delta) {
+        return blockEntityIn.getOutputSignal()/15f;
     }
 }

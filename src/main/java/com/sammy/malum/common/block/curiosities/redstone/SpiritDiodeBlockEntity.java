@@ -13,6 +13,10 @@ public class SpiritDiodeBlockEntity extends LodestoneBlockEntity {
     public int delay;
     public int signal;
 
+    public long visualStartTime;
+    public int visualTransitionTime;
+    public int visualTransitionStart;
+    public int visualTransitionEnd;
     public SpiritDiodeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         if (state.getBlock() instanceof SpiritDiodeBlock<?> diodeBlock) {
@@ -22,6 +26,14 @@ public class SpiritDiodeBlockEntity extends LodestoneBlockEntity {
 
     public int getOutputSignal() {
         return Mth.clamp(signal, 0, 15);
+    }
+
+    public void updateVisuals(int signal, boolean isPowering) {
+        this.visualStartTime = getLevel().getGameTime();
+        this.visualTransitionTime = 2 * delay;
+        this.visualTransitionStart = isPowering ? 0 : 1;
+        this.visualTransitionEnd = 1 - visualTransitionStart;
+        this.signal = signal;
     }
 
     @Override

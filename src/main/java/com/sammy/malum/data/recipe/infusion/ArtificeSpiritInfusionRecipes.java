@@ -36,7 +36,7 @@ public class ArtificeSpiritInfusionRecipes {
                 .addExtraItem(Items.REDSTONE, 4)
                 .addExtraItem(ItemTagRegistry.RUNEWOOD_PLANKS, 4)
                 .save(recipeOutput);
-        new SpiritInfusionRecipeBuilder(Items.COPPER_BLOCK, 1, ItemRegistry.WEAVEBREAKER.get(), 1)
+        new SpiritInfusionRecipeBuilder(Items.COPPER_BLOCK, 1, ItemRegistry.WAVEBREAKER.get(), 1)
                 .addSpirit(INFERNAL_SPIRIT, 4)
                 .addSpirit(ARCANE_SPIRIT, 2)
                 .addExtraItem(Items.REDSTONE, 4)

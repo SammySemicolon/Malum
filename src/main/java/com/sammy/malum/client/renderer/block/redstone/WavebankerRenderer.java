@@ -14,6 +14,7 @@ public class WavebankerRenderer extends RedstoneDiodeRenderer<WaveBankerBlockEnt
 
     @Override
     public float getGlowDelta(WaveBankerBlockEntity blockEntityIn) {
-        return Easing.QUARTIC_OUT.ease((float) blockEntityIn.timer / blockEntityIn.frequency, 0, 1);
+        // todo SpiritDiodeBlockEntity.timer no longer exists; replaced with SpiritDiodeBlockEntity.signal as temporary fix
+        return Easing.QUARTIC_OUT.ease((float) blockEntityIn.signal / blockEntityIn.delay, 0, 1);
     }
 }

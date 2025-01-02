@@ -10,11 +10,11 @@ version = "${property("minecraft_version")}-${property("mod_version")}"
 if (System.getenv("BUILD_NUMBER") != null) {
     version = "${property("minecraft_version")}-${property("mod_version")}.${System.getenv("BUILD_NUMBER")}"
 }
-group = "${property("mod_group_id")}"
+group = project.property("mod_group_id").toString()
 
-val baseArchivesName = "${property("mod_id")}"
+val baseArchivesName = project.property("mod_id").toString()
 base {
-    archivesName.set("${property("mod_id")}")
+    archivesName.set(project.property("mod_id").toString())
 }
 
 java {
@@ -147,8 +147,8 @@ repositories {
 
 dependencies {
     // JEI Dependency
-    compileOnly(("mezz.jei:jei-${property("minecraft_version")}-neoforge-api:${property("jei_version")}"))
-    runtimeOnly(("mezz.jei:jei-${property("minecraft_version")}-neoforge:${property("jei_version")}"))
+    compileOnly(("mezz.jei:jei-${project.property("minecraft_version")}-neoforge-api:${project.property("jei_version")}"))
+    runtimeOnly(("mezz.jei:jei-${project.property("minecraft_version")}-neoforge:${project.property("jei_version")}"))
 
     // Curios dependency
     implementation(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))

@@ -27,14 +27,12 @@ import static com.sammy.malum.MalumMod.malumPath;
 
 public class SpiritRiteRecipeCategory implements IRecipeCategory<TotemicRiteType> {
     public static final ResourceLocation UID = malumPath("spirit_rite");
-    private final IDrawable background;
     private final IDrawable overlay;
     private final IDrawable icon;
     private final Font font;
 
     public SpiritRiteRecipeCategory(IGuiHelper guiHelper) {
-        background = guiHelper.createBlankDrawable(142, 185);
-        overlay = guiHelper.createDrawable(malumPath("textures/gui/spirit_rite_jei.png"), 0, 0, 142, 183);
+        overlay = guiHelper.createDrawable(malumPath("textures/gui/spirit_rite_jei.png"), 0, 0, 142, 185);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.RUNEWOOD_TOTEM_BASE.get()));
         font = Minecraft.getInstance().font;
     }
@@ -57,10 +55,14 @@ public class SpiritRiteRecipeCategory implements IRecipeCategory<TotemicRiteType
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
     @Override
-    public IDrawable getBackground() {
-        return background;
+    public int getHeight() {
+        return overlay.getHeight();
+    }
+
+    @Override
+    public int getWidth() {
+        return overlay.getWidth();
     }
 
     @Nonnull

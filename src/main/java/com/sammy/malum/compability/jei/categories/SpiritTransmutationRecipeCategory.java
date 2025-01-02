@@ -26,13 +26,11 @@ import static com.sammy.malum.MalumMod.malumPath;
 
 public class SpiritTransmutationRecipeCategory implements IRecipeCategory<SpiritTransmutationWrapper> {
     public static final ResourceLocation UID = malumPath("spirit_transmutation");
-    private final IDrawable background;
     private final IDrawable overlay;
     private final IDrawable icon;
 
     public SpiritTransmutationRecipeCategory(IGuiHelper guiHelper) {
-        background = guiHelper.createBlankDrawable(142, 83);
-        overlay = guiHelper.createDrawable(MalumMod.malumPath("textures/gui/spirit_transmutation_jei.png"), 0, 0, 140, 81);
+        overlay = guiHelper.createDrawable(MalumMod.malumPath("textures/gui/spirit_transmutation_jei.png"), 0, 0, 142, 83);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.ARCANE_SPIRIT.get()));
     }
 
@@ -52,10 +50,15 @@ public class SpiritTransmutationRecipeCategory implements IRecipeCategory<Spirit
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
+
     @Override
-    public IDrawable getBackground() {
-        return background;
+    public int getHeight() {
+        return overlay.getHeight();
+    }
+
+    @Override
+    public int getWidth() {
+        return overlay.getWidth();
     }
 
     @Nonnull

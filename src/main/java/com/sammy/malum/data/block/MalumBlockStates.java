@@ -216,8 +216,7 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         MalumBlockStateSmithTypes.TALL_CALCIFIED_BLIGHT.act(data, TALL_CALCIFIED_BLIGHT);
 
         setTexturePath("redstone/");
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::horizontalBlock, this::directionalRedstoneMachineBlock, WAVECHARGER, WAVEBANKER, WAVEBREAKER);
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::simpleBlock, this::redstoneMachineBlock, WAVEMAKER);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::horizontalBlock, this::directionalRedstoneMachineBlock, WAVECHARGER, WAVEBANKER, WAVEBREAKER, WAVECHARGER);
 
         setTexturePath("");
         itemModelProvider.setTexturePath("ether/");
@@ -268,14 +267,6 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         ResourceLocation bottom = getBlockTexture(name.replace("_cap", "") + "_top");
         ResourceLocation side = getBlockTexture(name);
         return models().cubeBottomTop(name, side, bottom, top);
-    }
-
-    public ModelFile redstoneMachineBlock(Block block) {
-        String name = getBlockName(block);
-        ResourceLocation top = getBlockTexture("runewood_frame_top");
-        ResourceLocation bottom = getBlockTexture("runewood_frame_bottom");
-        ResourceLocation output = getBlockTexture(name + "_output");
-        return models().cubeBottomTop(name, output, bottom, top);
     }
 
     public ModelFile directionalRedstoneMachineBlock(Block block) {

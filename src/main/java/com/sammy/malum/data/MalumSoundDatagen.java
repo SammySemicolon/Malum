@@ -204,8 +204,8 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
 
         this.add(SoundRegistry.WAVECHARGER_CHARGE, s -> definition(s).with(sound("blocks/redstone_diode/tick")));
         this.add(SoundRegistry.WAVEBANKER_STORE, s -> definition(s).with(sound("blocks/redstone_diode/tick")));
-        this.add(SoundRegistry.PULSELAG_STORE, s -> definition(s).with(sound("blocks/redstone_diode/tick")));
-        this.add(SoundRegistry.PULSELAG_RELEASE, s -> definition(s).with(sound("blocks/redstone_diode/tick")));
+        this.add(SoundRegistry.WAVEBREAKER_STORE, s -> definition(s).with(sound("blocks/redstone_diode/tick")));
+        this.add(SoundRegistry.WAVEBREAKER_RELEASE, s -> definition(s).with(sound("blocks/redstone_diode/tick")));
         this.add(SoundRegistry.WAVEMAKER_PULSE, s -> definition(s).with(sound("blocks/redstone_diode/tick")));
 
         this.add(SoundRegistry.ARCANE_ROCK_BREAK, s -> definition(s).with(sounds("blocks/arcane_rock/break", 6)));

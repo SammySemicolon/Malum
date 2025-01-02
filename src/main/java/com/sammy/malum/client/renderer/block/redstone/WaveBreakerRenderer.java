@@ -13,8 +13,9 @@ public class WaveBreakerRenderer extends RedstoneDiodeRenderer<WaveBreakerBlockE
 
     @Override
     public float getGlowDelta(WaveBreakerBlockEntity blockEntityIn) {
-        int timer = blockEntityIn.timer;
-        int frequency = blockEntityIn.frequency;
+        // todo SpiritDiodeBlockEntity.timer no longer exists; replaced with SpiritDiodeBlockEntity.signal as temporary fix
+        int timer = blockEntityIn.signal;
+        int frequency = blockEntityIn.delay;
         if (timer > frequency - 20) {
             return Math.max((float) (timer-frequency+20) / 80f, 0.1f);
         }

@@ -1,21 +1,18 @@
 package com.sammy.malum.client.renderer.block.redstone;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.common.block.curiosities.redstone.DirectionalRedstoneDiodeBlock;
-import com.sammy.malum.common.block.curiosities.redstone.RedstoneDiodeBlockEntity;
+import com.sammy.malum.common.block.curiosities.redstone.SpiritDiodeBlock;
+import com.sammy.malum.common.block.curiosities.redstone.SpiritDiodeBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 import team.lodestar.lodestone.registry.client.LodestoneRenderTypes;
 import team.lodestar.lodestone.systems.easing.Easing;
-import team.lodestar.lodestone.systems.rendering.LodestoneRenderType;
 import team.lodestar.lodestone.systems.rendering.VFXBuilders;
 import team.lodestar.lodestone.systems.rendering.cube.CubeVertexData;
 import team.lodestar.lodestone.systems.rendering.rendeertype.RenderTypeToken;
@@ -23,7 +20,7 @@ import team.lodestar.lodestone.systems.rendering.rendeertype.RenderTypeToken;
 import java.awt.*;
 
 
-public abstract class RedstoneDiodeRenderer<T extends RedstoneDiodeBlockEntity> implements BlockEntityRenderer<T> {
+public abstract class RedstoneDiodeRenderer<T extends SpiritDiodeBlockEntity> implements BlockEntityRenderer<T> {
 
     protected static final RenderTypeToken LOCKED = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/redstone/runewood_frame_locked_overlay.png"));
     protected static final RenderTypeToken INPUT = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/redstone/runewood_frame_input_overlay.png"));
@@ -60,7 +57,7 @@ public abstract class RedstoneDiodeRenderer<T extends RedstoneDiodeBlockEntity> 
     }
 
     public RenderTypeToken getTokenForSide(BlockState state, Direction direction) {
-        Direction facing = state.getValue(DirectionalRedstoneDiodeBlock.FACING);
+        Direction facing = state.getValue(SpiritDiodeBlock.FACING);
         if (direction.equals(facing)) {
             return INPUT;
         }

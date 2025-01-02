@@ -1,40 +1,48 @@
 package com.sammy.malum.core.events;
 
-import com.sammy.malum.*;
-import com.sammy.malum.client.renderer.item.SpiritJarItemRenderer;
-import com.sammy.malum.client.screen.tooltip.*;
-import com.sammy.malum.common.data_components.*;
-import com.sammy.malum.core.handlers.client.*;
-import com.sammy.malum.registry.client.*;
-import com.sammy.malum.registry.common.item.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import com.sammy.malum.MalumMod;
+import com.sammy.malum.client.renderer.item.SpiritJarClientItemExtensions;
+import com.sammy.malum.client.screen.tooltip.ClientSoulwovenPouchTooltip;
+import com.sammy.malum.common.block.curiosities.mana_mote.ManaMoteBlockClientExtension;
+import com.sammy.malum.common.data_components.SoulwovenPouchContents;
+import com.sammy.malum.common.item.curiosities.armor.ArmorClientItemExtensions;
+import com.sammy.malum.core.handlers.client.HiddenBladeRenderHandler;
+import com.sammy.malum.core.handlers.client.SoulWardRenderHandler;
+import com.sammy.malum.core.handlers.client.TouchOfDarknessRenderHandler;
+import com.sammy.malum.registry.client.ModelRegistry;
+import com.sammy.malum.registry.client.ParticleRegistry;
+import com.sammy.malum.registry.client.ScreenParticleRegistry;
+import com.sammy.malum.registry.common.block.BlockRegistry;
+import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.client.extensions.common.*;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 @EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ClientSetupEvents {
 
-    public static IClientItemExtensions SPIRIT_JAR_RENDERER = new IClientItemExtensions() {
-        BlockEntityWithoutLevelRenderer renderer;
-
-        @Override
-        public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-            if (renderer != null) {
-                return renderer = new SpiritJarItemRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
-                        Minecraft.getInstance().getEntityModels());
-            }
-            return null;
-        }
-    };
-
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        event.registerItem(SPIRIT_JAR_RENDERER, ItemRegistry.SPIRIT_JAR.get());
+        event.registerItem(new SpiritJarClientItemExtensions(),
+            ItemRegistry.SPIRIT_JAR);
+        event.registerItem(new ArmorClientItemExtensions(ModelRegistry.SOUL_HUNTER_ARMOR),
+            ItemRegistry.SOUL_HUNTER_CLOAK,
+            ItemRegistry.SOUL_HUNTER_ROBE,
+            ItemRegistry.SOUL_HUNTER_LEGGINGS,
+            ItemRegistry.SOUL_HUNTER_BOOTS);
+        event.registerItem(new ArmorClientItemExtensions(ModelRegistry.MALIGNANT_LEAD_ARMOR),
+            ItemRegistry.MALIGNANT_STRONGHOLD_HELMET,
+            ItemRegistry.MALIGNANT_STRONGHOLD_CHESTPLATE,
+            ItemRegistry.MALIGNANT_STRONGHOLD_LEGGINGS,
+            ItemRegistry.MALIGNANT_STRONGHOLD_BOOTS);
+
+        event.registerBlock(new ManaMoteBlockClientExtension(),
+            BlockRegistry.SPIRIT_MOTE);
     }
 
     @SubscribeEvent

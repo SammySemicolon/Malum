@@ -599,37 +599,26 @@ public class MalumLang extends LanguageProvider {
                 "As if this was not enough, I have found a way to imbue a second color into my Ether, creating Iridescent Ether. When created, this form of Ether locks in its original color, leaving a new, " + italic("second") + " color open to dyeing. The light will shift from the original color into the new color towards the peak of the flames.",
                 "Getting the right coloring for this can be tricky, though. As stated, once Ether is made Iridescent, its original color can no longer be changed. This is hardly an issue, but should be kept in mind when tinting your flames.");
 
-        //TODO: this is the entry for the redstone components
-        // I had the idea of them having all the time-based-mechanics being done through using ether as a primitive slate for energy
-        // A redstone circuit prints energy onto the etheric soul slate and reads it to determine if enough time has passed
-        // Either way it uses ether :3
-        // Aerial - Pulsecharger - slowly matches output to what is input
-        // Aqueous - Pulsebank - keeps emitting the redstone signal it receives for some time
-        // Earthen - Chronopulser - redstone clock. Would be cool to change it's name to something that starts with pulse- to make it fit the bill
-        // Infernal - Pulselag - holds onto the redstone signal it receives and emits it after some time
-        // The timings of each of these blocks can be configured using the tuning fork... but the author hasn't made that yet. Not sure how to explain it in this entry
-        // Maybe editing the tuning fork entry instead would be better.
-        addSimpleEntryHeader("basic_artifice", "Basic Artifice", "An artificer's gizmo");
-
+        addSimpleEntryHeader("basic_artifice", "Waveform Artifice", "Signal modulation");
         addPages("basic_artifice",
-                "Redstone has proven to be quite a crucial assistant in my research thus far. Through the use of ether as a primitive soul slate, a ticker of sorts, I've designed a set of redstone diodes that store and/or emit a signal with unique rulesets each.",
-                "Each of these gizmos is composed of two mechanisms, one to keep track of time's passage by slowly imprinting redstone radiation into ether, and the second to read that radiation and accept it only when it becomes tangible enough for the sensory mechanism.");
+                "Redstone is always useful, no matter your profession or goal. One needs not be an engineer to build a piston door. I now add my own contribution: spirit diodes. By imprinting the impulses of elemental spirits upon a matrix of ether-treated copper, I have created four interesting redstone devices.",
+                "These diodes act by translating redstone impulse into arcane intent, allowing the nature of the spirit to shape the resulting effect, and then translating it back. Ether serves as the medium, with copper acting as a conceptual anchor to machinery and logic.");
         addHeadline("basic_artifice.wavecharger", "Wavecharger");
         addPage("basic_artifice.wavecharger",
-                "By modifying the circuitry responsible for the signal output with Aerial Arcana we create the Wavecharger. The gadget remembers the input signal it received and slowly matches it in output. Once reached, an opposite reaction triggers and the output signal slowly dampens.");
+                "Aerial seeks to soar, to rise. Given a signal, this transfers it but needs to 'warm up', causing the output's strength to slowly rise to meet the input signal. When unpowered or given a lower signal, it will similarly coast down until it turns off again.");
         addHeadline("basic_artifice.wavebanker", "Wavebanker");
         addPage("basic_artifice.wavebanker",
-                "By imbuing the signal reader through the use of Aqueous Arcana we create the Wavebanker, a gizmo that keeps track of the input signal, emitting it for much longer after being empowered with no power loss.");
+                "Aqueous seeks to change, to adapt. Given a signal, this transfers it but is 'sticky', continuing to emit the signal for a while after power is cut.");
         addHeadline("basic_artifice.wavemaker", "Wavemaker");
         addPage("basic_artifice.wavemaker",
-                "By utilizing Earthen Arcana in the pair of repeaters we create the Wavemaker. The pulses accepted by the ether are much stronger and sparser, activating the sensory system and producing an output signal with a set interval. Unlike other gizmos here, the Wavemaker accepts no input signal and operates on all sides.");
+                "Earthen seeks to stand, to stay. Given a signal or lack thereof, this acts like a clock, emitting the inverse of the input every so often on a steady rhythm, and emitting the input the rest of the time.");
         addHeadline("basic_artifice.wavebreaker", "Wavebreaker");
         addPage("basic_artifice.wavebreaker",
-                "By suffusing Infernal Arcana into the redstone wiring we create the Wavebreaker. The redstone energy received struggles much more when traveling through the wiring, creating a noticeable delay before it reaches the signal output.");
+                "Infernal seeks to burn, to shine. Given a signal, this transfers it but is 'slow', the signal being held - 'admired' - by the diode for a time before being emitted out the other side.");
 
-        addSimpleEntryHeader("basic_artifice.artificers_claw", "Artificer's Claw", "The Gizmo Whisperer");
+        addSimpleEntryHeader("basic_artifice.artificers_claw", "Artificer's Claw", "Despite the name, not sharp");
         addPages("basic_artifice.artificers_claw",
-                "To apply the desired timings to my gizmos, I thought up my own installment in the plethora of wrenches I've seen throughout my studies of the world. The Artificer's Claw has a simple job, when aimed at a gizmo the energy released is interpreted and the internal timings the gizmo keeps track of are modified to my desire.");
+                "I have also developed a tool to tweak the timing of these diodes. By using it to move parts of the copper matrix, you can lengthen or shorten the delays involved in a diode, with a single redstone tick being the lower limit.");
 
         addSimpleEntryHeader("soulwoven_silk", "Soulwoven Silk", "To weave the ephemeral");
         addPages("soulwoven_silk", "Soulwoven Silk is a light, yet sturdy material imbued with soulstuff. Like a body, it naturally insulates against arcane energies. While other materials do the same, cloth is far easier to work with in designing than stone.");

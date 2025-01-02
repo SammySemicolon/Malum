@@ -1,33 +1,47 @@
 package com.sammy.malum.common.block.curiosities.redstone.wavecharger;
 
-import com.sammy.malum.common.block.curiosities.redstone.DirectionalRedstoneDiodeBlock;
+import com.sammy.malum.common.block.curiosities.redstone.SpiritDiodeBlock;
+import com.sammy.malum.registry.common.SoundRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class WaveChargerBlock extends DirectionalRedstoneDiodeBlock<WaveChargerBlockEntity> {
+public class WaveChargerBlock extends SpiritDiodeBlock<WaveChargerBlockEntity> {
 
     public WaveChargerBlock(Properties properties) {
         super(properties);
     }
 
+    @Override
+    public int getDefaultFrequency(BlockPos pos, BlockState state) {
+        return 3;
+    }
 
     @Override
-    public boolean getWeakChanges(BlockState state, LevelReader level, BlockPos pos) {
+    public boolean processUpdate(Level level, BlockPos pos, BlockState state, WaveChargerBlockEntity diode, int signal) {
+        int startingSignal = diode.signal;
+        if (startingSignal > signal) {
+            diode.signal--;
+        } else if (startingSignal < signal) {
+            diode.signal++;
+        } else {
+            return false;
+        }
+
+        updateState(level, pos, state, diode);
+
+        if (diode.signal == signal) {
+            level.playSound(null, pos, SoundRegistry.WAVECHARGER_CHARGE.get(), SoundSource.BLOCKS, 0.3f, signal == 0 ? 0.9f : 1.5f);
+            emitRedstoneParticles(level, pos);
+            return false;
+        }
+
         return true;
     }
 
     @Override
-    protected int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-        if (!(blockAccess.getBlockEntity(pos) instanceof WaveChargerBlockEntity wavecharger)) {
-            return 0;
-        }
-        int signal = super.getSignal(blockState, blockAccess, pos, side);
-        if (signal != 0) {
-            return wavecharger.currentSignal;
-        }
-        return 0;
+    public boolean shouldUpdateWhenNeighborChanged(Level level, BlockPos pos, BlockState state, WaveChargerBlockEntity diode, int newInput) {
+        return newInput != diode.signal;
     }
 }

@@ -27,13 +27,11 @@ import static com.sammy.malum.MalumMod.malumPath;
 public class RuneworkingRecipeCategory implements IRecipeCategory<RunicWorkbenchRecipe> {
 
     public static final ResourceLocation UID = malumPath("runeworking");
-    private final IDrawable background;
     private final IDrawable overlay;
     private final IDrawable icon;
 
     public RuneworkingRecipeCategory(IGuiHelper guiHelper) {
-        background = guiHelper.createBlankDrawable(142, 185);
-        overlay = guiHelper.createDrawable(MalumMod.malumPath("textures/gui/runeworking_jei.png"), 0, 0, 142, 183);
+        overlay = guiHelper.createDrawable(MalumMod.malumPath("textures/gui/runeworking_jei.png"), 0, 0, 142, 185);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.RUNIC_WORKBENCH.get()));
     }
 
@@ -52,10 +50,14 @@ public class RuneworkingRecipeCategory implements IRecipeCategory<RunicWorkbench
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
     @Override
-    public IDrawable getBackground() {
-        return background;
+    public int getHeight() {
+        return overlay.getHeight();
+    }
+
+    @Override
+    public int getWidth() {
+        return overlay.getWidth();
     }
 
     @Nonnull

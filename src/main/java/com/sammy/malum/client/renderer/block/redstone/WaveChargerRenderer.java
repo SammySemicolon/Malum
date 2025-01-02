@@ -13,9 +13,10 @@ public class WaveChargerRenderer extends RedstoneDiodeRenderer<WaveChargerBlockE
 
     @Override
     public float getGlowDelta(WaveChargerBlockEntity blockEntityIn) {
-        int desiredSignal = blockEntityIn.desiredSignal;
-        int currentSignal = blockEntityIn.currentSignal;
-        float partial = (float) blockEntityIn.timer / Math.max(Math.round(blockEntityIn.frequency / 15f), 1);
+        // todo WaveChargerBlockEntity.desiredSignal and SpiritDiodeBlockEntity.timer no longer exists; replaced with SpiritDiodeBlockEntity.signal as temporary fix
+        int desiredSignal = blockEntityIn.signal;
+        int currentSignal = blockEntityIn.signal;
+        float partial = (float) blockEntityIn.signal / Math.max(Math.round(blockEntityIn.delay / 15f), 1);
         if (currentSignal > desiredSignal) {
             return (currentSignal - partial) / 15f;
         } else {

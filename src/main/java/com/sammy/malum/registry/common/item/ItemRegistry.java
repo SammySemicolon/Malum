@@ -469,7 +469,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> WAVECHARGER = register("wavecharger", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVECHARGER.get(), p));
     public static final DeferredHolder<Item, Item> WAVEBANKER = register("wavebanker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEBANKER.get(), p));
     public static final DeferredHolder<Item, Item> WAVEMAKER = register("wavemaker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEMAKER.get(), p));
-    public static final DeferredHolder<Item, Item> WEAVEBREAKER = register("wavebreaker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEBREAKER.get(), p));
+    public static final DeferredHolder<Item, Item> WAVEBREAKER = register("wavebreaker", DEFAULT_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WAVEBREAKER.get(), p));
 
     public static final DeferredHolder<Item, Item> WEAVERS_WORKBENCH = register("weavers_workbench", COSMETIC_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.WEAVERS_WORKBENCH.get(), p));
     //endregion

@@ -27,13 +27,11 @@ import static com.sammy.malum.MalumMod.malumPath;
 public class SpiritFocusingRecipeCategory implements IRecipeCategory<SpiritFocusingRecipe> {
 
     public static final ResourceLocation UID = malumPath("spirit_focusing");
-    private final IDrawable background;
     private final IDrawable overlay;
     private final IDrawable icon;
 
     public SpiritFocusingRecipeCategory(IGuiHelper guiHelper) {
-        background = guiHelper.createBlankDrawable(142, 185);
-        overlay = guiHelper.createDrawable(MalumMod.malumPath("textures/gui/spirit_focusing_jei.png"), 0, 0, 142, 183);
+        overlay = guiHelper.createDrawable(MalumMod.malumPath("textures/gui/spirit_focusing_jei.png"), 0, 0, 142, 185);
         icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.SPIRIT_CRUCIBLE.get()));
     }
 
@@ -55,10 +53,14 @@ public class SpiritFocusingRecipeCategory implements IRecipeCategory<SpiritFocus
         return Component.translatable("malum.jei." + UID.getPath());
     }
 
-    @Nonnull
     @Override
-    public IDrawable getBackground() {
-        return background;
+    public int getHeight() {
+        return overlay.getHeight();
+    }
+
+    @Override
+    public int getWidth() {
+        return overlay.getWidth();
     }
 
     @Nonnull

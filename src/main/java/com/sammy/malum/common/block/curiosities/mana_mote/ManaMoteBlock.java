@@ -1,13 +1,11 @@
 package com.sammy.malum.common.block.curiosities.mana_mote;
 
-import com.sammy.malum.core.systems.spirit.*;
-import com.sammy.malum.registry.common.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.client.extensions.common.IClientBlockExtensions;
-import team.lodestar.lodestone.systems.block.*;
-
-import java.util.function.*;
+import com.sammy.malum.core.systems.spirit.SpiritTypeProperty;
+import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import team.lodestar.lodestone.systems.block.LodestoneEntityBlock;
 
 public class ManaMoteBlock extends LodestoneEntityBlock<ManaMoteBlockEntity> {
 
@@ -21,10 +19,5 @@ public class ManaMoteBlock extends LodestoneEntityBlock<ManaMoteBlockEntity> {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(SPIRIT_TYPE);
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientBlockExtensions> consumer) {
-        consumer.accept(new ManaMoteBlockClientExtension());
     }
 }

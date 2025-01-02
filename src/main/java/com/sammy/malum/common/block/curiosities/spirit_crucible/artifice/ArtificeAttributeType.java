@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.function.Function;
 
 public class ArtificeAttributeType {
@@ -69,7 +68,7 @@ public class ArtificeAttributeType {
     }
 
     public String getLangKey() {
-        return id.getNamespace() + ".gui.crucible.attribute." + id.getPath();
+        return translationKey;
     }
 
 

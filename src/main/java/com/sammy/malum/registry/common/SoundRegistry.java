@@ -14,8 +14,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.neoforged.neoforge.common.util.*;
 import net.neoforged.neoforge.registries.*;
 
-import java.util.function.Supplier;
-
 import static com.sammy.malum.MalumMod.MALUM;
 
 public class SoundRegistry {
@@ -228,8 +226,8 @@ public class SoundRegistry {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> WAVECHARGER_CHARGE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavecharger_charges"), 8f));
     public static final DeferredHolder<SoundEvent, SoundEvent> WAVEBANKER_STORE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebanker_stores"), 8f));
-    public static final DeferredHolder<SoundEvent, SoundEvent> PULSELAG_STORE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebreaker_stores"), 8f));
-    public static final DeferredHolder<SoundEvent, SoundEvent> PULSELAG_RELEASE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebreaker_releases"), 8f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WAVEBREAKER_STORE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebreaker_stores"), 8f));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WAVEBREAKER_RELEASE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebreaker_releases"), 8f));
     public static final DeferredHolder<SoundEvent, SoundEvent> WAVEMAKER_PULSE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavemaker_pulses"), 8f));
 
     public static final DeferredHolder<SoundEvent, SoundEvent> ARCANE_ROCK_BREAK = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("arcane_rock_break")));

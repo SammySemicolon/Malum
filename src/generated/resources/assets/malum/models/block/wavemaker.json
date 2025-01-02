@@ -1,8 +1,12 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "bottom": "malum:block/redstone/runewood_frame_bottom",
-    "side": "malum:block/redstone/wavemaker_output",
-    "top": "malum:block/redstone/runewood_frame_top"
+    "down": "malum:block/redstone/runewood_frame_bottom",
+    "east": "malum:block/redstone/runewood_frame_locked",
+    "north": "malum:block/redstone/wavemaker_output",
+    "particle": "malum:block/redstone/runewood_frame_locked",
+    "south": "malum:block/redstone/runewood_frame_input",
+    "up": "malum:block/redstone/runewood_frame_top",
+    "west": "malum:block/redstone/runewood_frame_locked"
   }
 }

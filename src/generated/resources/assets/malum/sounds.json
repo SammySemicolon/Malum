@@ -870,10 +870,10 @@
   },
   "redstone_diode_break": {
     "sounds": [
-      "malum:blocks/redstone_diode/break1",
-      "malum:blocks/redstone_diode/break2",
-      "malum:blocks/redstone_diode/break3",
-      "malum:blocks/redstone_diode/break4"
+      "malum:blocks/spirit_diode/break1",
+      "malum:blocks/spirit_diode/break2",
+      "malum:blocks/spirit_diode/break3",
+      "malum:blocks/spirit_diode/break4"
     ],
     "subtitle": "malum.subtitle.redstone_diode_break"
   },
@@ -890,10 +890,10 @@
   },
   "redstone_diode_place": {
     "sounds": [
-      "malum:blocks/redstone_diode/place1",
-      "malum:blocks/redstone_diode/place2",
-      "malum:blocks/redstone_diode/place3",
-      "malum:blocks/redstone_diode/place4"
+      "malum:blocks/spirit_diode/place1",
+      "malum:blocks/spirit_diode/place2",
+      "malum:blocks/spirit_diode/place3",
+      "malum:blocks/spirit_diode/place4"
     ],
     "subtitle": "malum.subtitle.redstone_diode_place"
   },
@@ -1799,31 +1799,31 @@
   },
   "wavebanker_stores": {
     "sounds": [
-      "malum:blocks/redstone_diode/tick"
+      "malum:blocks/spirit_diode/tick"
     ],
     "subtitle": "malum.subtitle.wavebanker_stores"
   },
   "wavebreaker_releases": {
     "sounds": [
-      "malum:blocks/redstone_diode/tick"
+      "malum:blocks/spirit_diode/tick"
     ],
     "subtitle": "malum.subtitle.wavebreaker_releases"
   },
   "wavebreaker_stores": {
     "sounds": [
-      "malum:blocks/redstone_diode/tick"
+      "malum:blocks/spirit_diode/tick"
     ],
     "subtitle": "malum.subtitle.wavebreaker_stores"
   },
   "wavecharger_charges": {
     "sounds": [
-      "malum:blocks/redstone_diode/tick"
+      "malum:blocks/spirit_diode/tick"
     ],
     "subtitle": "malum.subtitle.wavecharger_charges"
   },
   "wavemaker_pulses": {
     "sounds": [
-      "malum:blocks/redstone_diode/tick"
+      "malum:blocks/spirit_diode/tick"
     ],
     "subtitle": "malum.subtitle.wavemaker_pulses"
   },

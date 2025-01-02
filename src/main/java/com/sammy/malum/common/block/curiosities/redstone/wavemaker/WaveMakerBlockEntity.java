@@ -24,7 +24,7 @@ public class WaveMakerBlockEntity extends SpiritDiodeBlockEntity {
     @Override
     protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
-        inverted = pTag.getBoolean("pending");
+        inverted = pTag.getBoolean("inverted");
     }
 
     @Override

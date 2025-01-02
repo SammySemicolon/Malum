@@ -602,7 +602,6 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> CATALYST_LOBBER = register("catalyst_lobber", GEAR_PROPERTIES(), (p) -> new CatalystLobberItem(p.durability(500), EthericNitrateEntity::new));
 
-
     public static final DeferredHolder<Item, Item> CRUDE_SCYTHE = register("crude_scythe", GEAR_PROPERTIES(), (p) -> new MalumScytheItem(Tiers.IRON, 0, 0.1f, p.durability(500)));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_SCYTHE = register("soul_stained_steel_scythe", GEAR_PROPERTIES(), (p) -> new MagicScytheItem(SOUL_STAINED_STEEL, -2.5f, 0.1f, 4, p));
 

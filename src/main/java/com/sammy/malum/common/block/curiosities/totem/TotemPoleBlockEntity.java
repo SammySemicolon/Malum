@@ -1,6 +1,5 @@
 package com.sammy.malum.common.block.curiosities.totem;
 
-import com.sammy.malum.common.item.curiosities.tools.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;

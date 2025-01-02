@@ -105,7 +105,7 @@ public class MalumLang extends LanguageProvider {
 
         for (ArtificeAttributeType value : ArtificeAttributeType.CRUCIBLE_ATTRIBUTES) {
             final String translation = value.getLangKey();
-            String name = DataHelper.toTitleCase(value.toString().toLowerCase(Locale.ROOT), "_");
+            String name = DataHelper.toTitleCase(value.id.getPath().toLowerCase(Locale.ROOT), "_");
             add(translation, name);
         }
 
@@ -604,16 +604,16 @@ public class MalumLang extends LanguageProvider {
                 "Redstone is always useful, no matter your profession or goal. One needs not be an engineer to build a piston door. I now add my own contribution: spirit diodes. By imprinting the impulses of elemental spirits upon a matrix of ether-treated copper, I have created four interesting redstone devices.",
                 "These diodes act by translating redstone impulse into arcane intent, allowing the nature of the spirit to shape the resulting effect, and then translating it back. Ether serves as the medium, with copper acting as a conceptual anchor to machinery and logic.");
         addHeadline("basic_artifice.wavecharger", "Wavecharger");
-        addPage("basic_artifice.wavecharger",
+        addPages("basic_artifice.wavecharger",
                 "Aerial seeks to soar, to rise. Given a signal, this transfers it but needs to 'warm up', causing the output's strength to slowly rise to meet the input signal. When unpowered or given a lower signal, it will similarly coast down until it turns off again.");
         addHeadline("basic_artifice.wavebanker", "Wavebanker");
-        addPage("basic_artifice.wavebanker",
+        addPages("basic_artifice.wavebanker",
                 "Aqueous seeks to change, to adapt. Given a signal, this transfers it but is 'sticky', continuing to emit the signal for a while after power is cut.");
         addHeadline("basic_artifice.wavemaker", "Wavemaker");
-        addPage("basic_artifice.wavemaker",
+        addPages("basic_artifice.wavemaker",
                 "Earthen seeks to stand, to stay. Given a signal or lack thereof, this acts like a clock, emitting the inverse of the input every so often on a steady rhythm, and emitting the input the rest of the time.");
         addHeadline("basic_artifice.wavebreaker", "Wavebreaker");
-        addPage("basic_artifice.wavebreaker",
+        addPages("basic_artifice.wavebreaker",
                 "Infernal seeks to burn, to shine. Given a signal, this transfers it but is 'slow', the signal being held - 'admired' - by the diode for a time before being emitted out the other side.");
 
         addSimpleEntryHeader("basic_artifice.artificers_claw", "Artificer's Claw", "Despite the name, not sharp");

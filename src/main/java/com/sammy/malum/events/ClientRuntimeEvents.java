@@ -1,6 +1,5 @@
-package com.sammy.malum.core.events;
+package com.sammy.malum.events;
 
-import com.sammy.malum.client.renderer.block.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.core.handlers.client.*;
 import com.sammy.malum.core.systems.item.HeldItemTracker;

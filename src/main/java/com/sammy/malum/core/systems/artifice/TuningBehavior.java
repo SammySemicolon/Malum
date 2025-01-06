@@ -1,4 +1,4 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
+package com.sammy.malum.core.systems.artifice;
 
 public abstract class TuningBehavior {
 
@@ -33,7 +33,7 @@ public abstract class TuningBehavior {
 
         @Override
         public float getRelativeValue(ArtificeAttributeData data, ArtificeAttributeValue artificeAttributeValue) {
-            return artificeAttributeValue.type.defaultValue - artificeAttributeValue.getValue(data);
+            return artificeAttributeValue.getValue(data);
         }
     };
 }

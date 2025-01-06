@@ -1,4 +1,4 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
+package com.sammy.malum.core.systems.artifice;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -36,11 +36,15 @@ public class ArtificeAttributeValue {
     }
 
     public float getValue(ArtificeAttributeData accelerationData) {
-        float bonus = 1 + accelerationData.chainProcessingBonus;
-        if (type.equals(ArtificeAttributeType.CHAIN_FOCUSING_CHANCE)) {
-            bonus *= -1;
+        float value = this.value * tuningMultiplierCache;
+        if (type.canBeTuned) {
+            float bonus = 1 + accelerationData.chainProcessingBonus;
+            if (type.equals(ArtificeAttributeType.CHAIN_FOCUSING_CHANCE) || (type.tuningBehavior.equals(TuningBehavior.INVERSE))) {
+                bonus = 1 - accelerationData.chainProcessingBonus;
+            }
+            value *= bonus;
         }
-        return value * bonus * tuningMultiplierCache;
+        return value;
     }
 
     public void applyModifier(ArtificeModifier modifier) {

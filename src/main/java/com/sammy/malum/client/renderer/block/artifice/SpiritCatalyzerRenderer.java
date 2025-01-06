@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import com.sammy.malum.client.*;
 import com.sammy.malum.client.renderer.entity.*;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer.*;
+import com.sammy.malum.core.systems.artifice.IArtificeAcceptor;
+import com.sammy.malum.common.block.curiosities.spirit_catalyzer.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.client.*;
 import net.minecraft.client.*;
@@ -17,8 +17,6 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
-
-import java.util.*;
 
 import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 

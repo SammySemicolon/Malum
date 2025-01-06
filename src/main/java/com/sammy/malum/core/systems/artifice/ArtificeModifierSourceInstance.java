@@ -1,14 +1,13 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
+package com.sammy.malum.core.systems.artifice;
 
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.Optional;
 import java.util.function.Consumer;
 
-public abstract class ArtificeModifierInstance {
+public abstract class ArtificeModifierSourceInstance {
 
     public final ResourceLocation type;
     public final BlockPos sourcePosition;
@@ -16,7 +15,7 @@ public abstract class ArtificeModifierInstance {
 
     public IArtificeAcceptor target;
 
-    protected ArtificeModifierInstance(ResourceLocation type, BlockPos sourcePosition, int maxAmount) {
+    protected ArtificeModifierSourceInstance(ResourceLocation type, BlockPos sourcePosition, int maxAmount) {
         this.type = type;
         this.sourcePosition = sourcePosition;
         this.maxAmount = maxAmount;
@@ -41,6 +40,8 @@ public abstract class ArtificeModifierInstance {
     public abstract void tickFocusing(ArtificeAttributeData attributes);
 
     public abstract boolean canModifyFocusing();
+
+    public abstract boolean consumesFuel();
 
     public abstract void addParticles(IArtificeAcceptor target, MalumSpiritType spiritType);
 

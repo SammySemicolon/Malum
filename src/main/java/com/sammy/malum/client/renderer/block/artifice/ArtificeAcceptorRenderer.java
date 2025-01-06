@@ -1,9 +1,9 @@
 package com.sammy.malum.client.renderer.block.artifice;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierInstance;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeModifierSource;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
+import com.sammy.malum.core.systems.artifice.ArtificeModifierSourceInstance;
+import com.sammy.malum.core.systems.artifice.IArtificeModifierSource;
+import com.sammy.malum.core.systems.artifice.IArtificeAcceptor;
 import com.sammy.malum.core.systems.item.HeldItemTracker;
 import com.sammy.malum.registry.client.MalumRenderTypeTokens;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
@@ -38,7 +38,7 @@ public abstract class ArtificeAcceptorRenderer<T extends LodestoneBlockEntity> i
         poseStack.pushPose();
         poseStack.translate(-pos.getX(), -pos.getY(), -pos.getZ());
         target.getAttributes().getInfluenceData(level).ifPresent(p -> {
-            for (ArtificeModifierInstance modifier : p.modifiers()) {
+            for (ArtificeModifierSourceInstance modifier : p.modifiers()) {
                 var modifierPosition = modifier.sourcePosition;
                 var modifierBlockEntity = level.getBlockEntity(modifierPosition);
                 if (modifierBlockEntity == null) {

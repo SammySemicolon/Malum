@@ -1,7 +1,7 @@
 package com.sammy.malum.common.block.curiosities.spirit_crucible;
 
 import com.sammy.malum.common.block.*;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.*;
+import com.sammy.malum.core.systems.artifice.*;
 import com.sammy.malum.common.block.storage.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.common.item.spirit.*;
@@ -192,7 +192,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
             }
             if (recipe != null) {
                 attributes.getInfluenceData(level).ifPresent(d -> {
-                    for (ArtificeModifierInstance modifier : d.modifiers()) {
+                    for (ArtificeModifierSourceInstance modifier : d.modifiers()) {
                         modifier.tickFocusing(attributes);
                         if (!modifier.canModifyFocusing()) {
                             recalibrateAccelerators(level, worldPosition);
@@ -218,12 +218,8 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         }
     }
 
-    public void updateRecipe() {
-        recipe = LodestoneRecipeType.getRecipe(level, RecipeTypeRegistry.SPIRIT_FOCUSING.get(), new SpiritBasedRecipeInput(inventory.getStackInSlot(0), spiritInventory.nonEmptyItemStacks));
-    }
-
     public void craft(ServerLevel level) {
-        var stack = inventory.getStackInSlot(0);
+        var impetus = inventory.getStackInSlot(0);
         var outputStack = recipe.output.copy();
         var itemPos = getItemPos();
         var random = level.random;
@@ -233,18 +229,21 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         float chainFocusingChance = attributes.chainFocusingChance.getValue(attributes);
         float damageAbsorptionChance = attributes.damageAbsorptionChance.getValue(attributes);
         float restorationChance = attributes.restorationChance.getValue(attributes);
-        if (random.nextFloat() < restorationChance) {
-            stack.setDamageValue(Math.max(stack.getDamageValue() - recipe.durabilityCost * 4, 0));
+        while (restorationChance > 0) {
+            if (restorationChance >= 1 || random.nextFloat() < restorationChance) {
+                impetus.setDamageValue(Math.max(impetus.getDamageValue() - recipe.durabilityCost * 4, 0));
+            }
+            restorationChance -= 1;
         }
         if (damageAbsorptionChance == 0 || random.nextFloat() < damageAbsorptionChance) {
-            if (recipe.durabilityCost != 0 && stack.isDamageableItem()) {
+            if (recipe.durabilityCost != 0 && impetus.isDamageableItem()) {
                 int durabilityCost = recipe.durabilityCost;
                 if (instability > 0 && random.nextFloat() < instability) {
                     durabilityCost *= 2;
                 }
 
                 queuedCracks += durabilityCost;
-                stack.hurtAndBreak(durabilityCost, level, null, brokenStack -> {
+                impetus.hurtAndBreak(durabilityCost, level, null, brokenStack -> {
                     if (brokenStack instanceof ImpetusItem impetusItem) {
                         inventory.setStackInSlot(0, impetusItem.getCrackedVariant().getDefaultInstance());
                     }
@@ -311,6 +310,12 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
     }
 
     @Override
+    public void applyAugments(Consumer<ItemStack> augmentConsumer) {
+        augmentInventory.getNonEmptyStacks().forEach(augmentConsumer);
+        coreAugmentInventory.getNonEmptyStacks().forEach(augmentConsumer);
+    }
+
+    @Override
     public Vec3 getItemPos(float partialTicks) {
         final BlockPos blockPos = getBlockPos();
         final Vec3 offset = CRUCIBLE_ITEM_OFFSET;
@@ -325,6 +330,10 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
     @Override
     public LodestoneBlockEntityInventory getSuppliedInventory() {
         return inventory;
+    }
+
+    public void updateRecipe() {
+        recipe = LodestoneRecipeType.getRecipe(level, RecipeTypeRegistry.SPIRIT_FOCUSING.get(), new SpiritBasedRecipeInput(inventory.getStackInSlot(0), spiritInventory.nonEmptyItemStacks));
     }
 
     public Vec3 getSpiritItemOffset(int slot, float partialTicks) {

@@ -2,10 +2,7 @@ package com.sammy.malum.common.data_components;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifier;
-import com.sammy.malum.core.systems.ritual.MalumRitualTier;
-import com.sammy.malum.core.systems.ritual.MalumRitualType;
+import com.sammy.malum.core.systems.artifice.ArtificeModifier;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

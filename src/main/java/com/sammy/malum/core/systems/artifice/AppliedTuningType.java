@@ -1,4 +1,4 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
+package com.sammy.malum.core.systems.artifice;
 
 public interface AppliedTuningType {
 

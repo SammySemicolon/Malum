@@ -1,4 +1,4 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
+package com.sammy.malum.core.systems.artifice;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -16,7 +16,7 @@ import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 import javax.annotation.Nullable;
 import java.util.*;
 
-import static com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType.*;
+import static com.sammy.malum.core.systems.artifice.ArtificeAttributeType.*;
 
 public class ArtificeAttributeData {
 
@@ -24,8 +24,9 @@ public class ArtificeAttributeData {
             ArtificeAttributeValue.CODEC.listOf().fieldOf("values").forGetter(v -> v.attributes),
             BlockPos.CODEC.listOf().fieldOf("modifierPositions").forGetter(v -> v.modifierPositions),
             ArtificeAttributeType.CODEC.optionalFieldOf("tunedAttribute").forGetter(v -> Optional.ofNullable(v.tunedAttribute)),
+            Codec.BOOL.fieldOf("demandsFuel").forGetter(v -> v.demandsFuel),
             Codec.FLOAT.fieldOf("chainProcessingBonus").forGetter(v -> v.chainProcessingBonus)
-    ).apply(obj, ((a, b, h, c) -> new ArtificeAttributeData(a, b, h.orElse(null), c))));
+    ).apply(obj, ((a, b, h, d, c) -> new ArtificeAttributeData(a, b, h.orElse(null), d, c))));
 
     public final ArtificeAttributeValue focusingSpeed = new ArtificeAttributeValue(FOCUSING_SPEED);
     public final ArtificeAttributeValue instability = new ArtificeAttributeValue(INSTABILITY);
@@ -35,38 +36,48 @@ public class ArtificeAttributeData {
     public final ArtificeAttributeValue chainFocusingChance = new ArtificeAttributeValue(CHAIN_FOCUSING_CHANCE);
     public final ArtificeAttributeValue damageAbsorptionChance = new ArtificeAttributeValue(DAMAGE_ABSORPTION_CHANCE);
     public final ArtificeAttributeValue restorationChance = new ArtificeAttributeValue(RESTORATION_CHANCE);
-    public final ArtificeAttributeValue weakestBoost = new ArtificeAttributeValue(WEAKEST_BOOST);
+    public final ArtificeAttributeValue weaknessTuning = new ArtificeAttributeValue(WEAKNESS_TUNING);
     public final ArtificeAttributeValue tuningPotency = new ArtificeAttributeValue(TUNING_POTENCY);
+    public final ArtificeAttributeValue tuningStrain = new ArtificeAttributeValue(TUNING_STRAIN);
 
     public final List<ArtificeAttributeValue> attributes = List.of(
             focusingSpeed, instability, fuelUsageRate,
-            fortuneChance, chainFocusingChance, damageAbsorptionChance, restorationChance, weakestBoost, tuningPotency
+            fortuneChance, chainFocusingChance, damageAbsorptionChance, restorationChance, weaknessTuning, tuningPotency, tuningStrain
     );
     public final List<BlockPos> modifierPositions = new ArrayList<>();
     @Nullable
     private ArtificeInfluenceData influenceData;
 
     public ArtificeAttributeType tunedAttribute;
+    public boolean demandsFuel;
     public float chainProcessingBonus;
 
-    public ArtificeAttributeData(@Nullable ArtificeInfluenceData influenceData) {
+    public ArtificeAttributeData(IArtificeAcceptor target, @Nullable ArtificeInfluenceData influenceData) {
+        if (target.getAttributes() != null) {
+            tunedAttribute = target.getAttributes().tunedAttribute;
+        }
         this.influenceData = influenceData;
         if (influenceData != null) {
-            for (ArtificeModifierInstance modifier : influenceData.modifiers()) {
+            for (ArtificeModifierSourceInstance modifier : influenceData.modifiers()) {
                 modifier.modifyFocusing(this::applyModifier);
                 modifier.applyAugments(this::applyAugment);
                 this.modifierPositions.add(modifier.sourcePosition);
+                if (modifier.consumesFuel()) {
+                    demandsFuel = true;
+                }
             }
         }
+        target.applyAugments(this::applyAugment);
         applyTuning();
     }
 
-    public ArtificeAttributeData(List<ArtificeAttributeValue> attributes, List<BlockPos> modifierPositions, ArtificeAttributeType tunedAttribute, float chainProcessingBonus) {
+    public ArtificeAttributeData(List<ArtificeAttributeValue> attributes, List<BlockPos> modifierPositions, ArtificeAttributeType tunedAttribute, boolean demandsFuel, float chainProcessingBonus) {
         for (int i = 0; i < this.attributes.size(); i++) {
             this.attributes.get(i).copyFrom(attributes.get(i));
         }
         this.modifierPositions.addAll(modifierPositions);
         this.tunedAttribute = tunedAttribute;
+        this.demandsFuel = demandsFuel;
         this.chainProcessingBonus = chainProcessingBonus;
     }
 
@@ -77,10 +88,14 @@ public class ArtificeAttributeData {
     public void applyTuning() {
         var attributesForTuning = getExistingAttributesForTuning();
         if (tunedAttribute != null) {
+            float potency = 1 + tuningPotency.getValue(this);
+            float strain = 1 + tuningStrain.getValue(this);
             for (ArtificeAttributeType attribute : attributesForTuning) {
                 ArtificeAttributeValue value = attribute.getAttributeValue(this);
-                var tuningType = tunedAttribute.equals(attribute) ? AppliedTuningType.POSITIVE : AppliedTuningType.NEGATIVE;
-                value.applyModifier(new TuningModifier(attribute, tuningType));
+                boolean isBoosted = tunedAttribute.equals(attribute);
+                var tuningType = isBoosted ? AppliedTuningType.POSITIVE : AppliedTuningType.NEGATIVE;
+                float bonus = tuningType.getMultiplier(attribute) * (isBoosted ? potency : strain);
+                value.applyModifier(new TuningModifier(TuningModifier.TUNING_FORK, bonus));
             }
         }
         else {
@@ -88,9 +103,12 @@ public class ArtificeAttributeData {
                 attribute.removeModifier(TuningModifier.TUNING_FORK);
             }
         }
+        for (ArtificeAttributeValue attribute : attributes) {
+            attribute.removeModifier(TuningModifier.WEAKEST_BOOST);
+        }
         var weakestAttribute = figureOutWeakestAttribute(attributesForTuning);
         if (weakestAttribute != null) {
-            weakestAttribute.applyModifier(new TuningModifier(TuningModifier.WEAKEST_BOOST, weakestBoost.getValue(this)));
+            weakestAttribute.applyModifier(new TuningModifier(TuningModifier.WEAKEST_BOOST, weaknessTuning.getValue(this)));
         }
     }
 

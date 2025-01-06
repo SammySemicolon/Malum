@@ -1,4 +1,4 @@
-package com.sammy.malum.core.events;
+package com.sammy.malum.events;
 
 import com.sammy.malum.common.block.storage.jar.*;
 import com.sammy.malum.common.effect.*;

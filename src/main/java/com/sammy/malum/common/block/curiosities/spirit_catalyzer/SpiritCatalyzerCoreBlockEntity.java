@@ -1,8 +1,8 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer;
+package com.sammy.malum.common.block.curiosities.spirit_catalyzer;
 
 import com.sammy.malum.common.block.*;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierInstance;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeModifierSource;
+import com.sammy.malum.core.systems.artifice.ArtificeModifierSourceInstance;
+import com.sammy.malum.core.systems.artifice.IArtificeModifierSource;
 import com.sammy.malum.common.block.AugmentBlockEntityInventory;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
@@ -32,7 +32,7 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
 
     public MalumBlockEntityInventory inventory;
     public MalumBlockEntityInventory augmentInventory;
-    public CatalyzerArtificeModifierInstance modifier;
+    public CatalyzerArtificeModifierSourceInstance modifier;
     public float burnTicks;
 
     public SpiritCatalyzerCoreBlockEntity(BlockEntityType<? extends SpiritCatalyzerCoreBlockEntity> type, MultiBlockStructure structure, BlockPos pos, BlockState state) {
@@ -46,12 +46,12 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
     }
 
     @Override
-    public ArtificeModifierInstance createFocusingModifierInstance() {
-        return modifier = new CatalyzerArtificeModifierInstance(this);
+    public ArtificeModifierSourceInstance createFocusingModifierInstance() {
+        return modifier = new CatalyzerArtificeModifierSourceInstance(this);
     }
 
     @Override
-    public Optional<ArtificeModifierInstance> getFocusingModifierInstance() {
+    public Optional<ArtificeModifierSourceInstance> getFocusingModifierInstance() {
         return Optional.ofNullable(modifier);
     }
 

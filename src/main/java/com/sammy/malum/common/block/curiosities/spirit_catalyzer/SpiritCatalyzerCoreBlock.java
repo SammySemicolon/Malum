@@ -1,4 +1,4 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer;
+package com.sammy.malum.common.block.curiosities.spirit_catalyzer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

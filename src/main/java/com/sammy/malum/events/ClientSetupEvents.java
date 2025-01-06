@@ -1,4 +1,4 @@
-package com.sammy.malum.core.events;
+package com.sammy.malum.events;
 
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.renderer.item.SpiritJarClientItemExtensions;

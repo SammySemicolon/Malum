@@ -1,9 +1,12 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
+package com.sammy.malum.core.systems.artifice;
 
 import com.sammy.malum.core.systems.spirit.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
+
+import java.util.function.Consumer;
 
 public interface IArtificeAcceptor {
 
@@ -19,21 +22,23 @@ public interface IArtificeAcceptor {
 
     Vec3 getVisualAccelerationPoint();
 
+    void applyAugments(Consumer<ItemStack> augmentConsumer);
+
     default void recalibrateAccelerators(Level level, BlockPos pos) {
         invalidateModifiers(level);
-        setAttributes(new ArtificeAttributeData(ArtificeInfluenceData.createFreshData(getLookupRadius(), level, pos)));
+        setAttributes(new ArtificeAttributeData(this, ArtificeInfluenceData.createFreshData(getLookupRadius(), level, pos)));
         bindModifiers(level);
     }
     default void invalidateModifiers(Level level) {
         getAttributes().getInfluenceData(level).ifPresent(d -> {
-            for (ArtificeModifierInstance modifier : d.modifiers()) {
+            for (ArtificeModifierSourceInstance modifier : d.modifiers()) {
                 modifier.invalidate();
             }
         });
     }
     default void bindModifiers(Level level) {
         getAttributes().getInfluenceData(level).ifPresent(d -> {
-            for (ArtificeModifierInstance modifier : d.modifiers()) {
+            for (ArtificeModifierSourceInstance modifier : d.modifiers()) {
                 modifier.bind(this);
             }
         });

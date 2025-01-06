@@ -1,10 +1,10 @@
 package com.sammy.malum.visual_effects;
 
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeInfluenceData;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierInstance;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer.*;
+import com.sammy.malum.core.systems.artifice.ArtificeInfluenceData;
+import com.sammy.malum.core.systems.artifice.ArtificeModifierSourceInstance;
+import com.sammy.malum.core.systems.artifice.IArtificeAcceptor;
+import com.sammy.malum.common.block.curiosities.spirit_catalyzer.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.common.recipe.spirit.focusing.*;
@@ -48,7 +48,7 @@ public class SpiritCrucibleParticleEffects {
         if (recipe != null) {
             Optional<ArtificeInfluenceData> influenceData = crucible.attributes.getInfluenceData(level);
             influenceData.ifPresent(d -> {
-                for (ArtificeModifierInstance modifier : d.modifiers()) {
+                for (ArtificeModifierSourceInstance modifier : d.modifiers()) {
                     modifier.addParticles(crucible, activeSpiritType);
                 }
             });

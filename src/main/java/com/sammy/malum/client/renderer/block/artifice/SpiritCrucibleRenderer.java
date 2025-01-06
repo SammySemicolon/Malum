@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import com.sammy.malum.client.renderer.entity.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
+import com.sammy.malum.core.systems.artifice.ArtificeAttributeType;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.spirit.*;
 import net.minecraft.*;

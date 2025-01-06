@@ -1,7 +1,7 @@
 package com.sammy.malum.common.item.augment;
 
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifier;
+import com.sammy.malum.core.systems.artifice.ArtificeAttributeType;
+import com.sammy.malum.core.systems.artifice.ArtificeModifier;
 import com.sammy.malum.common.data_components.ArtificeAugmentData;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
@@ -10,11 +10,20 @@ import net.minecraft.network.chat.*;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.*;
 
 import static net.minecraft.world.item.component.ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT;
 
 public class AugmentItem extends Item {
+
+    public static final DecimalFormat ATTRIBUTE_MODIFIER_FORMAT = Util.make(
+            new DecimalFormat("#.##%"), f -> {
+                f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ROOT));
+            }
+    );
+
     public final MalumSpiritType spiritType;
 
     public AugmentItem(Properties pProperties, MalumSpiritType spiritType, ArtificeModifier... modifiers) {
@@ -50,7 +59,9 @@ public class AugmentItem extends Item {
     }
 
     public static void addAugmentStatComponent(List<Component> tooltip, ArtificeAttributeType attributeType, float value) {
-        boolean inverse = attributeType.equals(ArtificeAttributeType.FUEL_USAGE_RATE) || attributeType.equals(ArtificeAttributeType.INSTABILITY);
+        boolean inverse = attributeType.equals(ArtificeAttributeType.FUEL_USAGE_RATE)
+                || attributeType.equals(ArtificeAttributeType.INSTABILITY)
+                || attributeType.equals(ArtificeAttributeType.TUNING_STRAIN);
         makeAugmentStatComponent(attributeType, value, inverse).ifPresent(tooltip::add);
     }
 

@@ -1,4 +1,4 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
+package com.sammy.malum.core.systems.artifice;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.ListTag;
@@ -10,7 +10,7 @@ import team.lodestar.lodestone.helpers.block.BlockEntityHelper;
 
 import java.util.*;
 
-public record ArtificeInfluenceData(Set<ArtificeModifierInstance> modifiers) {
+public record ArtificeInfluenceData(Set<ArtificeModifierSourceInstance> modifiers) {
 
     public static ArtificeInfluenceData createFreshData(int lookupRange, Level level, BlockPos pos) {
         var nearbyInfluencers = BlockEntityHelper.getBlockEntities(IArtificeModifierSource.class, level, pos, lookupRange, ArtificeInfluenceData::isValidInfluencer);
@@ -45,10 +45,10 @@ public record ArtificeInfluenceData(Set<ArtificeModifierInstance> modifiers) {
     }
 
     public static ArtificeInfluenceData createData(Collection<IArtificeModifierSource> nearbyInfluencers) {
-        Set<ArtificeModifierInstance> validModifiers = new HashSet<>();
+        Set<ArtificeModifierSourceInstance> validModifiers = new HashSet<>();
         Map<ResourceLocation, Integer> counter = new HashMap<>();
         for (IArtificeModifierSource influencer : nearbyInfluencers) {
-            ArtificeModifierInstance modifier = influencer.getActiveFocusingModifierInstance();
+            ArtificeModifierSourceInstance modifier = influencer.getActiveFocusingModifierInstance();
             if (modifier.canModifyFocusing()) {
                 int count = counter.merge(modifier.type, 1, Integer::sum);
                 if (count <= modifier.maxAmount) {
@@ -60,7 +60,7 @@ public record ArtificeInfluenceData(Set<ArtificeModifierInstance> modifiers) {
     }
 
     public static boolean isValidInfluencer(IArtificeModifierSource influencer) {
-        Optional<IArtificeAcceptor> optional = influencer.getFocusingModifierInstance().filter(ArtificeModifierInstance::isBound).map(p -> p.target);
+        Optional<IArtificeAcceptor> optional = influencer.getFocusingModifierInstance().filter(ArtificeModifierSourceInstance::isBound).map(p -> p.target);
         if (optional.isEmpty()) {
             return true;
         }

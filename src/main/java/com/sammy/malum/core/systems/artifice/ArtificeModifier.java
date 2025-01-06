@@ -1,8 +1,7 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
+package com.sammy.malum.core.systems.artifice;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sammy.malum.common.data_components.ArtificeAugmentData;
 
 public record ArtificeModifier(ArtificeAttributeType attribute, float value) {
     public static Codec<ArtificeModifier> CODEC = RecordCodecBuilder.create(instance -> instance.group(

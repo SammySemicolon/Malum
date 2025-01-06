@@ -1,7 +1,7 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer;
+package com.sammy.malum.common.block.curiosities.spirit_catalyzer;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.*;
+import com.sammy.malum.core.systems.artifice.*;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.visual_effects.SpiritCrucibleParticleEffects;
 import net.minecraft.resources.ResourceLocation;
@@ -11,12 +11,12 @@ import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 
 import java.util.function.Consumer;
 
-public class CatalyzerArtificeModifierInstance extends ArtificeModifierInstance {
+public class CatalyzerArtificeModifierSourceInstance extends ArtificeModifierSourceInstance {
 
     public static final ResourceLocation ID = MalumMod.malumPath("spirit_catalyzer");
     public final SpiritCatalyzerCoreBlockEntity catalyzer;
 
-    protected CatalyzerArtificeModifierInstance(SpiritCatalyzerCoreBlockEntity catalyzer) {
+    protected CatalyzerArtificeModifierSourceInstance(SpiritCatalyzerCoreBlockEntity catalyzer) {
         super(ID, catalyzer.getBlockPos(), 8);
         this.catalyzer = catalyzer;
     }
@@ -56,6 +56,11 @@ public class CatalyzerArtificeModifierInstance extends ArtificeModifierInstance 
             }
         }
         return catalyzer.burnTicks > 0;
+    }
+
+    @Override
+    public boolean consumesFuel() {
+        return true;
     }
 
     @Override

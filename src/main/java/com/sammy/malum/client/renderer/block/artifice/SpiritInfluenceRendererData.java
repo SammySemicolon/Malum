@@ -1,6 +1,6 @@
 package com.sammy.malum.client.renderer.block.artifice;
 
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
+import com.sammy.malum.core.systems.artifice.IArtificeAcceptor;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

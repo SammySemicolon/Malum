@@ -2,7 +2,7 @@ package com.sammy.malum.visual_effects;
 
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeInfluenceData;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierSource;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierInstance;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer.*;
 import com.sammy.malum.common.item.augment.*;
@@ -48,7 +48,7 @@ public class SpiritCrucibleParticleEffects {
         if (recipe != null) {
             Optional<ArtificeInfluenceData> influenceData = crucible.attributes.getInfluenceData(level);
             influenceData.ifPresent(d -> {
-                for (ArtificeModifierSource modifier : d.modifiers()) {
+                for (ArtificeModifierInstance modifier : d.modifiers()) {
                     modifier.addParticles(crucible, activeSpiritType);
                 }
             });

@@ -32,7 +32,7 @@ public class SpiritInfluenceRendererData extends HashMap<MalumSpiritType, Intege
             if (spiritType.equals(activeSpiritType)) {
                 continue;
             }
-            merge(activeSpiritType, 1, (a, b) -> Math.max(a - b, 0));
+            merge(spiritType, 1, (a, b) -> Math.max(a - b, 0));
         }
         return this;
     }

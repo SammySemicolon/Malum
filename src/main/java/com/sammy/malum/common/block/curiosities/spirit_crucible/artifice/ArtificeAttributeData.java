@@ -52,7 +52,7 @@ public class ArtificeAttributeData {
     public ArtificeAttributeData(@Nullable ArtificeInfluenceData influenceData) {
         this.influenceData = influenceData;
         if (influenceData != null) {
-            for (ArtificeModifierSource modifier : influenceData.modifiers()) {
+            for (ArtificeModifierInstance modifier : influenceData.modifiers()) {
                 modifier.modifyFocusing(this::applyModifier);
                 modifier.applyAugments(this::applyAugment);
                 this.modifierPositions.add(modifier.sourcePosition);

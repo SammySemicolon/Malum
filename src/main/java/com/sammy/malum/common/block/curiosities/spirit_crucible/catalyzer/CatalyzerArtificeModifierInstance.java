@@ -11,12 +11,12 @@ import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 
 import java.util.function.Consumer;
 
-public class CatalyzerArtificeModifierSource extends ArtificeModifierSource {
+public class CatalyzerArtificeModifierInstance extends ArtificeModifierInstance {
 
     public static final ResourceLocation ID = MalumMod.malumPath("spirit_catalyzer");
     public final SpiritCatalyzerCoreBlockEntity catalyzer;
 
-    protected CatalyzerArtificeModifierSource(SpiritCatalyzerCoreBlockEntity catalyzer) {
+    protected CatalyzerArtificeModifierInstance(SpiritCatalyzerCoreBlockEntity catalyzer) {
         super(ID, catalyzer.getBlockPos(), 8);
         this.catalyzer = catalyzer;
     }

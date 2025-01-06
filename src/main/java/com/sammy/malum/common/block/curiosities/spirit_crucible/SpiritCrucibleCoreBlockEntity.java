@@ -192,7 +192,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
             }
             if (recipe != null) {
                 attributes.getInfluenceData(level).ifPresent(d -> {
-                    for (ArtificeModifierSource modifier : d.modifiers()) {
+                    for (ArtificeModifierInstance modifier : d.modifiers()) {
                         modifier.tickFocusing(attributes);
                         if (!modifier.canModifyFocusing()) {
                             recalibrateAccelerators(level, worldPosition);

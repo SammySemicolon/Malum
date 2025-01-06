@@ -10,18 +10,18 @@ import team.lodestar.lodestone.helpers.block.BlockEntityHelper;
 
 import java.util.*;
 
-public record ArtificeInfluenceData(Set<ArtificeModifierSource> modifiers) {
+public record ArtificeInfluenceData(Set<ArtificeModifierInstance> modifiers) {
 
     public static ArtificeInfluenceData createFreshData(int lookupRange, Level level, BlockPos pos) {
-        var nearbyInfluencers = BlockEntityHelper.getBlockEntities(ArtificeModifierSource.CrucibleInfluencer.class, level, pos, lookupRange, ArtificeInfluenceData::isValidInfluencer);
+        var nearbyInfluencers = BlockEntityHelper.getBlockEntities(IArtificeModifierSource.class, level, pos, lookupRange, ArtificeInfluenceData::isValidInfluencer);
         return createData(nearbyInfluencers);
     }
 
     public static ArtificeInfluenceData loadData(Level level, ListTag list) {
-        Collection<ArtificeModifierSource.CrucibleInfluencer> nearbyInfluencers = new HashSet<>();
+        Collection<IArtificeModifierSource> nearbyInfluencers = new HashSet<>();
         for (int i = 0; i < list.size(); i++) {
             var pos = NBTHelper.readBlockPos(list, i);
-            if (level.getBlockEntity(pos) instanceof ArtificeModifierSource.CrucibleInfluencer influencer) {
+            if (level.getBlockEntity(pos) instanceof IArtificeModifierSource influencer) {
                 nearbyInfluencers.add(influencer);
             } else {
                 return null;
@@ -32,10 +32,10 @@ public record ArtificeInfluenceData(Set<ArtificeModifierSource> modifiers) {
     }
 
     public static ArtificeInfluenceData reconstructData(Level level, ArtificeAttributeData data) {
-        Collection<ArtificeModifierSource.CrucibleInfluencer> nearbyInfluencers = new HashSet<>();
+        Collection<IArtificeModifierSource> nearbyInfluencers = new HashSet<>();
         List<BlockPos> knownPositions = data.modifierPositions;
         for (BlockPos pos : knownPositions) {
-            if (level.getBlockEntity(pos) instanceof ArtificeModifierSource.CrucibleInfluencer influencer) {
+            if (level.getBlockEntity(pos) instanceof IArtificeModifierSource influencer) {
                 nearbyInfluencers.add(influencer);
             } else {
                 return null;
@@ -44,11 +44,11 @@ public record ArtificeInfluenceData(Set<ArtificeModifierSource> modifiers) {
         return createData(nearbyInfluencers);
     }
 
-    public static ArtificeInfluenceData createData(Collection<ArtificeModifierSource.CrucibleInfluencer> nearbyInfluencers) {
-        Set<ArtificeModifierSource> validModifiers = new HashSet<>();
+    public static ArtificeInfluenceData createData(Collection<IArtificeModifierSource> nearbyInfluencers) {
+        Set<ArtificeModifierInstance> validModifiers = new HashSet<>();
         Map<ResourceLocation, Integer> counter = new HashMap<>();
-        for (ArtificeModifierSource.CrucibleInfluencer influencer : nearbyInfluencers) {
-            ArtificeModifierSource modifier = influencer.getActiveFocusingModifierInstance();
+        for (IArtificeModifierSource influencer : nearbyInfluencers) {
+            ArtificeModifierInstance modifier = influencer.getActiveFocusingModifierInstance();
             if (modifier.canModifyFocusing()) {
                 int count = counter.merge(modifier.type, 1, Integer::sum);
                 if (count <= modifier.maxAmount) {
@@ -59,8 +59,8 @@ public record ArtificeInfluenceData(Set<ArtificeModifierSource> modifiers) {
         return new ArtificeInfluenceData(validModifiers);
     }
 
-    public static boolean isValidInfluencer(ArtificeModifierSource.CrucibleInfluencer influencer) {
-        Optional<IArtificeAcceptor> optional = influencer.getFocusingModifierInstance().filter(ArtificeModifierSource::isBound).map(p -> p.target);
+    public static boolean isValidInfluencer(IArtificeModifierSource influencer) {
+        Optional<IArtificeAcceptor> optional = influencer.getFocusingModifierInstance().filter(ArtificeModifierInstance::isBound).map(p -> p.target);
         if (optional.isEmpty()) {
             return true;
         }

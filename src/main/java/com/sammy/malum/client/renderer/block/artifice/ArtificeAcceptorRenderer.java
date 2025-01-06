@@ -1,7 +1,8 @@
 package com.sammy.malum.client.renderer.block.artifice;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierSource;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierInstance;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeModifierSource;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
 import com.sammy.malum.core.systems.item.HeldItemTracker;
 import com.sammy.malum.registry.client.MalumRenderTypeTokens;
@@ -37,14 +38,14 @@ public abstract class ArtificeAcceptorRenderer<T extends LodestoneBlockEntity> i
         poseStack.pushPose();
         poseStack.translate(-pos.getX(), -pos.getY(), -pos.getZ());
         target.getAttributes().getInfluenceData(level).ifPresent(p -> {
-            for (ArtificeModifierSource modifier : p.modifiers()) {
+            for (ArtificeModifierInstance modifier : p.modifiers()) {
                 var modifierPosition = modifier.sourcePosition;
                 var modifierBlockEntity = level.getBlockEntity(modifierPosition);
                 if (modifierBlockEntity == null) {
                     continue;
                 }
                 var modifierBlockPos = modifierBlockEntity.getBlockPos();
-                if (modifierBlockEntity instanceof ArtificeModifierSource.CrucibleInfluencer influencer) {
+                if (modifierBlockEntity instanceof IArtificeModifierSource influencer) {
                     BlockEntityRenderer<BlockEntity> renderer = minecraft.getBlockEntityRenderDispatcher().getRenderer(modifierBlockEntity);
                     if (renderer instanceof ArtificeModifierSourceRenderer modifierRenderer) {
                         poseStack.pushPose();
@@ -75,7 +76,7 @@ public abstract class ArtificeAcceptorRenderer<T extends LodestoneBlockEntity> i
         stack.popPose();
     }
 
-    public interface ArtificeModifierSourceRenderer<T extends ArtificeModifierSource.CrucibleInfluencer> {
+    public interface ArtificeModifierSourceRenderer<T extends IArtificeModifierSource> {
         void render(T modifier, IArtificeAcceptor target, SpiritInfluenceRendererData spiritInfluence, float partialTicks, PoseStack poseStack);
     }
 }

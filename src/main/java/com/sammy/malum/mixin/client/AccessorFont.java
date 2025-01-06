@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.gen.*;
 
 @Mixin(Font.class)
 public interface AccessorFont {
-
-    @Invoker("getFontSet")
-    FontSet malum$getFontSet(ResourceLocation pFontLocation);
+//
+//    @Invoker("getFontSet")
+//    FontSet malum$getFontSet(ResourceLocation pFontLocation);
 }

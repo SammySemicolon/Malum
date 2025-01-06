@@ -26,14 +26,14 @@ public interface IArtificeAcceptor {
     }
     default void invalidateModifiers(Level level) {
         getAttributes().getInfluenceData(level).ifPresent(d -> {
-            for (ArtificeModifierSource modifier : d.modifiers()) {
+            for (ArtificeModifierInstance modifier : d.modifiers()) {
                 modifier.invalidate();
             }
         });
     }
     default void bindModifiers(Level level) {
         getAttributes().getInfluenceData(level).ifPresent(d -> {
-            for (ArtificeModifierSource modifier : d.modifiers()) {
+            for (ArtificeModifierInstance modifier : d.modifiers()) {
                 modifier.bind(this);
             }
         });

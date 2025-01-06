@@ -1,8 +1,5 @@
-package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
+package com.sammy.malum.common.block;
 
-import com.sammy.malum.common.block.*;
-import com.sammy.malum.common.item.augment.*;
-import com.sammy.malum.common.item.augment.core.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import net.minecraft.sounds.*;

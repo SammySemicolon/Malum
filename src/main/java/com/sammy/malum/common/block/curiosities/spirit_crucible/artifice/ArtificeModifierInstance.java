@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public abstract class ArtificeModifierSource {
+public abstract class ArtificeModifierInstance {
 
     public final ResourceLocation type;
     public final BlockPos sourcePosition;
@@ -16,7 +16,7 @@ public abstract class ArtificeModifierSource {
 
     public IArtificeAcceptor target;
 
-    protected ArtificeModifierSource(ResourceLocation type, BlockPos sourcePosition, int maxAmount) {
+    protected ArtificeModifierInstance(ResourceLocation type, BlockPos sourcePosition, int maxAmount) {
         this.type = type;
         this.sourcePosition = sourcePosition;
         this.maxAmount = maxAmount;
@@ -44,15 +44,4 @@ public abstract class ArtificeModifierSource {
 
     public abstract void addParticles(IArtificeAcceptor target, MalumSpiritType spiritType);
 
-    public interface CrucibleInfluencer {
-        ArtificeModifierSource createFocusingModifierInstance();
-
-        Optional<ArtificeModifierSource> getFocusingModifierInstance();
-
-        default ArtificeModifierSource getActiveFocusingModifierInstance() {
-            return getFocusingModifierInstance()
-                    .filter(ArtificeModifierSource::isBound)
-                    .orElseGet(this::createFocusingModifierInstance);
-        }
-    }
 }

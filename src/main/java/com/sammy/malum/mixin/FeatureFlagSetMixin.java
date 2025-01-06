@@ -47,13 +47,13 @@ public class FeatureFlagSetMixin implements FeatureFlagExpandedUniverseSet {
 
 	@Override
 	public void malum$attachFeatureSet(FeatureFlagSet set) {
-		FeatureFlagUniverse universe = ((AccessorFeatureFlagSet) (Object) set).malum$getUniverse();
-
-		if (universe != null) {
-			if (malum$featureFlags == null)
-				malum$featureFlags = new HashMap<>();
-			malum$featureFlags.put(MalumMod.malumPath(universe.toString()), set);
-		}
+//		FeatureFlagUniverse universe = ((AccessorFeatureFlagSet) (Object) set).malum$getUniverse();
+//
+//		if (universe != null) {
+//			if (malum$featureFlags == null)
+//				malum$featureFlags = new HashMap<>();
+//			malum$featureFlags.put(MalumMod.malumPath(universe.toString()), set);
+//		}
 	}
 
 	@Override

@@ -1,11 +1,9 @@
 package com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer;
 
 import com.sammy.malum.common.block.*;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierSource;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.AugmentBlockEntityInventory;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
-import com.sammy.malum.common.item.augment.*;
-import com.sammy.malum.core.systems.spirit.*;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierInstance;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeModifierSource;
+import com.sammy.malum.common.block.AugmentBlockEntityInventory;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import com.sammy.malum.visual_effects.*;
@@ -14,7 +12,6 @@ import net.minecraft.nbt.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
@@ -27,7 +24,7 @@ import javax.annotation.*;
 import java.util.*;
 import java.util.function.*;
 
-public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity implements ArtificeModifierSource.CrucibleInfluencer, IBlockCapabilityProvider<IItemHandler, Direction> {
+public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity implements IArtificeModifierSource, IBlockCapabilityProvider<IItemHandler, Direction> {
 
     public static final Supplier<HorizontalDirectionStructure> STRUCTURE = () -> (HorizontalDirectionStructure.of(new MultiBlockStructure.StructurePiece(0, 1, 0, BlockRegistry.SPIRIT_CATALYZER_COMPONENT.get().defaultBlockState())));
     public static final Vec3 CATALYZER_ITEM_OFFSET = new Vec3(0.5f, 2f, 0.5f);
@@ -35,7 +32,7 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
 
     public MalumBlockEntityInventory inventory;
     public MalumBlockEntityInventory augmentInventory;
-    public CatalyzerArtificeModifierSource modifier;
+    public CatalyzerArtificeModifierInstance modifier;
     public float burnTicks;
 
     public SpiritCatalyzerCoreBlockEntity(BlockEntityType<? extends SpiritCatalyzerCoreBlockEntity> type, MultiBlockStructure structure, BlockPos pos, BlockState state) {
@@ -49,12 +46,12 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
     }
 
     @Override
-    public ArtificeModifierSource createFocusingModifierInstance() {
-        return modifier = new CatalyzerArtificeModifierSource(this);
+    public ArtificeModifierInstance createFocusingModifierInstance() {
+        return modifier = new CatalyzerArtificeModifierInstance(this);
     }
 
     @Override
-    public Optional<ArtificeModifierSource> getFocusingModifierInstance() {
+    public Optional<ArtificeModifierInstance> getFocusingModifierInstance() {
         return Optional.ofNullable(modifier);
     }
 

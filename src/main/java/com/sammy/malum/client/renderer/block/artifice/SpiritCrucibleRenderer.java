@@ -4,15 +4,9 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import com.sammy.malum.client.renderer.entity.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeData;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierSource;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.spirit.*;
-import com.sammy.malum.core.systems.item.HeldItemTracker;
-import com.sammy.malum.registry.client.MalumRenderTypeTokens;
-import com.sammy.malum.registry.common.item.*;
 import net.minecraft.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.Font;
@@ -21,7 +15,6 @@ import net.minecraft.client.renderer.blockentity.*;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
@@ -33,9 +26,7 @@ import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
 
-import java.awt.*;
 import java.lang.Math;
-import java.util.WeakHashMap;
 
 import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 

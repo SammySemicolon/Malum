@@ -523,15 +523,17 @@
   },
   "crucible_augment_applied": {
     "sounds": [
-      "malum:curiosities/augments/apply_augment1",
-      "malum:curiosities/augments/apply_augment2"
+      "malum:curiosities/augments/augment_insert1",
+      "malum:curiosities/augments/augment_insert2",
+      "malum:curiosities/augments/augment_insert3"
     ],
     "subtitle": "malum.subtitle.crucible_augment_applied"
   },
   "crucible_augment_removed": {
     "sounds": [
-      "malum:curiosities/augments/remove_augment1",
-      "malum:curiosities/augments/remove_augment2"
+      "malum:curiosities/augments/augment_remove1",
+      "malum:curiosities/augments/augment_remove2",
+      "malum:curiosities/augments/augment_remove3"
     ],
     "subtitle": "malum.subtitle.crucible_augment_removed"
   },
@@ -1740,8 +1742,12 @@
   },
   "tuning_fork_tinkers": {
     "sounds": [
-      "malum:curiosities/augments/tuning_fork_tinker1",
-      "malum:curiosities/augments/tuning_fork_tinker2"
+      "malum:curiosities/augments/tinker1",
+      "malum:curiosities/augments/tinker2",
+      "malum:curiosities/augments/tinker3",
+      "malum:curiosities/augments/tinker4",
+      "malum:curiosities/augments/tinker5",
+      "malum:curiosities/augments/tinker6"
     ],
     "subtitle": "malum.subtitle.tuning_fork_tinkers"
   },

@@ -4,6 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.block.curiosities.redstone.SpiritDiodeBlock;
 import com.sammy.malum.common.block.curiosities.redstone.SpiritDiodeBlockEntity;
+import com.sammy.malum.core.systems.item.HeldItemTracker;
+import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -26,6 +28,8 @@ public abstract class SpiritDiodeRenderer<T extends SpiritDiodeBlockEntity> impl
     protected static final RenderTypeToken INPUT = RenderTypeToken.createToken(MalumMod.malumPath("textures/block/redstone/runewood_frame_input_overlay.png"));
     protected final RenderTypeToken output;
     protected static final Color COLOR = new Color(170, 15, 1);
+
+    public static final HeldItemTracker CLAW_TRACKER = new HeldItemTracker(p -> p.is(ItemTagRegistry.IS_REDSTONE_TOOL));
 
     public SpiritDiodeRenderer(BlockEntityRendererProvider.Context context, ResourceLocation tokenTexture) {
         this.output = RenderTypeToken.createToken(tokenTexture);

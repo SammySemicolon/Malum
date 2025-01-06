@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.*;
 
 @Mixin(BakedGlyph.class)
 public interface AccessorBakedGlyph {
-
-    @Accessor("renderTypes")
-    GlyphRenderTypes malum$getRenderTypes();
+//
+//    @Accessor("renderTypes")
+//    GlyphRenderTypes malum$getRenderTypes();
 }

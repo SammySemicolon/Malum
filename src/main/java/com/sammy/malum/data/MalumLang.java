@@ -1,7 +1,7 @@
 package com.sammy.malum.data;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
+import com.sammy.malum.core.systems.artifice.ArtificeAttributeType;
 import com.sammy.malum.common.block.ether.EtherWallTorchBlock;
 import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.item.spirit.SpiritJarItem;
@@ -676,7 +676,7 @@ public class MalumLang extends LanguageProvider {
 
         addSimpleEntryHeader("impurity_stabilizer", "Impurity Stabilizer", "Potency from weakness");
         addPages("impurity_stabilizer",
-                "The wicked spirit is drawn to the weak, seeking to cull. The Impurity Stabilizer subverts that property, providing a powerful percentage bonus to the weakest crucible attribute besides fuel usage rate and instability, which receive a small improvement overall instead.");
+                "The wicked spirit is drawn to the weak, seeking to cull. The Impurity Stabilizer subverts that property, providing a powerful percentage tuning bonus to the weakest crucible attribute besides fuel usage rate and instability. This additional layer of tuning does increase tuning strain however.");
 
         addSimpleEntryHeader("shielding_apparatus", "Shielding Apparatus", "A bulwark against the storm");
         addPages("shielding_apparatus",

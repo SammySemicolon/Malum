@@ -1,10 +1,8 @@
 package com.sammy.malum.common.item.augment.core;
 
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifier;
+import com.sammy.malum.core.systems.artifice.ArtificeModifier;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.core.systems.spirit.*;
-
-import java.util.List;
 
 public class CoreAugmentItem extends AugmentItem {
 

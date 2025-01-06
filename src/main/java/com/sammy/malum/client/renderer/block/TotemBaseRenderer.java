@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.sammy.malum.client.*;
 import com.sammy.malum.common.block.curiosities.totem.*;
 import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.core.systems.item.HeldItemTracker;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.item.*;
@@ -25,38 +26,20 @@ import static com.sammy.malum.client.RenderUtils.*;
 
 public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEntity> {
 
-    private static float totemicStaffHeldTimer = 0;
-    private static boolean isHoldingStaff;
+    public static final HeldItemTracker STAFF_TRACKER = new HeldItemTracker(p -> p.is(ItemTagRegistry.IS_TOTEMIC_TOOL));
 
     public TotemBaseRenderer(BlockEntityRendererProvider.Context context) {
     }
 
-    public static void checkForTotemicStaff(ClientTickEvent.Pre event) {
-        final LocalPlayer player = Minecraft.getInstance().player;
-        if (player == null) {
-            return;
-        }
-        final Item totemicStaff = ItemRegistry.TOTEMIC_STAFF.get();
-        if ((player.getMainHandItem().getItem().equals(totemicStaff) || player.getOffhandItem().getItem().equals(totemicStaff))) {
-            if (TotemBaseRenderer.totemicStaffHeldTimer < 20) {
-                TotemBaseRenderer.totemicStaffHeldTimer++;
-            }
-            isHoldingStaff = true;
-        } else if (TotemBaseRenderer.totemicStaffHeldTimer > 0) {
-            TotemBaseRenderer.totemicStaffHeldTimer--;
-            isHoldingStaff = false;
-        }
-    }
 
     @Override
     public void render(TotemBaseBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        if (totemicStaffHeldTimer > 0f) {
+        if (STAFF_TRACKER.isVisible()) {
             if (blockEntityIn.cachedRadiusRite == null) {
                 return;
             }
-            float staffTimer = Mth.clamp((totemicStaffHeldTimer + (isHoldingStaff ? 1 : -1) * partialTicks), 0, 20);
             float totemTimer = Mth.clamp((blockEntityIn.radiusVisibility + (blockEntityIn.isActiveOrAssembling() ? 1 : -1) * partialTicks), 0, 40);
-            float scalar = Easing.SINE_IN_OUT.ease(staffTimer / 20f, 0, 1, 1) * Easing.SINE_IN_OUT.ease(totemTimer / 40f, 0, 1, 1);
+            float scalar = Easing.SINE_IN_OUT.ease(STAFF_TRACKER.getDelta(partialTicks), 0, 1) * Easing.SINE_IN_OUT.ease(totemTimer / 40f, 0, 1, 1);
             MalumSpiritType spiritType = blockEntityIn.cachedRadiusRite.getIdentifyingSpirit();
             TotemicRiteEffect riteEffect = blockEntityIn.cachedRadiusRite.getRiteEffect(blockEntityIn.isSoulwood);
             BlockPos riteEffectCenter = riteEffect.getRiteEffectCenter(blockEntityIn);

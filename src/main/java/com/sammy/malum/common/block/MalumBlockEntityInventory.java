@@ -1,6 +1,5 @@
 package com.sammy.malum.common.block;
 
-import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.AugmentBlockEntityInventory;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
@@ -8,7 +7,6 @@ import net.minecraft.sounds.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.helpers.*;
-import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 import team.lodestar.lodestone.systems.blockentity.*;
 
 import java.util.function.*;

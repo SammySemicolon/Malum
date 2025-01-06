@@ -51,9 +51,9 @@ public class FontStringRenderOutputMixin {
 
 	@WrapOperation(method = "accept", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;renderType(Lnet/minecraft/client/gui/Font$DisplayMode;)Lnet/minecraft/client/renderer/RenderType;"))
 	public RenderType useSubtractiveRenderingType(BakedGlyph instance, Font.DisplayMode displayMode, Operation<RenderType> original, @Local(ordinal = 0) float alpha, @Share("subtractiveEnabled") LocalBooleanRef subtractiveEnabled) {
-		if (subtractiveEnabled.get() && alpha >= 0.5f) {
-			return ((SubtractiveTextGlyphRenderTypes) (Object) ((AccessorBakedGlyph) instance).malum$getRenderTypes()).malum$getSubtractiveType();
-		}
+//		if (subtractiveEnabled.get() && alpha >= 0.5f) {
+//			return ((SubtractiveTextGlyphRenderTypes) (Object) ((AccessorBakedGlyph) instance).malum$getRenderTypes()).malum$getSubtractiveType();
+//		}
 
 		return original.call(instance, displayMode);
 	}
@@ -88,13 +88,13 @@ public class FontStringRenderOutputMixin {
 	@Inject(method = "finish", at = @At("RETURN"))
 	public void renderSubtractiveEffects(int pBackgroundColor, float pX, CallbackInfoReturnable<Float> cir) {
 		if (malum$inverseEffects != null) {
-			BakedGlyph bakedglyph = ((AccessorFont) this).malum$getFontSet(Style.DEFAULT_FONT).whiteGlyph();
-			RenderType subtractiveType = ((SubtractiveTextGlyphRenderTypes) (Object) ((AccessorBakedGlyph) bakedglyph).malum$getRenderTypes()).malum$getSubtractiveType();
-			VertexConsumer vertexconsumer = bufferSource.getBuffer(subtractiveType);
-
-			for(BakedGlyph.Effect bakedglyph$effect : malum$inverseEffects) {
-				bakedglyph.renderEffect(bakedglyph$effect, pose, vertexconsumer, packedLightCoords);
-			}
+//			BakedGlyph bakedglyph = ((AccessorFont) this).malum$getFontSet(Style.DEFAULT_FONT).whiteGlyph();
+//			RenderType subtractiveType = ((SubtractiveTextGlyphRenderTypes) (Object) ((AccessorBakedGlyph) bakedglyph).malum$getRenderTypes()).malum$getSubtractiveType();
+//			VertexConsumer vertexconsumer = bufferSource.getBuffer(subtractiveType);
+//
+//			for(BakedGlyph.Effect bakedglyph$effect : malum$inverseEffects) {
+//				bakedglyph.renderEffect(bakedglyph$effect, pose, vertexconsumer, packedLightCoords);
+//			}
 		}
 	}
 

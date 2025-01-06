@@ -3,6 +3,7 @@ package com.sammy.malum.core.events;
 import com.sammy.malum.client.renderer.block.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.core.handlers.client.*;
+import com.sammy.malum.core.systems.item.HeldItemTracker;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -25,8 +26,8 @@ public class ClientRuntimeEvents {
 
     @SubscribeEvent
     public static void clientTickEvent(ClientTickEvent.Pre event) {
-        SpiritCrucibleRenderer.checkForTuningFork(event);
-        TotemBaseRenderer.checkForTotemicStaff(event);
+        HeldItemTracker.tickTrackers();
+
         HiddenBladeRenderHandler.tick(event);
         SoulWardRenderHandler.tick(event);
     }

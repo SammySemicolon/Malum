@@ -21,4 +21,7 @@ public class MalumRenderTypeTokens {
     
     public static final RenderTypeToken VOID_VIGNETTE = RenderTypeToken.createToken(malumPath("textures/block/weeping_well/primordial_soup_vignette.png"));
     public static final RenderTypeToken VOID_NOISE = RenderTypeToken.createToken(malumPath("textures/vfx/void_noise.png"));
+
+    public static final RenderTypeToken DEBUG_GIZMO = RenderTypeToken.createToken(malumPath("textures/particle/funky_star.png"));
+
 }

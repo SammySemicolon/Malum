@@ -5,8 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 
-import java.util.Optional;
-
 public interface IArtificeAcceptor {
 
     ArtificeAttributeData getAttributes();
@@ -22,13 +20,21 @@ public interface IArtificeAcceptor {
     Vec3 getVisualAccelerationPoint();
 
     default void recalibrateAccelerators(Level level, BlockPos pos) {
-        invalidateAccelerators(level);
-        setAttributes(new ArtificeAttributeData(ArtificeInfluenceData.createData(getLookupRadius(), level, pos)));
+        invalidateModifiers(level);
+        setAttributes(new ArtificeAttributeData(ArtificeInfluenceData.createFreshData(getLookupRadius(), level, pos)));
+        bindModifiers(level);
     }
-    default void invalidateAccelerators(Level level) {
+    default void invalidateModifiers(Level level) {
         getAttributes().getInfluenceData(level).ifPresent(d -> {
             for (ArtificeModifierSource modifier : d.modifiers()) {
                 modifier.invalidate();
+            }
+        });
+    }
+    default void bindModifiers(Level level) {
+        getAttributes().getInfluenceData(level).ifPresent(d -> {
+            for (ArtificeModifierSource modifier : d.modifiers()) {
+                modifier.bind(this);
             }
         });
     }

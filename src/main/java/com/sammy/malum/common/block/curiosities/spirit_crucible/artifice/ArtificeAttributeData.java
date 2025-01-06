@@ -3,11 +3,15 @@ package com.sammy.malum.common.block.curiosities.spirit_crucible.artifice;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.common.data_components.ArtificeAugmentData;
+import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import team.lodestar.lodestone.helpers.RandomHelper;
+import team.lodestar.lodestone.helpers.block.BlockStateHelper;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -22,7 +26,6 @@ public class ArtificeAttributeData {
             ArtificeAttributeType.CODEC.optionalFieldOf("tunedAttribute").forGetter(v -> Optional.ofNullable(v.tunedAttribute)),
             Codec.FLOAT.fieldOf("chainProcessingBonus").forGetter(v -> v.chainProcessingBonus)
     ).apply(obj, ((a, b, h, c) -> new ArtificeAttributeData(a, b, h.orElse(null), c))));
-
 
     public final ArtificeAttributeValue focusingSpeed = new ArtificeAttributeValue(FOCUSING_SPEED);
     public final ArtificeAttributeValue instability = new ArtificeAttributeValue(INSTABILITY);
@@ -52,18 +55,10 @@ public class ArtificeAttributeData {
             for (ArtificeModifierSource modifier : influenceData.modifiers()) {
                 modifier.modifyFocusing(this::applyModifier);
                 modifier.applyAugments(this::applyAugment);
+                this.modifierPositions.add(modifier.sourcePosition);
             }
         }
-        var attributesForTuning = getExistingAttributesForTuning();
-        if (tunedAttribute != null) {
-            for (ArtificeAttributeValue attribute : attributes) {
-                attribute.tune(tunedAttribute.equals(attribute.type) ? AppliedTuningType.POSITIVE : AppliedTuningType.NEGATIVE);
-            }
-        }
-        var weakestValue = figureOutWeakestValue(attributesForTuning);
-        if (weakestValue != null) {
-            weakestValue.addTuningMultiplier(weakestValue.getValue(this));
-        }
+        applyTuning();
     }
 
     public ArtificeAttributeData(List<ArtificeAttributeValue> attributes, List<BlockPos> modifierPositions, ArtificeAttributeType tunedAttribute, float chainProcessingBonus) {
@@ -79,6 +74,26 @@ public class ArtificeAttributeData {
 
     }
 
+    public void applyTuning() {
+        var attributesForTuning = getExistingAttributesForTuning();
+        if (tunedAttribute != null) {
+            for (ArtificeAttributeType attribute : attributesForTuning) {
+                ArtificeAttributeValue value = attribute.getAttributeValue(this);
+                var tuningType = tunedAttribute.equals(attribute) ? AppliedTuningType.POSITIVE : AppliedTuningType.NEGATIVE;
+                value.applyModifier(new TuningModifier(attribute, tuningType));
+            }
+        }
+        else {
+            for (ArtificeAttributeValue attribute : attributes) {
+                attribute.removeModifier(TuningModifier.TUNING_FORK);
+            }
+        }
+        var weakestAttribute = figureOutWeakestAttribute(attributesForTuning);
+        if (weakestAttribute != null) {
+            weakestAttribute.applyModifier(new TuningModifier(TuningModifier.WEAKEST_BOOST, weakestBoost.getValue(this)));
+        }
+    }
+
     public void applyAugment(ItemStack augment) {
         if (!augment.has(DataComponentRegistry.ARTIFICE_AUGMENT))
         {
@@ -90,8 +105,7 @@ public class ArtificeAttributeData {
         }
     }
     public void applyModifier(ArtificeModifier modifier) {
-        ArtificeAttributeValue value = getAttributeValue(modifier.attribute());
-        value.addValue(modifier.value());
+        getAttributeValue(modifier.attribute()).applyModifier(modifier);
     }
 
     public Optional<ArtificeInfluenceData> getInfluenceData(Level level) {
@@ -99,6 +113,15 @@ public class ArtificeAttributeData {
             influenceData = ArtificeInfluenceData.reconstructData(level, this);
         }
         return Optional.ofNullable(influenceData);
+    }
+
+    public void applyTuningForkBuff(ServerLevel level, BlockPos pos) {
+        selectNextAttributeForTuning();
+        applyTuning();
+        float volume = RandomHelper.randomBetween(level.getRandom(), 1.25f, 1.75f);
+        float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 1.25f);
+        level.playSound(null, pos, SoundRegistry.TUNING_FORK_TINKER.get(), SoundSource.BLOCKS, volume, pitch);
+        BlockStateHelper.updateAndNotifyState(level, pos);
     }
 
     public void selectNextAttributeForTuning() {
@@ -123,7 +146,7 @@ public class ArtificeAttributeData {
         return getExistingAttributes(this).stream().filter(d -> d.canBeTuned).toList();
     }
 
-    public ArtificeAttributeValue figureOutWeakestValue(List<ArtificeAttributeType> tunedValues) {
+    public ArtificeAttributeValue figureOutWeakestAttribute(List<ArtificeAttributeType> tunedValues) {
         if (tunedValues.size() == 1) {
             return tunedValues.getFirst().getAttributeValue(this);
         }

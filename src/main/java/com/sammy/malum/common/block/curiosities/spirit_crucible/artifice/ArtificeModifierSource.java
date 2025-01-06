@@ -14,7 +14,7 @@ public abstract class ArtificeModifierSource {
     public final BlockPos sourcePosition;
     public final int maxAmount;
 
-    private boolean isBound = false;
+    public IArtificeAcceptor target;
 
     protected ArtificeModifierSource(ResourceLocation type, BlockPos sourcePosition, int maxAmount) {
         this.type = type;
@@ -22,17 +22,20 @@ public abstract class ArtificeModifierSource {
         this.maxAmount = maxAmount;
     }
 
-
     public abstract void modifyFocusing(Consumer<ArtificeModifier> modifierConsumer);
 
     public abstract void applyAugments(Consumer<ItemStack> augmentConsumer);
 
     public boolean isBound() {
-        return isBound;
+        return target != null;
     }
 
     public void invalidate() {
-        this.isBound = true;
+        target = null;
+    }
+
+    public void bind(IArtificeAcceptor target) {
+        this.target = target;
     }
 
     public abstract void tickFocusing(ArtificeAttributeData attributes);

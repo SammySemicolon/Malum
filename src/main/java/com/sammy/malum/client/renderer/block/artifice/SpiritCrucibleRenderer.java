@@ -1,4 +1,4 @@
-package com.sammy.malum.client.renderer.block;
+package com.sammy.malum.client.renderer.block.artifice;
 
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
@@ -6,22 +6,25 @@ import com.sammy.malum.client.renderer.entity.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeData;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeAttributeType;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.ArtificeModifierSource;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.spirit.*;
+import com.sammy.malum.core.systems.item.HeldItemTracker;
+import com.sammy.malum.registry.client.MalumRenderTypeTokens;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.*;
 import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.player.*;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.*;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import org.joml.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
@@ -30,47 +33,24 @@ import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
 
+import java.awt.*;
 import java.lang.Math;
+import java.util.WeakHashMap;
 
 import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 
 
-public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibleCoreBlockEntity> {
-
-    private static float tuningForkHeldTimer = 0;
-    private static boolean isHoldingFork;
+public class SpiritCrucibleRenderer extends ArtificeAcceptorRenderer<SpiritCrucibleCoreBlockEntity> {
 
     private static final MultiBufferSource TEXT = new LodestoneBufferWrapper(LodestoneRenderTypes.ADDITIVE_TEXT, RenderHandler.DELAYED_RENDER.getTarget());
 
     public SpiritCrucibleRenderer(BlockEntityRendererProvider.Context context) {
     }
 
-    public static void checkForTuningFork(ClientTickEvent.Pre event) {
-        final LocalPlayer player = Minecraft.getInstance().player;
-        if (player == null) {
-            return;
-        }
-        if ((player.getMainHandItem().is(ItemTagRegistry.IS_ARTIFICE_TOOL) || player.getOffhandItem().is(ItemTagRegistry.IS_ARTIFICE_TOOL))) {
-            if (tuningForkHeldTimer < 20) {
-                tuningForkHeldTimer++;
-            }
-            isHoldingFork = true;
-        } else if (tuningForkHeldTimer > 0) {
-            tuningForkHeldTimer--;
-            isHoldingFork = false;
-        }
-    }
-
-
-    @Override
-    public AABB getRenderBoundingBox(SpiritCrucibleCoreBlockEntity blockEntity) {
-        var pos = blockEntity.getBlockPos();
-        return new AABB(pos.getX() - 1, pos.getY(), pos.getZ() - 1, pos.getX() + 1, pos.getY() + 4, pos.getZ() + 1);
-    }
-
-
     @Override
     public void render(SpiritCrucibleCoreBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+        renderModifiers(blockEntityIn, partialTicks, poseStack, bufferIn, combinedLightIn, combinedOverlayIn);
+
         Level level = Minecraft.getInstance().level;
         ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
         LodestoneBlockEntityInventory inventory = blockEntityIn.spiritInventory;
@@ -121,14 +101,12 @@ public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibl
                 }
             }
         }
-        if (tuningForkHeldTimer > 5) {
-            ArtificeAttributeData accelerationData = blockEntityIn.getAttributes();
-            var font = Minecraft.getInstance().font;
-            float timer = Mth.clamp((tuningForkHeldTimer + (isHoldingFork ? 1 : -1) * partialTicks), 0, 20);
-            float scalar = Easing.SINE_IN_OUT.ease(timer/20f, 0, 1, 1);
-            float scale = 0.016F - (1-scalar)*0.004f;
-            var display = Font.DisplayMode.NORMAL;
+        if (FORK_TRACKER.isVisible()) {
+            var accelerationData = blockEntityIn.getAttributes();
             var attributes = ArtificeAttributeType.getExistingAttributes(accelerationData);
+            var font = Minecraft.getInstance().font;
+            float scalar = Easing.SINE_IN_OUT.ease(FORK_TRACKER.getDelta(partialTicks), 0, 1);
+            float scale = 0.016F - (1 - scalar) * 0.004f;
             poseStack.pushPose();
             poseStack.translate(0.5f, 2f, 0.55f);
             poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
@@ -154,28 +132,39 @@ public class SpiritCrucibleRenderer implements BlockEntityRenderer<SpiritCrucibl
                 Matrix4f pose = poseStack.last().pose();
                 float f = (-font.width(text) / 2f);
                 float xPos = 0 + f;
-                int color = ColorHelper.getColor(1, 1, 1, 0.38f*scalar);
-                font.drawInBatch(text, xPos, 0, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
+                int color = ColorHelper.getColor(1, 1, 1, 0.38f * scalar);
+                renderText(text, xPos, 0, color, pose);
 
-                color = ColorHelper.getColor(1, 1, 1, 0.18f*scalar);
-                font.drawInBatch(text, xPos - 0.5f, 0, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
-                font.drawInBatch(text, xPos - 0.5f, 0, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
-                font.drawInBatch(text, xPos, 0.5f, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
-                font.drawInBatch(text, xPos, -0.5f, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
+                color = ColorHelper.getColor(1, 1, 1, 0.18f * scalar);
+                renderText(text, xPos - 0.5f, 0, color, pose);
+                renderText(text, xPos - 0.5f, 0, color, pose);
+                renderText(text, xPos, 0.5f, color, pose);
+                renderText(text, xPos, -0.5f, color, pose);
 
-                color = ColorHelper.getColor(1, 1, 1, 0.12f*scalar);
-                font.drawInBatch(text, xPos - 1, 0, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
-                font.drawInBatch(outlineText, xPos + 1, 0, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
-                font.drawInBatch(outlineText, xPos, 1, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
-                font.drawInBatch(text, xPos, -1, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
+                color = ColorHelper.getColor(1, 1, 1, 0.12f * scalar);
+                renderText(text, xPos - 1, 0, color, pose);
+                renderText(outlineText, xPos + 1, 0, color, pose);
+                renderText(outlineText, xPos, 1, color, pose);
+                renderText(text, xPos, -1, color, pose);
 
-                font.drawInBatch(outlineText, xPos - 0.5f, -0.5f, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
-                font.drawInBatch(text, xPos - 0.5f, 0.5f, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
-                font.drawInBatch(outlineText, xPos + 0.5f, 0.5f, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
-                font.drawInBatch(text, xPos + 0.5f, -0.5f, color, false, pose, TEXT, display, 0, LightTexture.FULL_BRIGHT);
+                renderText(outlineText, xPos - 0.5f, -0.5f, color, pose);
+                renderText(text, xPos - 0.5f, 0.5f, color, pose);
+                renderText(outlineText, xPos + 0.5f, 0.5f, color, pose);
+                renderText(text, xPos + 0.5f, -0.5f, color, pose);
                 poseStack.popPose();
             }
             poseStack.popPose();
         }
+    }
+
+    public static void renderText(MutableComponent component, float xPos, float yPos, int color, Matrix4f pose) {
+        var font = Minecraft.getInstance().font;
+        font.drawInBatch(component, xPos, yPos, color, false, pose, TEXT, Font.DisplayMode.NORMAL, 0, LightTexture.FULL_BRIGHT);
+    }
+
+    @Override
+    public AABB getRenderBoundingBox(SpiritCrucibleCoreBlockEntity blockEntity) {
+        var pos = blockEntity.getBlockPos();
+        return new AABB(pos.getX() - 1, pos.getY(), pos.getZ() - 1, pos.getX() + 1, pos.getY() + 4, pos.getZ() + 1);
     }
 }

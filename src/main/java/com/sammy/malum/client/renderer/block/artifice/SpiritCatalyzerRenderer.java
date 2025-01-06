@@ -1,9 +1,10 @@
-package com.sammy.malum.client.renderer.block;
+package com.sammy.malum.client.renderer.block.artifice;
 
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import com.sammy.malum.client.*;
 import com.sammy.malum.client.renderer.entity.*;
+import com.sammy.malum.common.block.curiosities.spirit_crucible.artifice.IArtificeAcceptor;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.catalyzer.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.client.*;
@@ -11,7 +12,6 @@ import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.*;
 import net.minecraft.client.renderer.entity.*;
-import net.minecraft.core.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
@@ -22,9 +22,7 @@ import java.util.*;
 
 import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 
-
-public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCatalyzerCoreBlockEntity> {
-
+public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCatalyzerCoreBlockEntity>, ArtificeAcceptorRenderer.ArtificeModifierSourceRenderer<SpiritCatalyzerCoreBlockEntity> {
 
     public SpiritCatalyzerRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -53,37 +51,38 @@ public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCataly
             itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, combinedLightIn, NO_OVERLAY, poseStack, bufferIn, level, 0);
             poseStack.popPose();
         }
-        if (blockEntityIn.intensity != null && blockEntityIn.getFocusingModifierInstance().isPresent()) {
-            poseStack.pushPose();
-            var pos = blockEntityIn.getBlockPos();
-            Vec3 offset = SpiritCatalyzerCoreBlockEntity.CATALYZER_ITEM_OFFSET;
-            for (Map.Entry<MalumSpiritType, Integer> entry : blockEntityIn.intensity.entrySet()) {
-                if (entry.getValue() > 0) {
-                    final MalumSpiritType spirit = entry.getKey();
-                    poseStack.translate(-pos.getX(), -pos.getY(), -pos.getZ());
-                    renderBeam(blockEntityIn, poseStack, spirit, entry.getValue());
-                    poseStack.translate(pos.getX() + offset.x, pos.getY() + offset.y, pos.getZ() + offset.z);
-                    FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, spirit, entry.getValue() / 60f, partialTicks);
-                    poseStack.translate(-offset.x, -offset.y, -offset.z);
-                }
-            }
-            poseStack.popPose();
-        }
     }
 
-    public void renderBeam(SpiritCatalyzerCoreBlockEntity catalyzer, PoseStack poseStack, MalumSpiritType spiritType, int intensity) {
-//        var catalyzerPos = catalyzer.getBlockPos();
-//        var startPos = SpiritCatalyzerCoreBlockEntity.CATALYZER_ITEM_OFFSET.add(catalyzerPos.getX(), catalyzerPos.getY(), catalyzerPos.getZ());
-//        var targetPos = catalyzer.getTarget().getVisualAccelerationPoint();
-//        var difference = targetPos.subtract(startPos);
-//        float distance = 0.35f + Easing.SINE_OUT.ease(intensity / 60f, 0, 0.35f, 1);
-//        float alpha = intensity / 60f;
-//        var midPoint = startPos.add(difference.scale(distance));
-//        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
-//        SpiritBasedWorldVFXBuilder.create(spiritType)
-//                .setColor(spiritType.getPrimaryColor())
-//                .setRenderType(renderType)
-//                .setAlpha(alpha)
-//                .renderBeam(poseStack.last().pose(), startPos, midPoint, 0.4f, b -> b.setColor(spiritType.getSecondaryColor()).setAlpha(0f));
+    @Override
+    public void render(SpiritCatalyzerCoreBlockEntity catalyzer, IArtificeAcceptor target, SpiritInfluenceRendererData spiritInfluence, float partialTicks, PoseStack poseStack) {
+        poseStack.pushPose();
+        var pos = catalyzer.getBlockPos();
+        var offset = SpiritCatalyzerCoreBlockEntity.CATALYZER_ITEM_OFFSET;
+        for (MalumSpiritType spirit : spiritInfluence.keySet()) {
+            float delta = spiritInfluence.getDelta(spirit);
+            if (delta > 0) {
+                poseStack.translate(-pos.getX(), -pos.getY(), -pos.getZ());
+                renderBeam(catalyzer, target, poseStack, spirit, delta);
+                poseStack.translate(pos.getX() + offset.x, pos.getY() + offset.y, pos.getZ() + offset.z);
+                FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, spirit, delta, partialTicks);
+                poseStack.translate(-offset.x, -offset.y, -offset.z);
+            }
+        }
+        poseStack.popPose();
+    }
+
+    private static void renderBeam(SpiritCatalyzerCoreBlockEntity catalyzer, IArtificeAcceptor target, PoseStack poseStack, MalumSpiritType spiritType, float delta) {
+        var catalyzerPos = catalyzer.getBlockPos();
+        var startPos = SpiritCatalyzerCoreBlockEntity.CATALYZER_ITEM_OFFSET.add(catalyzerPos.getX(), catalyzerPos.getY(), catalyzerPos.getZ());
+        var targetPos = target.getVisualAccelerationPoint();
+        var difference = targetPos.subtract(startPos);
+        float distance = 0.35f + Easing.SINE_OUT.ease(delta, 0, 0.35f, 1);
+        var midPoint = startPos.add(difference.scale(distance));
+        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
+        SpiritBasedWorldVFXBuilder.create(spiritType)
+                .setColor(spiritType.getPrimaryColor())
+                .setRenderType(renderType)
+                .setAlpha(delta)
+                .renderBeam(poseStack.last().pose(), startPos, midPoint, 0.4f, b -> b.setColor(spiritType.getSecondaryColor()).setAlpha(0f));
     }
 }

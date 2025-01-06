@@ -49,13 +49,13 @@ public class CatalyzerArtificeModifierSource extends ArtificeModifierSource {
             return true;
         } else {
             ItemStack stack = catalyzer.inventory.getStackInSlot(0);
-            if (!stack.isEmpty()) {
+            if (!stack.isEmpty() && stack.getBurnTime(RecipeType.SMELTING) > 0) {
                 stack.shrink(1);
                 catalyzer.burnTicks = stack.getBurnTime(RecipeType.SMELTING) / 2f;
                 BlockStateHelper.updateAndNotifyState(catalyzer.getLevel(), catalyzer.getBlockPos());
             }
         }
-        return catalyzer.burnTicks != 0;
+        return catalyzer.burnTicks > 0;
     }
 
     @Override

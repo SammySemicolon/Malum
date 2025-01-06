@@ -55,9 +55,9 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
 
         this.add(SoundRegistry.CONCENTRATED_GLUTTONY_DRINK, s -> definition(s).with(sounds("curiosities/concentrated_gluttony/drink", 2)));
         this.add(SoundRegistry.SPIRIT_MOTE_CREATED, s -> definition(s).with(sounds("curiosities/spirit_mote/created", 3)));
-        this.add(SoundRegistry.TUNING_FORK_TINKER, s -> definition(s).with(sounds("curiosities/augments/tuning_fork_tinker", 2)));
-        this.add(SoundRegistry.CRUCIBLE_AUGMENT_APPLY, s -> definition(s).with(sounds("curiosities/augments/apply_augment", 2)));
-        this.add(SoundRegistry.CRUCIBLE_AUGMENT_REMOVE, s -> definition(s).with(sounds("curiosities/augments/remove_augment", 2)));
+        this.add(SoundRegistry.TUNING_FORK_TINKER, s -> definition(s).with(sounds("curiosities/augments/tinker", 6)));
+        this.add(SoundRegistry.CRUCIBLE_AUGMENT_APPLY, s -> definition(s).with(sounds("curiosities/augments/augment_insert", 3)));
+        this.add(SoundRegistry.CRUCIBLE_AUGMENT_REMOVE, s -> definition(s).with(sounds("curiosities/augments/augment_remove", 3)));
         this.add(SoundRegistry.WARPING_ENGINE_REVERBERATES, s -> definition(s).with(sounds("curiosities/augments/warping_engine_reverberates", 4)));
         this.add(SoundRegistry.SHIELDING_APPARATUS_SHIELDS, s -> definition(s).with(sounds("curiosities/augments/shielding_apparatus_shields", 2)));
 

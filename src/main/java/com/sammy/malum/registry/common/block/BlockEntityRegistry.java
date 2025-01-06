@@ -2,6 +2,8 @@ package com.sammy.malum.registry.common.block;
 
 import com.sammy.malum.*;
 import com.sammy.malum.client.renderer.block.*;
+import com.sammy.malum.client.renderer.block.artifice.SpiritCatalyzerRenderer;
+import com.sammy.malum.client.renderer.block.artifice.SpiritCrucibleRenderer;
 import com.sammy.malum.client.renderer.block.redstone.WaveMakerRenderer;
 import com.sammy.malum.client.renderer.block.redstone.WaveChargerRenderer;
 import com.sammy.malum.client.renderer.block.redstone.WavebankerRenderer;

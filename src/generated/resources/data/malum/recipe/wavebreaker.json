@@ -6,7 +6,11 @@
       "item": "minecraft:redstone"
     },
     {
-      "count": 4,
+      "count": 1,
+      "item": "malum:ether"
+    },
+    {
+      "count": 2,
       "tag": "malum:runewood_planks"
     }
   ],

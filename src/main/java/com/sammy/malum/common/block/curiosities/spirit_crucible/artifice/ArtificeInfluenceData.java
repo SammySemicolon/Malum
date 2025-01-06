@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import team.lodestar.lodestone.helpers.NBTHelper;
 import team.lodestar.lodestone.helpers.block.BlockEntityHelper;
 
@@ -11,8 +12,8 @@ import java.util.*;
 
 public record ArtificeInfluenceData(Set<ArtificeModifierSource> modifiers) {
 
-    public static ArtificeInfluenceData createData(int lookupRange, Level level, BlockPos pos) {
-        var nearbyInfluencers = BlockEntityHelper.getBlockEntities(ArtificeModifierSource.CrucibleInfluencer.class, level, pos, lookupRange);
+    public static ArtificeInfluenceData createFreshData(int lookupRange, Level level, BlockPos pos) {
+        var nearbyInfluencers = BlockEntityHelper.getBlockEntities(ArtificeModifierSource.CrucibleInfluencer.class, level, pos, lookupRange, ArtificeInfluenceData::isValidInfluencer);
         return createData(nearbyInfluencers);
     }
 
@@ -39,7 +40,6 @@ public record ArtificeInfluenceData(Set<ArtificeModifierSource> modifiers) {
             } else {
                 return null;
             }
-
         }
         return createData(nearbyInfluencers);
     }
@@ -49,9 +49,6 @@ public record ArtificeInfluenceData(Set<ArtificeModifierSource> modifiers) {
         Map<ResourceLocation, Integer> counter = new HashMap<>();
         for (ArtificeModifierSource.CrucibleInfluencer influencer : nearbyInfluencers) {
             ArtificeModifierSource modifier = influencer.getActiveFocusingModifierInstance();
-            if (modifier.isBound()) {
-                continue;
-            }
             if (modifier.canModifyFocusing()) {
                 int count = counter.merge(modifier.type, 1, Integer::sum);
                 if (count <= modifier.maxAmount) {
@@ -60,5 +57,14 @@ public record ArtificeInfluenceData(Set<ArtificeModifierSource> modifiers) {
             }
         }
         return new ArtificeInfluenceData(validModifiers);
+    }
+
+    public static boolean isValidInfluencer(ArtificeModifierSource.CrucibleInfluencer influencer) {
+        Optional<IArtificeAcceptor> optional = influencer.getFocusingModifierInstance().filter(ArtificeModifierSource::isBound).map(p -> p.target);
+        if (optional.isEmpty()) {
+            return true;
+        }
+        var target = optional.get();
+        return ((BlockEntity)target).isRemoved();
     }
 }

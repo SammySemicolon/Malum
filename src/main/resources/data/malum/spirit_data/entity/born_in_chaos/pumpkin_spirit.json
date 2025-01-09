@@ -1,0 +1,22 @@
+{
+  "registry_name": "born_in_chaos_v1:pumpkin_spirit",
+  "primary_type": "saacred",
+  "spirits": [
+    {
+      "spirit": "sacred",
+      "count": 4
+    },
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "eldritch",
+      "count": 1
+    }
+  ],
+  "spirit_item": {
+    "count": 1,
+    "item": "born_in_chaos_v1:ethereal_spirit"
+  }
+}

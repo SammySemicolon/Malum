@@ -1,0 +1,14 @@
+{
+  "registry_name": "born_in_chaos_v1:skeleton_thrasher",
+  "drops": [
+    {
+      "ingredient": {
+        "item": "malum:grim_talc",
+        "count": 1
+      },
+      "chance": "0.2",
+      "min": "4",
+      "max": "8"
+    }
+  ]
+}

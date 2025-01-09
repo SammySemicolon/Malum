@@ -78,6 +78,8 @@ public class MalumItemTags extends ItemTagsProvider {
                 CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), CREATIVE_SCYTHE.get(),
                 MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
 
+        tag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS).addOptional(ResourceLocation.parse("born_in_chaos_v1:nightmare_scythe"));
+
         tag(ItemTagRegistry.SCYTHES).add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), EDGE_OF_DELIVERANCE.get(), CREATIVE_SCYTHE.get());
         tag(ItemTagRegistry.STAVES).add(MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
 
@@ -95,8 +97,8 @@ public class MalumItemTags extends ItemTagsProvider {
                 .addOptional(ResourceLocation.parse("irons_spellbooks:magehunter"))
                 .addOptional(ResourceLocation.parse("irons_spellbooks:keeper_flamberge"))
                 .addOptional(ResourceLocation.parse("irons_spellbooks:spellbreaker"))
-                .addOptional(ResourceLocation.parse("irons_spellbooks:amethyst_rapier"));
-
+                .addOptional(ResourceLocation.parse("irons_spellbooks:amethyst_rapier"))
+                .addOptional(ResourceLocation.parse("born_in_chaos_v1:nightmare_scythe")); //TODO: Whenever BiC updates to 1.21, check if this is still valid! -Atobá
         tag(ItemTagRegistry.ANIMATED_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);
         tag(ItemTagRegistry.REBOUND_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);
         tag(ItemTagRegistry.ASCENSION_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);

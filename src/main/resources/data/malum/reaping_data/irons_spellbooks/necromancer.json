@@ -1,0 +1,14 @@
+{
+  "registry_name": "irons_spellbooks:necromancer",
+  "drops": [
+    {
+      "ingredient": {
+        "item": "malum:grim_talc",
+        "count": 1
+      },
+      "chance": "0.2",
+      "min": "1",
+      "max": "4"
+    }
+  ]
+}

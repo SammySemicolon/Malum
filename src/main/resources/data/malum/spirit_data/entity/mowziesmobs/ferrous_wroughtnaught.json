@@ -1,10 +1,10 @@
 {
-  "registry_name": "savageandravage:executioner",
+  "registry_name": "mowziesmobs:ferrous_wroughtnaught",
   "primary_type": "wicked",
   "spirits": [
     {
       "spirit": "wicked",
-      "count": 3
+      "count": 15
     }
   ]
 }

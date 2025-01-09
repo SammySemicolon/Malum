@@ -1,0 +1,14 @@
+{
+  "registry_name": "born_in_chaos_v1:spiritof_chaos",
+  "primary_type": "arcane",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 3
+    },
+    {
+      "spirit": "wicked",
+      "count": 2
+    }
+  ]
+}

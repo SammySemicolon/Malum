@@ -1,0 +1,14 @@
+{
+  "registry_name": "born_in_chaos_v1:fallen_chaos_knight",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 4
+    },
+    {
+      "spirit": "eldritch",
+      "count": 1
+    }
+  ]
+}

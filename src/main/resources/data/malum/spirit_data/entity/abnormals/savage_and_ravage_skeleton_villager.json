@@ -1,0 +1,14 @@
+{
+  "registry_name": "savage_and_ravage:skeleton_villager",
+  "primary_type": "arcane",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

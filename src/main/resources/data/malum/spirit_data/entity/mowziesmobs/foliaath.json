@@ -1,0 +1,14 @@
+{
+  "registry_name": "mowziesmobs:foliaath",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

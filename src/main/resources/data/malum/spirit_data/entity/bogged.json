@@ -1,0 +1,18 @@
+{
+  "registry_name": "minecraft:bogged",
+  "primary_type": "arcane",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count:": 1
+    }
+  ]
+}

@@ -34,6 +34,8 @@ var caelusVersion: String by extra
 val geckoLibVersion: String by extra
 val playerAnimatorVersion: String by extra
 val ironsSpellsVersion: String by extra
+val tconstructVersion: String by extra
+val mantleVersion: String by extra
 
 jarJar.enable()
 
@@ -218,6 +220,10 @@ dependencies {
     //Apothic Attributes
     compileOnly(fg.deobf("curse.maven:placebo-283644:5414631"))
     compileOnly(fg.deobf("curse.maven:apothic-attributes-898963:5634071"))
+
+    //Tinker's Construct optional Dependency
+    compileOnly(fg.deobf("curse.maven:tinkers-construct-${tconstructVersion}"))
+    compileOnly(fg.deobf("curse.maven:mantle-${mantleVersion}"))
 
     //Misc
     runtimeOnly(fg.deobf("curse.maven:spark-361579:4587309"))

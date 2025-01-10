@@ -100,7 +100,8 @@ public class ArtificeEntries {
                         SpiritInfusionPage.fromOutput(URANIUM_IMPETUS.get()),
                         SpiritInfusionPage.fromOutput(OSMIUM_IMPETUS.get()),
                         SpiritInfusionPage.fromOutput(ZINC_IMPETUS.get()),
-                        SpiritInfusionPage.fromOutput(TIN_IMPETUS.get())
+                        SpiritInfusionPage.fromOutput(TIN_IMPETUS.get()),
+                        SpiritInfusionPage.fromOutput(COBALT_IMPETUS.get())
                 ))
                 .addPage(new CyclingPage(
                         SpiritFocusingPage.fromOutput(IRON_NODE.get()),
@@ -113,7 +114,8 @@ public class ArtificeEntries {
                         SpiritFocusingPage.fromOutput(URANIUM_NODE.get()),
                         SpiritFocusingPage.fromOutput(OSMIUM_NODE.get()),
                         SpiritFocusingPage.fromOutput(ZINC_NODE.get()),
-                        SpiritFocusingPage.fromOutput(TIN_NODE.get())
+                        SpiritFocusingPage.fromOutput(TIN_NODE.get()),
+                        SpiritInfusionPage.fromOutput(COBALT_NODE.get())
                 ))
         );
 

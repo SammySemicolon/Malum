@@ -12,7 +12,8 @@
     "malum:cracked_uranium_impetus",
     "malum:cracked_osmium_impetus",
     "malum:cracked_zinc_impetus",
-    "malum:cracked_tin_impetus"
+    "malum:cracked_tin_impetus",
+    "malum:cracked_cobalt_impetus"
   ],
   "itemIdRegex": "none",
   "modIdRegex": "",

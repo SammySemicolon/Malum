@@ -1,0 +1,19 @@
+{
+    "conditions": [
+        {
+            "type": "forge:mod_loaded",
+            "modid": "tconstruct"
+        }
+    ],
+    "type": "tconstruct:melting",
+    "ingredient": {
+        "count": 1,
+        "item": "malum:iron_node"
+    },
+    "result": {
+        "fluid": "tconstruct:molten_iron",
+        "amount": 60
+    },
+    "temperature": 800,
+    "time": 40
+}

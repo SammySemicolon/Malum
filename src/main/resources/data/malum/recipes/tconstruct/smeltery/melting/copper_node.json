@@ -1,0 +1,19 @@
+{
+    "conditions": [
+        {
+            "type": "forge:mod_loaded",
+            "modid": "tconstruct"
+        }
+    ],
+    "type": "tconstruct:melting",
+    "ingredient": {
+        "count": 1,
+        "item": "malum:copper_node"
+    },
+    "result": {
+        "fluid": "tconstruct:molten_copper",
+        "amount": 60
+    },
+    "temperature": 500,
+    "time": 33
+}

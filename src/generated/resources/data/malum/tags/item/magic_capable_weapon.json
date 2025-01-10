@@ -5,6 +5,10 @@
     "malum:creative_scythe",
     "malum:mnemonic_hex_staff",
     "malum:staff_of_the_auric_flame",
-    "malum:erosion_scepter"
+    "malum:erosion_scepter",
+    {
+      "id": "born_in_chaos_v1:nightmare_scythe",
+      "required": false
+    }
   ]
 }

@@ -55,9 +55,9 @@ public class VoidInfluenceData {
                 isNearWeepingWell = checkForWeepingWell(living).isPresent();
             }
         }
-        if (voidAffliction > 0) {
-            voidAffliction--;
-            if (voidAffliction == 0) {
+        if (afflictionFalloffCooldown > 0) {
+            afflictionFalloffCooldown--;
+            if (afflictionFalloffCooldown == 0) {
                 expectedAffliction = 0;
             }
         }

@@ -3,6 +3,7 @@ package com.sammy.malum.client.renderer.block.artifice;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.*;
 import com.sammy.malum.client.renderer.entity.*;
+import com.sammy.malum.common.block.curiosities.spirit_catalyzer.SpiritCatalyzerCoreBlockEntity;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
 import com.sammy.malum.core.systems.artifice.ArtificeAttributeType;
 import com.sammy.malum.common.item.augment.*;
@@ -71,6 +72,17 @@ public class SpiritCrucibleRenderer extends ArtificeAcceptorRenderer<SpiritCruci
             itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, combinedLightIn, NO_OVERLAY, poseStack, bufferIn, level, 0);
             poseStack.popPose();
         }
+        stack = blockEntityIn.coreAugmentInventory.getStackInSlot(0);
+        if (!stack.isEmpty()) {
+            poseStack.pushPose();
+            Vec3 offset = SpiritCrucibleCoreBlockEntity.CRUCIBLE_CORE_AUGMENT_OFFSET;
+            poseStack.translate(offset.x, offset.y, offset.z);
+            poseStack.mulPose(Axis.YP.rotationDegrees(((-level.getGameTime() % 360) - partialTicks) * 3));
+            poseStack.scale(0.45f, 0.45f, 0.45f);
+            itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, combinedLightIn, NO_OVERLAY, poseStack, bufferIn, level, 0);
+            poseStack.popPose();
+        }
+
         final LodestoneBlockEntityInventory augmentInventory = blockEntityIn.augmentInventory;
 
         int augmentsRendered = 0;
@@ -94,7 +106,7 @@ public class SpiritCrucibleRenderer extends ArtificeAcceptorRenderer<SpiritCruci
         }
         if (FORK_TRACKER.isVisible()) {
             var accelerationData = blockEntityIn.getAttributes();
-            var attributes = ArtificeAttributeType.getExistingAttributes(accelerationData);
+            var attributes = accelerationData.getExistingAttributesForTuning();
             var font = Minecraft.getInstance().font;
             float scalar = Easing.SINE_IN_OUT.ease(FORK_TRACKER.getDelta(partialTicks), 0, 1);
             float scale = 0.016F - (1 - scalar) * 0.004f;
@@ -117,31 +129,37 @@ public class SpiritCrucibleRenderer extends ArtificeAcceptorRenderer<SpiritCruci
                 text.append(dataText).withStyle(ChatFormatting.AQUA);
                 outlineText.append(dataText).withStyle(ChatFormatting.LIGHT_PURPLE);
 
+                float f = (-font.width(text) / 2f);
+                float xPos = 0 + f;
                 poseStack.pushPose();
                 poseStack.translate(0, i * 0.15f, 0);
                 poseStack.scale(scale, -scale, -scale);
                 Matrix4f pose = poseStack.last().pose();
-                float f = (-font.width(text) / 2f);
-                float xPos = 0 + f;
-                int color = ColorHelper.getColor(1, 1, 1, 0.38f * scalar);
-                renderText(text, xPos, 0, color, pose);
-
-                color = ColorHelper.getColor(1, 1, 1, 0.18f * scalar);
-                renderText(text, xPos - 0.5f, 0, color, pose);
-                renderText(text, xPos - 0.5f, 0, color, pose);
-                renderText(text, xPos, 0.5f, color, pose);
-                renderText(text, xPos, -0.5f, color, pose);
-
-                color = ColorHelper.getColor(1, 1, 1, 0.12f * scalar);
-                renderText(text, xPos - 1, 0, color, pose);
-                renderText(outlineText, xPos + 1, 0, color, pose);
-                renderText(outlineText, xPos, 1, color, pose);
-                renderText(text, xPos, -1, color, pose);
-
-                renderText(outlineText, xPos - 0.5f, -0.5f, color, pose);
-                renderText(text, xPos - 0.5f, 0.5f, color, pose);
-                renderText(outlineText, xPos + 0.5f, 0.5f, color, pose);
-                renderText(text, xPos + 0.5f, -0.5f, color, pose);
+                float alpha = 0.38f * scalar;
+                int color = ColorHelper.getColor(1, 1, 1, alpha);
+                if (alpha > 0.02) { //For whatever reason Font#adjustColor gets considers alpha lesser than 3 to be "unset" and so it sets it to 255...
+                    renderText(text, xPos, 0, color, pose);
+                }
+                alpha = 0.18f * scalar;
+                if (alpha > 0.02) {
+                    color = ColorHelper.getColor(1, 1, 1, alpha);
+                    renderText(text, xPos - 0.5f, 0, color, pose);
+                    renderText(text, xPos - 0.5f, 0, color, pose);
+                    renderText(text, xPos, 0.5f, color, pose);
+                    renderText(text, xPos, -0.5f, color, pose);
+                }
+                alpha = 0.12f * scalar;
+                if (alpha > 0.02) {
+                    color = ColorHelper.getColor(1, 1, 1, alpha);
+                    renderText(text, xPos - 1, 0, color, pose);
+                    renderText(outlineText, xPos + 1, 0, color, pose);
+                    renderText(outlineText, xPos, 1, color, pose);
+                    renderText(text, xPos, -1, color, pose);
+                    renderText(outlineText, xPos - 0.5f, -0.5f, color, pose);
+                    renderText(text, xPos - 0.5f, 0.5f, color, pose);
+                    renderText(outlineText, xPos + 0.5f, 0.5f, color, pose);
+                    renderText(text, xPos + 0.5f, -0.5f, color, pose);
+                }
                 poseStack.popPose();
             }
             poseStack.popPose();

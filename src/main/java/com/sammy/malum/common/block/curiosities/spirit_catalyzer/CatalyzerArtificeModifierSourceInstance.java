@@ -24,7 +24,7 @@ public class CatalyzerArtificeModifierSourceInstance extends ArtificeModifierSou
     @Override
     public void modifyFocusing(Consumer<ArtificeModifier> modifierConsumer) {
         modifierConsumer.accept(new ArtificeModifier(ArtificeAttributeType.FOCUSING_SPEED, 0.5f));
-        modifierConsumer.accept(new ArtificeModifier(ArtificeAttributeType.INSTABILITY, 0.08f));
+        modifierConsumer.accept(new ArtificeModifier(ArtificeAttributeType.INSTABILITY, 0.05f));
     }
 
     @Override

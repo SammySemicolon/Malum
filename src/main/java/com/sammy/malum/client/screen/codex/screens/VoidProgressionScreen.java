@@ -86,81 +86,81 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
         Item EMPTY = ItemStack.EMPTY.getItem();
 
         addEntry("chronicles_of_the_soul", 0, 0, b -> b
-            .setWidgetSupplier((e, x, y) -> new ScreenOpenerObject(e, x, y, ArcanaProgressionScreen::openCodexViaTransition, malumPath("textures/gui/book/icons/arcana_button.png"), 20, 20))
-            .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_GRAND_SOULWOOD))
+                .setWidgetSupplier((e, x, y) -> new ScreenOpenerObject(e, x, y, ArcanaProgressionScreen::openCodexViaTransition, malumPath("textures/gui/book/icons/arcana_button.png"), 20, 20))
+                .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_GRAND_SOULWOOD))
         );
         addEntry("void.the_weeping_well", 0, 1, b -> b
-            .configureWidget(w -> w.setIcon(VOID_DEPOT).setStyle(BookWidgetStyle.GILDED_SOULWOOD))
-            .addPage(new HeadlineTextPage("void.the_weeping_well", "void.the_weeping_well.1"))
-            .addPage(new TextPage("void.the_weeping_well.2"))
-            .addPage(new TextPage("void.the_weeping_well.3"))
-            .addPage(new TextPage("void.the_weeping_well.4"))
-            .addPage(new TextPage("void.the_weeping_well.5"))
-            .addPage(new TextPage("void.the_weeping_well.6"))
-            .addPage(new TextPage("void.the_weeping_well.7"))
+                .configureWidget(w -> w.setIcon(VOID_DEPOT).setStyle(BookWidgetStyle.GILDED_SOULWOOD))
+                .addPage(new HeadlineTextPage("void.the_weeping_well", "void.the_weeping_well.1"))
+                .addPage(new TextPage("void.the_weeping_well.2"))
+                .addPage(new TextPage("void.the_weeping_well.3"))
+                .addPage(new TextPage("void.the_weeping_well.4"))
+                .addPage(new TextPage("void.the_weeping_well.5"))
+                .addPage(new TextPage("void.the_weeping_well.6"))
+                .addPage(new TextPage("void.the_weeping_well.7"))
         );
 
         addEntry("void.material_study_soulstone", 0, 2, b -> b
-            .configureWidget(w -> w.setIcon(RAW_SOULSTONE).setStyle(BookWidgetStyle.SMALL_SOULWOOD))
-            .addPage(new WeepingWellTextPage("void.material_study_soulstone", "void.material_study_soulstone.1", RAW_SOULSTONE.get()))
-            .addPage(new TextPage("void.material_study_soulstone.2"))
+                .configureWidget(w -> w.setIcon(RAW_SOULSTONE).setStyle(BookWidgetStyle.SMALL_SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.material_study_soulstone", "void.material_study_soulstone.1", RAW_SOULSTONE.get()))
+                .addPage(new TextPage("void.material_study_soulstone.2"))
         );
 
         addEntry("void.material_study_null_slate", -2, 3, b -> b
-            .configureWidget(w -> w.setIcon(NULL_SLATE).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new WeepingWellTextPage("void.material_study_null_slate", "void.material_study_null_slate.1", NULL_SLATE.get()))
-            .addPage(new TextPage("void.material_study_null_slate.2"))
-            .addReference(new EntryReference(UMBRAL_SPIRIT,
-                BookEntry.build("void.material_study_null_slate.reexamination")
-                    .addPage(new HeadlineTextPage("void.material_study_null_slate.reexamination", "void.material_study_null_slate.reexamination.1"))
-                    .addPage(new TextPage("void.material_study_null_slate.reexamination.2"))
-                    .afterUmbralCrystal()
-            ))
+                .configureWidget(w -> w.setIcon(NULL_SLATE).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.material_study_null_slate", "void.material_study_null_slate.1", NULL_SLATE.get()))
+                .addPage(new TextPage("void.material_study_null_slate.2"))
+                .addReference(new EntryReference(UMBRAL_SPIRIT,
+                        BookEntry.build("void.material_study_null_slate.reexamination")
+                                .addPage(new HeadlineTextPage("void.material_study_null_slate.reexamination", "void.material_study_null_slate.reexamination.1"))
+                                .addPage(new TextPage("void.material_study_null_slate.reexamination.2"))
+                                .afterUmbralCrystal()
+                ))
         );
 
         addEntry("void.material_study_mnemonic_fragment", -3, 4, b -> b
-            .configureWidget(w -> w.setIcon(MNEMONIC_FRAGMENT).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new WeepingWellTextPage("void.material_study_mnemonic_fragment", "void.material_study_mnemonic_fragment.1", MNEMONIC_FRAGMENT.get()))
-            .addPage(new TextPage("void.material_study_mnemonic_fragment.2"))
-            .addReference(new EntryReference(UMBRAL_SPIRIT,
-                BookEntry.build("void.material_study_mnemonic_fragment.reexamination")
-                    .addPage(new HeadlineTextPage("void.material_study_mnemonic_fragment.reexamination", "void.material_study_mnemonic_fragment.reexamination.1"))
-                    .afterUmbralCrystal()
-            ))
+                .configureWidget(w -> w.setIcon(MNEMONIC_FRAGMENT).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.material_study_mnemonic_fragment", "void.material_study_mnemonic_fragment.1", MNEMONIC_FRAGMENT.get()))
+                .addPage(new TextPage("void.material_study_mnemonic_fragment.2"))
+                .addReference(new EntryReference(UMBRAL_SPIRIT,
+                        BookEntry.build("void.material_study_mnemonic_fragment.reexamination")
+                                .addPage(new HeadlineTextPage("void.material_study_mnemonic_fragment.reexamination", "void.material_study_mnemonic_fragment.reexamination.1"))
+                                .afterUmbralCrystal()
+                ))
         );
 
         addEntry("void.material_study_void_salts", 0, 3, b -> b
-            .configureWidget(w -> w.setIcon(VOID_SALTS).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new WeepingWellTextPage("void.material_study_void_salts", "void.material_study_void_salts.1", VOID_SALTS.get()))
-            .addPage(new TextPage("void.material_study_void_salts.2"))
-            .addReference(new EntryReference(UMBRAL_SPIRIT,
-                BookEntry.build("void.material_study_void_salts.reexamination")
-                    .addPage(new HeadlineTextPage("void.material_study_void_salts.reexamination", "void.material_study_void_salts.reexamination.1"))
-                    .afterUmbralCrystal()
-            ))
+                .configureWidget(w -> w.setIcon(VOID_SALTS).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.material_study_void_salts", "void.material_study_void_salts.1", VOID_SALTS.get()))
+                .addPage(new TextPage("void.material_study_void_salts.2"))
+                .addReference(new EntryReference(UMBRAL_SPIRIT,
+                        BookEntry.build("void.material_study_void_salts.reexamination")
+                                .addPage(new HeadlineTextPage("void.material_study_void_salts.reexamination", "void.material_study_void_salts.reexamination.1"))
+                                .afterUmbralCrystal()
+                ))
         );
 
         addEntry("void.material_study_malignant_lead", 2, 3, b -> b
-            .configureWidget(w -> w.setIcon(MALIGNANT_LEAD).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new WeepingWellTextPage("void.material_study_malignant_lead", "void.material_study_malignant_lead.1", MALIGNANT_LEAD.get()))
-            .addPage(new TextPage("void.material_study_malignant_lead.2"))
-            .addReference(new EntryReference(UMBRAL_SPIRIT,
-                BookEntry.build("void.material_study_malignant_lead.reexamination")
-                    .addPage(new HeadlineTextPage("void.material_study_malignant_lead.reexamination", "void.material_study_malignant_lead.reexamination.1"))
-                    .addPage(new TextPage("void.material_study_malignant_lead.reexamination.2"))
-                    .afterUmbralCrystal()
-            ))
+                .configureWidget(w -> w.setIcon(MALIGNANT_LEAD).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.material_study_malignant_lead", "void.material_study_malignant_lead.1", MALIGNANT_LEAD.get()))
+                .addPage(new TextPage("void.material_study_malignant_lead.2"))
+                .addReference(new EntryReference(UMBRAL_SPIRIT,
+                        BookEntry.build("void.material_study_malignant_lead.reexamination")
+                                .addPage(new HeadlineTextPage("void.material_study_malignant_lead.reexamination", "void.material_study_malignant_lead.reexamination.1"))
+                                .addPage(new TextPage("void.material_study_malignant_lead.reexamination.2"))
+                                .afterUmbralCrystal()
+                ))
         );
 
         addEntry("void.material_study_auric_embers", 3, 4, b -> b
-            .configureWidget(w -> w.setIcon(AURIC_EMBERS).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new WeepingWellTextPage("void.material_study_auric_embers", "void.material_study_auric_embers.1", AURIC_EMBERS.get()))
-            .addPage(new TextPage("void.material_study_auric_embers.2"))
-            .addReference(new EntryReference(UMBRAL_SPIRIT,
-                BookEntry.build("void.material_study_auric_embers.reexamination")
-                    .addPage(new HeadlineTextPage("void.material_study_auric_embers.reexamination", "void.material_study_auric_embers.reexamination.1"))
-                    .afterUmbralCrystal()
-            ))
+                .configureWidget(w -> w.setIcon(AURIC_EMBERS).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.material_study_auric_embers", "void.material_study_auric_embers.1", AURIC_EMBERS.get()))
+                .addPage(new TextPage("void.material_study_auric_embers.2"))
+                .addReference(new EntryReference(UMBRAL_SPIRIT,
+                        BookEntry.build("void.material_study_auric_embers.reexamination")
+                                .addPage(new HeadlineTextPage("void.material_study_auric_embers.reexamination", "void.material_study_auric_embers.reexamination.1"))
+                                .afterUmbralCrystal()
+                ))
         );
 
         addEntry("void.catalyst_lobber", 5, 5, b -> b
@@ -172,69 +172,70 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
         );
 
         addEntry("void.black_crystal", 0, 5, b -> b
-            .withFragmentEntry(fragment -> fragment.addPage(new WeepingWellTextPage("fragment.void.black_crystal", "fragment.void.black_crystal.1", EMPTY)))
-            .configureWidget(w -> w.setIcon(UMBRAL_SPIRIT).setStyle(BookWidgetStyle.GILDED_SOULWOOD))
-            .addPage(new WeepingWellTextPage("void.black_crystal", "void.black_crystal.1", UMBRAL_SPIRIT.get()))
-            .addPage(new TextPage("void.black_crystal.2"))
-            .addPage(new TextPage("void.black_crystal.3"))
-            .addPage(new TextPage("void.black_crystal.4"))
-            .afterUmbralCrystal()
+                .withFragmentEntry(fragment -> fragment.addPage(new WeepingWellTextPage("fragment.void.black_crystal", "fragment.void.black_crystal.1", EMPTY)))
+                .configureWidget(w -> w.setIcon(UMBRAL_SPIRIT).setStyle(BookWidgetStyle.GILDED_SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.black_crystal", "void.black_crystal.1", UMBRAL_SPIRIT.get()))
+                .addPage(new TextPage("void.black_crystal.2"))
+                .addPage(new TextPage("void.black_crystal.3"))
+                .addPage(new TextPage("void.black_crystal.4"))
+                .afterUmbralCrystal()
         );
 
         addEntry("void.umbral_arcana", -1, 6, b -> b
-            .withEmptyFragmentEntry(BookWidgetStyle.WITHERED)
-            .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_SOULWOOD))
-            .setWidgetSupplier((e, x, y) -> new IconObject(e, x, y, malumPath("textures/gui/book/icons/umbral_shard.png")))
-            .addPage(new HeadlineTextPage("void.umbral_arcana", "void.umbral_arcana.1"))
-            .addPage(new TextPage("void.umbral_arcana.2"))
-            .addPage(new TextPage("void.umbral_arcana.3"))
-            .addPage(new TextPage("void.umbral_arcana.4"))
-            .addPage(new TextPage("void.umbral_arcana.5"))
-            .afterUmbralCrystal()
+                .withEmptyFragmentEntry(BookWidgetStyle.WITHERED)
+                .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_SOULWOOD))
+                .setWidgetSupplier((e, x, y) -> new IconObject(e, x, y, malumPath("textures/gui/book/icons/umbral_shard.png")))
+                .addPage(new HeadlineTextPage("void.umbral_arcana", "void.umbral_arcana.1"))
+                .addPage(new TextPage("void.umbral_arcana.2"))
+                .addPage(new TextPage("void.umbral_arcana.3"))
+                .addPage(new TextPage("void.umbral_arcana.4"))
+                .addPage(new TextPage("void.umbral_arcana.5"))
+                .afterUmbralCrystal()
         );
 
         addEntry("void.inverse_and_hybrid_arcana", 0, 7, b -> b
-            .withEmptyFragmentEntry(BookWidgetStyle.SMALL_WITHERED)
-            .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_SOULWOOD))
-            .setWidgetSupplier((e, x, y) -> new IconObject(e, x, y, malumPath("textures/gui/book/icons/umbral_shard.png")))
-            .addPage(new HeadlineTextPage("void.inverse_and_hybrid_arcana", "void.inverse_and_hybrid_arcana.1"))
-            .addPage(new TextPage("void.inverse_and_hybrid_arcana.2"))
-            .addPage(new TextPage("void.inverse_and_hybrid_arcana.3"))
-            .afterUmbralCrystal()
+                .withEmptyFragmentEntry(BookWidgetStyle.SMALL_WITHERED)
+                .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_SOULWOOD))
+                .setWidgetSupplier((e, x, y) -> new IconObject(e, x, y, malumPath("textures/gui/book/icons/umbral_shard.png")))
+                .addPage(new HeadlineTextPage("void.inverse_and_hybrid_arcana", "void.inverse_and_hybrid_arcana.1"))
+                .addPage(new TextPage("void.inverse_and_hybrid_arcana.2"))
+                .addPage(new TextPage("void.inverse_and_hybrid_arcana.3"))
+                .afterUmbralCrystal()
         );
 
         addEntry("void.material_study_arcana", 1, 8, b -> b
-            .withTraceFragmentEntry()
-            .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_SOULWOOD))
-            .setWidgetSupplier((e, x, y) -> new IconObject(e, x, y, malumPath("textures/gui/book/icons/umbral_shard.png")))
-            .addPage(new HeadlineTextPage("void.material_study_arcana", "void.material_study_arcana.1"))
-            .addPage(new TextPage("void.material_study_arcana.2"))
-            .addPage(new TextPage("void.material_study_arcana.3"))
-            .afterUmbralCrystal()
+                .withTraceFragmentEntry()
+                .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_SOULWOOD))
+                .setWidgetSupplier((e, x, y) -> new IconObject(e, x, y, malumPath("textures/gui/book/icons/umbral_shard.png")))
+                .addPage(new HeadlineTextPage("void.material_study_arcana", "void.material_study_arcana.1"))
+                .addPage(new TextPage("void.material_study_arcana.2"))
+                .addPage(new TextPage("void.material_study_arcana.3"))
+                .afterUmbralCrystal()
         );
 
         addEntry("void.staves_as_foci", 0, 9, b -> b
-            .withTraceFragmentEntry()
-            .configureWidget(w -> w.setIcon(MNEMONIC_HEX_STAFF).setStyle(BookWidgetStyle.GILDED_SOULWOOD))
-            .addPage(new HeadlineTextPage("void.staves_as_foci", "void.staves_as_foci.1"))
-            .addPage(new TextPage("void.staves_as_foci.2"))
-            .addPage(new TextPage("void.staves_as_foci.3"))
-            .addPage(new TextPage("void.staves_as_foci.4"))
-            .addPage(new TextPage("void.staves_as_foci.5"))
-            .addPage(SpiritInfusionPage.fromOutput(MNEMONIC_HEX_STAFF.get()))
-            .addReference(new EntryReference(RING_OF_THE_ENDLESS_WELL,
-                BookEntry.build("void.staves_as_foci.ring_of_the_endless_well")
-                    .addPage(new HeadlineTextPage("void.staves_as_foci.ring_of_the_endless_well", "void.staves_as_foci.ring_of_the_endless_well.1"))
-                    .addPage(SpiritInfusionPage.fromOutput(RING_OF_THE_ENDLESS_WELL.get()))
-            ))
-            .afterUmbralCrystal()
+                .withTraceFragmentEntry()
+                .configureWidget(w -> w.setIcon(MNEMONIC_HEX_STAFF).setStyle(BookWidgetStyle.GILDED_SOULWOOD))
+                .addPage(new HeadlineTextPage("void.staves_as_foci", "void.staves_as_foci.1"))
+                .addPage(new TextPage("void.staves_as_foci.2"))
+                .addPage(new TextPage("void.staves_as_foci.3"))
+                .addPage(new TextPage("void.staves_as_foci.4"))
+                .addPage(new TextPage("void.staves_as_foci.5"))
+                .addPage(SpiritInfusionPage.fromOutput(MNEMONIC_HEX_STAFF.get()))
+                .addReference(new EntryReference(RING_OF_THE_ENDLESS_WELL,
+                        BookEntry.build("void.staves_as_foci.ring_of_the_endless_well")
+                                .addPage(new HeadlineTextPage("void.staves_as_foci.ring_of_the_endless_well", "void.staves_as_foci.ring_of_the_endless_well.1"))
+                                .addPage(SpiritInfusionPage.fromOutput(RING_OF_THE_ENDLESS_WELL.get()))
+                ))
+                .afterUmbralCrystal()
         );
 
         addEntry("void.ring_of_gruesome_concentration", -3, 9, b -> b
-            .configureWidget(w -> w.setIcon(RING_OF_GRUESOME_CONCENTRATION).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new HeadlineTextPage("void.ring_of_gruesome_concentration", "void.ring_of_gruesome_concentration.1"))
-            .addPage(SpiritInfusionPage.fromOutput(RING_OF_GRUESOME_CONCENTRATION.get()))
-            .afterUmbralCrystal()
+                .withTraceFragmentEntry()
+                .configureWidget(w -> w.setIcon(RING_OF_GRUESOME_CONCENTRATION).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new HeadlineTextPage("void.ring_of_gruesome_concentration", "void.ring_of_gruesome_concentration.1"))
+                .addPage(SpiritInfusionPage.fromOutput(RING_OF_GRUESOME_CONCENTRATION.get()))
+                .afterUmbralCrystal()
         );
         addEntry("void.ring_of_growing_flesh", -4, 10, b -> b
                 .withTraceFragmentEntry()
@@ -244,7 +245,6 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
                 .afterUmbralCrystal()
         );
         addEntry("void.ring_of_echoing_arcana", -5, 10, b -> b
-                .withTraceFragmentEntry()
                 .configureWidget(w -> w.setIcon(RING_OF_ECHOING_ARCANA).setStyle(BookWidgetStyle.SOULWOOD))
                 .addPage(new HeadlineTextPage("void.ring_of_echoing_arcana", "void.ring_of_echoing_arcana.1"))
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_ECHOING_ARCANA.get()))

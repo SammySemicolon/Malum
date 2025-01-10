@@ -27,6 +27,7 @@ public class ArtificeAttributeType {
             MalumMod.malumPath("instability"), d -> d.instability).setDefaultValue(0.2f).invertedTuning().build();
     public static final ArtificeAttributeType FORTUNE_CHANCE = create(
             MalumMod.malumPath("fortune_chance"), d -> d.fortuneChance).build();
+
     public static final ArtificeAttributeType CHAIN_FOCUSING_CHANCE = create(
             MalumMod.malumPath("chain_focusing_chance"), d -> d.chainFocusingChance).build();
     public static final ArtificeAttributeType DAMAGE_ABSORPTION_CHANCE = create(
@@ -35,10 +36,18 @@ public class ArtificeAttributeType {
             MalumMod.malumPath("restoration_chance"), d -> d.restorationChance).build();
     public static final ArtificeAttributeType WEAKNESS_TUNING = create(
             MalumMod.malumPath("weakness_tuning"), d -> d.weaknessTuning).noTuning().build();
+
     public static final ArtificeAttributeType TUNING_POTENCY = create(
-            MalumMod.malumPath("tuning_potency"), d -> d.tuningPotency).withRequirement((d, v) -> v.getValue(d) != 0).noTuning().build();
+            MalumMod.malumPath("tuning_potency"), d -> d.tuningPotency).setDefaultValue(1f).noTuning().build();
     public static final ArtificeAttributeType TUNING_STRAIN = create(
-            MalumMod.malumPath("tuning_strain"), d -> d.tuningStrain).withRequirement((d, v) -> v.getValue(d) != 0).noTuning().build();
+            MalumMod.malumPath("tuning_strain"), d -> d.tuningStrain).setDefaultValue(1f).noTuning().build();
+
+    public static final ArtificeAttributeType CAUSTIC_SYNERGY = create(
+            MalumMod.malumPath("caustic_synergy"), d -> d.causticSynergy).noTuning().build();
+    public static final ArtificeAttributeType RESONANCE_TUNING = create(
+            MalumMod.malumPath("resonance_tuning"), d -> d.resonanceTuning).noTuning().build();
+    public static final ArtificeAttributeType MISFORTUNE_REVERSAL = create(
+            MalumMod.malumPath("misfortune_reversal"), d -> d.misfortuneReversal).noTuning().build();
 
     public final ResourceLocation id;
     public final Function<ArtificeAttributeData, ArtificeAttributeValue> valueGetter;

@@ -14,24 +14,30 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.*;
 
-import static net.minecraft.world.item.component.ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT;
-
 public class AugmentItem extends Item {
 
-    public static final DecimalFormat ATTRIBUTE_MODIFIER_FORMAT = Util.make(
-            new DecimalFormat("#.##%"), f -> {
-                f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ROOT));
-            }
+    private static final DecimalFormat ATTRIBUTE_MODIFIER_FORMAT = Util.make(
+            new DecimalFormat("#.##%"), f -> f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.ROOT))
     );
 
-    public final MalumSpiritType spiritType;
+    public final List<MalumSpiritType> spiritTypes;
+
 
     public AugmentItem(Properties pProperties, MalumSpiritType spiritType, ArtificeModifier... modifiers) {
         this(pProperties, spiritType, false, modifiers);
     }
+
+    public AugmentItem(Properties pProperties, List<MalumSpiritType> spiritTypes, ArtificeModifier... modifiers) {
+        this(pProperties, spiritTypes, false, modifiers);
+    }
+
     public AugmentItem(Properties pProperties, MalumSpiritType spiritType, boolean isCoreAugment, ArtificeModifier... modifiers) {
+        this(pProperties, List.of(spiritType), isCoreAugment, modifiers);
+    }
+
+    public AugmentItem(Properties pProperties, List<MalumSpiritType> spiritTypes, boolean isCoreAugment, ArtificeModifier... modifiers) {
         super(pProperties.component(DataComponentRegistry.ARTIFICE_AUGMENT, new ArtificeAugmentData(isCoreAugment, List.of(modifiers))));
-        this.spiritType = spiritType;
+        this.spiritTypes = spiritTypes;
     }
 
     @Override

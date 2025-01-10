@@ -9,15 +9,19 @@ import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.multiplayer.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.handlers.screenparticle.*;
 import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.particle.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 import team.lodestar.lodestone.systems.particle.data.*;
+import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
 import team.lodestar.lodestone.systems.particle.render_types.*;
 import team.lodestar.lodestone.systems.particle.screen.*;
+
+import java.awt.*;
 
 import static com.sammy.malum.client.screen.codex.ArcanaCodexHelper.*;
 
@@ -71,19 +75,19 @@ public class WeepingWellTextPage extends BookPage {
                 final int x = left + 71;
                 final int y = top + 46;
                 ScreenParticleBuilder.create(LodestoneScreenParticleTypes.STAR, ITEM_PARTICLES)
-                        .setTransparencyData(GenericParticleData.create(0.02f, 0.4f, 0f).build())
+                        .setTransparencyData(GenericParticleData.create(0.02f, 0.3f, 0f).build())
                         .setSpinData(SpinParticleData.create(0).setSpinOffset(spin).build())
-                        .setScaleData(GenericParticleData.create(0, scale * 1.2f).build())
-                        .setColorData(SpiritTypeRegistry.WICKED_SPIRIT.createColorData().setCoefficient(0.4f).build())
+                        .setScaleData(GenericParticleData.create(0, scale * 1.6f).build())
+                        .setColorData(ColorParticleData.create(new Color(78, 17, 43), new Color(78, 17, 43)).setCoefficient(0.8f).build())
                         .setLifetime(lifetime)
                         .setDiscardFunction(SimpleParticleOptions.ParticleDiscardFunctionType.ENDING_CURVE_INVISIBLE)
                         .setRenderType(LodestoneScreenParticleRenderType.LUMITRANSPARENT)
                         .spawn(x, y);
                 ScreenParticleBuilder.create(ScreenParticleRegistry.SAW, ITEM_PARTICLES)
-                        .setTransparencyData(GenericParticleData.create(0.02f, 0.2f, 0f).build())
+                        .setTransparencyData(GenericParticleData.create(0.02f, 0.3f, 0f).setCoefficient(1.2f).build())
                         .setSpinData(SpinParticleData.create(0).setSpinOffset(spin).build())
                         .setScaleData(GenericParticleData.create(0, scale * 0.9f).build())
-                        .setColorData(SpiritTypeRegistry.WICKED_SPIRIT.createColorData().setCoefficient(0.4f).build())
+                        .setColorData(ColorParticleData.create(new Color(255, 133, 155), new Color(78, 17, 43)).setCoefficient(0.8f).build())
                         .setLifetime(lifetime)
                         .setDiscardFunction(SimpleParticleOptions.ParticleDiscardFunctionType.ENDING_CURVE_INVISIBLE)
                         .setRenderType(LodestoneScreenParticleRenderType.LUMITRANSPARENT)

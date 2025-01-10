@@ -32,7 +32,7 @@ public class EntryScreen extends AbstractMalumScreen {
     public static float textJump;
 
     public final int bookWidth = 312;
-    public final int bookHeight = 200;
+    public final int bookHeight = 206;
     public final BookEntry openEntry;
     protected final Consumer<Boolean> onClose;
 
@@ -71,17 +71,17 @@ public class EntryScreen extends AbstractMalumScreen {
         int guiTop = getGuiTop();
         renderTexture(BOOK_TEXTURE, poseStack, guiLeft, guiTop, 0, 0, bookWidth, bookHeight);
 
+        int pageTop = guiTop + 11;
         if (!openEntry.pages.isEmpty()) {
             int openPages = grouping * 2;
             for (int i = openPages; i < openPages + 2; i++) {
                 if (i < openEntry.pages.size()) {
                     BookPage page = openEntry.pages.get(i);
                     final boolean isRightSide = i % 2 == 1;
-                    int pageLeft = guiLeft + (isRightSide ? 161 : 9);
-                    int pageTop = guiTop + 8;
+                    int backgroundLeft = guiLeft + (isRightSide ? 165 : 13);
                     final ResourceLocation background = page.getBackground(isRightSide);
                     if (background != null) {
-                        renderTexture(background, poseStack, pageLeft, pageTop, 0, 0, 142, 172);
+                        renderTexture(background, poseStack, backgroundLeft, pageTop, 0, 0, 134, 172);
                     }
                 }
             }
@@ -94,7 +94,6 @@ public class EntryScreen extends AbstractMalumScreen {
                     BookPage page = openEntry.pages.get(i);
                     final boolean isRightSide = i % 2 == 1;
                     int pageLeft = guiLeft + (isRightSide ? 161 : 9);
-                    int pageTop = guiTop + 8;
                     boolean isRepeat = i % 2 != 0 && page.getClass().equals(openEntry.pages.get(i - 1).getClass());
                     page.render(this, guiGraphics, pageLeft, pageTop, mouseX, mouseY, partialTicks, isRepeat);
                     lateRendering.add(() -> page.renderLate(this, guiGraphics, pageLeft, pageTop, mouseX, mouseY, partialTicks, isRepeat));

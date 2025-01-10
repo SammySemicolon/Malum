@@ -8,7 +8,7 @@ public class IntricateAssemblyItem extends AugmentItem {
     public IntricateAssemblyItem(Properties pProperties) {
         super(pProperties, SpiritTypeRegistry.EARTHEN_SPIRIT,
                 new ArtificeModifier(ArtificeAttributeType.FORTUNE_CHANCE, 0.1f),
-                new ArtificeModifier(ArtificeAttributeType.FUEL_USAGE_RATE, 0.1f),
-                new ArtificeModifier(ArtificeAttributeType.FOCUSING_SPEED, -0.3f));
+                new ArtificeModifier(ArtificeAttributeType.INSTABILITY, 0.1f),
+                new ArtificeModifier(ArtificeAttributeType.FOCUSING_SPEED, -0.2f));
     }
 }

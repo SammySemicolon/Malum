@@ -8,6 +8,7 @@
   "fragment": "malum:touch_of_darkness",
   "attributes": [
     "Position",
+    "UV0",
     "Color"
   ],
   "samplers": [

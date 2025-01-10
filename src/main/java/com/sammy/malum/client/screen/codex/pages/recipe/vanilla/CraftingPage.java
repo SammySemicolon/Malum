@@ -43,15 +43,15 @@ public class CraftingPage extends BookPage {
                 if (inputStacks.size() > index) {
                     final ItemStack stack = inputStacks.get(index);
                     if (!stack.isEmpty()) {
-                        int itemPosX = left + 41 + j * 22;
-                        int itemPosY = top + 34 + i * 22;
+                        int itemPosX = left + 42 + j * 21;
+                        int itemPosY = top + 35 + i * 21;
                         renderItem(screen, guiGraphics, stack, itemPosX, itemPosY, mouseX, mouseY);
                     }
                 }
             }
         }
 
-        renderItem(screen, guiGraphics, outputStack, left + 63, top + 126, mouseX, mouseY);
+        renderItem(screen, guiGraphics, outputStack, left + 63, top + 132, mouseX, mouseY);
     }
 
     public static CraftingPage shapeless(Item output, Item... inputs) {

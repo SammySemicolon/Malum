@@ -676,7 +676,7 @@ public class MalumLang extends LanguageProvider {
 
         addSimpleEntryHeader("impurity_stabilizer", "Impurity Stabilizer", "Potency from weakness");
         addPages("impurity_stabilizer",
-                "The wicked spirit is drawn to the weak, seeking to cull. The Impurity Stabilizer subverts that property, providing a powerful percentage tuning bonus to the weakest crucible attribute besides fuel usage rate and instability. This additional layer of tuning does increase tuning strain however.");
+                "The wicked spirit is drawn to the weak, seeking to cull. The Impurity Stabilizer subverts that property, providing a powerful percentage tuning bonus to the weakest crucible attribute besides fuel usage rate and instability. This secondary influence does create a bit of strain on the standard tuning process however.");
 
         addSimpleEntryHeader("shielding_apparatus", "Shielding Apparatus", "A bulwark against the storm");
         addPages("shielding_apparatus",

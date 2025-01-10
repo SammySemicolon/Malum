@@ -263,7 +263,7 @@ public class ArcanaCodexHelper {
 
     public static void renderItemList(AbstractMalumScreen screen, GuiGraphics guiGraphics, List<List<ItemStack>> items, Component hoverComponent, int left, int top, int mouseX, int mouseY, boolean isVertical) {
         int slots = items.size();
-        int startingOffset = (isVertical ? 9 : 12) * (slots - 1);
+        int startingOffset = 9 * (slots - 1);
         screen.renderLater(renderItemFrames(guiGraphics, hoverComponent, slots, left, top, mouseX, mouseY, items.getFirst().getFirst().getItem() instanceof SpiritShardItem, isVertical));
         if (isVertical) {
             top -= startingOffset;
@@ -272,8 +272,8 @@ public class ArcanaCodexHelper {
         }
         for (int i = 0; i < slots; i++) {
             List<ItemStack> list = items.get(i);
-            int offset = i * (isVertical ? 18 : 24);
-            int oLeft = left + 4 + (isVertical ? 0 : offset);
+            int offset = i * 18;
+            int oLeft = left + (isVertical ? 0 : offset);
             int oTop = top + (isVertical ? offset : 0);
             renderItem(screen, guiGraphics, list, oLeft, oTop, mouseX, mouseY);
         }
@@ -284,7 +284,7 @@ public class ArcanaCodexHelper {
     }
     public static Runnable renderItemFrames(GuiGraphics guiGraphics, @Nullable Component hoverComponent, int slots, int left, int top, double mouseX, double mouseY, boolean isSpirits, boolean isVertical) {
         var poseStack = guiGraphics.pose();
-        int startingOffset = (isVertical ? 9 : 12) * (slots - 1);
+        int startingOffset = 9 * (slots - 1);
         if (isVertical) {
             top -= startingOffset;
         } else {
@@ -292,22 +292,30 @@ public class ArcanaCodexHelper {
         }
         //item slot
         for (int i = slots - 1; i >= 0; i--) {
-            int offset = i * (isVertical ? 18 : 24);
-            int oLeft = left + (isVertical ? 0 : offset);
-            int oTop = top + (isVertical ? offset : 0);
-            renderTexture(EntryScreen.ITEM_SOCKET, poseStack, oLeft, oTop, 0, 0, 24, 19, 40, 32);
+            int offset = i * 18;
+            int u = isVertical ? 0 : 2;
+            int v = isVertical ? 2 : 0;
+            int oLeft = left - 1 + (isVertical ? -2 : offset);
+            int oTop = top - 1 + (isVertical ? offset : -2);
+            int width = isVertical ? 22 : 18;
+            int height = isVertical ? 18 : 22;
+            renderTexture(EntryScreen.ITEM_SOCKET, poseStack, oLeft, oTop, u, v, width, height, 64, 64);
         }
 
-        int crownLeft = left + 4 + (isVertical ? 0 : startingOffset);
-        renderTexture(EntryScreen.ITEM_SOCKET, poseStack, crownLeft, top - 7, 24, 0, 16, 10, 40, 32);
-        int plaqueTop = top - 3 + (isVertical ? slots : 1) * 18;
-        renderTexture(EntryScreen.ITEM_SOCKET, poseStack, crownLeft, plaqueTop, isSpirits ? 16 : 0, 19, 16, 13, 40, 32);
+        if (isVertical) {
+            renderTexture(EntryScreen.ITEM_SOCKET, poseStack, left - 3, top - 3, 0, 0, 22, 2, 64, 64);
+            renderTexture(EntryScreen.ITEM_SOCKET, poseStack, left - 3, top - 1 + 18 * (slots), 0, 20, 22, 2, 64, 64);
+        }
+        else {
+            renderTexture(EntryScreen.ITEM_SOCKET, poseStack, left - 3, top - 3, 0, 0, 2, 22, 64, 64);
+            renderTexture(EntryScreen.ITEM_SOCKET, poseStack, left - 1 + 18 * (slots), top - 3, 20, 0, 2, 22, 64, 64);
+        }
 
         return () -> {
             if (hoverComponent != null) {
-                if (isHovering(mouseX, mouseY, crownLeft + 3, plaqueTop + 2, 10, 11)) {
-                    guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, wrapComponent(hoverComponent, 180), (int) mouseX, (int) mouseY);
-                }
+//                if (isHovering(mouseX, mouseY, crownLeft + 3, plaqueTop + 2, 10, 11)) {
+//                    guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, wrapComponent(hoverComponent, 180), (int) mouseX, (int) mouseY);
+//                }
             }
         };
     }

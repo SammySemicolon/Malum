@@ -38,7 +38,7 @@ public class HeadlineTextItemPage extends BookPage {
     @Override
     public void render(EntryScreen screen, GuiGraphics guiGraphics, int left, int top, int mouseX, int mouseY, float partialTicks, boolean isRepeat) {
         Component component = Component.translatable(headlineTranslationKey());
-        renderText(guiGraphics, component, left + 70 - Minecraft.getInstance().font.width(component.getString()) / 2, top + 5);
+        renderText(guiGraphics, component, left + 72 - Minecraft.getInstance().font.width(component.getString()) / 2, top + 5);
         renderWrappingText(guiGraphics, translationKey(), left + 6, top + 75, 130);
         renderItem(screen, guiGraphics, spiritStack, left + 63, top + 38, mouseX, mouseY);
     }

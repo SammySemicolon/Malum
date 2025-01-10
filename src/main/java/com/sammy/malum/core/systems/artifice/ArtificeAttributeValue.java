@@ -58,7 +58,11 @@ public class ArtificeAttributeValue {
     }
 
     public void updateMultiplierCache() {
-        tuningMultiplierCache = (float) (1 + tuningModifiers.stream().mapToDouble(TuningModifier::value).sum());
+        float tuningMultiplier = 1;
+        for (TuningModifier tuningModifier : tuningModifiers) {
+            tuningMultiplier *= (1 + tuningModifier.value());
+        }
+        tuningMultiplierCache = tuningMultiplier;
     }
 
     public void copyFrom(ArtificeAttributeValue other) {
@@ -72,5 +76,6 @@ public class ArtificeAttributeValue {
 
     public void removeModifier(ResourceLocation id) {
         tuningModifiers.removeIf(m -> m.id().equals(id));
+        updateMultiplierCache();
     }
 }

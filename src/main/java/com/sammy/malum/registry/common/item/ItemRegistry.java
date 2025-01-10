@@ -588,6 +588,12 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> PRISMATIC_FOCUS_LENS = register("prismatic_focus_lens", DEFAULT_PROPERTIES(), PrismaticFocusLensItem::new);
     public static final DeferredHolder<Item, Item> BLAZING_DIODE = register("blazing_diode", DEFAULT_PROPERTIES(), BlazingDiodeItem::new);
     public static final DeferredHolder<Item, Item> INTRICATE_ASSEMBLY = register("intricate_assembly", DEFAULT_PROPERTIES(), IntricateAssemblyItem::new);
+
+    public static final DeferredHolder<Item, Item> SYMPATHY_DRIVE = register("sympathy_drive", DEFAULT_PROPERTIES(), SympathyDrive::new);
+    public static final DeferredHolder<Item, Item> SUSPICIOUS_DEVICE = register("suspicious_device", DEFAULT_PROPERTIES(), SuspiciousDeviceItem::new);
+    public static final DeferredHolder<Item, Item> CAUSTIC_CATALYST = register("caustic_catalyst", DEFAULT_PROPERTIES(), CausticCatalystItem::new);
+    public static final DeferredHolder<Item, Item> RESONANCE_TUNER = register("resonance_tuner", DEFAULT_PROPERTIES(), ResonanceTuner::new);
+
     public static final DeferredHolder<Item, Item> STELLAR_MECHANISM = register("stellar_mechanism", DEFAULT_PROPERTIES(), StellarMechanismItem::new);
     //endregion
 

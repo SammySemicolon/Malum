@@ -59,7 +59,7 @@ public class VoidDepotRenderer implements BlockEntityRenderer<VoidDepotBlockEnti
         float vOffset = ((gameTime + 500f + partialTicks) % 8000) / 8000f;
         float alpha = 0.05f;
 
-        final LodestoneRenderType renderType = LodestoneRenderTypes.ADDITIVE_DISTORTED_TEXTURE.applyAndCache(VOID_NOISE);
+        final LodestoneRenderType renderType = RenderTypeRegistry.WEEPING_WELL_DISTORTED_TEXTURE.applyAndCache(VOID_NOISE);
         builder.replaceBufferSource(RenderHandler.DELAYED_RENDER.getTarget());
         for (int i = 0; i < 2; i++) {
             builder.setAlpha(alpha);
@@ -68,7 +68,7 @@ public class VoidDepotRenderer implements BlockEntityRenderer<VoidDepotBlockEnti
                 s.safeGetUniform("Speed").set(speed);
                 s.safeGetUniform("Width").set(16f);
                 s.safeGetUniform("Height").set(16f);
-                s.safeGetUniform("UVEncasement").set(new Vector4f(-10, 20, -10, 20));
+                s.safeGetUniform("UVCoordinates").set(new Vector4f(-2, 4, -2, 4));
             }));
             builder.setUV(-uOffset, vOffset, 1 - uOffset, 1 + vOffset).renderQuad(poseStack, positions, 1f);
             builder.setUV(uOffset, -vOffset, 1 + uOffset, 1 - vOffset).renderQuad(poseStack, positions, 1f);

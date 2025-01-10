@@ -26,6 +26,9 @@ public class RenderTypeRegistry extends RenderStateShard {
         RenderSystem.defaultBlendFunc();
     });
 
+    public static final RenderTypeProvider WEEPING_WELL_DISTORTED_TEXTURE = new RenderTypeProvider((token) ->
+            createGenericRenderType("weeping_well_distorted_texture",
+                    LodestoneRenderTypes.builder(token, StateShards.ADDITIVE_TRANSPARENCY, ShaderRegistry.WEEPING_WELL_DISTORTION, CULL, LIGHTMAP, COLOR_WRITE)));
 
     public static final RenderTypeProvider SUBTRACTIVE_TEXT = new RenderTypeProvider((token) ->
             createGenericRenderType("subtractive_text", POSITION_COLOR_TEX_LIGHTMAP, QUADS, LodestoneRenderTypes.builder()

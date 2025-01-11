@@ -1,0 +1,18 @@
+{
+  "registry_name": "mowziesmobs:naga",
+  "primary_type": "aerial",
+  "spirits": [
+    {
+      "spirit": "aerial",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    }
+  ]
+}

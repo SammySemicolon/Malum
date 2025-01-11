@@ -90,7 +90,8 @@ public class MalumItemTags extends ItemTagsProvider {
 
         tag(ItemTagRegistry.MAGIC_CAPABLE_WEAPON).add(
                 CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), CREATIVE_SCYTHE.get(),
-                MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
+                MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get())
+                .addOptional(new ResourceLocation("born_in_chaos_v1:nightmare_scythe"));
 
         tag(ItemTagRegistry.SCYTHE).add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), EDGE_OF_DELIVERANCE.get(), CREATIVE_SCYTHE.get());
         tag(ItemTagRegistry.STAFF).add(MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
@@ -111,8 +112,8 @@ public class MalumItemTags extends ItemTagsProvider {
                 .addOptional(new ResourceLocation("irons_spellbooks:magehunter"))
                 .addOptional(new ResourceLocation("irons_spellbooks:keeper_flamberge"))
                 .addOptional(new ResourceLocation("irons_spellbooks:spellbreaker"))
-                .addOptional(new ResourceLocation("irons_spellbooks:amethyst_rapier"));
-
+                .addOptional(new ResourceLocation("irons_spellbooks:amethyst_rapier"))
+                .addOptional(new ResourceLocation("born_in_chaos_v1:nightmare_scythe"));
         tag(Tags.Items.NUGGETS).add(COPPER_NUGGET.get(), HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get());
         tag(Tags.Items.GEMS).add(NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), CLUSTER_OF_BRILLIANCE.get());
         tag(Tags.Items.INGOTS).add(SOUL_STAINED_STEEL_INGOT.get(), HALLOWED_GOLD_INGOT.get());

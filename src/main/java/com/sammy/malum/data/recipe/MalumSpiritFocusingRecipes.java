@@ -5,6 +5,7 @@ import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
@@ -66,6 +67,8 @@ public class MalumSpiritFocusingRecipes implements IConditionBuilder {
         addImpetusRecipes(consumer, metalDuration, ItemRegistry.OSMIUM_IMPETUS, ItemRegistry.OSMIUM_NODE, NUGGETS_OSMIUM);
         addImpetusRecipes(consumer, metalDuration, ItemRegistry.ZINC_IMPETUS, ItemRegistry.ZINC_NODE, NUGGETS_ZINC);
         addImpetusRecipes(consumer, metalDuration, ItemRegistry.TIN_IMPETUS, ItemRegistry.TIN_NODE, NUGGETS_TIN);
+        //TODO: Move this tag V to Lodestone's side. (LodestoneItemTags.class)
+        addImpetusRecipes(consumer, metalDuration, ItemRegistry.COBALT_IMPETUS, ItemRegistry.COBALT_NODE, ItemTags.create(new ResourceLocation("forge", "nuggets/cobalt")));
     }
 
     public static void addImpetusRecipes(Consumer<FinishedRecipe> consumer, int duration, RegistryObject<ImpetusItem> impetus, RegistryObject<Item> node) {

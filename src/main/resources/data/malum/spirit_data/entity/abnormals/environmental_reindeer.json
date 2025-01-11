@@ -1,0 +1,14 @@
+{
+  "registry_name": "environmental:reindeer",
+  "primary_type": "sacred",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "sacred",
+      "count": 1
+    }
+  ]
+}

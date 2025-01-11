@@ -1,0 +1,19 @@
+{
+    "conditions": [
+        {
+            "type": "forge:mod_loaded",
+            "modid": "tconstruct"
+        }
+    ],
+    "type": "tconstruct:melting",
+    "ingredient": {
+        "count": 1,
+        "item": "malum:tin_node"
+    },
+    "result": {
+        "fluid": "tconstruct:molten_tin",
+        "amount": 60
+    },
+    "temperature": 225,
+    "time": 26
+}

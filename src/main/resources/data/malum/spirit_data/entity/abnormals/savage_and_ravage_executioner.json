@@ -1,0 +1,10 @@
+{
+  "registry_name": "savage_and_ravage:executioner",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 3
+    }
+  ]
+}

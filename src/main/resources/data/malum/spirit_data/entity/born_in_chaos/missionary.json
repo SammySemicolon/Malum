@@ -1,0 +1,22 @@
+{
+  "registry_name": "born_in_chaos_v1:missionary",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 10
+    },
+    {
+      "spirit": "arcane",
+      "count": 4
+    },
+    {
+      "spirit": "eldritch",
+      "count": 6
+    }
+  ],
+  "spirit_item": {
+    "count": 1,
+    "item": "born_in_chaos_v1:ethereal_spirit"
+  }
+}

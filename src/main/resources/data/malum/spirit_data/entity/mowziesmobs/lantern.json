@@ -1,0 +1,14 @@
+{
+  "registry_name": "mowziesmobs:lantern",
+  "primary_type": "aerial",
+  "spirits": [
+    {
+      "spirit": "sacred",
+      "count": 1
+    },
+    {
+      "spirit": "aerial",
+      "count": 1
+    }
+  ]
+}

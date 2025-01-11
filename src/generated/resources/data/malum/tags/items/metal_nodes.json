@@ -10,6 +10,7 @@
     "malum:uranium_node",
     "malum:osmium_node",
     "malum:zinc_node",
-    "malum:tin_node"
+    "malum:tin_node",
+    "malum:cobalt_node"
   ]
 }

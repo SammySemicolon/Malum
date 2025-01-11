@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/leaves",
-  "textures": {
-    "all": "malum:block/soulwood/budding_soulwood_leaves"
-  }
-}

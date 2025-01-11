@@ -93,7 +93,7 @@ public class SpiritDataReloadListener extends SimpleJsonResourceReloadListener {
         for (JsonElement spiritElement : array) {
             JsonObject spiritObject = spiritElement.getAsJsonObject();
             String spiritName = spiritObject.getAsJsonPrimitive("spirit").getAsString();
-            int count = spiritObject.getAsJsonPrimitive("count").getAsInt();
+            int count = spiritObject.has("count") ? spiritObject.getAsJsonPrimitive("count").getAsInt() : 1;
             spiritData.add(new SpiritIngredient(MalumSpiritType.getSpiritType(spiritName), count));
         }
         return spiritData;

@@ -352,7 +352,6 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> CURSED_SAP_BLOCK = register("cursed_sap_block", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.CURSED_SAP_BLOCK.get(), p));
 
     public static final DeferredHolder<Item, Item> SOULWOOD_LEAVES = register("soulwood_leaves", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_LEAVES.get(), p));
-    public static final DeferredHolder<Item, Item> BUDDING_SOULWOOD_LEAVES = register("budding_soulwood_leaves", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BUDDING_SOULWOOD_LEAVES.get(), p));
     public static final DeferredHolder<Item, Item> HANGING_SOULWOOD_LEAVES = register("hanging_soulwood_leaves", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.HANGING_SOULWOOD_LEAVES.get(), p));
     public static final DeferredHolder<Item, Item> SOULWOOD_GROWTH = register("soulwood_growth", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_GROWTH.get(), p));
 
@@ -764,10 +763,9 @@ public class ItemRegistry {
         @SubscribeEvent
         public static void registerCompost(FMLCommonSetupEvent event) {
             registerCompostable(RUNEWOOD_LEAVES, 0.3f);
-            registerCompostable(HANGING_RUNEWOOD_LEAVES, 0.3f);
+            registerCompostable(HANGING_RUNEWOOD_LEAVES, 0.2f);
             registerCompostable(SOULWOOD_LEAVES, 0.3f);
-            registerCompostable(BUDDING_SOULWOOD_LEAVES, 0.3f);
-            registerCompostable(HANGING_SOULWOOD_LEAVES, 0.3f);
+            registerCompostable(HANGING_SOULWOOD_LEAVES, 0.2f);
             registerCompostable(RUNEWOOD_SAPLING, 0.3f);
             registerCompostable(SOULWOOD_GROWTH, 0.3f);
         }
@@ -835,7 +833,7 @@ public class ItemRegistry {
 
             DataHelper.takeAll(items, i -> i.get() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IGradientedLeavesBlock).forEach(item -> {
                 IGradientedLeavesBlock malumLeavesBlock = (IGradientedLeavesBlock) ((BlockItem) item.get()).getBlock();
-                event.register((stack, tintIndex) -> ColorHelper.getColor(malumLeavesBlock.getMaxColor()),
+                event.register((stack, tintIndex) -> ColorHelper.getColor(malumLeavesBlock.getMinColor()),
                         item.get());
             });
             DataHelper.takeAll(items, i -> i.get() instanceof EtherTorchItem || i.get() instanceof EtherBrazierItem).forEach(i -> event.register((s, c) -> {

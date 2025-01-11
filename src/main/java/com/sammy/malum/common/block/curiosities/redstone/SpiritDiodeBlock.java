@@ -115,8 +115,9 @@ public abstract class SpiritDiodeBlock<T extends SpiritDiodeBlockEntity> extends
     }
 
     public void updateAnimation(ServerLevel serverLevel, BlockPos pos, T diode) {
+        int outputSignal = diode.getOutputSignal();
         PacketDistributor.sendToPlayersTrackingChunk(serverLevel,
-                new ChunkPos(pos), new SpiritDiodeUpdatePayload(pos, diode.getOutputSignal(), diode.getOutputSignal() == 0));
+                new ChunkPos(pos), new SpiritDiodeUpdatePayload(pos, outputSignal, outputSignal == 0));
     }
 
     public void emitRedstoneParticles(Level level, BlockPos pos) {

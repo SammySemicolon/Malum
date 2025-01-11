@@ -32,7 +32,7 @@ public class MalumHangingLeavesBlock extends Block implements SimpleWaterloggedB
         super(properties);
         this.maxColor = maxColor;
         this.minColor = minColor;
-        registerDefaultState(defaultBlockState().setValue(COLOR, 0));
+        registerDefaultState(defaultBlockState().setValue(COLOR, 0).setValue(WATERLOGGED, false));
     }
 
     @Override

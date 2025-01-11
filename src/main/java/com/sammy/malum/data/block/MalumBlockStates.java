@@ -168,7 +168,7 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
 
         BlockStateSmithTypes.LOG_BLOCK.act(data, SOULWOOD_BEAM, SOULWOOD_LOG, STRIPPED_SOULWOOD_LOG, EXPOSED_SOULWOOD_LOG, REVEALED_SOULWOOD_LOG);
         BlockStateSmithTypes.WOOD_BLOCK.act(data, SOULWOOD, STRIPPED_SOULWOOD);
-        BlockStateSmithTypes.LEAVES_BLOCK.act(data, SOULWOOD_LEAVES, BUDDING_SOULWOOD_LEAVES);
+        BlockStateSmithTypes.LEAVES_BLOCK.act(data, SOULWOOD_LEAVES);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_TEXTURE_ITEM, this::simpleBlock, this::hangingLeavesModel, HANGING_SOULWOOD_LEAVES);
 
         BlockStateSmithTypes.CROSS_MODEL_BLOCK.act(data, SOULWOOD_GROWTH);

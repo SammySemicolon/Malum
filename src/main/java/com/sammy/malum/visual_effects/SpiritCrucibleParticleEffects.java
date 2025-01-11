@@ -1,6 +1,7 @@
 package com.sammy.malum.visual_effects;
 
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
+import com.sammy.malum.common.item.augment.core.CoreAugmentItem;
 import com.sammy.malum.core.systems.artifice.ArtificeInfluenceData;
 import com.sammy.malum.core.systems.artifice.ArtificeModifierSourceInstance;
 import com.sammy.malum.core.systems.artifice.IArtificeAcceptor;
@@ -36,11 +37,29 @@ public class SpiritCrucibleParticleEffects {
 
     public static void passiveCrucibleParticles(SpiritCrucibleCoreBlockEntity crucible) {
         MalumSpiritType activeSpiritType = crucible.getActiveSpiritType();
+        Level level = crucible.getLevel();
+        RandomSource random = level.random;
+        if (level.getGameTime() % 16L == 0) {
+            ItemStack item = crucible.coreAugmentInventory.getStackInSlot(0);
+            if (item.getItem() instanceof CoreAugmentItem augmentItem) {
+                BlockPos blockPos = crucible.getBlockPos();
+                for (var augmentSpiritType : augmentItem.spiritTypes) {
+                    Vec3 offset = SpiritCrucibleCoreBlockEntity.CRUCIBLE_CORE_AUGMENT_OFFSET.add(
+                            Mth.nextFloat(random, -0.1f, 0.1f),
+                            Mth.nextFloat(random, -0.1f, 0.1f),
+                            Mth.nextFloat(random, -0.1f, 0.1f));
+                    Vec3 particlePosition = new Vec3(blockPos.getX() + offset.x, blockPos.getY() + offset.y, blockPos.getZ() + offset.z);
+                    var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, particlePosition, augmentSpiritType);
+                    lightSpecs.getBuilder().multiplyLifetime(2.5f).modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(1.3f));
+                    lightSpecs.getBloomBuilder().multiplyLifetime(1.5f);
+                    lightSpecs.spawnParticles();
+                }
+            }
+        }
+
         if (activeSpiritType == null) {
             return;
         }
-        Level level = crucible.getLevel();
-        RandomSource random = level.random;
         Vec3 itemPos = crucible.getItemPos();
         LodestoneBlockEntityInventory spiritInventory = crucible.spiritInventory;
         LodestoneBlockEntityInventory augmentInventory = crucible.augmentInventory;
@@ -87,23 +106,6 @@ public class SpiritCrucibleParticleEffects {
                         lightSpecs.getBloomBuilder().setMotion(velocity);
                         lightSpecs.spawnParticles();
                     }
-                }
-            }
-        }
-        if (level.getGameTime() % 16L == 0) {
-            ItemStack item = crucible.coreAugmentInventory.getStackInSlot(0);
-            if (item.getItem() instanceof AugmentItem augmentItem) {
-                BlockPos blockPos = crucible.getBlockPos();
-                for (var augmentSpiritType : augmentItem.spiritTypes ) {
-                    Vec3 offset = SpiritCrucibleCoreBlockEntity.CRUCIBLE_CORE_AUGMENT_OFFSET.add(
-                            Mth.nextFloat(random, -0.1f, 0.1f),
-                            Mth.nextFloat(random, -0.1f, 0.1f),
-                            Mth.nextFloat(random, -0.1f, 0.1f));
-                    Vec3 particlePosition = new Vec3(blockPos.getX() + offset.x, blockPos.getY() + offset.y, blockPos.getZ() + offset.z);
-                    var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, particlePosition, augmentSpiritType);
-                    lightSpecs.getBuilder().multiplyLifetime(2.5f).modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(1.3f));
-                    lightSpecs.getBloomBuilder().multiplyLifetime(1.5f);
-                    lightSpecs.spawnParticles();
                 }
             }
         }

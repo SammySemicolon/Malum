@@ -260,32 +260,26 @@ public class SoulwoodTreeFeature extends Feature<NoneFeatureConfiguration> {
         for (int x = -leavesSize; x <= leavesSize; x++) {
             int offsetColor = leavesColor + Mth.nextInt(rand, leavesColor == 0 ? 0 : -1, leavesColor == 4 ? 0 : 1);
             for (int z = -leavesSize; z <= leavesSize; z++) {
+                float scalar = RandomHelper.randomBetween(rand, 0.1f, 0.3f) + leavesSize * 0.1f;
                 if (Math.abs(x) == leavesSize && Math.abs(z) == leavesSize) {
                     continue;
                 }
                 BlockPos leavesPos = pos.offset(x, 0, z);
                 if (makeHangingLeaves && !(x == 0 && z == 0)) {
-                    if (rand.nextFloat() < (0.4f + leavesSize * 0.2f)) {
-                        int length = leavesSize - 2 + RandomHelper.randomBetween(rand, 0, leavesSize);
-                        if (length < 2) {
-                            length -= 2;
+                    int offset = Math.max(RandomHelper.randomBetween(rand, 0, leavesSize-2), 0);
+                    int length = 2+RandomHelper.randomBetween(rand, 0, leavesSize)-offset;
+                    BlockPos.MutableBlockPos hangingLeavesPos = leavesPos.mutable().move(Direction.UP, offset);
+                    for (int i = 0; i <= length; i++) {
+                        final int colorValue = Mth.clamp(offsetColor + Mth.floor(i*scalar), 0, 4);
+                        var vinePos = hangingLeavesPos.move(Direction.DOWN).immutable();
+                        boolean hanging = i == length;
+                        var block = (hanging ? BlockRegistry.HANGING_SOULWOOD_LEAVES : BlockRegistry.SOULWOOD_LEAVES).get();
+                        var entry = create(block.defaultBlockState().setValue(MalumLeavesBlock.COLOR, colorValue));
+                        if (hanging) {
+                            entry.setDiscardPredicate((l, p, s) -> !filler.getLayer(LEAVES).containsKey(p.above()) || filler.getLayer(LOGS).containsKey(p.above()));
                         }
-                        if (length < 2) {
-                            continue;
-                        }
-                        int spawnHeight = rand.nextInt(2);
-                        BlockPos.MutableBlockPos hangingLeavesPos = leavesPos.mutable().move(Direction.UP, spawnHeight);
-                        for (int i = -spawnHeight; i <= length; i++) {
-                            final int gradient = Mth.clamp(leavesColor + 1 + i, 0, 4);
-                            BlockPos vinePos = hangingLeavesPos.move(Direction.DOWN).immutable();
-                            final boolean hanging = i == length;
-                            Block block = (hanging ? BlockRegistry.HANGING_SOULWOOD_LEAVES : BlockRegistry.BUDDING_SOULWOOD_LEAVES).get();
-                            BlockStateEntryBuilder entry = create(block.defaultBlockState().setValue(MalumLeavesBlock.COLOR, gradient));
-                            if (hanging) {
-                                entry.setDiscardPredicate((l, p, s) -> !filler.getLayer(LEAVES).containsKey(p.above()) || filler.getLayer(LOGS).containsKey(p.above()));
-                            }
-                            filler.getLayer(hanging ? HANGING_LEAVES : LEAVES).put(vinePos, entry.build());
-                        }
+                        var layer = filler.getLayer(hanging ? HANGING_LEAVES : LEAVES);
+                        layer.put(vinePos, entry.build());
                     }
                 } else {
                     filler.getLayer(LEAVES).put(leavesPos, create(BlockRegistry.SOULWOOD_LEAVES.get().defaultBlockState().setValue(MalumLeavesBlock.COLOR, offsetColor)));

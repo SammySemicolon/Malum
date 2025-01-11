@@ -5,6 +5,7 @@ import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
@@ -169,6 +170,7 @@ public class ArtificeSpiritInfusionRecipes {
         metalImpetusRecipe(recipeOutput, ItemRegistry.OSMIUM_IMPETUS, INGOTS_OSMIUM);
         metalImpetusRecipe(recipeOutput, ItemRegistry.ZINC_IMPETUS, INGOTS_ZINC);
         metalImpetusRecipe(recipeOutput, ItemRegistry.TIN_IMPETUS, INGOTS_TIN);
+        metalImpetusRecipe(recipeOutput, ItemRegistry.COBALT_IMPETUS, ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "ingots/cobalt"))); //TODO: Move this tag to Lodestone's side.
     }
 
     public static void metalImpetusRecipe(RecipeOutput recipeOutput, DeferredHolder<Item, ? extends ImpetusItem> output, TagKey<Item> ingot) {

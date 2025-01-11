@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:ingots/cobalt"
+      }
+    }
+  ],
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.25,
+  "ingredient": {
+    "tag": "c:ingots/cobalt"
+  },
+  "result": {
+    "count": 1,
+    "id": "malum:cobalt_node"
+  }
+}

@@ -148,7 +148,8 @@ public class ArtificeEntries {
                         SpiritInfusionPage.fromOutput(URANIUM_IMPETUS.get()),
                         SpiritInfusionPage.fromOutput(OSMIUM_IMPETUS.get()),
                         SpiritInfusionPage.fromOutput(ZINC_IMPETUS.get()),
-                        SpiritInfusionPage.fromOutput(TIN_IMPETUS.get())
+                        SpiritInfusionPage.fromOutput(TIN_IMPETUS.get()),
+                        SpiritInfusionPage.fromOutput(COBALT_IMPETUS.get())
                 ))
                 .addPage(new CyclingPage(
                         SpiritFocusingPage.fromOutput(IRON_NODE.get()),
@@ -161,7 +162,8 @@ public class ArtificeEntries {
                         SpiritFocusingPage.fromOutput(URANIUM_NODE.get()),
                         SpiritFocusingPage.fromOutput(OSMIUM_NODE.get()),
                         SpiritFocusingPage.fromOutput(ZINC_NODE.get()),
-                        SpiritFocusingPage.fromOutput(TIN_NODE.get())
+                        SpiritFocusingPage.fromOutput(TIN_NODE.get()),
+                        SpiritFocusingPage.fromOutput(COBALT_NODE.get())
                 ))
         );
 
@@ -199,7 +201,8 @@ public class ArtificeEntries {
                         SpiritRepairPage.fromOutput(URANIUM_IMPETUS.get()),
                         SpiritRepairPage.fromOutput(OSMIUM_IMPETUS.get()),
                         SpiritRepairPage.fromOutput(ZINC_IMPETUS.get()),
-                        SpiritRepairPage.fromOutput(TIN_IMPETUS.get())
+                        SpiritRepairPage.fromOutput(TIN_IMPETUS.get()),
+                        SpiritRepairPage.fromOutput(COBALT_IMPETUS.get())
                 ))
                 .addReference(new EntryReference(IRON_PICKAXE, BookEntry.build("arcane_restoration.tool_repair")
                         .addPage(new HeadlineTextPage("arcane_restoration.tool_repair", "arcane_restoration.tool_repair.1"))

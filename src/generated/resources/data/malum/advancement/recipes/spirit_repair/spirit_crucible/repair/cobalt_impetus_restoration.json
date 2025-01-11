@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crucible": {
+      "conditions": {
+        "items": [
+          {
+            "items": "malum:spirit_crucible"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "malum:spirit_crucible/repair/cobalt_impetus_restoration"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crucible"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "malum:spirit_crucible/repair/cobalt_impetus_restoration"
+    ]
+  }
+}

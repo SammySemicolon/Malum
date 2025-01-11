@@ -9,7 +9,9 @@
   "effect": "malum:silenced",
   "providers": [
     {
-      "item": "malum:rune_of_the_heretic",
+      "item": "malum:rune_of_the_heretic"
+    },
+    {
       "item": "malum:erosion_scepter"
     }
   ]

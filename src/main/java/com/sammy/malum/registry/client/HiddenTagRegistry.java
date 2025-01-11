@@ -33,6 +33,7 @@ public class HiddenTagRegistry {
 
 	public static void attachFeatureFlags(FeatureFlagSet set) {
 		// Purely exists to force a rebuild of flags, we check separately
+		//The mixin that ran this I believe is disabled atm
 		((FeatureFlagExpandedUniverseSet) (Object) set).malum$attachFeatureSet(
 			blankFeatureSet ? HiddenTagHandler.createAllEnabledFlagSet() : HiddenTagHandler.createFeatureFlagSet());
 	}
@@ -41,6 +42,7 @@ public class HiddenTagRegistry {
 	public static void hideItems(BuildCreativeModeTabContentsEvent event) {
 		List<TagKey<Item>> disabledTags = HiddenTagHandler.tagsToHide();
 
+		//TODO: I believe this just crashes the game atm, confirm
 		var iterator = event.getTab().getDisplayItems().iterator();
 		while (iterator.hasNext()) {
 			var entry = iterator.next();

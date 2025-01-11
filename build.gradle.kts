@@ -1,5 +1,3 @@
-import java.util.*
-
 plugins {
     id("java-library")
     id("maven-publish")
@@ -8,19 +6,27 @@ plugins {
 
 version = "${property("minecraft_version")}-${property("mod_version")}"
 if (System.getenv("BUILD_NUMBER") != null) {
-    version = "${property("minecraft_version")}-${property("mod_version")}.${System.getenv("BUILD_NUMBER")}"
+    version = "$version.${System.getenv("BUILD_NUMBER")}"
 }
-group = project.property("mod_group_id").toString()
-
 val baseArchivesName = project.property("mod_id").toString()
 base {
     archivesName.set(project.property("mod_id").toString())
 }
+group = "${property("mod_group_id")}"
 
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))
     }
+}
+
+tasks.named<Wrapper>("wrapper") {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+val localRuntime: Configuration by configurations.creating
+configurations.runtimeClasspath {
+    extendsFrom(localRuntime)
 }
 
 neoForge {
@@ -147,35 +153,35 @@ repositories {
 
 dependencies {
     // JEI Dependency
-    compileOnly(("mezz.jei:jei-${project.property("minecraft_version")}-neoforge-api:${project.property("jei_version")}"))
+    compileOnlyApi(("mezz.jei:jei-${project.property("minecraft_version")}-neoforge-api:${project.property("jei_version")}"))
     runtimeOnly(("mezz.jei:jei-${project.property("minecraft_version")}-neoforge:${project.property("jei_version")}"))
 
     // Curios dependency
-    implementation(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
+    compileOnlyApi(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
+    runtimeOnly(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
 
-    implementation(("team.lodestar.lodestone:lodestone:${property("minecraft_version")}-${property("lodestone_version")}"))
-
-    //runtimeOnly(("maven.modrinth:fusion-connected-textures:${property("fusion_version")}-forge-mc${property("minecraft_version")}"))
+    compileOnlyApi(("team.lodestar.lodestone:lodestone:${property("minecraft_version")}-${property("lodestone_version")}"))
+    runtimeOnly(("team.lodestar.lodestone:lodestone:${property("minecraft_version")}-${property("lodestone_version")}"))
 
     // Tetra Optional Dependency
 
 //    compileOnly(("curse.maven:tetra-${property("tetra_version")}"))
 //    compileOnly(("se.mickelus.mutil:mutil:${property("mutil_version")}"))
 
-    // FD Optional Dependency
     compileOnly(("curse.maven:farmers-delight-398521:5878217"))
 
-    // Iron's Spellbooks Optional Dependency
     compileOnly(("software.bernie.geckolib:geckolib-neoforge-${property("minecraft_version")}:${property("gecko_lib_version")}"))
     compileOnly(("dev.kosmx.player-anim:player-animation-lib-forge:${property("player_animator_version")}"))
     compileOnly(("curse.maven:irons-spells-n-spellbooks-855414:5863590"))
 
-    runtimeOnly(("curse.maven:jeed-532286:5693385"))
-    runtimeOnly(("curse.maven:spark-361579:5759671"))
-    runtimeOnly(("curse.maven:attributefix-280510:5824104"))
-    runtimeOnly(("curse.maven:bookshelf-228525:5824127")) //Required for AttributeFix
-    runtimeOnly(("curse.maven:prickle-1023259:5836410")) //Required for AttributeFix
-    runtimeOnly(("curse.maven:overloaded-armor-bar-314002:5537850"))
+    localRuntime(("curse.maven:jeed-532286:5693385"))
+    localRuntime(("curse.maven:spark-361579:5759671"))
+    localRuntime(("curse.maven:fusion-connected-textures-854949:6073987"))
+    localRuntime(("curse.maven:overloaded-armor-bar-314002:5537850"))
+
+    localRuntime(("curse.maven:bookshelf-228525:5824127")) //Required for AttributeFix
+    localRuntime(("curse.maven:prickle-1023259:5836410")) //Required for AttributeFix
+    localRuntime(("curse.maven:attributefix-280510:5824104"))
 }
 
 val generateModMetadata by tasks.registering(ProcessResources::class) {
@@ -195,7 +201,6 @@ val generateModMetadata by tasks.registering(ProcessResources::class) {
     inputs.properties(replaceProperties)
     expand(replaceProperties)
 
-    // Exclude .java files or any other files that shouldn't have template expansion
     filesMatching("**/*.java") {
         exclude()
     }
@@ -203,8 +208,6 @@ val generateModMetadata by tasks.registering(ProcessResources::class) {
     from("src/main/templates")
     into("build/generated/sources/modMetadata")
 }
-// Include the output of "generateModMetadata" as an input directory for the build.
-// This works with both building through Gradle and the IDE.
 sourceSets["main"].resources.srcDir(generateModMetadata)
 neoForge.ideSyncTask(generateModMetadata)
 
@@ -212,15 +215,6 @@ java {
 //    withJavadocJar()
     withSourcesJar()
 }
-
-
-
-//jar {
-////    exclude 'com/sammy/malum/core/data/**'
-//	exclude 'com/sammy/malum/client/model/bbmodels/**'
-//	exclude 'assets/malum/models/block/bbmodels/**'
-//}
-
 
 publishing {
     publications {

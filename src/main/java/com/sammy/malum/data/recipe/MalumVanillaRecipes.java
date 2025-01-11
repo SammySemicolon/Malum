@@ -6,6 +6,7 @@ import com.sammy.malum.data.recipe.builder.vanilla.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
@@ -82,6 +83,8 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         nodeSmelting(consumer, ItemRegistry.OSMIUM_IMPETUS, ItemRegistry.OSMIUM_NODE, NUGGETS_OSMIUM);
         nodeSmelting(consumer, ItemRegistry.ZINC_IMPETUS, ItemRegistry.ZINC_NODE, NUGGETS_ZINC);
         nodeSmelting(consumer, ItemRegistry.TIN_IMPETUS, ItemRegistry.TIN_NODE, NUGGETS_TIN);
+        //TODO: Move this V to Lodestone's side. (LodestoneItemTags.class)
+        nodeSmelting(consumer, ItemRegistry.COBALT_IMPETUS, ItemRegistry.COBALT_NODE, ItemTags.create(new ResourceLocation("forge", "nuggets/cobalt")));
         //TOOLS
         shaped(RecipeCategory.MISC, ItemRegistry.SOUL_STAINED_STEEL_HOE.get()).define('#', Tags.Items.RODS_WOODEN).define('X', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).pattern("XX").pattern(" #").pattern(" #").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(consumer);
         shaped(RecipeCategory.MISC, ItemRegistry.SOUL_STAINED_STEEL_PICKAXE.get()).define('#', Tags.Items.RODS_WOODEN).define('X', ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()).pattern("XXX").pattern(" # ").pattern(" # ").unlockedBy("has_soul_stained_steel", has(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get())).save(consumer);

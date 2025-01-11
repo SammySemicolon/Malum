@@ -1,9 +1,13 @@
 {
-  "registry_name": "upgrade_aquatic:glow_squid",
+  "registry_name": "born_in_chaos_v1:corpse_fish",
   "primary_type": "aqueous",
   "spirits": [
     {
       "spirit": "aqueous",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
       "count": 2
     }
   ]

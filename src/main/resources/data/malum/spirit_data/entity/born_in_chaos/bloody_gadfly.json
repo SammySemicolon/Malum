@@ -1,0 +1,18 @@
+{
+  "registry_name": "born_in_chaos_v1:bloody_gadfly",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "aerial",
+      "count": 1
+    }
+  ]
+}

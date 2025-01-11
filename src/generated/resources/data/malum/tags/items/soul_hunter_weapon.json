@@ -45,6 +45,10 @@
     {
       "id": "irons_spellbooks:amethyst_rapier",
       "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:nightmare_scythe",
+      "required": false
     }
   ]
 }

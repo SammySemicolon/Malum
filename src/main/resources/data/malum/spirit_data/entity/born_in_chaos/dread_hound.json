@@ -1,10 +1,10 @@
 {
-  "registry_name": "savageandravage:griefer",
+  "registry_name": "born_in_chaos_v1:dread_hound",
   "primary_type": "wicked",
   "spirits": [
     {
       "spirit": "wicked",
-      "count": 1
+      "count": 2
     }
   ]
 }

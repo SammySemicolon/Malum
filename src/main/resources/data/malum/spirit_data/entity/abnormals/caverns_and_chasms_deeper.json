@@ -1,0 +1,18 @@
+{
+  "registry_name": "caverns_and_chasms:deeper",
+  "primary_type": "infernal",
+  "spirits": [
+    {
+      "spirit": "infernal",
+      "count": 3
+    },
+    {
+      "spirit": "earthen",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ]
+}

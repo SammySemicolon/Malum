@@ -1,0 +1,18 @@
+{
+  "registry_name": "born_in_chaos_v1:dark_vortex",
+  "primary_type": "aerial",
+  "spirits": [
+    {
+      "spirit": "aerial",
+      "count": 1
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    }
+  ],
+  "spirit_item": {
+    "count": 1,
+    "item": "born_in_chaos_v1:ethereal_spirit"
+  }
+}

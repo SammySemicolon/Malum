@@ -594,6 +594,11 @@ public class ItemRegistry {
     public static final RegistryObject<CrackedImpetusItem> CRACKED_TIN_IMPETUS = register("cracked_tin_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
     public static final RegistryObject<ImpetusItem> TIN_IMPETUS = register("tin_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_TIN_IMPETUS));
     public static final RegistryObject<Item> TIN_NODE = register("tin_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
+    public static final RegistryObject<CrackedImpetusItem> CRACKED_COBALT_IMPETUS = register("cracked_cobalt_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final RegistryObject<ImpetusItem> COBALT_IMPETUS = register("cobalt_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_COBALT_IMPETUS));
+    public static final RegistryObject<Item> COBALT_NODE = register("cobalt_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
+
+
 
     public static final RegistryObject<CrackedImpetusItem> CRACKED_ALCHEMICAL_IMPETUS = register("cracked_alchemical_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
     public static final RegistryObject<ImpetusItem> ALCHEMICAL_IMPETUS = register("alchemical_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ALCHEMICAL_IMPETUS));

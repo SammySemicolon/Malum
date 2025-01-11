@@ -1,0 +1,18 @@
+{
+  "registry_name": "born_in_chaos_v1:krampus",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 20
+    },
+    {
+      "spirit": "arcane",
+      "count": 10
+    },
+    {
+      "spirit": "eldritch",
+      "count": 8
+    }
+  ]
+}

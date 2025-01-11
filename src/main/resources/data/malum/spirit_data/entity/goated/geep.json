@@ -1,0 +1,14 @@
+{
+  "registry_name": "goated:geep",
+  "primary_type": "sacred",
+  "spirits": [
+    {
+      "spirit": "sacred",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    }
+  ]
+}

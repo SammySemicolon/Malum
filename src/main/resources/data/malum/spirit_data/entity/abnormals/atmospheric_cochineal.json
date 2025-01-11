@@ -1,0 +1,14 @@
+{
+  "registry_name": "atmospheric:cochineal",
+  "primary_type": "aerial",
+  "spirits": [
+    {
+      "spirit": "aerial",
+      "count": 1
+    },
+    {
+      "spirit": "sacred",
+      "count": 1
+    }
+  ]
+}

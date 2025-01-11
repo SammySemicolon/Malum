@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "forge:tag_empty",
+            "tag": "forge:nuggets/cobalt"
+          }
+        }
+      ],
+      "recipe": {
+        "type": "malum:node_blasting",
+        "cookingtime": 100,
+        "experience": 0.25,
+        "ingredient": {
+          "item": "malum:cobalt_node"
+        },
+        "result": {
+          "count": 6,
+          "tag": "forge:nuggets/cobalt"
+        }
+      }
+    }
+  ]
+}

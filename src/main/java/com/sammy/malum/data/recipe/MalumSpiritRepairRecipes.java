@@ -119,6 +119,7 @@ public class MalumSpiritRepairRecipes implements IConditionBuilder {
                 .addItem(ItemRegistry.CRACKED_OSMIUM_IMPETUS.get())
                 .addItem(ItemRegistry.CRACKED_ZINC_IMPETUS.get())
                 .addItem(ItemRegistry.CRACKED_TIN_IMPETUS.get())
+                .addItem(ItemRegistry.CRACKED_COBALT_IMPETUS.get())
                 .addSpirit(INFERNAL_SPIRIT, 16)
                 .addSpirit(EARTHEN_SPIRIT, 16)
                 .build(consumer, "metal_impetus_restoration");

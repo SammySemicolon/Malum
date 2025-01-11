@@ -1,0 +1,18 @@
+{
+  "registry_name": "savage_and_ravage:iceologer",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "eldritch",
+      "count": 1
+    }
+  ]
+}

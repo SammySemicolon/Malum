@@ -1,0 +1,18 @@
+{
+  "registry_name": "born_in_chaos_v1:skeleton_demoman",
+  "primary_type": "arcane",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 2
+    },
+    {
+      "spirit": "wicked",
+      "count": 1
+    },
+    {
+      "spirit": "infernal",
+      "count": 2
+    }
+  ]
+}

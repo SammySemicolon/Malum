@@ -1,0 +1,18 @@
+{
+  "registry_name": "environmental:zebra",
+  "primary_type": "aerial",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "aerial",
+      "count": 2
+    },
+    {
+      "spirit": "sacred",
+      "count": 1
+    }
+  ]
+}

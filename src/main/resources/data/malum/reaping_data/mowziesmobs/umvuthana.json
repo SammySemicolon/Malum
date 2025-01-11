@@ -1,0 +1,14 @@
+{
+  "registry_name": "mowziesmobs:umvuthana",
+  "drops": [
+    {
+      "ingredient": {
+        "item": "malum:blazing_quartz",
+        "count": 1
+      },
+      "chance": "0.2",
+      "min": "1",
+      "max": "2"
+    }
+  ]
+}

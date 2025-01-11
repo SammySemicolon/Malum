@@ -1,0 +1,18 @@
+{
+  "registry_name": "born_in_chaos_v1:lords_felsteed",
+  "primary_type": "wicked",
+  "spirits": [
+    {
+      "spirit": "wicked",
+      "count": 10
+    },
+    {
+      "spirit": "arcane",
+      "count": 4
+    },
+    {
+      "spirit": "eldritch",
+      "count": 6
+    }
+  ]
+}

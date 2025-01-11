@@ -1,13 +1,11 @@
 package com.sammy.malum.common.spiritrite.arcane;
 
-import com.sammy.malum.common.block.blight.*;
 import com.sammy.malum.common.block.curiosities.totem.*;
 import com.sammy.malum.common.block.storage.*;
 import com.sammy.malum.common.packets.particle.rite.BlightTransformItemParticlePacket;
 import com.sammy.malum.common.packets.particle.rite.generic.BlockSparkleParticlePacket;
 import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.common.worldevent.*;
-import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.registry.common.block.*;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.core.*;
@@ -42,7 +40,10 @@ public class ArcaneRiteType extends TotemicRiteType {
             @SuppressWarnings("ConstantConditions")
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
-                WorldEventHandler.addWorldEvent(totemBase.getLevel(), new TotemCreatedBlightEvent().setPosition(totemBase.getBlockPos()).setBlightData(2, 4, 4));
+                WorldEventHandler.addWorldEvent(totemBase.getLevel(),
+                        new UnchainedTotemConversionEvent()
+                                .setPosition(totemBase.getBlockPos())
+                                .setBlightData(1, 4, 6));
             }
         };
     }

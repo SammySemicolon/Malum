@@ -4,7 +4,7 @@ import com.sammy.malum.common.block.blight.BlightedSoilBlock;
 import com.sammy.malum.common.worldgen.tree.SoulwoodTreeFeature;
 import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
-import com.sammy.malum.registry.common.WorldEventTypes;
+import com.sammy.malum.registry.common.WorldEventTypeRegistry;
 import com.sammy.malum.visual_effects.networked.data.PositionEffectData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -25,7 +25,7 @@ public class ActiveBlightEvent extends WorldEventInstance {
     public Map<Integer, Double> noiseValues;
 
     public ActiveBlightEvent() {
-        this(WorldEventTypes.ACTIVE_BLIGHT.get());
+        this(WorldEventTypeRegistry.ACTIVE_BLIGHT.get());
     }
     public ActiveBlightEvent(WorldEventType type) {
         super(type);
@@ -51,8 +51,8 @@ public class ActiveBlightEvent extends WorldEventInstance {
         }
         if (blightTimer == 0) {
             blightTimer = rate;
-            times--;
             createBlight((ServerLevel) level);
+            times--;
             intensity += 2;
         } else {
             blightTimer--;

@@ -36,19 +36,19 @@ import static com.sammy.malum.visual_effects.SpiritLightSpecs.*;
 public class SpiritCrucibleParticleEffects {
 
     public static void passiveCrucibleParticles(SpiritCrucibleCoreBlockEntity crucible) {
-        MalumSpiritType activeSpiritType = crucible.getActiveSpiritType();
-        Level level = crucible.getLevel();
-        RandomSource random = level.random;
+        var activeSpiritType = crucible.getActiveSpiritType();
+        var level = crucible.getLevel();
+        var random = level.random;
         if (level.getGameTime() % 16L == 0) {
-            ItemStack item = crucible.coreAugmentInventory.getStackInSlot(0);
+            var item = crucible.coreAugmentInventory.getStackInSlot(0);
             if (item.getItem() instanceof CoreAugmentItem augmentItem) {
-                BlockPos blockPos = crucible.getBlockPos();
+                var blockPos = crucible.getBlockPos();
                 for (var augmentSpiritType : augmentItem.spiritTypes) {
                     Vec3 offset = SpiritCrucibleCoreBlockEntity.CRUCIBLE_CORE_AUGMENT_OFFSET.add(
                             Mth.nextFloat(random, -0.1f, 0.1f),
                             Mth.nextFloat(random, -0.1f, 0.1f),
                             Mth.nextFloat(random, -0.1f, 0.1f));
-                    Vec3 particlePosition = new Vec3(blockPos.getX() + offset.x, blockPos.getY() + offset.y, blockPos.getZ() + offset.z);
+                    var particlePosition = new Vec3(blockPos.getX() + offset.x, blockPos.getY() + offset.y, blockPos.getZ() + offset.z);
                     var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, particlePosition, augmentSpiritType);
                     lightSpecs.getBuilder().multiplyLifetime(2.5f).modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(1.3f));
                     lightSpecs.getBloomBuilder().multiplyLifetime(1.5f);
@@ -60,10 +60,10 @@ public class SpiritCrucibleParticleEffects {
         if (activeSpiritType == null) {
             return;
         }
-        Vec3 itemPos = crucible.getItemPos();
-        LodestoneBlockEntityInventory spiritInventory = crucible.spiritInventory;
-        LodestoneBlockEntityInventory augmentInventory = crucible.augmentInventory;
-        SpiritFocusingRecipe recipe = crucible.recipe;
+        var itemPos = crucible.getItemPos();
+        var spiritInventory = crucible.spiritInventory;
+        var augmentInventory = crucible.augmentInventory;
+        var recipe = crucible.recipe;
         if (recipe != null) {
             Optional<ArtificeInfluenceData> influenceData = crucible.attributes.getInfluenceData(level);
             influenceData.ifPresent(d -> {
@@ -86,12 +86,12 @@ public class SpiritCrucibleParticleEffects {
 
         int spiritsRendered = 0;
         for (int i = 0; i < spiritInventory.slotCount; i++) {
-            ItemStack item = spiritInventory.getStackInSlot(i);
+            var item = spiritInventory.getStackInSlot(i);
             if (item.getItem() instanceof SpiritShardItem spiritSplinterItem) {
-                Vec3 offset = crucible.getSpiritItemOffset(spiritsRendered++, 0);
+                var offset = crucible.getSpiritItemOffset(spiritsRendered++, 0);
                 var spiritType = spiritSplinterItem.type;
-                BlockPos blockPos = crucible.getBlockPos();
-                Vec3 spiritPosition = new Vec3(blockPos.getX() + offset.x, blockPos.getY() + offset.y, blockPos.getZ() + offset.z);
+                var blockPos = crucible.getBlockPos();
+                var spiritPosition = new Vec3(blockPos.getX() + offset.x, blockPos.getY() + offset.y, blockPos.getZ() + offset.z);
                 if (recipe != null) {
                     Vec3 velocity = itemPos.subtract(spiritPosition).normalize().scale(RandomHelper.randomBetween(random, 0.03f, 0.06f));
                     if (random.nextFloat() < 0.85f) {
@@ -112,11 +112,11 @@ public class SpiritCrucibleParticleEffects {
         if (level.getGameTime() % 4L == 0) {
             int augmentsRendered = 0;
             for (int i = 0; i < augmentInventory.slotCount; i++) {
-                ItemStack item = augmentInventory.getStackInSlot(i);
+                var item = augmentInventory.getStackInSlot(i);
                 if (item.getItem() instanceof AugmentItem augmentItem) {
-                    Vec3 offset = crucible.getAugmentItemOffset(augmentsRendered++, 0);
-                    BlockPos blockPos = crucible.getBlockPos();
-                    Vec3 particlePosition = new Vec3(blockPos.getX() + offset.x, blockPos.getY() + offset.y, blockPos.getZ() + offset.z);
+                    var offset = crucible.getAugmentItemOffset(augmentsRendered++, 0);
+                    var blockPos = crucible.getBlockPos();
+                    var particlePosition = new Vec3(blockPos.getX() + offset.x, blockPos.getY() + offset.y, blockPos.getZ() + offset.z);
                     for (var spiritType : augmentItem.spiritTypes) {
                         if (recipe != null) {
                             Vec3 velocity = itemPos.subtract(particlePosition).normalize().scale(RandomHelper.randomBetween(random, 0.01f, 0.02f));

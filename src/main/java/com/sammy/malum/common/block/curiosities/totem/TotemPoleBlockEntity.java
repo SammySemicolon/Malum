@@ -82,7 +82,8 @@ public class TotemPoleBlockEntity extends LodestoneBlockEntity {
             if (spirit != null) {
                 ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), new ColorEffectData(spirit));
             }
-            level.playSound(null, worldPosition, SoundRegistry.TOTEM_ENGRAVE.get(), SoundSource.BLOCKS, 1, Mth.nextFloat(level.random, 0.9f, 1.1f));
+            float pitch = totemPoleState == VISUAL_ONLY ? 1.2f : 0.7f;
+            level.playSound(null, worldPosition, SoundRegistry.TOTEM_ENGRAVE.get(), SoundSource.BLOCKS, 1, pitch + Mth.nextFloat(level.random, -0.2f, 0.2f));
             if (isSoulwood) {
                 level.playSound(null, worldPosition, SoundRegistry.MAJOR_BLIGHT_MOTIF.get(), SoundSource.BLOCKS, 1, 1);
             }

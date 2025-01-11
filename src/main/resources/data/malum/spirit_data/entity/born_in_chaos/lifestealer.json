@@ -1,0 +1,18 @@
+{
+  "registry_name": "born_in_chaos_v1:lifestealer",
+  "primary_type": "eldritch",
+  "spirits": [
+    {
+      "spirit": "arcane",
+      "count": 6
+    },
+    {
+      "spirit": "wicked",
+      "count": 8
+    },
+    {
+      "spirit": "eldritch",
+      "count": 4
+    }
+  ]
+}

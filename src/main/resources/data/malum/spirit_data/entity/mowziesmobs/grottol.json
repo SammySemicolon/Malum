@@ -1,0 +1,14 @@
+{
+  "registry_name": "mowziesmobs:grottol",
+  "primary_type": "earthen",
+  "spirits": [
+    {
+      "spirit": "sacred",
+      "count": 1
+    },
+    {
+      "spirit": "earthen",
+      "count": 1
+    }
+  ]
+}

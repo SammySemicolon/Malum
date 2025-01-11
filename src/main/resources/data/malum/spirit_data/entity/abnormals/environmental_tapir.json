@@ -1,0 +1,14 @@
+{
+  "registry_name": "environmental:tapir",
+  "primary_type": "sacred",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "sacred",
+      "count": 2
+    }
+  ]
+}

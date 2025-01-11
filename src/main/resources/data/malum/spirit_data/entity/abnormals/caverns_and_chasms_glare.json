@@ -1,0 +1,14 @@
+{
+  "registry_name": "caverns_and_chasms:glare",
+  "primary_type": "sacred",
+  "spirits": [
+    {
+      "spirit": "sacred",
+      "count": 3
+    },
+    {
+      "spirit": "arcane",
+      "count": 1
+    }
+  ]
+}

@@ -89,9 +89,9 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.WEIGHT_OF_WORLDS_CUT, s -> definition(s).with(sounds("curiosities/weapons/scythe/sweep", 7)));
 
         this.add(SoundRegistry.STAFF_FIRES, s -> definition(s).with(sounds("curiosities/weapons/staff/fire", 2)));
-        this.add(SoundRegistry.STAFF_POWERS_UP, s -> definition(s).with(sounds("curiosities/weapons/staff/charge", 2)));
-        this.add(SoundRegistry.STAFF_SIZZLES, s -> definition(s).with(sounds("curiosities/weapons/staff/sizzle", 2)));
-        this.add(SoundRegistry.STAFF_CHARGED, s -> definition(s).with(sounds("curiosities/weapons/staff/sizzle", 2)));
+        this.add(SoundRegistry.STAFF_POWERS_UP, s -> definition(s).with(sounds("curiosities/weapons/staff/power_up", 2)));
+        this.add(SoundRegistry.STAFF_SIZZLES_OUT, s -> definition(s).with(sounds("curiosities/weapons/staff/sizzle", 2)));
+        this.add(SoundRegistry.STAFF_CHARGED, s -> definition(s).with(sounds("curiosities/weapons/staff/charge", 2)));
         this.add(SoundRegistry.STAFF_STRIKES, s -> definition(s).with(sounds("curiosities/weapons/staff/hit", 4)));
 
         this.add(SoundRegistry.AURIC_FLAME_MOTIF, s -> definition(s).with(sounds("curiosities/motifs/auric_cinders", 3)));
@@ -201,6 +201,8 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.SPIRIT_DIODE_STEP, s -> definition(s).with(sounds("minecraft:block/copper_bulb/step", 6)));
         this.add(SoundRegistry.SPIRIT_DIODE_PLACE, s -> definition(s).with(sounds("blocks/spirit_diode/place", 4)));
         this.add(SoundRegistry.SPIRIT_DIODE_HIT, s -> definition(s).with(sounds("minecraft:block/copper_bulb/step", 6)));
+        this.add(SoundRegistry.SPIRIT_DIODE_OPEN, s -> definition(s).with(sounds("blocks/spirit_diode/waveform_open", 4)));
+        this.add(SoundRegistry.SPIRIT_DIODE_CLOSE, s -> definition(s).with(sounds("blocks/spirit_diode/waveform_close", 4)));
 
         this.add(SoundRegistry.WAVECHARGER_CHARGE, s -> definition(s).with(sound("blocks/spirit_diode/tick")));
         this.add(SoundRegistry.WAVEBANKER_STORE, s -> definition(s).with(sound("blocks/spirit_diode/tick")));

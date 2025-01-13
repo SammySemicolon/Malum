@@ -3,11 +3,8 @@ package com.sammy.malum.common.item.curiosities.weapons.staff;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.core.helpers.ParticleHelper;
-import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.stats.*;
 import net.minecraft.util.*;
@@ -85,7 +82,7 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
                 float magicDamage = (float) pLivingEntity.getAttributes().getValue(LodestoneAttributes.MAGIC_DAMAGE);
                 if (magicDamage == 0) {
                     float pitch = Mth.nextFloat(pLevel.random, 0.5f, 0.8f);
-                    pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_SIZZLES.get(), SoundSource.PLAYERS, 0.5f, pitch);
+                    pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_SIZZLES_OUT.get(), SoundSource.PLAYERS, 0.5f, pitch);
                     pLivingEntity.swing(hand, true);
                     return;
                 }
@@ -110,7 +107,7 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
         }
         else {
             float pitch = Mth.nextFloat(pLevel.random, 0.5f, 0.8f);
-            pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_SIZZLES.get(), SoundSource.PLAYERS, 0.5f, pitch);
+            pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_SIZZLES_OUT.get(), SoundSource.PLAYERS, 0.5f, pitch);
         }
         super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
     }
@@ -125,15 +122,15 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
             spawnChargeParticles(pLevel, pLivingEntity, pos, pStack, chargePercentage);
         }
         if (pRemainingUseDuration == useDuration - chargeDuration) {
-            float pitch = Mth.nextFloat(pLevel.random, 1.2f, 1.6f);
+            float pitch = Mth.nextFloat(pLevel.random, 1.6f, 1.8f);
             pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_CHARGED.get(), SoundSource.PLAYERS, 1.25f, pitch);
         }
         else if (pRemainingUseDuration > useDuration - chargeDuration && pRemainingUseDuration % 5 == 0) {
-            float pitch = 0.25f + chargePercentage + Mth.nextFloat(pLevel.random, 0.2f, 0.6f);
+            float pitch = chargePercentage + Mth.nextFloat(pLevel.random, 0.6f, 0.7f);
             pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_POWERS_UP.get(), SoundSource.PLAYERS, 0.75f, pitch);
         }
         else if (pRemainingUseDuration % 5 == 0) {
-            float pitch = Mth.nextFloat(pLevel.random, 0.2f, 0.6f);
+            float pitch = Mth.nextFloat(pLevel.random, 0.3f, 0.4f);
             pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_POWERS_UP.get(), SoundSource.PLAYERS, 0.5f, pitch);
         }
         super.onUseTick(pLevel, pLivingEntity, pStack, pRemainingUseDuration);

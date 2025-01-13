@@ -18,6 +18,11 @@ public class WaveBankerBlock extends SpiritDiodeBlock<WaveBankerBlockEntity> {
     }
 
     @Override
+    public int[] getFrequencyPresets() {
+        return new int[] {10, 20, 40, 80, 160, 320, 640, 1280, 2560};
+    }
+
+    @Override
     public boolean processUpdate(Level level, BlockPos pos, BlockState state, WaveBankerBlockEntity diode, int signal) {
         int previousSignal = diode.signal;
         diode.signal = signal;

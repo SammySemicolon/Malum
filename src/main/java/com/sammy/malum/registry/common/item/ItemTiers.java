@@ -15,7 +15,7 @@ public enum ItemTiers implements Tier{
     MALIGNANT_ALLOY(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2500, 8f, 4f, 24, ItemRegistry.MALIGNANT_PEWTER_INGOT),
     TYRVING(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1500, 8f, 1f, 16, ItemRegistry.TWISTED_ROCK),
     HEX_STAFF(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1250, 8f, 2.5f, 16, ItemRegistry.MNEMONIC_FRAGMENT),
-    AURIC_STAFF(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2500, 8f, 2.5f, 16, ItemRegistry.AURIC_EMBERS);
+    CHAOS_STAFF(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2500, 8f, 2.5f, 16, ItemRegistry.AURIC_EMBERS);
     
     private final TagKey<Block> incorrectBlocksForDrops;
     private final int uses;

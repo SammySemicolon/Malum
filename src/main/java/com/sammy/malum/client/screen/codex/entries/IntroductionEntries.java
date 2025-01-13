@@ -131,7 +131,7 @@ public class IntroductionEntries {
                                 .addPage(new HeadlineTextPage("scythes.enchanting", "scythes.enchanting.1"))
                                 .addPage(new HeadlineTextPage("scythes.enchanting.spirit_plunder", "scythes.enchanting.spirit_plunder.1"))
                                 .addPage(new HeadlineTextPage("scythes.enchanting.haunted", "scythes.enchanting.haunted.1"))
-                                .addPage(new HeadlineTextPage("scythes.enchanting.winded", "scythes.enchanting.winded.1"))
+                                .addPage(new HeadlineTextPage("scythes.enchanting.animated", "scythes.enchanting.animated.1"))
                                 .addPage(new HeadlineTextPage("scythes.enchanting.rebound", "scythes.enchanting.rebound.1"))
                                 .addPage(new HeadlineTextPage("scythes.enchanting.ascension", "scythes.enchanting.ascension.1"))
                 ))

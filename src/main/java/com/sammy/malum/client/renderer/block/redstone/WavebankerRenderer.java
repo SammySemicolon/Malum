@@ -9,7 +9,7 @@ import team.lodestar.lodestone.systems.easing.Easing;
 public class WavebankerRenderer extends SpiritDiodeRenderer<WaveBankerBlockEntity> {
 
     public WavebankerRenderer(BlockEntityRendererProvider.Context context) {
-        super(context, MalumMod.malumPath("textures/block/redstone/wavebanker_overlay.png"));
+        super(context, MalumMod.malumPath("textures/block/spirit_diode/wavebanker_overlay.png"), "malum.waveform_artifice.wavebanker");
     }
 
     @Override

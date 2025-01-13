@@ -76,7 +76,7 @@ public class SpiritCatalyzerRenderer implements BlockEntityRenderer<SpiritCataly
         var difference = targetPos.subtract(startPos);
         float distance = 0.35f + Easing.SINE_OUT.ease(delta, 0, 0.35f, 1);
         var midPoint = startPos.add(difference.scale(distance));
-        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
+        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.apply(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
         SpiritBasedWorldVFXBuilder.create(spiritType)
                 .setColor(spiritType.getPrimaryColor())
                 .setRenderType(renderType)

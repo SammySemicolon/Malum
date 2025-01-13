@@ -73,9 +73,9 @@ public class EntityRegistry {
             () -> EntityType.Builder.<DrainingBoltEntity>of((e, w) -> new DrainingBoltEntity(w), MobCategory.MISC).sized(1.5F, 1.5f).clientTrackingRange(10)
                     .build(MalumMod.malumPath("draining_bolt").toString()));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<AuricFlameBoltEntity>> AURIC_FLAME_BOLT = ENTITY_TYPES.register("auric_flame_bolt",
-            () -> EntityType.Builder.<AuricFlameBoltEntity>of((e, w) -> new AuricFlameBoltEntity(w), MobCategory.MISC).sized(2F, 2F).clientTrackingRange(10)
-                    .build(MalumMod.malumPath("auric_flame_bolt").toString()));
+    public static final DeferredHolder<EntityType<?>, EntityType<EntropicFlameBoltEntity>> ENTROPIC_FLAME_BOLT = ENTITY_TYPES.register("entropic_flame_bolt",
+            () -> EntityType.Builder.<EntropicFlameBoltEntity>of((e, w) -> new EntropicFlameBoltEntity(w), MobCategory.MISC).sized(3F, 3F).clientTrackingRange(10)
+                    .build(MalumMod.malumPath("entropic_flame_bolt").toString()));
 
     @EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
     public static class ClientOnly {
@@ -96,7 +96,7 @@ public class EntityRegistry {
 
             EntityRenderers.register(EntityRegistry.HEX_BOLT.get(), HexBoltEntityRenderer::new);
             EntityRenderers.register(EntityRegistry.DRAINING_BOLT.get(), DrainingBoltEntityRenderer::new);
-            EntityRenderers.register(EntityRegistry.AURIC_FLAME_BOLT.get(), AuricFlameBoltEntityRenderer::new);
+            EntityRenderers.register(EntityRegistry.ENTROPIC_FLAME_BOLT.get(), EntropicFlameBoltEntityRenderer::new);
         }
     }
 }

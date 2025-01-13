@@ -257,12 +257,15 @@ public class SoulwoodTreeFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     public static void makeLeafSlice(LodestoneBlockFiller filler, RandomSource rand, BlockPos.MutableBlockPos pos, int leavesSize, int leavesColor, boolean makeHangingLeaves) {
+        int offsetColor = leavesColor;
         for (int x = -leavesSize; x <= leavesSize; x++) {
-            int offsetColor = leavesColor + Mth.nextInt(rand, leavesColor == 0 ? 0 : -1, leavesColor == 4 ? 0 : 1);
             for (int z = -leavesSize; z <= leavesSize; z++) {
                 float scalar = RandomHelper.randomBetween(rand, 0.1f, 0.3f) + leavesSize * 0.1f;
                 if (Math.abs(x) == leavesSize && Math.abs(z) == leavesSize) {
                     continue;
+                }
+                if (rand.nextFloat() < 0.05f) {
+                    offsetColor = (offsetColor+1)%4;
                 }
                 BlockPos leavesPos = pos.offset(x, 0, z);
                 if (makeHangingLeaves && !(x == 0 && z == 0)) {

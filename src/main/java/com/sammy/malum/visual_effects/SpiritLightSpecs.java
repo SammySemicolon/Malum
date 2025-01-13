@@ -24,7 +24,7 @@ import static net.minecraft.util.Mth.*;
 public class SpiritLightSpecs {
 
     public static void coolLookingShinyThing(Level level, Vec3 pos, MalumSpiritType spiritType) {
-        var centralLightSpecs = spiritLightSpecs(level, pos, spiritType, new WorldParticleOptions(ParticleRegistry.LIGHT_SPEC_SMALL.get()));
+        var centralLightSpecs = spiritLightSpecs(level, pos, spiritType, new WorldParticleOptions(ParticleRegistry.SHINE.get()));
         centralLightSpecs.getBuilder()
                 .multiplyLifetime(0.6f)
                 .modifyColorData(d -> d.multiplyCoefficient(0.5f))

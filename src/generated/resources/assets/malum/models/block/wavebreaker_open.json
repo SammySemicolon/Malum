@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "malum:block/spirit_diode/runewood_frame_bottom",
+    "east": "malum:block/spirit_diode/runewood_frame_locked",
+    "north": "malum:block/spirit_diode/wavebreaker_output",
+    "particle": "malum:block/spirit_diode/wavebreaker_output",
+    "south": "malum:block/spirit_diode/runewood_frame_input",
+    "up": "malum:block/spirit_diode/runewood_frame_top_open",
+    "west": "malum:block/spirit_diode/runewood_frame_locked"
+  }
+}

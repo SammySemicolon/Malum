@@ -28,7 +28,6 @@ public class EldritchAqueousRiteType extends TotemicRiteType {
                         for (int i = 0; i < 4 + level.random.nextInt(2); i++) {
                             level.getBlockState(p).randomTick(level, p, level.random);
                         }
-                        ParticleEffectTypeRegistry.DRIPPING_SMOKE.createPositionedEffect(level, new PositionEffectData(p), new ColorEffectData(AQUEOUS_SPIRIT.getPrimaryColor()));
                     }
                 });
             }
@@ -53,7 +52,7 @@ public class EldritchAqueousRiteType extends TotemicRiteType {
                 getNearbyEntities(totemBase, Zombie.class).filter(z -> !(z instanceof Drowned)).forEach(e -> {
                     if (!e.isUnderWaterConverting()) {
                         e.startUnderWaterConversion(100);
-                        ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(e, new ColorEffectData(AQUEOUS_SPIRIT.getPrimaryColor()));
+                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(AQUEOUS_SPIRIT.getPrimaryColor()));
                     }
                 });
             }

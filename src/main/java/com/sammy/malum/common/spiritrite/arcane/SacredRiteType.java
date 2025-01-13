@@ -40,7 +40,7 @@ public class SacredRiteType extends TotemicRiteType {
                 getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Monster)).forEach(e -> {
                     if (e.getHealth() < e.getMaxHealth()) {
                         e.heal(2);
-                        ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
                     }
                 });
             }
@@ -57,7 +57,7 @@ public class SacredRiteType extends TotemicRiteType {
                     if (e instanceof Animal animal) {
                         if (animal.getAge() < 0) {
                             if (totemBase.getLevel().random.nextFloat() <= 0.04f) {
-                                ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                                ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
                                 animal.ageUp(25);
                             }
                         }
@@ -74,43 +74,45 @@ public class SacredRiteType extends TotemicRiteType {
     public static final Map<Class<? extends Mob>, NourishmentRiteActor<?>> NOURISHMENT_RITE_ACTORS = Util.make(new HashMap<>(), m -> {
         m.put(Sheep.class, new NourishmentRiteActor<>(Sheep.class) {
             @Override
-            public void act(TotemBaseBlockEntity totemBaseBlockEntity, Sheep sheep) {
+            public boolean act(TotemBaseBlockEntity totemBaseBlockEntity, Sheep sheep) {
                 if (sheep.getRandom().nextFloat() < 0.6f) {
                     BlockPos blockpos = sheep.blockPosition();
                     final Level level = sheep.level();
                     if (IS_TALL_GRASS.test(level.getBlockState(blockpos)) || level.getBlockState(blockpos.below()).is(Blocks.GRASS_BLOCK)) {
                         EatBlockGoal goal = sheep.eatBlockGoal;
                         goal.start();
-                        ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(sheep, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                        return true;
                     }
                 }
+                return false;
             }
         });
         m.put(Bee.class, new NourishmentRiteActor<>(Bee.class) {
             @Override
-            public void act(TotemBaseBlockEntity totemBaseBlockEntity, Bee bee) {
+            public boolean act(TotemBaseBlockEntity totemBaseBlockEntity, Bee bee) {
                 Bee.BeePollinateGoal goal = bee.beePollinateGoal;
                 if (goal.canBeeUse()) {
                     goal.successfulPollinatingTicks += 40;
                     goal.tick();
-                    ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(bee, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                    return true;
                 }
+                return false;
             }
         });
 
         m.put(Chicken.class, new NourishmentRiteActor<>(Chicken.class) {
             @Override
-            public void act(TotemBaseBlockEntity totemBaseBlockEntity, Chicken chicken) {
+            public boolean act(TotemBaseBlockEntity totemBaseBlockEntity, Chicken chicken) {
                 chicken.eggTime -= 80;
-                ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(chicken, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                return true;
             }
         });
 
         m.put(Allay.class, new NourishmentRiteActor<>(Allay.class) {
             @Override
-            public void act(TotemBaseBlockEntity totemBaseBlockEntity, Allay allay) {
+            public boolean act(TotemBaseBlockEntity totemBaseBlockEntity, Allay allay) {
                 allay.duplicationCooldown -= 80;
-                ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(allay, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                return true;
             }
         });
     });
@@ -126,9 +128,10 @@ public class SacredRiteType extends TotemicRiteType {
         public final void tryAct(TotemBaseBlockEntity totemBaseBlockEntity, Mob mob) {
             if (targetClass.isInstance(mob)) {
                 act(totemBaseBlockEntity, (T) mob);
+                ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(mob, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
             }
         }
 
-        public abstract void act(TotemBaseBlockEntity totemBaseBlockEntity, T entity);
+        public abstract boolean act(TotemBaseBlockEntity totemBaseBlockEntity, T entity);
     }
 }

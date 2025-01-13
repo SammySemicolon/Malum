@@ -35,7 +35,7 @@ public class TotemPoleRenderer implements BlockEntityRenderer<TotemPoleBlockEnti
         }
 
         Level level = Minecraft.getInstance().level;
-        RenderType renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(RenderTypeToken.createCachedToken(spiritType.getTotemGlowTexture()));
+        RenderType renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE.apply(RenderTypeToken.createToken(spiritType.getTotemGlowTexture()));
 
         poseStack.pushPose();
         poseStack.translate(0.5f, 0.5f, 0.5f);

@@ -9,7 +9,7 @@
   "effect": "malum:sacrificial_empowerment",
   "providers": [
     {
-      "item": "malum:sacrificial_empowerment"
+      "item": "malum:rune_of_sacrificial_empowerment"
     }
   ]
 }

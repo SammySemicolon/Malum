@@ -12,23 +12,9 @@ import java.util.*;
 
 public record ArtificeInfluenceData(Set<ArtificeModifierSourceInstance> modifiers) {
 
-    public static ArtificeInfluenceData createFreshData(int lookupRange, Level level, BlockPos pos) {
+    public static ArtificeInfluenceData createFreshData(int lookupRange, Level level, BlockPos pos, ArtificeAttributeData attributes) {
         var nearbyInfluencers = BlockEntityHelper.getBlockEntities(IArtificeModifierSource.class, level, pos, lookupRange, ArtificeInfluenceData::isValidInfluencer);
-        return createData(nearbyInfluencers);
-    }
-
-    public static ArtificeInfluenceData loadData(Level level, ListTag list) {
-        Collection<IArtificeModifierSource> nearbyInfluencers = new HashSet<>();
-        for (int i = 0; i < list.size(); i++) {
-            var pos = NBTHelper.readBlockPos(list, i);
-            if (level.getBlockEntity(pos) instanceof IArtificeModifierSource influencer) {
-                nearbyInfluencers.add(influencer);
-            } else {
-                return null;
-            }
-
-        }
-        return createData(nearbyInfluencers);
+         return createData(nearbyInfluencers, attributes);
     }
 
     public static ArtificeInfluenceData reconstructData(Level level, ArtificeAttributeData data) {
@@ -41,15 +27,15 @@ public record ArtificeInfluenceData(Set<ArtificeModifierSourceInstance> modifier
                 return null;
             }
         }
-        return createData(nearbyInfluencers);
+        return createData(nearbyInfluencers, data);
     }
 
-    public static ArtificeInfluenceData createData(Collection<IArtificeModifierSource> nearbyInfluencers) {
+    public static ArtificeInfluenceData createData(Collection<IArtificeModifierSource> nearbyInfluencers, ArtificeAttributeData attributes) {
         Set<ArtificeModifierSourceInstance> validModifiers = new HashSet<>();
         Map<ResourceLocation, Integer> counter = new HashMap<>();
         for (IArtificeModifierSource influencer : nearbyInfluencers) {
             ArtificeModifierSourceInstance modifier = influencer.getActiveFocusingModifierInstance();
-            if (modifier.canModifyFocusing()) {
+            if (modifier.canModifyFocusing(attributes)) {
                 int count = counter.merge(modifier.type, 1, Integer::sum);
                 if (count <= modifier.maxAmount) {
                     validModifiers.add(modifier);
@@ -60,7 +46,10 @@ public record ArtificeInfluenceData(Set<ArtificeModifierSourceInstance> modifier
     }
 
     public static boolean isValidInfluencer(IArtificeModifierSource influencer) {
-        Optional<IArtificeAcceptor> optional = influencer.getFocusingModifierInstance().filter(ArtificeModifierSourceInstance::isBound).map(p -> p.target);
+        Optional<ArtificeModifierSourceInstance> focusingModifierInstance = influencer.getFocusingModifierInstance();
+        Optional<ArtificeModifierSourceInstance> artificeModifierSourceInstance = focusingModifierInstance.filter(ArtificeModifierSourceInstance::isBound);
+        Optional<IArtificeAcceptor> iArtificeAcceptor = artificeModifierSourceInstance.map(p -> p.target);
+        Optional<IArtificeAcceptor> optional = iArtificeAcceptor;
         if (optional.isEmpty()) {
             return true;
         }

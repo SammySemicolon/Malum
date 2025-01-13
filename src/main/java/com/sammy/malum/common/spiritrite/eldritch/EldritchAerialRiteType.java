@@ -1,7 +1,6 @@
 package com.sammy.malum.common.spiritrite.eldritch;
 
 import com.sammy.malum.common.block.curiosities.totem.*;
-import com.sammy.malum.common.packets.particle.rite.AerialBlockFallRiteEffectPacket;
 import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
@@ -15,10 +14,8 @@ import net.minecraft.tags.*;
 import net.minecraft.world.entity.item.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.*;
 
@@ -42,7 +39,6 @@ public class EldritchAerialRiteType extends TotemicRiteType {
                         if (!state.isAir() && level.getBlockEntity(p) == null && canSilkTouch(level, pos, state)) {
                             FallingBlockEntity.fall(level, p, state);
                             level.playSound(null, p, SoundRegistry.TOTEM_AERIAL_MAGIC.get(), SoundSource.BLOCKS, 0.5f, 2.6F + (level.random.nextFloat() - level.random.nextFloat()) * 0.8F);
-                            PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(pos), new AerialBlockFallRiteEffectPacket(AERIAL_SPIRIT.getPrimaryColor(), p));
                         }
                     }
                 });
@@ -60,7 +56,7 @@ public class EldritchAerialRiteType extends TotemicRiteType {
                     Stat<ResourceLocation> sleepStat = Stats.CUSTOM.get(Stats.TIME_SINCE_REST);
                     int value = stats.getValue(sleepStat);
                     stats.setValue(p, sleepStat, Math.max(0, value - 1000));
-                    ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(p, new ColorEffectData(AERIAL_SPIRIT));
+                    ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(p, new ColorEffectData(AERIAL_SPIRIT.getPrimaryColor()));
                 });
             }
         };

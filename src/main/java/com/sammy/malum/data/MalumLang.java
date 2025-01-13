@@ -123,6 +123,11 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.rite.medium.runewood", "Runewood");
         add("malum.gui.rite.medium.soulwood", "Soulwood");
 
+        add("malum.waveform_artifice.wavecharger", "Redstone Interpolation Time: %s");
+        add("malum.waveform_artifice.wavebanker", "Redstone Pulse Duration: %s");
+        add("malum.waveform_artifice.wavemaker", "Redstone Pulse Frequency: %s");
+        add("malum.waveform_artifice.wavebreaker", "Redstone Pulse Delay: %s");
+
         addRiteEffectCategory(TotemicRiteEffect.MalumRiteEffectCategory.AURA);
         addRiteEffectCategory(TotemicRiteEffect.MalumRiteEffectCategory.LIVING_ENTITY_EFFECT);
         addRiteEffectCategory(TotemicRiteEffect.MalumRiteEffectCategory.DIRECTIONAL_BLOCK_EFFECT);

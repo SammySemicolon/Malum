@@ -99,7 +99,7 @@ public class SoulwovenBannerBlockEntity extends LodestoneBlockEntity {
         level.playSound(null, worldPosition, SoundRegistry.TOTEM_ENGRAVE.get(), SoundSource.BLOCKS, 1, Mth.nextFloat(level.random, 0.9f, 1.1f));
         level.playSound(null, worldPosition, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1, Mth.nextFloat(level.random, 0.9f, 1.1f));
         if (spirit != null) {
-            ParticleEffectTypeRegistry.TOTEM_POLE_ACTIVATED.createPositionedEffect(serverLevel, new PositionEffectData(worldPosition), new ColorEffectData(spirit));
+            ParticleEffectTypeRegistry.SOULWOVEN_BANNER_ACTIVATED.createPositionedEffect(serverLevel, new PositionEffectData(worldPosition), new ColorEffectData(spirit));
         }
         intense = this.spirit == spirit;
         this.spirit = spirit;

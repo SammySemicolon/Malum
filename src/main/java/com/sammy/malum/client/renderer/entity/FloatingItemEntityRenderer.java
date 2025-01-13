@@ -32,7 +32,7 @@ public class FloatingItemEntityRenderer extends EntityRenderer<FloatingItemEntit
     @Override
     public void render(FloatingItemEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn) {
         var spiritType = entity.getSpiritType();
-        var renderType = LodestoneRenderTypes.ADDITIVE_ROUNDED_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
+        var renderType = LodestoneRenderTypes.ADDITIVE_ROUNDED_TEXTURE_TRIANGLE.apply(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
         var builder = SpiritBasedWorldVFXBuilder.create(spiritType).setRenderType(renderType);
         RenderUtils.renderEntityTrail(poseStack, builder, entity.trail, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 1f, partialTicks);
         renderSpiritEntity(entity, itemRenderer, partialTicks, poseStack, bufferIn, packedLightIn);
@@ -84,8 +84,8 @@ public class FloatingItemEntityRenderer extends EntityRenderer<FloatingItemEntit
         var minecraft = Minecraft.getInstance();
         var level = minecraft.level;
 
-        var star = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MalumRenderTypeTokens.STAR);
-        var twinkle = LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MalumRenderTypeTokens.TWINKLE);
+        var star = LodestoneRenderTypes.ADDITIVE_TEXTURE.apply(MalumRenderTypeTokens.STAR);
+        var twinkle = LodestoneRenderTypes.ADDITIVE_TEXTURE.apply(MalumRenderTypeTokens.TWINKLE);
 
         float gameTime = level.getGameTime() + partialTicks;
         double sine = Math.abs(((Math.sin((gameTime / 80f) % 360)) * 0.075f));

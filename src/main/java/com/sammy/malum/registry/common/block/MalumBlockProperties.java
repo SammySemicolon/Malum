@@ -327,7 +327,7 @@ public class MalumBlockProperties {
         return new LodestoneBlockProperties()
                 .mapColor(COPPER_BLOCK.defaultMapColor())
                 .strength(3.0F, 6.0F)
-                .sound(SoundRegistry.REDSTONE_DIODE)
+                .sound(SoundRegistry.SPIRIT_DIODE)
                 .requiresCorrectToolForDrops()
                 .isRedstoneConductor(Blocks::never)
                 .needsPickaxe()

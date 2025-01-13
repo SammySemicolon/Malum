@@ -1,16 +1,14 @@
 package com.sammy.malum.common.spiritrite.eldritch;
 
 import com.sammy.malum.common.block.curiosities.totem.*;
-import com.sammy.malum.common.packets.particle.rite.SacredMistRiteEffectPacket;
-import com.sammy.malum.common.packets.particle.rite.generic.MajorEntityEffectParticlePacket;
 import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
+import com.sammy.malum.visual_effects.networked.data.ColorEffectData;
 import net.minecraft.core.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.*;
 import java.util.stream.*;
@@ -36,7 +34,6 @@ public class EldritchSacredRiteType extends TotemicRiteType {
                 return 2;
             }
 
-            @SuppressWarnings("ConstantConditions")
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 BlockPos pos = totemBase.getBlockPos();
@@ -55,7 +52,6 @@ public class EldritchSacredRiteType extends TotemicRiteType {
                             }
                         }
                         BlockPos particlePos = state.canOcclude() ? p : p.below();
-                        PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(pos), new SacredMistRiteEffectPacket(List.of(SACRED_SPIRIT.getIdentifier()), particlePos));
                     }
                 });
             }
@@ -66,7 +62,6 @@ public class EldritchSacredRiteType extends TotemicRiteType {
     public TotemicRiteEffect getCorruptedEffect() {
         return new TotemicRiteEffect(TotemicRiteEffect.MalumRiteEffectCategory.LIVING_ENTITY_EFFECT) {
 
-            @SuppressWarnings("ConstantConditions")
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 Map<Class<? extends Animal>, List<Animal>> animalMap = getNearbyEntities(totemBase, Animal.class).collect(Collectors.groupingBy(Animal::getClass));
@@ -79,7 +74,7 @@ public class EldritchSacredRiteType extends TotemicRiteType {
                         if (e.canFallInLove() && e.getAge() == 0) {
                             if (level.random.nextFloat() <= 0.2f) {
                                 e.setInLoveTime(600);
-                                PacketDistributor.sendToPlayersTrackingEntity(e, new MajorEntityEffectParticlePacket(SACRED_SPIRIT.getPrimaryColor(), e.getX(), e.getY() + e.getBbHeight() / 2f, e.getZ()));
+                                ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
                             }
                         }
                     });

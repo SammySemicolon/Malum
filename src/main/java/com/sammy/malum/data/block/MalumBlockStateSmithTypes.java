@@ -2,6 +2,7 @@ package com.sammy.malum.data.block;
 
 import com.sammy.malum.common.block.blight.*;
 import com.sammy.malum.common.block.curiosities.banner.*;
+import com.sammy.malum.common.block.curiosities.redstone.SpiritDiodeBlock;
 import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.block.curiosities.totem.TotemPoleBlock;
 import com.sammy.malum.common.block.curiosities.weeping_well.PrimordialSoupBlock;
@@ -50,6 +51,22 @@ public class MalumBlockStateSmithTypes {
             Direction direction = isVertical ? (value.equals(SoulwovenBannerBlock.BannerType.HANGING_Z) ? Direction.NORTH : Direction.WEST) : value.direction;
             ResourceLocation model = isVertical ? hanging : mounted;
             return ConfiguredModel.builder().modelFile(provider.models().getExistingFile(model)).rotationY(((int) direction.toYRot()) % 360).build();
+        });
+    });
+
+    public static BlockStateSmith<SpiritDiodeBlock> SPIRIT_DIODE = new BlockStateSmith<>(SpiritDiodeBlock.class, ItemModelSmithTypes.BLOCK_MODEL_ITEM, (block, provider) -> {
+        String name = provider.getBlockName(block);
+        ResourceLocation top = provider.getBlockTexture("runewood_frame_top");
+        ResourceLocation opened = provider.getBlockTexture("runewood_frame_top_open");
+        ResourceLocation bottom = provider.getBlockTexture("runewood_frame_bottom");
+        ResourceLocation locked = provider.getBlockTexture("runewood_frame_locked");
+        ResourceLocation input = provider.getBlockTexture("runewood_frame_input");
+        ResourceLocation output = provider.getBlockTexture(name + "_output");
+        BlockModelBuilder model = provider.models().cube(name, bottom, top, output, input, locked, locked).texture("particle", output);
+        BlockModelBuilder openModel = provider.models().cube(name + "_open", bottom, opened, output, input, locked, locked).texture("particle", output);
+        provider.getVariantBuilder(block).forAllStates(s -> {
+            var direction = s.getValue(SpiritDiodeBlock.FACING);
+            return ConfiguredModel.builder().modelFile(s.getValue(SpiritDiodeBlock.OPEN) ? openModel : model).rotationY(((int) direction.toYRot()) % 360).build();
         });
     });
 

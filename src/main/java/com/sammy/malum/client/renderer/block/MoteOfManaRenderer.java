@@ -25,19 +25,19 @@ public class MoteOfManaRenderer implements BlockEntityRenderer<ManaMoteBlockEnti
         MalumSpiritType spiritType = MalumSpiritType.getSpiritType(blockEntityIn.getBlockState().getValue(ManaMoteBlock.SPIRIT_TYPE));
 
         var builder = SpiritBasedWorldVFXBuilder.create(spiritType)
-                .setRenderType(LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MOTE_OF_MANA));
+                .setRenderType(LodestoneRenderTypes.ADDITIVE_TEXTURE.apply(MOTE_OF_MANA));
 
         CubeVertexData cubeVertexData = CubeVertexData.makeCubePositions(1f).applyWobble(0, 0.5f, 0.015f);
         CubeVertexData inverse = CubeVertexData.makeCubePositions(-1f).applyWobble(0, 0.5f, 0.015f);
 
         poseStack.pushPose();
         poseStack.translate(0.5f, 0.5f, 0.5f);
-        builder.setRenderType(LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(MOTE_OF_MANA))
+        builder.setRenderType(LodestoneRenderTypes.ADDITIVE_TEXTURE.apply(MOTE_OF_MANA))
                 .setColor(spiritType.getPrimaryColor(), 0.9f)
                 .drawCube(poseStack, cubeVertexData);
         builder.setAlpha(0.5f).setUV(0.0625f, 0.0625f, 1.0625f, 1.0625f)
                 .drawCube(poseStack, cubeVertexData.scale(1.08f));
-        builder.setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(MOTE_OF_MANA))
+        builder.setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.apply(MOTE_OF_MANA))
                 .setColor(spiritType.getSecondaryColor(), 0.4f)
                 .setUV(-0.0625f, -0.0625f, 0.9375f, 0.9375f)
                 .drawCube(poseStack, inverse.scale(0.82f));

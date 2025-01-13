@@ -38,18 +38,17 @@ public class HexStaffItem extends AbstractStaffItem implements ISpiritAffiliated
     @Override
     public void spawnChargeParticles(Level pLevel, LivingEntity pLivingEntity, Vec3 pos, ItemStack pStack, float pct) {
         RandomSource random = pLevel.random;
-        final SpinParticleData spinData = SpinParticleData.createRandomDirection(random, 0.25f, 0.5f).setSpinOffset(RandomHelper.randomBetween(random, 0f, 6.28f)).build();
-        WorldParticleBuilder.create(ParticleRegistry.HEXAGON, new DirectionalBehaviorComponent(pLivingEntity.getLookAngle().normalize()))
-                .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
+        WorldParticleBuilder.create(ParticleRegistry.HEX_TARGET, new DirectionalBehaviorComponent(pLivingEntity.getLookAngle().normalize()))
+                .setSpinData(SpinParticleData.createRandomDirection(random, 0.1f, 0.2f).setSpinOffset(RandomHelper.randomBetween(random, -0.314f, 0.314f)).build())
                 .setTransparencyData(GenericParticleData.create(0.6f * pct, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
-                .setSpinData(spinData)
                 .setScaleData(GenericParticleData.create(0.3f * pct, 0).setEasing(Easing.SINE_IN_OUT).build())
                 .setColorData(SpiritTypeRegistry.WICKED_SPIRIT.createColorData().build())
-                .setLifetime(5)
-                .setLifeDelay(2)
-                .setMotion(pLivingEntity.getLookAngle().normalize().scale(0.05f))
-                .enableNoClip()
+                .setMotion(pLivingEntity.getLookAngle().normalize().scale(0.2f * pct))
+                .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
                 .enableForcedSpawn()
+                .setLifeDelay(2)
+                .enableNoClip()
+                .setLifetime(5)
                 .spawn(pLevel, pos.x, pos.y, pos.z)
                 .setRenderType(LodestoneWorldParticleRenderType.LUMITRANSPARENT)
                 .spawn(pLevel, pos.x, pos.y, pos.z);

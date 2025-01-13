@@ -93,7 +93,7 @@ public class SoundRegistry {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> STAFF_FIRES = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("staff_fires")));
     public static final DeferredHolder<SoundEvent, SoundEvent> STAFF_POWERS_UP = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("staff_powers_up")));
-    public static final DeferredHolder<SoundEvent, SoundEvent> STAFF_SIZZLES = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("staff_sizzles")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> STAFF_SIZZLES_OUT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("staff_sizzles_out")));
     public static final DeferredHolder<SoundEvent, SoundEvent> STAFF_CHARGED = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("staff_charged")));
     public static final DeferredHolder<SoundEvent, SoundEvent> STAFF_STRIKES = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("staff_strikes")));
 
@@ -219,10 +219,12 @@ public class SoundRegistry {
     public static final DeferredHolder<SoundEvent, SoundEvent> SOULWOOD_TRAPDOOR_CLOSE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("soulwood_trapdoor_close")));
     public static final DeferredHolder<SoundEvent, SoundEvent> SOULWOOD_TRAPDOOR_OPEN = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("soulwood_trapdoor_open")));
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_BREAK = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("redstone_diode_break")));
-    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_PLACE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("redstone_diode_place")));
-    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_STEP = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("redstone_diode_step")));
-    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_HIT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("redstone_diode_hit")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_BREAK = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_diode_break")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_PLACE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_diode_place")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_STEP = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_diode_step")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_HIT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_diode_hit")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_OPEN = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_diode_open")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_CLOSE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_diode_close")));
 
     public static final DeferredHolder<SoundEvent, SoundEvent> WAVECHARGER_CHARGE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavecharger_charges"), 8f));
     public static final DeferredHolder<SoundEvent, SoundEvent> WAVEBANKER_STORE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebanker_stores"), 8f));
@@ -298,7 +300,7 @@ public class SoundRegistry {
     public static final SoundType SOUL_STAINED_STEEL = new DeferredSoundType(1.0F, 1.0F, SOUL_STAINED_STEEL_BREAK, SOUL_STAINED_STEEL_STEP, SOUL_STAINED_STEEL_PLACE, SOUL_STAINED_STEEL_HIT, () -> SoundEvents.METAL_FALL);
     public static final SoundType MALIGNANT_PEWTER = new RareEarthSoundType(1.0F, 0.7f, SOUL_STAINED_STEEL_BREAK, SOUL_STAINED_STEEL_STEP, SOUL_STAINED_STEEL_PLACE, SOUL_STAINED_STEEL_HIT, () -> SoundEvents.METAL_FALL);
 
-    public static final SoundType REDSTONE_DIODE = new DeferredSoundType(1.0F, 1.0F, SPIRIT_DIODE_BREAK, SPIRIT_DIODE_STEP, SPIRIT_DIODE_PLACE, SPIRIT_DIODE_HIT, () -> SoundEvents.COPPER_BULB_FALL);
+    public static final SoundType SPIRIT_DIODE = new DeferredSoundType(1.0F, 1.0F, SPIRIT_DIODE_BREAK, SPIRIT_DIODE_STEP, SPIRIT_DIODE_PLACE, SPIRIT_DIODE_HIT, () -> SoundEvents.COPPER_BULB_FALL);
 
     public static final SoundType TAINTED_ROCK = new DeferredSoundType(1.0F, 1.1F, ARCANE_ROCK_BREAK, ARCANE_ROCK_STEP, ARCANE_ROCK_PLACE, ARCANE_ROCK_HIT, () -> SoundEvents.BASALT_FALL);
     public static final SoundType TAINTED_ROCK_BRICKS = new DeferredSoundType(1.0F, 1.1F, ARCANE_ROCK_BRICKS_BREAK, ARCANE_ROCK_BRICKS_STEP, ARCANE_ROCK_BRICKS_PLACE, ARCANE_ROCK_BRICKS_HIT, () -> SoundEvents.BASALT_FALL);

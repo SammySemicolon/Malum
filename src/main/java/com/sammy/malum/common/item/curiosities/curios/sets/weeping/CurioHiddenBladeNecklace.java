@@ -83,18 +83,17 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             var direction = isRanged ? damageDealer.getDeltaMovement().normalize() : attacker.getLookAngle();
             var damageCenter = damageDealer.position().add(direction);
             var attributes = attacker.getAttributes();
-            float amplifierScalar = 1+(effect.amplifier+1)*0.2f;
-            float multiplier = (float) Mth.clamp(attributes.getValue(Attributes.ATTACK_SPEED), 0, 2) * amplifierScalar;
+            float multiplier = 1+(effect.amplifier+1)*0.2f;
             int duration = 25;
 
-            float physicalDamage = (float) (attributes.getValue(Attributes.ATTACK_DAMAGE) / duration) * multiplier;
+            float physicalDamage = (float) (event.getNewDamage() +attributes.getValue(Attributes.ATTACK_DAMAGE)) / duration * multiplier;
             float magicDamage = (float) (attributes.getValue(LodestoneAttributes.MAGIC_DAMAGE) / duration) * multiplier;
 
             var entity = new HiddenBladeDelayedImpactEntity(level, damageCenter.x, damageCenter.y - 3f + attacker.getBbHeight() / 2f, damageCenter.z);
             entity.setData(attacker, physicalDamage, magicDamage, duration);
             entity.setItem(scytheWeapon);
             level.addFreshEntity(entity);
-            data.hiddenBladeNecklaceCooldown = 200;
+            data.hiddenBladeNecklaceCooldown = COOLDOWN_DURATION;
             PacketDistributor.sendToPlayersTrackingEntityAndSelf(attacker, new SyncCurioDataPayload(attacker.getId(), data));
             if (!effect.isInfiniteDuration()) {
                 attacker.removeEffect(effect.getEffect());
@@ -109,6 +108,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             particle.setRandomSlashAngle(random)
                     .mirrorRandomly(random)
                     .spawnForwardSlashingParticle(attacker, direction);
+            event.setNewDamage(0);
         }
     }
     public static void entityTick(EntityTickEvent.Pre event) {

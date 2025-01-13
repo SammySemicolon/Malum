@@ -65,4 +65,32 @@ public class TotemParticleEffects {
             lightSpecs.spawnParticles();
         }
     }
+
+    public static void triggerEntityEffect(Level level, MalumSpiritType spiritType, Vec3 position) {
+        long gameTime = level.getGameTime();
+        var random = level.random;
+        final float time = 16;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 8; j++) {
+                float velocity = RandomHelper.randomBetween(random, 0.02f, 0.03f);
+                var offsetPosition = VecHelper.rotatingRadialOffset(position, 1.2f, j, 8, gameTime, time);
+                offsetPosition = offsetPosition.add(0, (Math.cos(((gameTime + j * 480) % time) / time) * 0.25f) - 0.25f, 0);
+                var motion = offsetPosition.subtract(position).normalize().scale(velocity);
+                var lightSpecs = spiritLightSpecs(level, offsetPosition, spiritType);
+                lightSpecs.getBuilder()
+                        .multiplyLifetime(2.5f)
+                        .setMotion(motion)
+                        .setLifeDelay(i*6)
+                        .setTransparencyData(GenericParticleData.create(0.2f, 0.8f, 0f).build())
+                        .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(RandomHelper.randomBetween(random, 1f, 2f)));
+                lightSpecs.getBloomBuilder()
+                        .multiplyLifetime(1.5f)
+                        .setMotion(motion)
+                        .setLifeDelay(i)
+                        .setTransparencyData(GenericParticleData.create(0.05f, 0.35f, 0f).build())
+                        .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(RandomHelper.randomBetween(random, 0.5f, 1f)));
+                lightSpecs.spawnParticles();
+            }
+        }
+    }
 }

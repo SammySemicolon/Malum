@@ -61,10 +61,15 @@ public class ArtificeAttributeData {
     public boolean demandsFuel;
     public float chainProcessingBonus;
 
-    public ArtificeAttributeData(IArtificeAcceptor target, @Nullable ArtificeInfluenceData influenceData) {
+    public ArtificeAttributeData(IArtificeAcceptor target) {
         if (target.getAttributes() != null) {
             tunedAttribute = target.getAttributes().tunedAttribute;
         }
+        target.applyAugments(this::applyAugment);
+        applyTuning();
+    }
+
+    public ArtificeAttributeData applyModifierInfluence(ArtificeInfluenceData influenceData) {
         this.influenceData = influenceData;
         if (influenceData != null) {
             for (ArtificeModifierSourceInstance modifier : influenceData.modifiers()) {
@@ -76,8 +81,7 @@ public class ArtificeAttributeData {
                 }
             }
         }
-        target.applyAugments(this::applyAugment);
-        applyTuning();
+        return this;
     }
 
     public ArtificeAttributeData(List<ArtificeAttributeValue> attributes, List<BlockPos> modifierPositions, ArtificeAttributeType tunedAttribute,

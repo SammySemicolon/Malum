@@ -76,12 +76,12 @@ public class MalumItemTags extends ItemTagsProvider {
 
         tag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS).add(
                 CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), CREATIVE_SCYTHE.get(),
-                MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
+                MNEMONIC_HEX_STAFF.get(), UNWINDING_CHAOS.get(), EROSION_SCEPTER.get());
 
         tag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS).addOptional(ResourceLocation.parse("born_in_chaos_v1:nightmare_scythe"));
 
         tag(ItemTagRegistry.SCYTHES).add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), EDGE_OF_DELIVERANCE.get(), CREATIVE_SCYTHE.get());
-        tag(ItemTagRegistry.STAVES).add(MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get(), EROSION_SCEPTER.get());
+        tag(ItemTagRegistry.STAVES).add(MNEMONIC_HEX_STAFF.get(), UNWINDING_CHAOS.get(), EROSION_SCEPTER.get());
 
         tag(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS)
                 .addTags(ItemTagRegistry.SCYTHES, ItemTagRegistry.STAVES)
@@ -192,7 +192,7 @@ public class MalumItemTags extends ItemTagsProvider {
                         MALIGNANT_STRONGHOLD_LEGGINGS.get(), MALIGNANT_STRONGHOLD_BOOTS.get(),
                         WEIGHT_OF_WORLDS.get(), EDGE_OF_DELIVERANCE.get(),
                         EROSION_SCEPTER.get(),
-                        MNEMONIC_HEX_STAFF.get(), STAFF_OF_THE_AURIC_FLAME.get())
+                        MNEMONIC_HEX_STAFF.get(), UNWINDING_CHAOS.get())
                 // Runes
                 .add(RUNE_OF_BOLSTERING.get(), RUNE_OF_SACRIFICIAL_EMPOWERMENT.get(),
                         RUNE_OF_SPELL_MASTERY.get(), RUNE_OF_THE_HERETIC.get(),

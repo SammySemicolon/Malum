@@ -16,8 +16,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import team.lodestar.lodestone.helpers.*;
 
-import static com.sammy.malum.registry.common.SpiritTypeRegistry.ARCANE_SPIRIT;
-import static com.sammy.malum.registry.common.SpiritTypeRegistry.WICKED_SPIRIT;
+import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 
 public class WickedRiteType extends TotemicRiteType {
     public WickedRiteType() {
@@ -32,7 +31,7 @@ public class WickedRiteType extends TotemicRiteType {
                 getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Player)).forEach(e -> {
                     final DamageSource damageSource = DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO_PLAYERLESS);
                     if (e.getHealth() > 2.5f && !e.isInvulnerableTo(damageSource)) {
-                        ParticleEffectTypeRegistry.HEXING_SMOKE.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT.getPrimaryColor()));
+                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT.getPrimaryColor()));
                         e.hurt(damageSource, 2);
                     }
                 });
@@ -47,7 +46,7 @@ public class WickedRiteType extends TotemicRiteType {
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 getNearbyEntities(totemBase, Monster.class).forEach(e -> {
-                    ParticleEffectTypeRegistry.MAJOR_HEXING_SMOKE.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT.getPrimaryColor()));
+                    ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT.getPrimaryColor()));
                     e.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 1));
                     e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 1));
                     e.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 1));

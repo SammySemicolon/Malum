@@ -27,7 +27,7 @@ public class SpiritCollectionActivatorEntityRenderer extends EntityRenderer<Spir
     public void render(SpiritCollectionActivatorEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn) {
         var spiritType = UMBRAL_SPIRIT;
         var secondarySpiritType = ELDRITCH_SPIRIT;
-        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE_TRIANGLE.applyAndCache(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
+        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE_TRIANGLE.apply(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
         var trailBuilder = SpiritBasedWorldVFXBuilder.create(spiritType).setRenderType(renderType);
         var eldritchTrailBuilder = SpiritBasedWorldVFXBuilder.create(secondarySpiritType).setRenderType(renderType);
         float yOffset = entity.getYOffset(partialTicks);

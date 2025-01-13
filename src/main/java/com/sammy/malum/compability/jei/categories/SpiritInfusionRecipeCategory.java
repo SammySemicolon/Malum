@@ -51,7 +51,6 @@ public class SpiritInfusionRecipeCategory implements IRecipeCategory<SpiritInfus
         return JEIHandler.SPIRIT_INFUSION;
     }
 
-
     @Override
     public Component getTitle() {
         return Component.translatable("malum.jei." + UID.getPath());

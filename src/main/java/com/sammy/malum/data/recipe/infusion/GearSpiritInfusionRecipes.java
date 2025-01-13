@@ -54,7 +54,7 @@ public class GearSpiritInfusionRecipes {
                 .addSpirit(ELDRITCH_SPIRIT, 16)
                 .save(recipeOutput);
 
-        new SpiritInfusionRecipeBuilder(ItemRegistry.MNEMONIC_HEX_STAFF.get(), 1, ItemRegistry.STAFF_OF_THE_AURIC_FLAME.get(), 1)
+        new SpiritInfusionRecipeBuilder(ItemRegistry.MNEMONIC_HEX_STAFF.get(), 1, ItemRegistry.UNWINDING_CHAOS.get(), 1)
                 .addExtraItem(ItemRegistry.FUSED_CONSCIOUSNESS.get(), 1)
                 .addExtraItem(ItemRegistry.AURIC_EMBERS.get(), 8)
                 .addExtraItem(ItemRegistry.VOID_SALTS.get(), 8)

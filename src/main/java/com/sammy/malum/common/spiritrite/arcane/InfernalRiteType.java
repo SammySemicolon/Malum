@@ -1,18 +1,14 @@
 package com.sammy.malum.common.spiritrite.arcane;
 
 import com.sammy.malum.common.block.curiosities.totem.*;
-import com.sammy.malum.common.packets.particle.rite.InfernalExtinguishRiteEffectPacket;
-import com.sammy.malum.common.packets.particle.rite.generic.BlockSparkleParticlePacket;
 import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.function.*;
 
@@ -40,9 +36,6 @@ public class InfernalRiteType extends TotemicRiteType {
                     BlockState state = totemBase.getLevel().getBlockState(p);
                     if (!state.is(BlockTagRegistry.ENDLESS_FLAME)) {
                         level.playSound(null, p, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 2.6F + (level.random.nextFloat() - level.random.nextFloat()) * 0.8F);
-
-                        PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(p), new InfernalExtinguishRiteEffectPacket(INFERNAL_SPIRIT.getPrimaryColor(), p));
-                        PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(p), new BlockSparkleParticlePacket(ARCANE_SPIRIT.getPrimaryColor(), p, false));
                         totemBase.getLevel().removeBlock(p, false);
                     }
                 });

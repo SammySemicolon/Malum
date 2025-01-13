@@ -9,7 +9,7 @@ import net.minecraft.util.Mth;
 public class WaveBreakerRenderer extends SpiritDiodeRenderer<WaveBreakerBlockEntity> {
 
     public WaveBreakerRenderer(BlockEntityRendererProvider.Context context) {
-        super(context, MalumMod.malumPath("textures/block/redstone/wavebreaker_overlay.png"));
+        super(context, MalumMod.malumPath("textures/block/spirit_diode/wavebreaker_overlay.png"), "malum.waveform_artifice.wavebreaker");
     }
 
     @Override

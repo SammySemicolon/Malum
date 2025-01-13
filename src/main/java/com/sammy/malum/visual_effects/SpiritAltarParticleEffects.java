@@ -6,6 +6,7 @@ import com.sammy.malum.common.block.storage.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.common.recipe.spirit.infusion.*;
 import com.sammy.malum.core.systems.spirit.*;
+import com.sammy.malum.registry.client.ParticleRegistry;
 import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
 import net.minecraft.util.*;
@@ -15,8 +16,12 @@ import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
+import team.lodestar.lodestone.systems.particle.SimpleParticleOptions;
 import team.lodestar.lodestone.systems.particle.builder.*;
+import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.data.spin.SpinParticleData;
 import team.lodestar.lodestone.systems.particle.world.*;
+import team.lodestar.lodestone.systems.particle.world.options.WorldParticleOptions;
 
 import java.util.function.*;
 
@@ -144,8 +149,33 @@ public class SpiritAltarParticleEffects {
         for (int i = 0; i < 2; i++) {
             SpiritLightSpecs.coolLookingShinyThing(level, targetPos, activeSpiritType);
         }
-        for (int i = 0; i < 24; i++) {
-            int lifeDelay = i / 8;
+        for (int i = 0; i < 8; i++) {
+            MalumSpiritType cyclingSpiritType = colorData.getCyclingColorRecord().spiritType();
+            float xOffset = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, 0.1f, 0.5f)*(random.nextBoolean()?-1:1);
+            float yOffset = i * 0.08f;
+            float zOffset = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, 0.1f, 0.5f)*(random.nextBoolean()?-1:1);
+            var offsetPos = targetPos.add(xOffset, yOffset, zOffset);
+            int lifeDelay = 5 + i * 3;
+            var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, offsetPos, cyclingSpiritType, new WorldParticleOptions(ParticleRegistry.SHINE));
+            lightSpecs.getBuilder()
+                    .modifyData(AbstractParticleBuilder::getTransparencyData, d -> d.multiplyValue(1.25f))
+                    .setSpinData(SpinParticleData.create(0).randomSpinOffset(random).build())
+                    .setSpritePicker(SimpleParticleOptions.ParticleSpritePicker.WITH_AGE)
+                    .setScaleData(GenericParticleData.create(0.3f).build())
+                    .multiplyLifetime(1.25f)
+                    .setLifeDelay(lifeDelay)
+                    .disableNoClip();
+            lightSpecs.getBloomBuilder()
+                    .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(3f))
+                    .modifyData(AbstractParticleBuilder::getTransparencyData, d -> d.multiplyValue(1.25f))
+                    .multiplyLifetime(0.85f)
+                    .setLifeDelay(lifeDelay)
+                    .disableNoClip();
+            lightSpecs.spawnParticles();
+        }
+
+        for (int i = 0; i < 12; i++) {
+            int lifeDelay = i / 4;
             MalumSpiritType cyclingSpiritType = colorData.getCyclingColorRecord().spiritType();
             float xVelocity = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, -0.075f, 0.075f);
             float yVelocity = RandomHelper.randomBetween(random, 0.2f, 0.5f);
@@ -156,14 +186,14 @@ public class SpiritAltarParticleEffects {
                 sparkParticles.getBuilder()
                         .disableNoClip()
                         .setLifeDelay(lifeDelay)
-                        .multiplyLifetime(2)
+                        .multiplyLifetime(1.5f)
                         .setGravityStrength(gravityStrength)
                         .setMotion(xVelocity, yVelocity, zVelocity)
                         .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(2f));
                 sparkParticles.getBloomBuilder()
                         .disableNoClip()
                         .setLifeDelay(lifeDelay)
-                        .multiplyLifetime(2)
+                        .multiplyLifetime(1.5f)
                         .setGravityStrength(gravityStrength)
                         .setMotion(xVelocity, yVelocity, zVelocity)
                         .modifyData(AbstractParticleBuilder::getTransparencyData, d -> d.multiplyValue(1.25f));
@@ -177,14 +207,14 @@ public class SpiritAltarParticleEffects {
                 lightSpecs.getBuilder()
                         .disableNoClip()
                         .setLifeDelay(lifeDelay)
-                        .multiplyLifetime(4)
+                        .multiplyLifetime(2)
                         .setGravityStrength(gravityStrength)
                         .setMotion(xVelocity, yVelocity, zVelocity)
                         .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(2.5f));
                 lightSpecs.getBloomBuilder()
                         .disableNoClip()
                         .setLifeDelay(lifeDelay)
-                        .multiplyLifetime(4)
+                        .multiplyLifetime(1.5f)
                         .setGravityStrength(gravityStrength)
                         .setMotion(xVelocity, yVelocity, zVelocity)
                         .modifyData(AbstractParticleBuilder::getTransparencyData, d -> d.multiplyValue(1.25f));

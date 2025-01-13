@@ -35,14 +35,14 @@ public class VoidConduitRenderer implements BlockEntityRenderer<VoidConduitBlock
             poseStack.translate(0.5f, 0.01f, 0.5f);
 
             builder.replaceBufferSource(RenderHandler.LATE_DELAYED_RENDER)
-                    .setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(MalumRenderTypeTokens.VOID_VIGNETTE))
+                    .setRenderType(LodestoneRenderTypes.TRANSPARENT_TEXTURE.apply(MalumRenderTypeTokens.VOID_VIGNETTE))
                     .renderQuad(poseStack, positions, 1f);
             final long gameTime = voidConduit.getLevel().getGameTime();
             float uOffset = ((gameTime + partialTicks) % 4000) / 2000f;
             float vOffset = ((gameTime + 500f + partialTicks) % 8000) / 8000f;
             float alpha = 0.05f;
 
-            final LodestoneRenderType renderType = RenderTypeRegistry.WEEPING_WELL_DISTORTED_TEXTURE.applyAndCache(MalumRenderTypeTokens.VOID_NOISE);
+            final LodestoneRenderType renderType = RenderTypeRegistry.WEEPING_WELL_DISTORTED_TEXTURE.apply(MalumRenderTypeTokens.VOID_NOISE);
             builder.replaceBufferSource(RenderHandler.DELAYED_RENDER.getTarget());
             for (int i = 0; i < 3; i++) {
                 float speed = 1000f + 250f * i;

@@ -870,46 +870,6 @@
     ],
     "subtitle": "malum.subtitle.quartz_cluster_block_step"
   },
-  "redstone_diode_break": {
-    "sounds": [
-      "malum:blocks/spirit_diode/break1",
-      "malum:blocks/spirit_diode/break2",
-      "malum:blocks/spirit_diode/break3",
-      "malum:blocks/spirit_diode/break4"
-    ],
-    "subtitle": "malum.subtitle.redstone_diode_break"
-  },
-  "redstone_diode_hit": {
-    "sounds": [
-      "block/copper_bulb/step1",
-      "block/copper_bulb/step2",
-      "block/copper_bulb/step3",
-      "block/copper_bulb/step4",
-      "block/copper_bulb/step5",
-      "block/copper_bulb/step6"
-    ],
-    "subtitle": "malum.subtitle.redstone_diode_hit"
-  },
-  "redstone_diode_place": {
-    "sounds": [
-      "malum:blocks/spirit_diode/place1",
-      "malum:blocks/spirit_diode/place2",
-      "malum:blocks/spirit_diode/place3",
-      "malum:blocks/spirit_diode/place4"
-    ],
-    "subtitle": "malum.subtitle.redstone_diode_place"
-  },
-  "redstone_diode_step": {
-    "sounds": [
-      "block/copper_bulb/step1",
-      "block/copper_bulb/step2",
-      "block/copper_bulb/step3",
-      "block/copper_bulb/step4",
-      "block/copper_bulb/step5",
-      "block/copper_bulb/step6"
-    ],
-    "subtitle": "malum.subtitle.redstone_diode_step"
-  },
   "rejected_by_the_unknown": {
     "sounds": [
       "malum:weeping_well/void_rejection"
@@ -1633,6 +1593,64 @@
     ],
     "subtitle": "malum.subtitle.spirit_crucible_focuses"
   },
+  "spirit_diode_break": {
+    "sounds": [
+      "malum:blocks/spirit_diode/break1",
+      "malum:blocks/spirit_diode/break2",
+      "malum:blocks/spirit_diode/break3",
+      "malum:blocks/spirit_diode/break4"
+    ],
+    "subtitle": "malum.subtitle.spirit_diode_break"
+  },
+  "spirit_diode_close": {
+    "sounds": [
+      "malum:blocks/spirit_diode/waveform_close1",
+      "malum:blocks/spirit_diode/waveform_close2",
+      "malum:blocks/spirit_diode/waveform_close3",
+      "malum:blocks/spirit_diode/waveform_close4"
+    ],
+    "subtitle": "malum.subtitle.spirit_diode_close"
+  },
+  "spirit_diode_hit": {
+    "sounds": [
+      "block/copper_bulb/step1",
+      "block/copper_bulb/step2",
+      "block/copper_bulb/step3",
+      "block/copper_bulb/step4",
+      "block/copper_bulb/step5",
+      "block/copper_bulb/step6"
+    ],
+    "subtitle": "malum.subtitle.spirit_diode_hit"
+  },
+  "spirit_diode_open": {
+    "sounds": [
+      "malum:blocks/spirit_diode/waveform_open1",
+      "malum:blocks/spirit_diode/waveform_open2",
+      "malum:blocks/spirit_diode/waveform_open3",
+      "malum:blocks/spirit_diode/waveform_open4"
+    ],
+    "subtitle": "malum.subtitle.spirit_diode_open"
+  },
+  "spirit_diode_place": {
+    "sounds": [
+      "malum:blocks/spirit_diode/place1",
+      "malum:blocks/spirit_diode/place2",
+      "malum:blocks/spirit_diode/place3",
+      "malum:blocks/spirit_diode/place4"
+    ],
+    "subtitle": "malum.subtitle.spirit_diode_place"
+  },
+  "spirit_diode_step": {
+    "sounds": [
+      "block/copper_bulb/step1",
+      "block/copper_bulb/step2",
+      "block/copper_bulb/step3",
+      "block/copper_bulb/step4",
+      "block/copper_bulb/step5",
+      "block/copper_bulb/step6"
+    ],
+    "subtitle": "malum.subtitle.spirit_diode_step"
+  },
   "spirit_engraved": {
     "sounds": [
       "malum:totem/totem_engrave1",
@@ -1660,8 +1678,8 @@
   },
   "staff_charged": {
     "sounds": [
-      "malum:curiosities/weapons/staff/sizzle1",
-      "malum:curiosities/weapons/staff/sizzle2"
+      "malum:curiosities/weapons/staff/charge1",
+      "malum:curiosities/weapons/staff/charge2"
     ],
     "subtitle": "malum.subtitle.staff_charged"
   },
@@ -1674,17 +1692,17 @@
   },
   "staff_powers_up": {
     "sounds": [
-      "malum:curiosities/weapons/staff/charge1",
-      "malum:curiosities/weapons/staff/charge2"
+      "malum:curiosities/weapons/staff/power_up1",
+      "malum:curiosities/weapons/staff/power_up2"
     ],
     "subtitle": "malum.subtitle.staff_powers_up"
   },
-  "staff_sizzles": {
+  "staff_sizzles_out": {
     "sounds": [
       "malum:curiosities/weapons/staff/sizzle1",
       "malum:curiosities/weapons/staff/sizzle2"
     ],
-    "subtitle": "malum.subtitle.staff_sizzles"
+    "subtitle": "malum.subtitle.staff_sizzles_out"
   },
   "staff_strikes": {
     "sounds": [

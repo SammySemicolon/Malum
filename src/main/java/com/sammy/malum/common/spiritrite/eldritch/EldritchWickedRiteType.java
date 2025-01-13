@@ -1,15 +1,15 @@
 package com.sammy.malum.common.spiritrite.eldritch;
 
 import com.sammy.malum.common.block.curiosities.totem.TotemBaseBlockEntity;
-import com.sammy.malum.common.packets.particle.rite.generic.MajorEntityEffectParticlePacket;
 import com.sammy.malum.common.spiritrite.TotemicRiteEffect;
 import com.sammy.malum.common.spiritrite.TotemicRiteType;
 import com.sammy.malum.registry.common.DamageTypeRegistry;
+import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
+import com.sammy.malum.visual_effects.networked.data.ColorEffectData;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.PacketDistributor;
 import team.lodestar.lodestone.helpers.*;
 
 import java.util.*;
@@ -29,7 +29,7 @@ public class EldritchWickedRiteType extends TotemicRiteType {
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Player)).forEach(e -> {
                     if (e.getHealth() <= 2.5f && !e.isInvulnerableTo(DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO_PLAYERLESS))) {
-                        PacketDistributor.sendToPlayersTrackingEntity(e, new MajorEntityEffectParticlePacket(getIdentifyingSpirit().getPrimaryColor(), e.getX(), e.getY() + e.getBbHeight() / 2f, e.getZ()));
+                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
                         e.hurt(DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO_PLAYERLESS), 10f);
                     }
                 });
@@ -49,9 +49,9 @@ public class EldritchWickedRiteType extends TotemicRiteType {
                     }
                     int maxKills = animals.size() - 20;
                     animals.removeIf(Animal::isInLove);
-                    for (Animal entity : animals) {
-                        entity.hurt(DamageTypeHelper.create(entity.level(), DamageTypeRegistry.VOODOO_PLAYERLESS), entity.getMaxHealth());
-                        PacketDistributor.sendToPlayersTrackingEntity(entity, new MajorEntityEffectParticlePacket(WICKED_SPIRIT.getPrimaryColor(), entity.getX(), entity.getY() + entity.getBbHeight() / 2f, entity.getZ()));
+                    for (Animal animal : animals) {
+                        animal.hurt(DamageTypeHelper.create(animal.level(), DamageTypeRegistry.VOODOO_PLAYERLESS), animal.getMaxHealth());
+                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(animal, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
                         if (maxKills-- <= 0) {
                             return;
                         }

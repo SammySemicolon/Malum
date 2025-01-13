@@ -26,7 +26,7 @@ public class SoulwovenBannerRenderer implements BlockEntityRenderer<SoulwovenBan
     public void render(SoulwovenBannerBlockEntity blockEntityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         var blockState = blockEntityIn.getBlockState();
         final SoulwovenBannerPatternData patternData = blockEntityIn.patternData;
-        var token = RenderTypeToken.createCachedToken(patternData.texturePath());
+        var token = RenderTypeToken.createToken(patternData.texturePath());
         var banner = LodestoneRenderTypes.CUTOUT_TEXTURE.applyWithModifierAndCache(token, b -> b.setCullState(RenderStateShard.NO_CULL));
         var builder = VFXBuilders.createWorld().setRenderType(banner).setLight(combinedLightIn);
         var pos = blockEntityIn.getBlockPos();

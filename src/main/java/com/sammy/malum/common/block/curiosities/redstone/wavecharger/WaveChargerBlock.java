@@ -19,6 +19,11 @@ public class WaveChargerBlock extends SpiritDiodeBlock<WaveChargerBlockEntity> {
     }
 
     @Override
+    public int[] getFrequencyPresets() {
+        return new int[] {3, 6, 12, 24, 48, 96, 192, 384, 768};
+    }
+
+    @Override
     public boolean processUpdate(Level level, BlockPos pos, BlockState state, WaveChargerBlockEntity diode, int signal) {
         int startingSignal = diode.signal;
         if (startingSignal > signal) {

@@ -44,8 +44,9 @@ public class WeaponParticleEffects {
         var rand = level.getRandom();
         final WorldParticleBuilder worldParticleBuilder = builder
                 .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(rand, 1.5f, 2f)).build())
-                .setTransparencyData(GenericParticleData.create(1f, 0.9f).build())
                 .setSpritePicker(SimpleParticleOptions.ParticleSpritePicker.WITH_AGE)
+                .setTransparencyData(GenericParticleData.create(1f, 0.9f).build())
+                .enableForcedSpawn()
                 .setLifetime(5)
                 .enableNoClip();
         return new ParticleEffectSpawner(level, pos, worldParticleBuilder);
@@ -75,8 +76,9 @@ public class WeaponParticleEffects {
         var rand = level.getRandom();
         final WorldParticleBuilder worldParticleBuilder = builder
                 .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(rand, 1.5f, 2f)).build())
-                .setTransparencyData(GenericParticleData.create(1f, 0.9f).build())
                 .setSpritePicker(SimpleParticleOptions.ParticleSpritePicker.WITH_AGE)
+                .setTransparencyData(GenericParticleData.create(1f, 0.9f).build())
+                .enableForcedSpawn()
                 .setLifetime(5)
                 .enableNoClip();
         return new ParticleEffectSpawner(level, pos, worldParticleBuilder);

@@ -2,17 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "Y": {
-      "tag": "c:glass_panes"
-    },
-    "Z": {
+    "X": {
       "item": "malum:hallowed_gold_ingot"
+    },
+    "Y": {
+      "tag": "c:glass_blocks"
     }
   },
   "pattern": [
-    "YZY",
-    "Y Y",
-    "YYY"
+    "X",
+    "Y"
   ],
   "result": {
     "count": 1,

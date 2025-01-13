@@ -11,6 +11,7 @@ import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.block.BlockEntityRegistry;
+import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
 import com.sammy.malum.visual_effects.SpiritAltarParticleEffects;
 import com.sammy.malum.visual_effects.networked.altar.SpiritAltarEatItemParticleEffect;
@@ -82,9 +83,9 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
 
     public SpiritAltarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.SPIRIT_ALTAR.get(), pos, state);
-        inventory = MalumBlockEntityInventory.singleStackNotSpirit(this);
+        inventory = MalumBlockEntityInventory.singleStackNotSpirit(this).onContentsChanged(this::recalculateRecipes);
         extrasInventory = MalumBlockEntityInventory.stacksNotSpirits(this, 8);
-        spiritInventory = MalumSpiritBlockEntityInventory.spiritStacks(this, SpiritTypeRegistry.SPIRITS.size());
+        spiritInventory = MalumSpiritBlockEntityInventory.spiritStacks(this, SpiritTypeRegistry.SPIRITS.size()).onContentsChanged(this::recalculateRecipes);
     }
 
     @Override
@@ -132,7 +133,19 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
         inventory.load(pRegistries, compound);
         spiritInventory.load(pRegistries, compound, "spiritInventory");
         extrasInventory.load(pRegistries, compound, "extrasInventory");
+
+        if (level != null) {
+            recalculateRecipes();
+            recalibrateAccelerators();
+            if (level.isClientSide && isCrafting) {
+                AltarSoundInstance.playSound(this);
+            }
+        }
         super.loadAdditional(compound, pRegistries);
+    }
+
+    @Override
+    public void update(@NotNull Level level) {
     }
 
     @Override
@@ -144,30 +157,18 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
 
     @Override
     public ItemInteractionResult onUse(Player pPlayer, InteractionHand pHand) {
-        if (pHand.equals(InteractionHand.MAIN_HAND)) {
-            recalibrateAccelerators();
-            if (level instanceof ServerLevel serverLevel) {
-                var itemStack = inventory.interact(serverLevel, pPlayer, pHand);
-                if (!itemStack.isEmpty()) {
-                    return ItemInteractionResult.SUCCESS;
-                }
-                var spiritStack = spiritInventory.interact(serverLevel, pPlayer, pHand);
-                if (!spiritStack.isEmpty()) {
-                    return ItemInteractionResult.SUCCESS;
-                }
-            }
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return ItemInteractionResult.CONSUME;
+        }
+        var spiritResult = spiritInventory.interact(serverLevel, pPlayer, pHand);
+        if (!spiritResult.isEmpty()) {
             return ItemInteractionResult.SUCCESS;
         }
-
-        return super.onUse(pPlayer, pHand);
-    }
-
-    @Override
-    public void update(@NotNull Level level) {
-        recalculateRecipes();
-        if (level.isClientSide && isCrafting) {
-            AltarSoundInstance.playSound(this);
+        var impetusResult = inventory.interact(serverLevel, pPlayer, pHand);
+        if (!impetusResult.isEmpty()) {
+            return ItemInteractionResult.SUCCESS;
         }
+        return super.onUse(pPlayer, pHand);
     }
 
     @Override
@@ -175,7 +176,8 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
         super.tick();
         spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.getFilledSlotCount()));
 
-        if (!inventory.getStackInSlot(0).isEmpty()) {
+        var primeItem = inventory.getStackInSlot(0);
+        if (!primeItem.isEmpty()) {
             idleProgress++;
             int progressCap = (int) (20 / speed);
             if (idleProgress >= progressCap) {
@@ -189,23 +191,17 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
             if (spiritYLevel < 30) {
                 spiritYLevel++;
             }
-            if (recipe != null) {
-                if (!isCrafting) {
-                    BlockStateHelper.updateAndNotifyState(level, worldPosition);
-                    isCrafting = true;
-                }
-                progress++;
+            if (!isCrafting && recipe != null) {
+                isCrafting = true;
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
-            else {
-                if (isCrafting) {
-                    BlockStateHelper.updateAndNotifyState(level, worldPosition);
-                    isCrafting = false;
-                }
-                progress = 0;
+            else if(isCrafting && recipe == null) {
+                isCrafting = false;
+                BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
-
-            if (!level.isClientSide) {
-                if (level.getGameTime() % 20L == 0) {
+            progress = isCrafting ? progress+1 : progress;
+            if (level instanceof ServerLevel serverLevel) {
+                if (serverLevel.getGameTime() % 20L == 0) {
                     boolean canAccelerate = accelerators.stream().allMatch(IAltarAccelerator::canAccelerate);
                     if (!canAccelerate) {
                         recalibrateAccelerators();
@@ -215,7 +211,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
                 if (progress >= progressCap) {
                     boolean success = consume();
                     if (success) {
-                        craft();
+                        craft(serverLevel);
                     }
                 }
             }
@@ -237,7 +233,10 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
 
         ItemStack stack = inventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
-            final Collection<SpiritInfusionRecipe> all = DataHelper.getAll(LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_INFUSION.get()));
+            List<ItemStack> physicalIngredients = new ArrayList<>();
+            physicalIngredients.add(stack);
+            physicalIngredients.addAll(extrasInventory.nonEmptyItemStacks);
+            final Collection<SpiritInfusionRecipe> all = LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_INFUSION.get());
             Collection<SpiritInfusionRecipe> recipes = all.stream().filter(r -> r.matches(new SpiritBasedRecipeInput(stack, spiritInventory.nonEmptyItemStacks), level)).toList();
             possibleRecipes.clear();
             IItemHandlerModifiable pedestalItems = AltarCraftingHelper.createPedestalInventoryCapture(AltarCraftingHelper.capturePedestals(level, worldPosition));
@@ -252,6 +251,9 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
 
         if (hadRecipe && recipe == null && level != null) {
             extrasInventory.dumpItems(level, worldPosition);
+        }
+        if (recipe != null) {
+            isCrafting = true;
         }
     }
 
@@ -293,14 +295,20 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
         return true;
     }
 
-    public void craft() {
+    public void craft(ServerLevel level) {
         ItemStack stack = inventory.getStackInSlot(0);
         ItemStack outputStack = recipe.output.copy();
         Vec3 itemPos = getItemPos();
+        ParticleEffectTypeRegistry.SPIRIT_ALTAR_CRAFTS
+                .createPositionedEffect(level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits));
+        level.playSound(null, worldPosition, SoundRegistry.ALTAR_CRAFT.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.2f);
         if (recipe.carryOverData) {
             outputStack.applyComponents(stack.getComponents());
         }
+        extrasInventory.clear();
+        progress -= (int) (progress * 0.2f);
         stack.shrink(recipe.ingredient.count());
+        level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, outputStack));
         for (SpiritIngredient spirit : recipe.spirits) {
             for (int i = 0; i < spiritInventory.slotCount; i++) {
                 ItemStack spiritStack = spiritInventory.getStackInSlot(i);
@@ -310,11 +318,6 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
                 }
             }
         }
-        progress *= 0.75f;
-        extrasInventory.clear();
-        ParticleEffectTypeRegistry.SPIRIT_ALTAR_CRAFTS.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits));
-        level.playSound(null, worldPosition, SoundRegistry.ALTAR_CRAFT.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.2f);
-        level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, outputStack));
         recalibrateAccelerators();
         BlockStateHelper.updateAndNotifyState(level, worldPosition);
     }

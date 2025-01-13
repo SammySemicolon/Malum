@@ -71,8 +71,8 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         super(type, structure, pos, state);
         inventory = MalumBlockEntityInventory.singleNotSpirit(this).onContentsChanged(this::updateRecipe);
         spiritInventory = MalumSpiritBlockEntityInventory.spiritStacks(this, 4).onContentsChanged(this::updateRecipe);
-        augmentInventory = AugmentBlockEntityInventory.augmentInventory(this, 4).onContentsChanged(() -> recalibrateAccelerators(level, pos));
-        coreAugmentInventory = AugmentBlockEntityInventory.coreAugmentInventory(this, 1).onContentsChanged(() -> recalibrateAccelerators(level, pos));
+        augmentInventory = AugmentBlockEntityInventory.augmentInventory(this, 4).onContentsChanged(() -> recalibrateAccelerators(level));
+        coreAugmentInventory = AugmentBlockEntityInventory.coreAugmentInventory(this, 1).onContentsChanged(() -> recalibrateAccelerators(level));
     }
 
     public SpiritCrucibleCoreBlockEntity(BlockPos pos, BlockState state) {
@@ -106,12 +106,33 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         queuedCracks = compound.getInt("queuedCracks");
 
         attributes = CodecUtil.decodeNBT(ArtificeAttributeData.CODEC, compound.getCompound("attributes"));
+
         inventory.load(pRegistries, compound);
         spiritInventory.load(pRegistries, compound, "spiritInventory");
         augmentInventory.load(pRegistries, compound, "augmentInventory");
         coreAugmentInventory.load(pRegistries, compound, "coreAugmentInventory");
 
+        if (level != null) {
+            if (level.isClientSide) {
+                if (recipe != null) {
+                    CrucibleSoundInstance.playSound(this);
+                }
+            }
+            updateRecipe();
+        }
         super.loadAdditional(compound, pRegistries);
+    }
+
+    @Override
+    public void onBreak(@Nullable Player player) {
+        inventory.dumpItems(level, worldPosition);
+        spiritInventory.dumpItems(level, worldPosition);
+        augmentInventory.dumpItems(level, worldPosition);
+        coreAugmentInventory.dumpItems(level, worldPosition);
+        if (!level.isClientSide) {
+            invalidateModifiers(level);
+        }
+        super.onBreak(player);
     }
 
     @Override
@@ -159,26 +180,6 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
     }
 
     @Override
-    public void onBreak(@Nullable Player player) {
-        inventory.dumpItems(level, worldPosition);
-        spiritInventory.dumpItems(level, worldPosition);
-        augmentInventory.dumpItems(level, worldPosition);
-        coreAugmentInventory.dumpItems(level, worldPosition);
-        invalidateModifiers(level);
-        super.onBreak(player);
-    }
-
-    @Override
-    public void update(@NotNull Level level) {
-        if (level.isClientSide) {
-            if (recipe == null) {
-                CrucibleSoundInstance.playSound(this);
-            }
-            updateRecipe();
-        }
-    }
-
-    @Override
     public void tick() {
         spiritAmount = Math.max(1, Mth.lerp(0.1f, spiritAmount, spiritInventory.getFilledSlotCount()));
         float speed = attributes.focusingSpeed.getValue(attributes);
@@ -201,13 +202,13 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
                 attributes.getInfluenceData(level).ifPresent(d -> {
                     for (ArtificeModifierSourceInstance modifier : d.modifiers()) {
                         modifier.tickFocusing(attributes);
-                        if (!modifier.canModifyFocusing()) {
-                            recalibrateAccelerators(level, worldPosition);
+                        if (!modifier.canModifyFocusing(attributes)) {
+                            recalibrateAccelerators(level);
                         }
                     }
                 });
                 if (progress == 0) {
-                    recalibrateAccelerators(level, worldPosition);
+                    recalibrateAccelerators(level);
                 }
                 progress += speed;
                 if (progress >= recipe.time) {

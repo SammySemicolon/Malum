@@ -87,7 +87,7 @@ public class ColorEffectData {
         if (colorRecordList.isEmpty()) {
             return null;
         }
-        return colorRecordList.get(0);
+        return colorRecordList.getFirst();
     }
 
     public ColorRecord getRandomColorRecord() {
@@ -104,10 +104,16 @@ public class ColorEffectData {
         return colorRecordList.get(recordCycleCounter++ % colorRecordList.size());
     }
 
+    public Color getPrimaryColor() {
+        return getPrimaryColor(getDefaultColorRecord());
+    }
     public Color getPrimaryColor(ColorRecord colorRecord) {
         return colorRecord.primaryColor;
     }
 
+    public Color getSecondaryColor() {
+        return getSecondaryColor(getDefaultColorRecord());
+    }
     public Color getSecondaryColor(ColorRecord colorRecord) {
         return colorRecord.secondaryColor;
     }

@@ -24,4 +24,6 @@ public class MalumRenderTypeTokens {
 
     public static final RenderTypeToken DEBUG_GIZMO = RenderTypeToken.createToken(malumPath("textures/particle/funky_star.png"));
 
+    public static final RenderTypeToken DIODE_LOCKED = RenderTypeToken.createToken(malumPath("textures/block/spirit_diode/runewood_frame_locked_overlay.png"));
+    public static final RenderTypeToken DIODE_INPUT = RenderTypeToken.createToken(malumPath("textures/block/spirit_diode/runewood_frame_input_overlay.png"));
 }

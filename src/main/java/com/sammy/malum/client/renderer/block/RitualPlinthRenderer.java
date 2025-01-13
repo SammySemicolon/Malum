@@ -19,6 +19,8 @@ import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.rendering.*;
 import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 
+import java.util.SequencedMap;
+
 import static net.minecraft.client.renderer.texture.OverlayTexture.*;
 
 public class RitualPlinthRenderer implements BlockEntityRenderer<RitualPlinthBlockEntity> {
@@ -50,10 +52,11 @@ public class RitualPlinthRenderer implements BlockEntityRenderer<RitualPlinthBlo
         final MalumRitualTier ritualTier = blockEntityIn.ritualTier;
         if (blockEntityIn.activeDuration > 0 && ritualType != null) {
             final boolean hasDecor = ritualTier != null && !MalumRitualTier.FADED.equals(ritualTier);
-            RenderType silhouette = (LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(MalumRenderTypeTokens.RITUAL_SILHOUETTE));
-            RenderType icon = (LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(ritualTier == null ? MalumRenderTypeTokens.INCOMPLETE_RITUAL : RenderTypeToken.createCachedToken(ritualType.getIcon())));
-            RenderType decorGlow = hasDecor ? LodestoneRenderTypes.ADDITIVE_TEXTURE.applyAndCache(RenderTypeToken.createCachedToken(ritualTier.getDecorTexture())) : null;
-            RenderType decorSilhouette = hasDecor ? LodestoneRenderTypes.TRANSPARENT_TEXTURE.applyAndCache(RenderTypeToken.createCachedToken(ritualTier.getDecorTexture())) : null;
+            RenderType silhouette = (LodestoneRenderTypes.TRANSPARENT_TEXTURE.apply(MalumRenderTypeTokens.RITUAL_SILHOUETTE));
+            RenderType icon = (LodestoneRenderTypes.ADDITIVE_TEXTURE.apply(ritualTier == null ? MalumRenderTypeTokens.INCOMPLETE_RITUAL : RenderTypeToken.createToken(ritualType.getIcon())));
+            RenderType decorGlow = hasDecor ? LodestoneRenderTypes.ADDITIVE_TEXTURE.apply(RenderTypeToken.createToken(ritualTier.getDecorTexture())) : null;
+            RenderType decorSilhouette = hasDecor ? LodestoneRenderTypes.TRANSPARENT_TEXTURE.apply(RenderTypeToken.createToken(ritualTier.getDecorTexture())) : null;
+            SequencedMap<RenderType, ByteBufferBuilder> buffers = RenderHandler.BUFFERS;
             MalumSpiritType spirit = ritualType.spirit;
             Vec3 offset = blockEntityIn.getRitualIconOffset(partialTicks);
             final float scalar = Math.min(blockEntityIn.activeDuration, 15) / 15f;

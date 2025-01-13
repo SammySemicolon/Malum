@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.items.IItemHandler;
+import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntityInventory;
 import team.lodestar.lodestone.systems.multiblock.*;
 
 import javax.annotation.*;
@@ -30,15 +31,15 @@ public class SpiritCatalyzerCoreBlockEntity extends MultiBlockCoreEntity impleme
     public static final Vec3 CATALYZER_ITEM_OFFSET = new Vec3(0.5f, 2f, 0.5f);
     public static final Vec3 CATALYZER_AUGMENT_OFFSET = new Vec3(0.5f, 2.75f, 0.5f);
 
-    public MalumBlockEntityInventory inventory;
-    public MalumBlockEntityInventory augmentInventory;
+    public LodestoneBlockEntityInventory inventory;
+    public LodestoneBlockEntityInventory augmentInventory;
     public CatalyzerArtificeModifierSourceInstance modifier;
     public float burnTicks;
 
     public SpiritCatalyzerCoreBlockEntity(BlockEntityType<? extends SpiritCatalyzerCoreBlockEntity> type, MultiBlockStructure structure, BlockPos pos, BlockState state) {
         super(type, structure, pos, state);
-        inventory = MalumBlockEntityInventory.singleItemStack(this);
-        augmentInventory = AugmentBlockEntityInventory.augmentInventory(this, 1);
+        inventory = MalumBlockEntityInventory.singleItemStack(this).onContentsChanged(()->triggerRecalibration(level, pos));
+        augmentInventory = AugmentBlockEntityInventory.augmentInventory(this, 1).onContentsChanged(()->triggerRecalibration(level, pos));
     }
 
     public SpiritCatalyzerCoreBlockEntity(BlockPos pos, BlockState state) {

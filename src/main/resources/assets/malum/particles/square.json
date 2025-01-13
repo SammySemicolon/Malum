@@ -1,7 +1,12 @@
 {
   "textures": [
-    "malum:square0",
-    "malum:square1",
-    "malum:square2"
+    "malum:square_1",
+    "malum:square_2",
+    "malum:square_3",
+    "malum:square_4",
+    "malum:square_5",
+    "malum:square_6",
+    "malum:square_7",
+    "malum:square_8"
   ]
 }

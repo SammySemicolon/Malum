@@ -258,7 +258,7 @@ public class RitualPlinthParticleEffects {
                 p.setParticleSpeed(p.getParticleSpeed().scale(0.95f));
             });
 
-            WorldParticleBuilder.create(ParticleRegistry.SHARP_SPARK.get(), new DirectionalBehaviorComponent(plinthItemPos.subtract(particlePosition).normalize()))
+            WorldParticleBuilder.create(ParticleRegistry.SPARK.get(), new DirectionalBehaviorComponent(plinthItemPos.subtract(particlePosition).normalize()))
                     .setTransparencyData(GenericParticleData.create(0f, 0.9f, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
                     .setSpinData(SpinParticleData.createRandomDirection(random, nextFloat(random, 0.025f, 0.05f)).randomSpinOffset(random).build())
                     .setScaleData(GenericParticleData.create(0.3f, 0).setEasing(Easing.SINE_IN_OUT).build())
@@ -372,7 +372,7 @@ public class RitualPlinthParticleEffects {
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 4; j++) {
                 final Vec3 particlePosition = VecHelper.rotatingRadialOffset(targetPos, 0.5f, j, 4, level.getGameTime()+i*4, 160);
-                WorldParticleBuilder.create(ParticleRegistry.SHARP_SPARK, new DirectionalBehaviorComponent(targetPos.subtract(particlePosition).normalize()))
+                WorldParticleBuilder.create(ParticleRegistry.SPARK, new DirectionalBehaviorComponent(targetPos.subtract(particlePosition).normalize()))
                         .setTransparencyData(GenericParticleData.create(0f, 0.6f, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
                         .setSpinData(SpinParticleData.createRandomDirection(random, nextFloat(random, 0.05f, 0.1f)).randomSpinOffset(random).build())
                         .setScaleData(GenericParticleData.create(0.125f, 0.075f, 0).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
@@ -408,7 +408,7 @@ public class RitualPlinthParticleEffects {
         if (level.getGameTime() % 3L == 0) {
             for (int i = 0; i < 8; i++) {
                 final Vec3 particlePosition = VecHelper.rotatingRadialOffset(itemPos, 0.5f, i, 8, level.getGameTime(), 320);
-                WorldParticleBuilder.create(ParticleRegistry.SHARP_SPARK, new DirectionalBehaviorComponent(itemPos.subtract(particlePosition).normalize()))
+                WorldParticleBuilder.create(ParticleRegistry.SPARK, new DirectionalBehaviorComponent(itemPos.subtract(particlePosition).normalize()))
                         .setTransparencyData(GenericParticleData.create(0f, 0.4f, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
                         .setSpinData(SpinParticleData.createRandomDirection(random, nextFloat(random, 0.05f, 0.1f)).randomSpinOffset(random).build())
                         .setScaleData(GenericParticleData.create(0.125f, 0.075f, 0).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
@@ -492,7 +492,7 @@ public class RitualPlinthParticleEffects {
                     .add(up.scale(Math.cos(angle)))
                     .normalize();
             particlePosition = particlePosition.add(particleDirection.scale(0.075f));
-            WorldParticleBuilder.create(ParticleRegistry.SHARP_SPARK, new DirectionalBehaviorComponent(particleDirection))
+            WorldParticleBuilder.create(ParticleRegistry.SPARK, new DirectionalBehaviorComponent(particleDirection))
                     .setTransparencyData(GenericParticleData.create(0.6f, 0.4f, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
                     .setSpinData(SpinParticleData.createRandomDirection(random, nextFloat(random, 0.05f, 0.1f)).randomSpinOffset(random).build())
                     .setScaleData(GenericParticleData.create(0.125f, 0.075f, 0).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())

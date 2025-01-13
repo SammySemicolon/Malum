@@ -4,6 +4,7 @@ import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.function.Consumer;
 
@@ -26,7 +27,7 @@ public abstract class ArtificeModifierSourceInstance {
     public abstract void applyAugments(Consumer<ItemStack> augmentConsumer);
 
     public boolean isBound() {
-        return target != null;
+        return target != null && !((BlockEntity)target).isRemoved();
     }
 
     public void invalidate() {
@@ -39,7 +40,7 @@ public abstract class ArtificeModifierSourceInstance {
 
     public abstract void tickFocusing(ArtificeAttributeData attributes);
 
-    public abstract boolean canModifyFocusing();
+    public abstract boolean canModifyFocusing(ArtificeAttributeData attributes);
 
     public abstract boolean consumesFuel();
 

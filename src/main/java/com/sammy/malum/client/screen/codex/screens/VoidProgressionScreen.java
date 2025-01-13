@@ -7,6 +7,7 @@ import com.sammy.malum.client.screen.codex.BookWidgetStyle;
 import com.sammy.malum.client.screen.codex.PlacedBookEntry;
 import com.sammy.malum.client.screen.codex.objects.progression.IconObject;
 import com.sammy.malum.client.screen.codex.objects.progression.ScreenOpenerObject;
+import com.sammy.malum.client.screen.codex.pages.BookPage;
 import com.sammy.malum.client.screen.codex.pages.CyclingPage;
 import com.sammy.malum.client.screen.codex.pages.EntryReference;
 import com.sammy.malum.client.screen.codex.pages.EntrySelectorPage;
@@ -84,6 +85,7 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
 
     public void setupEntries() {
         Item EMPTY = ItemStack.EMPTY.getItem();
+        BookPage.isVoidThemed = true;
 
         addEntry("chronicles_of_the_soul", 0, 0, b -> b
                 .setWidgetSupplier((e, x, y) -> new ScreenOpenerObject(e, x, y, ArcanaProgressionScreen::openCodexViaTransition, malumPath("textures/gui/book/icons/arcana_button.png"), 20, 20))
@@ -238,7 +240,6 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
                 .afterUmbralCrystal()
         );
         addEntry("void.ring_of_growing_flesh", -4, 10, b -> b
-                .withTraceFragmentEntry()
                 .configureWidget(w -> w.setIcon(RING_OF_GROWING_FLESH).setStyle(BookWidgetStyle.SOULWOOD))
                 .addPage(new HeadlineTextPage("void.ring_of_growing_flesh", "void.ring_of_growing_flesh.1"))
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_GROWING_FLESH.get()))
@@ -353,5 +354,7 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
 //                .addPage(new HeadlineTextPage("void.staff_of_the_auric_flame", "void.staff_of_the_auric_flame.1"))
 //                .addPage(SpiritInfusionPage.fromOutput(STAFF_OF_THE_AURIC_FLAME.get()))
 //        );
+
+        BookPage.isVoidThemed = false;
     }
 }

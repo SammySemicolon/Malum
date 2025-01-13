@@ -18,12 +18,12 @@ public class GlyphRenderTypesMixin implements SubtractiveTextGlyphRenderTypes {
 
 	@Inject(method = "createForIntensityTexture", at = @At("RETURN"))
 	private static void setSubtractiveLayerForIntensity(ResourceLocation pId, CallbackInfoReturnable<GlyphRenderTypes> cir) {
-		((GlyphRenderTypesMixin) (Object) cir.getReturnValue()).malum$subtractive = RenderTypeRegistry.SUBTRACTIVE_INTENSE_TEXT.applyAndCache(RenderTypeToken.createCachedToken(pId));
+		((GlyphRenderTypesMixin) (Object) cir.getReturnValue()).malum$subtractive = RenderTypeRegistry.SUBTRACTIVE_INTENSE_TEXT.apply(RenderTypeToken.createToken(pId));
 	}
 
 	@Inject(method = "createForColorTexture", at = @At("RETURN"))
 	private static void setSubtractiveLayerForColor(ResourceLocation pId, CallbackInfoReturnable<GlyphRenderTypes> cir) {
-		((GlyphRenderTypesMixin) (Object) cir.getReturnValue()).malum$subtractive = RenderTypeRegistry.SUBTRACTIVE_TEXT.applyAndCache(RenderTypeToken.createCachedToken(pId));
+		((GlyphRenderTypesMixin) (Object) cir.getReturnValue()).malum$subtractive = RenderTypeRegistry.SUBTRACTIVE_TEXT.apply(RenderTypeToken.createToken(pId));
 	}
 
 	@Override

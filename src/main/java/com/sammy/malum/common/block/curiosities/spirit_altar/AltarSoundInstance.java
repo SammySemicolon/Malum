@@ -14,7 +14,7 @@ public class AltarSoundInstance extends CachedBlockEntitySoundInstance<SpiritAlt
 
     @Override
     public void tick() {
-        if (blockEntity.recipe == null) {
+        if (!blockEntity.isCrafting) {
             stop();
         }
         super.tick();

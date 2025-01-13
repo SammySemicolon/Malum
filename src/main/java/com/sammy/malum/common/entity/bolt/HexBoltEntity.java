@@ -13,8 +13,10 @@ import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.easing.*;
+import team.lodestar.lodestone.systems.particle.SimpleParticleOptions;
 import team.lodestar.lodestone.systems.particle.builder.*;
 import team.lodestar.lodestone.systems.particle.data.*;
+import team.lodestar.lodestone.systems.particle.data.color.ColorParticleData;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
 import team.lodestar.lodestone.systems.particle.render_types.*;
 import team.lodestar.lodestone.systems.particle.world.*;
@@ -70,17 +72,21 @@ public class HexBoltEntity extends AbstractBoltProjectileEntity {
         final SpinParticleData spinData = SpinParticleData.createRandomDirection(random, RandomHelper.randomBetween(random, 0.25f, 0.5f)).randomSpinOffset(random).build();
         final Consumer<LodestoneWorldParticle> behavior = p -> p.setParticleSpeed(p.getParticleSpeed().scale(0.95f));
         WorldParticleBuilder.create(ParticleRegistry.SAW, new DirectionalBehaviorComponent(getDeltaMovement().normalize()))
-                .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
                 .setTransparencyData(GenericParticleData.create(0.9f * scalar, 0.4f * scalar, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
-                .setSpinData(spinData)
-                .setScaleData(GenericParticleData.create(0.4f * scalar, 0).setEasing(Easing.SINE_IN_OUT).build())
+                .setScaleData(GenericParticleData.create(0.4f * scalar, 0.3f * scalar).setEasing(Easing.SINE_IN_OUT).build())
                 .setColorData(SpiritTypeRegistry.WICKED_SPIRIT.createColorData().build())
+                .setSpritePicker(SimpleParticleOptions.ParticleSpritePicker.WITH_AGE)
+                .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
                 .setLifetime(Math.min(6 + age * 3, 30))
-                .enableNoClip()
-                .enableForcedSpawn()
                 .addTickActor(behavior)
+                .setSpinData(spinData)
+                .enableForcedSpawn()
+                .enableNoClip()
                 .spawn(level, position.x, position.y, position.z)
+                .setScaleData(GenericParticleData.create(0.5f * scalar, 0.3f * scalar).setEasing(Easing.SINE_IN_OUT).build())
+                .setTransparencyData(GenericParticleData.create(0.4f * scalar, 0.2f * scalar, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
                 .setRenderType(LodestoneWorldParticleRenderType.LUMITRANSPARENT)
+                .setColorData(ColorParticleData.create(ColorHelper.darker(SpiritTypeRegistry.WICKED_SPIRIT.getPrimaryColor(), 2)).build())
                 .spawn(level, position.x, position.y, position.z);
     }
 }

@@ -33,7 +33,8 @@ public class SpiritInfusionPage extends BookPage {
     }
 
     public SpiritInfusionPage(SpiritInfusionRecipe recipe) {
-        super(MalumMod.malumPath("textures/gui/book/pages/spirit_infusion_page.png"));
+        super(isVoidThemed ? MalumMod.malumPath("textures/gui/book/pages/spirit_infusion_page_void.png") :
+                MalumMod.malumPath("textures/gui/book/pages/spirit_infusion_page.png"));
         this.recipe = recipe;
     }
 

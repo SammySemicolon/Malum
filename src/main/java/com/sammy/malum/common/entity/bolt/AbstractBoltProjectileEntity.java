@@ -22,8 +22,8 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
     protected static final EntityDataAccessor<Boolean> DATA_FADING_AWAY = SynchedEntityData.defineId(AbstractBoltProjectileEntity.class, EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Integer> DATA_SPAWN_DELAY = SynchedEntityData.defineId(AbstractBoltProjectileEntity.class, EntityDataSerializers.INT);
 
-    public final TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(8);
-    public final TrailPointBuilder spinningTrailPointBuilder = TrailPointBuilder.create(16);
+    public TrailPointBuilder trailPointBuilder = TrailPointBuilder.create(8);
+    public TrailPointBuilder spinningTrailPointBuilder = TrailPointBuilder.create(16);
     public float spinOffset = (float) (random.nextFloat() * Math.PI * 2);
     protected float magicDamage;
     public int age;
@@ -168,7 +168,7 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
             spawnDelay--;
             if (spawnDelay == 0 && !level().isClientSide) {
                 spawnDelay = -1;
-                playSound(SoundRegistry.STAFF_FIRES.get(), 0.5f, Mth.nextFloat(random, 0.9F, 1.5F));
+                playSound(SoundRegistry.STAFF_FIRES.get(), 1f, Mth.nextFloat(random, 0.9F, 1.5F));
             }
             return;
         }
@@ -180,7 +180,7 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
         else {
             Vec3 motion = getDeltaMovement();
             float scalar = 0.96f;
-            setDeltaMovement(motion.x * scalar, (motion.y-0.015f)* scalar, motion.z * scalar);
+            setDeltaMovement(motion.x * scalar, (motion.y-0.02f)* scalar, motion.z * scalar);
         }
         if (level().isClientSide) {
             float offsetScale = fadingAway ? 0f : getOrbitingTrailDistance();
@@ -232,8 +232,8 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
 
     public float getVisualEffectScalar() {
         float effectScalar = 1;
-        if (age < 5) {
-            effectScalar = age / 5f;
+        if (age < 8) {
+            effectScalar = age / 8f;
         }
         else if (fadingAway) {
             effectScalar = effectScalar / ((fadingTimer+2) / 2f);

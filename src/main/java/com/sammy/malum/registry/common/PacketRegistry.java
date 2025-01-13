@@ -4,7 +4,8 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.packets.*;
 import com.sammy.malum.common.packets.particle.rite.*;
 import com.sammy.malum.common.packets.particle.rite.generic.BlockSparkleParticlePacket;
-import com.sammy.malum.common.packets.particle.rite.generic.MajorEntityEffectParticlePacket;
+import com.sammy.malum.common.packets.spirit_diode.SpiritDiodeToggleOpenPayload;
+import com.sammy.malum.common.packets.spirit_diode.SpiritDiodeUpdatePayload;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -25,14 +26,9 @@ public class PacketRegistry {
         MALUM_CHANNEL.playToClient(registrar, "void_rejection", VoidRejectionPayload.class, VoidRejectionPayload::new);
         MALUM_CHANNEL.playToClient(registrar, "sync_staff_cooldown_changes", ReplenishingCooldownUpdatePayload.class, ReplenishingCooldownUpdatePayload::new);
         MALUM_CHANNEL.playToClient(registrar, "particle_effect", ParticleEffectPacket.class, ParticleEffectPacket::new);
-        MALUM_CHANNEL.playToClient(registrar, "major_entity_effect", MajorEntityEffectParticlePacket.class, MajorEntityEffectParticlePacket::new);
-        MALUM_CHANNEL.playToClient(registrar, "sacred_mist_rite_effect", SacredMistRiteEffectPacket.class, SacredMistRiteEffectPacket::new);
         MALUM_CHANNEL.playToClient(registrar, "block_sparkle_particle", BlockSparkleParticlePacket.class, BlockSparkleParticlePacket::new);
-        MALUM_CHANNEL.playToClient(registrar, "infernal_acceleration_rite_effect", InfernalAccelerationRiteEffectPacket.class, InfernalAccelerationRiteEffectPacket::new);
-        MALUM_CHANNEL.playToClient(registrar, "infernal_extinguish_rite_effect", InfernalExtinguishRiteEffectPacket.class, InfernalExtinguishRiteEffectPacket::new);
-        MALUM_CHANNEL.playToClient(registrar, "aerial_block_fall_rite_effect", AerialBlockFallRiteEffectPacket.class, AerialBlockFallRiteEffectPacket::new);
-        MALUM_CHANNEL.playToClient(registrar, "spirit_rite_activation", SpiritRiteActivationEffectPacket.class, SpiritRiteActivationEffectPacket::new);
         MALUM_CHANNEL.playToClient(registrar, "spirit_diode_update", SpiritDiodeUpdatePayload.class, SpiritDiodeUpdatePayload::new);
+        MALUM_CHANNEL.playToClient(registrar, "spirit_diode_toggle", SpiritDiodeToggleOpenPayload.class, SpiritDiodeToggleOpenPayload::new);
 
         MALUM_CHANNEL.playToClient(registrar, "sync_soul_ward_data", SyncSoulWardDataPayload.class, SyncSoulWardDataPayload::new);
         MALUM_CHANNEL.playToClient(registrar, "sync_curio_data", SyncCurioDataPayload.class, SyncCurioDataPayload::new);

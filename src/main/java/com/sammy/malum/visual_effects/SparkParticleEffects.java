@@ -25,11 +25,11 @@ import static net.minecraft.util.Mth.*;
 public class SparkParticleEffects {
 
     public static ParticleEffectSpawner spiritMotionSparks(Level level, Vec3 pos, MalumSpiritType spiritType) {
-        return spiritMotionSparks(level, pos, spiritType, new WorldParticleOptions(ParticleRegistry.ROUND_SPARK));
+        return spiritMotionSparks(level, pos, spiritType, new WorldParticleOptions(ParticleRegistry.SPARK));
     }
 
     public static ParticleEffectSpawner spiritMotionSparks(Level level, Vec3 pos, ColorParticleData colorData) {
-        return spiritMotionSparks(level, pos, colorData, new WorldParticleOptions(ParticleRegistry.ROUND_SPARK));
+        return spiritMotionSparks(level, pos, colorData, new WorldParticleOptions(ParticleRegistry.SPARK));
     }
 
     public static ParticleEffectSpawner spiritMotionSparks(Level level, Vec3 pos, MalumSpiritType spiritType, WorldParticleOptions options) {
@@ -53,12 +53,13 @@ public class SparkParticleEffects {
         final Consumer<LodestoneWorldParticle> slowDown = p -> p.setParticleSpeed(p.getParticleSpeed().scale(0.95f));
         int lifetime = RandomHelper.randomBetween(rand, 10, 20);
         final WorldParticleBuilder sparkParticleBuilder = builder
-                .setTransparencyData(GenericParticleData.create(0.8f, 0f).build())
                 .setScaleData(GenericParticleData.create(0.1f, RandomHelper.randomBetween(rand, 0.2f, 0.3f), 0).build())
+                .setSpritePicker(SimpleParticleOptions.ParticleSpritePicker.WITH_AGE)
+                .setTransparencyData(GenericParticleData.create(0.8f, 0f).build())
+                .addTickActor(slowDown)
                 .setLifetime(lifetime)
-                .enableNoClip()
-                .addTickActor(slowDown);
-        final WorldParticleBuilder bloomParticleBuilder = SpiritLightSpecs.spiritBloom(level, bloomBuilder, lifetime).setSpinData(spinData).addTickActor(slowDown);
+                .enableNoClip();
+        final WorldParticleBuilder bloomParticleBuilder = SpiritLightSpecs.spiritBloom(level, bloomBuilder, lifetime).modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(0.5f)).setSpinData(spinData).addTickActor(slowDown);
         return new ParticleEffectSpawner(level, pos, sparkParticleBuilder, bloomParticleBuilder);
     }
 }

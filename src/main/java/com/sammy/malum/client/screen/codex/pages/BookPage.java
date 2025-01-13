@@ -11,6 +11,9 @@ import javax.annotation.*;
 import static com.sammy.malum.client.screen.codex.screens.EntryScreen.*;
 
 public abstract class BookPage {
+
+    public static boolean isVoidThemed = false;
+
     @Nullable
     protected final ResourceLocation background;
     protected BookEntry bookEntry;

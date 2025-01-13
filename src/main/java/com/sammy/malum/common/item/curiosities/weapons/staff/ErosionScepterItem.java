@@ -105,19 +105,21 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
     @Override
     public void spawnChargeParticles(Level pLevel, LivingEntity pLivingEntity, Vec3 pos, ItemStack pStack, float pct) {
         RandomSource random = pLevel.random;
-        final SpinParticleData spinData = SpinParticleData.createRandomDirection(random, 0.25f, 0.5f).setSpinOffset(RandomHelper.randomBetween(random, 0f, 6.28f)).build();
-        WorldParticleBuilder.create(ParticleRegistry.CIRCLE, new DirectionalBehaviorComponent(pLivingEntity.getLookAngle().normalize()))
-                .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
+        WorldParticleBuilder.create(ParticleRegistry.DRAINING_TARGET, new DirectionalBehaviorComponent(pLivingEntity.getLookAngle().normalize()))
+                .setSpinData(SpinParticleData.createRandomDirection(random, 0.1f, 0.2f).setSpinOffset(RandomHelper.randomBetween(random, -0.314f, 0.314f)).build())
                 .setTransparencyData(GenericParticleData.create(0.8f * pct, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
-                .setSpinData(spinData)
+                .setColorData(ColorParticleData.create(MALIGNANT_PURPLE, MALIGNANT_BLACK).setCoefficient(2f).build())
                 .setScaleData(GenericParticleData.create(0.3f * pct, 0).setEasing(Easing.SINE_IN_OUT).build())
-                .setColorData(ColorParticleData.create(MALIGNANT_BLACK, MALIGNANT_BLACK).build())
-                .setLifetime(5)
-                .setLifeDelay(2)
                 .setMotion(pLivingEntity.getLookAngle().normalize().scale(0.05f))
-                .enableNoClip()
-                .enableForcedSpawn()
                 .setRenderType(LodestoneWorldParticleRenderType.LUMITRANSPARENT)
+                .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
+                .enableForcedSpawn()
+                .setLifeDelay(2)
+                .enableNoClip()
+                .setLifetime(5)
+                .spawn(pLevel, pos.x, pos.y, pos.z)
+                .setScaleData(GenericParticleData.create(0.4f * pct, 0).setEasing(Easing.SINE_IN_OUT).build())
+                .setColorData(ColorParticleData.create(MALIGNANT_BLACK, MALIGNANT_BLACK).build())
                 .spawn(pLevel, pos.x, pos.y, pos.z);
     }
 }

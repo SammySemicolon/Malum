@@ -75,12 +75,12 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(Tags.Items.ORES_QUARTZ).add(NATURAL_QUARTZ_ORE.get(), DEEPSLATE_QUARTZ_ORE.get());
 
         tag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS).add(
-                CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), CREATIVE_SCYTHE.get(),
+                CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(),
                 MNEMONIC_HEX_STAFF.get(), UNWINDING_CHAOS.get(), EROSION_SCEPTER.get());
 
         tag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS).addOptional(ResourceLocation.parse("born_in_chaos_v1:nightmare_scythe"));
 
-        tag(ItemTagRegistry.SCYTHES).add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), EDGE_OF_DELIVERANCE.get(), CREATIVE_SCYTHE.get());
+        tag(ItemTagRegistry.SCYTHES).add(CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(), EDGE_OF_DELIVERANCE.get());
         tag(ItemTagRegistry.STAVES).add(MNEMONIC_HEX_STAFF.get(), UNWINDING_CHAOS.get(), EROSION_SCEPTER.get());
 
         tag(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS)

@@ -3,10 +3,13 @@ package com.sammy.malum.common.item.curiosities.weapons;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.*;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.handlers.*;
@@ -18,6 +21,14 @@ import java.util.*;
 public class WeightOfWorldsItem extends LodestoneAxeItem implements ItemEventHandler.IEventResponderItem {
     public WeightOfWorldsItem(Tier material, int attackDamage, float attackSpeed, Properties properties) {
         super(material, attackDamage, attackSpeed, properties);
+    }
+
+    @Override
+    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+        if (enchantment.equals(Enchantments.BREACH)) {
+            return true;
+        }
+        return super.supportsEnchantment(stack, enchantment);
     }
 
     @Override

@@ -1,6 +1,0 @@
-{
-  "parent": "malum:item/handheld_large",
-  "textures": {
-    "layer0": "malum:item/creative_scythe_huge"
-  }
-}

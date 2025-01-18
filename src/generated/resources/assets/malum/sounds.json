@@ -1738,6 +1738,33 @@
     ],
     "subtitle": "malum.subtitle.the_void_heart_beats"
   },
+  "the_worldsoul_reverberates": {
+    "sounds": [
+      "malum:curiosities/motifs/worldsoul_reverb1",
+      "malum:curiosities/motifs/worldsoul_reverb2",
+      "malum:curiosities/motifs/worldsoul_reverb3"
+    ],
+    "subtitle": "malum.subtitle.the_worldsoul_reverberates"
+  },
+  "the_worldsoul_shifts_erratically": {
+    "sounds": [
+      "malum:curiosities/motifs/worldsoul_impact1",
+      "malum:curiosities/motifs/worldsoul_impact2",
+      "malum:curiosities/motifs/worldsoul_impact3",
+      "malum:curiosities/motifs/worldsoul_impact4",
+      "malum:curiosities/motifs/worldsoul_impact5",
+      "malum:curiosities/motifs/worldsoul_impact6"
+    ],
+    "subtitle": "malum.subtitle.the_worldsoul_shifts_erratically"
+  },
+  "the_worldsoul_shifts_slightly": {
+    "sounds": [
+      "malum:curiosities/motifs/worldsoul_minor_impact1",
+      "malum:curiosities/motifs/worldsoul_minor_impact2",
+      "malum:curiosities/motifs/worldsoul_minor_impact3"
+    ],
+    "subtitle": "malum.subtitle.the_worldsoul_shifts_slightly"
+  },
   "totem_charges": {
     "sounds": [
       "malum:totem/totem_charge1",

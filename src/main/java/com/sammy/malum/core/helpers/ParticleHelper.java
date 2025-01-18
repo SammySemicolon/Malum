@@ -29,6 +29,9 @@ public class ParticleHelper {
         public boolean isMirrored;
         public MalumSpiritType spiritType;
 
+        public Vec3 positionOffset = Vec3.ZERO;
+        public float horizontalDirectionOffset = 0, verticalDirectionOffset = 0, directionOffsetAngle = 0;
+
         public WeaponParticleEffectBuilder(ParticleEffectType effectType, EffectDataSupplier supplier) {
             this.effectType = effectType;
             this.supplier = supplier;
@@ -74,6 +77,49 @@ public class ParticleHelper {
             this.spiritType = spiritType;
             return this;
         }
+
+        public WeaponParticleEffectBuilder setPositionOffset(float offset) {
+            return setPositionOffset(offset, offset, offset);
+        }
+
+        public WeaponParticleEffectBuilder setPositionOffset(float x, float y, float z) {
+            return setPositionOffset(new Vec3(x, y, z));
+        }
+
+        public WeaponParticleEffectBuilder setPositionOffset(Vec3 positionOffset) {
+            this.positionOffset = positionOffset;
+            return this;
+        }
+
+        public WeaponParticleEffectBuilder setDirectionOffset(float offset, float angle) {
+            return setDirectionOffset(offset, offset, angle);
+        }
+
+        public WeaponParticleEffectBuilder setDirectionOffset(float horizontalDirectionOffset, float verticalDirectionOffset, float directionOffsetAngle) {
+            this.horizontalDirectionOffset = horizontalDirectionOffset;
+            this.verticalDirectionOffset = verticalDirectionOffset;
+            this.directionOffsetAngle = directionOffsetAngle;
+            return this;
+        }
+
+        public Vec3 getPosition(Vec3 position) {
+            return position.add(positionOffset);
+        }
+
+        public Vec3 getDirection(Vec3 direction) {
+            if (horizontalDirectionOffset == 0 && verticalDirectionOffset == 0 && directionOffsetAngle == 0) {
+                return direction;
+            }
+            float yRot = ((float) (Mth.atan2(direction.x, direction.z) * (double) (180F / (float) Math.PI)));
+            float yaw = (float) Math.toRadians(yRot);
+            var left = new Vec3(-Math.cos(yaw), 0, Math.sin(yaw));
+            var up = left.cross(direction);
+            return direction
+                    .add(left.scale(Math.sin(directionOffsetAngle) * horizontalDirectionOffset))
+                    .add(up.scale(Math.cos(directionOffsetAngle) * verticalDirectionOffset))
+                    .normalize();
+        }
+
         public void spawnForwardSlashingParticle(Entity attacker) {
             spawnForwardSlashingParticle(attacker, attacker.getLookAngle());
         }
@@ -117,6 +163,21 @@ public class ParticleHelper {
             spawnTargetBoundSlashingParticle(attacker, target, offset, slashDirection);
         }
 
+        public void spawnTargetBoundSlashingParticle(Entity attacker, Entity target, Vec3 slashDirection) {
+            var direction = attacker.getLookAngle();
+            var random = attacker.getRandom();
+            float yRot = ((float) (Mth.atan2(direction.x, direction.z) * (double) (180F / (float) Math.PI)));
+            float yaw = (float) Math.toRadians(yRot);
+            var left = new Vec3(-Math.cos(yaw), 0, Math.sin(yaw));
+            var up = left.cross(direction);
+
+            var offset = direction.scale(-1.4f).add(up.scale(-0.2f)).subtract(slashDirection.scale(0.5f + random.nextFloat() * 0.5f));
+            if (horizontalOffset != 0) {
+                offset = offset.add(left.scale(horizontalOffset));
+            }
+            spawnTargetBoundSlashingParticle(attacker, target, offset, slashDirection);
+        }
+
         public void spawnTargetBoundSlashingParticle(Entity attacker, Entity target, Vec3 slashOffset, Vec3 slashDirection) {
             if (attacker.level() instanceof ServerLevel serverLevel) {
                 double xOffset = slashOffset.x;
@@ -128,7 +189,9 @@ public class ParticleHelper {
         }
 
         public void spawnSlashingParticle(ServerLevel level, Vec3 slashPosition, Vec3 slashDirection) {
-            effectType.createPositionedEffect(level, new PositionEffectData(slashPosition), SlashAttackParticleEffect.createData(slashDirection, isMirrored, slashAngle, spiritType));
+            effectType.createPositionedEffect(level,
+                    new PositionEffectData(getPosition(slashPosition)),
+                    SlashAttackParticleEffect.createData(getDirection(slashDirection), isMirrored, slashAngle, spiritType));
         }
 
         public interface EffectDataSupplier {

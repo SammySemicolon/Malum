@@ -1,5 +1,5 @@
 {
-  "parent": "item/handheld",
+  "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "malum:item/edge_of_deliverance"
   }

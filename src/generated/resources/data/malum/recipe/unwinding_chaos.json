@@ -10,8 +10,12 @@
       "item": "malum:auric_embers"
     },
     {
-      "count": 8,
-      "item": "malum:void_salts"
+      "count": 1,
+      "item": "minecraft:heart_of_the_sea"
+    },
+    {
+      "count": 4,
+      "item": "malum:malignant_pewter_plating"
     }
   ],
   "ingredient": {
@@ -29,15 +33,19 @@
     },
     {
       "type": "arcane",
-      "count": 16
+      "count": 32
     },
     {
       "type": "infernal",
-      "count": 16
+      "count": 32
+    },
+    {
+      "type": "aqueous",
+      "count": 32
     },
     {
       "type": "eldritch",
-      "count": 16
+      "count": 32
     }
   ]
 }

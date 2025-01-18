@@ -101,6 +101,10 @@ public class SoundRegistry {
     public static final DeferredHolder<SoundEvent, SoundEvent> DRAINING_MOTIF = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("draining_motif")));
     public static final DeferredHolder<SoundEvent, SoundEvent> MALIGNANT_METAL_MOTIF = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("malignant_metal_motif")));
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> WORLDSOUL_MOTIF_LIGHT_IMPACT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("the_worldsoul_shifts_slightly")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WORLDSOUL_MOTIF_HEAVY_IMPACT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("the_worldsoul_shifts_erratically")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WORLDSOUL_MOTIF_REVERB = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("the_worldsoul_reverberates")));
+
     public static final DeferredHolder<SoundEvent, SoundEvent> ALTAR_LOOP = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_altar_infuses")));
     public static final DeferredHolder<SoundEvent, SoundEvent> ALTAR_CRAFT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_altar_completes_infusion")));
     public static final DeferredHolder<SoundEvent, SoundEvent> ALTAR_CONSUME = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_altar_absorbs_item")));

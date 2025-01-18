@@ -130,8 +130,8 @@ public class EntropicFlameBoltEntity extends AbstractBoltProjectileEntity {
 
     @Override
     public void playSound(SoundEvent pSound, float pVolume, float pPitch) {
-        super.playSound(pSound, pVolume, pPitch);
-        super.playSound(SoundRegistry.AURIC_FLAME_MOTIF.get(), pVolume + 0.1f, pPitch + 0.6f);
+        super.playSound(pSound, pVolume/2f, pPitch+0.4f);
+        super.playSound(SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), pVolume - 0.2f, pPitch + 0.3f);
     }
 
     @Override

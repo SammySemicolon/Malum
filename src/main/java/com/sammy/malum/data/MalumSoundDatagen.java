@@ -98,6 +98,10 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.DRAINING_MOTIF, s -> definition(s).with(sounds("curiosities/motifs/draining_bubbling", 3)));
         this.add(SoundRegistry.MALIGNANT_METAL_MOTIF, s -> definition(s).with(sounds("curiosities/motifs/malignant_crit", 3)));
 
+        this.add(SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT, s -> definition(s).with(sounds("curiosities/motifs/worldsoul_minor_impact", 3)));
+        this.add(SoundRegistry.WORLDSOUL_MOTIF_HEAVY_IMPACT, s -> definition(s).with(sounds("curiosities/motifs/worldsoul_impact", 6)));
+        this.add(SoundRegistry.WORLDSOUL_MOTIF_REVERB, s -> definition(s).with(sounds("curiosities/motifs/worldsoul_reverb", 3)));
+
         this.add(SoundRegistry.ALTAR_LOOP, s -> definition(s).with(sound("altar/altar_loop")));
         this.add(SoundRegistry.ALTAR_CRAFT, s -> definition(s).with(sounds("altar/altar_craft", 2)));
         this.add(SoundRegistry.ALTAR_CONSUME, s -> definition(s).with(sounds("altar/altar_speedup", 2)));

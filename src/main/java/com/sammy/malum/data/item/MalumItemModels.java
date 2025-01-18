@@ -2,15 +2,12 @@ package com.sammy.malum.data.item;
 
 import com.sammy.malum.*;
 import com.sammy.malum.common.item.cosmetic.weaves.*;
-import com.sammy.malum.common.item.curiosities.*;
 import com.sammy.malum.common.item.curiosities.curios.runes.*;
-import com.sammy.malum.common.item.curiosities.weapons.*;
-import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
-import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.data.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.common.data.*;
 import team.lodestar.lodestone.systems.datagen.*;
@@ -35,33 +32,36 @@ public class MalumItemModels extends LodestoneItemModelProvider {
         Set<Supplier<? extends Item>> items = new HashSet<>(ITEMS.getEntries());
 
         items.removeIf(i -> i.get() instanceof BlockItem);
-        items.removeIf(i -> i.get() instanceof MalumScytheItem);
-        items.removeIf(i -> i.get() instanceof WeightOfWorldsItem);
-        items.removeIf(i -> i.get() instanceof TemporarilyDisabledItem);
 
         ItemModelSmithData data = new ItemModelSmithData(this, items::remove);
-
+        MalumItemModelSmithTypes.PARENTED_ITEM.apply(ResourceLocation.parse("item/air")).act(data, SOUL_OF_A_SCYTHE).applyModifier(result -> {
+            var separateTransforms = result.addSeparateTransformData();
+            result.getProvider().addModelNameModifier(s -> s + "_gui");
+            var guiModel = ItemModelSmithTypes.GENERATED_ITEM.act(data, result::getItem);
+            separateTransforms.perspective(ItemDisplayContext.GUI, guiModel.parentedToThis(existingFileHelper));
+            separateTransforms.perspective(ItemDisplayContext.FIXED, guiModel.parentedToThis(existingFileHelper));
+        });
         setTexturePath("cosmetic/weaves/pride/");
-        ItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof PrideweaveItem).collect(Collectors.toList()));
+        MalumItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof PrideweaveItem).collect(Collectors.toList()));
         setTexturePath("cosmetic/weaves/");
-        ItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof AbstractWeaveItem).collect(Collectors.toList()));
+        MalumItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof AbstractWeaveItem).collect(Collectors.toList()));
 
         setTexturePath("runes/");
-        ItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof AbstractRuneCurioItem).collect(Collectors.toList()));
+        MalumItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof AbstractRuneCurioItem).collect(Collectors.toList()));
 
         setTexturePath("impetus/");
         MalumItemModelSmithTypes.IMPETUS_ITEM.act(data, items.stream().filter(i -> i.get() instanceof ImpetusItem || i.get() instanceof CrackedImpetusItem).collect(Collectors.toList()));
-        ItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof NodeItem).collect(Collectors.toList()));
+        MalumItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof NodeItem).collect(Collectors.toList()));
 
         setTexturePath("");
         MalumItemModelSmithTypes.UMBRAL_SPIRIT_ITEM.act(data, UMBRAL_SPIRIT);
         MalumItemModelSmithTypes.SPIRIT_ITEM.act(data, items.stream().filter(i -> i.get() instanceof SpiritShardItem).collect(Collectors.toList()));
-
-        ItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof DiggerItem).collect(Collectors.toList()));
-        ItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof SwordItem).collect(Collectors.toList()));
-        ItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof ModCombatItem).collect(Collectors.toList()));
-        ItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof AbstractStaffItem).collect(Collectors.toList()));
-        ItemModelSmithTypes.HANDHELD_ITEM.act(data, SOUL_STAINED_STEEL_KNIFE, TUNING_FORK, LAMPLIGHTERS_TONGS, ARTIFICERS_CLAW, TOTEMIC_STAFF);
+        MalumItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof DiggerItem).collect(Collectors.toList()));
+        MalumItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof SwordItem).collect(Collectors.toList()));
+        MalumItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof ModCombatItem).collect(Collectors.toList()));
+        MalumItemModelSmithTypes.HANDHELD_ITEM.act(data, MNEMONIC_HEX_STAFF, EROSION_SCEPTER);
+        MalumItemModelSmithTypes.LARGE_HANDHELD_ITEM.act(data, CRUDE_SCYTHE, SOUL_STAINED_STEEL_SCYTHE, EDGE_OF_DELIVERANCE, WEIGHT_OF_WORLDS);
+        MalumItemModelSmithTypes.HANDHELD_ITEM.act(data, SOUL_STAINED_STEEL_KNIFE, TUNING_FORK, LAMPLIGHTERS_TONGS, ARTIFICERS_CLAW, TOTEMIC_STAFF);
         MalumItemModelSmithTypes.CATALYST_LOBBER.act(data, CATALYST_LOBBER);
         MalumItemModelSmithTypes.SOULWOVEN_POUCH.act(data, SOULWOVEN_POUCH);
 
@@ -71,7 +71,7 @@ public class MalumItemModels extends LodestoneItemModelProvider {
 
         MalumItemModelSmithTypes.RITUAL_SHARD_ITEM.act(data, RITUAL_SHARD);
 
-        ItemModelSmithTypes.GENERATED_ITEM.act(data, items);
+        MalumItemModelSmithTypes.GENERATED_ITEM.act(data, items);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.sammy.malum.visual_effects.networked.staff.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.syncher.*;
 import net.minecraft.server.level.*;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
@@ -17,6 +18,9 @@ import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.rendering.trail.*;
 
+import java.util.Comparator;
+import java.util.List;
+
 public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjectile {
 
     protected static final EntityDataAccessor<Boolean> DATA_FADING_AWAY = SynchedEntityData.defineId(AbstractBoltProjectileEntity.class, EntityDataSerializers.BOOLEAN);
@@ -26,6 +30,7 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
     public TrailPointBuilder spinningTrailPointBuilder = TrailPointBuilder.create(16);
     public float spinOffset = (float) (random.nextFloat() * Math.PI * 2);
     protected float magicDamage;
+    public boolean isHoming;
     public int age;
     public int spawnDelay;
 
@@ -91,6 +96,9 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
         if (magicDamage != 0) {
             compound.putFloat("magicDamage", magicDamage);
         }
+        if (isHoming) {
+            compound.putBoolean("isHoming", true);
+        }
         if (age != 0) {
             compound.putInt("age", age);
         }
@@ -107,6 +115,7 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         magicDamage = compound.getFloat("magicDamage");
+        isHoming = compound.getBoolean("isHoming");
         age = compound.getInt("age");
         getEntityData().set(DATA_SPAWN_DELAY, compound.getInt("spawnDelay"));
         getEntityData().set(DATA_FADING_AWAY, compound.getBoolean("fadingAway"));
@@ -126,17 +135,6 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
             setPosRaw(getX() - offset.x, getY() - offset.y, getZ() - offset.z);
         }
         super.onHitBlock(pResult);
-    }
-
-    @Override
-    protected boolean canHitEntity(Entity pTarget) {
-        if (pTarget.equals(getOwner())) {
-            return false;
-        }
-        if (pTarget instanceof AbstractBoltProjectileEntity) {
-            return false;
-        }
-        return super.canHitEntity(pTarget);
     }
 
     @Override
@@ -178,9 +176,12 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
             fadingTimer++;
         }
         else {
-            Vec3 motion = getDeltaMovement();
+            var motion = getDeltaMovement();
             float scalar = 0.96f;
             setDeltaMovement(motion.x * scalar, (motion.y-0.02f)* scalar, motion.z * scalar);
+        }
+        if (isHoming) {
+            homeIn();
         }
         if (level().isClientSide) {
             float offsetScale = fadingAway ? 0f : getOrbitingTrailDistance();
@@ -207,6 +208,55 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
                 getEntityData().set(DATA_FADING_AWAY, true);
             }
         }
+    }
+
+    public void homeIn() {
+        Vec3 motion = getDeltaMovement();
+        Entity owner = getOwner();
+        if (spawnDelay > 0 || owner == null || fadingAway) {
+            return;
+        }
+        List<LivingEntity> entities = level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(25), target -> target != owner && target.isAlive() && !target.isAlliedTo(owner));
+        if (!entities.isEmpty()) {
+            LivingEntity nearest = entities.stream().min(Comparator.comparingDouble((e) -> e.distanceToSqr(this))).get();
+            Vec3 nearestPosition = nearest.position().add(0, nearest.getBbHeight() / 2, 0);
+            Vec3 diff = nearestPosition.subtract(position());
+            double speed = motion.length();
+            Vec3 nextPosition = position().add(getDeltaMovement());
+            if (nearest.distanceToSqr(nextPosition) > nearest.distanceToSqr(position())) {
+                return;
+            }
+            Vec3 newMotion = diff.normalize().scale(speed);
+            final double dot = motion.normalize().dot(diff.normalize());
+            if (dot < 0.8f) {
+                return;
+            }
+            if (newMotion.length() == 0) {
+                newMotion = newMotion.add(0.01, 0, 0);
+            }
+            float angleScalar = (float) ((dot - 0.6f) * 5f);
+            float factor = 0.15f * angleScalar;
+            final double x = Mth.lerp(factor, motion.x, newMotion.x);
+            final double y = Mth.lerp(factor, motion.y, newMotion.y);
+            final double z = Mth.lerp(factor, motion.z, newMotion.z);
+            setDeltaMovement(new Vec3(x, y, z));
+        }
+    }
+
+    @Override
+    protected boolean canHitEntity(Entity pTarget) {
+        if (pTarget.equals(getOwner())) {
+            return false;
+        }
+        if (pTarget instanceof AbstractBoltProjectileEntity) {
+            return false;
+        }
+        return super.canHitEntity(pTarget);
+    }
+
+    @Override
+    public SoundSource getSoundSource() {
+        return getOwner() != null ? getOwner().getSoundSource() : SoundSource.PLAYERS;
     }
 
     @Override

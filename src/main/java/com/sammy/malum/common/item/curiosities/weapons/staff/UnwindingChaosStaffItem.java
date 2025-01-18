@@ -1,23 +1,30 @@
 package com.sammy.malum.common.item.curiosities.weapons.staff;
 
+import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.entity.bolt.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.ISpiritAffiliatedItem;
+import com.sammy.malum.core.helpers.ComponentHelper;
+import com.sammy.malum.core.helpers.ParticleHelper;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
+import com.sammy.malum.visual_effects.networked.altar.SpiritAltarCraftParticleEffect;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.*;
+import net.neoforged.neoforge.client.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
+import team.lodestar.lodestone.registry.common.tag.LodestoneDamageTypeTags;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 import team.lodestar.lodestone.systems.particle.data.*;
@@ -33,18 +40,46 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
     public UnwindingChaosStaffItem(Tier tier, float magicDamage, Properties builderIn) {
         super(tier, -0.2f, 20, magicDamage, builderIn);
     }
+
+    @Override
+    public void modifyAttributeTooltipEvent(AddAttributeTooltipsEvent event) {
+        event.addTooltipLines(ComponentHelper.positiveEffect("unwinding_chaos_volley"));
+        event.addTooltipLines(ComponentHelper.positiveEffect("unwinding_chaos_burn"));
+    }
+
     @Override
     public MalumSpiritType getDefiningSpiritType() {
-        return SpiritTypeRegistry.INFERNAL_SPIRIT;
+        var spirits = new MalumSpiritType[]{SpiritTypeRegistry.INFERNAL_SPIRIT, SpiritTypeRegistry.SACRED_SPIRIT, SpiritTypeRegistry.AQUEOUS_SPIRIT, SpiritTypeRegistry.EARTHEN_SPIRIT};
+        return spirits[MalumMod.RANDOM.nextInt(spirits.length)];
     }
     @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
-        if (event.getSource().is(DamageTypeTags.IS_FIRE)) {
-
+        DamageSource source = event.getSource();
+        Level level = attacker.level();
+        RandomSource random = level.random;
+        if (source.is(DamageTypeTags.IS_FIRE)) {
+            float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 1.25f);
+            level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), attacker.getSoundSource(), 1.5f, pitch);
         }
-        else if (!(event.getSource().getDirectEntity() instanceof AbstractBoltProjectileEntity)) {
+        else if (source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
+            for (int i = 0; i < 3; i++) {
+                var spiritType = SpiritTypeRegistry.EARTHEN_SPIRIT;
+                if (i == 1) {
+                    spiritType = SpiritTypeRegistry.AQUEOUS_SPIRIT;
+                }
+                else if (i == 2) {
+                    spiritType = SpiritTypeRegistry.SACRED_SPIRIT;
+                }
+                var particle = ParticleHelper.createSlamEffect(ParticleEffectTypeRegistry.STAFF_SLAM)
+                        .setSpiritType(spiritType)
+                        .setPositionOffset(RandomHelper.randomBetween(random, 0.3f, 0.8f) * (random.nextBoolean()?1:-1))
+                        .setDirectionOffset(RandomHelper.randomBetween(random, -0.4f, 0.4f), random.nextFloat()*6.28f)
+                        .setRandomSlashAngle(random);
+                particle.spawnTargetBoundSlashingParticle(attacker, target);
+            }
             target.igniteForTicks(100);
-            attacker.level().playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.AURIC_FLAME_MOTIF.get(), attacker.getSoundSource(), 1, 1.25f);
+            float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 2f);
+            level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.WORLDSOUL_MOTIF_HEAVY_IMPACT.get(), attacker.getSoundSource(), 2f, pitch);
         }
         super.outgoingDamageEvent(event, attacker, target, stack);
     }
@@ -63,7 +98,7 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
     public void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, float chargePercentage, int count) {
         int ceil =  Mth.ceil(count / 2f);
         float spread = count > 0 ? ceil * 0.1f * (count % 2L == 0 ? 1 : -1) : 0f;
-        float pitchOffset = count > 0 ? 2f + (1f - ceil * 2f) : 0.5f;
+        float pitchOffset = count > 4 ? 2f + (2f - ceil * 1.5f) : 0.5f;
         int spawnDelay = 1 + ceil * 2;
         float velocity = 3f;
         float magicDamage = (float) player.getAttributes().getValue(LodestoneAttributes.MAGIC_DAMAGE);
@@ -71,7 +106,6 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
         EntropicFlameBoltEntity entity = new EntropicFlameBoltEntity(level, pos.x, pos.y, pos.z);
         entity.setData(player, magicDamage, spawnDelay);
         entity.setItem(stack);
-
         entity.shootFromRotation(player, player.getXRot(), player.getYRot(), -pitchOffset, velocity, 0f);
         Vec3 projectileDirection = entity.getDeltaMovement();
         float yRot = ((float) (Mth.atan2(projectileDirection.x, projectileDirection.z) * (double) (180F / (float) Math.PI)));

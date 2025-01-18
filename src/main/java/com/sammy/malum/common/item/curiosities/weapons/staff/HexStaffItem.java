@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.sammy.malum.common.entity.bolt.*;
 import com.sammy.malum.common.item.ISpiritAffiliatedItem;
+import com.sammy.malum.core.helpers.ComponentHelper;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.event.AddAttributeTooltipsEvent;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
@@ -27,6 +29,11 @@ public class HexStaffItem extends AbstractStaffItem implements ISpiritAffiliated
 
     public HexStaffItem(Tier tier, float magicDamage, Properties builderIn) {
         super(tier, 15, magicDamage, builderIn);
+    }
+
+    @Override
+    public void modifyAttributeTooltipEvent(AddAttributeTooltipsEvent event) {
+        event.addTooltipLines(ComponentHelper.positiveEffect("hex_bolts"));
     }
 
     @Override

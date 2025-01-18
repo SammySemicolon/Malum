@@ -57,9 +57,8 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
         if (attacker instanceof Player player && event.getSource().is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
             var level = player.level();
             if (!level.isClientSide) {
-                SoundHelper.playSound(target, SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 0.75f, RandomHelper.randomBetween(level.random, 0.5f, 1.0f));
+//                SoundHelper.playSound(target, SoundRegistry.STAFF_STRIKES.get(), attacker.getSoundSource(), 2f, RandomHelper.randomBetween(level.random, 0.85f, 1.25f));
                 var particle = ParticleHelper.createSlamEffect(ParticleEffectTypeRegistry.STAFF_SLAM)
-                        .setSpiritType(SpiritTypeRegistry.WICKED_SPIRIT)
                         .setVerticalSlashAngle();
                 if (stack.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
                     particle.setSpiritType(spiritAffiliatedItem);

@@ -57,11 +57,13 @@ public class GearSpiritInfusionRecipes {
         new SpiritInfusionRecipeBuilder(ItemRegistry.MNEMONIC_HEX_STAFF.get(), 1, ItemRegistry.UNWINDING_CHAOS.get(), 1)
                 .addExtraItem(ItemRegistry.FUSED_CONSCIOUSNESS.get(), 1)
                 .addExtraItem(ItemRegistry.AURIC_EMBERS.get(), 8)
-                .addExtraItem(ItemRegistry.VOID_SALTS.get(), 8)
+                .addExtraItem(Items.HEART_OF_THE_SEA, 1)
+                .addExtraItem(ItemRegistry.MALIGNANT_PEWTER_PLATING.get(), 4)
                 .addSpirit(WICKED_SPIRIT, 32)
-                .addSpirit(ARCANE_SPIRIT, 16)
-                .addSpirit(INFERNAL_SPIRIT, 16)
-                .addSpirit(ELDRITCH_SPIRIT, 16)
+                .addSpirit(ARCANE_SPIRIT, 32)
+                .addSpirit(INFERNAL_SPIRIT, 32)
+                .addSpirit(AQUEOUS_SPIRIT, 32)
+                .addSpirit(ELDRITCH_SPIRIT, 32)
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.CRUDE_SCYTHE.get(), 1, ItemRegistry.SOUL_STAINED_STEEL_SCYTHE.get(), 1)

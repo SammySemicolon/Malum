@@ -126,7 +126,7 @@ public class VoidDepotBlockEntity extends LodestoneBlockEntity {
     @Override
     public ItemInteractionResult onUseWithItem(Player player, ItemStack stack, InteractionHand hand) {
         if (!goals.isEmpty()) {
-            if (player.getItemInHand(hand).getItem().equals(ItemRegistry.CREATIVE_SCYTHE.get())) {
+            if (player.getItemInHand(hand).getItem().equals(ItemRegistry.VOID_DEPOT.get())) {
                 List<VoidDepotGoal> newGoals = new ArrayList<>();
                 for (VoidDepotGoal goal : goals) {
                     if (goal instanceof ItemGoal itemGoal) {

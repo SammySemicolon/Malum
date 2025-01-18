@@ -223,6 +223,11 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.weight_of_worlds_kill", "Kills Guarantee a Critical Strike");
         add("malum.effect.edge_of_deliverance_crit", "Follow-up Strikes Hit Critically");
         add("malum.effect.edge_of_deliverance_unpowered_attack", "Non-Critical Strikes Deal Reduced Damage");
+        add("malum.effect.hex_bolts", "Charges a Burst of Mnemonic Blades");
+        add("malum.effect.erosive_spread", "Charges a Spread of Eroding Sub-munitions");
+        add("malum.effect.erosive_silence", "Erosion Damage Silences Targets");
+        add("malum.effect.unwinding_chaos_volley", "Charges a Volley of Composite Energy");
+        add("malum.effect.unwinding_chaos_burn", "Burn Damage Empowers Volley");
 
         addSimpleEntryHeader("chronicles_of_the_void", "Chronicles of the Void", "A magecraft of madness");
         addSimpleEntryHeader("chronicles_of_the_soul", "Chronicles of the Soul", "A magecraft of miracles");

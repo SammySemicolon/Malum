@@ -24,7 +24,7 @@ import static com.sammy.malum.MalumMod.malumPath;
 
 public class MalumBlockStateSmithTypes {
 
-    public static BlockStateSmith<TotemPoleBlock> TOTEM_POLE = new BlockStateSmith<>(TotemPoleBlock.class, ItemModelSmithTypes.NO_MODEL, (block, provider) -> {
+    public static BlockStateSmith<TotemPoleBlock> TOTEM_POLE = new BlockStateSmith<>(TotemPoleBlock.class, ItemModelSmithTypes.NO_DATAGEN, (block, provider) -> {
         String name = provider.getBlockName(block);
         String woodName = name.substring(0, 8);
         ResourceLocation parent = malumPath("block/templates/template_totem_pole");
@@ -70,7 +70,7 @@ public class MalumBlockStateSmithTypes {
         });
     });
 
-    public static BlockStateSmith<RepairPylonComponentBlock> REPAIR_PYLON_COMPONENT = new BlockStateSmith<>(RepairPylonComponentBlock.class, ItemModelSmithTypes.NO_MODEL, (block, provider) -> {
+    public static BlockStateSmith<RepairPylonComponentBlock> REPAIR_PYLON_COMPONENT = new BlockStateSmith<>(RepairPylonComponentBlock.class, ItemModelSmithTypes.NO_DATAGEN, (block, provider) -> {
         ModelFile model = provider.models().getExistingFile(malumPath("block/repair_pylon_component_middle"));
         ModelFile topModel = provider.models().getExistingFile(malumPath("block/repair_pylon_component_top"));
         provider.getVariantBuilder(block).forAllStates(s -> ConfiguredModel.builder().modelFile(s.getValue(RepairPylonComponentBlock.TOP) ? topModel : model).build());
@@ -147,7 +147,7 @@ public class MalumBlockStateSmithTypes {
                 .addModel();
     });
 
-    public static BlockStateSmith<Block> BLIGHTED_GROWTH = new BlockStateSmith<>(Block.class, ItemModelSmithTypes.NO_MODEL, (block, provider) -> {
+    public static BlockStateSmith<Block> BLIGHTED_GROWTH = new BlockStateSmith<>(Block.class, ItemModelSmithTypes.NO_DATAGEN, (block, provider) -> {
         String name = provider.getBlockName(block);
         Function<Integer, ModelFile> tumorFunction = (i) -> provider.models().withExistingParent(name + "_" + i, ResourceLocation.withDefaultNamespace("block/cross")).texture("cross", malumPath("block/" + name + "_" + i));
 
@@ -170,7 +170,7 @@ public class MalumBlockStateSmithTypes {
         });
     });
 
-    public static BlockStateSmith<Block> TALL_CALCIFIED_BLIGHT = new BlockStateSmith<>(Block.class, ItemModelSmithTypes.NO_MODEL, (block, provider) -> {
+    public static BlockStateSmith<Block> TALL_CALCIFIED_BLIGHT = new BlockStateSmith<>(Block.class, ItemModelSmithTypes.NO_DATAGEN, (block, provider) -> {
         String name = provider.getBlockName(block);
         Function<String, ModelFile> modelFunction = (s) -> provider.models().withExistingParent(name + "_" + s, ResourceLocation.withDefaultNamespace("block/cross")).texture("cross", malumPath("block/" + name + "_" + s));
         provider.getVariantBuilder(block).forAllStates(s -> {

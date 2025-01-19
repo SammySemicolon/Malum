@@ -1,3 +1,3 @@
 {
-  "parent": "malum:block/spirit_diode/block/wavecharger"
+  "parent": "malum:block/wavecharger"
 }

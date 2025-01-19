@@ -78,4 +78,8 @@ public class ArtificeAttributeValue {
         tuningModifiers.removeIf(m -> m.id().equals(id));
         updateMultiplierCache();
     }
+    public void clearModifiers() {
+        tuningModifiers.clear();
+        updateMultiplierCache();
+    }
 }

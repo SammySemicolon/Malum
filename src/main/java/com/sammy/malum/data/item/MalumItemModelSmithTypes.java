@@ -30,17 +30,19 @@ public class MalumItemModelSmithTypes extends ItemModelSmithTypes {
         var provider = result.getProvider();
         var existingFileHelper = provider.existingFileHelper;
         var separateTransforms = result.addSeparateTransformData();
-        provider.addModelNameModifier(s -> s + "_huge");
-        var firstPersonModel = AFFIXED_ITEM.apply(LARGE_HANDHELD, "_huge").act(provider, result::getItem);
-        provider.addModelNameModifier(s -> s + "_gui");
-        var guiModel = ItemModelSmithTypes.GENERATED_ITEM.act(provider, result::getItem);
+        var firstPersonModel = PARENTED_ITEM.apply(LARGE_HANDHELD)
+                .addModelNameAffix("_huge")
+                .addTextureNameAffix("_huge")
+                .act(provider, result::getItem);
+        var guiModel = ItemModelSmithTypes.GENERATED_ITEM
+                .addModelNameAffix("_gui")
+                .act(provider, result::getItem);
         separateTransforms.perspective(ItemDisplayContext.GUI, guiModel.parentedToThis(existingFileHelper));
         separateTransforms.perspective(ItemDisplayContext.FIXED, guiModel.parentedToThis(existingFileHelper));
         separateTransforms.base(firstPersonModel.parentedToThis(existingFileHelper));
     };
 
-    public static ItemModelSmith LARGE_HANDHELD_ITEM = new ItemModelSmith(PARENTED_ITEM.apply(LARGE_HANDHELD), HUGE_ITEM);
-    public static Function<String, ItemModelSmith> LARGE_AFFIXED_HANDHELD_ITEM = Util.memoize((affix) -> new ItemModelSmith(AFFIXED_ITEM.apply(LARGE_HANDHELD, affix), HUGE_ITEM));
+    public static ItemModelSmith LARGE_HANDHELD_ITEM = PARENTED_ITEM.apply(LARGE_HANDHELD).modifyResult(HUGE_ITEM);
 
     public static ItemModelSmith IMPETUS_ITEM = new ItemModelSmith((item, provider) -> {
         String name = provider.getItemName(item);
@@ -143,7 +145,6 @@ public class MalumItemModelSmithTypes extends ItemModelSmithTypes {
         String name = provider.getItemName(item);
         return provider.withExistingParent(name, HANDHELD).texture("layer0", provider.getItemTexture("ether_torch")).texture("layer1", provider.getItemTexture(name)).texture("layer2", provider.getItemTexture(name + "_overlay"));
     });
-
 
     public static ItemModelSmith ARMOR_ITEM = new ItemModelSmith((item, provider) -> {
         String name = provider.getItemName(item);

@@ -66,7 +66,6 @@ public class ArtificeAttributeData {
             tunedAttribute = target.getAttributes().tunedAttribute;
         }
         target.applyAugments(this::applyAugment);
-        applyTuning();
     }
 
     public ArtificeAttributeData applyModifierInfluence(ArtificeInfluenceData influenceData) {
@@ -81,6 +80,7 @@ public class ArtificeAttributeData {
                 }
             }
         }
+        applyTuning();
         return this;
     }
 
@@ -101,7 +101,7 @@ public class ArtificeAttributeData {
 
     public void applyTuning() {
         for (ArtificeAttributeValue attribute : attributes) {
-            attribute.removeModifier(TuningModifier.TUNING_FORK);
+            attribute.clearModifiers();
         }
         CausticCatalystItem.scalePotency(this);
         var attributesForTuning = getExistingAttributesForTuning();

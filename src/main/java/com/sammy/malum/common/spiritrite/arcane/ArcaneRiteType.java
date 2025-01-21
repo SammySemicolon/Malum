@@ -41,9 +41,9 @@ public class ArcaneRiteType extends TotemicRiteType {
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 WorldEventHandler.addWorldEvent(totemBase.getLevel(),
-                        new UnchainedTotemConversionEvent()
+                        new UnchainedTotemConversionWorldEvent()
                                 .setPosition(totemBase.getBlockPos())
-                                .setBlightData(1, 4, 6));
+                                .setData(List.of(1, 3, 5, 6, 7, 8), 4, 0));
             }
         };
     }
@@ -51,7 +51,6 @@ public class ArcaneRiteType extends TotemicRiteType {
     @Override
     public TotemicRiteEffect getCorruptedEffect() {
         return new TotemicRiteEffect(TotemicRiteEffect.MalumRiteEffectCategory.RADIAL_BLOCK_EFFECT) {
-
 
             @Override
             public boolean canAffectBlock(TotemBaseBlockEntity totemBase, BlockState state, BlockPos pos) {

@@ -1554,8 +1554,8 @@
   },
   "spirit_altar_absorbs_item": {
     "sounds": [
-      "malum:altar/altar_speedup1",
-      "malum:altar/altar_speedup2"
+      "malum:altar/altar_consume1",
+      "malum:altar/altar_consume2"
     ],
     "subtitle": "malum.subtitle.spirit_altar_absorbs_item"
   },
@@ -1574,8 +1574,8 @@
   },
   "spirit_altar_speeds_up": {
     "sounds": [
-      "malum:altar/altar_consume1",
-      "malum:altar/altar_consume2"
+      "malum:altar/altar_speedup1",
+      "malum:altar/altar_speedup2"
     ],
     "subtitle": "malum.subtitle.spirit_altar_speeds_up"
   },
@@ -1712,6 +1712,28 @@
       "malum:curiosities/weapons/staff/hit4"
     ],
     "subtitle": "malum.subtitle.staff_strikes"
+  },
+  "sundering_anchor_cuts": {
+    "sounds": [
+      "malum:curiosities/weapons/sundering_anchor/swing1",
+      "malum:curiosities/weapons/sundering_anchor/swing2",
+      "malum:curiosities/weapons/sundering_anchor/swing3",
+      "malum:curiosities/weapons/sundering_anchor/swing4",
+      "malum:curiosities/weapons/sundering_anchor/swing5",
+      "malum:curiosities/weapons/sundering_anchor/swing6"
+    ],
+    "subtitle": "malum.subtitle.sundering_anchor_cuts"
+  },
+  "sundering_anchor_twists_gracefully": {
+    "sounds": [
+      "malum:curiosities/weapons/sundering_anchor/extra_swing1",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing2",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing3",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing4",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing5",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing6"
+    ],
+    "subtitle": "malum.subtitle.sundering_anchor_twists_gracefully"
   },
   "the_deep_beckons": {
     "sounds": [

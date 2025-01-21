@@ -27,8 +27,8 @@ import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 
 public class HexStaffItem extends AbstractStaffItem implements ISpiritAffiliatedItem {
 
-    public HexStaffItem(Tier tier, float magicDamage, Properties builderIn) {
-        super(tier, 15, magicDamage, builderIn);
+    public HexStaffItem(Tier tier, int chargeDuration, float magicDamage, Properties builderIn) {
+        super(tier, chargeDuration, magicDamage, builderIn);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class HexStaffItem extends AbstractStaffItem implements ISpiritAffiliated
     }
 
     @Override
-    public void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, float chargePercentage, int count) {
+    public void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, int count) {
         float pitchOffset = 3f + count;
         int spawnDelay = count * 3;
         float velocity = 3f + 0.5f * count;

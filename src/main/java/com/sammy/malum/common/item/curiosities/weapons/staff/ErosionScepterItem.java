@@ -37,8 +37,8 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
     public static final Color MALIGNANT_BLACK = new Color(12, 4, 11);
     public static final ColorParticleData MALIGNANT_COLOR_DATA = ColorParticleData.create(MALIGNANT_PURPLE, MALIGNANT_BLACK).setEasing(Easing.BOUNCE_IN_OUT).setCoefficient(1.2f).build();
 
-    public ErosionScepterItem(Tier tier, float magicDamage, Properties builderIn) {
-        super(tier, 10, magicDamage, builderIn);
+    public ErosionScepterItem(Tier tier, int chargeDuration, float magicDamage, Properties builderIn) {
+        super(tier, chargeDuration, magicDamage, builderIn);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
     }
 
     @Override
-    public void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, float chargePercentage, int count) {
+    public void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, int count) {
         int spawnDelay = count * 5;
         float pitchOffset = count * 1.5f;
         float velocity = 4f;

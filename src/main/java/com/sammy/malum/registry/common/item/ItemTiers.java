@@ -13,9 +13,10 @@ import java.util.function.Supplier;
 public enum ItemTiers implements Tier{
     SOUL_STAINED_STEEL(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1250, 7.5f, 2.5f, 16, ItemRegistry.SOUL_STAINED_STEEL_INGOT),
     MALIGNANT_ALLOY(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2500, 8f, 4f, 24, ItemRegistry.MALIGNANT_PEWTER_INGOT),
+    HARNESSED_CHAOS(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2500, 8f, 2.5f, 24, ItemRegistry.FUSED_CONSCIOUSNESS),
+
     TYRVING(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1500, 8f, 1f, 16, ItemRegistry.TWISTED_ROCK),
-    HEX_STAFF(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1250, 8f, 2.5f, 16, ItemRegistry.MNEMONIC_FRAGMENT),
-    CHAOS_STAFF(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2500, 8f, 2.5f, 16, ItemRegistry.AURIC_EMBERS);
+    HEX_STAFF(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1250, 8f, 2.5f, 16, ItemRegistry.MNEMONIC_FRAGMENT);
     
     private final TagKey<Block> incorrectBlocksForDrops;
     private final int uses;

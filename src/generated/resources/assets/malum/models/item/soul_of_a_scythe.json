@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:item/air",
+  "base": {},
   "loader": "neoforge:separate_transforms",
   "perspectives": {
     "fixed": {

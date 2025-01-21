@@ -15,48 +15,49 @@ import team.lodestar.lodestone.systems.worldevent.*;
 import team.lodestar.lodestone.systems.worldgen.LodestoneBlockFiller;
 import team.lodestar.lodestone.systems.worldgen.LodestoneBlockFiller.*;
 
-import java.util.Map;
+import java.util.*;
 
 import static com.sammy.malum.common.worldgen.tree.SoulwoodTreeFeature.BLIGHT;
 
-public class ActiveBlightEvent extends WorldEventInstance {
-    public int blightTimer, intensity, rate, times;
-    public BlockPos sourcePos;
+public abstract class ActiveBlightWorldEvent extends WorldEventInstance {
+    protected List<Integer> intensity = new ArrayList<>();
+    protected int frequency;
+    protected int delay;
+    protected int timer;
+    protected BlockPos position;
     public Map<Integer, Double> noiseValues;
 
-    public ActiveBlightEvent() {
-        this(WorldEventTypeRegistry.ACTIVE_BLIGHT.get());
-    }
-    public ActiveBlightEvent(WorldEventType type) {
+    public ActiveBlightWorldEvent(WorldEventType type) {
         super(type);
     }
 
-    public ActiveBlightEvent setBlightData(int intensity, int rate, int times) {
-        this.intensity = intensity;
-        this.rate = rate;
-        this.times = times;
+    public ActiveBlightWorldEvent setData(List<Integer> intensity, int frequency, int delay) {
+        this.intensity.addAll(intensity);
+        this.frequency = frequency;
+        this.delay = delay;
         return this;
     }
 
-    public ActiveBlightEvent setPosition(BlockPos sourcePos) {
-        this.sourcePos = sourcePos;
+    public ActiveBlightWorldEvent setPosition(BlockPos position) {
+        this.position = position;
         return this;
     }
 
     @Override
     public void tick(Level level) {
-        if (times == 0) {
-            end(level);
+        if (delay > 0) {
+            delay--;
             return;
         }
-        if (blightTimer == 0) {
-            blightTimer = rate;
-            createBlight((ServerLevel) level);
-            times--;
-            intensity += 2;
-        } else {
-            blightTimer--;
+        if (timer == 0) {
+            timer = frequency;
+            if (intensity.isEmpty()) {
+                end(level);
+                return;
+            }
+            createBlight((ServerLevel) level, intensity.removeFirst());
         }
+        timer--;
     }
 
     @Override
@@ -69,15 +70,15 @@ public class ActiveBlightEvent extends WorldEventInstance {
 
     }
 
-    public void createBlight(ServerLevel level) {
+    public void createBlight(ServerLevel level, int intensity) {
         LodestoneBlockFiller filler = new LodestoneBlockFiller(new LodestoneBlockFillerLayer(BLIGHT));
         if (noiseValues == null) {
-            noiseValues = SoulwoodTreeFeature.generateBlight(level, filler, sourcePos, intensity);
+            noiseValues = SoulwoodTreeFeature.generateBlight(level, filler, position, intensity);
         } else {
-            SoulwoodTreeFeature.generateBlight(level, filler, noiseValues, sourcePos, intensity);
+            SoulwoodTreeFeature.generateBlight(level, filler, noiseValues, position, intensity);
         }
         createBlightVFX(level, filler);
-        level.playSound(null, sourcePos, SoundRegistry.MAJOR_BLIGHT_MOTIF.get(), SoundSource.BLOCKS, 1f, 1.8f);
+        level.playSound(null, position, SoundRegistry.MAJOR_BLIGHT_MOTIF.get(), SoundSource.BLOCKS, 1f, 1.8f);
     }
 
     public static void createBlightVFX(ServerLevel level, LodestoneBlockFiller filler) {

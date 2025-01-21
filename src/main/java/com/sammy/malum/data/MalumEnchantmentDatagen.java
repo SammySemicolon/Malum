@@ -19,7 +19,6 @@ import static net.minecraft.world.item.enchantment.Enchantment.enchantment;
 public class MalumEnchantmentDatagen {
 
     public static void bootstrap(BootstrapContext<Enchantment> context) {
-        HolderGetter<Enchantment> enchantments = context.lookup(Registries.ENCHANTMENT);
         HolderGetter<Item> items = context.lookup(Registries.ITEM);
 
         register(context, EnchantmentRegistry.ANIMATED,

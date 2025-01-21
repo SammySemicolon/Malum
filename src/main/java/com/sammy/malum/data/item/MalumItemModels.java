@@ -40,6 +40,7 @@ public class MalumItemModels extends LodestoneItemModelProvider {
             var guiModel = ItemModelSmithTypes.GENERATED_ITEM.addModelNameAffix("_gui").act(data, result::getItem);
             separateTransforms.perspective(ItemDisplayContext.GUI, guiModel.parentedToThis(existingFileHelper));
             separateTransforms.perspective(ItemDisplayContext.FIXED, guiModel.parentedToThis(existingFileHelper));
+            separateTransforms.base(getBuilder("item/air"));
         });
         setTexturePath("cosmetic/weaves/pride/");
         MalumItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof PrideweaveItem).collect(Collectors.toList()));
@@ -59,8 +60,7 @@ public class MalumItemModels extends LodestoneItemModelProvider {
         MalumItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof DiggerItem).collect(Collectors.toList()));
         MalumItemModelSmithTypes.HANDHELD_ITEM.act(data, items.stream().filter(i -> i.get() instanceof SwordItem).collect(Collectors.toList()));
         MalumItemModelSmithTypes.HANDHELD_ITEM.act(data, MNEMONIC_HEX_STAFF, EROSION_SCEPTER);
-        MalumItemModelSmithTypes.HANDHELD_OVERLAY_ITEM.act(data, UNWINDING_CHAOS)
-                .addModelLayerData().emissive(15, 15, 1);
+        MalumItemModelSmithTypes.HANDHELD_OVERLAY_ITEM.act(data, UNWINDING_CHAOS, SUNDERING_ANCHOR).forEach(result -> result.addModelLayerData().emissive(15, 15, 1));
         MalumItemModelSmithTypes.LARGE_HANDHELD_ITEM.act(data, CRUDE_SCYTHE, SOUL_STAINED_STEEL_SCYTHE, EDGE_OF_DELIVERANCE, WEIGHT_OF_WORLDS);
         MalumItemModelSmithTypes.HANDHELD_ITEM.act(data, SOUL_STAINED_STEEL_KNIFE, TUNING_FORK, LAMPLIGHTERS_TONGS, ARTIFICERS_CLAW, TOTEMIC_STAFF);
         MalumItemModelSmithTypes.CATALYST_LOBBER.act(data, CATALYST_LOBBER);

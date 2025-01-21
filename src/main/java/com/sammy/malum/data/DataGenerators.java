@@ -5,6 +5,7 @@ import com.sammy.malum.data.block.*;
 import com.sammy.malum.data.item.MalumEnchantments;
 import com.sammy.malum.data.item.MalumItemModels;
 import com.sammy.malum.data.item.MalumItemTags;
+import com.sammy.malum.data.lang.*;
 import com.sammy.malum.data.recipe.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;

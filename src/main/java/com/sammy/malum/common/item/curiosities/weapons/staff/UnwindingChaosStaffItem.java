@@ -9,7 +9,6 @@ import com.sammy.malum.core.helpers.ParticleHelper;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
-import com.sammy.malum.visual_effects.networked.altar.SpiritAltarCraftParticleEffect;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -37,8 +36,8 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
 
     public static final ColorParticleData AURIC_COLOR_DATA = EthericNitrateEntity.AURIC_COLOR_DATA;
 
-    public UnwindingChaosStaffItem(Tier tier, float magicDamage, Properties builderIn) {
-        super(tier, -0.2f, 20, magicDamage, builderIn);
+    public UnwindingChaosStaffItem(Tier tier, int chargeDuration, float magicDamage, Properties builderIn) {
+        super(tier, -0.2f, chargeDuration, magicDamage, builderIn);
     }
 
     @Override
@@ -79,7 +78,7 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
             }
             target.igniteForTicks(100);
             float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 2f);
-            level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.WORLDSOUL_MOTIF_HEAVY_IMPACT.get(), attacker.getSoundSource(), 2f, pitch);
+            SoundHelper.playSound(attacker, SoundRegistry.WORLDSOUL_MOTIF_HEAVY_IMPACT.get(), 2f, pitch);
         }
         super.outgoingDamageEvent(event, attacker, target, stack);
     }
@@ -95,7 +94,7 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
     }
 
     @Override
-    public void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, float chargePercentage, int count) {
+    public void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, int count) {
         int ceil =  Mth.ceil(count / 2f);
         float spread = count > 0 ? ceil * 0.1f * (count % 2L == 0 ? 1 : -1) : 0f;
         float pitchOffset = count > 4 ? 2f + (2f - ceil * 1.5f) : 0.5f;

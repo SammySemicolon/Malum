@@ -14,14 +14,14 @@ import java.lang.Math;
 public class PointyDirectionalParticleBehavior implements LodestoneParticleBehavior {
 
     //TODO: move this to lodestone
-    public static LodestoneParticleBehavior DIRECTIONAL = new PointyDirectionalParticleBehavior();
+    public static LodestoneParticleBehavior POINTY = new PointyDirectionalParticleBehavior();
 
     protected PointyDirectionalParticleBehavior() {
     }
 
     @Override
     public PointyDirectionalBehaviorComponent getComponent(LodestoneBehaviorComponent component) {
-        return component instanceof PointyDirectionalBehaviorComponent directional ? directional : PointyDirectionalBehaviorComponent.DIRECTIONAL;
+        return component instanceof PointyDirectionalBehaviorComponent pointy ? pointy : PointyDirectionalBehaviorComponent.POINTY;
     }
 
     @Override

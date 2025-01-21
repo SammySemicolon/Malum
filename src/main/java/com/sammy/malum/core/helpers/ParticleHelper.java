@@ -14,10 +14,13 @@ import net.minecraft.world.phys.*;
 public class ParticleHelper {
 
     public static WeaponParticleEffectBuilder createSlashingEffect(ParticleEffectType effectType) {
-        return new WeaponParticleEffectBuilder(effectType, (d, b) -> SlashAttackParticleEffect.createData(d, b.isMirrored, b.slashAngle, b.spiritType));
+        return createEffect(effectType, (d, b) -> SlashAttackParticleEffect.createData(d, b.isMirrored, b.slashAngle, b.spiritType));
     }
     public static WeaponParticleEffectBuilder createSlamEffect(ParticleEffectType effectType) {
-        return new WeaponParticleEffectBuilder(effectType, (d, b) -> SlamAttackParticleEffect.createData(d, b.slashAngle, b.spiritType));
+        return createEffect(effectType, (d, b) -> SlamAttackParticleEffect.createData(d, b.slashAngle, b.spiritType));
+    }
+    public static WeaponParticleEffectBuilder createEffect(ParticleEffectType effectType, WeaponParticleEffectBuilder.EffectDataSupplier supplier) {
+        return new WeaponParticleEffectBuilder(effectType, supplier);
     }
 
     public static class WeaponParticleEffectBuilder {
@@ -32,7 +35,7 @@ public class ParticleHelper {
         public Vec3 positionOffset = Vec3.ZERO;
         public float horizontalDirectionOffset = 0, verticalDirectionOffset = 0, directionOffsetAngle = 0;
 
-        public WeaponParticleEffectBuilder(ParticleEffectType effectType, EffectDataSupplier supplier) {
+        protected WeaponParticleEffectBuilder(ParticleEffectType effectType, EffectDataSupplier supplier) {
             this.effectType = effectType;
             this.supplier = supplier;
         }
@@ -191,7 +194,7 @@ public class ParticleHelper {
         public void spawnSlashingParticle(ServerLevel level, Vec3 slashPosition, Vec3 slashDirection) {
             effectType.createPositionedEffect(level,
                     new PositionEffectData(getPosition(slashPosition)),
-                    SlashAttackParticleEffect.createData(getDirection(slashDirection), isMirrored, slashAngle, spiritType));
+                    supplier.createData(getDirection(slashDirection), this));
         }
 
         public interface EffectDataSupplier {

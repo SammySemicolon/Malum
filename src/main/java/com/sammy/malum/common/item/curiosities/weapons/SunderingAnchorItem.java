@@ -14,6 +14,7 @@ import net.minecraft.core.component.*;
 import net.minecraft.tags.*;
 import net.minecraft.util.*;
 import net.minecraft.world.damagesource.*;
+import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
@@ -21,7 +22,9 @@ import net.minecraft.world.item.component.*;
 import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.registries.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
@@ -30,13 +33,21 @@ import team.lodestar.lodestone.systems.item.*;
 
 import java.util.*;
 
-public class SunderingAnchorItem extends ModCombatItem implements IMalumEventResponderItem, ISpiritAffiliatedItem {
+public class SunderingAnchorItem extends LodestoneCombatItem implements IMalumEventResponderItem, ISpiritAffiliatedItem {
 
-    public final float magicDamage;
+    public SunderingAnchorItem(Tier tier, float magicDamage, LodestoneItemProperties properties) {
+        super(tier, -2f, -2f, properties
+                .component(DataComponents.TOOL, createToolProperties(tier, BlockTagRegistry.MINEABLE_WITH_KNIFE))
+                .mergeAttributes(
+                        ItemAttributeModifiers.builder()
+                                .add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                                .build()));
+    }
 
-    public SunderingAnchorItem(Tier tier, float magicDamage, Properties builderIn) {
-        super(tier, 1, -2f, builderIn.component(DataComponents.TOOL, createToolProperties(tier, BlockTagRegistry.MINEABLE_WITH_KNIFE)));
-        this.magicDamage = magicDamage;
+    @Override
+    public void modifyAttributeTooltipEvent(AddAttributeTooltipsEvent event) {
+        event.addTooltipLines(ComponentHelper.positiveEffect("sundering_anchor_damage_split"));
+        event.addTooltipLines(ComponentHelper.positiveEffect("sundering_anchor_chaos_curse"));
     }
 
     @Override
@@ -54,20 +65,22 @@ public class SunderingAnchorItem extends ModCombatItem implements IMalumEventRes
     }
 
     @Override
-    public ItemAttributeModifiers.Builder createExtraAttributes() {
-        var builder = ItemAttributeModifiers.builder();
-        builder.add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
-        return builder;
-    }
-
-    @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         DamageSource source = event.getSource();
         Level level = attacker.level();
         RandomSource random = level.random;
+        var chaosCurse = MobEffectRegistry.CHAOS_CURSE;
+        var effect = target.getEffect(chaosCurse);
+        if (effect == null) {
+            target.addEffect(new MobEffectInstance(chaosCurse, 60, 0, true, true, true));
+        } else {
+            EntityHelper.amplifyEffect(effect, target, 1, 49);
+            EntityHelper.extendEffect(effect, target, 15, 3000);
+        }
+
         if (source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
             var spiritType = getDefiningSpiritType();
-            int slashCount = 1 + Mth.floor(random.nextFloat() * 5);
+            int slashCount = 3 + Mth.floor(random.nextFloat() * 3);
             float splitDamage = event.getOriginalDamage() / slashCount;
             if (target.isAlive()) {
                 for (int i = 0; i < slashCount; i++) {
@@ -78,7 +91,6 @@ public class SunderingAnchorItem extends ModCombatItem implements IMalumEventRes
                 }
             }
             event.setNewDamage(splitDamage);
-
             float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 2f);
             SoundHelper.playSound(attacker, SoundRegistry.SUNDERING_ANCHOR_SWING.get(), 2f, pitch);
             var particle = ParticleHelper.createEffect(ParticleEffectTypeRegistry.SUNDERING_ANCHOR_SLASH,

@@ -186,7 +186,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.curio.low_health_speed", "Speed at Low Health");
         add("malum.effect.curio.always_sprint", "Sprinting Always Available");
         add("malum.effect.curio.fervor", "Increased Mining Speed");
-        add("malum.effect.curio.burning_resistance", "Damage Resistance While Burning");
+        add("malum.effect.curio.burning_damage", "Burning Damage");
 
         add("malum.effect.curio.spirits_heal", "Spirit Collection Replenishes Health");
         add("malum.effect.curio.spirits_xp", "Spirit Collection Generates Experience Points");
@@ -227,6 +227,8 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.erosive_silence", "Erosion Damage Silences Targets");
         add("malum.effect.unwinding_chaos_volley", "Charges a Volley of Composite Energy");
         add("malum.effect.unwinding_chaos_burn", "Burn Damage Empowers Volley");
+        add("malum.effect.sundering_anchor_damage_split", "Damage is Split Between Several Cuts");
+        add("malum.effect.sundering_anchor_chaos_curse", "Each Cut Inflicts Chaos Curse");
 
         add("malum.spirit.flavour.sacred", "Innocent");
         add("malum.spirit.flavour.wicked", "Malicious");
@@ -356,9 +358,10 @@ public class MalumLang extends LanguageProvider {
     }
 
     public void addEnchantmentNameAndDescription(ResourceKey<Enchantment> enchantment, String desc) {
-        final String key = enchantment.location().getPath();
-        add(key, DataHelper.toTitleCase(key, "_"));
-        add("enchantment.malum." + key + ".desc", desc);
+        var name = enchantment.location().getPath();
+        var key = "enchantment.malum." + name;
+        add(key, DataHelper.toTitleCase(name, "_"));
+        add(key + ".desc", desc);
     }
 
     public void addAttributeLibAttributeDescription(DeferredHolder<Attribute, Attribute> attribute, String desc) {

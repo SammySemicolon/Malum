@@ -41,6 +41,7 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> SILENCED = EFFECTS.register("silenced", SilencedEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> GRIM_CERTAINTY = EFFECTS.register("grim_certainty", GrimCertaintyEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> IMMINENT_DELIVERANCE = EFFECTS.register("imminent_deliverance", ImminentDeliveranceEffect::new);
+    public static final DeferredHolder<MobEffect, MobEffect> CHAOS_CURSE = EFFECTS.register("chaos_curse", ChaosCurseEffect::new);
 
     public static final DeferredHolder<MobEffect, MobEffect> REJECTED = EFFECTS.register("rejected", RejectedEffect::new);
 

@@ -25,6 +25,7 @@ import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
 import team.lodestar.lodestone.registry.common.tag.LodestoneDamageTypeTags;
 import team.lodestar.lodestone.systems.easing.*;
+import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.color.*;
@@ -36,8 +37,8 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
 
     public static final ColorParticleData AURIC_COLOR_DATA = EthericNitrateEntity.AURIC_COLOR_DATA;
 
-    public UnwindingChaosStaffItem(Tier tier, int chargeDuration, float magicDamage, Properties builderIn) {
-        super(tier, -0.2f, chargeDuration, magicDamage, builderIn);
+    public UnwindingChaosStaffItem(Tier tier, float magicDamage, float chargeDuration, LodestoneItemProperties properties) {
+        super(tier, -3.2f, magicDamage, chargeDuration, properties);
     }
 
     @Override

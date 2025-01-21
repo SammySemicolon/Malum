@@ -5,7 +5,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import team.lodestar.lodestone.handlers.*;
 
-public interface IMalumEventResponderItem extends ItemEventHandler.IEventResponderItem {
+public interface IMalumEventResponderItem extends ItemEventHandler.IEventResponder{
+
+
     default void spiritCollectionEvent(CollectSpiritEvent event, LivingEntity collector, double arcaneResonance) {
 
     }

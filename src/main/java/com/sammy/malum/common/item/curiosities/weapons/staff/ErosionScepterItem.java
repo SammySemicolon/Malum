@@ -22,6 +22,7 @@ import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.easing.*;
+import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.color.*;
@@ -37,10 +38,9 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
     public static final Color MALIGNANT_BLACK = new Color(12, 4, 11);
     public static final ColorParticleData MALIGNANT_COLOR_DATA = ColorParticleData.create(MALIGNANT_PURPLE, MALIGNANT_BLACK).setEasing(Easing.BOUNCE_IN_OUT).setCoefficient(1.2f).build();
 
-    public ErosionScepterItem(Tier tier, int chargeDuration, float magicDamage, Properties builderIn) {
-        super(tier, chargeDuration, magicDamage, builderIn);
+    public ErosionScepterItem(Tier tier, float magicDamage, float chargeDuration, LodestoneItemProperties properties) {
+        super(tier, magicDamage, chargeDuration, properties);
     }
-
     @Override
     public void modifyAttributeTooltipEvent(AddAttributeTooltipsEvent event) {
         event.addTooltipLines(ComponentHelper.positiveEffect("erosive_spread"));
@@ -57,10 +57,10 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
             var silenced = MobEffectRegistry.SILENCED;
             MobEffectInstance effect = target.getEffect(silenced);
             if (effect == null) {
-                target.addEffect(new MobEffectInstance(silenced, 300, 1, true, true, true));
+                target.addEffect(new MobEffectInstance(silenced, 150, 0, true, true, true));
             } else {
-                EntityHelper.amplifyEffect(effect, target, 2, 9);
-                EntityHelper.extendEffect(effect, target, 60, 600);
+                EntityHelper.amplifyEffect(effect, target, 1, 9);
+                EntityHelper.extendEffect(effect, target, 30, 300);
             }
             SoundHelper.playSound(target, SoundRegistry.DRAINING_MOTIF.get(), attacker.getSoundSource(), 1, 1.25f);
         }

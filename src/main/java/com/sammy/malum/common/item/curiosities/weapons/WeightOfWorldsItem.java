@@ -14,13 +14,15 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.item.tools.*;
 
 import java.util.*;
 
-public class WeightOfWorldsItem extends LodestoneAxeItem implements ItemEventHandler.IEventResponderItem {
-    public WeightOfWorldsItem(Tier material, int attackDamage, float attackSpeed, Properties properties) {
-        super(material, attackDamage, attackSpeed, properties);
+public class WeightOfWorldsItem extends LodestoneAxeItem implements ItemEventHandler.IEventResponder {
+
+    public WeightOfWorldsItem(Tier tier, float attackDamage, float attackSpeed, LodestoneItemProperties properties) {
+        super(tier, attackDamage, attackSpeed, properties);
     }
 
     @Override

@@ -26,6 +26,9 @@ public class AttributeRegistry {
     public static final DeferredHolder<Attribute, Attribute> ARCANE_RESONANCE = registerAttribute(ATTRIBUTES,
             LodestoneRangedAttribute.create(MalumMod.malumPath("arcane_resonance"), 1.0D, 0.0D, 2048.0D).setSyncable(true));
 
+    public static final DeferredHolder<Attribute, Attribute> HEALING_MULTIPLIER = registerAttribute(ATTRIBUTES,
+            LodestoneRangedAttribute.create(MalumMod.malumPath("healing_received"), 1.0D, 0.0D, 2048.0D).setSyncable(true));
+
     public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_INTEGRITY = registerAttribute(ATTRIBUTES,
             LodestoneRangedAttribute.create(MalumMod.malumPath("soul_ward_integrity"), 1.0D, 0.0D, 2048.0D).setSyncable(true));
     public static final DeferredHolder<Attribute, Attribute> SOUL_WARD_RECOVERY_RATE = registerAttribute(ATTRIBUTES,

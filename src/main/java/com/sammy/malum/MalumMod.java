@@ -5,6 +5,8 @@ import com.sammy.malum.compability.farmersdelight.*;
 import com.sammy.malum.compability.irons_spellbooks.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.config.*;
+import com.sammy.malum.core.handlers.*;
+import com.sammy.malum.registry.common.*;
 import net.minecraft.resources.*;
 import net.minecraft.util.*;
 import net.neoforged.bus.api.IEventBus;
@@ -12,6 +14,7 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import org.apache.logging.log4j.*;
+import team.lodestar.lodestone.registry.common.*;
 
 import static com.sammy.malum.registry.client.ParticleRegistry.*;
 import static com.sammy.malum.registry.common.AttachmentTypeRegistry.ATTACHMENT_TYPES;
@@ -61,6 +64,8 @@ public class MalumMod {
         CREATIVE_MODE_TABS.register(modBus);
         ATTACHMENT_TYPES.register(modBus);
         WORLD_EVENT_TYPES.register(modBus);
+        MalumEtchingEffectTypeRegistry.ETCHING_TYPES.register(modBus);
+        EtchingHandler.init();
 
         TetraCompat.init();
         FarmersDelightCompat.init();

@@ -86,7 +86,7 @@ public class MalumItemTags extends ItemTagsProvider {
 
         tag(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS)
                 .addTags(ItemTagRegistry.SCYTHES, ItemTagRegistry.STAVES)
-                .add(TYRVING.get(), WEIGHT_OF_WORLDS.get())
+                .add(TYRVING.get(), WEIGHT_OF_WORLDS.get(), SUNDERING_ANCHOR.get())
                 .add(SOUL_STAINED_STEEL_AXE.get(), SOUL_STAINED_STEEL_PICKAXE.get(), SOUL_STAINED_STEEL_SHOVEL.get(), SOUL_STAINED_STEEL_SWORD.get(), SOUL_STAINED_STEEL_HOE.get(), SOUL_STAINED_STEEL_KNIFE.get());
 
         tag(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS)

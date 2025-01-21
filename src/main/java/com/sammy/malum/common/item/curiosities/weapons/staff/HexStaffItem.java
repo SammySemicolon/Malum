@@ -19,6 +19,7 @@ import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
 import team.lodestar.lodestone.systems.easing.*;
+import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
@@ -27,8 +28,8 @@ import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 
 public class HexStaffItem extends AbstractStaffItem implements ISpiritAffiliatedItem {
 
-    public HexStaffItem(Tier tier, int chargeDuration, float magicDamage, Properties builderIn) {
-        super(tier, chargeDuration, magicDamage, builderIn);
+    public HexStaffItem(Tier tier, float magicDamage, float chargeDuration, LodestoneItemProperties properties) {
+        super(tier, magicDamage, chargeDuration, properties);
     }
 
     @Override

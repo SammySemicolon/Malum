@@ -17,19 +17,22 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.tag.*;
+import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.item.tools.*;
 
 import java.util.*;
 
 public class TyrvingItem extends LodestoneSwordItem implements IMalumEventResponderItem {
-    public TyrvingItem(Tier material, int attackDamage, float attackSpeed, Properties properties) {
-        super(material, attackDamage, attackSpeed, properties);
+
+    public TyrvingItem(Tier tier, float attackDamage, float attackSpeed, LodestoneItemProperties properties) {
+        super(tier, attackDamage, attackSpeed, properties);
     }
 
     @Override
     public void modifyAttributeTooltipEvent(AddAttributeTooltipsEvent event) {
         event.addTooltipLines(ComponentHelper.positiveEffect("soul_based_damage"));
     }
+
     @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         var level = attacker.level();
@@ -47,7 +50,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
         if (target.isAlive()) {
             WorldEventHandler.addWorldEvent(level,
                     new DelayedDamageWorldEvent()
-                            .setData(attacker.getUUID(), target.getUUID(), 0, magicDamage, 4));
+                            .setData(attacker.getUUID(), target.getUUID(), 0, magicDamage, 3));
         }
 
         SoundHelper.playSound(attacker, SoundRegistry.TYRVING_SLASH.get(), 1, RandomHelper.randomBetween(attacker.getRandom(), 1f, 1.5f));
@@ -56,6 +59,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
                 .setVerticalSlashAngle()
                 .spawnForwardSlashingParticle(attacker);
     }
+
     @Override
     public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
         return itemAbility.equals(ItemAbilities.SWORD_DIG);

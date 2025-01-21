@@ -79,39 +79,39 @@ public class ItemRegistry {
 
     public static final List<Item> CONTENT = new ArrayList<>();
 
-    public static Item.Properties DEFAULT_PROPERTIES() {
+    public static LodestoneItemProperties DEFAULT_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.CONTENT);
     }
 
-    public static Item.Properties GEAR_PROPERTIES() {
+    public static LodestoneItemProperties GEAR_PROPERTIES() {
         return DEFAULT_PROPERTIES().stacksTo(1);
     }
 
-    public static Item.Properties BUILDING_PROPERTIES() {
+    public static LodestoneItemProperties BUILDING_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.BUILDING);
     }
 
-    public static Item.Properties NATURE_PROPERTIES() {
+    public static LodestoneItemProperties NATURE_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.NATURE);
     }
 
-    public static Item.Properties METALLURGIC_NODE_PROPERTIES() {
+    public static LodestoneItemProperties METALLURGIC_NODE_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.METALLURGY);
     }
 
-    public static Item.Properties METALLURGIC_PROPERTIES() {
+    public static LodestoneItemProperties METALLURGIC_PROPERTIES() {
         return METALLURGIC_NODE_PROPERTIES().stacksTo(1);
     }
 
-    public static Item.Properties COSMETIC_PROPERTIES() {
+    public static LodestoneItemProperties COSMETIC_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.COSMETIC);
     }
 
-    public static Item.Properties HIDDEN_PROPERTIES() {
-        return new Item.Properties().stacksTo(1);
+    public static LodestoneItemProperties HIDDEN_PROPERTIES() {
+        return new LodestoneItemProperties().stacksTo(1);
     }
 
-    public static <T extends Item> DeferredHolder<Item, T> register(String name, Item.Properties properties, Function<Item.Properties, T> function) {
+    public static <T extends Item> DeferredHolder<Item, T> register(String name, LodestoneItemProperties properties, Function<LodestoneItemProperties, T> function) {
         LodestoneItemProperties.addToTabSorting(MalumMod.malumPath(name), properties);
         return ITEMS.register(name, () -> function.apply(properties));
     }
@@ -119,6 +119,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> ENCYCLOPEDIA_ARCANA = register("encyclopedia_arcana", GEAR_PROPERTIES().rarity(UNCOMMON), EncyclopediaArcanaItem::new);
 
     public static final DeferredHolder<Item, RitualShardItem> RITUAL_SHARD = register("ritual_shard", HIDDEN_PROPERTIES(), RitualShardItem::new);
+    public static final DeferredHolder<Item, EtchingItem> ETCHING = register("etching", HIDDEN_PROPERTIES(), EtchingItem::new);
 
     //region spirits
     public static final DeferredHolder<Item, SpiritShardItem> SACRED_SPIRIT = register("sacred_spirit", DEFAULT_PROPERTIES(), (p) -> new SpiritShardItem(p, SpiritTypeRegistry.SACRED_SPIRIT));
@@ -629,18 +630,18 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> TYRVING = register("tyrving", GEAR_PROPERTIES(), (p) -> new TyrvingItem(ItemTiers.TYRVING, 0, -0.3f, p));
 
-    public static final DeferredHolder<Item, Item> MNEMONIC_HEX_STAFF = register("mnemonic_hex_staff", GEAR_PROPERTIES(), (p) -> new HexStaffItem(HEX_STAFF, 20, 5, p));
-    public static final DeferredHolder<Item, Item> EROSION_SCEPTER = register("erosion_scepter", GEAR_PROPERTIES(), (p) -> new ErosionScepterItem(MALIGNANT_ALLOY, 10, 5, p));
+    public static final DeferredHolder<Item, Item> MNEMONIC_HEX_STAFF = register("mnemonic_hex_staff", GEAR_PROPERTIES(), (p) -> new HexStaffItem(HEX_STAFF, 5, 20, p));
+    public static final DeferredHolder<Item, Item> EROSION_SCEPTER = register("erosion_scepter", GEAR_PROPERTIES(), (p) -> new ErosionScepterItem(MALIGNANT_ALLOY, 5, 10, p));
 
-    public static final DeferredHolder<Item, Item> WEIGHT_OF_WORLDS = register("weight_of_worlds", GEAR_PROPERTIES(), (p) -> new WeightOfWorldsItem(ItemTiers.MALIGNANT_ALLOY, 1, -0.3f, p));
-    public static final DeferredHolder<Item, Item> EDGE_OF_DELIVERANCE = register("edge_of_deliverance", GEAR_PROPERTIES(), (p) -> new EdgeOfDeliveranceItem(ItemTiers.MALIGNANT_ALLOY, 2, -0.2f, p));
+    public static final DeferredHolder<Item, Item> WEIGHT_OF_WORLDS = register("weight_of_worlds", GEAR_PROPERTIES(), (p) -> new WeightOfWorldsItem(ItemTiers.MALIGNANT_ALLOY, 1, -0.2f, p));
+    public static final DeferredHolder<Item, Item> EDGE_OF_DELIVERANCE = register("edge_of_deliverance", GEAR_PROPERTIES(), (p) -> new EdgeOfDeliveranceItem(ItemTiers.MALIGNANT_ALLOY, 2, -0.1f, p));
 
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_HELMET = register("malignant_stronghold_helmet", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.HELMET, p));
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_CHESTPLATE = register("malignant_stronghold_chestplate", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.CHESTPLATE, p));
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_LEGGINGS = register("malignant_stronghold_leggings", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.LEGGINGS, p));
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_BOOTS = register("malignant_stronghold_boots", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.BOOTS, p));
 
-    public static final DeferredHolder<Item, Item> UNWINDING_CHAOS = register("unwinding_chaos", GEAR_PROPERTIES(), (p) -> new UnwindingChaosStaffItem(HARNESSED_CHAOS, 30, 7, p));
+    public static final DeferredHolder<Item, Item> UNWINDING_CHAOS = register("unwinding_chaos", GEAR_PROPERTIES(), (p) -> new UnwindingChaosStaffItem(HARNESSED_CHAOS, 7, 30, p));
     public static final DeferredHolder<Item, Item> SUNDERING_ANCHOR = register("sundering_anchor", GEAR_PROPERTIES(), (p) -> new SunderingAnchorItem(HARNESSED_CHAOS, 4, p));
 
     public static final DeferredHolder<Item, Item> GILDED_RING = register("gilded_ring", GEAR_PROPERTIES(), CurioGildedRing::new);

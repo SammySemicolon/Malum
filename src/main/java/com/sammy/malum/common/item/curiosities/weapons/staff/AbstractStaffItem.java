@@ -24,23 +24,21 @@ import team.lodestar.lodestone.registry.common.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.item.*;
 
-public abstract class AbstractStaffItem extends ModCombatItem implements IMalumEventResponderItem {
+public abstract class AbstractStaffItem extends LodestoneCombatItem implements IMalumEventResponderItem {
 
-    private final float chargeDuration;
-    private final float magicDamage;
-
-    public AbstractStaffItem(Tier tier, float attackDamage, float attackSpeed, int chargeDuration, float magicDamage, Properties builderIn) {
-        super(tier, attackDamage, -2.8f + attackSpeed, builderIn);
-        this.chargeDuration = chargeDuration;
-        this.magicDamage = magicDamage;
+    public AbstractStaffItem(Tier tier, float magicDamage, float chargeDuration, LodestoneItemProperties properties) {
+        this(tier, -3f, magicDamage, chargeDuration, properties);
     }
-
-    public AbstractStaffItem(Tier tier, float attackSpeed, int chargeDuration, float magicDamage, Properties builderIn) {
-        this(tier, 1, attackSpeed, chargeDuration, magicDamage, builderIn);
+    public AbstractStaffItem(Tier tier, float attackSpeed, float magicDamage, float chargeDuration, LodestoneItemProperties properties) {
+        this(tier, 1f, attackSpeed, magicDamage, chargeDuration, properties);
     }
-
-    public AbstractStaffItem(Tier tier, int chargeDuration, float magicDamage, Properties builderIn) {
-        this(tier, 0f, chargeDuration, magicDamage, builderIn);
+    public AbstractStaffItem(Tier tier, float attackDamage, float attackSpeed, float magicDamage, float chargeDuration, LodestoneItemProperties properties) {
+        super(tier, attackDamage, attackSpeed, properties.mergeAttributes(
+                ItemAttributeModifiers.builder()
+                        .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID,  attackDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                        .add(AttributeRegistry.CHARGE_DURATION, new AttributeModifier(AttributeRegistry.CHARGE_DURATION.getId(), chargeDuration, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                        .add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                        .build()));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -51,14 +49,6 @@ public abstract class AbstractStaffItem extends ModCombatItem implements IMalumE
     public abstract int getProjectileCount(Level level, LivingEntity livingEntity, float chargePercentage);
 
     public abstract void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, int count);
-
-    @Override
-    public ItemAttributeModifiers.Builder createExtraAttributes() {
-        var builder = ItemAttributeModifiers.builder();
-        builder.add(AttributeRegistry.CHARGE_DURATION, new AttributeModifier(AttributeRegistry.CHARGE_DURATION.getId(), chargeDuration, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
-        builder.add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
-        return builder;
-    }
 
     @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {

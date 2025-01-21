@@ -22,7 +22,7 @@ import java.util.UUID;
 
 import static top.theillusivec4.curios.api.type.capability.ICurio.DropRule.ALWAYS_KEEP;
 
-public class CurioTokenOfGratitude extends MalumCurioItem implements ItemEventHandler.IEventResponderItem {
+public class CurioTokenOfGratitude extends MalumCurioItem implements ItemEventHandler.IEventResponder {
     public static final List<UUID> GRADITUDE_CERTIFIED = new ArrayList<>();
     public static final List<UUID> TRANS_SCARFS = new ArrayList<>();
     public static final UUID SAMMY = validateForGratitude("0ca54301-6170-4c44-b3e0-b8afa6b81ed2");

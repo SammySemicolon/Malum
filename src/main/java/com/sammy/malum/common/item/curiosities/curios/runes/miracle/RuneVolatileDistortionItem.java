@@ -13,7 +13,7 @@ import team.lodestar.lodestone.handlers.*;
 
 import java.util.function.Consumer;
 
-public class RuneVolatileDistortionItem extends AbstractRuneCurioItem implements ItemEventHandler.IEventResponderItem {
+public class RuneVolatileDistortionItem extends AbstractRuneCurioItem implements ItemEventHandler.IEventResponder {
 
     public RuneVolatileDistortionItem(Properties builder) {
         super(builder, SpiritTypeRegistry.ELDRITCH_SPIRIT);

@@ -13,13 +13,14 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.systems.item.*;
 
 import java.util.*;
 
 public class EdgeOfDeliveranceItem extends MalumScytheItem {
-
-    public EdgeOfDeliveranceItem(Tier tier, float attackDamageIn, float attackSpeedIn, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
+    
+    public EdgeOfDeliveranceItem(Tier tier, float attackDamage, float attackSpeed, LodestoneItemProperties properties) {
+        super(tier, attackDamage, attackSpeed, properties);
     }
 
     @Override

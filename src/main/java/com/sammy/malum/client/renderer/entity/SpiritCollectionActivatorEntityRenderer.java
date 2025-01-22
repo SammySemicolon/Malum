@@ -36,8 +36,9 @@ public class SpiritCollectionActivatorEntityRenderer extends EntityRenderer<Spir
 
             poseStack.pushPose();
             poseStack.translate(0.0D, yOffset, 0.0D);
-            FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, secondarySpiritType, 1f, 4f, partialTicks);
-            FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, spiritType, 2f, 0.5f, partialTicks);
+            FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, secondarySpiritType, 1f, 0.1f, partialTicks);
+            FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, secondarySpiritType, 0.2f, 0.7f, partialTicks);
+            FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, spiritType, 2f, 3f, partialTicks);
             poseStack.popPose();
 
             RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trail, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 0.7f, 1f, partialTicks);

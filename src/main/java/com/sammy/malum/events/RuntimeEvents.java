@@ -86,7 +86,7 @@ public class RuntimeEvents {
 
     @SubscribeEvent
     public static void onLivingTick(EntityTickEvent.Pre event) {
-        EtchingHandler.entityTick(event);
+        GeasEffectHandler.entityTick(event);
         SoulDataHandler.entityTick(event);
         SoulWardHandler.recoverSoulWard(event);
         MalignantConversionHandler.entityTick(event);

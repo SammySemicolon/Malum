@@ -80,19 +80,19 @@ public class ArtificeEntries {
                 .addPage(new TextPage("soulwoven_silk.soulwoven_banner.1"))
                 .addPage(new CraftingPage(new ItemStack(SOULWOVEN_BANNER.get(), 2), EMPTY, RUNEWOOD_PLANKS.get(), EMPTY, EMPTY, SOULWOVEN_SILK.get(), EMPTY, EMPTY, SOULWOVEN_SILK.get()))
                 .addPage(new CyclingPage(
-                        CraftingPage.bannerPage(ROTTING_ESSENCE.get(), SoulwovenBannerPatternData.HUNGER),
-                        CraftingPage.bannerPage(GRIM_TALC.get(), SoulwovenBannerPatternData.HORNS),
-                        CraftingPage.bannerPage(ASTRAL_WEAVE.get(), SoulwovenBannerPatternData.HEFT),
-                        CraftingPage.bannerPage(WARP_FLUX.get(), SoulwovenBannerPatternData.HALLUCINATION)
+                        CraftingPage.bannerPage(ROTTING_ESSENCE.get(), SoulwovenBannerPatternDataComponent.HUNGER),
+                        CraftingPage.bannerPage(GRIM_TALC.get(), SoulwovenBannerPatternDataComponent.HORNS),
+                        CraftingPage.bannerPage(ASTRAL_WEAVE.get(), SoulwovenBannerPatternDataComponent.HEFT),
+                        CraftingPage.bannerPage(WARP_FLUX.get(), SoulwovenBannerPatternDataComponent.HALLUCINATION)
                 ))
                 .addPage(new CyclingPage(
-                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.SACRED.getRecipeId()),
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternDataComponent.SACRED.getRecipeId()),
 //                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.WICKED.getRecipeId()),
 //                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.ARCANE.getRecipeId()),
-                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.ELDRITCH.getRecipeId()),
-                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.AERIAL.getRecipeId()),
-                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.AQUEOUS.getRecipeId()),
-                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.EARTHEN.getRecipeId())//,
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternDataComponent.ELDRITCH.getRecipeId()),
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternDataComponent.AERIAL.getRecipeId()),
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternDataComponent.AQUEOUS.getRecipeId()),
+                        SpiritInfusionPage.fromId(SoulwovenBannerPatternDataComponent.EARTHEN.getRecipeId())//,
 //                        SpiritInfusionPage.fromId(SoulwovenBannerPatternData.INFERNAL.getRecipeId())
                 ))
         );

@@ -4,7 +4,7 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.client.renderer.item.SpiritJarClientItemExtensions;
 import com.sammy.malum.client.screen.tooltip.ClientSoulwovenPouchTooltip;
 import com.sammy.malum.common.block.curiosities.mana_mote.ManaMoteBlockClientExtension;
-import com.sammy.malum.common.data_components.SoulwovenPouchContents;
+import com.sammy.malum.common.data_components.SoulwovenPouchContentsComponent;
 import com.sammy.malum.common.item.curiosities.armor.ArmorClientItemExtensions;
 import com.sammy.malum.core.handlers.client.HiddenBladeRenderHandler;
 import com.sammy.malum.core.handlers.client.SoulWardRenderHandler;
@@ -52,7 +52,7 @@ public class ClientSetupEvents {
 
     @SubscribeEvent
     public static void registerTooltipComponentManagers(RegisterClientTooltipComponentFactoriesEvent event) {
-        event.register(SoulwovenPouchContents.class, ClientSoulwovenPouchTooltip::new);
+        event.register(SoulwovenPouchContentsComponent.class, ClientSoulwovenPouchTooltip::new);
     }
 
     @SubscribeEvent

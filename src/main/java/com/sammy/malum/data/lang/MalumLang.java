@@ -5,7 +5,7 @@ import com.sammy.malum.core.systems.artifice.ArtificeAttributeType;
 import com.sammy.malum.common.block.ether.EtherWallTorchBlock;
 import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.spiritrite.*;
-import com.sammy.malum.core.systems.etching.*;
+import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
@@ -100,7 +100,7 @@ public class MalumLang extends LanguageProvider {
         for (MalumSpiritType spirit : SpiritTypeRegistry.SPIRITS.values()) {
             add(spirit.getSpiritDescription(), DataHelper.toTitleCase(spirit.getIdentifier() + "_spirit", "_"));
         }
-        for (SoulwovenBannerPatternData pattern : SoulwovenBannerPatternData.REGISTERED_PATTERNS) {
+        for (SoulwovenBannerPatternDataComponent pattern : SoulwovenBannerPatternDataComponent.REGISTERED_PATTERNS) {
             add(pattern.translationKey(), DataHelper.toTitleCase(pattern.type().getPath(), "_"));
         }
         for (ArtificeAttributeType attribute : ArtificeAttributeType.CRUCIBLE_ATTRIBUTES) {

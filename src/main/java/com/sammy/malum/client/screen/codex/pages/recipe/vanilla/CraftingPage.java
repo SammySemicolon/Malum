@@ -66,7 +66,7 @@ public class CraftingPage extends BookPage {
         return new CraftingPage(output, input, input, input, input, input, input, input, input, input);
     }
 
-    public static CraftingPage bannerPage(Item input, SoulwovenBannerPatternData pattern) {
+    public static CraftingPage bannerPage(Item input, SoulwovenBannerPatternDataComponent pattern) {
         return new CraftingPage(pattern.getDefaultStack(), ItemRegistry.SOULWOVEN_BANNER.get(), input);
     }
 

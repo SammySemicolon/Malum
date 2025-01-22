@@ -64,7 +64,7 @@ public class MalumMod {
         ATTACHMENT_TYPES.register(modBus);
         WORLD_EVENT_TYPES.register(modBus);
         MalumGeasEffectTypeRegistry.GEAS_TYPES.register(modBus);
-        EtchingHandler.init();
+        GeasEffectHandler.init();
 
         TetraCompat.init();
         FarmersDelightCompat.init();

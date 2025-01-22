@@ -1,7 +1,7 @@
 package com.sammy.malum.core.handlers;
 
 import com.sammy.malum.*;
-import com.sammy.malum.core.systems.etching.*;
+import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.world.entity.*;
@@ -11,11 +11,11 @@ import team.lodestar.lodestone.handlers.*;
 
 import java.util.*;
 
-public class EtchingHandler {
-    public static final ItemEventHandler.EventResponderSource ETCHINGS = new ItemEventHandler.EventResponderSource(MalumMod.malumPath("etchings"), EtchingHandler::getGeasItemStacks, EtchingHandler::getEquippedGeasEffects);
+public class GeasEffectHandler {
+    public static final ItemEventHandler.EventResponderSource GEAS_EFFECTS = new ItemEventHandler.EventResponderSource(MalumMod.malumPath("geas_effects"), GeasEffectHandler::getGeasItemStacks, GeasEffectHandler::getEquippedGeasEffects);
 
     public static void init() {
-        ItemEventHandler.registerLookup(ETCHINGS);
+        ItemEventHandler.registerLookup(GEAS_EFFECTS);
     }
 
     public static void entityTick(EntityTickEvent.Pre event) {

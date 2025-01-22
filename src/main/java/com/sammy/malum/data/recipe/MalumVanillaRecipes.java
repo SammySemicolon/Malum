@@ -60,10 +60,10 @@ public class MalumVanillaRecipes implements IConditionBuilder {
 
         //BANNERS
         shaped(RecipeCategory.BUILDING_BLOCKS, ItemRegistry.SOULWOVEN_BANNER.get()).define('X', ItemTagRegistry.RUNEWOOD_PLANKS).define('Y', ItemRegistry.SOULWOVEN_SILK.get()).pattern("X").pattern("Y").pattern("Y").unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(output);
-        bannerRecipe(output, ItemRegistry.ROTTING_ESSENCE.get(), SoulwovenBannerPatternData.HUNGER);
-        bannerRecipe(output, ItemRegistry.GRIM_TALC.get(), SoulwovenBannerPatternData.HORNS);
-        bannerRecipe(output, ItemRegistry.ASTRAL_WEAVE.get(), SoulwovenBannerPatternData.HEFT);
-        bannerRecipe(output, ItemRegistry.WARP_FLUX.get(), SoulwovenBannerPatternData.HALLUCINATION);
+        bannerRecipe(output, ItemRegistry.ROTTING_ESSENCE.get(), SoulwovenBannerPatternDataComponent.HUNGER);
+        bannerRecipe(output, ItemRegistry.GRIM_TALC.get(), SoulwovenBannerPatternDataComponent.HORNS);
+        bannerRecipe(output, ItemRegistry.ASTRAL_WEAVE.get(), SoulwovenBannerPatternDataComponent.HEFT);
+        bannerRecipe(output, ItemRegistry.WARP_FLUX.get(), SoulwovenBannerPatternDataComponent.HALLUCINATION);
 
 
         //SPIRIT METALS
@@ -259,7 +259,7 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         return blasting(ingredient, category, new ItemStack(resultItem, resultCount), experience, time);
     }
 
-    private static void bannerRecipe(RecipeOutput consumer, Item material, SoulwovenBannerPatternData pattern) {
+    private static void bannerRecipe(RecipeOutput consumer, Item material, SoulwovenBannerPatternDataComponent pattern) {
         shapeless(RecipeCategory.BUILDING_BLOCKS, pattern.getDefaultStack()).requires(ItemRegistry.SOULWOVEN_BANNER.get()).requires(material).unlockedBy("has_soulwoven_silk", has(ItemRegistry.SOULWOVEN_SILK.get())).save(consumer, pattern.getRecipeId());
     }
 

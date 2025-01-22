@@ -106,7 +106,7 @@ public abstract class AbstractStaffItem extends LodestoneCombatItem implements I
         if (pRemainingUseDuration == fullyCharged) {
             float pitch = Mth.nextFloat(pLevel.random, 1.6f, 1.8f);
             pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_CHARGED.get(), SoundSource.PLAYERS, 1.25f, pitch);
-            if (EtchingHandler.hasGeasEffect(pLivingEntity, MalumGeasEffectTypeRegistry.OVEREAGER_FIST.get())) {
+            if (GeasEffectHandler.hasGeasEffect(pLivingEntity, MalumGeasEffectTypeRegistry.OVEREAGER_FIST.get())) {
                 if (pLivingEntity instanceof Player player) {
                     player.getCooldowns().addCooldown(this, 5);
                 }

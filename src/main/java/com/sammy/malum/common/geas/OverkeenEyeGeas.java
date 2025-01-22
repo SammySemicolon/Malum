@@ -1,22 +1,15 @@
 package com.sammy.malum.common.geas;
 
 import com.google.common.collect.*;
-import com.sammy.malum.common.packets.*;
-import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
-import com.sammy.malum.core.systems.etching.*;
+import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
-import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.tick.*;
-import net.neoforged.neoforge.network.*;
 
-import java.util.*;
 import java.util.function.*;
 
 public class OverkeenEyeGeas extends GeasEffect {

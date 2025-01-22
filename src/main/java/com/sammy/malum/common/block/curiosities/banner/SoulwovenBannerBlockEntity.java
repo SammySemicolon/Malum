@@ -27,12 +27,12 @@ import javax.annotation.*;
 public class SoulwovenBannerBlockEntity extends LodestoneBlockEntity {
 
     public MalumSpiritType spirit;
-    public SoulwovenBannerPatternData patternData;
+    public SoulwovenBannerPatternDataComponent patternData;
     public boolean intense;
 
     public SoulwovenBannerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.SOULWOVEN_BANNER.get(), pos, state);
-        this.patternData = SoulwovenBannerPatternData.DEFAULT;
+        this.patternData = SoulwovenBannerPatternDataComponent.DEFAULT;
     }
     @Override
     protected void collectImplicitComponents(DataComponentMap.Builder components) {
@@ -78,7 +78,7 @@ public class SoulwovenBannerBlockEntity extends LodestoneBlockEntity {
             spirit = null;
         }
         intense = pTag.getBoolean("intense");
-        patternData = SoulwovenBannerPatternData.load(pTag);
+        patternData = SoulwovenBannerPatternDataComponent.load(pTag);
     }
 
     @Override

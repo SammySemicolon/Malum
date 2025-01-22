@@ -4,7 +4,7 @@ import com.google.common.collect.*;
 import com.sammy.malum.common.packets.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
-import com.sammy.malum.core.systems.etching.*;
+import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
@@ -59,7 +59,7 @@ public class LionsHeartGeas extends GeasEffect {
     }
 
     public static boolean pausePotionEffects(LivingEntity entity, MobEffectInstance instance) {
-        final Map.Entry<ItemStack, GeasEffect> geasEffect = EtchingHandler.getGeasEffect(entity, MalumGeasEffectTypeRegistry.LIONS_HEART.get());
+        final Map.Entry<ItemStack, GeasEffect> geasEffect = GeasEffectHandler.getGeasEffect(entity, MalumGeasEffectTypeRegistry.LIONS_HEART.get());
         if (geasEffect != null && geasEffect.getValue() instanceof LionsHeartGeas effect) {
             if (effect.lionsHeartDuration > 0) {
                 final MobEffect type = instance.getEffect().value();

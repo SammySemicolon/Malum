@@ -25,11 +25,11 @@ public class SoulwovenPouchItem extends Item {
     private static final int BAR_COLOR = Mth.color(0.4F, 0.4F, 1.0F);
 
     public SoulwovenPouchItem(Item.Properties properties) {
-        super(properties.component(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY));
+        super(properties.component(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContentsComponent.EMPTY));
     }
 
     public static float getFullnessDisplay(ItemStack stack) {
-        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContentsComponent.EMPTY);
         return contents.weight().floatValue();
     }
 
@@ -43,7 +43,7 @@ public class SoulwovenPouchItem extends Item {
                 return false;
             } else {
                 var itemstack = slot.getItem();
-                var mutable = new SoulwovenPouchContents.Mutable(contents);
+                var mutable = new SoulwovenPouchContentsComponent.Mutable(contents);
                 if (itemstack.isEmpty()) {
                     this.playRemoveOneSound(player);
                     var tryRemove = mutable.removeOne();
@@ -74,7 +74,7 @@ public class SoulwovenPouchItem extends Item {
             if (contents == null) {
                 return false;
             } else {
-                var mutable = new SoulwovenPouchContents.Mutable(contents);
+                var mutable = new SoulwovenPouchContentsComponent.Mutable(contents);
                 if (other.isEmpty()) {
                     var removed = mutable.removeOne();
                     if (removed != null) {
@@ -110,13 +110,13 @@ public class SoulwovenPouchItem extends Item {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContentsComponent.EMPTY);
         return contents.weight().compareTo(Fraction.ZERO) > 0;
     }
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+        var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContentsComponent.EMPTY);
         return Math.min(1 + Mth.mulAndTruncate(contents.weight(), 12), 13);
     }
 
@@ -128,7 +128,7 @@ public class SoulwovenPouchItem extends Item {
     private static boolean dropContents(ItemStack stack, Player player) {
         var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS);
         if (contents != null && !contents.isEmpty()) {
-            stack.set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+            stack.set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContentsComponent.EMPTY);
             if (player instanceof ServerPlayer) {
                 contents.itemsCopy().forEach(item -> player.drop(item, true));
             }
@@ -159,7 +159,7 @@ public class SoulwovenPouchItem extends Item {
     public void onDestroyed(ItemEntity itemEntity) {
         var contents = itemEntity.getItem().get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS);
         if (contents != null) {
-            itemEntity.getItem().set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContents.EMPTY);
+            itemEntity.getItem().set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContentsComponent.EMPTY);
             ItemUtils.onContainerDestroyed(itemEntity, contents.itemsCopy());
         }
     }

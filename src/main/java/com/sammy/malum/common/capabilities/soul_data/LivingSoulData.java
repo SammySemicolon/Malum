@@ -3,7 +3,7 @@ package com.sammy.malum.common.capabilities.soul_data;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import com.sammy.malum.core.handlers.*;
-import com.sammy.malum.core.systems.etching.*;
+import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
@@ -53,7 +53,7 @@ public class LivingSoulData {
         if (!geas.has(DataComponentRegistry.GEAS_EFFECT)) {
             throw new IllegalArgumentException("Etching Itemstack does not have an geas effect");
         }
-        var storedEtching = EtchingHandler.getStoredGeasEffect(geas);
+        var storedEtching = GeasEffectHandler.getStoredGeasEffect(geas);
         if (cachedEtchingEffects.values().stream().anyMatch(e -> e.type.equals(storedEtching.type))) {
             return;
         }

@@ -1,7 +1,7 @@
 package com.sammy.malum.common.geas;
 
 import com.google.common.collect.*;
-import com.sammy.malum.core.systems.etching.*;
+import com.sammy.malum.core.systems.geas.*;
 import net.minecraft.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;

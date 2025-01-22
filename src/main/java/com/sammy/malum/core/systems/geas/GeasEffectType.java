@@ -1,4 +1,4 @@
-package com.sammy.malum.core.systems.etching;
+package com.sammy.malum.core.systems.geas;
 
 import com.mojang.serialization.*;
 import com.sammy.malum.registry.common.*;

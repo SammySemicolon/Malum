@@ -52,7 +52,7 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
                 playSound(SoundRegistry.STAFF_FIRES.get(), 0.5f, Mth.nextFloat(random, 0.9F, 1.5F));
             }
         }
-        isHoming = EtchingHandler.hasGeasEffect(owner, MalumGeasEffectTypeRegistry.OVERKEEN_EYE.get());
+        isHoming = GeasEffectHandler.hasGeasEffect(owner, MalumGeasEffectTypeRegistry.OVERKEEN_EYE.get());
     }
 
     @OnlyIn(Dist.CLIENT)

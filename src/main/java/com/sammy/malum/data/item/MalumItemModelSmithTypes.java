@@ -5,11 +5,9 @@ import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.item.cosmetic.skins.ArmorSkin;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.registry.common.item.ArmorSkinRegistry;
-import net.minecraft.Util;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import team.lodestar.lodestone.helpers.DataHelper;
 import team.lodestar.lodestone.systems.datagen.ItemModelSmithTypes;
 import team.lodestar.lodestone.systems.datagen.itemsmith.ItemModelSmith;
@@ -21,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class MalumItemModelSmithTypes extends ItemModelSmithTypes {
 
@@ -82,9 +79,9 @@ public class MalumItemModelSmithTypes extends ItemModelSmithTypes {
     public static ItemModelSmith SOULWOVEN_BANNER = new ItemModelSmith((item, provider) -> {
         String base = provider.getItemName(item);
         var model = provider.createGenericModel(item, GENERATED, provider.getItemTexture(base + "_default"));
-        for (SoulwovenBannerPatternData pattern : SoulwovenBannerPatternData.REGISTERED_PATTERNS) {
-            final int i = SoulwovenBannerPatternData.REGISTERED_PATTERNS.indexOf(pattern);
-            if (pattern.equals(SoulwovenBannerPatternData.DEFAULT)) {
+        for (SoulwovenBannerPatternDataComponent pattern : SoulwovenBannerPatternDataComponent.REGISTERED_PATTERNS) {
+            final int i = SoulwovenBannerPatternDataComponent.REGISTERED_PATTERNS.indexOf(pattern);
+            if (pattern.equals(SoulwovenBannerPatternDataComponent.DEFAULT)) {
                 continue;
             }
             final String path = base + "_" + pattern.type().getPath();

@@ -3,7 +3,7 @@ package com.sammy.malum.common.geas;
 import com.google.common.collect.*;
 import com.sammy.malum.common.worldevent.*;
 import com.sammy.malum.core.helpers.*;
-import com.sammy.malum.core.systems.etching.*;
+import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;

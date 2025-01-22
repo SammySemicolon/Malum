@@ -2,7 +2,7 @@ package com.sammy.malum.registry.common.item.tabs;
 
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.data_components.*;
-import com.sammy.malum.core.systems.etching.*;
+import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
@@ -60,7 +60,7 @@ public class CreativeTabRegistry {
                         for (DeferredHolder<GeasEffectType, ? extends GeasEffectType> etchingType : MalumGeasEffectTypeRegistry.GEAS_TYPES.getEntries()) {
                             final GeasEffectType geasEffectType = etchingType.get();
                             ItemStack etching = new ItemStack(ItemRegistry.GEAS.get());
-                            etching.set(DataComponentRegistry.GEAS_EFFECT, new EtchingData(geasEffectType));
+                            etching.set(DataComponentRegistry.GEAS_EFFECT, new GeasDataComponent(geasEffectType));
                             o.accept(etching);
                         }
                     })

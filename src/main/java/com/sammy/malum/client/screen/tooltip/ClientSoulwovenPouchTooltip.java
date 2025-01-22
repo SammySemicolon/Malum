@@ -11,9 +11,9 @@ import org.apache.commons.lang3.math.*;
 
 public class ClientSoulwovenPouchTooltip implements ClientTooltipComponent {
     private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.withDefaultNamespace("container/bundle/background");
-    private final SoulwovenPouchContents contents;
+    private final SoulwovenPouchContentsComponent contents;
 
-    public ClientSoulwovenPouchTooltip(SoulwovenPouchContents contents) {
+    public ClientSoulwovenPouchTooltip(SoulwovenPouchContentsComponent contents) {
         this.contents = contents;
     }
 

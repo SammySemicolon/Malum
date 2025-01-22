@@ -42,7 +42,7 @@ public class AugmentItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("malum.gui.augment.slot").withStyle(ChatFormatting.GOLD)
+        tooltipComponents.add(Component.translatable("malum.gui.slot").withStyle(ChatFormatting.GOLD)
                 .append(Component.translatable("malum.gui.augment.type." + getAugmentTypeTranslator()).withStyle(ChatFormatting.YELLOW)));
     }
 

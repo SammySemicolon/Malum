@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.resources.*;
+import net.minecraft.util.*;
 import net.minecraft.world.item.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.client.*;
@@ -94,14 +95,14 @@ public class FloatingItemEntityRenderer extends EntityRenderer<FloatingItemEntit
 
         poseStack.pushPose();
         poseStack.mulPose(minecraft.getEntityRenderDispatcher().cameraOrientation());
-        builder.setAlpha(0.6f * alphaScalar)
+        builder.setAlpha(Mth.clamp(0.6f * alphaScalar, 0, 1))
                 .setColor(primaryColor)
                 .setRenderType(star)
                 .renderQuad(poseStack, scale * 0.8f);
-        builder.setAlpha(0.8f * alphaScalar)
+        builder.setAlpha(Mth.clamp(0.8f * alphaScalar, 0, 1))
                 .setRenderType(twinkle)
                 .renderQuad(poseStack, scale * 0.6f);
-        builder.setAlpha(0.2f * alphaScalar)
+        builder.setAlpha(Mth.clamp(0.2f * alphaScalar, 0, 1))
                 .setColor(secondaryColor)
                 .renderQuad(poseStack, scale * 0.6f);
         poseStack.popPose();

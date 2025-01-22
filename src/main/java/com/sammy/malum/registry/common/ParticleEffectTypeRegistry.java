@@ -6,6 +6,7 @@ import com.sammy.malum.visual_effects.networked.attack.slam.SlamAttackParticleEf
 import com.sammy.malum.visual_effects.networked.attack.slash.AscensionRadialSlashParticleEffect;
 import com.sammy.malum.visual_effects.networked.blight.*;
 import com.sammy.malum.visual_effects.networked.crucible.*;
+import com.sammy.malum.visual_effects.networked.geas.*;
 import com.sammy.malum.visual_effects.networked.gluttony.*;
 import com.sammy.malum.visual_effects.networked.nitrate.*;
 import com.sammy.malum.visual_effects.networked.pylon.*;
@@ -73,6 +74,9 @@ public class ParticleEffectTypeRegistry {
     public static final ParticleEffectType HEX_BOLT_IMPACT = new HexBoltImpactParticleEffect("hex_bolt_impact");
     public static final ParticleEffectType DRAINING_BOLT_IMPACT = new DrainingBoltImpactParticleEffect("draining_bolt_impact");
     public static final ParticleEffectType ENTROPIC_BOLT_IMPACT = new EntropicBoltImpactParticleEffect("entropic_bolt_impact");
+
+    //Geas
+    public static final ParticleEffectType SOULWASHING_IMPACT = new SoulwashingGeasImpactParticleEffect("soulwashing_impact");
 
     //Gluttony
     public static final ParticleEffectType THROWN_GLUTTONY_IMPACT = new ThrownGluttonyParticleEffect("splash_of_gluttony");

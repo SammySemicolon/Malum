@@ -51,26 +51,26 @@ public class CreativeTabRegistry {
                     .icon(() -> ItemRegistry.ALCHEMICAL_IMPETUS.get().getDefaultInstance()).build()
     );
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ETCHINGS = CREATIVE_MODE_TABS.register("malum_etchings",
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> GEAS = CREATIVE_MODE_TABS.register("malum_geas",
             () -> CreativeModeTab.builder()
-                    .title(Component.translatable("itemGroup." + MalumMod.MALUM + "_etchings"))
+                    .title(Component.translatable("itemGroup." + MalumMod.MALUM + "_geas"))
                     .withTabsBefore(METALLURGY.getId())
                     .withTabsAfter(MalumMod.malumPath("malum_ritual_shards"))
                     .displayItems((p, o) -> {
-                        for (DeferredHolder<EtchingEffectType, ? extends EtchingEffectType> etchingType : MalumEtchingEffectTypeRegistry.ETCHING_TYPES.getEntries()) {
-                            final EtchingEffectType etchingEffectType = etchingType.get();
-                            ItemStack etching = new ItemStack(ItemRegistry.ETCHING.get());
-                            etching.set(DataComponentRegistry.ETCHING_EFFECT, new EtchingData(etchingEffectType));
+                        for (DeferredHolder<GeasEffectType, ? extends GeasEffectType> etchingType : MalumGeasEffectTypeRegistry.GEAS_TYPES.getEntries()) {
+                            final GeasEffectType geasEffectType = etchingType.get();
+                            ItemStack etching = new ItemStack(ItemRegistry.GEAS.get());
+                            etching.set(DataComponentRegistry.GEAS_EFFECT, new EtchingData(geasEffectType));
                             o.accept(etching);
                         }
                     })
-                    .icon(() -> ETCHING.get().getDefaultInstance()).build()
+                    .icon(() -> ItemRegistry.GEAS.get().getDefaultInstance()).build()
     );
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> RITUAL_SHARDS = CREATIVE_MODE_TABS.register("malum_ritual_shards",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup." + MalumMod.MALUM + "_ritual_shards"))
-                    .withTabsBefore(ETCHINGS.getId())
+                    .withTabsBefore(GEAS.getId())
                     .withTabsAfter(MalumMod.malumPath("malum_cosmetic"))
                     .displayItems((p, o) -> {
                         for (MalumRitualType ritualType : RitualRegistry.RITUALS) {

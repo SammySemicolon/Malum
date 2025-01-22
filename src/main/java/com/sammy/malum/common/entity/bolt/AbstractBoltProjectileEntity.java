@@ -1,5 +1,6 @@
 package com.sammy.malum.common.entity.bolt;
 
+import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.visual_effects.networked.*;
 import com.sammy.malum.visual_effects.networked.data.*;
@@ -42,7 +43,7 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
         noPhysics = false;
     }
 
-    public void setData(Entity owner, float magicDamage, int spawnDelay) {
+    public void setData(LivingEntity owner, float magicDamage, int spawnDelay) {
         setOwner(owner);
         this.magicDamage = magicDamage;
         getEntityData().set(DATA_SPAWN_DELAY, spawnDelay);
@@ -51,6 +52,7 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
                 playSound(SoundRegistry.STAFF_FIRES.get(), 0.5f, Mth.nextFloat(random, 0.9F, 1.5F));
             }
         }
+        isHoming = EtchingHandler.hasGeasEffect(owner, MalumGeasEffectTypeRegistry.OVERKEEN_EYE.get());
     }
 
     @OnlyIn(Dist.CLIENT)

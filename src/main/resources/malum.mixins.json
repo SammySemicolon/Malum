@@ -12,6 +12,8 @@
     "FeatureFlagSetMixin",
     "FishingHookEntityMixin",
     "ItemStackMixin",
+    "LivingEntityMixin",
+    "MobEffectInstanceMixin",
     "PlayerMixin"
   ],
   "client": [

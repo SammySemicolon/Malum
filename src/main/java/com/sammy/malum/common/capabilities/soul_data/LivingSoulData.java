@@ -2,6 +2,7 @@ package com.sammy.malum.common.capabilities.soul_data;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
+import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.systems.etching.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.world.entity.*;
@@ -14,14 +15,14 @@ import java.util.*;
 public class LivingSoulData {
 
     public static final Codec<LivingSoulData> CODEC = RecordCodecBuilder.create(obj -> obj.group(
-            ItemStack.CODEC.listOf().fieldOf("etchings").forGetter(sd -> sd.etchings),
+            ItemStack.CODEC.listOf().optionalFieldOf("etchings").forGetter(sd -> Optional.of(sd.etchings)),
             Codec.FLOAT.fieldOf("exposedSoulDuration").forGetter(sd -> sd.exposedSoulDuration),
             Codec.BOOL.fieldOf("soulless").forGetter(sd -> sd.soulless),
             Codec.BOOL.fieldOf("spawnerSpawned").forGetter(sd -> sd.spawnerSpawned)
     ).apply(obj, LivingSoulData::new));
 
     private List<ItemStack> etchings = new ArrayList<>();
-    private Map<ItemStack, EtchingEffect> cachedEtchingEffects = new WeakHashMap<>();
+    private final Map<ItemStack, GeasEffect> cachedEtchingEffects = new WeakHashMap<>();
     private boolean dirtyEtchings;
 
     private float exposedSoulDuration;
@@ -31,40 +32,50 @@ public class LivingSoulData {
     public LivingSoulData() {
     }
 
-    private LivingSoulData(List<ItemStack> etchings, float exposedSoulDuration, boolean soulless, boolean spawnerSpawned) {
-        this.etchings = new ArrayList<>(etchings);
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    private LivingSoulData(Optional<List<ItemStack>> etchings, float exposedSoulDuration, boolean soulless, boolean spawnerSpawned) {
+        this.etchings = new ArrayList<>(etchings.orElse(Collections.emptyList()));
         this.exposedSoulDuration = exposedSoulDuration;
         this.soulless = soulless;
         this.spawnerSpawned = spawnerSpawned;
     }
 
-    public void addEtching(ItemStack etching) {
-        if (!etching.has(DataComponentRegistry.ETCHING_EFFECT)) {
-            throw new IllegalArgumentException("Etching Itemstack does not have an etching effect");
-        }
-        if (cachedEtchingEffects.containsKey(etching)) {
-            return;
-        }
-        etchings.add(etching);
-        dirtyEtchings = true;
-    }
-
-    public void removeEtching(ItemStack etching) {
-        etchings.remove(etching);
-        dirtyEtchings = true;
-    }
-
-    public List<ItemStack> getEtchings() {
+    public List<ItemStack> getGeasItems() {
         return etchings;
     }
 
+    public void removeGeasEffect(ItemStack geas) {
+        etchings.remove(geas);
+        dirtyEtchings = true;
+    }
+
+    public void addGeasEffect(ItemStack geas) {
+        if (!geas.has(DataComponentRegistry.GEAS_EFFECT)) {
+            throw new IllegalArgumentException("Etching Itemstack does not have an geas effect");
+        }
+        var storedEtching = EtchingHandler.getStoredGeasEffect(geas);
+        if (cachedEtchingEffects.values().stream().anyMatch(e -> e.type.equals(storedEtching.type))) {
+            return;
+        }
+        etchings.add(geas);
+        dirtyEtchings = true;
+    }
+
+    public boolean hasGeasEffect(LivingEntity living, GeasEffectType type) {
+        return getGeasEffect(living, type) != null;
+    }
+
+    public Map.Entry<ItemStack, GeasEffect> getGeasEffect(LivingEntity entity, GeasEffectType type) {
+        return getGeasEffects(entity).entrySet().stream().filter(e -> e.getValue().type.equals(type)).findFirst().orElse(null);
+    }
+
     @SuppressWarnings("DataFlowIssue")
-    public Map<ItemStack, EtchingEffect> getEtchingEffects(LivingEntity entity) {
+    public Map<ItemStack, GeasEffect> getGeasEffects(LivingEntity entity) {
         if (dirtyEtchings) {
             cachedEtchingEffects.values().forEach(e -> e.removeAttributeModifiers(entity));
             cachedEtchingEffects.clear();
-            for (ItemStack etching : etchings) {
-                cachedEtchingEffects.put(etching, etching.get(DataComponentRegistry.ETCHING_EFFECT).etchingEffectType().createEffect());
+            for (ItemStack geas : etchings) {
+                cachedEtchingEffects.put(geas, geas.get(DataComponentRegistry.GEAS_EFFECT).geasEffectType().createEffect());
             }
             dirtyEtchings = false;
         }

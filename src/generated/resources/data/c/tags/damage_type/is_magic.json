@@ -1,6 +1,8 @@
 {
   "values": [
     "malum:voodoo_playerless",
-    "malum:voodoo"
+    "malum:voodoo",
+    "malum:soulwashing_propagation",
+    "malum:soulwashing_retaliation"
   ]
 }

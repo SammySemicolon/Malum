@@ -34,7 +34,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
     }
 
     @Override
-    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void finalizedOutgoingDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         var level = attacker.level();
         if (level.isClientSide) {
             return;

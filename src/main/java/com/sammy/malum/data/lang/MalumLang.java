@@ -4,8 +4,8 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.core.systems.artifice.ArtificeAttributeType;
 import com.sammy.malum.common.block.ether.EtherWallTorchBlock;
 import com.sammy.malum.common.data_components.*;
-import com.sammy.malum.common.item.spirit.SpiritJarItem;
 import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.core.systems.etching.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
@@ -53,8 +53,6 @@ public class MalumLang extends LanguageProvider {
         var effects = new HashSet<>(EFFECTS.getEntries());
         var attributes = new HashSet<>(ATTRIBUTES.getEntries());
         var entities = new HashSet<>(ENTITY_TYPES.getEntries());
-        var spirits = new ArrayList<>(SpiritTypeRegistry.SPIRITS.values());
-        var bannerPatterns = SoulwovenBannerPatternData.REGISTERED_PATTERNS;
 
         add(DataHelper.take(blocks, BlockRegistry.PRIMORDIAL_SOUP).get(), "The Weeping Well");
         add(DataHelper.take(blocks, BlockRegistry.VOID_CONDUIT).get(), "The Weeping Well");
@@ -99,20 +97,31 @@ public class MalumLang extends LanguageProvider {
             add("entity.malum." + BuiltInRegistries.ENTITY_TYPE.getKey(e.get()).getPath(), name);
         });
 
-        for (MalumSpiritType s : spirits) {
-            add(s.getSpiritDescription(), DataHelper.toTitleCase(s.getIdentifier() + "_spirit", "_"));
+        for (MalumSpiritType spirit : SpiritTypeRegistry.SPIRITS.values()) {
+            add(spirit.getSpiritDescription(), DataHelper.toTitleCase(spirit.getIdentifier() + "_spirit", "_"));
         }
-        for (SoulwovenBannerPatternData b : bannerPatterns) {
-            add(b.translationKey(), DataHelper.toTitleCase(b.type().getPath(), "_"));
+        for (SoulwovenBannerPatternData pattern : SoulwovenBannerPatternData.REGISTERED_PATTERNS) {
+            add(pattern.translationKey(), DataHelper.toTitleCase(pattern.type().getPath(), "_"));
         }
         for (ArtificeAttributeType attribute : ArtificeAttributeType.CRUCIBLE_ATTRIBUTES) {
             add(attribute.getLangKey(), DataHelper.toTitleCase(attribute.id.getPath().toLowerCase(Locale.ROOT), "_"));
         }
 
-        add("malum.gui.augment.slot", "Slot: ");
+        for (DeferredHolder<GeasEffectType, ? extends GeasEffectType> geas : MalumGeasEffectTypeRegistry.GEAS_TYPES.getEntries()) {
+            var effectType = geas.get();
+            add(effectType.getLangKey(), DataHelper.toTitleCase(geas.getId().getPath().toLowerCase(Locale.ROOT), "_"));
+        }
+
+        add("malum.gui.slot", "Slot: ");
+
         add("malum.gui.augment.installed", "When installed: ");
         add("malum.gui.augment.type.augment", "Augment");
         add("malum.gui.augment.type.core_augment", "Core Augment");
+
+        add("malum.gui.geas.sworn", "When Sworn: ");
+        add("malum.gui.geas.any", "Geas");
+        add("malum.gui.geas.day_effect", "During Day: ");
+        add("malum.gui.geas.night_effect", "During Night: ");
 
         add("malum.gui.rite.type", "Type: ");
         add("malum.gui.rite.medium", "Polarity: ");
@@ -121,6 +130,20 @@ public class MalumLang extends LanguageProvider {
 
         add("malum.gui.rite.medium.runewood", "Runewood");
         add("malum.gui.rite.medium.soulwood", "Soulwood");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.BLESSED_MOON.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.RADIANT_DAWN.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.SOULDRINKERS_ECSTASY.get(), "");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.MANAWEAVERS_INTEGRITY.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.MANAWEAVERS_OBSESSION.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.RUNIC_INFUSION.get(), "");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.OVERKEEN_EYE.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OVEREAGER_FIST.get(), "");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.SOULWASHING.get(), "Witch Factor of Wrath");
+        addGeasDescription(MalumGeasEffectTypeRegistry.LIONS_HEART.get(), "Witch Factor of Greed");
 
         add("malum.waveform_artifice.wavecharger", "Redstone Interpolation Time: %s");
         add("malum.waveform_artifice.wavebanker", "Redstone Pulse Duration: %s");
@@ -172,8 +195,8 @@ public class MalumLang extends LanguageProvider {
         add("curios.identifier.rune", "Rune");
         add("curios.modifiers.rune", "When equipped:");
 
-        add("malum.effect.curio.positive", "+%s");
-        add("malum.effect.curio.negative", "-%s");
+        add("malum.effect.positive", "+%s");
+        add("malum.effect.negative", "-%s");
 
         add("malum.effect.curio.passive_healing", "Passive Healing");
         add("malum.effect.curio.scythe_chain", "Scythe Kill Chaining");
@@ -216,6 +239,12 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.curio.spirits_gluttony", "Spirit Collection Generates Gluttony");
         add("malum.effect.curio.enchanted_explosions", "Explosions are Enchanted with %s");
         add("malum.effect.curio.explosions_spare_valuables", "Protects Valuable Items from Explosions");
+
+        add("malum.effect.geas.soul_ward_on_hit", "Magic Damage Recovers Soul Ward");
+        add("malum.effect.geas.staff_homing", "Staff Projectiles Home In on Targets");
+        add("malum.effect.geas.staff_autofire", "Staff Charges Automatically Fire");
+        add("malum.effect.geas.authority_of_wrath", "Injuries, Emotions, Senses are Shared with Witnesses");
+        add("malum.effect.geas.authority_of_greed", "Aliments, Blessings, Curses are Paused When Wounded");
 
         add("malum.effect.soul_based_damage", "Deals Soulbound Magic Damage");
         add("malum.effect.weight_of_worlds_crit", "Sometimes Strikes With Critical Force");
@@ -346,6 +375,9 @@ public class MalumLang extends LanguageProvider {
         add(category.getTranslationKey(), DataHelper.toTitleCase(category.name().toLowerCase(), "_"));
     }
 
+    public void addGeasDescription(GeasEffectType effectType, String description) {
+        add(effectType.getLangKey() + ".tooltip", description);
+    }
 
     public void addTetraMaterial(String identifier, String name) {
         add("tetra.material." + identifier, name);

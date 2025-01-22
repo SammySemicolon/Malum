@@ -119,7 +119,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> ENCYCLOPEDIA_ARCANA = register("encyclopedia_arcana", GEAR_PROPERTIES().rarity(UNCOMMON), EncyclopediaArcanaItem::new);
 
     public static final DeferredHolder<Item, RitualShardItem> RITUAL_SHARD = register("ritual_shard", HIDDEN_PROPERTIES(), RitualShardItem::new);
-    public static final DeferredHolder<Item, EtchingItem> ETCHING = register("etching", HIDDEN_PROPERTIES(), EtchingItem::new);
+    public static final DeferredHolder<Item, GeasItem> GEAS = register("geas", HIDDEN_PROPERTIES(), GeasItem::new);
 
     //region spirits
     public static final DeferredHolder<Item, SpiritShardItem> SACRED_SPIRIT = register("sacred_spirit", DEFAULT_PROPERTIES(), (p) -> new SpiritShardItem(p, SpiritTypeRegistry.SACRED_SPIRIT));

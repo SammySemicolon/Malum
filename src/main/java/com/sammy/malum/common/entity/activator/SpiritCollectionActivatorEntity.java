@@ -11,10 +11,15 @@ import net.minecraft.util.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.systems.rendering.trail.*;
 
 import java.util.*;
 
 public class SpiritCollectionActivatorEntity extends FloatingEntity {
+
+    public TrailPointBuilder secondaryTrailPointBuilder = TrailPointBuilder.create(4);
+    public TrailPointBuilder trinaryTrailPointBuilder = TrailPointBuilder.create(4);
+    public float spinOffset = (float) (random.nextFloat() * Math.PI * 2);
 
     public SpiritCollectionActivatorEntity(Level level) {
         super(EntityRegistry.SPIRIT_COLLECTION_ACTIVATOR.get(), level);
@@ -27,6 +32,7 @@ public class SpiritCollectionActivatorEntity extends FloatingEntity {
         setPos(posX, posY, posZ);
         setDeltaMovement(velX, velY, velZ);
         maxAge = 800;
+
     }
 
     @Override
@@ -41,10 +47,31 @@ public class SpiritCollectionActivatorEntity extends FloatingEntity {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (level().isClientSide) {
+            float offsetScale = 0.1f + random.nextFloat() * 0.2f;
+            for (int i = 0; i < 2; i++) {
+                float progress = (i + 1) * 0.5f;
+                Vec3 position = getPosition(progress).add(0, getYOffset(progress), 0);
+                float scalar = (age + progress) / 6f;
+                double xOffset = Math.cos(spinOffset + scalar) * offsetScale;
+                double zOffset = Math.sin(spinOffset + scalar) * offsetScale;
+                secondaryTrailPointBuilder.addTrailPoint(position.add(xOffset, 0, zOffset));
+                xOffset = Math.cos(spinOffset + scalar + 3.14f) * offsetScale;
+                zOffset = Math.sin(spinOffset + scalar + 3.14f) * offsetScale;
+                trinaryTrailPointBuilder.addTrailPoint(position.add(xOffset, 0, zOffset));
+            }
+            secondaryTrailPointBuilder.tickTrailPoints();
+            trinaryTrailPointBuilder.tickTrailPoints();
+        }
+    }
+
+    @Override
     public void spawnParticles(double x, double y, double z) {
         Vec3 motion = getDeltaMovement();
         Vec3 norm = motion.normalize().scale(0.05f);
-        var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level(), new Vec3(x, y, z), SpiritTypeRegistry.ELDRITCH_SPIRIT);
+        var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level(), new Vec3(x, y, z), SpiritTypeRegistry.UMBRAL_SPIRIT);
         lightSpecs.getBuilder().setMotion(norm);
         lightSpecs.getBloomBuilder().setMotion(norm);
         lightSpecs.spawnParticles();

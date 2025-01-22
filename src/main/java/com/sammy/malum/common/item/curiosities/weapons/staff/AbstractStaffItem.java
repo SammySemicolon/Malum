@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.core.helpers.ParticleHelper;
 import com.sammy.malum.registry.common.*;
@@ -95,18 +96,25 @@ public abstract class AbstractStaffItem extends LodestoneCombatItem implements I
             return;
         }
         float delta = Math.min(duration, useDuration - pRemainingUseDuration) / duration;
+        final InteractionHand hand = pLivingEntity.getUsedItemHand();
         if (pLevel.isClientSide) {
-            InteractionHand hand = pLivingEntity.getUsedItemHand();
             Vec3 pos = getProjectileSpawnPos(pLivingEntity, hand, 1.5f, 0.6f);
             spawnChargeParticles(pLevel, pLivingEntity, pos, pStack, delta);
             return;
         }
-        if (pRemainingUseDuration == useDuration - duration) {
+        int fullyCharged = useDuration - Mth.ceil(duration);
+        if (pRemainingUseDuration == fullyCharged) {
             float pitch = Mth.nextFloat(pLevel.random, 1.6f, 1.8f);
             pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_CHARGED.get(), SoundSource.PLAYERS, 1.25f, pitch);
+            if (EtchingHandler.hasGeasEffect(pLivingEntity, MalumGeasEffectTypeRegistry.OVEREAGER_FIST.get())) {
+                if (pLivingEntity instanceof Player player) {
+                    player.getCooldowns().addCooldown(this, 5);
+                }
+                pLivingEntity.releaseUsingItem();
+            }
             return;
         }
-        if (pRemainingUseDuration > useDuration - duration && pRemainingUseDuration % 5 == 0) {
+        if (pRemainingUseDuration > fullyCharged && pRemainingUseDuration % 5 == 0) {
             float pitch = delta + Mth.nextFloat(pLevel.random, 0.6f, 0.7f);
             pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.STAFF_POWERS_UP.get(), SoundSource.PLAYERS, 0.75f, pitch);
             return;

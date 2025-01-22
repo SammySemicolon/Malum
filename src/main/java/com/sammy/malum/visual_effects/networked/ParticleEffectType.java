@@ -1,10 +1,12 @@
 package com.sammy.malum.visual_effects.networked;
 
+import com.mojang.serialization.*;
 import com.sammy.malum.common.packets.ParticleEffectPacket;
 import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
 import com.sammy.malum.visual_effects.networked.data.ColorEffectData;
 import com.sammy.malum.visual_effects.networked.data.NBTEffectData;
 import com.sammy.malum.visual_effects.networked.data.PositionEffectData;
+import net.minecraft.resources.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -19,11 +21,20 @@ import java.util.function.Supplier;
 
 public abstract class ParticleEffectType {
 
+    public static final Codec<ParticleEffectType> CODEC = Codec.STRING.comapFlatMap(s -> {
+        final ParticleEffectType effectType = ParticleEffectTypeRegistry.EFFECT_TYPES.get(s);
+        return DataResult.success(effectType);
+    }, ParticleEffectType::getId);
+
     public final String id;
 
     public ParticleEffectType(String id) {
         this.id = id;
         ParticleEffectTypeRegistry.EFFECT_TYPES.put(id, this);
+    }
+
+    public String getId() {
+        return id;
     }
 
     @OnlyIn(Dist.CLIENT)

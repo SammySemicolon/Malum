@@ -1,5 +1,6 @@
 package com.sammy.malum.events;
 
+import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.core.handlers.client.*;
 import com.sammy.malum.core.systems.item.HeldItemTracker;
@@ -33,6 +34,7 @@ public class ClientRuntimeEvents {
 
     @SubscribeEvent
     public static void itemTooltipEvent(ItemTooltipEvent event) {
+        GeasItem.addEtchingTooltip(event);
         AugmentItem.addAugmentAttributeTooltip(event);
     }
 }

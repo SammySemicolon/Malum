@@ -87,7 +87,7 @@ public class SunderingAnchorItem extends LodestoneCombatItem implements IMalumEv
                     WorldEventHandler.addWorldEvent(level,
                             new DelayedDamageWorldEvent()
                                     .setData(attacker.getUUID(), target.getUUID(), 0, splitDamage, i * 2)
-                                    .setSound(SoundRegistry.SUNDERING_ANCHOR_EXTRA_SWING, 0.5f, 2f, 1f));
+                                    .setSound(SoundRegistry.SUNDERING_ANCHOR_EXTRA_SWING, 1.25f, 2f, 0.7f));
                 }
             }
             event.setNewDamage(splitDamage);

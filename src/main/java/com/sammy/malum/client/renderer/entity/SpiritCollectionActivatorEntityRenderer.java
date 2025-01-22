@@ -27,21 +27,27 @@ public class SpiritCollectionActivatorEntityRenderer extends EntityRenderer<Spir
     public void render(SpiritCollectionActivatorEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn) {
         var spiritType = UMBRAL_SPIRIT;
         var secondarySpiritType = ELDRITCH_SPIRIT;
-        var renderType = LodestoneRenderTypes.ADDITIVE_TEXTURE_TRIANGLE.apply(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
-        var trailBuilder = SpiritBasedWorldVFXBuilder.create(spiritType).setRenderType(renderType);
-        var eldritchTrailBuilder = SpiritBasedWorldVFXBuilder.create(secondarySpiritType).setRenderType(renderType);
+        var additive = LodestoneRenderTypes.ADDITIVE_TWO_SIDED_TEXTURE_TRIANGLE.apply(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
+        var transparent = LodestoneRenderTypes.TRANSPARENT_TWO_SIDED_TEXTURE_TRIANGLE.apply(MalumRenderTypeTokens.CONCENTRATED_TRAIL);
+        var trailBuilder = SpiritBasedWorldVFXBuilder.create(spiritType).setRenderType(additive);
         float yOffset = entity.getYOffset(partialTicks);
 
-        poseStack.pushPose();
-        poseStack.translate(0.0D, yOffset, 0.0D);
-        FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, spiritType, 0.85f, 4f, partialTicks);
-        FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, secondarySpiritType, 0.6f, 0.5f, partialTicks);
-        poseStack.popPose();
+        for (int i = 0; i < 2; i++) {
 
-        RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trail, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 1f, partialTicks);
-        RenderUtils.renderEntityTrail(poseStack, eldritchTrailBuilder, entity.trail, entity, secondarySpiritType.getPrimaryColor(), secondarySpiritType.getSecondaryColor(), 0.75f, 0.5f, partialTicks);
+            poseStack.pushPose();
+            poseStack.translate(0.0D, yOffset, 0.0D);
+            FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, secondarySpiritType, 1f, 4f, partialTicks);
+            FloatingItemEntityRenderer.renderSpiritGlimmer(poseStack, spiritType, 2f, 0.5f, partialTicks);
+            poseStack.popPose();
 
-
+            RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trail, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 0.7f, 1f, partialTicks);
+            RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.secondaryTrailPointBuilder, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 0.9f, 1f, partialTicks);
+            RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trinaryTrailPointBuilder, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 0.9f, 1f, partialTicks);
+            trailBuilder.setRenderType(transparent);
+            RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trail, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 0.7f, 1.25f, partialTicks);
+            RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.secondaryTrailPointBuilder, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 0.4f, 1.25f, partialTicks);
+            RenderUtils.renderEntityTrail(poseStack, trailBuilder, entity.trinaryTrailPointBuilder, entity, spiritType.getPrimaryColor(), spiritType.getSecondaryColor(), 0.4f, 1.25f, partialTicks);
+        }
         super.render(entity, entityYaw, partialTicks, poseStack, bufferIn, packedLightIn);
     }
 

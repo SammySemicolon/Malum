@@ -300,6 +300,17 @@
     ],
     "subtitle": "malum.subtitle.auric_flame_motif"
   },
+  "authority_of_wrath_takes_effect": {
+    "sounds": [
+      "malum:curiosities/geas/soulwashing_impact1",
+      "malum:curiosities/geas/soulwashing_impact2",
+      "malum:curiosities/geas/soulwashing_impact3",
+      "malum:curiosities/geas/soulwashing_impact4",
+      "malum:curiosities/geas/soulwashing_impact5",
+      "malum:curiosities/geas/soulwashing_impact6"
+    ],
+    "subtitle": "malum.subtitle.authority_of_wrath_takes_effect"
+  },
   "blazing_quartz_block_break": {
     "sounds": [
       "malum:blocks/gemstone/break1",

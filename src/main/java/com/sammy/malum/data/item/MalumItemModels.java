@@ -6,7 +6,6 @@ import com.sammy.malum.common.item.curiosities.curios.runes.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.registry.common.item.*;
-import io.netty.channel.socket.ChannelOutputShutdownEvent;
 import net.minecraft.data.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
@@ -14,7 +13,6 @@ import net.neoforged.neoforge.common.data.*;
 import team.lodestar.lodestone.systems.datagen.*;
 import team.lodestar.lodestone.systems.datagen.itemsmith.*;
 import team.lodestar.lodestone.systems.datagen.providers.*;
-import team.lodestar.lodestone.systems.item.*;
 
 import java.util.*;
 import java.util.function.*;
@@ -33,6 +31,7 @@ public class MalumItemModels extends LodestoneItemModelProvider {
         Set<Supplier<? extends Item>> items = new HashSet<>(ITEMS.getEntries());
 
         items.removeIf(i -> i.get() instanceof BlockItem);
+        items.remove(GEAS);
 
         ItemModelSmithData data = new ItemModelSmithData(this, items::remove);
         MalumItemModelSmithTypes.PARENTED_ITEM.apply(ResourceLocation.parse("item/air")).act(data, SOUL_OF_A_SCYTHE).applyModifier(result -> {

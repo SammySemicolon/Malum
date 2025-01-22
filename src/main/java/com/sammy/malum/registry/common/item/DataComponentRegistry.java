@@ -29,7 +29,7 @@ public class DataComponentRegistry {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<RitualData>> RITUAL_DATA = register("ritual_data", builder ->
             builder.persistent(RitualData.CODEC).networkSynchronized(RitualData.STREAM_CODEC));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<EtchingData>> ETCHING_EFFECT = register("etching_effect", builder ->
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<EtchingData>> GEAS_EFFECT = register("etching_effect", builder ->
             builder.persistent(EtchingData.CODEC).networkSynchronized(EtchingData.STREAM_CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> ITEM_SKIN = register("item_skin", builder ->

@@ -45,7 +45,7 @@ public class GeasEffect implements IMalumEventResponderItem {
     }
 
     public void addAttributeModifier(Multimap<Holder<Attribute>, AttributeModifier> modifiers, Holder<Attribute> attribute, double value, AttributeModifier.Operation operation) {
-        modifiers.put(attribute, new AttributeModifier(type.getId(), value, operation));
+        modifiers.put(attribute, new AttributeModifier(type.getId().withPrefix(type.getId().getPath() + "_"), value, operation));
     }
 
     public final void updateDirty(LivingEntity entity) {

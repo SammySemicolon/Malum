@@ -29,7 +29,7 @@ public record SoulwovenBannerPatternDataComponent(ResourceLocation type, Resourc
 
     public static final SoulwovenBannerPatternDataComponent SACRED = register(MalumMod.malumPath("sequence"));
 //    public static final SoulwovenBannerPatternData WICKED = register(MalumMod.malumPath("slash"));
-//    public static final SoulwovenBannerPatternData ARCANE = register(MalumMod.malumPath("spirit"));
+    public static final SoulwovenBannerPatternDataComponent ARCANE = register(MalumMod.malumPath("creation"));
     public static final SoulwovenBannerPatternDataComponent ELDRITCH = register(MalumMod.malumPath("sanity"));
 
     public static final SoulwovenBannerPatternDataComponent AERIAL = register(MalumMod.malumPath("breeze"));

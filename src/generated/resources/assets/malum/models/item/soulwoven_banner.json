@@ -8,7 +8,7 @@
       }
     },
     {
-      "model": "malum:item/soulwoven_banner_control",
+      "model": "malum:item/soulwoven_banner_spawn",
       "predicate": {
         "malum:pattern": 2.0
       }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "malum:controlbanner_crafting_"
+        "recipe": "malum:spawnbanner_crafting_"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -15,7 +15,7 @@
   ],
   "rewards": {
     "recipes": [
-      "malum:controlbanner_crafting_"
+      "malum:spawnbanner_crafting_"
     ]
   }
 }

@@ -30,14 +30,13 @@ public abstract class NightCycleBasedGeas extends GeasEffect {
     }
 
     @Override
-    public void update(EntityTickEvent event) {
+    public void update(EntityTickEvent.Pre event, LivingEntity entity) {
         boolean wasNight = isNight;
         isNight = event.getEntity().level().isNight();
         if (wasNight != isNight) {
             markDirty();
         }
     }
-
 
     public final Multimap<Holder<Attribute>, AttributeModifier> createAttributeModifiers(LivingEntity entity, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         return createAttributeModifiers(entity, modifiers, isNight);

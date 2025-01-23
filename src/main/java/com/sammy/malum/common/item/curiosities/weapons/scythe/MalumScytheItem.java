@@ -66,10 +66,10 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
         float damage = event.getOriginalDamage() * (0.66f + sweeping * 0.33f);
         float radius = 1 + sweeping * 0.25f;
         level.getEntities(attacker, target.getBoundingBox().inflate(radius)).forEach(e -> {
-            if (e instanceof LivingEntity livingEntity) {
-                if (livingEntity.isAlive()) {
-                    livingEntity.hurt((DamageTypeHelper.create(level, DamageTypeRegistry.SCYTHE_SWEEP, attacker)), damage);
-                    livingEntity.knockback(0.4F,
+            if (e instanceof LivingEntity sweepTarget) {
+                if (sweepTarget.isAlive() && sweepTarget != target) {
+                    sweepTarget.hurt((DamageTypeHelper.create(level, DamageTypeRegistry.SCYTHE_SWEEP, attacker)), damage);
+                    sweepTarget.knockback(0.4F,
                             Mth.sin(attacker.getYRot() * ((float) Math.PI / 180F)),
                             (-Mth.cos(attacker.getYRot() * ((float) Math.PI / 180F))));
                 }

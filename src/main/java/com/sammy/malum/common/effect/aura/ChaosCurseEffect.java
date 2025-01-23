@@ -8,7 +8,7 @@ import team.lodestar.lodestone.helpers.*;
 
 public class ChaosCurseEffect extends MobEffect {
     public ChaosCurseEffect() {
-        super(MobEffectCategory.HARMFUL, ColorHelper.getColor(SpiritTypeRegistry.INFERNAL_SPIRIT.getPrimaryColor()));
+        super(MobEffectCategory.BENEFICIAL, ColorHelper.getColor(SpiritTypeRegistry.INFERNAL_SPIRIT.getPrimaryColor()));
         var id = MalumMod.malumPath("chaos_curse");
         addAttributeModifier(AttributeRegistry.MALIGNANT_CONVERSION, id, 0.02f, AttributeModifier.Operation.ADD_VALUE);
     }

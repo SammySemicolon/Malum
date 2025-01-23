@@ -213,9 +213,9 @@ public class SoulHarvestHandler {
 
     public static void triggerSpiritCollection(LivingEntity collector) {
         var collectionEvent = new CollectSpiritEvent(collector);
-        var attribute = collector.getAttributeValue(AttributeRegistry.ARCANE_RESONANCE);
+        var resonance = collector.getAttributeValue(AttributeRegistry.ARCANE_RESONANCE);
         ItemEventHandler.getEventResponders(collector).forEach(lookup -> lookup.run(IMalumEventResponderItem.class,
-                (eventResponderItem, stack) -> eventResponderItem.spiritCollectionEvent(collectionEvent, collector, attribute)));
+                (eventResponderItem, stack) -> eventResponderItem.spiritCollectionEvent(collectionEvent, collector, resonance)));
         NeoForge.EVENT_BUS.post(collectionEvent);
     }
 }

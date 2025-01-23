@@ -24,6 +24,8 @@ public class MalumGeasEffectTypeRegistry {
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OVERKEEN_EYE = GEAS_TYPES.register("overkeen_eye", () -> new GeasEffectType(OverkeenEyeGeas::new));
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OVEREAGER_FIST = GEAS_TYPES.register("overeager_fist", () -> new GeasEffectType(OvereagerFist::new));
 
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> HUNGERING_DELIVERANCE = GEAS_TYPES.register("hungering_deliverance", () -> new GeasEffectType(HungeringDeliveranceGeas::new));
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> REINFORCING_DELIVERANCE = GEAS_TYPES.register("reinforcing_deliverance", () -> new GeasEffectType(ReinforcingDeliveranceGeas::new));
 
     public static final DeferredHolder<GeasEffectType, GeasEffectType> SOULWASHING = GEAS_TYPES.register("soulwashing", () -> new GeasEffectType(SoulwashingGeas::new));
     public static final DeferredHolder<GeasEffectType, GeasEffectType> LIONS_HEART = GEAS_TYPES.register("lions_heart", () -> new GeasEffectType(LionsHeartGeas::new));

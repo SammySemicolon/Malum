@@ -142,6 +142,9 @@ public class MalumLang extends LanguageProvider {
         addGeasDescription(MalumGeasEffectTypeRegistry.OVERKEEN_EYE.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.OVEREAGER_FIST.get(), "");
 
+        addGeasDescription(MalumGeasEffectTypeRegistry.HUNGERING_DELIVERANCE.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.REINFORCING_DELIVERANCE.get(), "");
+
         addGeasDescription(MalumGeasEffectTypeRegistry.SOULWASHING.get(), "Witch Factor of Wrath");
         addGeasDescription(MalumGeasEffectTypeRegistry.LIONS_HEART.get(), "Witch Factor of Greed");
 
@@ -243,8 +246,12 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.soul_ward_on_hit", "Magic Damage Recovers Soul Ward");
         add("malum.effect.geas.staff_homing", "Staff Projectiles Home In on Targets");
         add("malum.effect.geas.staff_autofire", "Staff Charges Automatically Fire");
+        add("malum.effect.geas.malignant_crit_leech", "Malignant Deliverance Leeches Life Essence");
+        add("malum.effect.geas.malignant_crit_reinforcement", "Malignant Deliverance Improves Conversion");
         add("malum.effect.geas.authority_of_wrath", "Injuries, Emotions, Senses are Shared with Witnesses");
+        add("malum.effect.geas.authority_of_wrath_arcane_resonance", "Arcane Resonance Favors Influence");
         add("malum.effect.geas.authority_of_greed", "Aliments, Blessings, Curses are Paused When Wounded");
+        add("malum.effect.geas.authority_of_greed_arcane_resonance", "Arcane Resonance Aids Stasis Duration");
 
         add("malum.effect.soul_based_damage", "Deals Soulbound Magic Damage");
         add("malum.effect.weight_of_worlds_crit", "Sometimes Strikes With Critical Force");

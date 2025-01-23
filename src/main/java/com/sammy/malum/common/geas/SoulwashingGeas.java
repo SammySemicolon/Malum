@@ -35,6 +35,7 @@ public class SoulwashingGeas extends GeasEffect {
     @Override
     public void addTooltipComponents(LivingEntity entity, Consumer<Component> tooltipAcceptor, TooltipFlag tooltipFlag) {
         tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("authority_of_wrath"));
+        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("authority_of_wrath_arcane_resonance"));
         super.addTooltipComponents(entity, tooltipAcceptor, tooltipFlag);
     }
 
@@ -47,7 +48,7 @@ public class SoulwashingGeas extends GeasEffect {
 
     @Override
     public void finalizedIncomingDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
-        if (event.getSource().is(DamageTypeTagRegistry.SOULWASHING)) {
+        if (event.getSource().is(DamageTypeTagRegistry.IS_SOULWASHING)) {
             return;
         }
         damageTargets(target, null, DamageTypeRegistry.SOULWASHING_RETALIATION, event.getOriginalDamage());
@@ -55,7 +56,7 @@ public class SoulwashingGeas extends GeasEffect {
 
     @Override
     public void finalizedOutgoingDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
-        if (event.getSource().is(DamageTypeTagRegistry.SOULWASHING)) {
+        if (event.getSource().is(DamageTypeTagRegistry.SOULWASHING_BLACKLIST)) {
             return;
         }
         if (!attacker.equals(event.getSource().getEntity())) {
@@ -66,38 +67,42 @@ public class SoulwashingGeas extends GeasEffect {
     }
 
     @Override
-    public void update(EntityTickEvent event) {
-        final Entity geasHolder = event.getEntity();
-        final Level level = geasHolder.level();
+    public void update(EntityTickEvent.Pre event, LivingEntity entity) {
+        var geasHolder = event.getEntity();
+        var level = geasHolder.level();
         if (level.getGameTime() % 40L == 0) {
             visibleTargets.clear();
-            for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, geasHolder.getBoundingBox().inflate(32f, 16f, 32f))) {
-                if (entity == geasHolder || entity.isSpectator()) {
+            double influence = 8f;
+            influence *= entity.getAttributeValue(AttributeRegistry.ARCANE_RESONANCE);
+            for (LivingEntity target : level.getEntitiesOfClass(LivingEntity.class, geasHolder.getBoundingBox().inflate(influence*2, influence, influence*2))) {
+                if (target == geasHolder || target.isSpectator()) {
                     continue;
                 }
                 if (geasHolder instanceof Player player) {
-                    if (entity.isInvisibleTo(player)) {
+                    if (target.isInvisibleTo(player)) {
                         continue;
                     }
                 }
-                if (entity instanceof TamableAnimal tamableAnimal) {
+                if (target instanceof TamableAnimal tamableAnimal) {
                     if (tamableAnimal.isTame()) {
                         continue;
                     }
                 }
-                if (entity.hasCustomName()) {
+                if (target.hasCustomName()) {
                     continue;
                 }
-                if (!hasLineOfSight(geasHolder, entity)) {
+                if (!hasLineOfSight(geasHolder, target)) {
                     continue;
                 }
-                visibleTargets.put(entity.getUUID(), entity);
+                visibleTargets.put(target.getUUID(), target);
             }
         }
     }
 
-    public void damageTargets(Entity wrathBearer, @Nullable Entity excludedTarget, ResourceKey<DamageType> damageType, float damage) {
+    public void damageTargets(LivingEntity wrathBearer, @Nullable LivingEntity excludedTarget, ResourceKey<DamageType> damageType, float damage) {
         var targets = new ArrayList<>(visibleTargets.values());
+        Collections.shuffle(targets);
+
         for (int i = 0; i < targets.size(); i++) {
             LivingEntity target = targets.get(i);
             if (target.equals(excludedTarget)) {

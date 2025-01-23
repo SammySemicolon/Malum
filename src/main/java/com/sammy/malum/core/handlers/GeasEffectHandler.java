@@ -12,7 +12,9 @@ import team.lodestar.lodestone.handlers.*;
 import java.util.*;
 
 public class GeasEffectHandler {
-    public static final ItemEventHandler.EventResponderSource GEAS_EFFECTS = new ItemEventHandler.EventResponderSource(MalumMod.malumPath("geas_effects"), GeasEffectHandler::getGeasItemStacks, GeasEffectHandler::getEquippedGeasEffects);
+    public static final ItemEventHandler.EventResponderSource GEAS_EFFECTS = new ItemEventHandler.EventResponderSource(MalumMod.malumPath("geas_effects"),
+            GeasEffectHandler::getGeasItemStacks,
+            GeasEffectHandler::getEquippedGeasEffectFromStack);
 
     public static void init() {
         ItemEventHandler.registerLookup(GEAS_EFFECTS);
@@ -23,7 +25,7 @@ public class GeasEffectHandler {
             final Collection<GeasEffect> geasEffects = getGeasEffects(living).values();
             geasEffects.forEach(e -> {
                 e.updateDirty(living);
-                e.update(event);
+                e.update(event, living);
             });
         }
     }
@@ -47,10 +49,11 @@ public class GeasEffectHandler {
         return entity.getData(AttachmentTypeRegistry.LIVING_SOUL_INFO).getGeasEffect(entity, type);
     }
 
-    public static GeasEffect getEquippedGeasEffects(LivingEntity entity, ItemStack stack) {
+    public static GeasEffect getEquippedGeasEffectFromStack(LivingEntity entity, ItemStack stack) {
         return getGeasEffects(entity).get(stack);
     }
 
+    @SuppressWarnings("DataFlowIssue")
     public static GeasEffect getStoredGeasEffect(ItemStack stack) {
         if (!stack.has(DataComponentRegistry.GEAS_EFFECT)) {
             throw new IllegalArgumentException("Stack does not have an etching effect");

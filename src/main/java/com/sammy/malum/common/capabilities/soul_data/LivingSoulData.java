@@ -15,14 +15,14 @@ import java.util.*;
 public class LivingSoulData {
 
     public static final Codec<LivingSoulData> CODEC = RecordCodecBuilder.create(obj -> obj.group(
-            ItemStack.CODEC.listOf().optionalFieldOf("etchings").forGetter(sd -> Optional.of(sd.etchings)),
+            ItemStack.CODEC.listOf().optionalFieldOf("geasEffects").forGetter(sd -> Optional.of(sd.geasStacks)),
             Codec.FLOAT.fieldOf("exposedSoulDuration").forGetter(sd -> sd.exposedSoulDuration),
             Codec.BOOL.fieldOf("soulless").forGetter(sd -> sd.soulless),
             Codec.BOOL.fieldOf("spawnerSpawned").forGetter(sd -> sd.spawnerSpawned)
     ).apply(obj, LivingSoulData::new));
 
-    private List<ItemStack> etchings = new ArrayList<>();
-    private final Map<ItemStack, GeasEffect> cachedEtchingEffects = new WeakHashMap<>();
+    private final List<ItemStack> geasStacks = new ArrayList<>();
+    private final Map<ItemStack, GeasEffect> cachedGeasEffects = new WeakHashMap<>();
     private boolean dirtyEtchings;
 
     private float exposedSoulDuration;
@@ -33,19 +33,19 @@ public class LivingSoulData {
     }
 
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-    private LivingSoulData(Optional<List<ItemStack>> etchings, float exposedSoulDuration, boolean soulless, boolean spawnerSpawned) {
-        this.etchings = new ArrayList<>(etchings.orElse(Collections.emptyList()));
+    private LivingSoulData(Optional<List<ItemStack>> geasStacks, float exposedSoulDuration, boolean soulless, boolean spawnerSpawned) {
+        geasStacks.ifPresent(s -> s.forEach(this::addGeasEffect));
         this.exposedSoulDuration = exposedSoulDuration;
         this.soulless = soulless;
         this.spawnerSpawned = spawnerSpawned;
     }
 
     public List<ItemStack> getGeasItems() {
-        return etchings;
+        return geasStacks;
     }
 
     public void removeGeasEffect(ItemStack geas) {
-        etchings.remove(geas);
+        geasStacks.remove(geas);
         dirtyEtchings = true;
     }
 
@@ -54,10 +54,10 @@ public class LivingSoulData {
             throw new IllegalArgumentException("Etching Itemstack does not have an geas effect");
         }
         var storedEtching = GeasEffectHandler.getStoredGeasEffect(geas);
-        if (cachedEtchingEffects.values().stream().anyMatch(e -> e.type.equals(storedEtching.type))) {
+        if (cachedGeasEffects.values().stream().anyMatch(e -> e.type.equals(storedEtching.type))) {
             return;
         }
-        etchings.add(geas);
+        geasStacks.add(geas);
         dirtyEtchings = true;
     }
 
@@ -72,14 +72,14 @@ public class LivingSoulData {
     @SuppressWarnings("DataFlowIssue")
     public Map<ItemStack, GeasEffect> getGeasEffects(LivingEntity entity) {
         if (dirtyEtchings) {
-            cachedEtchingEffects.values().forEach(e -> e.removeAttributeModifiers(entity));
-            cachedEtchingEffects.clear();
-            for (ItemStack geas : etchings) {
-                cachedEtchingEffects.put(geas, geas.get(DataComponentRegistry.GEAS_EFFECT).geasEffectType().createEffect());
+            cachedGeasEffects.values().forEach(e -> e.removeAttributeModifiers(entity));
+            cachedGeasEffects.clear();
+            for (ItemStack geas : geasStacks) {
+                cachedGeasEffects.put(geas, geas.get(DataComponentRegistry.GEAS_EFFECT).geasEffectType().createEffect());
             }
             dirtyEtchings = false;
         }
-        return cachedEtchingEffects;
+        return cachedGeasEffects;
     }
 
     public void setExposed() {

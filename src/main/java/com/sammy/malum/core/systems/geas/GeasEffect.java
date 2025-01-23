@@ -68,7 +68,7 @@ public class GeasEffect implements IMalumEventResponderItem {
         attributeCache = attributes;
     }
 
-    public void update(EntityTickEvent event) {
+    public void update(EntityTickEvent.Pre event, LivingEntity entity) {
 
     }
 }

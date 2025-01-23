@@ -62,6 +62,9 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         if (!source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
             return;
         }
+        if (source.is(DamageTypeRegistry.HIDDEN_BLADE_COUNTER)) {
+            return;
+        }
         if (CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get())) {
             var data = attacker.getData(AttachmentTypeRegistry.CURIO_DATA);
             var random = level.getRandom();
@@ -93,9 +96,9 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             entity.setData(attacker, physicalDamage, magicDamage, duration);
             entity.setItem(scytheWeapon);
             level.addFreshEntity(entity);
-            data.hiddenBladeNecklaceCooldown = COOLDOWN_DURATION;
             PacketDistributor.sendToPlayersTrackingEntityAndSelf(attacker, new SyncCurioDataPayload(attacker.getId(), data));
             if (!effect.isInfiniteDuration()) {
+                data.hiddenBladeNecklaceCooldown = COOLDOWN_DURATION;
                 attacker.removeEffect(effect.getEffect());
             }
             for (int i = 0; i < 3; i++) {

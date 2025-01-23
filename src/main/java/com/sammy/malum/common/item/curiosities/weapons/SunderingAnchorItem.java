@@ -72,10 +72,10 @@ public class SunderingAnchorItem extends LodestoneCombatItem implements IMalumEv
         var chaosCurse = MobEffectRegistry.CHAOS_CURSE;
         var effect = target.getEffect(chaosCurse);
         if (effect == null) {
-            target.addEffect(new MobEffectInstance(chaosCurse, 60, 0, true, true, true));
+            target.addEffect(new MobEffectInstance(chaosCurse, 120, 0, true, true, true));
         } else {
             EntityHelper.amplifyEffect(effect, target, 1, 49);
-            EntityHelper.extendEffect(effect, target, 15, 3000);
+            EntityHelper.extendEffect(effect, target, 60, 3000);
         }
 
         if (source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {

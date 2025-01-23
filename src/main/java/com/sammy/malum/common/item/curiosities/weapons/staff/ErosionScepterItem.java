@@ -59,7 +59,7 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
             if (effect == null) {
                 target.addEffect(new MobEffectInstance(silenced, 150, 0, true, true, true));
             } else {
-                EntityHelper.amplifyEffect(effect, target, 1, 9);
+                EntityHelper.amplifyEffect(effect, target, 1, 19);
                 EntityHelper.extendEffect(effect, target, 30, 300);
             }
             SoundHelper.playSound(target, SoundRegistry.DRAINING_MOTIF.get(), attacker.getSoundSource(), 1, 1.25f);

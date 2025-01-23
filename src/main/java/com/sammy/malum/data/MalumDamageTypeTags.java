@@ -33,8 +33,10 @@ public class MalumDamageTypeTags extends DamageTypeTagsProvider {
         tag(DamageTypeTagRegistry.IS_SCYTHE).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP, DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
         tag(DamageTypeTagRegistry.IS_SCYTHE_MELEE).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP);
 
-        tag(DamageTypeTagRegistry.SOULWASHING).add(DamageTypeRegistry.SOULWASHING_PROPAGATION, DamageTypeRegistry.SOULWASHING_RETALIATION);
-        tag(DamageTypeTagRegistry.AUTHORITY_OF_GREED_BLACKLIST).addTag(DamageTypeTags.BYPASSES_ARMOR);
+        tag(DamageTypeTagRegistry.IS_SOULWASHING).add(DamageTypeRegistry.SOULWASHING_PROPAGATION, DamageTypeRegistry.SOULWASHING_RETALIATION);
+
+        tag(DamageTypeTagRegistry.SOULWASHING_BLACKLIST).addTag(DamageTypeTagRegistry.IS_SOULWASHING).add(DamageTypeRegistry.SCYTHE_SWEEP);
+        tag(DamageTypeTagRegistry.LIONS_HEART_BLACKLIST).addTag(DamageTypeTags.BYPASSES_ARMOR);
 
         tag(DamageTypeTags.BYPASSES_COOLDOWN).add(DamageTypeRegistry.VOODOO, DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
     }

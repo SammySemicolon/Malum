@@ -37,7 +37,7 @@ public class RuneHereticItem extends AbstractRuneCurioItem implements ItemEventH
             attacker.addEffect(new MobEffectInstance(silenced, 60, 0, true, true, true));
         } else {
             if (attacked.getRandom().nextFloat() < 0.6f) {
-                EntityHelper.amplifyEffect(effect, attacker, 1, 9);
+                EntityHelper.amplifyEffect(effect, attacker, 1, 19);
             }
             EntityHelper.extendEffect(effect, attacker, 30, 600);
         }

@@ -8,6 +8,7 @@ import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.util.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -30,6 +31,7 @@ public class LionsHeartGeas extends GeasEffect {
     @Override
     public void addTooltipComponents(LivingEntity entity, Consumer<Component> tooltipAcceptor, TooltipFlag tooltipFlag) {
         tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("authority_of_greed"));
+        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("authority_of_greed_arcane_resonance"));
         super.addTooltipComponents(entity, tooltipAcceptor, tooltipFlag);
     }
 
@@ -40,7 +42,7 @@ public class LionsHeartGeas extends GeasEffect {
     }
 
     @Override
-    public void update(EntityTickEvent event) {
+    public void update(EntityTickEvent.Pre event, LivingEntity entity) {
         if (lionsHeartDuration > 0) {
             lionsHeartDuration--;
         }
@@ -48,10 +50,10 @@ public class LionsHeartGeas extends GeasEffect {
 
     @Override
     public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
-        if (event.getSource().is(DamageTypeTagRegistry.AUTHORITY_OF_GREED_BLACKLIST)) {
+        if (event.getSource().is(DamageTypeTagRegistry.LIONS_HEART_BLACKLIST)) {
             return;
         }
-        lionsHeartDuration += 200;
+        lionsHeartDuration += Mth.floor(100 * target.getAttributeValue(AttributeRegistry.ARCANE_RESONANCE));
         if (lionsHeartDuration > 3600) {
             lionsHeartDuration = 3600;
         }

@@ -169,6 +169,7 @@ dependencies {
 //    compileOnly(("se.mickelus.mutil:mutil:${property("mutil_version")}"))
 
     compileOnly(("curse.maven:farmers-delight-398521:5878217"))
+    localRuntime(("curse.maven:farmers-delight-398521:5878217"))
 
     compileOnly(("software.bernie.geckolib:geckolib-neoforge-${property("minecraft_version")}:${property("gecko_lib_version")}"))
     compileOnly(("dev.kosmx.player-anim:player-animation-lib-forge:${property("player_animator_version")}"))

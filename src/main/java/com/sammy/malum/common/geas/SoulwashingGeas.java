@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
+import net.minecraft.world.scores.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
 import team.lodestar.lodestone.handlers.*;
@@ -78,8 +79,13 @@ public class SoulwashingGeas extends GeasEffect {
                 if (target == geasHolder || target.isSpectator()) {
                     continue;
                 }
-                if (geasHolder instanceof Player player) {
-                    if (target.isInvisibleTo(player)) {
+                if (target instanceof Player player) {
+                    if (geasHolder.isInvisibleTo(player)) {
+                        continue;
+                    }
+                }
+                if (target.getTeam() != null && target.getTeam().isAlliedTo(geasHolder.getTeam())) {
+                    if (!target.getTeam().isAllowFriendlyFire()) {
                         continue;
                     }
                 }

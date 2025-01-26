@@ -14,13 +14,37 @@ import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.tick.*;
+import team.lodestar.lodestone.registry.common.*;
 
 import java.util.function.*;
 
 public class HungeringDeliveranceGeas extends GeasEffect {
 
+    private int timer;
+    private int streak;
+
     public HungeringDeliveranceGeas() {
         super(MalumGeasEffectTypeRegistry.HUNGERING_DELIVERANCE.get());
+    }
+
+    @Override
+    public void update(EntityTickEvent.Pre event, LivingEntity entity) {
+        if (streak > 0) {
+            timer++;
+            if (timer > 1200) {
+                streak = 0;
+                markDirty();
+            }
+        }
+    }
+
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> createAttributeModifiers(LivingEntity entity, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        if (streak > 3) {
+            addAttributeModifier(modifiers, AttributeRegistry.HEALING_MULTIPLIER, -0.1f * (streak - 3), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        }
+        return modifiers;
     }
 
     @Override
@@ -31,6 +55,11 @@ public class HungeringDeliveranceGeas extends GeasEffect {
             player.causeFoodExhaustion(0.5f * multiplier);
         }
         attacker.heal(4f * multiplier);
+        streak++;
+        timer /= 2;
+        if (streak > 3) {
+            markDirty();
+        }
     }
 
     @Override

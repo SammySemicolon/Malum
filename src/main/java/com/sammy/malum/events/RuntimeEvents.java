@@ -124,6 +124,7 @@ public class RuntimeEvents {
         RuneTwinnedDurationItem.onPotionApplied(event);
         RuneAlimentCleansingItem.onPotionApplied(event);
     }
+
     @SubscribeEvent
     public static void onPotionExpired(MobEffectEvent.Expired event) {
     }
@@ -142,6 +143,11 @@ public class RuntimeEvents {
     public static void onHurt(LivingDamageEvent.Pre event) {
         SoulWardHandler.shieldPlayer(event);
         MalumAttributeEventHandler.processAttributes(event);
+    }
+
+    @SubscribeEvent
+    public static void onHeal(LivingHealEvent event) {
+        MalumAttributeEventHandler.heal(event);
     }
 
     @SubscribeEvent
@@ -165,4 +171,3 @@ public class RuntimeEvents {
         NitrateExplosion.processExplosion(event);
     }
 }
-

@@ -90,8 +90,7 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
 
     public static boolean canSweep(LivingEntity attacker) {
         //TODO: convert this to a ToolAction, or something alike
-        return !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get()) &&
-                !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get());
+        return !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get());
     }
 
     public static DamageSource replaceDamageSource(Player player, DamageSource source) {

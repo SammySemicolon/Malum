@@ -55,8 +55,8 @@ public class AscensionHandler {
             var sound = SoundRegistry.SCYTHE_SWEEP.get();
             var particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_SPIN).mirrorRandomly(random);
             if (isEnhanced) {
-                baseDamage *= 1.25f;
-                magicDamage *= 1.25f;
+                baseDamage *= 1.3f;
+                magicDamage *= 1.3f;
                 aabb = aabb.move(player.getLookAngle().scale(2f)).inflate(-2f, 1f, -2f);
                 sound = SoundRegistry.SCYTHE_CUT.get();
                 particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_UPPERCUT).setVerticalSlashAngle().setMirrored(true);

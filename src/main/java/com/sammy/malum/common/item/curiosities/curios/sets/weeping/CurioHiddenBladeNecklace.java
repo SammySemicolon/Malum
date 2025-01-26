@@ -33,11 +33,8 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
         consumer.accept(ComponentHelper.positiveCurioEffect("scythe_counterattack"));
-        consumer.accept(ComponentHelper.positiveCurioEffect("enhanced_maneuvers"));
         consumer.accept(ComponentHelper.negativeCurioEffect("pacifist_recharge"));
-        consumer.accept(ComponentHelper.negativeCurioEffect("no_sweep"));
     }
-
 
     @Override
     public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
@@ -128,5 +125,4 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             }
         }
     }
-
 }

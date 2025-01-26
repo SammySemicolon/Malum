@@ -13,7 +13,7 @@ public class AttachmentTypeRegistry {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MalumMod.MALUM);
 
     public static final Supplier<AttachmentType<LivingSoulData>> LIVING_SOUL_INFO = ATTACHMENT_TYPES.register(
-            "living_soul_info", () -> AttachmentType.builder(LivingSoulData::new).serialize(LivingSoulData.CODEC).build());
+            "living_soul_info", () -> AttachmentType.builder(LivingSoulData::new).serialize(LivingSoulData.CODEC).copyOnDeath().build());
 
     public static final Supplier<AttachmentType<ProjectileSoulData>> PROJECTILE_SOUL_INFO = ATTACHMENT_TYPES.register(
             "projectile_soul_info", () -> AttachmentType.builder(ProjectileSoulData::new).serialize(ProjectileSoulData.CODEC).build());
@@ -22,7 +22,7 @@ public class AttachmentTypeRegistry {
             "cached_spirit_drops", () -> AttachmentType.builder(CachedSpiritDropsData::new).serialize(CachedSpiritDropsData.CODEC).build());
 
     public static final Supplier<AttachmentType<ProgressionData>> PROGRESSION_DATA = ATTACHMENT_TYPES.register(
-            "progression_data", () -> AttachmentType.builder(ProgressionData::new).serialize(ProgressionData.CODEC).build());
+            "progression_data", () -> AttachmentType.builder(ProgressionData::new).serialize(ProgressionData.CODEC).copyOnDeath().build());
 
     public static final Supplier<AttachmentType<CurioData>> CURIO_DATA = ATTACHMENT_TYPES.register(
             "curio_data", () -> AttachmentType.builder(CurioData::new).serialize(CurioData.CODEC).build());

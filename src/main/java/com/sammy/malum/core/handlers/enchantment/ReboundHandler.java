@@ -30,8 +30,8 @@ public class ReboundHandler {
                 int angle = hand == InteractionHand.MAIN_HAND ? 225 : 90;
                 double radians = Math.toRadians(angle - player.yHeadRot);
                 position = player.position().add(player.getLookAngle().scale(0.5f)).add(0.75f * Math.sin(radians), player.getBbHeight() * 0.9f, 0.75f * Math.cos(radians));
-                baseDamage *= 1.5f;
-                magicDamage *= 1.5f;
+                baseDamage *= 1.3f;
+                magicDamage *= 1.3f;
             }
             var entity = new ScytheBoomerangEntity(level, position.x, position.y, position.z);
 

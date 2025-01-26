@@ -13,6 +13,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.*;
 import org.apache.logging.log4j.*;
 
 import static com.sammy.malum.registry.client.ParticleRegistry.*;
@@ -45,7 +46,7 @@ public class MalumMod {
 
         ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC);
-
+        NeoForgeMod.enableMergedAttributeTooltips();
         BLOCKS.register(modBus);
         BLOCK_ENTITY_TYPES.register(modBus);
         COMPONENTS.register(modBus);

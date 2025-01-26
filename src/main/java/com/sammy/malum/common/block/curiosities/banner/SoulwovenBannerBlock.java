@@ -30,7 +30,13 @@ import java.util.stream.Collectors;
 
 public class SoulwovenBannerBlock extends LodestoneEntityBlock<SoulwovenBannerBlockEntity> {
     public static final EnumProperty<BannerType> BANNER_TYPE = EnumProperty.create("banner_type", BannerType.class);
-    private static final VoxelShape SHAPE = Block.box(2.0, 0.0, 2.0, 12.0, 16.0, 12.0);
+    private static final VoxelShape HANGING_SHAPE_X = Block.box(6.0, 9.0, 0.0, 10.0, 16.0, 16.0);
+    private static final VoxelShape HANGING_SHAPE_Z = Block.box(0.0, 9.0, 6.0, 16.0, 16.0, 10.0);
+
+    private static final VoxelShape MOUNTED_NORTH_SHAPE = Block.box(0.0, 6.0, 14.0, 16.0, 16.0, 16.0);
+    private static final VoxelShape MOUNTED_SOUTH_SHAPE = Block.box(0.0, 6.0, 0.0, 16.0, 16.0, 2.0);
+    private static final VoxelShape MOUNTED_WEST_SHAPE = Block.box(14.0, 6.0, 0.0, 16.0, 16.0, 16.0);
+    private static final VoxelShape MOUNTED_EAST_SHAPE = Block.box(0.0, 6.0, 0.0, 2.0, 16.0, 16.0);
 
     public SoulwovenBannerBlock(Properties properties) {
         super(properties);
@@ -69,7 +75,29 @@ public class SoulwovenBannerBlock extends LodestoneEntityBlock<SoulwovenBannerBl
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        switch (state.getValue(BANNER_TYPE)) {
+            case HANGING_X -> {
+                return HANGING_SHAPE_X;
+            }
+            case HANGING_Z -> {
+                return HANGING_SHAPE_Z;
+            }
+            case MOUNTED_NORTH -> {
+                return MOUNTED_NORTH_SHAPE;
+            }
+            case MOUNTED_SOUTH -> {
+                return MOUNTED_SOUTH_SHAPE;
+            }
+            case MOUNTED_WEST -> {
+                return MOUNTED_WEST_SHAPE;
+            }
+            case MOUNTED_EAST -> {
+                return MOUNTED_EAST_SHAPE;
+            }
+            default -> {
+                return super.getShape(state, level, pos, context);
+            }
+        }
     }
 
 

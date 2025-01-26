@@ -1,4 +1,4 @@
-package com.sammy.malum.common.item.curiosities.curios.sets.misc;
+package com.sammy.malum.common.item.curiosities.curios.sets.scythe;
 
 import com.google.common.collect.Multimap;
 import com.sammy.malum.MalumMod;
@@ -14,8 +14,8 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.function.Consumer;
 
-public class CurioNarrowNecklace extends MalumCurioItem {
-    public CurioNarrowNecklace(Properties builder) {
+public class CurioNarrowEdgeNecklace extends MalumCurioItem {
+    public CurioNarrowEdgeNecklace(Properties builder) {
         super(builder, MalumTrinketType.METALLIC);
     }
 

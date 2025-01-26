@@ -87,7 +87,7 @@ public abstract class AbstractScytheProjectileEntity extends ThrowableItemProjec
         }
         if (getOwner() instanceof LivingEntity owner) {
             var target = result.getEntity();
-            var source = DamageTypeHelper.create(level(), DamageTypeRegistry.SCYTHE_SWEEP, this, owner);
+            var source = DamageTypeHelper.create(level(), DamageTypeRegistry.SCYTHE_REBOUND, this, owner);
             var heldItem = owner.getMainHandItem();
 
             owner.setItemInHand(InteractionHand.MAIN_HAND, getItem());

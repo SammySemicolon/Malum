@@ -14,6 +14,7 @@ import com.sammy.malum.registry.common.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.*;
+import net.minecraft.world.damagesource.*;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.BlockItem;
@@ -227,9 +228,10 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.curio.growing_gluttony", "Eating Rotten Foods Extends Gluttony");
         add("malum.effect.curio.explosion_drops_collected", "Automatic Collection of Explosion Drops");
         add("malum.effect.curio.bigger_explosions", "Improves Explosions");
-        add("malum.effect.curio.better_conduit_power", "Conduit Power Provides Numerous Benefits");
         add("malum.effect.curio.no_sweep", "Disables Scythe Sweeping");
         add("malum.effect.curio.enhanced_maneuvers", "Augments Rebound and Ascension");
+        add("malum.effect.curio.ascension_launch", "Ascension Launches Targets Upwards");
+        add("malum.effect.curio.longer_ascension_cooldown", "Ascension Suffers a Longer Cooldown");
         add("malum.effect.curio.friendly_enemies", "Reduces Enemy Aggression");
         add("malum.effect.curio.soul_ward_magic_resilience", "Soul Ward Magic Rerouting");
         add("malum.effect.curio.soul_ward_long_shatter_cooldown", "Lengthy Soul Ward Recharge upon Disintegration");
@@ -292,21 +294,23 @@ public class MalumLang extends LanguageProvider {
         add("itemGroup.malum_ritual_shards", "Malum: Ritual Shards");
         add("itemGroup.malum_cosmetics", "Malum: Self Expression");
 
-        add("death.attack.voodoo", "%1$s had their soul shattered");
-        add("death.attack.vodooo.player", "%1$s had their soul shattered by %2$s");
-        add("death.attack.vodooo.player.item", "%1$s had their soul shattered by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.VOODOO, "%1$s had their soul shattered by %2$s", "%1$s had their soul shattered by %2$s using %3$s");
+        addPlayerlessDeathMessage(DamageTypeRegistry.VOODOO_PLAYERLESS, "%1$s had their soul shattered", "%1$s had their soul shattered while trying to escape %2$s");
 
-        add("death.attack.vodooo_playerless", "%1$s had their soul shattered");
-        add("death.attack.vodooo_playerless.player", "%1$s had their soul shattered while trying to escape %2$s");
+        addPlayerlessDeathMessage(DamageTypeRegistry.VOID, "%1$s underwent reality erosion", "%1$s underwent reality erosion while trying to escape %2$s");
 
-        add("death.attack.scythe_melee", "%1$s was sliced in half");
-        add("death.attack.scythe_melee.item", "%1$s was sliced in half by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.NITRATE, "%1$s had their soul detonated by %2$s", "%1$s had their soul detonated by %2$s using %3$s");
+        addPlayerlessDeathMessage(DamageTypeRegistry.NITRATE_PLAYERLESS, "%1$s had their soul detonated", "%1$s had their soul detonated while trying to escape %2$s");
 
-        add("death.attack.scythe_sweep", "%1$s was sliced in half");
-        add("death.attack.scythe_sweep.item", "%1$s was sliced in half by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.SCYTHE_MELEE, "%1$s was sliced in half by %2$s", "%1$s was sliced in half by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.SCYTHE_SWEEP, "%1$s was sliced in half by %2$s", "%1$s was sliced in half by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.SCYTHE_REBOUND, "%1$s was boomeranged by %2$s", "%1$s was boomeranged by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.SCYTHE_ASCENSION, "%1$s was cleaved using ascension by %2$s", "%1$s was cleaved using ascension by %2$s using %3$s");
 
-        add("death.attack.hidden_blade_counter", "%1$s was sliced into innumerable pieces");
-        add("death.attack.hidden_blade_counter.item", "%1$s was sliced into innumerable pieces by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.HIDDEN_BLADE_COUNTER, "%1$s was sliced into innumerable pieces by %2$s", "%1$s was sliced into innumerable pieces by %2$s using %3$s");
+
+        addDeathMessage(DamageTypeRegistry.SOULWASHING_RETALIATION, "%1$s was caught in %2$s's karmic flow", "%1$s was caught in %2$s's karmic flow using %3$s");
+
 
         addJEEDEffectDescription(MobEffectRegistry.GAIAS_BULWARK, "An earthen carapace surrounds your body, functioning as extra armor.");
         addJEEDEffectDescription(MobEffectRegistry.EARTHEN_MIGHT, "Your fists and tools are reinforced with earth, increasing your strength.");
@@ -396,6 +400,18 @@ public class MalumLang extends LanguageProvider {
         add("tetra.improvement." + identifier + ".description", description);
     }
 
+    public void addPlayerlessDeathMessage(ResourceKey<DamageType> damageType, String base, String player) {
+        final String key = "death.attack." + damageType.location().getPath();
+        add(key, base);
+        add(key + ".player", player);
+    }
+
+    public void addDeathMessage(ResourceKey<DamageType> damageType, String base, String item) {
+        final String key = "death.attack." + damageType.location().getPath();
+        add(key, base);
+        add(key + ".item", item);
+    }
+
     public void addEnchantmentNameAndDescription(ResourceKey<Enchantment> enchantment, String desc) {
         var name = enchantment.location().getPath();
         var key = "enchantment.malum." + name;
@@ -410,7 +426,6 @@ public class MalumLang extends LanguageProvider {
     public void addJEEDEffectDescription(Supplier<MobEffect> mobEffectSupplier, String description) {
         add(mobEffectSupplier.get().getDescriptionId() + ".description", description);
     }
-
 
     public String correctSoundName(String name) {
         if ((name.endsWith("_step"))) {

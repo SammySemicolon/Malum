@@ -46,6 +46,7 @@ public class AscensionHandler {
             player.hasImpulse = true;
             CommonHooks.onLivingJump(player);
         }
+        boolean hasFunnyRing = CurioHelper.hasCurioEquipped(player, ItemRegistry.RING_OF_THE_RISING_EDGE.get());
         if (level instanceof ServerLevel serverLevel) {
             var random = serverLevel.getRandom();
             float baseDamage = (float) player.getAttributes().getValue(Attributes.ATTACK_DAMAGE);
@@ -63,9 +64,10 @@ public class AscensionHandler {
             if (scythe.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
                 particleEffect.setSpiritType(spiritAffiliatedItem);
             }
+            boolean hasNarrowNecklace = !MalumScytheItem.canSweep(player);
             boolean dealtDamage = false;
             for (Entity target : serverLevel.getEntities(player, aabb, t -> ascensionCanHitEntity(player, t))) {
-                var damageSource = DamageTypeHelper.create(serverLevel, DamageTypeRegistry.SCYTHE_SWEEP, player);
+                var damageSource = DamageTypeHelper.create(serverLevel, DamageTypeRegistry.SCYTHE_ASCENSION, player);
                 target.invulnerableTime = 0;
                 boolean success = target.hurt(damageSource, baseDamage);
                 if (success && target instanceof LivingEntity livingentity) {
@@ -77,7 +79,15 @@ public class AscensionHandler {
                     }
                     SoundHelper.playSound(player, sound, 2.0f, RandomHelper.randomBetween(random, 0.75f, 1.25f));
                     dealtDamage = true;
+                    if (hasFunnyRing) {
+                        float velocity = 0.8f;
+                        if (hasNarrowNecklace) {
+                            velocity *= 1.3f;
+                        }
+                        target.setDeltaMovement(target.getDeltaMovement().add(0, velocity, 0));
+                    }
                 }
+
             }
             if (dealtDamage) {
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.ASCENSION, 80, 0));
@@ -93,7 +103,11 @@ public class AscensionHandler {
         if (!player.isCreative()) {
             int enchantmentLevel = getEnchantmentLevel(level, EnchantmentRegistry.ASCENSION, scythe);
             if (enchantmentLevel < 6) {
-                player.getCooldowns().addCooldown(scythe.getItem(), 150 - 25 * (enchantmentLevel - 1));
+                int cooldown = 150 - 25 * (enchantmentLevel - 1);
+                if (hasFunnyRing) {
+                    cooldown += 50;
+                }
+                player.getCooldowns().addCooldown(scythe.getItem(), cooldown);
             }
         }
         player.swing(hand, false);

@@ -30,8 +30,8 @@ public class MalumDamageTypeTags extends DamageTypeTagsProvider {
                 DamageTypeRegistry.VOODOO_PLAYERLESS, DamageTypeRegistry.VOODOO,
                 DamageTypeRegistry.SOULWASHING_PROPAGATION, DamageTypeRegistry.SOULWASHING_RETALIATION);
 
-        tag(DamageTypeTagRegistry.IS_SCYTHE).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP, DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
-        tag(DamageTypeTagRegistry.IS_SCYTHE_MELEE).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP);
+        tag(DamageTypeTagRegistry.IS_SCYTHE).addTag(DamageTypeTagRegistry.IS_SCYTHE_MELEE).add(DamageTypeRegistry.SCYTHE_REBOUND, DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
+        tag(DamageTypeTagRegistry.IS_SCYTHE_MELEE).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP, DamageTypeRegistry.SCYTHE_REBOUND, DamageTypeRegistry.SCYTHE_ASCENSION);
 
         tag(DamageTypeTagRegistry.IS_SOULWASHING).add(DamageTypeRegistry.SOULWASHING_PROPAGATION, DamageTypeRegistry.SOULWASHING_RETALIATION);
 
@@ -39,5 +39,8 @@ public class MalumDamageTypeTags extends DamageTypeTagsProvider {
         tag(DamageTypeTagRegistry.LIONS_HEART_BLACKLIST).addTag(DamageTypeTags.BYPASSES_ARMOR);
 
         tag(DamageTypeTags.BYPASSES_COOLDOWN).add(DamageTypeRegistry.VOODOO, DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
+        tag(DamageTypeTags.NO_KNOCKBACK)
+                .add(DamageTypeRegistry.VOODOO, DamageTypeRegistry.VOODOO_PLAYERLESS, DamageTypeRegistry.VOID)
+                .addTag(DamageTypeTagRegistry.IS_SOULWASHING);
     }
 }

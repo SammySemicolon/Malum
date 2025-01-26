@@ -1,7 +1,8 @@
 {
   "type": "malum:spirit_repair",
   "inputs": [
-    "minecraft:flint_and_steel"
+    "minecraft:flint_and_steel",
+    "farmersdelight:flint_knife"
   ],
   "itemIdRegex": "flint_.+",
   "repairMaterial": {

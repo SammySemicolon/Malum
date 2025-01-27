@@ -1220,6 +1220,14 @@
     ],
     "subtitle": "malum.subtitle.scythe_sweeps"
   },
+  "scythe_target_is_launched": {
+    "sounds": [
+      "entity/wind_charge/wind_burst1",
+      "entity/wind_charge/wind_burst2",
+      "entity/wind_charge/wind_burst3"
+    ],
+    "subtitle": "malum.subtitle.scythe_target_is_launched"
+  },
   "scythe_thrown": {
     "sounds": [
       "malum:curiosities/weapons/scythe/throw1",

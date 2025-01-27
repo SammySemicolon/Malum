@@ -634,6 +634,13 @@ public class CodexLangDatagen {
         addPages("necklace_of_the_narrow_edge",
                 "The sweep of the scythe is its main draw. The ability to cut my targets like so much wheat is invaluable. But that comes at the cost of damage to a single target. This necklace mystically focuses the edge of my attack, directing all of the power into one target for a strong damage boost.");
 
+        addEntryHeader("necklace_of_the_narrow_edge.ring_of_the_rising_edge", "Ring of the Rising Edge", "An A press is an A press");
+        addHeadline("necklace_of_the_narrow_edge.ring_of_the_rising_edge", "The Rising Edge");
+        addPages("necklace_of_the_narrow_edge.ring_of_the_rising_edge",
+                "The Ascension enchantment allows me to rise on blades of wind - and the opportunity for sympathetic magic there is obvious. Air begets air, and by adding a simple array to alter the airflow, I have created a modifier for Ascension, which I term the Rising Edge.",
+                "In addition to increased damage and a longer cooldown, those cut by the blades of wind under the Rising Edge’s effect will also find themselves launched upwards. Useful for crowd control and whatnot, but like the scythe itself, the Narrow Edge can change this purpose.",
+                "By wearing both the Necklace of the Narrow Edge and the Ring of the Rising Edge, the concentrated sweep of wind launches with vastly increased potency, allowing me to juggle my enemies above me.");
+
         addEntryHeader("runeworking", "Runeworking", "The central pin");
         addHeadline("runeworking", "Runeworking");
         addPages("runeworking",

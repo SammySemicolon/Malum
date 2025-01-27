@@ -109,7 +109,6 @@ public class ArcanaCodexHelper {
         Supplier<ShaderInstance> shaderInstanceSupplier = () -> shaderInstance;
 
         VFXBuilders.ScreenVFXBuilder builder = VFXBuilders.createScreen()
-                
                 .setShader(shaderInstanceSupplier)
                 .setColor(spiritType.getPrimaryColor())
                 .setAlpha(0.9f)

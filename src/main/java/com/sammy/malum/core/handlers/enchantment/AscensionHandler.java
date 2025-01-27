@@ -1,6 +1,7 @@
 package com.sammy.malum.core.handlers.enchantment;
 
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.curiosities.curios.sets.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
@@ -80,14 +81,9 @@ public class AscensionHandler {
                     SoundHelper.playSound(player, sound, 2.0f, RandomHelper.randomBetween(random, 0.75f, 1.25f));
                     dealtDamage = true;
                     if (hasFunnyRing) {
-                        float velocity = 0.8f;
-                        if (hasNarrowNecklace) {
-                            velocity *= 1.3f;
-                        }
-                        target.setDeltaMovement(target.getDeltaMovement().add(0, velocity, 0));
+                        CurioRisingEdgeRing.launchEntity(target, hasNarrowNecklace);
                     }
                 }
-
             }
             if (dealtDamage) {
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.ASCENSION, 80, 0));

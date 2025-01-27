@@ -145,6 +145,14 @@ public class TinkeringEntries {
                 .configureWidget(w -> w.setIcon(NECKLACE_OF_THE_NARROW_EDGE))
                 .addPage(new HeadlineTextPage("necklace_of_the_narrow_edge", "necklace_of_the_narrow_edge.1"))
                 .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_NARROW_EDGE.get()))
+                .addReference(new EntryReference(
+                        RING_OF_THE_RISING_EDGE.get(),
+                        BookEntry.build("necklace_of_the_narrow_edge.ring_of_the_rising_edge")
+                                .addPage(new HeadlineTextPage("necklace_of_the_narrow_edge.ring_of_the_rising_edge", "necklace_of_the_narrow_edge.ring_of_the_rising_edge.1"))
+                                .addPage(SpiritInfusionPage.fromOutput(RING_OF_THE_RISING_EDGE.get()))
+                                .addPage(new TextPage("necklace_of_the_narrow_edge.ring_of_the_rising_edge.2"))
+                                .addPage(new TextPage("necklace_of_the_narrow_edge.ring_of_the_rising_edge.3"))
+                ))
         );
 
         screen.addEntry("belt_of_the_prospector", -9, 6, b -> b

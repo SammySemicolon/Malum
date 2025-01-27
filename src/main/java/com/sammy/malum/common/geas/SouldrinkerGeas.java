@@ -29,8 +29,8 @@ public class SouldrinkerGeas extends GeasEffect {
 
     @Override
     public void addTooltipComponents(LivingEntity entity, Consumer<Component> tooltipAcceptor, TooltipFlag tooltipFlag) {
-        tooltipAcceptor.accept(ComponentHelper.negativeGeasEffect("hunger_as_withdrawal"));
         super.addTooltipComponents(entity, tooltipAcceptor, tooltipFlag);
+        tooltipAcceptor.accept(ComponentHelper.negativeGeasEffect("hunger_as_withdrawal"));
     }
 
     @Override
@@ -46,18 +46,18 @@ public class SouldrinkerGeas extends GeasEffect {
 
     @Override
     public void update(EntityTickEvent.Pre event, LivingEntity entity) {
-        if (entity.level() instanceof ServerLevel serverLevel) {
-            boolean useDayTime = serverLevel.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT);
-            long time = useDayTime ? serverLevel.getDayTime() : serverLevel.getGameTime();
-            long timeSince = time - mostRecentShatter;
-            if (timeSince > 32000) {
-                float drain = 0.005f;
-                long remainder = timeSince - 32000;
-                while (remainder > 24000) {
-                    remainder -= 24000;
-                    drain += 0.005f;
-                }
-                if (entity instanceof Player player) {
+        if (entity instanceof Player player) {
+            if (entity.level() instanceof ServerLevel serverLevel) {
+                boolean useDayTime = serverLevel.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT);
+                long time = useDayTime ? serverLevel.getDayTime() : serverLevel.getGameTime();
+                long timeSince = time - mostRecentShatter;
+                if (timeSince > 32000) {
+                    float drain = 0.005f;
+                    long remainder = timeSince - 32000;
+                    while (remainder > 24000) {
+                        remainder -= 24000;
+                        drain += 0.005f;
+                    }
                     player.causeFoodExhaustion(drain);
                 }
             }

@@ -61,23 +61,25 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
             float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 1.25f);
             level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), attacker.getSoundSource(), 1.5f, pitch);
         }
-        else if (source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
+        final boolean canTriggerMagic = source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC);
+        if (canTriggerMagic || source.is(DamageTypeRegistry.SOULWASHING_PROPAGATION)) {
+            target.igniteForTicks(100);
+        }
+        if (canTriggerMagic) {
             for (int i = 0; i < 3; i++) {
                 var spiritType = SpiritTypeRegistry.EARTHEN_SPIRIT;
                 if (i == 1) {
                     spiritType = SpiritTypeRegistry.AQUEOUS_SPIRIT;
-                }
-                else if (i == 2) {
+                } else if (i == 2) {
                     spiritType = SpiritTypeRegistry.SACRED_SPIRIT;
                 }
                 var particle = ParticleHelper.createSlamEffect(ParticleEffectTypeRegistry.STAFF_SLAM)
                         .setSpiritType(spiritType)
-                        .setPositionOffset(RandomHelper.randomBetween(random, 0.3f, 0.8f) * (random.nextBoolean()?1:-1))
-                        .setDirectionOffset(RandomHelper.randomBetween(random, -0.4f, 0.4f), random.nextFloat()*6.28f)
+                        .setPositionOffset(RandomHelper.randomBetween(random, 0.3f, 0.8f) * (random.nextBoolean() ? 1 : -1))
+                        .setDirectionOffset(RandomHelper.randomBetween(random, -0.4f, 0.4f), random.nextFloat() * 6.28f)
                         .setRandomSlashAngle(random);
                 particle.spawnTargetBoundSlashingParticle(attacker, target);
             }
-            target.igniteForTicks(100);
             float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 2f);
             SoundHelper.playSound(attacker, SoundRegistry.WORLDSOUL_MOTIF_HEAVY_IMPACT.get(), 2f, pitch);
         }

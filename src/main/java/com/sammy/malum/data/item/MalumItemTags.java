@@ -100,6 +100,20 @@ public class MalumItemTags extends ItemTagsProvider {
                 .addOptional(ResourceLocation.parse("irons_spellbooks:spellbreaker"))
                 .addOptional(ResourceLocation.parse("irons_spellbooks:amethyst_rapier"))
                 .addOptional(ResourceLocation.parse("born_in_chaos_v1:nightmare_scythe")); //TODO: Whenever BiC updates to 1.21, check if this is still valid! -Atobá
+
+        tag(ItemTags.HEAD_ARMOR).add(SOUL_HUNTER_CLOAK.get(), SOUL_STAINED_STEEL_HELMET.get(), MALIGNANT_STRONGHOLD_HELMET.get());
+        tag(ItemTags.CHEST_ARMOR).add(SOUL_HUNTER_ROBE.get(), SOUL_STAINED_STEEL_CHESTPLATE.get(), MALIGNANT_STRONGHOLD_CHESTPLATE.get());
+        tag(ItemTags.LEG_ARMOR).add(SOUL_HUNTER_LEGGINGS.get(), SOUL_STAINED_STEEL_LEGGINGS.get(), MALIGNANT_STRONGHOLD_LEGGINGS.get());
+        tag(ItemTags.FOOT_ARMOR).add(SOUL_HUNTER_BOOTS.get(), SOUL_STAINED_STEEL_BOOTS.get(), MALIGNANT_STRONGHOLD_BOOTS.get());
+
+        tag(ItemTags.SWORDS).add(SOUL_STAINED_STEEL_SWORD.get(), TYRVING.get());
+        tag(ItemTags.PICKAXES).add(SOUL_STAINED_STEEL_PICKAXE.get());
+        tag(ItemTags.AXES).add(SOUL_STAINED_STEEL_AXE.get(), WEIGHT_OF_WORLDS.get());
+        tag(ItemTags.SHOVELS).add(SOUL_STAINED_STEEL_SHOVEL.get());
+        tag(ItemTags.HOES).add(SOUL_STAINED_STEEL_HOE.get());
+        tag(ItemTagRegistry.KNIVES).add(SUNDERING_ANCHOR.get());
+        tag(ItemTagRegistry.KNIVES_FD).add(SUNDERING_ANCHOR.get());
+
         tag(ItemTagRegistry.REBOUND_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);
         tag(ItemTagRegistry.ASCENSION_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);
 
@@ -108,6 +122,9 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(ItemTagRegistry.ANIMATED_ENCHANTABLE).addTag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS);
         tag(ItemTagRegistry.HAUNTED_ENCHANTABLE).addTag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS);
         tag(ItemTagRegistry.SPIRIT_SPOILS_ENCHANTABLE).addTag(ItemTagRegistry.SOUL_SHATTER_CAPABLE_WEAPONS);
+
+        tag(ItemTags.DURABILITY_ENCHANTABLE).addTags(ItemTagRegistry.SCYTHES, ItemTagRegistry.STAVES)
+                .add(CATALYST_LOBBER.get(), SUNDERING_ANCHOR.get());
 
         tag(ItemTagRegistry.ASPECTED_SPIRITS).add(
                 SACRED_SPIRIT.get(), WICKED_SPIRIT.get(), ARCANE_SPIRIT.get(), ELDRITCH_SPIRIT.get(),

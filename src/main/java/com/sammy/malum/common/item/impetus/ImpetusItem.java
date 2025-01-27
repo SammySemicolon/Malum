@@ -12,7 +12,7 @@ public class ImpetusItem extends Item implements SpiritRepairRecipe.IRepairOutpu
     private Supplier<CrackedImpetusItem> cracked;
 
     public ImpetusItem(Properties properties) {
-        super(properties);
+        super(properties.durability(800));
     }
 
     public ImpetusItem setCrackedVariant(Supplier<CrackedImpetusItem> cracked) {

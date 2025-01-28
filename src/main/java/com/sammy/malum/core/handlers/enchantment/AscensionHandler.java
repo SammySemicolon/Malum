@@ -26,7 +26,7 @@ import static com.sammy.malum.registry.common.item.EnchantmentRegistry.getEnchan
 public class AscensionHandler {
 
     public static void triggerAscension(Level level, Player player, InteractionHand hand, ItemStack scythe) {
-        final boolean isEnhanced = !MalumScytheItem.canSweep(player);
+        final boolean isEnhanced = MalumScytheItem.isEnhanced(player);
         player.resetFallDistance();
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
@@ -65,7 +65,7 @@ public class AscensionHandler {
             if (scythe.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
                 particleEffect.setSpiritType(spiritAffiliatedItem);
             }
-            boolean hasNarrowNecklace = !MalumScytheItem.canSweep(player);
+            boolean hasNarrowNecklace = !MalumScytheItem.isEnhanced(player);
             boolean dealtDamage = false;
             for (Entity target : serverLevel.getEntities(player, aabb, t -> ascensionCanHitEntity(player, t))) {
                 var damageSource = DamageTypeHelper.create(serverLevel, DamageTypeRegistry.SCYTHE_ASCENSION, player);

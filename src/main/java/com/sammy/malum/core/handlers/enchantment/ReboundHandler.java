@@ -20,7 +20,7 @@ public class ReboundHandler {
     public static void throwScythe(Level level, Player player, InteractionHand hand, ItemStack scythe) {
         int slot = hand == InteractionHand.OFF_HAND ? player.getInventory().getContainerSize() - 1 : player.getInventory().selected;
         if (player instanceof ServerPlayer serverPlayer) {
-            final boolean isEnhanced = !MalumScytheItem.canSweep(player);
+            boolean isEnhanced = MalumScytheItem.isEnhanced(player);
             float baseDamage = (float) player.getAttributes().getValue(Attributes.ATTACK_DAMAGE);
             float magicDamage = (float) player.getAttributes().getValue(LodestoneAttributes.MAGIC_DAMAGE);
             float velocity = (isEnhanced ? 3f : 1.75f);

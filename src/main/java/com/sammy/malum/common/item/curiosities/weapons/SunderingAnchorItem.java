@@ -81,7 +81,7 @@ public class SunderingAnchorItem extends LodestoneCombatItem implements IMalumEv
         if (source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
             var spiritType = getDefiningSpiritType();
             int slashCount = 3 + Mth.floor(random.nextFloat() * 3);
-            float splitDamage = event.getOriginalDamage() / slashCount;
+            float splitDamage = event.getNewDamage() / slashCount;
             if (target.isAlive()) {
                 for (int i = 0; i < slashCount; i++) {
                     WorldEventHandler.addWorldEvent(level,

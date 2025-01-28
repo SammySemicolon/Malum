@@ -17,7 +17,6 @@ import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
-import team.lodestar.lodestone.systems.block.*;
 import team.lodestar.lodestone.systems.item.*;
 
 public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventResponderItem {
@@ -49,12 +48,11 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
         if (!event.getSource().is(DamageTypeRegistry.SCYTHE_MELEE)) {
             return;
         }
-        boolean canSweep = canSweep(attacker);
         var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_SLASH);
         if (stack.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
             particle.setSpiritType(spiritAffiliatedItem);
         }
-        if (!canSweep) {
+        if (isEnhanced(attacker)) {
             SoundHelper.playSound(attacker, getScytheSound(false), 1, 0.75f);
             particle.setVertical().spawnForwardSlashingParticle(attacker);
             return;
@@ -88,9 +86,9 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
         return super.supportsEnchantment(stack, enchantment);
     }
 
-    public static boolean canSweep(LivingEntity attacker) {
+    public static boolean isEnhanced(LivingEntity attacker) {
         //TODO: convert this to a ToolAction, or something alike
-        return !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get());
+        return CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get());
     }
 
     public static DamageSource replaceDamageSource(Player player, DamageSource source) {

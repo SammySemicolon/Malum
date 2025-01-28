@@ -5,8 +5,6 @@ import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.Holder;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
@@ -54,7 +52,7 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
             if (target.hasEffect(effect)) {
                 triggerMalignantCrit(event.getContainer(), attacker, target);
                 var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.EDGE_OF_DELIVERANCE_CRIT);
-                if (!canSweep(attacker)) {
+                if (isEnhanced(attacker)) {
                     particle.setVertical();
                 }
                 particle.spawnTargetBoundSlashingParticle(attacker, target);

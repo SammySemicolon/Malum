@@ -291,7 +291,7 @@ public class MalumLang extends LanguageProvider {
         add("itemGroup.malum_arcane_construct", "Malum: Arcane Construct");
         add("itemGroup.malum_natural_wonders", "Malum: Born from Arcana");
         add("itemGroup.malum_metallurgic_magics", "Malum: Metallurgic Magics");
-        add("itemGroup.malum_void_chronicles", "Malum: Chronicles of the Void");
+        add("itemGroup.malum_geas", "Malum: Bleghhh:P x3");
         add("itemGroup.malum_ritual_shards", "Malum: Ritual Shards");
         add("itemGroup.malum_cosmetics", "Malum: Self Expression");
 

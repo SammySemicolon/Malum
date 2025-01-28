@@ -1,5 +1,6 @@
 package com.sammy.malum.common.geas;
 
+import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.world.damagesource.*;
@@ -17,7 +18,13 @@ public class ThanatophobiaGeas extends GeasEffect {
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         final DamageSource source = event.getSource();
         if (source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
-
+            float chance = 0.3f;
+            int extraHits = 1;
+            if (MalumScytheItem.isEnhanced(attacker)) {
+                chance += 0.1f;
+                extraHits++;
+            }
+            
         }
     }
 }

@@ -11,7 +11,7 @@ import team.lodestar.lodestone.registry.common.*;
 public class ManaweaverIntegrityGeas extends GeasEffect {
 
     public ManaweaverIntegrityGeas() {
-        super(MalumGeasEffectTypeRegistry.MANAWEAVERS_INTEGRITY.get());
+        super(MalumGeasEffectTypeRegistry.PACT_OF_THE_FORTRESS.get());
     }
 
     @Override

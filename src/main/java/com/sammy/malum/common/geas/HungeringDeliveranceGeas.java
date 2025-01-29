@@ -7,15 +7,11 @@ import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
-import team.lodestar.lodestone.registry.common.*;
 
 import java.util.function.*;
 
@@ -25,7 +21,7 @@ public class HungeringDeliveranceGeas extends GeasEffect {
     private int streak;
 
     public HungeringDeliveranceGeas() {
-        super(MalumGeasEffectTypeRegistry.HUNGERING_DELIVERANCE.get());
+        super(MalumGeasEffectTypeRegistry.OATH_OF_THE_UNDISCERNED_MAW.get());
     }
 
     @Override

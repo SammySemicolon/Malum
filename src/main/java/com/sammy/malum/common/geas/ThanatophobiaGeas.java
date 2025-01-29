@@ -11,7 +11,7 @@ import net.neoforged.neoforge.event.entity.living.*;
 public class ThanatophobiaGeas extends GeasEffect {
 
     public ThanatophobiaGeas() {
-        super(MalumGeasEffectTypeRegistry.THANATOPHOBIA.get());
+        super(MalumGeasEffectTypeRegistry.PACT_OF_THE_REAPER.get());
     }
 
     @Override
@@ -24,7 +24,7 @@ public class ThanatophobiaGeas extends GeasEffect {
                 chance += 0.1f;
                 extraHits++;
             }
-            
+
         }
     }
 }

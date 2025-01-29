@@ -6,6 +6,6 @@ import com.sammy.malum.registry.common.*;
 public class AmorousChainsGeas extends GeasEffect {
 
     public AmorousChainsGeas() {
-        super(MalumGeasEffectTypeRegistry.AMOROUS_CHAINS.get());
+        super(MalumGeasEffectTypeRegistry.BOND_OF_BELOVED_CHAINS.get());
     }
 }

@@ -6,7 +6,6 @@ import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
-import net.minecraft.server.commands.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
@@ -15,7 +14,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
-import team.lodestar.lodestone.registry.common.*;
 
 import java.util.function.*;
 
@@ -24,7 +22,7 @@ public class SouldrinkerGeas extends GeasEffect {
     private long mostRecentShatter;
 
     public SouldrinkerGeas() {
-        super(MalumGeasEffectTypeRegistry.SOULDRINKERS_ECSTASY.get());
+        super(MalumGeasEffectTypeRegistry.PACT_OF_THE_SHATTERING_ADDICT.get());
     }
 
     @Override

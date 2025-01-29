@@ -17,7 +17,7 @@ import java.util.function.*;
 public class RunicInfusionGeas extends GeasEffect {
 
     public RunicInfusionGeas() {
-        super(MalumGeasEffectTypeRegistry.RUNIC_INFUSION.get());
+        super(MalumGeasEffectTypeRegistry.PACT_OF_RECIPROCATION.get());
     }
 
     @Override

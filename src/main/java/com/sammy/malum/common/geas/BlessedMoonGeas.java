@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.*;
 public class BlessedMoonGeas extends NightCycleBasedGeas {
 
     public BlessedMoonGeas() {
-        super(MalumGeasEffectTypeRegistry.BLESSED_MOON.get());
+        super(MalumGeasEffectTypeRegistry.PACT_OF_THE_NIGHTCHILD.get());
     }
 
     @Override

@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.*;
 public class RadiantDawnGeas extends NightCycleBasedGeas {
 
     public RadiantDawnGeas() {
-        super(MalumGeasEffectTypeRegistry.RADIANT_DAWN.get());
+        super(MalumGeasEffectTypeRegistry.PACT_OF_THE_DAYBLESSED.get());
     }
 
     @Override

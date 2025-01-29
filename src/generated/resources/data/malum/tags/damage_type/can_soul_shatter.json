@@ -2,6 +2,9 @@
   "values": [
     "malum:scythe_melee",
     "malum:scythe_sweep",
+    "malum:scythe_rebound",
+    "malum:scythe_ascension",
+    "malum:thanatophobia_combo",
     "malum:hidden_blade_counter",
     "malum:voodoo_playerless",
     "malum:voodoo",

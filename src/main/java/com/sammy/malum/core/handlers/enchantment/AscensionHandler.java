@@ -80,9 +80,6 @@ public class AscensionHandler {
                     }
                     SoundHelper.playSound(player, sound, 2.0f, RandomHelper.randomBetween(random, 0.75f, 1.25f));
                     dealtDamage = true;
-                    if (hasFunnyRing) {
-                        CurioRisingEdgeRing.launchEntity(target, hasNarrowNecklace);
-                    }
                 }
             }
             if (dealtDamage) {

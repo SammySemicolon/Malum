@@ -11,13 +11,12 @@ public class StaffAbilityHandler {
         if (!player.level().isClientSide) {
             var reserveStaffCharges = player.getAttribute(AttributeRegistry.RESERVE_STAFF_CHARGES);
             if (reserveStaffCharges != null) {
-                var data = player.getData(AttachmentTypeRegistry.RESERVE_STAFF_CHARGES);
+                var data = player.getData(AttachmentTypeRegistry.STAFF_ABILITIES);
                 if (data.reserveChargeCount < reserveStaffCharges.getValue()) {
                     data.reserveChargeProgress++;
                     if (data.reserveChargeProgress >= 600) {
                         data.reserveChargeProgress = 0;
                         data.reserveChargeCount++;
-//                        MalumPlayerDataCapability.syncTrackingAndSelf(player);
                     }
                 }
             }

@@ -30,8 +30,8 @@ public class AttachmentTypeRegistry {
     public static final Supplier<AttachmentType<SoulWardData>> SOUL_WARD = ATTACHMENT_TYPES.register(
             "soul_ward", () -> AttachmentType.builder(SoulWardData::new).serialize(SoulWardData.CODEC).build());
 
-    public static final Supplier<AttachmentType<StaffAbilityData>> RESERVE_STAFF_CHARGES = ATTACHMENT_TYPES.register(
-            "reserve_staff_charges", () -> AttachmentType.builder(StaffAbilityData::new).serialize(StaffAbilityData.CODEC).build());
+    public static final Supplier<AttachmentType<StaffAbilityData>> STAFF_ABILITIES = ATTACHMENT_TYPES.register(
+            "staff_abilities", () -> AttachmentType.builder(StaffAbilityData::new).serialize(StaffAbilityData.CODEC).build());
 
     public static final Supplier<AttachmentType<VoidInfluenceData>> VOID_INFLUENCE = ATTACHMENT_TYPES.register(
             "void_influence", () -> AttachmentType.builder(VoidInfluenceData::new).serialize(VoidInfluenceData.CODEC).build());

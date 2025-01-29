@@ -69,8 +69,8 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
     }
 
     @Override
-    public SoundEvent getScytheSound(boolean canSweep) {
-        return canSweep ? SoundRegistry.EDGE_OF_DELIVERANCE_SWEEP.get() : SoundRegistry.EDGE_OF_DELIVERANCE_CUT.get();
+    public Holder<SoundEvent> getScytheSound(boolean canSweep) {
+        return canSweep ? SoundRegistry.EDGE_OF_DELIVERANCE_SWEEP : SoundRegistry.EDGE_OF_DELIVERANCE_CUT;
     }
 
     public static void triggerMalignantCrit(DamageContainer damageContainer, LivingEntity attacker, LivingEntity target) {

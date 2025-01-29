@@ -28,6 +28,6 @@ public class CurioNarrowEdgeNecklace extends MalumCurioItem {
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, AttributeRegistry.SCYTHE_PROFICIENCY,
-                new AttributeModifier(MalumMod.malumPath("narrow_edge_necklace"), 0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                new AttributeModifier(MalumMod.malumPath("narrow_edge_necklace"), 0.4f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 }

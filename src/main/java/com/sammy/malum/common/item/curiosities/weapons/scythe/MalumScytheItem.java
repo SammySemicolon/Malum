@@ -53,11 +53,11 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
             particle.setSpiritType(spiritAffiliatedItem);
         }
         if (isEnhanced(attacker)) {
-            SoundHelper.playSound(attacker, getScytheSound(false), 1, 0.75f);
+            SoundHelper.playSound(attacker, getScytheSound(false).value(), 1, 0.75f);
             particle.setVertical().spawnForwardSlashingParticle(attacker);
             return;
         }
-        SoundHelper.playSound(attacker, getScytheSound(true), 1, 1);
+        SoundHelper.playSound(attacker, getScytheSound(true).value(), 1, 1);
         particle.mirrorRandomly(attacker.getRandom()).spawnForwardSlashingParticle(attacker);
 
         int sweeping = EnchantmentRegistry.getEnchantmentLevel(level, Enchantments.SWEEPING_EDGE, stack);
@@ -74,8 +74,8 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
             }
         });
     }
-    public SoundEvent getScytheSound(boolean canSweep) {
-        return canSweep ? SoundRegistry.SCYTHE_SWEEP.get() : SoundRegistry.SCYTHE_CUT.get();
+    public Holder<SoundEvent> getScytheSound(boolean canSweep) {
+        return canSweep ? SoundRegistry.SCYTHE_SWEEP : SoundRegistry.SCYTHE_CUT;
     }
 
     @Override

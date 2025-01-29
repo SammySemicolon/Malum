@@ -26,12 +26,16 @@ public class MalumDamageTypeTags extends DamageTypeTagsProvider {
                 DamageTypeRegistry.SOULWASHING_PROPAGATION, DamageTypeRegistry.SOULWASHING_RETALIATION);
 
         tag(DamageTypeTagRegistry.SOUL_SHATTER_DAMAGE).add(
-                DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP, DamageTypeRegistry.HIDDEN_BLADE_COUNTER,
+                DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP,
+                DamageTypeRegistry.SCYTHE_REBOUND, DamageTypeRegistry.SCYTHE_ASCENSION,
+                DamageTypeRegistry.THANATOPHOBIA_COMBO, DamageTypeRegistry.HIDDEN_BLADE_COUNTER,
                 DamageTypeRegistry.VOODOO_PLAYERLESS, DamageTypeRegistry.VOODOO,
                 DamageTypeRegistry.SOULWASHING_PROPAGATION, DamageTypeRegistry.SOULWASHING_RETALIATION);
 
-        tag(DamageTypeTagRegistry.IS_SCYTHE).addTag(DamageTypeTagRegistry.IS_SCYTHE_MELEE).add(DamageTypeRegistry.SCYTHE_REBOUND, DamageTypeRegistry.HIDDEN_BLADE_COUNTER);
-        tag(DamageTypeTagRegistry.IS_SCYTHE_MELEE).add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP, DamageTypeRegistry.SCYTHE_REBOUND, DamageTypeRegistry.SCYTHE_ASCENSION);
+        tag(DamageTypeTagRegistry.IS_SCYTHE).addTag(DamageTypeTagRegistry.IS_SCYTHE_MELEE)
+                .add(DamageTypeRegistry.SCYTHE_REBOUND, DamageTypeRegistry.HIDDEN_BLADE_COUNTER, DamageTypeRegistry.THANATOPHOBIA_COMBO);
+        tag(DamageTypeTagRegistry.IS_SCYTHE_MELEE)
+                .add(DamageTypeRegistry.SCYTHE_MELEE, DamageTypeRegistry.SCYTHE_SWEEP, DamageTypeRegistry.SCYTHE_ASCENSION);
 
         tag(DamageTypeTagRegistry.IS_SOULWASHING).add(DamageTypeRegistry.SOULWASHING_PROPAGATION, DamageTypeRegistry.SOULWASHING_RETALIATION);
 

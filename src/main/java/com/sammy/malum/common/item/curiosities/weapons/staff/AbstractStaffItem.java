@@ -156,7 +156,7 @@ public abstract class AbstractStaffItem extends LodestoneCombatItem implements I
             player.awardStat(Stats.ITEM_USED.get(this));
             if (!player.getAbilities().instabuild) {
                 stack.hurtAndBreak(2, player, EquipmentSlot.MAINHAND);
-                var data = player.getData(AttachmentTypeRegistry.RESERVE_STAFF_CHARGES);
+                var data = player.getData(AttachmentTypeRegistry.STAFF_ABILITIES);
                 if (data.reserveChargeCount > 0) {
                     data.reserveChargeCount--;
                 } else {

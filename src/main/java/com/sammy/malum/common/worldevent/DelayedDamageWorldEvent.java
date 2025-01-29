@@ -25,6 +25,7 @@ import java.util.*;
 
 public class DelayedDamageWorldEvent extends WorldEventInstance {
 
+    protected ResourceKey<DamageType> physicalDamageType = DamageTypes.PLAYER_ATTACK;
     protected ResourceKey<DamageType> magicDamageType = DamageTypeRegistry.VOODOO;
 
     protected UUID attackerUUID;
@@ -57,6 +58,11 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
         this.physicalDamage = physicalDamage;
         this.magicDamage = magicDamage;
         this.delay = delay;
+        return this;
+    }
+
+    public DelayedDamageWorldEvent setPhysicalDamageType(ResourceKey<DamageType> physicalDamageType) {
+        this.physicalDamageType = physicalDamageType;
         return this;
     }
 
@@ -103,7 +109,7 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
                     var deltaMovement = entity.getDeltaMovement();
                     if (physicalDamage > 0) {
                         entity.invulnerableTime = 0;
-                        entity.hurt(attacker.damageSources().playerAttack(player), physicalDamage);
+                        entity.hurt(attacker.damageSources().source(physicalDamageType, player), physicalDamage);
                     }
                     if (magicDamage > 0) {
                         entity.invulnerableTime = 0;
@@ -127,6 +133,9 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compoundTag) {
+        if (physicalDamageType != DamageTypes.PLAYER_ATTACK) {
+            compoundTag.putString("physicalDamageType", physicalDamageType.location().toString());
+        }
         if (magicDamageType != DamageTypeRegistry.VOODOO) {
             compoundTag.putString("magicDamageType", magicDamageType.location().toString());
         }
@@ -154,6 +163,9 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compoundTag) {
+        physicalDamageType = compoundTag.contains("physicalDamageType")
+                ? ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse(compoundTag.getString("physicalDamageType")))
+                : DamageTypes.PLAYER_ATTACK;
         magicDamageType = compoundTag.contains("magicDamageType")
                 ? ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.parse(compoundTag.getString("magicDamageType")))
                 : DamageTypeRegistry.VOODOO;

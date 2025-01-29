@@ -52,29 +52,40 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
         var spirits = new MalumSpiritType[]{SpiritTypeRegistry.INFERNAL_SPIRIT, SpiritTypeRegistry.SACRED_SPIRIT, SpiritTypeRegistry.AQUEOUS_SPIRIT, SpiritTypeRegistry.EARTHEN_SPIRIT};
         return spirits[MalumMod.RANDOM.nextInt(spirits.length)];
     }
+
     @Override
-    public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+    public void outgoingDeathEvent(LivingDeathEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+        if (event.getSource().is(DamageTypeTags.IS_FIRE)) {
+            var data = attacker.getData(AttachmentTypeRegistry.STAFF_ABILITIES);
+            if (data.unwindingChaosBurnStacks < 6) {
+                data.unwindingChaosBurnStacks++;
+                float pitch = RandomHelper.randomBetween(attacker.level().getRandom(), 0.75f, 1.25f);
+                SoundHelper.playSound(target, SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), attacker.getSoundSource(), 1.5f, pitch);
+            }
+        }
+    }
+
+    @Override
+    public void finalizedOutgoingDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         DamageSource source = event.getSource();
         Level level = attacker.level();
         RandomSource random = level.random;
         if (source.is(DamageTypeTags.IS_FIRE)) {
-            float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 1.25f);
-            level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), attacker.getSoundSource(), 1.5f, pitch);
+            var data = attacker.getData(AttachmentTypeRegistry.STAFF_ABILITIES);
+            if (data.unwindingChaosBurnStacks < 6) {
+                data.unwindingChaosBurnStacks++;
+                float pitch = RandomHelper.randomBetween(attacker.level().getRandom(), 0.75f, 1.25f);
+                SoundHelper.playSound(target, SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), attacker.getSoundSource(), 1.5f, pitch);
+            }
         }
-        final boolean canTriggerMagic = source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC);
+        boolean canTriggerMagic = source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC);
         if (canTriggerMagic || source.is(DamageTypeRegistry.SOULWASHING_PROPAGATION)) {
             target.igniteForTicks(100);
         }
         if (canTriggerMagic) {
             for (int i = 0; i < 3; i++) {
-                var spiritType = SpiritTypeRegistry.EARTHEN_SPIRIT;
-                if (i == 1) {
-                    spiritType = SpiritTypeRegistry.AQUEOUS_SPIRIT;
-                } else if (i == 2) {
-                    spiritType = SpiritTypeRegistry.SACRED_SPIRIT;
-                }
                 var particle = ParticleHelper.createSlamEffect(ParticleEffectTypeRegistry.STAFF_SLAM)
-                        .setSpiritType(spiritType)
+                        .setSpiritType(getDefiningSpiritType())
                         .setPositionOffset(RandomHelper.randomBetween(random, 0.3f, 0.8f) * (random.nextBoolean() ? 1 : -1))
                         .setDirectionOffset(RandomHelper.randomBetween(random, -0.4f, 0.4f), random.nextFloat() * 6.28f)
                         .setRandomSlashAngle(random);
@@ -83,7 +94,7 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
             float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 2f);
             SoundHelper.playSound(attacker, SoundRegistry.WORLDSOUL_MOTIF_HEAVY_IMPACT.get(), 2f, pitch);
         }
-        super.outgoingDamageEvent(event, attacker, target, stack);
+        super.finalizedOutgoingDamageEvent(event, attacker, target, stack);
     }
 
     @Override
@@ -93,7 +104,13 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
 
     @Override
     public int getProjectileCount(Level level, LivingEntity livingEntity, float pct) {
-        return pct == 1f ? 15 : 0;
+        if (pct == 1f) {
+            var data = livingEntity.getData(AttachmentTypeRegistry.STAFF_ABILITIES);
+            int projectileCount = Mth.clamp(3+data.unwindingChaosBurnStacks*2, 0, 15);
+            data.unwindingChaosBurnStacks = 0;
+            return projectileCount;
+        }
+        return 0;
     }
 
     @Override

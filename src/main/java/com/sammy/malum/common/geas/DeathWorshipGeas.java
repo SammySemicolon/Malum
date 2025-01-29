@@ -6,6 +6,6 @@ import com.sammy.malum.registry.common.*;
 public class DeathWorshipGeas extends GeasEffect {
 
     public DeathWorshipGeas() {
-        super(MalumGeasEffectTypeRegistry.DEATH_WORSHIP.get());
+        super(MalumGeasEffectTypeRegistry.BOND_OF_DEATHS_SEEKERS.get());
     }
 }

@@ -25,7 +25,7 @@ public class LionsHeartGeas extends GeasEffect {
     public int lionsHeartDuration;
 
     public LionsHeartGeas() {
-        super(MalumGeasEffectTypeRegistry.LIONS_HEART.get());
+        super(MalumGeasEffectTypeRegistry.OATH_OF_THE_GLEEFUL_TARGET.get());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class LionsHeartGeas extends GeasEffect {
     }
 
     public static boolean pausePotionEffects(LivingEntity entity, MobEffectInstance instance) {
-        final Map.Entry<ItemStack, GeasEffect> geasEffect = GeasEffectHandler.getGeasEffect(entity, MalumGeasEffectTypeRegistry.LIONS_HEART.get());
+        final Map.Entry<ItemStack, GeasEffect> geasEffect = GeasEffectHandler.getGeasEffect(entity, MalumGeasEffectTypeRegistry.OATH_OF_THE_GLEEFUL_TARGET.get());
         if (geasEffect != null && geasEffect.getValue() instanceof LionsHeartGeas effect) {
             if (effect.lionsHeartDuration > 0) {
                 final MobEffect type = instance.getEffect().value();

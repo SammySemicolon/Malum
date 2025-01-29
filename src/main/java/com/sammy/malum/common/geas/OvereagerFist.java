@@ -15,7 +15,7 @@ import java.util.function.*;
 public class OvereagerFist extends GeasEffect {
 
     public OvereagerFist() {
-        super(MalumGeasEffectTypeRegistry.OVEREAGER_FIST.get());
+        super(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVEREAGER_FIST.get());
     }
 
     @Override

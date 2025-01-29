@@ -15,7 +15,7 @@ import java.util.function.*;
 public class OverkeenEyeGeas extends GeasEffect {
 
     public OverkeenEyeGeas() {
-        super(MalumGeasEffectTypeRegistry.OVERKEEN_EYE.get());
+        super(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVERKEEN_EYE.get());
     }
 
     @Override

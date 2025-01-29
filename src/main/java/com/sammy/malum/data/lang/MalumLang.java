@@ -132,22 +132,22 @@ public class MalumLang extends LanguageProvider {
         add("malum.gui.rite.medium.runewood", "Runewood");
         add("malum.gui.rite.medium.soulwood", "Soulwood");
 
-        addGeasDescription(MalumGeasEffectTypeRegistry.BLESSED_MOON.get(), "");
-        addGeasDescription(MalumGeasEffectTypeRegistry.RADIANT_DAWN.get(), "");
-        addGeasDescription(MalumGeasEffectTypeRegistry.SOULDRINKERS_ECSTASY.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_NIGHTCHILD.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_DAYBLESSED.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_SHATTERING_ADDICT.get(), "");
 
-        addGeasDescription(MalumGeasEffectTypeRegistry.MANAWEAVERS_INTEGRITY.get(), "");
-        addGeasDescription(MalumGeasEffectTypeRegistry.MANAWEAVERS_OBSESSION.get(), "");
-        addGeasDescription(MalumGeasEffectTypeRegistry.RUNIC_INFUSION.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_FORTRESS.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_SHIELD.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_RECIPROCATION.get(), "");
 
-        addGeasDescription(MalumGeasEffectTypeRegistry.OVERKEEN_EYE.get(), "");
-        addGeasDescription(MalumGeasEffectTypeRegistry.OVEREAGER_FIST.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVERKEEN_EYE.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVEREAGER_FIST.get(), "");
 
-        addGeasDescription(MalumGeasEffectTypeRegistry.HUNGERING_DELIVERANCE.get(), "");
-        addGeasDescription(MalumGeasEffectTypeRegistry.REINFORCING_DELIVERANCE.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_UNDISCERNED_MAW.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_UNSIGHTED_RESISTANCE.get(), "");
 
-        addGeasDescription(MalumGeasEffectTypeRegistry.SOULWASHING.get(), "Witch Factor of Wrath");
-        addGeasDescription(MalumGeasEffectTypeRegistry.LIONS_HEART.get(), "Witch Factor of Greed");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_INVERTED_HEART.get(), "Witch Factor of Wrath");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_GLEEFUL_TARGET.get(), "Witch Factor of Greed");
 
         add("malum.waveform_artifice.wavecharger", "Redstone Interpolation Time: %s");
         add("malum.waveform_artifice.wavebanker", "Redstone Pulse Duration: %s");

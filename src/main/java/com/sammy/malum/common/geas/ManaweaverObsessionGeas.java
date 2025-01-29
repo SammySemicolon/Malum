@@ -11,7 +11,7 @@ import team.lodestar.lodestone.registry.common.*;
 public class ManaweaverObsessionGeas extends GeasEffect {
 
     public ManaweaverObsessionGeas() {
-        super(MalumGeasEffectTypeRegistry.MANAWEAVERS_OBSESSION.get());
+        super(MalumGeasEffectTypeRegistry.PACT_OF_THE_SHIELD.get());
     }
 
     @Override

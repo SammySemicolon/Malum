@@ -15,7 +15,6 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
-import net.minecraft.world.scores.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
 import team.lodestar.lodestone.handlers.*;
@@ -30,7 +29,7 @@ public class SoulwashingGeas extends GeasEffect {
     public WeakHashMap<UUID, LivingEntity> visibleTargets = new WeakHashMap<>();
 
     public SoulwashingGeas() {
-        super(MalumGeasEffectTypeRegistry.SOULWASHING.get());
+        super(MalumGeasEffectTypeRegistry.OATH_OF_THE_INVERTED_HEART.get());
     }
 
     @Override

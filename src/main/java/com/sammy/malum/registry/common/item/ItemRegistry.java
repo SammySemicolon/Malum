@@ -14,6 +14,7 @@ import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.augment.core.*;
 import com.sammy.malum.common.item.codex.*;
 import com.sammy.malum.common.item.cosmetic.curios.*;
+import com.sammy.malum.common.item.cosmetic.skins.*;
 import com.sammy.malum.common.item.cosmetic.weaves.*;
 import com.sammy.malum.common.item.curiosities.*;
 import com.sammy.malum.common.item.curiosities.armor.*;
@@ -47,6 +48,7 @@ import com.sammy.malum.registry.common.item.tabs.*;
 import net.minecraft.client.color.item.*;
 import net.minecraft.client.renderer.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.*;
 import net.minecraft.world.food.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
@@ -794,23 +796,20 @@ public class ItemRegistry {
         @SubscribeEvent(priority = EventPriority.LOWEST)
         public static void addItemProperties(FMLClientSetupEvent event) {
             Set<LodestoneArmorItem> armors = ItemRegistry.ITEMS.getEntries().stream().filter(r -> r.get() instanceof LodestoneArmorItem).map(r -> (LodestoneArmorItem) r.get()).collect(Collectors.toSet());
-//            ItemPropertyFunction armorPropertyFunction = (stack, level, holder, holderID) -> {
-//                if (!stack.hasTag()) {
-//                    return -1;
-//                }
-//                CompoundTag nbt = stack.getTag();
-//                if (!nbt.contains(ArmorSkin.MALUM_SKIN_TAG)) {
-//                    return -1;
-//                }
-//                ArmorSkin armorSkin = ArmorSkinRegistry.SKINS.get(nbt.getString(ArmorSkin.MALUM_SKIN_TAG));
-//                if (armorSkin == null) {
-//                    return -1;
-//                }
-//                return armorSkin.index;
-//            };
-//            for (LodestoneArmorItem armor : armors) {
-//                ItemProperties.register(armor, new ResourceLocation(ArmorSkin.MALUM_SKIN_TAG), armorPropertyFunction);
-//            }
+            ItemPropertyFunction armorPropertyFunction = (stack, level, holder, holderID) -> {
+                if (!stack.has(DataComponentRegistry.ITEM_SKIN)) {
+                    return -1;
+                }
+                var skin = stack.get(DataComponentRegistry.ITEM_SKIN.get());
+                ArmorSkin armorSkin = ArmorSkinRegistry.SKINS.get(skin);
+                if (armorSkin == null) {
+                    return -1;
+                }
+                return armorSkin.index;
+            };
+            for (LodestoneArmorItem armor : armors) {
+                ItemProperties.register(armor, MalumMod.malumPath("item_skin"), armorPropertyFunction);
+            }
 
             ItemProperties.register(
                     SOULWOVEN_POUCH.get(),

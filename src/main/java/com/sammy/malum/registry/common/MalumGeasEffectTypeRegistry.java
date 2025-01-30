@@ -4,6 +4,7 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.geas.*;
 import com.sammy.malum.common.geas.bond.*;
 import com.sammy.malum.common.geas.deliverance.*;
+import com.sammy.malum.common.geas.explosion.*;
 import com.sammy.malum.common.geas.gluttony.*;
 import com.sammy.malum.common.geas.oath.*;
 import com.sammy.malum.common.geas.scythe.*;
@@ -38,9 +39,6 @@ public class MalumGeasEffectTypeRegistry {
 
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_REAPER = GEAS_TYPES.register("pact_of_the_reaper", () -> new GeasEffectType(ReaperGeas::new));
 
-    // Pact of the Skybreaker
-    //You auto-attack targets that take fall damage
-    //Requires that you and the target have attacked each other in recent time
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_SKYBREAKER = GEAS_TYPES.register("pact_of_the_skybreaker", () -> new GeasEffectType(SkyBreakerGeas::new));
 
 
@@ -58,21 +56,12 @@ public class MalumGeasEffectTypeRegistry {
     //Desperate Need is reduced when taking damage
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_PROFANE_GLUTTON = GEAS_TYPES.register("pact_of_the_profane_glutton", () -> new GeasEffectType(ProfaneGluttonGeas::new));
 
-    // Oath of the Overkeen Eye
-    //Staff projectiles home in on targets
-    //+Charge Duration for staves, this is bad
-    //This is a void geas
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_CONCUSSIVE_FORCE = GEAS_TYPES.register("pact_of_the_concussive_force", () -> new GeasEffectType(ConcussiveForceGeas::new));
+
+
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_OVERKEEN_EYE = GEAS_TYPES.register("oath_of_the_overkeen_eye", () -> new GeasEffectType(OverkeenEyeGeas::new));
-    // Oath of the Overeager Fist
-    //Staves autofire once fully charged
-    //-Charge Duration for staves, this is good
-    //This is a void geas
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_OVEREAGER_FIST = GEAS_TYPES.register("oath_of_the_overeager_fist", () -> new GeasEffectType(OvereagerFistGeas::new));
 
-    // Oath of the Undiscerned Maw
-    //Malignant Deliverance leeches health and hunger from the hit target
-    //The leaching effect starts to add a healing received penalty after the 3rd trigger, resets after a minute of no leeching
-    //This is a void geas
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_UNDISCERNED_MAW = GEAS_TYPES.register("oath_of_the_undiscerned_maw", () -> new GeasEffectType(UndiscernedMawGeas::new));
     // Oath of Unsighted Resistance
     //Malignant Deliverance generates Malignant Conversion

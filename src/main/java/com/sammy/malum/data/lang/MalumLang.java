@@ -259,6 +259,8 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.soul_ward_on_hit", "Magic Damage Recovers Soul Ward");
         add("malum.effect.geas.staff_homing", "Staff Projectiles Home In on Targets");
         add("malum.effect.geas.staff_autofire", "Staff Charges Automatically Fire");
+        add("malum.effect.geas.rocket_jumping", "Explosions Apply More Knockback");
+        add("malum.effect.geas.no_block_breaking", "Explosions Cannot Damage Terrain");
         add("malum.effect.geas.malignant_crit_leech", "Malignant Deliverance Leeches Life Essence");
         add("malum.effect.geas.malignant_crit_healing_overexertion", "Repeated Activations Nullify All Healing");
         add("malum.effect.geas.malignant_crit_reinforcement", "Malignant Deliverance Improves Conversion");

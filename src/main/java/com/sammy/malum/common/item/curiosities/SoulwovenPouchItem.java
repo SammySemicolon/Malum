@@ -3,6 +3,7 @@ package com.sammy.malum.common.item.curiosities;
 import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.*;
+import net.minecraft.core.*;
 import net.minecraft.core.component.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.server.level.*;
@@ -17,7 +18,9 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.inventory.tooltip.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
+import net.neoforged.neoforge.event.entity.player.*;
 import org.apache.commons.lang3.math.*;
+import team.lodestar.lodestone.helpers.*;
 
 import java.util.*;
 
@@ -31,6 +34,44 @@ public class SoulwovenPouchItem extends Item {
     public static float getFullnessDisplay(ItemStack stack) {
         var contents = stack.getOrDefault(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, SoulwovenPouchContentsComponent.EMPTY);
         return contents.weight().floatValue();
+    }
+
+    public static void trySwallowItem(ItemEntityPickupEvent.Pre event) {
+        if (event.canPickup().isFalse()) {
+            return;
+        }
+        final ItemEntity itemEntity = event.getItemEntity();
+        if (itemEntity.hasPickUpDelay()) {
+            return;
+        }
+        final Player player = event.getPlayer();
+        final ItemStack pickedUp = itemEntity.getItem();
+        if (!pickedUp.is(ItemTagRegistry.SOULWOVEN_POUCH_AUTOCOLLECT)) {
+            return;
+        }
+        for (NonNullList<ItemStack> playerInventory : player.getInventory().compartments) {
+            for (ItemStack item : playerInventory) {
+                if (item.has(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS)) {
+                    trySwallowItem(player, item, pickedUp);
+                }
+            }
+        }
+    }
+    public static int trySwallowItem(Player player, ItemStack stack, ItemStack pickedUp) {
+        var contents = stack.get(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS);
+        if (contents == null) {
+            return 0;
+        } else {
+            var mutable = new SoulwovenPouchContentsComponent.Mutable(contents);
+            int i = mutable.tryInsert(pickedUp);
+            if (i > 0) {
+                if (stack.getItem() instanceof SoulwovenPouchItem pouch) {
+                    pouch.playInsertSound(player);
+                }
+            }
+            stack.set(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS, mutable.toImmutable());
+            return i;
+        }
     }
 
     @Override
@@ -169,7 +210,8 @@ public class SoulwovenPouchItem extends Item {
     }
 
     private void playInsertSound(Entity entity) {
-        entity.playSound(SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
+        //Side Agnostic Implementation
+        SoundHelper.playSound(entity, SoundEvents.BUNDLE_INSERT, 0.8f, 0.8f + entity.level().getRandom().nextFloat() * 0.4F);
     }
 
     private void playDropContentsSound(Entity entity) {

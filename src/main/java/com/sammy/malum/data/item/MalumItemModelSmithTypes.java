@@ -156,7 +156,7 @@ public class MalumItemModelSmithTypes extends ItemModelSmithTypes {
             String itemSuffix = datagenData.getSuffix((LodestoneArmorItem) item);
             ResourceLocation itemTexturePath = ResourceLocation.tryParse(datagenData.itemTexturePrefix + itemSuffix);
             provider.getBuilder(BuiltInRegistries.ITEM.getKey(item).getPath()).override()
-                    .predicate(ResourceLocation.parse(ArmorSkin.MALUM_SKIN_TAG), value)
+                    .predicate(MalumMod.malumPath("item_skin"), value)
                     .model(provider.withExistingParent(entry.getKey() + "_" + itemSuffix, GENERATED).texture("layer0", itemTexturePath))
                     .end();
         }

@@ -12,8 +12,6 @@ import team.lodestar.lodestone.systems.item.LodestoneArmorItem;
 import java.util.Map;
 
 public abstract class ArmorSkin {
-    public static final String MALUM_SKIN_TAG = "malum:item_skin";
-
     public static int indexCounter;
     public final String id;
     public final Class<? extends LodestoneArmorItem> validArmorClass;

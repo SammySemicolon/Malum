@@ -10,8 +10,8 @@ import team.lodestar.lodestone.systems.item.*;
 
 public abstract class MalumArmorItem extends LodestoneArmorItem {
 
-    public MalumArmorItem(Holder<ArmorMaterial> materialIn, ArmorItem.Type slot, Properties builder) {
-        super(materialIn, slot, builder);
+    public MalumArmorItem(Holder<ArmorMaterial> pMaterial, Type pType, int durabilityFactor, Properties pProperties) {
+        super(pMaterial, pType, durabilityFactor, pProperties);
     }
 
     @Override

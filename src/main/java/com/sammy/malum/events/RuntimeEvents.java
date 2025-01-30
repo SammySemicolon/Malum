@@ -4,7 +4,9 @@ import com.sammy.malum.common.block.storage.jar.*;
 import com.sammy.malum.common.effect.*;
 import com.sammy.malum.common.effect.aura.*;
 import com.sammy.malum.common.entity.nitrate.*;
+import com.sammy.malum.common.geas.explosion.*;
 import com.sammy.malum.common.item.cosmetic.curios.*;
+import com.sammy.malum.common.item.curiosities.*;
 import com.sammy.malum.common.item.curiosities.curios.runes.madness.*;
 import com.sammy.malum.common.item.curiosities.curios.runes.miracle.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.misc.*;
@@ -136,6 +138,12 @@ public class RuntimeEvents {
     }
 
     @SubscribeEvent
+    public static void onPickupItem(ItemEntityPickupEvent.Pre event) {
+        SoulwovenPouchItem.trySwallowItem(event);
+    }
+
+
+    @SubscribeEvent
     public static void onHurt(LivingDamageEvent.Post event) {
         SoulDataHandler.exposeSoul(event);
     }
@@ -170,5 +178,9 @@ public class RuntimeEvents {
     public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
         CurioProspectorBelt.processExplosion(event);
         NitrateExplosion.processExplosion(event);
+    }
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onExplosionKnockback(ExplosionKnockbackEvent event) {
+        ConcussiveForceGeas.onExplosionKnockback(event);
     }
 }

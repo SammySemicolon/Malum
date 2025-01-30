@@ -5,7 +5,7 @@ import com.sammy.malum.registry.common.AttributeRegistry;
 import net.minecraft.resources.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
 
 import java.util.*;
@@ -14,7 +14,7 @@ import static com.sammy.malum.registry.common.item.ArmorTiers.SOUL_STAINED_STEEL
 
 public class SoulStainedSteelArmorItem extends MalumArmorItem {
     public SoulStainedSteelArmorItem(ArmorItem.Type slot, Properties builder) {
-        super(SOUL_STAINED_STEEL, slot, builder);
+        super(SOUL_STAINED_STEEL, slot, 24, builder);
     }
 
     @Override
@@ -33,6 +33,7 @@ public class SoulStainedSteelArmorItem extends MalumArmorItem {
                         group)
         );
     }
+
     @Override
     public ResourceLocation getArmorTexture() {
         return MalumMod.malumPath("textures/armor/soul_stained_steel_reforged.png");

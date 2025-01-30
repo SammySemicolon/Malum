@@ -109,6 +109,6 @@ public class MalumGeasEffectTypeRegistry {
     //As long as you keep dying, this timer is extended
     //Reduces Armor significantly
     //This is a void geas, might use fused consciousness even
-    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_LOOSENED_SHACKLES = GEAS_TYPES.register("oath_of_the_loosened_shackles", () -> new GeasEffectType(LoosenedShacklesOath::new));
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_LAST_STAND = GEAS_TYPES.register("oath_of_the_last_stand", () -> new GeasEffectType(LastStandOath::new));
 
 }

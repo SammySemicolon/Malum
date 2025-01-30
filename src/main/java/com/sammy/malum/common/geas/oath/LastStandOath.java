@@ -2,9 +2,9 @@ package com.sammy.malum.common.geas.oath;
 
 import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
-import net.minecraft.world.damagesource.*;
+import net.minecraft.sounds.*;
+import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.neoforged.neoforge.common.*;
@@ -12,22 +12,33 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
 import team.lodestar.lodestone.helpers.*;
 
-public class LoosenedShacklesOath extends GeasEffect {
+public class LastStandOath extends GeasEffect {
 
     public int deaths;
     public long scheduledDeath;
 
-    public LoosenedShacklesOath() {
-        super(MalumGeasEffectTypeRegistry.OATH_OF_THE_LOOSENED_SHACKLES.get());
+    public LastStandOath() {
+        super(MalumGeasEffectTypeRegistry.OATH_OF_THE_LAST_STAND.get());
     }
 
     @Override
     public void update(EntityTickEvent.Pre event, LivingEntity entity) {
         final Level level = entity.level();
-        if (deaths > 0 && level.getGameTime() >= scheduledDeath) {
-            entity.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOID), 1000f);
-            deaths = 0;
-            scheduledDeath = 0;
+
+        final long time = level.getGameTime();
+        if (deaths > 0) {
+            long interval = 20 - 2 * Math.min(deaths-1, 5) - Mth.clamp(deaths-6, 0, 5);
+            if (time % (interval*5) == 0) {
+//                SoundHelper.playSound(entity, SoundRegistry.UNCANNY_VALLEY.get(), SoundSource.MASTER, 2f, Mth.nextFloat(level.getRandom(), 0.55f, 1.75f));
+            }
+            if (time % interval == 0) {
+                SoundHelper.playSound(entity, SoundRegistry.VOID_HEARTBEAT.get(), SoundSource.MASTER, 2.5f, Mth.nextFloat(level.getRandom(), 0.95f, 1.15f));
+            }
+            if (time >= scheduledDeath) {
+                entity.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOID), 1000f);
+                deaths = 0;
+                scheduledDeath = 0;
+            }
         }
     }
 

@@ -7,6 +7,7 @@ import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
@@ -25,7 +26,8 @@ public class ConcussiveForceGeas extends GeasEffect {
         final LivingEntity sourceEntity = event.getExplosion().getIndirectSourceEntity();
         if (sourceEntity != null) {
             if (GeasEffectHandler.hasGeasEffect(sourceEntity, MalumGeasEffectTypeRegistry.PACT_OF_CONCUSSIVE_FORCE.get())) {
-                event.setKnockbackVelocity(event.getKnockbackVelocity().scale(2.5f));
+                double multiplier = 4f / (event.getKnockbackVelocity().length()*2);
+                event.setKnockbackVelocity(event.getKnockbackVelocity().scale(Math.max(multiplier, 1)));
                 event.getAffectedBlocks().clear();
             }
         }

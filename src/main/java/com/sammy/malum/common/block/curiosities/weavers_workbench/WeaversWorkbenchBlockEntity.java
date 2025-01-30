@@ -77,7 +77,7 @@ public class WeaversWorkbenchBlockEntity extends LodestoneBlockEntity implements
         if (!target.isEmpty() && weave.isEmpty()) {
             if (target.has(DataComponentRegistry.ITEM_SKIN)) {
                 ItemStack result = target.copy();
-                target.remove(DataComponentRegistry.ITEM_SKIN);
+                result.remove(DataComponentRegistry.ITEM_SKIN);
                 return result;
             }
         }

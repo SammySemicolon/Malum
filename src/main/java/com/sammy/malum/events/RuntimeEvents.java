@@ -91,6 +91,7 @@ public class RuntimeEvents {
         SoulWardHandler.recoverSoulWard(event);
         MalignantConversionHandler.entityTick(event);
         WeepingWellRejectionHandler.entityTick(event);
+        TouchOfDarknessHandler.entityTick(event);
         CurioWatcherNecklace.entityTick(event);
         CurioHiddenBladeNecklace.entityTick(event);
     }

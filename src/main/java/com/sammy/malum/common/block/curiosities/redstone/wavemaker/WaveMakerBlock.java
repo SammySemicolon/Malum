@@ -15,6 +15,9 @@ public class WaveMakerBlock extends SpiritDiodeBlock<WaveMakerBlockEntity> {
 
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        if (oldState.getBlock().equals(this)) {
+            return;
+        }
         level.scheduleTick(pos, this, getDefaultFrequency(pos, state));
     }
 
@@ -35,7 +38,7 @@ public class WaveMakerBlock extends SpiritDiodeBlock<WaveMakerBlockEntity> {
 
     @Override
     public boolean processUpdate(Level level, BlockPos pos, BlockState state, WaveMakerBlockEntity diode, int signal) {
-        diode.signal = signal;
+        diode.outputSignal = signal;
 
         if (!diode.inverted) {
             level.playSound(null, pos, SoundRegistry.WAVEMAKER_PULSE.get(), SoundSource.BLOCKS, 0.3f, 1.8f);

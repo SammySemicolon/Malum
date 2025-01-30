@@ -24,10 +24,10 @@ public class WaveBankerBlock extends SpiritDiodeBlock<WaveBankerBlockEntity> {
 
     @Override
     public boolean processUpdate(Level level, BlockPos pos, BlockState state, WaveBankerBlockEntity diode, int signal) {
-        int previousSignal = diode.signal;
-        diode.signal = signal;
+        int previousSignal = diode.outputSignal;
+        diode.outputSignal = signal;
 
-        if (previousSignal > diode.signal) {
+        if (previousSignal > diode.outputSignal) {
             level.playSound(null, pos, SoundRegistry.WAVEBANKER_STORE.get(), SoundSource.BLOCKS, 0.3f, 1.2f);
             emitRedstoneParticles(level, pos);
         }
@@ -38,12 +38,12 @@ public class WaveBankerBlock extends SpiritDiodeBlock<WaveBankerBlockEntity> {
 
     @Override
     public boolean shouldUpdateWhenNeighborChanged(Level level, BlockPos pos, BlockState state, WaveBankerBlockEntity diode, int newInput) {
-        return newInput != diode.signal;
+        return newInput != diode.outputSignal;
     }
 
     @Override
     public int redstoneTicksUntilUpdate(Level level, BlockPos pos, BlockState state, WaveBankerBlockEntity diode, int newInput) {
-        if (newInput < diode.signal)
+        if (newInput < diode.outputSignal)
             return super.redstoneTicksUntilUpdate(level, pos, state, diode, newInput);
         else
             return 2; // One redstone tick

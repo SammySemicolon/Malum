@@ -7,6 +7,7 @@ import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
+import net.minecraft.util.*;
 import net.minecraft.world.entity.player.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
@@ -37,8 +38,7 @@ public class TouchOfDarknessRenderHandler {
         Consumer<Float> setZoom = f -> shaderInstance.safeGetUniform("Zoom").set(f);
         Consumer<Float> setIntensity = f -> shaderInstance.safeGetUniform("Intensity").set(f);
         VFXBuilders.ScreenVFXBuilder builder = VFXBuilders.createScreen()
-                .setPositionWithWidth(0, 0, screenWidth, screenHeight)
-                .setColor(0, 0, 0)
+                .setPositionWithWidth(screenWidth*-0.2f, screenHeight*-0.2f, screenWidth*1.4f, screenHeight*1.4f)
                 .setAlpha(alpha)
                 .setShader(shaderInstance);
 
@@ -46,13 +46,25 @@ public class TouchOfDarknessRenderHandler {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
 
-        setZoom.accept(zoom);
-        setIntensity.accept(intensity);
-        builder.draw(poseStack);
+        for (int i = 0; i < 4; i++) {
+            poseStack.pushPose();
+            if (i != 2) {
+                float angle = ((player.level().getGameTime() + deltaTracker.getGameTimeDeltaTicks()) / 80 + i * 2.09f) * 6.28f;
+                float xOffset = Mth.sin(angle) * 20;
+                float yOffset = Mth.cos(angle) * 20;
+                poseStack.translate(xOffset, yOffset, 0);
+            }
+            builder.setColor(i==0?55:0, i==1?55:0, i==2?55:0);
 
-        setZoom.accept(zoom * 1.25f + 0.15f);
-        setIntensity.accept(intensity * 0.8f + 0.5f);
-        builder.setAlpha(0.5f * alpha).draw(poseStack);
+            setZoom.accept(zoom);
+            setIntensity.accept(intensity);
+            builder.setAlpha(alpha).blit(poseStack);
+
+            setZoom.accept(zoom * 1.25f + 0.15f);
+            setIntensity.accept(intensity * 0.8f + 0.5f);
+            builder.setAlpha(0.5f * alpha).blit(poseStack);
+            poseStack.popPose();
+        }
 
         RenderSystem.disableBlend();
         poseStack.popPose();

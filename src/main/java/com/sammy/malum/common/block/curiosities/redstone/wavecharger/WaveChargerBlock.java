@@ -25,18 +25,18 @@ public class WaveChargerBlock extends SpiritDiodeBlock<WaveChargerBlockEntity> {
 
     @Override
     public boolean processUpdate(Level level, BlockPos pos, BlockState state, WaveChargerBlockEntity diode, int signal) {
-        int startingSignal = diode.signal;
+        int startingSignal = diode.outputSignal;
         if (startingSignal > signal) {
-            diode.signal--;
+            diode.outputSignal--;
         } else if (startingSignal < signal) {
-            diode.signal++;
+            diode.outputSignal++;
         } else {
             return false;
         }
 
         updateState(level, pos, state, diode);
 
-        if (diode.signal == signal) {
+        if (diode.outputSignal == signal) {
             level.playSound(null, pos, SoundRegistry.WAVECHARGER_CHARGE.get(), SoundSource.BLOCKS, 0.3f, signal == 0 ? 0.9f : 1.5f);
             emitRedstoneParticles(level, pos);
             return false;
@@ -47,6 +47,6 @@ public class WaveChargerBlock extends SpiritDiodeBlock<WaveChargerBlockEntity> {
 
     @Override
     public boolean shouldUpdateWhenNeighborChanged(Level level, BlockPos pos, BlockState state, WaveChargerBlockEntity diode, int newInput) {
-        return newInput != diode.signal;
+        return newInput != diode.outputSignal;
     }
 }

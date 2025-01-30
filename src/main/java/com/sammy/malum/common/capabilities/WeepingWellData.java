@@ -51,6 +51,7 @@ public class WeepingWellData {
                 voidRejection++;
                 if (voidRejection == MAX_REJECTION) {
                     isInRejectedState = true;
+                    return;
                 }
             }
         }

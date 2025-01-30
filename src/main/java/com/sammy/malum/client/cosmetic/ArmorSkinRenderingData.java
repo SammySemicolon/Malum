@@ -3,6 +3,7 @@ package com.sammy.malum.client.cosmetic;
 import com.sammy.malum.common.item.cosmetic.skins.ArmorSkin;
 import net.minecraft.Util;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.resources.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import team.lodestar.lodestone.systems.model.LodestoneArmorModel;
@@ -26,6 +27,8 @@ public abstract class ArmorSkinRenderingData {
     }
 
     public static boolean isSlim(LivingEntity livingEntity) {
-        return livingEntity instanceof AbstractClientPlayer player && player.getSkin().model().name().equals("slim");
+        if (!(livingEntity instanceof AbstractClientPlayer player)) return false;
+        final PlayerSkin.Model model = player.getSkin().model();
+        return model.id().equals("slim");
     }
 }

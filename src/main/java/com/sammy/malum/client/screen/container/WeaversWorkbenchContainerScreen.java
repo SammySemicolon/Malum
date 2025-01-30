@@ -61,7 +61,7 @@ public class WeaversWorkbenchContainerScreen extends AbstractContainerScreen<Wea
             setupArmorStand();
         }
         cachedOutput = output;
-        InventoryScreen.renderEntityInInventory(pGuiGraphics, this.leftPos + 141, this.topPos + 75, 25.0F, TRANSLATION, ANGLE, null, this.armorStand);
+        InventoryScreen.renderEntityInInventory(pGuiGraphics, this.leftPos + 141, this.topPos + 65, 25.0F, TRANSLATION, ANGLE, null, this.armorStand);
     }
 
     protected void setupArmorStand() {

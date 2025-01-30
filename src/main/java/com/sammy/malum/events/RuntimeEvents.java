@@ -90,7 +90,7 @@ public class RuntimeEvents {
         SoulDataHandler.entityTick(event);
         SoulWardHandler.recoverSoulWard(event);
         MalignantConversionHandler.entityTick(event);
-        TouchOfDarknessHandler.entityTick(event);
+        WeepingWellRejectionHandler.entityTick(event);
         CurioWatcherNecklace.entityTick(event);
         CurioHiddenBladeNecklace.entityTick(event);
     }

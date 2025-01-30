@@ -12,6 +12,7 @@ import net.minecraft.core.particles.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
+import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.projectile.windcharge.*;
@@ -41,20 +42,17 @@ public class CurioRisingEdgeRing extends MalumCurioItem implements IMalumEventRe
                 new AttributeModifier(MalumMod.malumPath("rising_edge_ring"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 
-    @Override
-    public void finalizedOutgoingDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
-        if (event.getSource().is(DamageTypeRegistry.SCYTHE_ASCENSION)) {
-            float velocity = 0.9f;
-            if (MalumScytheItem.isEnhanced(attacker)) {
-                velocity += 0.4f;
-            }
-            target.setDeltaMovement(target.getDeltaMovement().add(0, velocity, 0));
-            if (target.level() instanceof ServerLevel serverLevel) {
-                SoundHelper.playSound(target, SoundRegistry.SCYTHE_ASCENSION_LAUNCH.get(), SoundSource.PLAYERS, 2, 1.25f);
-                serverLevel.sendParticles(ParticleTypes.GUST_EMITTER_SMALL,
-                        target.getX(), target.getY(), target.getZ(), 1,
-                        0, 0, 0, 0);
-            }
+    public static void launchEntity(LivingEntity attacker, LivingEntity target) {
+        float velocity = 0.9f;
+        if (MalumScytheItem.isEnhanced(attacker)) {
+            velocity += 0.4f;
+        }
+        target.setDeltaMovement(target.getDeltaMovement().add(0, velocity, 0));
+        if (target.level() instanceof ServerLevel serverLevel) {
+            SoundHelper.playSound(target, SoundRegistry.SCYTHE_ASCENSION_LAUNCH.get(), SoundSource.PLAYERS, 2, 1.25f);
+            serverLevel.sendParticles(ParticleTypes.GUST_EMITTER_SMALL,
+                    target.getX(), target.getY(), target.getZ(), 1,
+                    0, 0, 0, 0);
         }
     }
 }

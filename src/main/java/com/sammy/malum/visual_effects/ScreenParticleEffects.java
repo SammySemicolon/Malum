@@ -157,7 +157,7 @@ public class ScreenParticleEffects {
         @Override
         public void spawnEarlyParticles(ScreenParticleHolder target, Level level, float partialTick, ItemStack stack, float x, float y) {
             final LocalPlayer player = Minecraft.getInstance().player;
-            isNearWell = player.getData(AttachmentTypeRegistry.VOID_INFLUENCE).isNearWeepingWell;
+            isNearWell = player.getData(AttachmentTypeRegistry.WEEPING_WELL_INFO).isNearWeepingWell;
             if (!isNearWell) {
                 return;
             }

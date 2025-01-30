@@ -1,4 +1,4 @@
-package com.sammy.malum.common.geas;
+package com.sammy.malum.common.geas.soul_ward;
 
 import com.google.common.collect.*;
 import com.sammy.malum.core.helpers.*;
@@ -14,9 +14,9 @@ import net.neoforged.neoforge.event.entity.living.*;
 
 import java.util.function.*;
 
-public class RunicInfusionGeas extends GeasEffect {
+public class ReciprocationGeas extends GeasEffect {
 
-    public RunicInfusionGeas() {
+    public ReciprocationGeas() {
         super(MalumGeasEffectTypeRegistry.PACT_OF_RECIPROCATION.get());
     }
 

@@ -6,9 +6,9 @@ import net.minecraft.core.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 
-public class RadiantDawnGeas extends NightCycleBasedGeas {
+public class DayBlessedGeas extends NightCycleBasedGeas {
 
-    public RadiantDawnGeas() {
+    public DayBlessedGeas() {
         super(MalumGeasEffectTypeRegistry.PACT_OF_THE_DAYBLESSED.get());
     }
 

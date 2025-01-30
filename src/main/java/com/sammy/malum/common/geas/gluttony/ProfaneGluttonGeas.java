@@ -1,11 +1,11 @@
-package com.sammy.malum.common.geas;
+package com.sammy.malum.common.geas.gluttony;
 
 import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 
-public class RavenousGluttonyGeas extends GeasEffect {
+public class ProfaneGluttonGeas extends GeasEffect {
 
-    public RavenousGluttonyGeas() {
+    public ProfaneGluttonGeas() {
         super(MalumGeasEffectTypeRegistry.PACT_OF_THE_PROFANE_GLUTTON.get());
     }
 }

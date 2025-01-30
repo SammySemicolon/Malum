@@ -50,6 +50,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
         if (target.isAlive()) {
             WorldEventHandler.addWorldEvent(level,
                     new DelayedDamageWorldEvent()
+                            .setMagicDamageType(DamageTypeRegistry.TYRVING)
                             .setData(attacker.getUUID(), target.getUUID(), 0, magicDamage, 3));
         }
 

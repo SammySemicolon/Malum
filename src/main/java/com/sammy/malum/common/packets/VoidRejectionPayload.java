@@ -26,7 +26,7 @@ public class VoidRejectionPayload extends OneSidedPayloadData {
     public void handle(IPayloadContext iPayloadContext) {
         Entity entity = Minecraft.getInstance().level.getEntity(entityId);
         if (entity instanceof Player player) {
-            TouchOfDarknessHandler.launchPlayer(player);
+            WeepingWellRejectionHandler.launchPlayer(player);
         }
     }
 

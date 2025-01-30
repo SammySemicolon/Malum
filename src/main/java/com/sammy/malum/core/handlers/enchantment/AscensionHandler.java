@@ -65,7 +65,6 @@ public class AscensionHandler {
             if (scythe.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
                 particleEffect.setSpiritType(spiritAffiliatedItem);
             }
-            boolean hasNarrowNecklace = !MalumScytheItem.isEnhanced(player);
             boolean dealtDamage = false;
             for (Entity target : serverLevel.getEntities(player, aabb, t -> ascensionCanHitEntity(player, t))) {
                 var damageSource = DamageTypeHelper.create(serverLevel, DamageTypeRegistry.SCYTHE_ASCENSION, player);
@@ -80,6 +79,9 @@ public class AscensionHandler {
                     }
                     SoundHelper.playSound(player, sound, 2.0f, RandomHelper.randomBetween(random, 0.75f, 1.25f));
                     dealtDamage = true;
+                    if (hasFunnyRing) {
+                        CurioRisingEdgeRing.launchEntity(player, livingentity);
+                    }
                 }
             }
             if (dealtDamage) {

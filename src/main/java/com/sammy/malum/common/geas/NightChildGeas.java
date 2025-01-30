@@ -6,9 +6,9 @@ import net.minecraft.core.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 
-public class BlessedMoonGeas extends NightCycleBasedGeas {
+public class NightChildGeas extends NightCycleBasedGeas {
 
-    public BlessedMoonGeas() {
+    public NightChildGeas() {
         super(MalumGeasEffectTypeRegistry.PACT_OF_THE_NIGHTCHILD.get());
     }
 

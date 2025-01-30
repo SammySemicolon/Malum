@@ -140,11 +140,21 @@ public class MalumLang extends LanguageProvider {
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_SHIELD.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_RECIPROCATION.get(), "");
 
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_REAPER.get(), "");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_SKYBREAKER.get(), "");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_PROFANE_ASCETIC.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_PROFANE_GLUTTON.get(), "");
+
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVERKEEN_EYE.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVEREAGER_FIST.get(), "");
 
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_UNDISCERNED_MAW.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_UNSIGHTED_RESISTANCE.get(), "");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.BOND_OF_BELOVED_CHAINS.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.BOND_OF_DEATHS_SEEKERS.get(), "");
 
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_INVERTED_HEART.get(), "Witch Factor of Wrath");
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_GLEEFUL_TARGET.get(), "Witch Factor of Greed");
@@ -250,6 +260,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.staff_homing", "Staff Projectiles Home In on Targets");
         add("malum.effect.geas.staff_autofire", "Staff Charges Automatically Fire");
         add("malum.effect.geas.malignant_crit_leech", "Malignant Deliverance Leeches Life Essence");
+        add("malum.effect.geas.malignant_crit_healing_overexertion", "Repeated Activations Nullify All Healing");
         add("malum.effect.geas.malignant_crit_reinforcement", "Malignant Deliverance Improves Conversion");
         add("malum.effect.geas.authority_of_wrath", "Injuries, Emotions, Senses are Shared with Witnesses");
         add("malum.effect.geas.authority_of_wrath_arcane_resonance", "Arcane Resonance Favors Influence");
@@ -307,11 +318,14 @@ public class MalumLang extends LanguageProvider {
         addDeathMessage(DamageTypeRegistry.SCYTHE_SWEEP, "%1$s was sliced in half by %2$s", "%1$s was sliced in half by %2$s using %3$s");
         addDeathMessage(DamageTypeRegistry.SCYTHE_REBOUND, "%1$s was boomeranged by %2$s", "%1$s was boomeranged by %2$s using %3$s");
         addDeathMessage(DamageTypeRegistry.SCYTHE_ASCENSION, "%1$s was cleaved using ascension by %2$s", "%1$s was cleaved using ascension by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.SCYTHE_COMBO, "%1$s was sliced in half and then again by %2$s", "%1$s was sliced in half and then again by %2$s using %3$s");
 
         addDeathMessage(DamageTypeRegistry.HIDDEN_BLADE_COUNTER, "%1$s was sliced into innumerable pieces by %2$s", "%1$s was sliced into innumerable pieces by %2$s using %3$s");
 
-        addDeathMessage(DamageTypeRegistry.SOULWASHING_RETALIATION, "%1$s was caught in %2$s's karmic flow", "%1$s was caught in %2$s's karmic flow using %3$s");
+        addDeathMessage(DamageTypeRegistry.TYRVING, "%1$s had their soul scarred by %2$s", "%1$s had their soul scarred by %2$s using %3$s");
 
+        addDeathMessage(DamageTypeRegistry.SOULWASHING_PROPAGATION, "%1$s was caught in %2$s's karmic flow", "%1$s was caught in %2$s's karmic flow using %3$s");
+        addDeathMessage(DamageTypeRegistry.SOULWASHING_RETALIATION, "%1$s was caught in %2$s's karmic flow", "%1$s was caught in %2$s's karmic flow using %3$s");
 
         addJEEDEffectDescription(MobEffectRegistry.GAIAS_BULWARK, "An earthen carapace surrounds your body, functioning as extra armor.");
         addJEEDEffectDescription(MobEffectRegistry.EARTHEN_MIGHT, "Your fists and tools are reinforced with earth, increasing your strength.");

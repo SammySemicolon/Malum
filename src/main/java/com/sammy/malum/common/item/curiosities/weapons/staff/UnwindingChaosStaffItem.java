@@ -56,12 +56,11 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
     @Override
     public void outgoingDeathEvent(LivingDeathEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (event.getSource().is(DamageTypeTags.IS_FIRE)) {
-            var data = attacker.getData(AttachmentTypeRegistry.STAFF_ABILITIES);
-            if (data.unwindingChaosBurnStacks < 6) {
-                data.unwindingChaosBurnStacks++;
-                float pitch = RandomHelper.randomBetween(attacker.level().getRandom(), 0.75f, 1.25f);
-                SoundHelper.playSound(target, SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), attacker.getSoundSource(), 1.5f, pitch);
-            }
+            attacker.getData(AttachmentTypeRegistry.STAFF_ABILITIES).chargeUpUnwindingChaos(2,
+                    () -> {
+                        float pitch = RandomHelper.randomBetween(attacker.level().getRandom(), 0.75f, 1.25f);
+                        SoundHelper.playSound(target, SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), attacker.getSoundSource(), 1.5f, pitch);
+                    });
         }
     }
 
@@ -71,12 +70,11 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
         Level level = attacker.level();
         RandomSource random = level.random;
         if (source.is(DamageTypeTags.IS_FIRE)) {
-            var data = attacker.getData(AttachmentTypeRegistry.STAFF_ABILITIES);
-            if (data.unwindingChaosBurnStacks < 6) {
-                data.unwindingChaosBurnStacks++;
-                float pitch = RandomHelper.randomBetween(attacker.level().getRandom(), 0.75f, 1.25f);
-                SoundHelper.playSound(target, SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), attacker.getSoundSource(), 1.5f, pitch);
-            }
+            attacker.getData(AttachmentTypeRegistry.STAFF_ABILITIES).chargeUpUnwindingChaos(1,
+                    () -> {
+                        float pitch = RandomHelper.randomBetween(attacker.level().getRandom(), 0.75f, 1.25f);
+                        SoundHelper.playSound(target, SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), attacker.getSoundSource(), 1.5f, pitch);
+                    });
         }
         boolean canTriggerMagic = source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC);
         if (canTriggerMagic || source.is(DamageTypeRegistry.SOULWASHING_PROPAGATION)) {
@@ -94,7 +92,6 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
             float pitch = RandomHelper.randomBetween(level.getRandom(), 0.75f, 2f);
             SoundHelper.playSound(attacker, SoundRegistry.WORLDSOUL_MOTIF_HEAVY_IMPACT.get(), 2f, pitch);
         }
-        super.finalizedOutgoingDamageEvent(event, attacker, target, stack);
     }
 
     @Override
@@ -106,9 +103,11 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
     public int getProjectileCount(Level level, LivingEntity livingEntity, float pct) {
         if (pct == 1f) {
             var data = livingEntity.getData(AttachmentTypeRegistry.STAFF_ABILITIES);
-            int projectileCount = Mth.clamp(3+data.unwindingChaosBurnStacks*2, 0, 15);
-            data.unwindingChaosBurnStacks = 0;
-            return projectileCount;
+            if (data.tryEmpowerChaosVolley()) {
+                data.unwindingChaosBurnStacks--;
+                return 17;
+            }
+            return 9;
         }
         return 0;
     }

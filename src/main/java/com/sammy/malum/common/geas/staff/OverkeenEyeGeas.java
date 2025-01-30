@@ -1,4 +1,4 @@
-package com.sammy.malum.common.geas;
+package com.sammy.malum.common.geas.staff;
 
 import com.google.common.collect.*;
 import com.sammy.malum.core.helpers.*;
@@ -12,21 +12,21 @@ import net.minecraft.world.item.*;
 
 import java.util.function.*;
 
-public class OvereagerFist extends GeasEffect {
+public class OverkeenEyeGeas extends GeasEffect {
 
-    public OvereagerFist() {
-        super(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVEREAGER_FIST.get());
+    public OverkeenEyeGeas() {
+        super(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVERKEEN_EYE.get());
     }
 
     @Override
     public void addTooltipComponents(LivingEntity entity, Consumer<Component> tooltipAcceptor, TooltipFlag tooltipFlag) {
-        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("staff_autofire"));
+        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("staff_homing"));
         super.addTooltipComponents(entity, tooltipAcceptor, tooltipFlag);
     }
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> createAttributeModifiers(LivingEntity entity, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        addAttributeModifier(modifiers, AttributeRegistry.CHARGE_DURATION, -0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        addAttributeModifier(modifiers, AttributeRegistry.CHARGE_DURATION, 0.5f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         return modifiers;
     }
 }

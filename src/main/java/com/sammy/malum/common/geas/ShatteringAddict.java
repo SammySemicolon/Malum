@@ -17,11 +17,11 @@ import net.neoforged.neoforge.event.tick.*;
 
 import java.util.function.*;
 
-public class SouldrinkerGeas extends GeasEffect {
+public class ShatteringAddict extends GeasEffect {
 
     private long mostRecentShatter;
 
-    public SouldrinkerGeas() {
+    public ShatteringAddict() {
         super(MalumGeasEffectTypeRegistry.PACT_OF_THE_SHATTERING_ADDICT.get());
     }
 

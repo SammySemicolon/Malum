@@ -20,14 +20,14 @@ public class TouchOfDarknessRenderHandler {
         Minecraft minecraft = Minecraft.getInstance();
         PoseStack poseStack = guiGraphics.pose();
         Player player = minecraft.player;
-        var data = player.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
-        if (data.voidAffliction == 0f) {
+        var data = player.getData(AttachmentTypeRegistry.TOUCH_OF_DARKNESS);
+        if (data.touchOfDarkness == 0f) {
             return;
         }
         int screenWidth = minecraft.getWindow().getGuiScaledWidth();
         int screenHeight = minecraft.getWindow().getGuiScaledHeight();
 
-        float effectStrength = Easing.SINE_IN_OUT.ease(data.voidAffliction / VoidInfluenceData.MAX_AFFLICTION, 0, 1, 1);
+        float effectStrength = Easing.SINE_IN_OUT.ease(data.touchOfDarkness / TouchOfDarknessData.MAX_TOUCH_OF_DARKNESS, 0, 1, 1);
         float alpha = Math.min(1, effectStrength * 5);
         float zoom = 0.5f + Math.min(0.35f, effectStrength);
         float intensity = 1f + (effectStrength > 0.5f ? (effectStrength - 0.5f) * 2.5f : 0);

@@ -26,7 +26,7 @@ public class SilencedEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        pLivingEntity.getData(AttachmentTypeRegistry.VOID_INFLUENCE).setAfflictionLevel(20 + pAmplifier * 2);
+        pLivingEntity.getData(AttachmentTypeRegistry.TOUCH_OF_DARKNESS).setAfflictionLevel(10 + pAmplifier * 4);
         return true;
     }
 }

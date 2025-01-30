@@ -28,24 +28,24 @@ import java.util.*;
 
 import static com.sammy.malum.client.VoidRevelationHandler.RevelationType.BLACK_CRYSTAL;
 
-public class TouchOfDarknessHandler {
+public class WeepingWellRejectionHandler {
 
     public static final ResourceLocation GRAVITY_MODIFIER_ID = MalumMod.malumPath("weeping_well_reduced_gravity");
 
     public static void handlePrimordialSoupContact(LivingEntity livingEntity) {
-        var data = livingEntity.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
+        var data = livingEntity.getData(AttachmentTypeRegistry.WEEPING_WELL_INFO);
         if (data.isInRejectedState) {
             return;
         }
         livingEntity.setDeltaMovement(livingEntity.getDeltaMovement().scale(0.4f));
-        data.setAfflictionLevel(100);
+        livingEntity.getData(AttachmentTypeRegistry.TOUCH_OF_DARKNESS.get()).setAfflictionLevel(100);
         data.setGoopStatus();
     }
 
     public static void entityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity livingEntity) {
             var level = livingEntity.level();
-            var data = livingEntity.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
+            var data = livingEntity.getData(AttachmentTypeRegistry.WEEPING_WELL_INFO);
             data.update(livingEntity);
             var gravity = livingEntity.getAttribute(Attributes.GRAVITY);
             if (gravity != null) {
@@ -63,7 +63,7 @@ public class TouchOfDarknessHandler {
     }
 
     public static void handleRejectionState(Level level, LivingEntity living) {
-        var data = living.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
+        var data = living.getData(AttachmentTypeRegistry.WEEPING_WELL_INFO);
         if (!level.isClientSide) {
             if (living instanceof Player && level.getGameTime() % 6L == 0) {
                 float volume = 0.5f + data.voidRejection * 0.02f;
@@ -79,17 +79,17 @@ public class TouchOfDarknessHandler {
             }
         }
         if (data.isInRejectedState && data.voidRejection > 0) {
-            float intensity = data.voidRejection / VoidInfluenceData.MAX_REJECTION;
+            float intensity = data.voidRejection / WeepingWellData.MAX_REJECTION;
             Vec3 movement = living.getDeltaMovement();
             living.setDeltaMovement(movement.x, Math.pow(intensity, 2), movement.z);
         }
     }
 
     public static void launchPlayer(Player player) {
-        var data = player.getData(AttachmentTypeRegistry.PROGRESSION_DATA);
+        var progression = player.getData(AttachmentTypeRegistry.PROGRESSION_DATA);
         var level = player.level();
         if (level instanceof ServerLevel serverLevel) {
-            final Optional<VoidConduitBlockEntity> voidConduitBlockEntity = VoidInfluenceData.checkForWeepingWell(player);
+            final Optional<VoidConduitBlockEntity> voidConduitBlockEntity = WeepingWellData.checkForWeepingWell(player);
             if (voidConduitBlockEntity.isPresent()) {
                 VoidConduitBlockEntity weepingWell = voidConduitBlockEntity.get();
                 BlockPos worldPosition = weepingWell.getBlockPos();
@@ -100,8 +100,8 @@ public class TouchOfDarknessHandler {
             if (!player.isCreative()) {
                 player.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.VOID), 4);
             }
-            if (!data.hasBeenRejected) {
-                SoulHarvestHandler.spawnSpirits(level, player, player.position(), List.of(ItemRegistry.ENCYCLOPEDIA_ARCANA.get().getDefaultInstance()));
+            if (!progression.hasBeenRejected) {
+                SoulHarvestHandler.spawnSpirits(level, player, player.position(), List.of(ItemRegistry.UMBRAL_SPIRIT.get().getDefaultInstance()));
             }
             PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new VoidRejectionPayload(player.getId()));
             SoundHelper.playSound(player, SoundRegistry.VOID_REJECTION.get(), 2f, Mth.nextFloat(player.getRandom(), 0.5f, 0.8f));
@@ -109,7 +109,7 @@ public class TouchOfDarknessHandler {
             VoidRevelationHandler.seeTheRevelation(BLACK_CRYSTAL);
         }
 
-        data.hasBeenRejected = true;
+        progression.hasBeenRejected = true;
         player.addEffect(new MobEffectInstance(MobEffectRegistry.REJECTED, 400, 0));
     }
 
@@ -118,7 +118,7 @@ public class TouchOfDarknessHandler {
     }
 
     public static double updateEntityGravity(LivingEntity living) {
-        var data = living.getData(AttachmentTypeRegistry.VOID_INFLUENCE);
+        var data = living.getData(AttachmentTypeRegistry.WEEPING_WELL_INFO);
         if (data.voidRejection > 0) {
             return -Math.min(60, data.voidRejection) / 60f;
         }

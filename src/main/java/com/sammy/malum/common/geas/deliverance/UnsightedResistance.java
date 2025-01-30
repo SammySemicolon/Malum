@@ -1,4 +1,4 @@
-package com.sammy.malum.common.geas;
+package com.sammy.malum.common.geas.deliverance;
 
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.geas.*;
@@ -9,9 +9,9 @@ import net.minecraft.world.item.*;
 
 import java.util.function.*;
 
-public class ReinforcingDeliveranceGeas extends GeasEffect {
+public class UnsightedResistance extends GeasEffect {
 
-    public ReinforcingDeliveranceGeas() {
+    public UnsightedResistance() {
         super(MalumGeasEffectTypeRegistry.OATH_OF_UNSIGHTED_RESISTANCE.get());
     }
 

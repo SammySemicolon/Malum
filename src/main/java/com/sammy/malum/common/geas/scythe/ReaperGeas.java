@@ -1,4 +1,4 @@
-package com.sammy.malum.common.geas;
+package com.sammy.malum.common.geas.scythe;
 
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
@@ -8,8 +8,6 @@ import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
-import net.minecraft.core.*;
-import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
@@ -22,10 +20,10 @@ import team.lodestar.lodestone.helpers.*;
 
 import static net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 
-public class ThanatophobiaGeas extends GeasEffect {
+public class ReaperGeas extends GeasEffect {
 
-    public ThanatophobiaGeas() {
-        super(MalumGeasEffectTypeRegistry.THANATOPHOBIA.get());
+    public ReaperGeas() {
+        super(MalumGeasEffectTypeRegistry.PACT_OF_THE_REAPER.get());
     }
 
     @Override
@@ -33,7 +31,7 @@ public class ThanatophobiaGeas extends GeasEffect {
         final DamageSource source = event.getSource();
         final Level level = attacker.level();
 
-        if (source.is(DamageTypes.PLAYER_ATTACK)) {
+        if (source.is(DamageTypes.PLAYER_ATTACK) || source.is(DamageTypeRegistry.TYRVING)) {
             event.setNewDamage(event.getNewDamage()*0.1f);
             final ItemStack mainHandItem = attacker.getMainHandItem();
             if (mainHandItem.isDamageableItem()) {
@@ -43,7 +41,7 @@ public class ThanatophobiaGeas extends GeasEffect {
         }
 
         final boolean enhanced = MalumScytheItem.isEnhanced(attacker);
-        if (source.is(DamageTypeRegistry.THANATOPHOBIA_COMBO)) {
+        if (source.is(DamageTypeRegistry.SCYTHE_COMBO)) {
             var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_SLASH);
             var scytheStack = SoulDataHandler.getScytheWeapon(source, attacker);
             if (scytheStack.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
@@ -91,7 +89,7 @@ public class ThanatophobiaGeas extends GeasEffect {
                 WorldEventHandler.addWorldEvent(level,
                         new DelayedDamageWorldEvent()
                                 .setData(attacker.getUUID(), target.getUUID(), 2, 0, delay)
-                                .setPhysicalDamageType(DamageTypeRegistry.THANATOPHOBIA_COMBO)
+                                .setPhysicalDamageType(DamageTypeRegistry.SCYTHE_COMBO)
                                 .setSound(scytheSound, 0.5f, 1.5f, 0.3f));
 
             }

@@ -33,8 +33,11 @@ public class AttachmentTypeRegistry {
     public static final Supplier<AttachmentType<StaffAbilityData>> STAFF_ABILITIES = ATTACHMENT_TYPES.register(
             "staff_abilities", () -> AttachmentType.builder(StaffAbilityData::new).serialize(StaffAbilityData.CODEC).build());
 
-    public static final Supplier<AttachmentType<VoidInfluenceData>> VOID_INFLUENCE = ATTACHMENT_TYPES.register(
-            "void_influence", () -> AttachmentType.builder(VoidInfluenceData::new).serialize(VoidInfluenceData.CODEC).build());
+    public static final Supplier<AttachmentType<WeepingWellData>> WEEPING_WELL_INFO = ATTACHMENT_TYPES.register(
+            "weeping_well_info", () -> AttachmentType.builder(WeepingWellData::new).serialize(WeepingWellData.CODEC).build());
+
+    public static final Supplier<AttachmentType<TouchOfDarknessData>> TOUCH_OF_DARKNESS = ATTACHMENT_TYPES.register(
+            "touch_of_darkness", () -> AttachmentType.builder(TouchOfDarknessData::new).serialize(TouchOfDarknessData.CODEC).build());
 
     public static final Supplier<AttachmentType<MalignantInfluenceData>> MALIGNANT_INFLUENCE = ATTACHMENT_TYPES.register(
             "malignant_influence", () -> AttachmentType.builder(MalignantInfluenceData::new).serialize(MalignantInfluenceData.CODEC).build());

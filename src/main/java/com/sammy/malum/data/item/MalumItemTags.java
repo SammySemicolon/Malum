@@ -57,6 +57,7 @@ public class MalumItemTags extends ItemTagsProvider {
         copy(BlockTags.DOORS, ItemTags.DOORS);
         copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
         copy(BlockTagRegistry.STRIPPED_LOGS, ItemTagRegistry.STRIPPED_LOGS);
+        copy(BlockTagRegistry.STRIPPED_WOODS, ItemTagRegistry.STRIPPED_WOODS);
         copy(BlockTags.SLABS, ItemTags.SLABS);
         copy(BlockTags.WALLS, ItemTags.WALLS);
         copy(BlockTags.STAIRS, ItemTags.STAIRS);
@@ -147,7 +148,7 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(ItemTagRegistry.MINERALS).add(
                 RAW_SOULSTONE.get(), CRUSHED_SOULSTONE.get(), REFINED_SOULSTONE.get(),
                 RAW_BRILLIANCE.get(), CRUSHED_BRILLIANCE.get(), REFINED_BRILLIANCE.get(),
-                BLAZING_QUARTZ.get(), ARCANE_CHARCOAL.get(),
+                BLAZING_QUARTZ.get(),
                 NATURAL_QUARTZ.get(), CTHONIC_GOLD.get(), CTHONIC_GOLD_FRAGMENT.get());
 
         tag(ItemTagRegistry.AUGMENTS).addAll(items.stream().filter(i -> i.get() instanceof AugmentItem).map(DeferredHolder::getKey).toList());
@@ -171,7 +172,7 @@ public class MalumItemTags extends ItemTagsProvider {
                 .add(TUNING_FORK.get(), LAMPLIGHTERS_TONGS.get(), CATALYST_LOBBER.get())
                 .add(ENCYCLOPEDIA_ARCANA.get(), ENCYCLOPEDIA_ESOTERICA.get());
         tag(ItemTagRegistry.SOULWOVEN_POUCH_AUTOCOLLECT)
-                .addTags(ItemTagRegistry.SPIRITS, ItemTagRegistry.MOB_DROPS, ItemTagRegistry.MATERIALS, ItemTagRegistry.MINERALS);
+                .addTags(ItemTagRegistry.SPIRITS, ItemTagRegistry.MOB_DROPS, ItemTagRegistry.MINERALS);
 
         tag(Tags.Items.NUGGETS).add(COPPER_NUGGET.get(), HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get());
         tag(Tags.Items.GEMS).add(NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), RAW_BRILLIANCE.get());

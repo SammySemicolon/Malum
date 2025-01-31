@@ -1,13 +1,13 @@
 {
-  "registry_name": "minecraft:tropical_fish",
+  "registry_name": "nomansland:billhook_bass",
   "primary_type": "aqueous",
   "spirits": [
     {
-      "spirit": "aqueous",
+      "spirit": "earthen",
       "count": 1
     },
     {
-      "spirit": "earthen",
+      "spirit": "aqueous",
       "count": 1
     }
   ]

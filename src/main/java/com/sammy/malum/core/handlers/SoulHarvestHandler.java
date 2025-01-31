@@ -193,10 +193,9 @@ public class SoulHarvestHandler {
         if (collector instanceof Player player) {
             entity.playerTouch(player);
         }
-        if (entity.getItem().isEmpty()) {
-            return;
+        else {
+            ItemHelper.giveItemToEntity(collector, stack);
         }
-        ItemHelper.giveItemToEntity(collector, stack);
     }
 
     public static void triggerSpiritCollection(LivingEntity collector) {

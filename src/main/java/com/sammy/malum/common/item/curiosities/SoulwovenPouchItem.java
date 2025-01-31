@@ -52,6 +52,9 @@ public class SoulwovenPouchItem extends Item {
         for (NonNullList<ItemStack> playerInventory : player.getInventory().compartments) {
             for (ItemStack item : playerInventory) {
                 if (item.has(DataComponentRegistry.SOULWOVEN_POUCH_CONTENTS)) {
+                    if (player.getCooldowns().isOnCooldown(item.getItem())) {
+                        continue;
+                    }
                     trySwallowItem(player, item, pickedUp);
                 }
             }
@@ -143,6 +146,7 @@ public class SoulwovenPouchItem extends Item {
         if (dropContents(itemstack, player)) {
             this.playDropContentsSound(player);
             player.awardStat(Stats.ITEM_USED.get(this));
+            player.getCooldowns().addCooldown(itemstack.getItem(), 200);
             return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
         } else {
             return InteractionResultHolder.fail(itemstack);

@@ -1,7 +1,7 @@
 {
   "anvil_cost": 10,
   "description": {
-    "translate": "enchantment.malum.haunted"
+    "translate": "enchantment.malum.capacitor"
   },
   "effects": {
     "minecraft:attributes": [
@@ -11,13 +11,13 @@
           "base": 1.0,
           "per_level_above_first": 1.0
         },
-        "attribute": "lodestone:magic_damage",
-        "id": "malum:enchantment.magic_damage",
+        "attribute": "malum:reserve_staff_charges",
+        "id": "malum:enchantment.reserve_staff_charges",
         "operation": "add_value"
       }
     ]
   },
-  "exclusive_set": "malum:animated",
+  "exclusive_set": "malum:replenishing",
   "max_cost": {
     "base": 200,
     "per_level_above_first": 0
@@ -30,6 +30,6 @@
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#malum:enchantable/haunted",
-  "weight": 2
+  "supported_items": "#malum:enchantable/capacitor",
+  "weight": 1
 }

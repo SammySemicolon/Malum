@@ -3,6 +3,7 @@
   "description": {
     "translate": "enchantment.malum.replenishing"
   },
+  "exclusive_set": "malum:capacitor",
   "max_cost": {
     "base": 200,
     "per_level_above_first": 0

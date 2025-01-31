@@ -6,6 +6,7 @@ import com.sammy.malum.data.worldgen.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.data.*;
+import net.minecraft.data.registries.*;
 import net.neoforged.neoforge.common.data.*;
 import net.neoforged.neoforge.registries.*;
 
@@ -22,7 +23,7 @@ public class RegistryDataGenerator extends DatapackBuiltinEntriesProvider {
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, BiomeModifications::bootstrap);
 
     public RegistryDataGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of("minecraft", MalumMod.MALUM));
+        super(output, RegistryPatchGenerator.createLookup(registries, BUILDER), Set.of("minecraft", MalumMod.MALUM));
         RegistryDataGenerator.registries = this;
     }
 }

@@ -3,6 +3,7 @@
   "description": {
     "translate": "enchantment.malum.ascension"
   },
+  "exclusive_set": "malum:rebound",
   "max_cost": {
     "base": 200,
     "per_level_above_first": 0

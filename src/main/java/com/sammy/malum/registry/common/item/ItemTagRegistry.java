@@ -13,12 +13,13 @@ public class ItemTagRegistry {
     public static final TagKey<Item> SCYTHES = malumTag("scythe");
     public static final TagKey<Item> STAVES = malumTag("staff");
     public static final TagKey<Item> KNIVES_FD = modTag("farmersdelight:tools/knives");
-    public static final TagKey<Item> KNIVES = forgeTag("tools/knives");
+    public static final TagKey<Item> KNIVES = commonTag("tools/knives");
 
     public static final TagKey<Item> ANIMATED_ENCHANTABLE = malumTag("enchantable/animated");
     public static final TagKey<Item> REBOUND_ENCHANTABLE = malumTag("enchantable/rebound");
     public static final TagKey<Item> ASCENSION_ENCHANTABLE = malumTag("enchantable/ascension");
     public static final TagKey<Item> REPLENISHING_ENCHANTABLE = malumTag("enchantable/replenishing");
+    public static final TagKey<Item> CAPACITOR_ENCHANTABLE = malumTag("enchantable/capacitor");
     public static final TagKey<Item> HAUNTED_ENCHANTABLE = malumTag("enchantable/haunted");
     public static final TagKey<Item> SPIRIT_SPOILS_ENCHANTABLE = malumTag("enchantable/spirit_spoils");
 
@@ -81,19 +82,19 @@ public class ItemTagRegistry {
     public static final TagKey<Item> TWISTED_STAIRS = malumTag("twisted_rock_stairs");
     public static final TagKey<Item> TWISTED_WALLS = malumTag("twisted_rock_walls");
 
-    public static final TagKey<Item> STRIPPED_LOGS = forgeTag("stripped_logs");
-
+    public static final TagKey<Item> STRIPPED_LOGS = commonTag("stripped_logs");
+    public static final TagKey<Item> STRIPPED_WOODS = commonTag("stripped_woods");
 
 
     private static TagKey<Item> modTag(String path) {
-        return TagKey.create(Registries.ITEM, ResourceLocation.tryParse(path));
+        return TagKey.create(Registries.ITEM, ResourceLocation.parse(path));
     }
 
     private static TagKey<Item> malumTag(String path) {
         return TagKey.create(Registries.ITEM, MalumMod.malumPath(path));
     }
 
-    private static TagKey<Item> forgeTag(String name) {
-        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("neoforge", name));
+    private static TagKey<Item> commonTag(String name) {
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
     }
 }

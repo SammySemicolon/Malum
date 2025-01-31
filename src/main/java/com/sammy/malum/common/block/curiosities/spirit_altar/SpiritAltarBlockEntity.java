@@ -230,7 +230,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
 
     private void recalculateRecipes() {
         boolean hadRecipe = recipe != null;
-
+        inventory.updateInventoryCaches();
         ItemStack stack = inventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
             final Collection<SpiritInfusionRecipe> all = LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_INFUSION.get());

@@ -17,6 +17,7 @@
       }
     ]
   },
+  "exclusive_set": "malum:haunted",
   "max_cost": {
     "base": 200,
     "per_level_above_first": 0

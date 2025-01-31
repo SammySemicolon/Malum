@@ -1,5 +1,5 @@
 {
-  "anvil_cost": 10,
+  "anvil_cost": 3,
   "description": {
     "translate": "enchantment.malum.animated"
   },
@@ -19,12 +19,12 @@
   },
   "exclusive_set": "malum:haunted",
   "max_cost": {
-    "base": 200,
+    "base": 55,
     "per_level_above_first": 0
   },
   "max_level": 2,
   "min_cost": {
-    "base": 55,
+    "base": 3,
     "per_level_above_first": 0
   },
   "slots": [

@@ -1,5 +1,5 @@
 {
-  "anvil_cost": 10,
+  "anvil_cost": 5,
   "description": {
     "translate": "enchantment.malum.spirit_plunder"
   },
@@ -18,12 +18,12 @@
     ]
   },
   "max_cost": {
-    "base": 200,
+    "base": 55,
     "per_level_above_first": 0
   },
   "max_level": 2,
   "min_cost": {
-    "base": 55,
+    "base": 5,
     "per_level_above_first": 0
   },
   "slots": [

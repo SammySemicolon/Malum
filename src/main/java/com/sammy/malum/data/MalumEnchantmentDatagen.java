@@ -25,7 +25,7 @@ public class MalumEnchantmentDatagen {
 
         register(context, EnchantmentRegistry.ANIMATED, enchantment(
                 Enchantment.definition(items.getOrThrow(ItemTagRegistry.ANIMATED_ENCHANTABLE), 2, 2,
-                        Enchantment.constantCost(55), Enchantment.constantCost(200), 10, EquipmentSlotGroup.MAINHAND))
+                        Enchantment.constantCost(3), Enchantment.constantCost(55), 3, EquipmentSlotGroup.MAINHAND))
 
                 .withEffect(EnchantmentEffectComponents.ATTRIBUTES,
                         new EnchantmentAttributeEffect(
@@ -39,7 +39,7 @@ public class MalumEnchantmentDatagen {
         );
         register(context, EnchantmentRegistry.HAUNTED, enchantment(
                 Enchantment.definition(items.getOrThrow(ItemTagRegistry.HAUNTED_ENCHANTABLE), 2, 2,
-                        Enchantment.constantCost(55), Enchantment.constantCost(200), 10, EquipmentSlotGroup.MAINHAND))
+                        Enchantment.constantCost(3), Enchantment.constantCost(55), 3, EquipmentSlotGroup.MAINHAND))
 
                 .withEffect(EnchantmentEffectComponents.ATTRIBUTES,
                         new EnchantmentAttributeEffect(
@@ -55,28 +55,28 @@ public class MalumEnchantmentDatagen {
 
         register(context, EnchantmentRegistry.REBOUND, enchantment(
                 Enchantment.definition(items.getOrThrow(ItemTagRegistry.REBOUND_ENCHANTABLE), 1, 3,
-                        Enchantment.constantCost(55), Enchantment.constantCost(200), 10, EquipmentSlotGroup.MAINHAND))
+                        Enchantment.constantCost(10), Enchantment.constantCost(55), 8, EquipmentSlotGroup.MAINHAND))
 
                 .exclusiveWith(HolderSet.direct(enchantments.getOrThrow(EnchantmentRegistry.ASCENSION)))
         );
 
         register(context, EnchantmentRegistry.ASCENSION, enchantment(
                 Enchantment.definition(items.getOrThrow(ItemTagRegistry.ASCENSION_ENCHANTABLE), 1, 3,
-                        Enchantment.constantCost(55), Enchantment.constantCost(200), 10, EquipmentSlotGroup.MAINHAND))
+                        Enchantment.constantCost(10), Enchantment.constantCost(55), 8, EquipmentSlotGroup.MAINHAND))
 
                 .exclusiveWith(HolderSet.direct(enchantments.getOrThrow(EnchantmentRegistry.REBOUND)))
         );
 
         register(context, EnchantmentRegistry.REPLENISHING, enchantment(
                 Enchantment.definition(items.getOrThrow(ItemTagRegistry.REPLENISHING_ENCHANTABLE), 1, 2,
-                        Enchantment.constantCost(55), Enchantment.constantCost(200), 10, EquipmentSlotGroup.MAINHAND))
+                        Enchantment.constantCost(10), Enchantment.constantCost(55), 8, EquipmentSlotGroup.MAINHAND))
 
                 .exclusiveWith(HolderSet.direct(enchantments.getOrThrow(EnchantmentRegistry.CAPACITOR)))
         );
 
         register(context, EnchantmentRegistry.CAPACITOR, enchantment(
                 Enchantment.definition(items.getOrThrow(ItemTagRegistry.CAPACITOR_ENCHANTABLE), 1, 2,
-                        Enchantment.constantCost(55), Enchantment.constantCost(200), 10, EquipmentSlotGroup.MAINHAND))
+                        Enchantment.constantCost(10), Enchantment.constantCost(55), 8, EquipmentSlotGroup.MAINHAND))
 
                 .withEffect(EnchantmentEffectComponents.ATTRIBUTES,
                         new EnchantmentAttributeEffect(
@@ -92,7 +92,7 @@ public class MalumEnchantmentDatagen {
 
         register(context, EnchantmentRegistry.SPIRIT_PLUNDER, enchantment(
                 Enchantment.definition(items.getOrThrow(ItemTagRegistry.SPIRIT_SPOILS_ENCHANTABLE), 1, 2,
-                        Enchantment.constantCost(55), Enchantment.constantCost(200), 10, EquipmentSlotGroup.MAINHAND))
+                        Enchantment.constantCost(5), Enchantment.constantCost(55), 5, EquipmentSlotGroup.MAINHAND))
 
                 .withEffect(EnchantmentEffectComponents.ATTRIBUTES,
                         new EnchantmentAttributeEffect(

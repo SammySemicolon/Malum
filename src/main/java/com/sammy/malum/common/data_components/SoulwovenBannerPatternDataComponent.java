@@ -25,24 +25,27 @@ public record SoulwovenBannerPatternDataComponent(ResourceLocation type, Resourc
 
     public static final List<SoulwovenBannerPatternDataComponent> REGISTERED_PATTERNS = new ArrayList<>();
 
-    public static final SoulwovenBannerPatternDataComponent DEFAULT = register(MalumMod.malumPath("default"));
+    public static final SoulwovenBannerPatternDataComponent DEFAULT = register("default");
 
-    public static final SoulwovenBannerPatternDataComponent SACRED = register(MalumMod.malumPath("sequence"));
-//    public static final SoulwovenBannerPatternData WICKED = register(MalumMod.malumPath("slash"));
-    public static final SoulwovenBannerPatternDataComponent ARCANE = register(MalumMod.malumPath("spawn"));
-    public static final SoulwovenBannerPatternDataComponent ELDRITCH = register(MalumMod.malumPath("sanity"));
+    public static final SoulwovenBannerPatternDataComponent SACRED = register("sequence");
+//    public static final SoulwovenBannerPatternData WICKED = register("slash"));
+    public static final SoulwovenBannerPatternDataComponent ARCANE = register("spawn");
+    public static final SoulwovenBannerPatternDataComponent ELDRITCH = register("sanity");
 
-    public static final SoulwovenBannerPatternDataComponent AERIAL = register(MalumMod.malumPath("breeze"));
-    public static final SoulwovenBannerPatternDataComponent AQUEOUS = register(MalumMod.malumPath("breath"));
-    public static final SoulwovenBannerPatternDataComponent EARTHEN = register(MalumMod.malumPath("break"));
-//    public static final SoulwovenBannerPatternData INFERNAL = register(MalumMod.malumPath("burn"));
+    public static final SoulwovenBannerPatternDataComponent AERIAL = register("breeze");
+    public static final SoulwovenBannerPatternDataComponent AQUEOUS = register("breath");
+    public static final SoulwovenBannerPatternDataComponent EARTHEN = register("break");
+//    public static final SoulwovenBannerPatternData INFERNAL = register("burn"));
 
-    public static final SoulwovenBannerPatternDataComponent HUNGER = register(MalumMod.malumPath("hunger"));
-    public static final SoulwovenBannerPatternDataComponent HORNS = register(MalumMod.malumPath("horns"));
-    public static final SoulwovenBannerPatternDataComponent HEFT = register(MalumMod.malumPath("heft"));
-    public static final SoulwovenBannerPatternDataComponent HALLUCINATION = register(MalumMod.malumPath("hallucination"));
+    public static final SoulwovenBannerPatternDataComponent HUNGER = register("hunger");
+    public static final SoulwovenBannerPatternDataComponent HORNS = register("horns");
+    public static final SoulwovenBannerPatternDataComponent HEFT = register("heft");
+    public static final SoulwovenBannerPatternDataComponent HALLUCINATION = register("hallucination");
 
 
+    public static SoulwovenBannerPatternDataComponent register(String type) {
+        return register(MalumMod.malumPath(type));
+    }
     public static SoulwovenBannerPatternDataComponent register(ResourceLocation type) {
         var pattern = new SoulwovenBannerPatternDataComponent(type, ResourceLocation.fromNamespaceAndPath(type.getNamespace(), "textures/block/banners/soulwoven_banner_" + type.getPath() + ".png"));
         REGISTERED_PATTERNS.add(pattern);

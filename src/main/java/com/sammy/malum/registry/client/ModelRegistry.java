@@ -13,10 +13,15 @@ import com.sammy.malum.client.model.cosmetic.risky.CommandoArmorModel;
 import com.sammy.malum.client.model.cosmetic.risky.ExecutionerArmorModel;
 import com.sammy.malum.client.model.cosmetic.ultrakill.UltrakillMachineArmorModel;
 
+import com.sammy.malum.client.scarf.*;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.resources.*;
+import net.minecraft.world.entity.player.*;
 import net.neoforged.api.distmarker.*;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.common.*;
 import net.neoforged.neoforge.client.event.*;
+import top.theillusivec4.curios.client.render.*;
 
 @EventBusSubscriber(modid = MalumMod.MALUM, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ModelRegistry {
@@ -72,6 +77,7 @@ public class ModelRegistry {
         event.registerLayerDefinition(ScarfModel.LAYER, ScarfModel::createBodyLayer);
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.AddLayers event) {
         SOUL_HUNTER_ARMOR = new SoulHunterArmorModel(event.getEntityModels().bakeLayer(SoulHunterArmorModel.LAYER));
@@ -96,5 +102,13 @@ public class ModelRegistry {
 
         HEAD_OVERLAY_MODEL = new HeadOverlayModel(event.getEntityModels().bakeLayer(HeadOverlayModel.LAYER));
         SCARF = new ScarfModel(event.getEntityModels().bakeLayer(ScarfModel.LAYER));
+
+        for (PlayerSkin.Model skin : event.getSkins()) {
+            EntityRenderer<? extends Player> renderer = event.getSkin(skin);
+
+            if (renderer instanceof LivingEntityRenderer livingRenderer) {
+                livingRenderer.addLayer(new ScarfLayer(livingRenderer));
+            }
+        }
     }
 }

@@ -227,7 +227,6 @@ public class MalumVanillaRecipes implements IConditionBuilder {
 
         weaveRecipe(output, ItemRegistry.BLIGHTED_GUNK.get(), ItemRegistry.ANCIENT_WEAVE);
         weaveRecipe(output, Items.IRON_INGOT, ItemRegistry.CORNERED_WEAVE);
-        weaveRecipe(output, Items.COPPER_INGOT, ItemRegistry.DREADED_WEAVE);
         weaveRecipe(output, Items.LAPIS_LAZULI, ItemRegistry.MECHANICAL_WEAVE_V1);
         weaveRecipe(output, Items.REDSTONE, ItemRegistry.MECHANICAL_WEAVE_V2);
 

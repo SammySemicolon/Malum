@@ -8,14 +8,13 @@ import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
 import com.sammy.malum.common.block.curiosities.spirit_catalyzer.*;
 import com.sammy.malum.common.block.nature.*;
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.augment.core.*;
 import com.sammy.malum.common.item.codex.*;
 import com.sammy.malum.common.item.cosmetic.curios.*;
-import com.sammy.malum.common.item.cosmetic.skins.*;
-import com.sammy.malum.common.item.cosmetic.weaves.*;
 import com.sammy.malum.common.item.curiosities.*;
 import com.sammy.malum.common.item.curiosities.armor.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
@@ -48,7 +47,6 @@ import com.sammy.malum.registry.common.item.tabs.*;
 import net.minecraft.client.color.item.*;
 import net.minecraft.client.renderer.item.*;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.*;
 import net.minecraft.world.food.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
@@ -712,32 +710,35 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> RUNE_OF_IGNEOUS_SOLACE = register("rune_of_igneous_solace", GEAR_PROPERTIES(), RuneIgneousSolaceItem::new);
     //endregion
 
+
+    public static Item skinHoldingItem(Item.Properties properties, ItemSkinComponent skin) {
+        return new Item(properties.component(DataComponentRegistry.ITEM_SKIN, skin));
+    }
     //region cosmetics
     public static final DeferredHolder<Item, Item> ESOTERIC_SPOOL = register("esoteric_spool", COSMETIC_PROPERTIES(), Item::new);
-    public static final DeferredHolder<Item, Item> ANCIENT_WEAVE = register("ancient_weave", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
-    public static final DeferredHolder<Item, Item> CORNERED_WEAVE = register("cornered_weave", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
-    public static final DeferredHolder<Item, Item> DREADED_WEAVE = register("dreaded_weave", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
-    public static final DeferredHolder<Item, Item> MECHANICAL_WEAVE_V1 = register("mechanical_weave_v1", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
-    public static final DeferredHolder<Item, Item> MECHANICAL_WEAVE_V2 = register("mechanical_weave_v2", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
+    public static final DeferredHolder<Item, Item> ANCIENT_WEAVE = register("ancient_weave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.ANCIENT_CLOTH));
+    public static final DeferredHolder<Item, Item> CORNERED_WEAVE = register("cornered_weave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.COMMANDO));
+    public static final DeferredHolder<Item, Item> MECHANICAL_WEAVE_V1 = register("mechanical_weave_v1", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.BLUE_MACHINE));
+    public static final DeferredHolder<Item, Item> MECHANICAL_WEAVE_V2 = register("mechanical_weave_v2", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.RED_MACHINE));
 
-    public static final DeferredHolder<Item, PrideweaveItem> ACE_PRIDEWEAVE = register("ace_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> AGENDER_PRIDEWEAVE = register("agender_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> ARO_PRIDEWEAVE = register("aro_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> AROACE_PRIDEWEAVE = register("aroace_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> BI_PRIDEWEAVE = register("bi_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> DEMIBOY_PRIDEWEAVE = register("demiboy_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> DEMIGIRL_PRIDEWEAVE = register("demigirl_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> ENBY_PRIDEWEAVE = register("enby_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> GAY_PRIDEWEAVE = register("gay_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> GENDERFLUID_PRIDEWEAVE = register("genderfluid_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> GENDERQUEER_PRIDEWEAVE = register("genderqueer_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> INTERSEX_PRIDEWEAVE = register("intersex_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> LESBIAN_PRIDEWEAVE = register("lesbian_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> PAN_PRIDEWEAVE = register("pan_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> PLURAL_PRIDEWEAVE = register("plural_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> POLY_PRIDEWEAVE = register("poly_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> PRIDE_PRIDEWEAVE = register("pride_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> TRANS_PRIDEWEAVE = register("trans_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
+    public static final DeferredHolder<Item, Item> ACE_PRIDEWEAVE = register("ace_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.ACE));
+    public static final DeferredHolder<Item, Item> AGENDER_PRIDEWEAVE = register("agender_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.AGENDER));
+    public static final DeferredHolder<Item, Item> ARO_PRIDEWEAVE = register("aro_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.ARO));
+    public static final DeferredHolder<Item, Item> AROACE_PRIDEWEAVE = register("aroace_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.AROACE));
+    public static final DeferredHolder<Item, Item> BI_PRIDEWEAVE = register("bi_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.BI));
+    public static final DeferredHolder<Item, Item> DEMIBOY_PRIDEWEAVE = register("demiboy_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.DEMIBOY));
+    public static final DeferredHolder<Item, Item> DEMIGIRL_PRIDEWEAVE = register("demigirl_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.DEMIGIRL));
+    public static final DeferredHolder<Item, Item> ENBY_PRIDEWEAVE = register("enby_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.ENBY));
+    public static final DeferredHolder<Item, Item> GAY_PRIDEWEAVE = register("gay_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.GAY));
+    public static final DeferredHolder<Item, Item> GENDERFLUID_PRIDEWEAVE = register("genderfluid_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.GENDERFLUID));
+    public static final DeferredHolder<Item, Item> GENDERQUEER_PRIDEWEAVE = register("genderqueer_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.GENDERQUEER));
+    public static final DeferredHolder<Item, Item> INTERSEX_PRIDEWEAVE = register("intersex_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.INTERSEX));
+    public static final DeferredHolder<Item, Item> LESBIAN_PRIDEWEAVE = register("lesbian_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.LESBIAN));
+    public static final DeferredHolder<Item, Item> PAN_PRIDEWEAVE = register("pan_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.PAN));
+    public static final DeferredHolder<Item, Item> PLURAL_PRIDEWEAVE = register("plural_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.PLURAL));
+    public static final DeferredHolder<Item, Item> POLY_PRIDEWEAVE = register("poly_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.POLY));
+    public static final DeferredHolder<Item, Item> PRIDE_PRIDEWEAVE = register("pride_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.PRIDE));
+    public static final DeferredHolder<Item, Item> TRANS_PRIDEWEAVE = register("trans_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.TRANS));
 
     public static final DeferredHolder<Item, Item> TOPHAT = register("tophat", COSMETIC_PROPERTIES().stacksTo(1), CurioTopHat::new);
 
@@ -795,21 +796,12 @@ public class ItemRegistry {
 
         @SubscribeEvent(priority = EventPriority.LOWEST)
         public static void addItemProperties(FMLClientSetupEvent event) {
-            Set<LodestoneArmorItem> armors = ItemRegistry.ITEMS.getEntries().stream().filter(r -> r.get() instanceof LodestoneArmorItem).map(r -> (LodestoneArmorItem) r.get()).collect(Collectors.toSet());
-            ItemPropertyFunction armorPropertyFunction = (stack, level, holder, holderID) -> {
-                if (!stack.has(DataComponentRegistry.ITEM_SKIN)) {
-                    return -1;
-                }
-                var skin = stack.get(DataComponentRegistry.ITEM_SKIN.get());
-                ArmorSkin armorSkin = ArmorSkinRegistry.SKINS.get(skin);
-                if (armorSkin == null) {
-                    return -1;
-                }
-                return armorSkin.index;
-            };
-            for (LodestoneArmorItem armor : armors) {
-                ItemProperties.register(armor, MalumMod.malumPath("item_skin"), armorPropertyFunction);
-            }
+            ITEMS.getEntries().stream().filter(r -> r.get() instanceof LodestoneArmorItem).forEach(armor -> {
+                ItemProperties.register(
+                        armor.get(),
+                        MalumMod.malumPath("item_skin"),
+                        (stack, level, holder, holderID) -> ItemSkinComponent.getAppliedSkinId(stack));
+            });
 
             ItemProperties.register(
                     SOULWOVEN_POUCH.get(),

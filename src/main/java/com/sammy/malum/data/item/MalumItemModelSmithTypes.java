@@ -2,9 +2,7 @@ package com.sammy.malum.data.item;
 
 import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.data_components.*;
-import com.sammy.malum.common.item.cosmetic.skins.ArmorSkin;
 import com.sammy.malum.core.systems.ritual.*;
-import com.sammy.malum.registry.common.item.ArmorSkinRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -17,7 +15,6 @@ import team.lodestar.lodestone.systems.item.LodestoneArmorItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 
 public class MalumItemModelSmithTypes extends ItemModelSmithTypes {
@@ -143,23 +140,58 @@ public class MalumItemModelSmithTypes extends ItemModelSmithTypes {
         return provider.withExistingParent(name, HANDHELD).texture("layer0", provider.getItemTexture("ether_torch")).texture("layer1", provider.getItemTexture(name)).texture("layer2", provider.getItemTexture(name + "_overlay"));
     });
 
-    public static ItemModelSmith ARMOR_ITEM = new ItemModelSmith((item, provider) -> {
+    public static ItemModelSmith SKIN_APPLICABLE_ARMOR_ITEM = new ItemModelSmith((item, provider) -> {
         String name = provider.getItemName(item);
         var model = provider.createGenericModel(item, GENERATED, provider.getItemTexture(name));
-        for (Map.Entry<String, ArmorSkin> entry : ArmorSkinRegistry.SKINS.entrySet()) {
-            ArmorSkin skin = entry.getValue();
-            int value = skin.index;
-            ArmorSkin.ArmorSkinDatagenData datagenData = ArmorSkinRegistry.SKIN_DATAGEN_DATA.get(skin);
-            if (datagenData == null) {
-                continue;
-            }
-            String itemSuffix = datagenData.getSuffix((LodestoneArmorItem) item);
-            ResourceLocation itemTexturePath = ResourceLocation.tryParse(datagenData.itemTexturePrefix + itemSuffix);
+        for (ItemSkinComponent registeredSkin : ItemSkinComponent.REGISTERED_SKINS) {
+            final int index = registeredSkin.id();
+            var armorItem = (LodestoneArmorItem) item;
+            var itemTexture = index < 18 ? getDefaultPrideTexturePath(registeredSkin, armorItem) : getDefaultTexturePath(registeredSkin, armorItem);
+            var split = itemTexture.getPath().split("/");
+            var modelName = split[split.length - 1];
             provider.getBuilder(BuiltInRegistries.ITEM.getKey(item).getPath()).override()
-                    .predicate(MalumMod.malumPath("item_skin"), value)
-                    .model(provider.withExistingParent(entry.getKey() + "_" + itemSuffix, GENERATED).texture("layer0", itemTexturePath))
+                    .predicate(MalumMod.malumPath("item_skin"), index)
+                    .model(provider.withExistingParent(modelName, GENERATED).texture("layer0", itemTexture))
                     .end();
         }
         return model;
     });
+
+    public static ResourceLocation getDefaultPrideTexturePath(ItemSkinComponent skin, LodestoneArmorItem item) {
+        ResourceLocation path = MalumMod.malumPath("item/cosmetic/armor_icons/pride/" + skin.name().getPath());
+        switch (item.getEquipmentSlot()) {
+            case HEAD -> {
+                return path.withSuffix("_beanie");
+            }
+            case CHEST -> {
+                return path.withSuffix("_hoodie");
+            }
+            case LEGS -> {
+                return path.withSuffix("_shorts");
+            }
+            case FEET -> {
+                return path.withSuffix("_socks");
+            }
+        }
+        return null;
+    }
+
+    public static ResourceLocation getDefaultTexturePath(ItemSkinComponent skin, LodestoneArmorItem item) {
+        ResourceLocation path = MalumMod.malumPath("item/cosmetic/armor_icons/" + skin.name().getPath());
+        switch (item.getEquipmentSlot()) {
+            case HEAD -> {
+                return path.withSuffix("_head");
+            }
+            case CHEST -> {
+                return path.withSuffix("_body");
+            }
+            case LEGS -> {
+                return path.withSuffix("_legs");
+            }
+            case FEET -> {
+                return path.withSuffix("_feet");
+            }
+        }
+        return null;
+    }
 }

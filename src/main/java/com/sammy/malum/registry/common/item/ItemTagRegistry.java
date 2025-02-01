@@ -57,16 +57,17 @@ public class ItemTagRegistry {
     public static final TagKey<Item> RING = modTag("curios:ring");
     public static final TagKey<Item> RUNE = modTag("curios:rune");
 
-
     public static final TagKey<Item> RUNEWOOD_BOARD_INGREDIENT = malumTag("runewood_board_ingredient");
     public static final TagKey<Item> RUNEWOOD_LOGS = malumTag("runewood_logs");
     public static final TagKey<Item> RUNEWOOD_PLANKS = malumTag("runewood_planks");
+    public static final TagKey<Item> RUNEWOOD_BOARDS = malumTag("runewood_boards");
     public static final TagKey<Item> RUNEWOOD_SLABS = malumTag("runewood_slabs");
     public static final TagKey<Item> RUNEWOOD_STAIRS = malumTag("runewood_stairs");
 
     public static final TagKey<Item> SOULWOOD_BOARD_INGREDIENT = malumTag("soulwood_board_ingredient");
     public static final TagKey<Item> SOULWOOD_LOGS = malumTag("soulwood_logs");
     public static final TagKey<Item> SOULWOOD_PLANKS = malumTag("soulwood_planks");
+    public static final TagKey<Item> SOULWOOD_BOARDS = malumTag("soulwood_boards");
     public static final TagKey<Item> SOULWOOD_SLABS = malumTag("soulwood_slabs");
     public static final TagKey<Item> SOULWOOD_STAIRS = malumTag("soulwood_stairs");
 

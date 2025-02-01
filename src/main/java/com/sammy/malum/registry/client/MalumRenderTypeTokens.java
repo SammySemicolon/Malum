@@ -26,4 +26,7 @@ public class MalumRenderTypeTokens {
 
     public static final RenderTypeToken DIODE_LOCKED = RenderTypeToken.createToken(malumPath("textures/block/spirit_diode/runewood_frame_locked_overlay.png"));
     public static final RenderTypeToken DIODE_INPUT = RenderTypeToken.createToken(malumPath("textures/block/spirit_diode/runewood_frame_input_overlay.png"));
+
+    public static final RenderTypeToken SCARF = RenderTypeToken.createToken(malumPath("textures/vfx/scarf/default.png"));
+
 }

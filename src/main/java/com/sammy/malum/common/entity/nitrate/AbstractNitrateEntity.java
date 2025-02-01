@@ -127,9 +127,9 @@ public abstract class AbstractNitrateEntity extends ThrowableProjectile {
                 @Override
                 public Vec3 getPosition() {
                     return new Vec3(
-                            Mth.lerp(getTimeActive()/MAIN_TRAIL_LENGTH, position.x, randomizedPosition.x),
-                            Mth.lerp(getTimeActive()/MAIN_TRAIL_LENGTH, position.y, randomizedPosition.y),
-                            Mth.lerp(getTimeActive()/MAIN_TRAIL_LENGTH, position.z, randomizedPosition.z)
+                            Mth.lerp(getAge()/MAIN_TRAIL_LENGTH, position.x, randomizedPosition.x),
+                            Mth.lerp(getAge()/MAIN_TRAIL_LENGTH, position.y, randomizedPosition.y),
+                            Mth.lerp(getAge()/MAIN_TRAIL_LENGTH, position.z, randomizedPosition.z)
                     );
                 }
             });

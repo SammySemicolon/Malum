@@ -1,16 +1,20 @@
 package com.sammy.malum.client.cosmetic;
 
+import com.sammy.malum.common.data_components.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import team.lodestar.lodestone.systems.model.LodestoneArmorModel;
+
+import static com.sammy.malum.MalumMod.malumPath;
 
 public class SimpleArmorSkinRenderingData extends ArmorSkinRenderingData {
 
     private final ResourceLocation texture;
     private final LodestoneArmorModel model;
 
-    public SimpleArmorSkinRenderingData(ResourceLocation texture, LodestoneArmorModel model) {
-        this.texture = texture;
+    public SimpleArmorSkinRenderingData(ItemSkinComponent skin, LodestoneArmorModel model) {
+        String type = skin.name().getPath();
+        this.texture = malumPath("textures/armor/cosmetic/" + type + ".png");
         this.model = model;
     }
 

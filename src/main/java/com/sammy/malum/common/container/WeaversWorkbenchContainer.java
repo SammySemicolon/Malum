@@ -2,8 +2,8 @@ package com.sammy.malum.common.container;
 
 import com.sammy.malum.common.block.curiosities.weavers_workbench.WeaversWorkbenchBlockEntity;
 import com.sammy.malum.common.block.curiosities.weavers_workbench.WeaversWorkbenchItemHandler;
-import com.sammy.malum.common.item.cosmetic.weaves.AbstractWeaveItem;
 import com.sammy.malum.registry.common.ContainerRegistry;
+import com.sammy.malum.registry.common.item.*;
 import net.minecraft.network.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -49,7 +49,7 @@ public class WeaversWorkbenchContainer extends AbstractContainerMenu {
             addSlot(new SlotItemHandler(itemHandler, 1, 54, 52) {
                 @Override
                 public boolean mayPlace(ItemStack pStack) {
-                    return pStack.getItem() instanceof AbstractWeaveItem;
+                    return pStack.has(DataComponentRegistry.ITEM_SKIN);
                 }
             });
 

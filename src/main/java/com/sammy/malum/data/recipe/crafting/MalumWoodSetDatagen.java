@@ -41,7 +41,7 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
             ItemRegistry.RUNEWOOD_SIGN.get(), ItemRegistry.RUNEWOOD_SIGN.get(),
             ItemRegistry.RUNEWOOD_ITEM_STAND.get(), ItemRegistry.RUNEWOOD_ITEM_PEDESTAL.get(),
             ItemRegistry.GILDED_RUNEWOOD_ITEM_STAND.get(), ItemRegistry.GILDED_RUNEWOOD_ITEM_PEDESTAL.get(),
-            ItemTagRegistry.RUNEWOOD_LOGS, ItemTagRegistry.RUNEWOOD_BOARD_INGREDIENT, ItemTagRegistry.RUNEWOOD_PLANKS, ItemTagRegistry.RUNEWOOD_STAIRS, ItemTagRegistry.RUNEWOOD_SLABS,
+            ItemTagRegistry.RUNEWOOD_LOGS, ItemTagRegistry.RUNEWOOD_BOARD_INGREDIENT, ItemTagRegistry.RUNEWOOD_PLANKS, ItemTagRegistry.RUNEWOOD_BOARDS, ItemTagRegistry.RUNEWOOD_STAIRS, ItemTagRegistry.RUNEWOOD_SLABS,
             ItemRegistry.RUNEWOOD_BOAT.get(),
             ItemRegistry.HALLOWED_GOLD_NUGGET.get()
     );
@@ -69,7 +69,7 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
             ItemRegistry.SOULWOOD_SIGN.get(), ItemRegistry.SOULWOOD_SIGN.get(),
             ItemRegistry.SOULWOOD_ITEM_STAND.get(), ItemRegistry.SOULWOOD_ITEM_PEDESTAL.get(),
             ItemRegistry.ORNATE_SOULWOOD_ITEM_STAND.get(), ItemRegistry.ORNATE_SOULWOOD_ITEM_PEDESTAL.get(),
-            ItemTagRegistry.SOULWOOD_LOGS, ItemTagRegistry.SOULWOOD_BOARD_INGREDIENT, ItemTagRegistry.SOULWOOD_PLANKS, ItemTagRegistry.SOULWOOD_STAIRS, ItemTagRegistry.SOULWOOD_SLABS,
+            ItemTagRegistry.SOULWOOD_LOGS, ItemTagRegistry.SOULWOOD_BOARD_INGREDIENT, ItemTagRegistry.SOULWOOD_PLANKS, ItemTagRegistry.SOULWOOD_BOARDS, ItemTagRegistry.SOULWOOD_STAIRS, ItemTagRegistry.SOULWOOD_SLABS,
             ItemRegistry.SOULWOOD_BOAT.get(),
             ItemRegistry.SOUL_STAINED_STEEL_NUGGET.get()
     );
@@ -89,10 +89,12 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
                 woodSet.log, woodSet.strippedLog, woodSet.wood, woodSet.strippedWood, woodSet.sapFilledLog, woodSet.strippedSapFilledLog);
         provider.tag(woodSet.boardIngredientTag).add(woodSet.log, woodSet.wood);
         provider.tag(woodSet.planksTag).add(
-                woodSet.boards, woodSet.verticalBoards,
                 woodSet.planks, woodSet.verticalPlanks,
                 woodSet.rusticPlanks, woodSet.verticalRusticPlanks,
                 woodSet.tiles, woodSet.rusticTiles
+        );
+        provider.tag(woodSet.boardsTag).add(
+                woodSet.boards, woodSet.verticalBoards
         );
         provider.tag(woodSet.stairsTag).add(
                 woodSet.boardsStairs, woodSet.verticalBoardsStairs,
@@ -169,7 +171,7 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
         var condition = has(woodSet.planksTag);
 
         shaped(RecipeCategory.MISC, woodSet.boardWall, 6)
-                .define('#', woodSet.boards)
+                .define('#', woodSet.boardsTag)
                 .pattern("###")
                 .pattern("###")
                 .unlockedBy("has_input", condition)
@@ -413,7 +415,7 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
             Item itemStand, Item itemPedestal,
             Item decoratedItemStand, Item decoratedItemPedestal,
 
-            TagKey<Item> logTag, TagKey<Item> boardIngredientTag, TagKey<Item> planksTag, TagKey<Item> stairsTag, TagKey<Item> slabTag,
+            TagKey<Item> logTag, TagKey<Item> boardIngredientTag, TagKey<Item> planksTag, TagKey<Item> boardsTag, TagKey<Item> stairsTag, TagKey<Item> slabTag,
 
             Item boat,
 

@@ -14,6 +14,7 @@ import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
+import team.lodestar.lodestone.systems.rendering.rendeertype.*;
 import team.lodestar.lodestone.systems.rendering.trail.*;
 
 import java.awt.*;
@@ -53,18 +54,19 @@ public class ScarfRenderHandler {
     }
 
     public static class ScarfRenderData {
+        public final RenderTypeToken token;
         public final TrailPointBuilder points;
 
         public Color primaryColor = Color.WHITE;
         public Color secondaryColor = Color.WHITE;
-        public LodestoneRenderType renderType;
 
         public boolean isValid = true;
 
         public float scale = 1;
         public float alpha = 1;
 
-        public ScarfRenderData(int trailLength) {
+        public ScarfRenderData(RenderTypeToken token, int trailLength) {
+            this.token = token;
             this.points = new TrailPointBuilder(()->trailLength);
         }
 
@@ -75,11 +77,6 @@ public class ScarfRenderHandler {
 
         public ScarfRenderData setSecondaryColor(Color secondaryColor) {
             this.secondaryColor = secondaryColor;
-            return this;
-        }
-
-        public ScarfRenderData setRenderType(LodestoneRenderType renderType) {
-            this.renderType = renderType;
             return this;
         }
 
@@ -96,7 +93,7 @@ public class ScarfRenderHandler {
         public void render(LivingEntity entity, PoseStack poseStack, float partialTicks) {
             BlockPos blockpos = entity.blockPosition().above(2);
             int light = entity.level().hasChunkAt(blockpos) ? LevelRenderer.getLightColor(entity.level(), blockpos) : 0;
-            var renderType = LodestoneRenderTypes.TRANSPARENT_TEXTURE.apply(MalumRenderTypeTokens.SCARF);
+            var renderType = LodestoneRenderTypes.TRANSPARENT_TEXTURE.apply(token);
             var builder = VFXBuilders.createWorld().setRenderType(renderType).setLight(light).setAlpha(alpha);
             List<TrailPoint> trailPoints = points.getTrailPoints();
             poseStack.pushPose();

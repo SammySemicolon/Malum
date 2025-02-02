@@ -41,7 +41,8 @@ public class ScarfRenderHandler {
         for (Map.Entry<LivingEntity, ScarfRenderData> entry : SCARF_DATA.entrySet()) {
             final ScarfRenderData data = entry.getValue();
             final LivingEntity entity = entry.getKey();
-            poseStack.translate(entity.position().x, entity.position().y, entity.position().z);
+            var position = entity.getPosition(event.getPartialTick().getRealtimeDeltaTicks());
+            poseStack.translate(position.x, position.y, position.z);
             data.render(entity, poseStack, event.getPartialTick().getGameTimeDeltaTicks());
         }
     }
@@ -95,27 +96,25 @@ public class ScarfRenderHandler {
             int light = entity.level().hasChunkAt(blockpos) ? LevelRenderer.getLightColor(entity.level(), blockpos) : 0;
             var renderType = LodestoneRenderTypes.TRANSPARENT_TEXTURE.apply(token);
             var builder = VFXBuilders.createWorld().setRenderType(renderType).setLight(light).setAlpha(alpha);
-            List<TrailPoint> trailPoints = points.getTrailPoints();
+            points.setOrigin(getScarfStart(entity, partialTicks));
             poseStack.pushPose();
             float trailOffsetX = (float) Mth.lerp(partialTicks, entity.xOld, entity.getX());
             float trailOffsetY = (float) Mth.lerp(partialTicks, entity.yOld, entity.getY());
             float trailOffsetZ = (float) Mth.lerp(partialTicks, entity.zOld, entity.getZ());
-            if (trailPoints.size() >= 2) {
-                poseStack.translate(-trailOffsetX, -trailOffsetY, -trailOffsetZ);
-                builder.renderTrail(poseStack, trailPoints,
-                        f -> scale * (2.5f-f*1.75f),
-                        f -> builder.setColor(ColorHelper.colorLerp(Easing.SINE_IN, Mth.floor(f * 8)/4f, secondaryColor, primaryColor))
-                );
-                poseStack.translate(trailOffsetX, trailOffsetY, trailOffsetZ);
-            }
-            poseStack.popPose();
+            poseStack.translate(-trailOffsetX, -trailOffsetY, -trailOffsetZ);
+            builder.usePartialTicks(partialTicks).renderTrail(poseStack, points,
+                    f -> scale * (2.5f - f * 1.75f),
+                    f -> builder.setColor(ColorHelper.colorLerp(Easing.LINEAR, Mth.floor(f * 4) / 4f, secondaryColor, primaryColor))
+            );
+            poseStack.translate(trailOffsetX, trailOffsetY, trailOffsetZ);
 
+            poseStack.popPose();
         }
 
         public void tick(LivingEntity entity) {
             var movement = getScarfPointMovement(entity);
             if (entity.level().getGameTime() % 2L == 0) {
-                points.addTrailPoint(new TrailPoint(getScarfStart(entity)));
+                points.addTrailPoint(new TrailPoint(getScarfStart(entity, 0)));
             }
             points.run(t -> t.move(movement));
             final List<TrailPoint> list = points.getTrailPoints();
@@ -124,7 +123,7 @@ public class ScarfRenderHandler {
                 for (int i = 0; i < list.size() - 1; i++) {
                     var currentPoint = list.get(i);
                     var nextPoint = list.get(i+1);
-                    float delta = Mth.clamp(currentPoint.getAge() / age * 2, 0, 1);
+                    float delta = Mth.clamp(currentPoint.getAge() / age * 4, 0, 1);
                     float lerpX = (float) Mth.lerp(delta, currentPoint.getPosition().x, nextPoint.getPosition().x);
                     float lerpY = (float) Mth.lerp(delta, currentPoint.getPosition().y, nextPoint.getPosition().y);
                     float lerpZ = (float) Mth.lerp(delta, currentPoint.getPosition().z, nextPoint.getPosition().z);
@@ -146,15 +145,15 @@ public class ScarfRenderHandler {
             return new Vec3(x, y, z);
         }
 
-        public Vec3 getScarfStart(LivingEntity entity) {
+        public Vec3 getScarfStart(LivingEntity entity, float partialTicks) {
             var lookDirection = entity.getForward();
             final float upwardsOffset = entity.getBbHeight() * 0.8f;
-            var eyePosition = new Vec3(entity.getX(), entity.getY()+ upwardsOffset, entity.getZ());
+            var eyePosition = entity.getPosition(partialTicks).add(0, upwardsOffset, 0);
             float yRot = ((float) (Mth.atan2(lookDirection.x, lookDirection.z) * (double) (180F / (float) Math.PI)));
             float yaw = (float) Math.toRadians(yRot);
             var left = new Vec3(-Math.cos(yaw), 0, Math.sin(yaw));
             final Vec3 offsetPosition = eyePosition.subtract(lookDirection.scale(0.2f).add(left.scale(-0.2f)));
-            float randomSize = 0.05f;
+            float randomSize = 0.03f;
             float xOffset = RandomHelper.randomBetween(entity.getRandom(), -randomSize, randomSize);
             float yOffset = RandomHelper.randomBetween(entity.getRandom(), -randomSize, randomSize);
             float zOffset = RandomHelper.randomBetween(entity.getRandom(), -randomSize, randomSize);

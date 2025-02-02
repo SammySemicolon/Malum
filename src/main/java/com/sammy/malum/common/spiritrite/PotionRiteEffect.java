@@ -29,7 +29,7 @@ public class PotionRiteEffect extends TotemicRiteEffect {
         getNearbyEntities(totemBase, targetClass).filter(getEntityPredicate()).forEach(e -> {
             MobEffectInstance instance = new MobEffectInstance(mobEffectHolder, 1200, 1, true, true);
             if (!e.hasEffect(instance.getEffect())) {
-                ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT));
             }
             e.addEffect(instance);
         });

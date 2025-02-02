@@ -20,6 +20,7 @@ import static com.sammy.malum.registry.client.ParticleRegistry.*;
 import static com.sammy.malum.registry.common.AttachmentTypeRegistry.ATTACHMENT_TYPES;
 import static com.sammy.malum.registry.common.AttributeRegistry.*;
 import static com.sammy.malum.registry.common.ContainerRegistry.*;
+import static com.sammy.malum.registry.common.MalumGeasEffectTypeRegistry.GEAS_TYPES;
 import static com.sammy.malum.registry.common.MobEffectRegistry.*;
 import static com.sammy.malum.registry.common.SoundRegistry.*;
 import static com.sammy.malum.registry.common.WorldEventTypeRegistry.WORLD_EVENT_TYPES;
@@ -46,7 +47,13 @@ public class MalumMod {
 
         ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC);
+
         NeoForgeMod.enableMergedAttributeTooltips();
+        TetraCompat.init();
+        FarmersDelightCompat.init();
+        AttributeLibCompat.init();
+        IronsSpellsCompat.init();
+
         BLOCKS.register(modBus);
         BLOCK_ENTITY_TYPES.register(modBus);
         COMPONENTS.register(modBus);
@@ -64,13 +71,7 @@ public class MalumMod {
         CREATIVE_MODE_TABS.register(modBus);
         ATTACHMENT_TYPES.register(modBus);
         WORLD_EVENT_TYPES.register(modBus);
-        MalumGeasEffectTypeRegistry.GEAS_TYPES.register(modBus);
-        GeasEffectHandler.init();
-
-        TetraCompat.init();
-        FarmersDelightCompat.init();
-        AttributeLibCompat.init();
-        IronsSpellsCompat.init();
+        GEAS_TYPES.register(modBus);
     }
 
     public static ResourceLocation malumPath(String path) {

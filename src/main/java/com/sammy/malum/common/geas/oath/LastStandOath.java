@@ -1,9 +1,11 @@
 package com.sammy.malum.common.geas.oath;
 
+import com.sammy.malum.common.effect.*;
 import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
+import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
@@ -13,6 +15,8 @@ import net.neoforged.neoforge.event.tick.*;
 import team.lodestar.lodestone.helpers.*;
 
 public class LastStandOath extends GeasEffect {
+
+    public static final int DEATH_DELAY = 1200;
 
     public int deaths;
     public long scheduledDeath;
@@ -29,7 +33,7 @@ public class LastStandOath extends GeasEffect {
         if (deaths > 0) {
             long interval = 20 - 2 * Math.min(deaths-1, 5) - Mth.clamp(deaths-6, 0, 5);
             if (time % (interval*5) == 0) {
-//                SoundHelper.playSound(entity, SoundRegistry.UNCANNY_VALLEY.get(), SoundSource.MASTER, 2f, Mth.nextFloat(level.getRandom(), 0.55f, 1.75f));
+                SoundHelper.playSound(entity, SoundRegistry.UNCANNY_VALLEY.get(), SoundSource.MASTER, 2f, Mth.nextFloat(level.getRandom(), 0.55f, 1.75f));
             }
             if (time % interval == 0) {
                 SoundHelper.playSound(entity, SoundRegistry.VOID_HEARTBEAT.get(), SoundSource.MASTER, 2.5f, Mth.nextFloat(level.getRandom(), 0.95f, 1.15f));
@@ -53,8 +57,16 @@ public class LastStandOath extends GeasEffect {
         }
         event.setCanceled(true);
         target.setHealth(1);
+        var effect = target.getEffect(MobEffectRegistry.SILENCED);
+        if (effect == null) {
+            target.addEffect(new MobEffectInstance(MobEffectRegistry.SILENCED, DEATH_DELAY, 4, true, true, true));
+        } else {
+            EntityHelper.amplifyEffect(effect, target, 5, 19);
+            EntityHelper.extendEffect(effect, target, DEATH_DELAY);
+        }
+        target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, DEATH_DELAY, 4, true, true, true));
         deaths++;
-        scheduledDeath = target.level().getGameTime() + 100;
+        scheduledDeath = target.level().getGameTime() + DEATH_DELAY;
     }
 
     @Override

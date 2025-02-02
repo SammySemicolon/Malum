@@ -8,6 +8,7 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.ModList;
+import team.lodestar.lodestone.systems.item.*;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 public class FarmersDelightCompat {
@@ -19,7 +20,7 @@ public class FarmersDelightCompat {
 
     public static class LoadedOnly {
 
-        public static Item makeMagicKnife(Item.Properties properties) {
+        public static Item makeMagicKnife(LodestoneItemProperties properties) {
             return new MagicKnifeItem(ItemTiers.SOUL_STAINED_STEEL, -1.5f, 0, 2, properties);
         }
     }

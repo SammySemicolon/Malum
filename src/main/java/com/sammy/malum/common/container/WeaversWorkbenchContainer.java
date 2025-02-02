@@ -2,9 +2,9 @@ package com.sammy.malum.common.container;
 
 import com.sammy.malum.common.block.curiosities.weavers_workbench.WeaversWorkbenchBlockEntity;
 import com.sammy.malum.common.block.curiosities.weavers_workbench.WeaversWorkbenchItemHandler;
-import com.sammy.malum.common.item.cosmetic.weaves.AbstractWeaveItem;
 import com.sammy.malum.registry.common.ContainerRegistry;
-import net.minecraft.network.FriendlyByteBuf;
+import com.sammy.malum.registry.common.item.*;
+import net.minecraft.network.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.network.*;
 import team.lodestar.lodestone.systems.item.LodestoneArmorItem;
 
 import javax.annotation.Nonnull;
@@ -23,6 +24,10 @@ public class WeaversWorkbenchContainer extends AbstractContainerMenu {
     public static final Component component = Component.literal("Weaver's Workbench");
     public final WeaversWorkbenchItemHandler itemHandler;
     public final WeaversWorkbenchBlockEntity blockEntity;
+
+    public WeaversWorkbenchContainer(int containerId, Inventory inv, RegistryFriendlyByteBuf data) {
+        this(containerId, inv, ContainerLevelAccess.create(inv.player.level(), data.readBlockPos()));
+    }
 
     public WeaversWorkbenchContainer(int containerId, Inventory playerInv) {
         this(containerId, playerInv, ContainerLevelAccess.NULL);
@@ -44,7 +49,7 @@ public class WeaversWorkbenchContainer extends AbstractContainerMenu {
             addSlot(new SlotItemHandler(itemHandler, 1, 54, 52) {
                 @Override
                 public boolean mayPlace(ItemStack pStack) {
-                    return pStack.getItem() instanceof AbstractWeaveItem;
+                    return pStack.has(DataComponentRegistry.ITEM_SKIN);
                 }
             });
 
@@ -104,15 +109,5 @@ public class WeaversWorkbenchContainer extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player playerIn) {
         return true;
-    }
-
-    private static WeaversWorkbenchBlockEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
-        Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
-        Objects.requireNonNull(data, "data cannot be null");
-        final BlockEntity tileAtPos = playerInventory.player.level().getBlockEntity(data.readBlockPos());
-        if (tileAtPos instanceof WeaversWorkbenchBlockEntity weaversWorkbenchBlockEntity) {
-            return weaversWorkbenchBlockEntity;
-        }
-        throw new IllegalStateException("Tile entity is not correct! " + tileAtPos);
     }
 }

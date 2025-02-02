@@ -1,0 +1,14 @@
+{
+  "registry_name": "nomansland:billhook_bass",
+  "primary_type": "aqueous",
+  "spirits": [
+    {
+      "spirit": "earthen",
+      "count": 1
+    },
+    {
+      "spirit": "aqueous",
+      "count": 1
+    }
+  ]
+}

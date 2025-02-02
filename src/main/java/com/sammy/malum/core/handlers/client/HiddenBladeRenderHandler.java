@@ -16,7 +16,7 @@ import team.lodestar.lodestone.systems.rendering.shader.*;
 
 public class HiddenBladeRenderHandler {
 
-    public static int fadeOut;
+    public static int fadeOut = 80;
 
     public static void tick(ClientTickEvent event) {
         var player = Minecraft.getInstance().player;

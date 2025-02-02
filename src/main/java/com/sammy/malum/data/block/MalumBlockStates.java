@@ -222,10 +222,10 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         itemModelProvider.setTexturePath("ether/");
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.GENERATED_ITEM, this::simpleBlock, this::etherModel, ETHER);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, MalumItemModelSmithTypes.GENERATED_OVERLAY_ITEM, this::simpleBlock, this::etherTorchModel, ETHER_TORCH);
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.NO_MODEL, (b, m) -> horizontalBlock(b, m, 90), this::wallEtherTorchModel, WALL_ETHER_TORCH);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.NO_DATAGEN, (b, m) -> horizontalBlock(b, m, 90), this::wallEtherTorchModel, WALL_ETHER_TORCH);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, MalumItemModelSmithTypes.GENERATED_OVERLAY_ITEM, this::simpleBlock, this::etherModel, IRIDESCENT_ETHER);
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, MalumItemModelSmithTypes.IRIDESCENT_ETHER_TORCH_ITEM, this::simpleBlock, this::etherTorchModel, IRIDESCENT_ETHER_TORCH);
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.NO_MODEL, (b, m) -> horizontalBlock(b, m, 90), this::wallEtherTorchModel, IRIDESCENT_WALL_ETHER_TORCH);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.NO_DATAGEN, (b, m) -> horizontalBlock(b, m, 90), this::wallEtherTorchModel, IRIDESCENT_WALL_ETHER_TORCH);
         itemModelProvider.setTexturePath("");
 
 
@@ -235,12 +235,12 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::horizontalBlock, this::predefinedModel,
                 WEAVERS_WORKBENCH, RUNIC_WORKBENCH);
 
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.UNIQUE_ITEM_MODEL, this::simpleBlock, this::predefinedModel,
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.NO_DATAGEN, this::simpleBlock, this::predefinedModel,
                 RUNEWOOD_OBELISK, RUNEWOOD_OBELISK_COMPONENT, BRILLIANT_OBELISK, BRILLIANT_OBELISK_COMPONENT, SPIRIT_CRUCIBLE, SPIRIT_CRUCIBLE_COMPONENT, REPAIR_PYLON);
 
         MalumBlockStateSmithTypes.REPAIR_PYLON_COMPONENT.act(data, REPAIR_PYLON_COMPONENT);
 
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.UNIQUE_ITEM_MODEL, this::horizontalBlock, this::predefinedModel,
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.NO_DATAGEN, this::horizontalBlock, this::predefinedModel,
                 SPIRIT_CATALYZER, SPIRIT_CATALYZER_COMPONENT);
 
         BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.BLOCK_MODEL_ITEM, this::simpleBlock, this::predefinedModel,
@@ -253,7 +253,7 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
 
         BlockStateSmithTypes.FULL_BLOCK.act(data, THE_DEVICE, THE_VESSEL);
 
-        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.NO_MODEL, this::simpleBlock, this::cubeModelAirTexture, SPIRIT_MOTE);
+        BlockStateSmithTypes.CUSTOM_MODEL.act(data, ItemModelSmithTypes.NO_DATAGEN, this::simpleBlock, this::cubeModelAirTexture, SPIRIT_MOTE);
     }
 
     public ModelFile cubeModelAirTexture(Block block) {

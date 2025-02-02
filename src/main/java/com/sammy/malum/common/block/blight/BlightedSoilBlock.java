@@ -80,6 +80,6 @@ public class BlightedSoilBlock extends Block implements BonemealableBlock {
         pLevel.playSound(null, pPos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1.2f, 0.8f);
         LodestoneBlockFiller filler = new LodestoneBlockFiller(new LodestoneBlockFillerLayer(BLIGHT));
         SoulwoodTreeFeature.generateBlight(pLevel, filler, pPos, 6);
-        ActiveBlightEvent.createBlightVFX(pLevel, filler);
+        ActiveBlightWorldEvent.createBlightVFX(pLevel, filler);
     }
 }

@@ -1,11 +1,13 @@
 package com.sammy.malum.core.handlers;
 
+import com.sammy.malum.common.capabilities.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.packets.*;
 import com.sammy.malum.config.*;
 import com.sammy.malum.core.systems.events.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.util.*;
+import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.living.*;

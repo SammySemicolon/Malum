@@ -8,21 +8,15 @@ import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
 import team.lodestar.lodestone.registry.common.*;
+import team.lodestar.lodestone.systems.item.*;
 
 public class MagicScytheItem extends MalumScytheItem implements ISpiritAffiliatedItem {
 
-    public final float magicDamage;
-
-    public MagicScytheItem(Tier tier, float attackDamageIn, float attackSpeedIn, float magicDamage, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
-        this.magicDamage = magicDamage;
-    }
-
-    @Override
-    public ItemAttributeModifiers.Builder createExtraAttributes() {
-        var builder = ItemAttributeModifiers.builder();
-        builder.add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
-        return builder;
+    public MagicScytheItem(Tier tier, float attackDamage, float attackSpeed, float magicDamage, LodestoneItemProperties properties) {
+        super(tier, attackDamage, attackSpeed, properties.mergeAttributes(
+                ItemAttributeModifiers.builder()
+                        .add(LodestoneAttributes.MAGIC_DAMAGE, new AttributeModifier(LodestoneAttributes.MAGIC_DAMAGE.getId(), magicDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                        .build()));
     }
 
     @Override

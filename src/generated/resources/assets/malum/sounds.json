@@ -300,6 +300,17 @@
     ],
     "subtitle": "malum.subtitle.auric_flame_motif"
   },
+  "authority_of_wrath_takes_effect": {
+    "sounds": [
+      "malum:curiosities/geas/soulwashing_impact1",
+      "malum:curiosities/geas/soulwashing_impact2",
+      "malum:curiosities/geas/soulwashing_impact3",
+      "malum:curiosities/geas/soulwashing_impact4",
+      "malum:curiosities/geas/soulwashing_impact5",
+      "malum:curiosities/geas/soulwashing_impact6"
+    ],
+    "subtitle": "malum.subtitle.authority_of_wrath_takes_effect"
+  },
   "blazing_quartz_block_break": {
     "sounds": [
       "malum:blocks/gemstone/break1",
@@ -1209,6 +1220,14 @@
     ],
     "subtitle": "malum.subtitle.scythe_sweeps"
   },
+  "scythe_target_is_launched": {
+    "sounds": [
+      "entity/wind_charge/wind_burst1",
+      "entity/wind_charge/wind_burst2",
+      "entity/wind_charge/wind_burst3"
+    ],
+    "subtitle": "malum.subtitle.scythe_target_is_launched"
+  },
   "scythe_thrown": {
     "sounds": [
       "malum:curiosities/weapons/scythe/throw1",
@@ -1554,8 +1573,8 @@
   },
   "spirit_altar_absorbs_item": {
     "sounds": [
-      "malum:altar/altar_speedup1",
-      "malum:altar/altar_speedup2"
+      "malum:altar/altar_consume1",
+      "malum:altar/altar_consume2"
     ],
     "subtitle": "malum.subtitle.spirit_altar_absorbs_item"
   },
@@ -1574,8 +1593,8 @@
   },
   "spirit_altar_speeds_up": {
     "sounds": [
-      "malum:altar/altar_consume1",
-      "malum:altar/altar_consume2"
+      "malum:altar/altar_speedup1",
+      "malum:altar/altar_speedup2"
     ],
     "subtitle": "malum.subtitle.spirit_altar_speeds_up"
   },
@@ -1713,6 +1732,28 @@
     ],
     "subtitle": "malum.subtitle.staff_strikes"
   },
+  "sundering_anchor_cuts": {
+    "sounds": [
+      "malum:curiosities/weapons/sundering_anchor/swing1",
+      "malum:curiosities/weapons/sundering_anchor/swing2",
+      "malum:curiosities/weapons/sundering_anchor/swing3",
+      "malum:curiosities/weapons/sundering_anchor/swing4",
+      "malum:curiosities/weapons/sundering_anchor/swing5",
+      "malum:curiosities/weapons/sundering_anchor/swing6"
+    ],
+    "subtitle": "malum.subtitle.sundering_anchor_cuts"
+  },
+  "sundering_anchor_twists_gracefully": {
+    "sounds": [
+      "malum:curiosities/weapons/sundering_anchor/extra_swing1",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing2",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing3",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing4",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing5",
+      "malum:curiosities/weapons/sundering_anchor/extra_swing6"
+    ],
+    "subtitle": "malum.subtitle.sundering_anchor_twists_gracefully"
+  },
   "the_deep_beckons": {
     "sounds": [
       "malum:suspicious_sound"
@@ -1737,6 +1778,33 @@
       "malum:weeping_well/void_heartbeat"
     ],
     "subtitle": "malum.subtitle.the_void_heart_beats"
+  },
+  "the_worldsoul_reverberates": {
+    "sounds": [
+      "malum:curiosities/motifs/worldsoul_reverb1",
+      "malum:curiosities/motifs/worldsoul_reverb2",
+      "malum:curiosities/motifs/worldsoul_reverb3"
+    ],
+    "subtitle": "malum.subtitle.the_worldsoul_reverberates"
+  },
+  "the_worldsoul_shifts_erratically": {
+    "sounds": [
+      "malum:curiosities/motifs/worldsoul_impact1",
+      "malum:curiosities/motifs/worldsoul_impact2",
+      "malum:curiosities/motifs/worldsoul_impact3",
+      "malum:curiosities/motifs/worldsoul_impact4",
+      "malum:curiosities/motifs/worldsoul_impact5",
+      "malum:curiosities/motifs/worldsoul_impact6"
+    ],
+    "subtitle": "malum.subtitle.the_worldsoul_shifts_erratically"
+  },
+  "the_worldsoul_shifts_slightly": {
+    "sounds": [
+      "malum:curiosities/motifs/worldsoul_minor_impact1",
+      "malum:curiosities/motifs/worldsoul_minor_impact2",
+      "malum:curiosities/motifs/worldsoul_minor_impact3"
+    ],
+    "subtitle": "malum.subtitle.the_worldsoul_shifts_slightly"
   },
   "totem_charges": {
     "sounds": [

@@ -9,7 +9,8 @@
     "minecraft:golden_helmet",
     "minecraft:golden_chestplate",
     "minecraft:golden_leggings",
-    "minecraft:golden_boots"
+    "minecraft:golden_boots",
+    "farmersdelight:golden_knife"
   ],
   "itemIdRegex": "golden_.+",
   "repairMaterial": {

@@ -2,7 +2,7 @@ package com.sammy.malum.core.systems.artifice;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sammy.malum.common.data_components.ArtificeAugmentData;
+import com.sammy.malum.common.data_components.ArtificeAugmentDataComponent;
 import com.sammy.malum.common.item.augment.ImpurityStabilizer;
 import com.sammy.malum.common.item.augment.core.CausticCatalystItem;
 import com.sammy.malum.common.item.augment.core.ResonanceTuner;
@@ -66,7 +66,6 @@ public class ArtificeAttributeData {
             tunedAttribute = target.getAttributes().tunedAttribute;
         }
         target.applyAugments(this::applyAugment);
-        applyTuning();
     }
 
     public ArtificeAttributeData applyModifierInfluence(ArtificeInfluenceData influenceData) {
@@ -81,6 +80,7 @@ public class ArtificeAttributeData {
                 }
             }
         }
+        applyTuning();
         return this;
     }
 
@@ -101,7 +101,7 @@ public class ArtificeAttributeData {
 
     public void applyTuning() {
         for (ArtificeAttributeValue attribute : attributes) {
-            attribute.removeModifier(TuningModifier.TUNING_FORK);
+            attribute.clearModifiers();
         }
         CausticCatalystItem.scalePotency(this);
         var attributesForTuning = getExistingAttributesForTuning();
@@ -125,7 +125,7 @@ public class ArtificeAttributeData {
         {
             throw new IllegalArgumentException();
         }
-        ArtificeAugmentData augmentData = augment.get(DataComponentRegistry.ARTIFICE_AUGMENT);
+        ArtificeAugmentDataComponent augmentData = augment.get(DataComponentRegistry.ARTIFICE_AUGMENT);
         for (ArtificeModifier modifier : augmentData.modifiers()) {
             applyModifier(modifier);
         }

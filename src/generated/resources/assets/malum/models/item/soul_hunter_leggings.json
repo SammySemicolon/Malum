@@ -110,39 +110,33 @@
       }
     },
     {
-      "model": "malum:item/executioner_drip_leggings",
+      "model": "malum:item/v1_legs",
       "predicate": {
         "malum:item_skin": 18.0
       }
     },
     {
-      "model": "malum:item/commando_drip_leggings",
+      "model": "malum:item/v2_legs",
       "predicate": {
         "malum:item_skin": 19.0
       }
     },
     {
-      "model": "malum:item/ultrakill_v1_leggings",
+      "model": "malum:item/commando_legs",
       "predicate": {
         "malum:item_skin": 20.0
       }
     },
     {
-      "model": "malum:item/ultrakill_v2_leggings",
+      "model": "malum:item/ancient_soul_hunter_legs",
       "predicate": {
         "malum:item_skin": 21.0
       }
     },
     {
-      "model": "malum:item/ancient_cloth_leggings",
+      "model": "malum:item/ancient_soul_stained_steel_legs",
       "predicate": {
         "malum:item_skin": 22.0
-      }
-    },
-    {
-      "model": "malum:item/ancient_metal_leggings",
-      "predicate": {
-        "malum:item_skin": 23.0
       }
     }
   ],

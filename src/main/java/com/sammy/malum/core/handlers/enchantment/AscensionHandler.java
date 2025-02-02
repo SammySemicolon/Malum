@@ -1,6 +1,7 @@
 package com.sammy.malum.core.handlers.enchantment;
 
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.curiosities.curios.sets.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
@@ -25,7 +26,7 @@ import static com.sammy.malum.registry.common.item.EnchantmentRegistry.getEnchan
 public class AscensionHandler {
 
     public static void triggerAscension(Level level, Player player, InteractionHand hand, ItemStack scythe) {
-        final boolean isEnhanced = !MalumScytheItem.canSweep(player);
+        final boolean isEnhanced = MalumScytheItem.isEnhanced(player);
         player.resetFallDistance();
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
@@ -46,6 +47,7 @@ public class AscensionHandler {
             player.hasImpulse = true;
             CommonHooks.onLivingJump(player);
         }
+        boolean hasFunnyRing = CurioHelper.hasCurioEquipped(player, ItemRegistry.RING_OF_THE_RISING_EDGE.get());
         if (level instanceof ServerLevel serverLevel) {
             var random = serverLevel.getRandom();
             float baseDamage = (float) player.getAttributes().getValue(Attributes.ATTACK_DAMAGE);
@@ -54,8 +56,8 @@ public class AscensionHandler {
             var sound = SoundRegistry.SCYTHE_SWEEP.get();
             var particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_SPIN).mirrorRandomly(random);
             if (isEnhanced) {
-                baseDamage *= 1.25f;
-                magicDamage *= 1.25f;
+                baseDamage *= 1.3f;
+                magicDamage *= 1.3f;
                 aabb = aabb.move(player.getLookAngle().scale(2f)).inflate(-2f, 1f, -2f);
                 sound = SoundRegistry.SCYTHE_CUT.get();
                 particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_UPPERCUT).setVerticalSlashAngle().setMirrored(true);
@@ -65,7 +67,7 @@ public class AscensionHandler {
             }
             boolean dealtDamage = false;
             for (Entity target : serverLevel.getEntities(player, aabb, t -> ascensionCanHitEntity(player, t))) {
-                var damageSource = DamageTypeHelper.create(serverLevel, DamageTypeRegistry.SCYTHE_SWEEP, player);
+                var damageSource = DamageTypeHelper.create(serverLevel, DamageTypeRegistry.SCYTHE_ASCENSION, player);
                 target.invulnerableTime = 0;
                 boolean success = target.hurt(damageSource, baseDamage);
                 if (success && target instanceof LivingEntity livingentity) {
@@ -77,6 +79,9 @@ public class AscensionHandler {
                     }
                     SoundHelper.playSound(player, sound, 2.0f, RandomHelper.randomBetween(random, 0.75f, 1.25f));
                     dealtDamage = true;
+                    if (hasFunnyRing) {
+                        CurioRisingEdgeRing.launchEntity(player, livingentity);
+                    }
                 }
             }
             if (dealtDamage) {
@@ -93,7 +98,11 @@ public class AscensionHandler {
         if (!player.isCreative()) {
             int enchantmentLevel = getEnchantmentLevel(level, EnchantmentRegistry.ASCENSION, scythe);
             if (enchantmentLevel < 6) {
-                player.getCooldowns().addCooldown(scythe.getItem(), 150 - 25 * (enchantmentLevel - 1));
+                int cooldown = 150 - 25 * (enchantmentLevel - 1);
+                if (hasFunnyRing) {
+                    cooldown += 50;
+                }
+                player.getCooldowns().addCooldown(scythe.getItem(), cooldown);
             }
         }
         player.swing(hand, false);

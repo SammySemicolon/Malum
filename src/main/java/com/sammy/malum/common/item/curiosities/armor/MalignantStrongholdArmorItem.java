@@ -14,7 +14,7 @@ import static com.sammy.malum.registry.common.item.ArmorTiers.MALIGNANT_ALLOY;
 public class MalignantStrongholdArmorItem extends MalumArmorItem {
 
     public MalignantStrongholdArmorItem(Type slot, Properties builder) {
-        super(MALIGNANT_ALLOY, slot, builder);
+        super(MALIGNANT_ALLOY, slot, 42, builder);
     }
 
     @Override

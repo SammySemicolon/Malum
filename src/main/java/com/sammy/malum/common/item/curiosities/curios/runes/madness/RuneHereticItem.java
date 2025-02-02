@@ -17,7 +17,7 @@ import team.lodestar.lodestone.handlers.*;
 
 import java.util.function.Consumer;
 
-public class RuneHereticItem extends AbstractRuneCurioItem implements ItemEventHandler.IEventResponderItem {
+public class RuneHereticItem extends AbstractRuneCurioItem implements ItemEventHandler.IEventResponder {
 
     public RuneHereticItem(Properties builder) {
         super(builder, SpiritTypeRegistry.ELDRITCH_SPIRIT);
@@ -34,10 +34,12 @@ public class RuneHereticItem extends AbstractRuneCurioItem implements ItemEventH
         Holder<MobEffect> silenced = MobEffectRegistry.SILENCED;
         MobEffectInstance effect = attacker.getEffect(silenced);
         if (effect == null) {
-            attacker.addEffect(new MobEffectInstance(silenced, 300, 0, true, true, true));
+            attacker.addEffect(new MobEffectInstance(silenced, 60, 0, true, true, true));
         } else {
-            EntityHelper.amplifyEffect(effect, attacker, 1, 9);
-            EntityHelper.extendEffect(effect, attacker, 60, 600);
+            if (attacked.getRandom().nextFloat() < 0.6f) {
+                EntityHelper.amplifyEffect(effect, attacker, 1, 19);
+            }
+            EntityHelper.extendEffect(effect, attacker, 30, 600);
         }
         SoundHelper.playSound(attacked, SoundRegistry.DRAINING_MOTIF.get(), 1f, 1.5f);
     }

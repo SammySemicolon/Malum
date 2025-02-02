@@ -13,9 +13,6 @@ public class ImpurityStabilizer extends AugmentItem {
     }
 
     public static void applyWeaknessTuning(ArtificeAttributeData data, List<ArtificeAttributeType> attributesForTuning) {
-        for (ArtificeAttributeValue attribute : data.attributes) {
-            attribute.removeModifier(TuningModifier.WEAKEST_BOOST);
-        }
         float bonus = data.weaknessTuning.getValue(data);
         if (bonus != 0) {
             var weakestAttribute = data.figureOutWeakestAttribute(attributesForTuning);

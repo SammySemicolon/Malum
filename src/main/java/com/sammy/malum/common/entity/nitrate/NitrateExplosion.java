@@ -33,7 +33,7 @@ public class NitrateExplosion extends Explosion {
     }
 
     public static NitrateExplosion explode(Level level, @Nullable Entity source, @Nullable ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean spawnParticles) {
-        var damageSource = DamageTypeHelper.create(level, source != null ? DamageTypeRegistry.VOODOO : DamageTypeRegistry.VOODOO_PLAYERLESS, source);
+        var damageSource = DamageTypeHelper.create(level, source != null ? DamageTypeRegistry.NITRATE : DamageTypeRegistry.NITRATE_PLAYERLESS, source);
         var explosion = new NitrateExplosion(
                 level, source, damageSource, damageCalculator,
                 x, y, z, radius, false,

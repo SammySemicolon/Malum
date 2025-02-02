@@ -44,6 +44,6 @@ public class SpiritInfusionRecipe extends LodestoneInWorldRecipe<SpiritBasedReci
 
     @Override
     public boolean matches(SpiritBasedRecipeInput input, Level level) {
-        return input.test(ingredient, extraIngredients, spirits);
+        return input.test(ingredient, spirits);
     }
 }

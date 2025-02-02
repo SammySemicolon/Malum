@@ -10,7 +10,7 @@ import java.util.function.*;
 public class PointyDirectionalBehaviorComponent implements LodestoneBehaviorComponent {
 
     //TODO: move this to lodestone
-    public static PointyDirectionalBehaviorComponent DIRECTIONAL = new PointyDirectionalBehaviorComponent();
+    public static PointyDirectionalBehaviorComponent POINTY = new PointyDirectionalBehaviorComponent();
     private final Function<LodestoneWorldParticle, Vec3> direction;
 
     protected PointyDirectionalBehaviorComponent(Function<LodestoneWorldParticle, Vec3> direction) {
@@ -31,6 +31,6 @@ public class PointyDirectionalBehaviorComponent implements LodestoneBehaviorComp
 
     @Override
     public LodestoneParticleBehavior getBehaviorType() {
-        return PointyDirectionalParticleBehavior.DIRECTIONAL;
+        return PointyDirectionalParticleBehavior.POINTY;
     }
 }

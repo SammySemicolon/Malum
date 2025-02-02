@@ -62,12 +62,44 @@ public class CurioSpiritInfusionRecipes {
                 .addSpirit(ARCANE_SPIRIT, 32)
                 .save(recipeOutput);
 
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_RING.get(), 1, ItemRegistry.RING_OF_DESPERATE_VORACITY.get(), 1)
+                .addExtraItem(Items.BONE, 4)
+                .addExtraItem(ItemRegistry.GRIM_TALC.get(), 4)
+                .addExtraItem(Items.ROTTEN_FLESH, 16)
+                .addExtraItem(ItemRegistry.HEX_ASH.get(), 4)
+                .addSpirit(WICKED_SPIRIT, 32)
+                .addSpirit(SACRED_SPIRIT, 16)
+                .addSpirit(ARCANE_SPIRIT, 16)
+                .save(recipeOutput);
+
+        new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_RING.get(), 1, ItemRegistry.RING_OF_THE_HOARDER.get(), 1)
+                .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 6))
+                .addExtraItem(ItemRegistry.WARP_FLUX.get(), 4)
+                .addExtraItem(Items.ENDER_PEARL, 2)
+                .addSpirit(EARTHEN_SPIRIT, 32)
+                .addSpirit(SACRED_SPIRIT, 16)
+                .addSpirit(ARCANE_SPIRIT, 16)
+                .save(recipeOutput);
+
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_RING.get(), 1, ItemRegistry.RING_OF_THE_DEMOLITIONIST.get(), 1)
+                .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 6))
+                .addExtraItem(Items.GUNPOWDER, 4)
+                .addExtraItem(Items.BLAZE_POWDER, 2)
+                .addSpirit(INFERNAL_SPIRIT, 32)
+                .addSpirit(ELDRITCH_SPIRIT, 4)
+                .save(recipeOutput);
+
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_RING.get(), 1, ItemRegistry.RING_OF_THE_RISING_EDGE.get(), 1)
+                .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 4))
+                .addExtraItem(Items.WIND_CHARGE, 4)
+                .addSpirit(AERIAL_SPIRIT, 32)
+                .save(recipeOutput);
+
         new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_NECKLACE.get(), 1, ItemRegistry.NECKLACE_OF_BLISSFUL_HARMONY.get(), 1)
                 .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 6))
                 .addExtraItem(Items.PHANTOM_MEMBRANE, 4)
                 .addExtraItem(ItemRegistry.ASTRAL_WEAVE.get(), 2)
                 .addExtraItem(Items.DIAMOND, 2)
-                .addSpirit(AERIAL_SPIRIT, 16)
                 .addSpirit(AQUEOUS_SPIRIT, 16)
                 .addSpirit(SACRED_SPIRIT, 16)
                 .addSpirit(ELDRITCH_SPIRIT, 2)
@@ -88,16 +120,6 @@ public class CurioSpiritInfusionRecipes {
                 .addSpirit(SACRED_SPIRIT, 24)
                 .save(recipeOutput);
 
-        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_RING.get(), 1, ItemRegistry.RING_OF_DESPERATE_VORACITY.get(), 1)
-                .addExtraItem(Items.BONE, 4)
-                .addExtraItem(ItemRegistry.GRIM_TALC.get(), 4)
-                .addExtraItem(Items.ROTTEN_FLESH, 16)
-                .addExtraItem(ItemRegistry.HEX_ASH.get(), 4)
-                .addSpirit(WICKED_SPIRIT, 32)
-                .addSpirit(SACRED_SPIRIT, 16)
-                .addSpirit(ARCANE_SPIRIT, 16)
-                .save(recipeOutput);
-
         new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_BELT.get(), 1, ItemRegistry.BELT_OF_THE_STARVED.get(), 1)
                 .addExtraItem(Items.BONE, 4)
                 .addExtraItem(ItemRegistry.GRIM_TALC.get(), 8)
@@ -106,23 +128,6 @@ public class CurioSpiritInfusionRecipes {
                 .addSpirit(WICKED_SPIRIT, 32)
                 .addSpirit(AQUEOUS_SPIRIT, 16)
                 .addSpirit(ARCANE_SPIRIT, 16)
-                .save(recipeOutput);
-
-        new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_RING.get(), 1, ItemRegistry.RING_OF_THE_HOARDER.get(), 1)
-                .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 6))
-                .addExtraItem(ItemRegistry.WARP_FLUX.get(), 4)
-                .addExtraItem(Items.ENDER_PEARL, 2)
-                .addSpirit(EARTHEN_SPIRIT, 32)
-                .addSpirit(SACRED_SPIRIT, 16)
-                .addSpirit(ARCANE_SPIRIT, 16)
-                .save(recipeOutput);
-
-        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_RING.get(), 1, ItemRegistry.RING_OF_THE_DEMOLITIONIST.get(), 1)
-                .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 6))
-                .addExtraItem(Items.GUNPOWDER, 4)
-                .addExtraItem(Items.BLAZE_POWDER, 2)
-                .addSpirit(INFERNAL_SPIRIT, 32)
-                .addSpirit(ELDRITCH_SPIRIT, 4)
                 .save(recipeOutput);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_BELT.get(), 1, ItemRegistry.BELT_OF_THE_PROSPECTOR.get(), 1)

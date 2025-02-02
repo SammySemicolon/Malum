@@ -23,8 +23,8 @@ public class RuneSpellMasteryItem extends AbstractRuneCurioItem {
         var id = MalumMod.malumPath("spell_mastery_rune");
         addAttributeModifier(map, LodestoneAttributes.MAGIC_PROFICIENCY,
                 new AttributeModifier(id, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-        addAttributeModifier(map, AttributeRegistry.RESERVE_STAFF_CHARGES,
-                new AttributeModifier(id, 2f, AttributeModifier.Operation.ADD_VALUE));
+        addAttributeModifier(map, AttributeRegistry.CHARGE_DURATION,
+                new AttributeModifier(id, -0.3f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
         IronsSpellsCompat.addSpellPowerToCurio(this, map, id,0.1f);
     }

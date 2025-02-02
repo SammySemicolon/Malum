@@ -24,7 +24,7 @@ public class WaveBreakerBlock extends SpiritDiodeBlock<WaveBreakerBlockEntity> {
 
     @Override
     public boolean processUpdate(Level level, BlockPos pos, BlockState state, WaveBreakerBlockEntity diode, int signal) {
-        if (diode.signal == diode.pendingSignal) {
+        if (diode.outputSignal == diode.pendingSignal) {
             if (signal != diode.pendingSignal) {
                 diode.pendingSignal = signal;
                 level.playSound(null, pos, SoundRegistry.WAVEBREAKER_STORE.get(), SoundSource.BLOCKS, 0.3f, 1.5f);
@@ -34,13 +34,13 @@ public class WaveBreakerBlock extends SpiritDiodeBlock<WaveBreakerBlockEntity> {
 
             return false;
         } else {
-            diode.signal = diode.pendingSignal;
+            diode.outputSignal = diode.pendingSignal;
 
             level.playSound(null, pos, SoundRegistry.WAVEBREAKER_RELEASE.get(), SoundSource.BLOCKS, 0.3f, 1.5f);
             updateState(level, pos, state, diode);
             emitRedstoneParticles(level, pos);
 
-            return signal != diode.signal;
+            return signal != diode.outputSignal;
         }
     }
 
@@ -48,7 +48,7 @@ public class WaveBreakerBlock extends SpiritDiodeBlock<WaveBreakerBlockEntity> {
 
     @Override
     public int redstoneTicksUntilUpdate(Level level, BlockPos pos, BlockState state, WaveBreakerBlockEntity diode, int newInput) {
-        if (diode.pendingSignal != diode.signal)
+        if (diode.pendingSignal != diode.outputSignal)
             return super.redstoneTicksUntilUpdate(level, pos, state, diode, newInput);
         else
             return 2; // One redstone tick

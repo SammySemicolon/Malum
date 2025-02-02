@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.sammy.malum.common.entity.bolt.*;
 import com.sammy.malum.common.item.ISpiritAffiliatedItem;
+import com.sammy.malum.core.helpers.ComponentHelper;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
@@ -14,12 +15,14 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.easing.*;
+import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.color.*;
@@ -35,9 +38,15 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
     public static final Color MALIGNANT_BLACK = new Color(12, 4, 11);
     public static final ColorParticleData MALIGNANT_COLOR_DATA = ColorParticleData.create(MALIGNANT_PURPLE, MALIGNANT_BLACK).setEasing(Easing.BOUNCE_IN_OUT).setCoefficient(1.2f).build();
 
-    public ErosionScepterItem(Tier tier, float magicDamage, Properties builderIn) {
-        super(tier, 10, magicDamage, builderIn);
+    public ErosionScepterItem(Tier tier, float magicDamage, float chargeDuration, LodestoneItemProperties properties) {
+        super(tier, magicDamage, chargeDuration, properties);
     }
+    @Override
+    public void modifyAttributeTooltipEvent(AddAttributeTooltipsEvent event) {
+        event.addTooltipLines(ComponentHelper.positiveEffect("erosive_spread"));
+        event.addTooltipLines(ComponentHelper.positiveEffect("erosive_silence"));
+    }
+
     @Override
     public MalumSpiritType getDefiningSpiritType() {
         return SpiritTypeRegistry.UMBRAL_SPIRIT;
@@ -48,10 +57,10 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
             var silenced = MobEffectRegistry.SILENCED;
             MobEffectInstance effect = target.getEffect(silenced);
             if (effect == null) {
-                target.addEffect(new MobEffectInstance(silenced, 300, 1, true, true, true));
+                target.addEffect(new MobEffectInstance(silenced, 150, 0, true, true, true));
             } else {
-                EntityHelper.amplifyEffect(effect, target, 2, 9);
-                EntityHelper.extendEffect(effect, target, 60, 600);
+                EntityHelper.amplifyEffect(effect, target, 1, 19);
+                EntityHelper.extendEffect(effect, target, 30, 300);
             }
             SoundHelper.playSound(target, SoundRegistry.DRAINING_MOTIF.get(), attacker.getSoundSource(), 1, 1.25f);
         }
@@ -71,7 +80,7 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
     }
 
     @Override
-    public void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, float chargePercentage, int count) {
+    public void fireProjectile(LivingEntity player, ItemStack stack, Level level, InteractionHand hand, int count) {
         int spawnDelay = count * 5;
         float pitchOffset = count * 1.5f;
         float velocity = 4f;

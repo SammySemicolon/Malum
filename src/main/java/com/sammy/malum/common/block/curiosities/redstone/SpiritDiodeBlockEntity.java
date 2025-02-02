@@ -30,9 +30,11 @@ public class SpiritDiodeBlockEntity extends LodestoneBlockEntity {
 
     protected static final Color REDSTONE_COLOR = new Color(170, 15, 1);
     public int delay;
-    public int signal;
+    public int outputSignal;
 
     public long toggleTime;
+
+    public int inputSignal;
     public long visualStartTime;
     public int visualTransitionTime;
     public int visualTransitionStart;
@@ -46,21 +48,22 @@ public class SpiritDiodeBlockEntity extends LodestoneBlockEntity {
     }
 
     public int getOutputSignal() {
-        return Mth.clamp(signal, 0, 15);
+        return Mth.clamp(outputSignal, 0, 15);
     }
 
-    public void updateVisuals(int signal, boolean isPowering) {
+    public void updateVisuals(int outputSignal, int inputSignal, boolean isPowering) {
+        this.outputSignal = outputSignal;
+        this.inputSignal = inputSignal;
         this.visualStartTime = getLevel().getGameTime();
         this.visualTransitionTime = 2 * delay;
         this.visualTransitionStart = isPowering ? 0 : 1;
         this.visualTransitionEnd = 1 - visualTransitionStart;
-        this.signal = signal;
     }
 
-    public void updateAnimation(ServerLevel serverLevel, BlockPos pos) {
+    public void updateAnimation(ServerLevel serverLevel, BlockPos pos, int inputSignal) {
         int outputSignal = getOutputSignal();
         PacketDistributor.sendToPlayersTrackingChunk(serverLevel,
-                new ChunkPos(pos), new SpiritDiodeUpdatePayload(pos, outputSignal, outputSignal == 0));
+                new ChunkPos(pos), new SpiritDiodeUpdatePayload(pos, outputSignal, inputSignal, outputSignal == 0));
     }
     public void updateToggle(ServerLevel serverLevel, BlockPos pos, boolean isOpen) {
         PacketDistributor.sendToPlayersTrackingChunk(serverLevel,

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "malum:item/soul_stained_steel_scythe"
+  }
+}

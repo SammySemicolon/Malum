@@ -38,15 +38,20 @@ public class SoulWardData {
         this.soulWardCooldown = soulWardCooldown;
     }
 
+    @SuppressWarnings("DataFlowIssue")
     public void recoverSoulWard(LivingEntity entity, double amount) {
-        var multiplier = Optional.ofNullable(entity.getAttribute(AttributeRegistry.SOUL_WARD_RECOVERY_MULTIPLIER)).map(AttributeInstance::getValue).orElse(1.0);
-        addSoulWard(amount * multiplier);
-        if (!(entity instanceof Player player) || !player.isCreative()) {
-            var capacity = entity.getAttribute(AttributeRegistry.SOUL_WARD_CAPACITY);
-            if (capacity != null) {
-                var sound = soulWard >= capacity.getValue() ? SoundRegistry.SOUL_WARD_CHARGE : SoundRegistry.SOUL_WARD_GROW;
-                double pitchOffset = (soulWard / capacity.getValue()) * 0.5f + (Mth.ceil(soulWard) % 3) * 0.25f;
-                SoundHelper.playSound(entity, sound.get(), 0.25f, (float) (1f + pitchOffset));
+        var capacity = entity.getAttribute(AttributeRegistry.SOUL_WARD_CAPACITY);
+        if (getSoulWard() < capacity.getValue()) {
+            var multiplier = Optional.ofNullable(entity.getAttribute(AttributeRegistry.SOUL_WARD_RECOVERY_MULTIPLIER)).map(AttributeInstance::getValue).orElse(1.0);
+            var previousSoulward = soulWard;
+            addSoulWard(amount * multiplier);
+            if (soulWard > previousSoulward) {
+                if (!(entity instanceof Player player) || !player.isCreative()) {
+                    var sound = soulWard >= capacity.getValue() ? SoundRegistry.SOUL_WARD_CHARGE : SoundRegistry.SOUL_WARD_GROW;
+                    double pitchOffset = (soulWard / capacity.getValue()) * 0.5f + (Mth.ceil(soulWard) % 3) * 0.25f;
+                    SoundHelper.playSound(entity, sound.get(), 0.25f, (float) (1f + pitchOffset));
+
+                }
             }
         }
         addCooldown(entity, 1);

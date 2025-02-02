@@ -35,18 +35,20 @@ public class BlockTagRegistry {
 
     public static final TagKey<Block> TRAY_HEAT_SOURCES = modTag("farmersdelight:tray_heat_sources");
     public static final TagKey<Block> HEAT_SOURCES = modTag("farmersdelight:heat_sources");
+    public static final TagKey<Block> MINEABLE_WITH_KNIFE = modTag("farmersdelight:mineable/knife");
 
-    public static final TagKey<Block> STRIPPED_LOGS = forgeTag("stripped_logs");
+    public static final TagKey<Block> STRIPPED_LOGS = commonTag("stripped_logs");
+    public static final TagKey<Block> STRIPPED_WOODS = commonTag("stripped_woods");
 
     private static TagKey<Block> modTag(String path) {
-        return TagKey.create(Registries.BLOCK, ResourceLocation.tryParse(path));
+        return TagKey.create(Registries.BLOCK, ResourceLocation.parse(path));
     }
 
     private static TagKey<Block> malumTag(String path) {
         return TagKey.create(Registries.BLOCK, MalumMod.malumPath(path));
     }
 
-    private static TagKey<Block> forgeTag(String name) {
-        return BlockTags.create(ResourceLocation.fromNamespaceAndPath("neoforge", name));
+    private static TagKey<Block> commonTag(String name) {
+        return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
     }
 }

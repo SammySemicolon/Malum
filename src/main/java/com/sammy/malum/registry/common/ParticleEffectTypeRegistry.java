@@ -6,6 +6,7 @@ import com.sammy.malum.visual_effects.networked.attack.slam.SlamAttackParticleEf
 import com.sammy.malum.visual_effects.networked.attack.slash.AscensionRadialSlashParticleEffect;
 import com.sammy.malum.visual_effects.networked.blight.*;
 import com.sammy.malum.visual_effects.networked.crucible.*;
+import com.sammy.malum.visual_effects.networked.geas.*;
 import com.sammy.malum.visual_effects.networked.gluttony.*;
 import com.sammy.malum.visual_effects.networked.nitrate.*;
 import com.sammy.malum.visual_effects.networked.pylon.*;
@@ -57,9 +58,13 @@ public class ParticleEffectTypeRegistry {
     public static final ParticleEffectType SCYTHE_SLASH = new SlashAttackParticleEffect("scythe_slash");
     public static final ParticleEffectType SCYTHE_ASCENSION_SPIN = new AscensionRadialSlashParticleEffect("scythe_ascension_spin");
     public static final ParticleEffectType SCYTHE_ASCENSION_UPPERCUT = new AscensionUppercutParticleEffect("scythe_ascension_uppercut");
+
     public static final ParticleEffectType TYRVING_SLASH = new TyrvingSlashParticleEffect("tyrving_slash");
+    public static final ParticleEffectType SUNDERING_ANCHOR_SLASH = new SunderingAnchorSlashParticleEffect("sundering_anchor_slash");
+
     public static final ParticleEffectType WEIGHT_OF_WORLDS_CRIT = new WeightOfWorldsCritParticleEffect("weight_of_worlds_crit");
     public static final ParticleEffectType EDGE_OF_DELIVERANCE_CRIT = new EdgeOfDeliveranceCritParticleEffect("weight_of_worlds_crit");
+
     public static final ParticleEffectType HIDDEN_BLADE_COUNTER_FLURRY = new HiddenBladeCounterParticleEffect("hidden_blade_counter_flurry");
 
     //Slam Effects
@@ -69,6 +74,9 @@ public class ParticleEffectTypeRegistry {
     public static final ParticleEffectType HEX_BOLT_IMPACT = new HexBoltImpactParticleEffect("hex_bolt_impact");
     public static final ParticleEffectType DRAINING_BOLT_IMPACT = new DrainingBoltImpactParticleEffect("draining_bolt_impact");
     public static final ParticleEffectType ENTROPIC_BOLT_IMPACT = new EntropicBoltImpactParticleEffect("entropic_bolt_impact");
+
+    //Geas
+    public static final ParticleEffectType SOULWASHING_IMPACT = new SoulwashingGeasImpactParticleEffect("soulwashing_impact");
 
     //Gluttony
     public static final ParticleEffectType THROWN_GLUTTONY_IMPACT = new ThrownGluttonyParticleEffect("splash_of_gluttony");

@@ -60,8 +60,8 @@ public abstract class MalumRitualType {
         return id.withPrefix("textures/vfx/ritual/").withSuffix(".png");
     }
 
-    public RitualData createDataComponent(MalumRitualTier tier) {
-        return new RitualData(this, tier);
+    public RitualDataComponent createDataComponent(MalumRitualTier tier) {
+        return new RitualDataComponent(this, tier);
     }
 
     public List<Component> makeRitualShardDescriptor(MalumRitualTier ritualTier) {

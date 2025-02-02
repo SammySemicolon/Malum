@@ -1,11 +1,11 @@
 package com.sammy.malum.events;
 
 import com.sammy.malum.MalumMod;
-import com.sammy.malum.client.renderer.item.SpiritJarClientItemExtensions;
+import com.sammy.malum.client.extensions.*;
+import com.sammy.malum.client.extensions.SpiritJarClientItemExtensions;
 import com.sammy.malum.client.screen.tooltip.ClientSoulwovenPouchTooltip;
 import com.sammy.malum.common.block.curiosities.mana_mote.ManaMoteBlockClientExtension;
-import com.sammy.malum.common.data_components.SoulwovenPouchContents;
-import com.sammy.malum.common.item.curiosities.armor.ArmorClientItemExtensions;
+import com.sammy.malum.common.data_components.SoulwovenPouchContentsComponent;
 import com.sammy.malum.core.handlers.client.HiddenBladeRenderHandler;
 import com.sammy.malum.core.handlers.client.SoulWardRenderHandler;
 import com.sammy.malum.core.handlers.client.TouchOfDarknessRenderHandler;
@@ -40,7 +40,7 @@ public class ClientSetupEvents {
                 ItemRegistry.SOUL_STAINED_STEEL_CHESTPLATE,
                 ItemRegistry.SOUL_STAINED_STEEL_LEGGINGS,
                 ItemRegistry.SOUL_STAINED_STEEL_BOOTS);
-        event.registerItem(new ArmorClientItemExtensions(() -> ModelRegistry.MALIGNANT_LEAD_ARMOR),
+        event.registerItem(new MalignantArmorItemExtensions(() -> ModelRegistry.MALIGNANT_LEAD_ARMOR),
                 ItemRegistry.MALIGNANT_STRONGHOLD_HELMET,
                 ItemRegistry.MALIGNANT_STRONGHOLD_CHESTPLATE,
                 ItemRegistry.MALIGNANT_STRONGHOLD_LEGGINGS,
@@ -52,7 +52,7 @@ public class ClientSetupEvents {
 
     @SubscribeEvent
     public static void registerTooltipComponentManagers(RegisterClientTooltipComponentFactoriesEvent event) {
-        event.register(SoulwovenPouchContents.class, ClientSoulwovenPouchTooltip::new);
+        event.register(SoulwovenPouchContentsComponent.class, ClientSoulwovenPouchTooltip::new);
     }
 
     @SubscribeEvent

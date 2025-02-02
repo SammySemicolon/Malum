@@ -1,0 +1,35 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.malum.capacitor"
+  },
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 1.0,
+          "per_level_above_first": 1.0
+        },
+        "attribute": "malum:reserve_staff_charges",
+        "id": "malum:enchantment.reserve_staff_charges",
+        "operation": "add_value"
+      }
+    ]
+  },
+  "exclusive_set": "malum:replenishing",
+  "max_cost": {
+    "base": 55,
+    "per_level_above_first": 0
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#malum:enchantable/capacitor",
+  "weight": 1
+}

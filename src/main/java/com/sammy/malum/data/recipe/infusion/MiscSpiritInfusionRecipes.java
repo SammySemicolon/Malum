@@ -7,6 +7,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
+import org.jline.terminal.*;
 
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 
@@ -28,7 +29,7 @@ public class MiscSpiritInfusionRecipes {
                 .save(consumer);
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.RUNEWOOD_ITEM_PEDESTAL.get(), 1, ItemRegistry.RUNIC_WORKBENCH.get(), 1)
-                .addExtraItem(ItemRegistry.RUNEWOOD_PLANKS.get(), 4)
+                .addExtraItem(SizedIngredient.of(ItemTagRegistry.RUNEWOOD_PLANKS, 4))
                 .addExtraItem(ItemRegistry.HALLOWED_GOLD_INGOT.get(), 2)
                 .addSpirit(AQUEOUS_SPIRIT, 16)
                 .addSpirit(SACRED_SPIRIT, 8)

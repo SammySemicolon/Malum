@@ -25,13 +25,13 @@ public class MaterialSpiritInfusionRecipes {
         spiritedGlassRecipe(recipeOutput, EARTHEN_SPIRIT, ItemRegistry.EARTHEN_SPIRITED_GLASS.get());
         spiritedGlassRecipe(recipeOutput, INFERNAL_SPIRIT, ItemRegistry.INFERNAL_SPIRITED_GLASS.get());
 
-        soulwovenBannerRecipe(recipeOutput, SACRED_SPIRIT, SoulwovenBannerPatternData.SACRED);
+        soulwovenBannerRecipe(recipeOutput, SACRED_SPIRIT, SoulwovenBannerPatternDataComponent.SACRED);
 //        soulwovenBannerRecipe(recipeOutput, WICKED_SPIRIT, SoulwovenBannerPatternData.WICKED);
-//        soulwovenBannerRecipe(recipeOutput, ARCANE_SPIRIT, SoulwovenBannerPatternData.ARCANE);
-        soulwovenBannerRecipe(recipeOutput, ELDRITCH_SPIRIT, SoulwovenBannerPatternData.ELDRITCH);
-        soulwovenBannerRecipe(recipeOutput, AERIAL_SPIRIT, SoulwovenBannerPatternData.AERIAL);
-        soulwovenBannerRecipe(recipeOutput, AQUEOUS_SPIRIT, SoulwovenBannerPatternData.AQUEOUS);
-        soulwovenBannerRecipe(recipeOutput, EARTHEN_SPIRIT, SoulwovenBannerPatternData.EARTHEN);
+        soulwovenBannerRecipe(recipeOutput, ARCANE_SPIRIT, SoulwovenBannerPatternDataComponent.ARCANE);
+        soulwovenBannerRecipe(recipeOutput, ELDRITCH_SPIRIT, SoulwovenBannerPatternDataComponent.ELDRITCH);
+        soulwovenBannerRecipe(recipeOutput, AERIAL_SPIRIT, SoulwovenBannerPatternDataComponent.AERIAL);
+        soulwovenBannerRecipe(recipeOutput, AQUEOUS_SPIRIT, SoulwovenBannerPatternDataComponent.AQUEOUS);
+        soulwovenBannerRecipe(recipeOutput, EARTHEN_SPIRIT, SoulwovenBannerPatternDataComponent.EARTHEN);
 //        soulwovenBannerRecipe(recipeOutput, INFERNAL_SPIRIT, SoulwovenBannerPatternData.INFERNAL);
 
         new SpiritInfusionRecipeBuilder(Items.GUNPOWDER, 1, ItemRegistry.HEX_ASH.get(), 1)
@@ -134,7 +134,7 @@ public class MaterialSpiritInfusionRecipes {
                 .save(recipeOutput);
     }
 
-    public static void soulwovenBannerRecipe(RecipeOutput recipeOutput, MalumSpiritType spirit, SoulwovenBannerPatternData pattern) {
+    public static void soulwovenBannerRecipe(RecipeOutput recipeOutput, MalumSpiritType spirit, SoulwovenBannerPatternDataComponent pattern) {
         new SpiritInfusionRecipeBuilder(ItemRegistry.SOULWOVEN_BANNER.get(), pattern.getDefaultStack())
                 .addSpirit(spirit, 1)
                 .save(recipeOutput, pattern.getRecipeId());

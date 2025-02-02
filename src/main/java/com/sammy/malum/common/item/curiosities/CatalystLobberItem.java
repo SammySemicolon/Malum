@@ -53,7 +53,7 @@ public class CatalystLobberItem extends Item {
                     state = 0;
                     pEntity.playSound(SoundRegistry.CATALYST_LOBBER_LOCKED.get(), 1.2f, 0.8f);
                 }
-                pStack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState(timer, state, stashedState));
+                pStack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerStateComponent(timer, state, stashedState));
             }
         }
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
@@ -62,7 +62,7 @@ public class CatalystLobberItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
-        var component = stack.getOrDefault(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState());
+        var component = stack.getOrDefault(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerStateComponent());
         int timer = component.timer();
         int state = component.state();
         int stashedState = component.stashedState();
@@ -111,11 +111,11 @@ public class CatalystLobberItem extends Item {
                 sound = SoundRegistry.CATALYST_LOBBER_FIRED.get();
             }
             default -> {
-                stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState());
+                stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerStateComponent());
                 throw new IllegalStateException("Catalyst lobber used with an invalid state.");
             }
         }
-        stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerState(timer, state, stashedState));
+        stack.set(DataComponentRegistry.CATALYST_LOBBER_STATE, new CatalystFlingerStateComponent(timer, state, stashedState));
         if (cooldown != 0) {
             playerIn.getCooldowns().addCooldown(this, cooldown);
         }

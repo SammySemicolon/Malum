@@ -49,11 +49,10 @@ public record ArtificeInfluenceData(Set<ArtificeModifierSourceInstance> modifier
         Optional<ArtificeModifierSourceInstance> focusingModifierInstance = influencer.getFocusingModifierInstance();
         Optional<ArtificeModifierSourceInstance> artificeModifierSourceInstance = focusingModifierInstance.filter(ArtificeModifierSourceInstance::isBound);
         Optional<IArtificeAcceptor> iArtificeAcceptor = artificeModifierSourceInstance.map(p -> p.target);
-        Optional<IArtificeAcceptor> optional = iArtificeAcceptor;
-        if (optional.isEmpty()) {
+        if (iArtificeAcceptor.isEmpty()) {
             return true;
         }
-        var target = optional.get();
-        return ((BlockEntity)target).isRemoved();
+        var target = iArtificeAcceptor.get();
+        return !((BlockEntity)target).isRemoved();
     }
 }

@@ -110,39 +110,33 @@
       }
     },
     {
-      "model": "malum:item/executioner_drip_visor",
+      "model": "malum:item/v1_head",
       "predicate": {
         "malum:item_skin": 18.0
       }
     },
     {
-      "model": "malum:item/commando_drip_visor",
+      "model": "malum:item/v2_head",
       "predicate": {
         "malum:item_skin": 19.0
       }
     },
     {
-      "model": "malum:item/ultrakill_v1_visor",
+      "model": "malum:item/commando_head",
       "predicate": {
         "malum:item_skin": 20.0
       }
     },
     {
-      "model": "malum:item/ultrakill_v2_visor",
+      "model": "malum:item/ancient_soul_hunter_head",
       "predicate": {
         "malum:item_skin": 21.0
       }
     },
     {
-      "model": "malum:item/ancient_cloth_cloak",
+      "model": "malum:item/ancient_soul_stained_steel_head",
       "predicate": {
         "malum:item_skin": 22.0
-      }
-    },
-    {
-      "model": "malum:item/ancient_metal_helmet",
-      "predicate": {
-        "malum:item_skin": 23.0
       }
     }
   ],

@@ -33,11 +33,8 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
     @Override
     public void addExtraTooltipLines(Consumer<Component> consumer) {
         consumer.accept(ComponentHelper.positiveCurioEffect("scythe_counterattack"));
-        consumer.accept(ComponentHelper.positiveCurioEffect("enhanced_maneuvers"));
         consumer.accept(ComponentHelper.negativeCurioEffect("pacifist_recharge"));
-        consumer.accept(ComponentHelper.negativeCurioEffect("no_sweep"));
     }
-
 
     @Override
     public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity attacked, ItemStack stack) {
@@ -60,6 +57,9 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             return;
         }
         if (!source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
+            return;
+        }
+        if (source.is(DamageTypeRegistry.HIDDEN_BLADE_COUNTER)) {
             return;
         }
         if (CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get())) {
@@ -93,9 +93,9 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             entity.setData(attacker, physicalDamage, magicDamage, duration);
             entity.setItem(scytheWeapon);
             level.addFreshEntity(entity);
-            data.hiddenBladeNecklaceCooldown = COOLDOWN_DURATION;
             PacketDistributor.sendToPlayersTrackingEntityAndSelf(attacker, new SyncCurioDataPayload(attacker.getId(), data));
             if (!effect.isInfiniteDuration()) {
+                data.hiddenBladeNecklaceCooldown = COOLDOWN_DURATION;
                 attacker.removeEffect(effect.getEffect());
             }
             for (int i = 0; i < 3; i++) {
@@ -125,5 +125,4 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             }
         }
     }
-
 }

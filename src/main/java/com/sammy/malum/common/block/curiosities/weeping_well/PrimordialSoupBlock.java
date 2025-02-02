@@ -63,7 +63,7 @@ public class PrimordialSoupBlock extends Block {
     @Override
     public void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
         if (pEntity instanceof LivingEntity livingEntity) {
-            TouchOfDarknessHandler.handlePrimordialSoupContact(livingEntity);
+            WeepingWellRejectionHandler.handlePrimordialSoupContact(livingEntity);
         }
     }
 

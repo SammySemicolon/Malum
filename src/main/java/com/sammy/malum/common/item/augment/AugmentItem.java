@@ -2,7 +2,7 @@ package com.sammy.malum.common.item.augment;
 
 import com.sammy.malum.core.systems.artifice.ArtificeAttributeType;
 import com.sammy.malum.core.systems.artifice.ArtificeModifier;
-import com.sammy.malum.common.data_components.ArtificeAugmentData;
+import com.sammy.malum.common.data_components.ArtificeAugmentDataComponent;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import net.minecraft.*;
@@ -36,13 +36,13 @@ public class AugmentItem extends Item {
     }
 
     public AugmentItem(Properties pProperties, List<MalumSpiritType> spiritTypes, boolean isCoreAugment, ArtificeModifier... modifiers) {
-        super(pProperties.component(DataComponentRegistry.ARTIFICE_AUGMENT, new ArtificeAugmentData(isCoreAugment, List.of(modifiers))));
+        super(pProperties.component(DataComponentRegistry.ARTIFICE_AUGMENT, new ArtificeAugmentDataComponent(isCoreAugment, List.of(modifiers))));
         this.spiritTypes = spiritTypes;
     }
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("malum.gui.augment.slot").withStyle(ChatFormatting.GOLD)
+        tooltipComponents.add(Component.translatable("malum.gui.slot").withStyle(ChatFormatting.GOLD)
                 .append(Component.translatable("malum.gui.augment.type." + getAugmentTypeTranslator()).withStyle(ChatFormatting.YELLOW)));
     }
 
@@ -51,7 +51,7 @@ public class AugmentItem extends Item {
         if (!itemStack.has(DataComponentRegistry.ARTIFICE_AUGMENT)) {
             return;
         }
-        ArtificeAugmentData augmentData = itemStack.get(DataComponentRegistry.ARTIFICE_AUGMENT);
+        ArtificeAugmentDataComponent augmentData = itemStack.get(DataComponentRegistry.ARTIFICE_AUGMENT);
         List<Component> tooltip = event.getToolTip();
         tooltip.add(Component.empty());
         tooltip.add(Component.translatable("malum.gui.augment.installed").withStyle(ChatFormatting.GOLD));

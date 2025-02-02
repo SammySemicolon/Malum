@@ -18,20 +18,15 @@ public class ResonanceTuner extends CoreAugmentItem {
     public static void exchangeSpeed(ArtificeAttributeData data) {
         float resonanceTuning = data.resonanceTuning.getValue(data);
         if (resonanceTuning > 0) {
-            data.focusingSpeed.removeModifier(TuningModifier.RESONANCE_TUNING);
-            data.instability.removeModifier(TuningModifier.RESONANCE_TUNING);
-            float instability = data.instability.getValue(data);
             float speed = data.focusingSpeed.getValue(data);
+            float instability = data.instability.getValue(data);
             float goal = Math.min(instability * resonanceTuning, speed)*2f;
             float conversion = Mth.clampedLerp(0, 1, speed/goal);
             if (conversion > 0) {
                 float toll = Mth.clamp(goal/speed, 0, 1) * 0.8f;
                 data.focusingSpeed.applyModifier(new TuningModifier(TuningModifier.RESONANCE_TUNING, -toll));
                 data.instability.applyModifier(new TuningModifier(TuningModifier.RESONANCE_TUNING, -conversion));
-                return;
             }
         }
-        data.focusingSpeed.removeModifier(TuningModifier.RESONANCE_TUNING);
-        data.instability.removeModifier(TuningModifier.RESONANCE_TUNING);
     }
 }

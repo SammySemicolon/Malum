@@ -2,8 +2,13 @@
   "values": [
     "malum:scythe_melee",
     "malum:scythe_sweep",
+    "malum:scythe_rebound",
+    "malum:scythe_ascension",
+    "malum:scythe_combo",
+    "malum:hidden_blade_counter",
     "malum:voodoo_playerless",
     "malum:voodoo",
-    "malum:hidden_blade_counter"
+    "malum:soulwashing_propagation",
+    "malum:soulwashing_retaliation"
   ]
 }

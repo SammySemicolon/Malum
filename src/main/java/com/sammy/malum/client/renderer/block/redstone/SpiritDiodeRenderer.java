@@ -135,10 +135,10 @@ public abstract class SpiritDiodeRenderer<T extends SpiritDiodeBlockEntity> impl
 
     public RenderTypeToken getTokenForSide(BlockState state, Direction direction) {
         Direction facing = state.getValue(SpiritDiodeBlock.FACING);
-        if (direction.equals(facing)) {
+        if (direction.equals(facing.getOpposite())) {
             return MalumRenderTypeTokens.DIODE_INPUT;
         }
-        if (direction.equals(facing.getOpposite())) {
+        if (direction.equals(facing)) {
             return output;
         }
         return MalumRenderTypeTokens.DIODE_LOCKED;

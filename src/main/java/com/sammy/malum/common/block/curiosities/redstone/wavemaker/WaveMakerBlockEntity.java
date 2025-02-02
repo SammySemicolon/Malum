@@ -5,6 +5,7 @@ import com.sammy.malum.registry.common.block.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.*;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class WaveMakerBlockEntity extends SpiritDiodeBlockEntity {
@@ -13,6 +14,14 @@ public class WaveMakerBlockEntity extends SpiritDiodeBlockEntity {
 
     public WaveMakerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.WAVEMAKER.get(), pos, state);
+    }
+
+    @Override
+    public void updateAnimation(ServerLevel serverLevel, BlockPos pos, int inputSignal) {
+        if (getOutputSignal() == inputSignal) {
+            return;
+        }
+        super.updateAnimation(serverLevel, pos, inputSignal);
     }
 
     @Override

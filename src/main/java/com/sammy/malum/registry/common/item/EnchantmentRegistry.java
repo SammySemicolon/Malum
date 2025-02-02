@@ -14,6 +14,7 @@ public class EnchantmentRegistry {
     public static final ResourceKey<Enchantment> REBOUND = keyOf("rebound");
     public static final ResourceKey<Enchantment> ASCENSION = keyOf("ascension");
     public static final ResourceKey<Enchantment> REPLENISHING = keyOf("replenishing");
+    public static final ResourceKey<Enchantment> CAPACITOR = keyOf("capacitor");
     public static final ResourceKey<Enchantment> HAUNTED = keyOf("haunted");
     public static final ResourceKey<Enchantment> SPIRIT_PLUNDER = keyOf("spirit_plunder");
 

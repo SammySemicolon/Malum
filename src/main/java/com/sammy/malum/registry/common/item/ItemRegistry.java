@@ -8,13 +8,13 @@ import com.sammy.malum.common.block.curiosities.repair_pylon.*;
 import com.sammy.malum.common.block.curiosities.spirit_crucible.*;
 import com.sammy.malum.common.block.curiosities.spirit_catalyzer.*;
 import com.sammy.malum.common.block.nature.*;
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.augment.core.*;
 import com.sammy.malum.common.item.codex.*;
 import com.sammy.malum.common.item.cosmetic.curios.*;
-import com.sammy.malum.common.item.cosmetic.weaves.*;
 import com.sammy.malum.common.item.curiosities.*;
 import com.sammy.malum.common.item.curiosities.armor.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
@@ -26,6 +26,7 @@ import com.sammy.malum.common.item.curiosities.curios.sets.alchemical.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.misc.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.prospector.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.rotten.*;
+import com.sammy.malum.common.item.curiosities.curios.sets.scythe.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.soulward.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.spirit.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
@@ -79,39 +80,39 @@ public class ItemRegistry {
 
     public static final List<Item> CONTENT = new ArrayList<>();
 
-    public static Item.Properties DEFAULT_PROPERTIES() {
+    public static LodestoneItemProperties DEFAULT_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.CONTENT);
     }
 
-    public static Item.Properties GEAR_PROPERTIES() {
+    public static LodestoneItemProperties GEAR_PROPERTIES() {
         return DEFAULT_PROPERTIES().stacksTo(1);
     }
 
-    public static Item.Properties BUILDING_PROPERTIES() {
+    public static LodestoneItemProperties BUILDING_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.BUILDING);
     }
 
-    public static Item.Properties NATURE_PROPERTIES() {
+    public static LodestoneItemProperties NATURE_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.NATURE);
     }
 
-    public static Item.Properties METALLURGIC_NODE_PROPERTIES() {
+    public static LodestoneItemProperties METALLURGIC_NODE_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.METALLURGY);
     }
 
-    public static Item.Properties METALLURGIC_PROPERTIES() {
+    public static LodestoneItemProperties METALLURGIC_PROPERTIES() {
         return METALLURGIC_NODE_PROPERTIES().stacksTo(1);
     }
 
-    public static Item.Properties COSMETIC_PROPERTIES() {
+    public static LodestoneItemProperties COSMETIC_PROPERTIES() {
         return new LodestoneItemProperties(CreativeTabRegistry.COSMETIC);
     }
 
-    public static Item.Properties HIDDEN_PROPERTIES() {
-        return new Item.Properties().stacksTo(1);
+    public static LodestoneItemProperties HIDDEN_PROPERTIES() {
+        return new LodestoneItemProperties().stacksTo(1);
     }
 
-    public static <T extends Item> DeferredHolder<Item, T> register(String name, Item.Properties properties, Function<Item.Properties, T> function) {
+    public static <T extends Item> DeferredHolder<Item, T> register(String name, LodestoneItemProperties properties, Function<LodestoneItemProperties, T> function) {
         LodestoneItemProperties.addToTabSorting(MalumMod.malumPath(name), properties);
         return ITEMS.register(name, () -> function.apply(properties));
     }
@@ -119,6 +120,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> ENCYCLOPEDIA_ARCANA = register("encyclopedia_arcana", GEAR_PROPERTIES().rarity(UNCOMMON), EncyclopediaArcanaItem::new);
 
     public static final DeferredHolder<Item, RitualShardItem> RITUAL_SHARD = register("ritual_shard", HIDDEN_PROPERTIES(), RitualShardItem::new);
+    public static final DeferredHolder<Item, GeasItem> GEAS = register("geas", HIDDEN_PROPERTIES(), GeasItem::new);
 
     //region spirits
     public static final DeferredHolder<Item, SpiritShardItem> SACRED_SPIRIT = register("sacred_spirit", DEFAULT_PROPERTIES(), (p) -> new SpiritShardItem(p, SpiritTypeRegistry.SACRED_SPIRIT));
@@ -529,41 +531,41 @@ public class ItemRegistry {
 
     //region impetus
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_IRON_IMPETUS = register("cracked_iron_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> IRON_IMPETUS = register("iron_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_IRON_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> IRON_IMPETUS = register("iron_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_IRON_IMPETUS));
     public static final DeferredHolder<Item, Item> IRON_NODE = register("iron_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_COPPER_IMPETUS = register("cracked_copper_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> COPPER_IMPETUS = register("copper_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_COPPER_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> COPPER_IMPETUS = register("copper_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_COPPER_IMPETUS));
     public static final DeferredHolder<Item, Item> COPPER_NODE = register("copper_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_GOLD_IMPETUS = register("cracked_gold_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> GOLD_IMPETUS = register("gold_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_GOLD_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> GOLD_IMPETUS = register("gold_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_GOLD_IMPETUS));
     public static final DeferredHolder<Item, Item> GOLD_NODE = register("gold_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_LEAD_IMPETUS = register("cracked_lead_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> LEAD_IMPETUS = register("lead_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_LEAD_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> LEAD_IMPETUS = register("lead_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_LEAD_IMPETUS));
     public static final DeferredHolder<Item, Item> LEAD_NODE = register("lead_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_SILVER_IMPETUS = register("cracked_silver_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> SILVER_IMPETUS = register("silver_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_SILVER_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> SILVER_IMPETUS = register("silver_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_SILVER_IMPETUS));
     public static final DeferredHolder<Item, Item> SILVER_NODE = register("silver_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_ALUMINUM_IMPETUS = register("cracked_aluminum_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> ALUMINUM_IMPETUS = register("aluminum_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ALUMINUM_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> ALUMINUM_IMPETUS = register("aluminum_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ALUMINUM_IMPETUS));
     public static final DeferredHolder<Item, Item> ALUMINUM_NODE = register("aluminum_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_NICKEL_IMPETUS = register("cracked_nickel_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> NICKEL_IMPETUS = register("nickel_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_NICKEL_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> NICKEL_IMPETUS = register("nickel_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_NICKEL_IMPETUS));
     public static final DeferredHolder<Item, Item> NICKEL_NODE = register("nickel_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_URANIUM_IMPETUS = register("cracked_uranium_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> URANIUM_IMPETUS = register("uranium_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_URANIUM_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> URANIUM_IMPETUS = register("uranium_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_URANIUM_IMPETUS));
     public static final DeferredHolder<Item, Item> URANIUM_NODE = register("uranium_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_OSMIUM_IMPETUS = register("cracked_osmium_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> OSMIUM_IMPETUS = register("osmium_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_OSMIUM_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> OSMIUM_IMPETUS = register("osmium_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_OSMIUM_IMPETUS));
     public static final DeferredHolder<Item, Item> OSMIUM_NODE = register("osmium_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_ZINC_IMPETUS = register("cracked_zinc_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> ZINC_IMPETUS = register("zinc_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ZINC_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> ZINC_IMPETUS = register("zinc_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ZINC_IMPETUS));
     public static final DeferredHolder<Item, Item> ZINC_NODE = register("zinc_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_TIN_IMPETUS = register("cracked_tin_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> TIN_IMPETUS = register("tin_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_TIN_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> TIN_IMPETUS = register("tin_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_TIN_IMPETUS));
     public static final DeferredHolder<Item, Item> TIN_NODE = register("tin_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
 
     public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_ALCHEMICAL_IMPETUS = register("cracked_alchemical_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> ALCHEMICAL_IMPETUS = register("alchemical_impetus", METALLURGIC_PROPERTIES().durability(800), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ALCHEMICAL_IMPETUS));
+    public static final DeferredHolder<Item, ImpetusItem> ALCHEMICAL_IMPETUS = register("alchemical_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ALCHEMICAL_IMPETUS));
     //endregion
 
     //region ether
@@ -610,17 +612,17 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> CRUDE_SCYTHE = register("crude_scythe", GEAR_PROPERTIES(), (p) -> new MalumScytheItem(Tiers.IRON, 0, 0.1f, p.durability(500)));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_SCYTHE = register("soul_stained_steel_scythe", GEAR_PROPERTIES(), (p) -> new MagicScytheItem(SOUL_STAINED_STEEL, -2.5f, 0.1f, 4, p));
 
+    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_HELMET = register("soul_stained_steel_helmet", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.HELMET, p));
+    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_CHESTPLATE = register("soul_stained_steel_chestplate", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.CHESTPLATE, p));
+    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_LEGGINGS = register("soul_stained_steel_leggings", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.LEGGINGS, p));
+    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_BOOTS = register("soul_stained_steel_boots", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.BOOTS, p));
+
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_SWORD = register("soul_stained_steel_sword", GEAR_PROPERTIES(), (p) -> new MagicSwordItem(SOUL_STAINED_STEEL, -3, 0, 3, p));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_PICKAXE = register("soul_stained_steel_pickaxe", GEAR_PROPERTIES(), (p) -> new MagicPickaxeItem(SOUL_STAINED_STEEL, -2, 0, 2, p));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_AXE = register("soul_stained_steel_axe", GEAR_PROPERTIES(), (p) -> new MagicAxeItem(SOUL_STAINED_STEEL, -3, 0, 4, p));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_SHOVEL = register("soul_stained_steel_shovel", GEAR_PROPERTIES(), (p) -> new MagicShovelItem(SOUL_STAINED_STEEL, -2, 0, 2, p));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_HOE = register("soul_stained_steel_hoe", GEAR_PROPERTIES(), (p) -> new MagicHoeItem(SOUL_STAINED_STEEL, 0, -1.5f, 1, p));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_KNIFE = register("soul_stained_steel_knife", FarmersDelightCompat.LOADED ? GEAR_PROPERTIES() : HIDDEN_PROPERTIES(), (p) -> FarmersDelightCompat.LOADED ? FarmersDelightCompat.LoadedOnly.makeMagicKnife(p) : new Item(p));
-
-    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_HELMET = register("soul_stained_steel_helmet", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.HELMET, p));
-    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_CHESTPLATE = register("soul_stained_steel_chestplate", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.CHESTPLATE, p));
-    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_LEGGINGS = register("soul_stained_steel_leggings", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.LEGGINGS, p));
-    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_BOOTS = register("soul_stained_steel_boots", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.BOOTS, p));
 
     public static final DeferredHolder<Item, Item> SOUL_HUNTER_CLOAK = register("soul_hunter_cloak", GEAR_PROPERTIES(), (p) -> new SoulHunterArmorItem(ArmorItem.Type.HELMET, p));
     public static final DeferredHolder<Item, Item> SOUL_HUNTER_ROBE = register("soul_hunter_robe", GEAR_PROPERTIES(), (p) -> new SoulHunterArmorItem(ArmorItem.Type.CHESTPLATE, p));
@@ -629,17 +631,19 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> TYRVING = register("tyrving", GEAR_PROPERTIES(), (p) -> new TyrvingItem(ItemTiers.TYRVING, 0, -0.3f, p));
 
-    public static final DeferredHolder<Item, Item> MNEMONIC_HEX_STAFF = register("mnemonic_hex_staff", GEAR_PROPERTIES(), (p) -> new HexStaffItem(HEX_STAFF, 5, p));
-    public static final DeferredHolder<Item, Item> EROSION_SCEPTER = register("erosion_scepter", GEAR_PROPERTIES(), (p) -> new ErosionScepterItem(MALIGNANT_ALLOY, 5, p));
-    public static final DeferredHolder<Item, Item> UNWINDING_CHAOS = register("unwinding_chaos", GEAR_PROPERTIES(), (p) -> new UnwindingChaosStaffItem(CHAOS_STAFF, 7, p));
+    public static final DeferredHolder<Item, Item> MNEMONIC_HEX_STAFF = register("mnemonic_hex_staff", GEAR_PROPERTIES(), (p) -> new HexStaffItem(HEX_STAFF, 5, 20, p));
+    public static final DeferredHolder<Item, Item> EROSION_SCEPTER = register("erosion_scepter", GEAR_PROPERTIES(), (p) -> new ErosionScepterItem(MALIGNANT_ALLOY, 5, 10, p));
 
-    public static final DeferredHolder<Item, Item> WEIGHT_OF_WORLDS = register("weight_of_worlds", GEAR_PROPERTIES(), (p) -> new WeightOfWorldsItem(ItemTiers.MALIGNANT_ALLOY, 1, -0.3f, p));
-    public static final DeferredHolder<Item, Item> EDGE_OF_DELIVERANCE = register("edge_of_deliverance", GEAR_PROPERTIES(), (p) -> new EdgeOfDeliveranceItem(ItemTiers.MALIGNANT_ALLOY, 2, -0.2f, p));
+    public static final DeferredHolder<Item, Item> WEIGHT_OF_WORLDS = register("weight_of_worlds", GEAR_PROPERTIES(), (p) -> new WeightOfWorldsItem(ItemTiers.MALIGNANT_ALLOY, 1, -0.2f, p));
+    public static final DeferredHolder<Item, Item> EDGE_OF_DELIVERANCE = register("edge_of_deliverance", GEAR_PROPERTIES(), (p) -> new EdgeOfDeliveranceItem(ItemTiers.MALIGNANT_ALLOY, 2, -0.1f, p));
 
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_HELMET = register("malignant_stronghold_helmet", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.HELMET, p));
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_CHESTPLATE = register("malignant_stronghold_chestplate", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.CHESTPLATE, p));
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_LEGGINGS = register("malignant_stronghold_leggings", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.LEGGINGS, p));
     public static final DeferredHolder<Item, Item> MALIGNANT_STRONGHOLD_BOOTS = register("malignant_stronghold_boots", GEAR_PROPERTIES(), (p) -> new MalignantStrongholdArmorItem(ArmorItem.Type.BOOTS, p));
+
+    public static final DeferredHolder<Item, Item> UNWINDING_CHAOS = register("unwinding_chaos", GEAR_PROPERTIES().rarity(EPIC), (p) -> new UnwindingChaosStaffItem(HARNESSED_CHAOS, 7, 30, p));
+    public static final DeferredHolder<Item, Item> SUNDERING_ANCHOR = register("sundering_anchor", GEAR_PROPERTIES().rarity(EPIC), (p) -> new SunderingAnchorItem(HARNESSED_CHAOS, 4, p));
 
     public static final DeferredHolder<Item, Item> GILDED_RING = register("gilded_ring", GEAR_PROPERTIES(), CurioGildedRing::new);
     public static final DeferredHolder<Item, Item> GILDED_BELT = register("gilded_belt", GEAR_PROPERTIES(), CurioGildedBelt::new);
@@ -652,6 +656,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> GLUTTONOUS_BROOCH = register("gluttonous_brooch", GEAR_PROPERTIES(), CurioGluttonousBrooch::new);
 
     public static final DeferredHolder<Item, Item> RING_OF_ESOTERIC_SPOILS = register("ring_of_esoteric_spoils", GEAR_PROPERTIES(), CurioArcaneSpoilRing::new);
+    public static final DeferredHolder<Item, Item> RING_OF_THE_RISING_EDGE = register("ring_of_the_rising_edge", GEAR_PROPERTIES(), CurioRisingEdgeRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_CURATIVE_TALENT = register("ring_of_curative_talent", GEAR_PROPERTIES(), CurioCurativeRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_ARCANE_PROWESS = register("ring_of_arcane_prowess", GEAR_PROPERTIES(), CurioProwessRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_MANAWEAVING = register("ring_of_manaweaving", GEAR_PROPERTIES(), CurioManaweavingRing::new);
@@ -661,7 +666,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> RING_OF_THE_DEMOLITIONIST = register("ring_of_the_demolitionist", GEAR_PROPERTIES(), CurioDemolitionistRing::new);
 
     public static final DeferredHolder<Item, Item> NECKLACE_OF_THE_MYSTIC_MIRROR = register("necklace_of_the_mystic_mirror", GEAR_PROPERTIES(), CurioMirrorNecklace::new);
-    public static final DeferredHolder<Item, Item> NECKLACE_OF_THE_NARROW_EDGE = register("necklace_of_the_narrow_edge", GEAR_PROPERTIES(), CurioNarrowNecklace::new);
+    public static final DeferredHolder<Item, Item> NECKLACE_OF_THE_NARROW_EDGE = register("necklace_of_the_narrow_edge", GEAR_PROPERTIES(), CurioNarrowEdgeNecklace::new);
     public static final DeferredHolder<Item, Item> NECKLACE_OF_BLISSFUL_HARMONY = register("necklace_of_blissful_harmony", GEAR_PROPERTIES(), CurioHarmonyNecklace::new);
 
     public static final DeferredHolder<Item, Item> BELT_OF_THE_STARVED = register("belt_of_the_starved", GEAR_PROPERTIES(), CurioStarvedBelt::new);
@@ -705,32 +710,35 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> RUNE_OF_IGNEOUS_SOLACE = register("rune_of_igneous_solace", GEAR_PROPERTIES(), RuneIgneousSolaceItem::new);
     //endregion
 
+
+    public static Item skinHoldingItem(Item.Properties properties, ItemSkinComponent skin) {
+        return new Item(properties.component(DataComponentRegistry.ITEM_SKIN, skin));
+    }
     //region cosmetics
     public static final DeferredHolder<Item, Item> ESOTERIC_SPOOL = register("esoteric_spool", COSMETIC_PROPERTIES(), Item::new);
-    public static final DeferredHolder<Item, Item> ANCIENT_WEAVE = register("ancient_weave", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
-    public static final DeferredHolder<Item, Item> CORNERED_WEAVE = register("cornered_weave", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
-    public static final DeferredHolder<Item, Item> DREADED_WEAVE = register("dreaded_weave", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
-    public static final DeferredHolder<Item, Item> MECHANICAL_WEAVE_V1 = register("mechanical_weave_v1", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
-    public static final DeferredHolder<Item, Item> MECHANICAL_WEAVE_V2 = register("mechanical_weave_v2", COSMETIC_PROPERTIES(), GenericWeaveItem::new);
+    public static final DeferredHolder<Item, Item> ANCIENT_WEAVE = register("ancient_weave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.ANCIENT_CLOTH));
+    public static final DeferredHolder<Item, Item> CORNERED_WEAVE = register("cornered_weave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.COMMANDO));
+    public static final DeferredHolder<Item, Item> MECHANICAL_WEAVE_V1 = register("mechanical_weave_v1", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.BLUE_MACHINE));
+    public static final DeferredHolder<Item, Item> MECHANICAL_WEAVE_V2 = register("mechanical_weave_v2", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.RED_MACHINE));
 
-    public static final DeferredHolder<Item, PrideweaveItem> ACE_PRIDEWEAVE = register("ace_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> AGENDER_PRIDEWEAVE = register("agender_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> ARO_PRIDEWEAVE = register("aro_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> AROACE_PRIDEWEAVE = register("aroace_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> BI_PRIDEWEAVE = register("bi_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> DEMIBOY_PRIDEWEAVE = register("demiboy_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> DEMIGIRL_PRIDEWEAVE = register("demigirl_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> ENBY_PRIDEWEAVE = register("enby_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> GAY_PRIDEWEAVE = register("gay_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> GENDERFLUID_PRIDEWEAVE = register("genderfluid_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> GENDERQUEER_PRIDEWEAVE = register("genderqueer_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> INTERSEX_PRIDEWEAVE = register("intersex_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> LESBIAN_PRIDEWEAVE = register("lesbian_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> PAN_PRIDEWEAVE = register("pan_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> PLURAL_PRIDEWEAVE = register("plural_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> POLY_PRIDEWEAVE = register("poly_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> PRIDE_PRIDEWEAVE = register("pride_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
-    public static final DeferredHolder<Item, PrideweaveItem> TRANS_PRIDEWEAVE = register("trans_prideweave", COSMETIC_PROPERTIES(), PrideweaveItem::new);
+    public static final DeferredHolder<Item, Item> ACE_PRIDEWEAVE = register("ace_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.ACE));
+    public static final DeferredHolder<Item, Item> AGENDER_PRIDEWEAVE = register("agender_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.AGENDER));
+    public static final DeferredHolder<Item, Item> ARO_PRIDEWEAVE = register("aro_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.ARO));
+    public static final DeferredHolder<Item, Item> AROACE_PRIDEWEAVE = register("aroace_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.AROACE));
+    public static final DeferredHolder<Item, Item> BI_PRIDEWEAVE = register("bi_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.BI));
+    public static final DeferredHolder<Item, Item> DEMIBOY_PRIDEWEAVE = register("demiboy_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.DEMIBOY));
+    public static final DeferredHolder<Item, Item> DEMIGIRL_PRIDEWEAVE = register("demigirl_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.DEMIGIRL));
+    public static final DeferredHolder<Item, Item> ENBY_PRIDEWEAVE = register("enby_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.ENBY));
+    public static final DeferredHolder<Item, Item> GAY_PRIDEWEAVE = register("gay_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.GAY));
+    public static final DeferredHolder<Item, Item> GENDERFLUID_PRIDEWEAVE = register("genderfluid_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.GENDERFLUID));
+    public static final DeferredHolder<Item, Item> GENDERQUEER_PRIDEWEAVE = register("genderqueer_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.GENDERQUEER));
+    public static final DeferredHolder<Item, Item> INTERSEX_PRIDEWEAVE = register("intersex_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.INTERSEX));
+    public static final DeferredHolder<Item, Item> LESBIAN_PRIDEWEAVE = register("lesbian_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.LESBIAN));
+    public static final DeferredHolder<Item, Item> PAN_PRIDEWEAVE = register("pan_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.PAN));
+    public static final DeferredHolder<Item, Item> PLURAL_PRIDEWEAVE = register("plural_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.PLURAL));
+    public static final DeferredHolder<Item, Item> POLY_PRIDEWEAVE = register("poly_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.POLY));
+    public static final DeferredHolder<Item, Item> PRIDE_PRIDEWEAVE = register("pride_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.PRIDE));
+    public static final DeferredHolder<Item, Item> TRANS_PRIDEWEAVE = register("trans_prideweave", COSMETIC_PROPERTIES(), p -> skinHoldingItem(p, ItemSkinComponent.TRANS));
 
     public static final DeferredHolder<Item, Item> TOPHAT = register("tophat", COSMETIC_PROPERTIES().stacksTo(1), CurioTopHat::new);
 
@@ -741,7 +749,6 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> THE_DEVICE = register("the_device", HIDDEN_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.THE_DEVICE.get(), p));
     public static final DeferredHolder<Item, Item> THE_VESSEL = register("the_vessel", HIDDEN_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.THE_VESSEL.get(), p));
-    public static final DeferredHolder<Item, Item> CREATIVE_SCYTHE = register("creative_scythe", HIDDEN_PROPERTIES().durability(-1), (p) -> new MagicScytheItem(Tiers.IRON, 9993, 9.1f, 999f, p));
     public static final DeferredHolder<Item, Item> TOKEN_OF_GRATITUDE = register("token_of_gratitude", HIDDEN_PROPERTIES(), CurioTokenOfGratitude::new);
 
     public static final DeferredHolder<Item, Item> PRIMORDIAL_SOUP = register("primordial_soup", HIDDEN_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.PRIMORDIAL_SOUP.get(), p));
@@ -789,24 +796,12 @@ public class ItemRegistry {
 
         @SubscribeEvent(priority = EventPriority.LOWEST)
         public static void addItemProperties(FMLClientSetupEvent event) {
-            Set<LodestoneArmorItem> armors = ItemRegistry.ITEMS.getEntries().stream().filter(r -> r.get() instanceof LodestoneArmorItem).map(r -> (LodestoneArmorItem) r.get()).collect(Collectors.toSet());
-//            ItemPropertyFunction armorPropertyFunction = (stack, level, holder, holderID) -> {
-//                if (!stack.hasTag()) {
-//                    return -1;
-//                }
-//                CompoundTag nbt = stack.getTag();
-//                if (!nbt.contains(ArmorSkin.MALUM_SKIN_TAG)) {
-//                    return -1;
-//                }
-//                ArmorSkin armorSkin = ArmorSkinRegistry.SKINS.get(nbt.getString(ArmorSkin.MALUM_SKIN_TAG));
-//                if (armorSkin == null) {
-//                    return -1;
-//                }
-//                return armorSkin.index;
-//            };
-//            for (LodestoneArmorItem armor : armors) {
-//                ItemProperties.register(armor, new ResourceLocation(ArmorSkin.MALUM_SKIN_TAG), armorPropertyFunction);
-//            }
+            ITEMS.getEntries().stream().filter(r -> r.get() instanceof LodestoneArmorItem).forEach(armor -> {
+                ItemProperties.register(
+                        armor.get(),
+                        MalumMod.malumPath("item_skin"),
+                        (stack, level, holder, holderID) -> ItemSkinComponent.getAppliedSkinId(stack));
+            });
 
             ItemProperties.register(
                     SOULWOVEN_POUCH.get(),
@@ -831,11 +826,11 @@ public class ItemRegistry {
             ItemColors itemColors = event.getItemColors();
             HashSet<DeferredHolder<Item, ? extends Item>> items = new HashSet<>(ITEMS.getEntries());
 
-            DataHelper.takeAll(items, i -> i.get() instanceof BlockItem blockItem && blockItem.getBlock() instanceof IGradientedLeavesBlock).forEach(item -> {
-                IGradientedLeavesBlock malumLeavesBlock = (IGradientedLeavesBlock) ((BlockItem) item.get()).getBlock();
-                event.register((stack, tintIndex) -> ColorHelper.getColor(malumLeavesBlock.getMinColor()),
-                        item.get());
-            });
+            event.register((stack, tintIndex) -> ColorHelper.getColor(((IGradientedLeavesBlock) ((BlockItem) stack.getItem()).getBlock()).getMaxColor()),
+                    RUNEWOOD_LEAVES.get(), HANGING_RUNEWOOD_LEAVES.get(), AZURE_RUNEWOOD_LEAVES.get(), HANGING_AZURE_RUNEWOOD_LEAVES.get());
+            event.register((stack, tintIndex) -> ColorHelper.getColor(((IGradientedLeavesBlock) ((BlockItem) stack.getItem()).getBlock()).getMinColor()),
+                    SOULWOOD_LEAVES.get(), HANGING_SOULWOOD_LEAVES.get());
+
             DataHelper.takeAll(items, i -> i.get() instanceof EtherTorchItem || i.get() instanceof EtherBrazierItem).forEach(i -> event.register((s, c) -> {
                 AbstractEtherItem etherItem = (AbstractEtherItem) s.getItem();
                 switch (c) {

@@ -42,12 +42,14 @@ public class DrainingBoltEntity extends AbstractBoltProjectileEntity {
 
     @Override
     public void onDealDamage(LivingEntity target) {
-        var effect = target.getEffect(MobEffectRegistry.SILENCED);
-        if (effect == null) {
-            target.addEffect(new MobEffectInstance(MobEffectRegistry.SILENCED, 300, 0, true, true, true));
-        } else {
-            EntityHelper.amplifyEffect(effect, target, 1, 9);
-            EntityHelper.extendEffect(effect, target, 30, 600);
+        if (target.getRandom().nextFloat() < 0.3f) {
+            var effect = target.getEffect(MobEffectRegistry.SILENCED);
+            if (effect == null) {
+                target.addEffect(new MobEffectInstance(MobEffectRegistry.SILENCED, 150, 0, true, true, true));
+            } else {
+                EntityHelper.amplifyEffect(effect, target, 1, 19);
+                EntityHelper.extendEffect(effect, target, 15, 300);
+            }
         }
     }
 

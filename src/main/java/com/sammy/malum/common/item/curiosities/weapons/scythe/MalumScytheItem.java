@@ -19,10 +19,10 @@ import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.item.*;
 
-public class MalumScytheItem extends ModCombatItem implements IMalumEventResponderItem {
+public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventResponderItem {
 
-    public MalumScytheItem(Tier tier, float damage, float speed, Properties builderIn) {
-        super(tier, damage + 3 + tier.getAttackDamageBonus(), speed - 3.2f, builderIn);
+    public MalumScytheItem(Tier tier, float attackDamage, float attackSpeed, LodestoneItemProperties properties) {
+        super(tier, attackDamage + 3, attackSpeed - 3.2f, properties);
     }
 
     @Override
@@ -48,35 +48,34 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
         if (!event.getSource().is(DamageTypeRegistry.SCYTHE_MELEE)) {
             return;
         }
-        boolean canSweep = canSweep(attacker);
         var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_SLASH);
         if (stack.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
             particle.setSpiritType(spiritAffiliatedItem);
         }
-        if (!canSweep) {
-            SoundHelper.playSound(attacker, getScytheSound(false), 1, 0.75f);
+        if (isEnhanced(attacker)) {
+            SoundHelper.playSound(attacker, getScytheSound(false).value(), 1, 0.75f);
             particle.setVertical().spawnForwardSlashingParticle(attacker);
             return;
         }
-        SoundHelper.playSound(attacker, getScytheSound(true), 1, 1);
+        SoundHelper.playSound(attacker, getScytheSound(true).value(), 1, 1);
         particle.mirrorRandomly(attacker.getRandom()).spawnForwardSlashingParticle(attacker);
 
         int sweeping = EnchantmentRegistry.getEnchantmentLevel(level, Enchantments.SWEEPING_EDGE, stack);
         float damage = event.getOriginalDamage() * (0.66f + sweeping * 0.33f);
         float radius = 1 + sweeping * 0.25f;
         level.getEntities(attacker, target.getBoundingBox().inflate(radius)).forEach(e -> {
-            if (e instanceof LivingEntity livingEntity) {
-                if (livingEntity.isAlive()) {
-                    livingEntity.hurt((DamageTypeHelper.create(level, DamageTypeRegistry.SCYTHE_SWEEP, attacker)), damage);
-                    livingEntity.knockback(0.4F,
+            if (e instanceof LivingEntity sweepTarget) {
+                if (sweepTarget.isAlive() && sweepTarget != target) {
+                    sweepTarget.hurt((DamageTypeHelper.create(level, DamageTypeRegistry.SCYTHE_SWEEP, attacker)), damage);
+                    sweepTarget.knockback(0.4F,
                             Mth.sin(attacker.getYRot() * ((float) Math.PI / 180F)),
                             (-Mth.cos(attacker.getYRot() * ((float) Math.PI / 180F))));
                 }
             }
         });
     }
-    public SoundEvent getScytheSound(boolean canSweep) {
-        return canSweep ? SoundRegistry.SCYTHE_SWEEP.get() : SoundRegistry.SCYTHE_CUT.get();
+    public Holder<SoundEvent> getScytheSound(boolean canSweep) {
+        return canSweep ? SoundRegistry.SCYTHE_SWEEP : SoundRegistry.SCYTHE_CUT;
     }
 
     @Override
@@ -87,10 +86,9 @@ public class MalumScytheItem extends ModCombatItem implements IMalumEventRespond
         return super.supportsEnchantment(stack, enchantment);
     }
 
-    public static boolean canSweep(LivingEntity attacker) {
+    public static boolean isEnhanced(LivingEntity attacker) {
         //TODO: convert this to a ToolAction, or something alike
-        return !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get()) &&
-                !CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get());
+        return CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get());
     }
 
     public static DamageSource replaceDamageSource(Player player, DamageSource source) {

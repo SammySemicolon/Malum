@@ -3,7 +3,7 @@
   "extraIngredients": [
     {
       "count": 4,
-      "item": "malum:runewood_planks"
+      "tag": "malum:runewood_planks"
     },
     {
       "count": 2,

@@ -11,18 +11,21 @@ import team.lodestar.lodestone.systems.network.OneSidedPayloadData;
 
 public class SpiritDiodeUpdatePayload extends OneSidedPayloadData {
     private final BlockPos pos;
-    private final int signal;
+    private final int outputSignal;
+    private final int inputSignal;
     private final boolean isPowering;
 
-    public SpiritDiodeUpdatePayload(BlockPos pos, int signal, boolean isPowering) {
+    public SpiritDiodeUpdatePayload(BlockPos pos, int outputSignal, int inputSignal, boolean isPowering) {
         this.pos = pos;
-        this.signal = signal;
+        this.outputSignal = outputSignal;
+        this.inputSignal = inputSignal;
         this.isPowering = isPowering;
     }
 
     public SpiritDiodeUpdatePayload(FriendlyByteBuf buf) {
         this.pos = BlockPos.STREAM_CODEC.decode(buf);
-        this.signal = buf.readInt();
+        this.outputSignal = buf.readInt();
+        this.inputSignal = buf.readInt();
         this.isPowering = buf.readBoolean();
     }
 
@@ -31,14 +34,15 @@ public class SpiritDiodeUpdatePayload extends OneSidedPayloadData {
     public void handle(IPayloadContext iPayloadContext) {
         Level level = iPayloadContext.player().level();
         if (level.getBlockEntity(pos) instanceof SpiritDiodeBlockEntity spiritDiode) {
-            spiritDiode.updateVisuals(signal, isPowering);
+            spiritDiode.updateVisuals(outputSignal, inputSignal, isPowering);
         }
     }
 
     @Override
     public void serialize(FriendlyByteBuf friendlyByteBuf) {
         BlockPos.STREAM_CODEC.encode(friendlyByteBuf, pos);
-        friendlyByteBuf.writeInt(this.signal);
+        friendlyByteBuf.writeInt(this.outputSignal);
+        friendlyByteBuf.writeInt(this.inputSignal);
         friendlyByteBuf.writeBoolean(this.isPowering);
     }
 }

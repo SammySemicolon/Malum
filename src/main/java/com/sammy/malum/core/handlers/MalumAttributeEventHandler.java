@@ -4,7 +4,7 @@ import com.sammy.malum.registry.common.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 
 public class MalumAttributeEventHandler {
     public static void processAttributes(LivingDamageEvent.Pre event) {
@@ -20,5 +20,16 @@ public class MalumAttributeEventHandler {
                 }
             }
         }
+    }
+    public static void heal(LivingHealEvent event) {
+        if (event.getAmount() <= 0) {
+            return;
+        }
+        final LivingEntity entity = event.getEntity();
+        if (!entity.getAttributes().hasAttribute(AttributeRegistry.HEALING_MULTIPLIER)) {
+            return;
+        }
+        float multiplier = (float) entity.getAttributeValue(AttributeRegistry.HEALING_MULTIPLIER);
+        event.setAmount(event.getAmount() * multiplier);
     }
 }

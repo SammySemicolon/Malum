@@ -4,7 +4,9 @@ import com.sammy.malum.common.block.storage.jar.*;
 import com.sammy.malum.common.effect.*;
 import com.sammy.malum.common.effect.aura.*;
 import com.sammy.malum.common.entity.nitrate.*;
+import com.sammy.malum.common.geas.explosion.*;
 import com.sammy.malum.common.item.cosmetic.curios.*;
+import com.sammy.malum.common.item.curiosities.*;
 import com.sammy.malum.common.item.curiosities.curios.runes.madness.*;
 import com.sammy.malum.common.item.curiosities.curios.runes.miracle.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.misc.*;
@@ -86,9 +88,11 @@ public class RuntimeEvents {
 
     @SubscribeEvent
     public static void onLivingTick(EntityTickEvent.Pre event) {
+        GeasEffectHandler.entityTick(event);
         SoulDataHandler.entityTick(event);
         SoulWardHandler.recoverSoulWard(event);
         MalignantConversionHandler.entityTick(event);
+        WeepingWellRejectionHandler.entityTick(event);
         TouchOfDarknessHandler.entityTick(event);
         CurioWatcherNecklace.entityTick(event);
         CurioHiddenBladeNecklace.entityTick(event);
@@ -123,6 +127,7 @@ public class RuntimeEvents {
         RuneTwinnedDurationItem.onPotionApplied(event);
         RuneAlimentCleansingItem.onPotionApplied(event);
     }
+
     @SubscribeEvent
     public static void onPotionExpired(MobEffectEvent.Expired event) {
     }
@@ -133,6 +138,12 @@ public class RuntimeEvents {
     }
 
     @SubscribeEvent
+    public static void onPickupItem(ItemEntityPickupEvent.Pre event) {
+        SoulwovenPouchItem.trySwallowItem(event);
+    }
+
+
+    @SubscribeEvent
     public static void onHurt(LivingDamageEvent.Post event) {
         SoulDataHandler.exposeSoul(event);
     }
@@ -141,6 +152,11 @@ public class RuntimeEvents {
     public static void onHurt(LivingDamageEvent.Pre event) {
         SoulWardHandler.shieldPlayer(event);
         MalumAttributeEventHandler.processAttributes(event);
+    }
+
+    @SubscribeEvent
+    public static void onHeal(LivingHealEvent event) {
+        MalumAttributeEventHandler.heal(event);
     }
 
     @SubscribeEvent
@@ -163,5 +179,8 @@ public class RuntimeEvents {
         CurioProspectorBelt.processExplosion(event);
         NitrateExplosion.processExplosion(event);
     }
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onExplosionKnockback(ExplosionKnockbackEvent event) {
+        ConcussiveForceGeas.onExplosionKnockback(event);
+    }
 }
-

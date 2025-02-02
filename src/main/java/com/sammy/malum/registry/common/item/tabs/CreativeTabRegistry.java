@@ -1,6 +1,8 @@
 package com.sammy.malum.registry.common.item.tabs;
 
 import com.sammy.malum.MalumMod;
+import com.sammy.malum.common.data_components.*;
+import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.DataComponentRegistry;
@@ -20,7 +22,7 @@ public class CreativeTabRegistry {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CONTENT = CREATIVE_MODE_TABS.register("malum_content",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup." + MalumMod.MALUM + "_basis_of_magic"))
-                    .withTabsAfter(MalumMod.malumPath("nature"))
+                    .withTabsAfter(MalumMod.malumPath("malum_nature"))
                     .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
                     .icon(() -> ItemRegistry.SPIRIT_ALTAR.get().getDefaultInstance()).build()
     );
@@ -29,7 +31,7 @@ public class CreativeTabRegistry {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup." + MalumMod.MALUM + "_natural_wonders"))
                     .withTabsBefore(CONTENT.getId())
-                    .withTabsAfter(MalumMod.malumPath("building"))
+                    .withTabsAfter(MalumMod.malumPath("malum_building"))
                     .icon(() -> ItemRegistry.RUNEWOOD_SAPLING.get().getDefaultInstance()).build()
     );
 
@@ -37,7 +39,7 @@ public class CreativeTabRegistry {
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup." + MalumMod.MALUM + "_arcane_construct"))
                     .withTabsBefore(NATURE.getId())
-                    .withTabsAfter(MalumMod.malumPath("metallurgy"))
+                    .withTabsAfter(MalumMod.malumPath("malum_metallurgy"))
                     .icon(() -> ItemRegistry.TAINTED_ROCK.get().getDefaultInstance()).build()
     );
 
@@ -49,11 +51,27 @@ public class CreativeTabRegistry {
                     .icon(() -> ItemRegistry.ALCHEMICAL_IMPETUS.get().getDefaultInstance()).build()
     );
 
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> GEAS = CREATIVE_MODE_TABS.register("malum_geas",
+            () -> CreativeModeTab.builder()
+                    .title(Component.translatable("itemGroup." + MalumMod.MALUM + "_geas"))
+                    .withTabsBefore(METALLURGY.getId())
+                    .withTabsAfter(MalumMod.malumPath("malum_ritual_shards"))
+                    .displayItems((p, o) -> {
+                        for (DeferredHolder<GeasEffectType, ? extends GeasEffectType> etchingType : MalumGeasEffectTypeRegistry.GEAS_TYPES.getEntries()) {
+                            final GeasEffectType geasEffectType = etchingType.get();
+                            ItemStack etching = new ItemStack(ItemRegistry.GEAS.get());
+                            etching.set(DataComponentRegistry.GEAS_EFFECT, new GeasDataComponent(geasEffectType));
+                            o.accept(etching);
+                        }
+                    })
+                    .icon(() -> ItemRegistry.GEAS.get().getDefaultInstance()).build()
+    );
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> RITUAL_SHARDS = CREATIVE_MODE_TABS.register("malum_ritual_shards",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup." + MalumMod.MALUM + "_ritual_shards"))
-                    .withTabsBefore(METALLURGY.getId())
-                    .withTabsAfter(MalumMod.malumPath("cosmetic"))
+                    .withTabsBefore(GEAS.getId())
+                    .withTabsAfter(MalumMod.malumPath("malum_cosmetic"))
                     .displayItems((p, o) -> {
                         for (MalumRitualType ritualType : RitualRegistry.RITUALS) {
                             for (MalumRitualTier ritualTier : MalumRitualTier.TIERS) {

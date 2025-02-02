@@ -9,7 +9,8 @@
     "minecraft:diamond_helmet",
     "minecraft:diamond_chestplate",
     "minecraft:diamond_leggings",
-    "minecraft:diamond_boots"
+    "minecraft:diamond_boots",
+    "farmersdelight:diamond_knife"
   ],
   "itemIdRegex": "diamond_.+",
   "repairMaterial": {

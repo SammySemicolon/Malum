@@ -29,6 +29,11 @@ public class MalignantStrongholdArmorModel extends LodestoneArmorModel {
         super(root);
     }
 
+    @Override
+    public void renderToBuffer(PoseStack matrixStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int p_350361_) {
+        super.renderToBuffer(matrixStack, vertexConsumer, packedLight, packedOverlay, p_350361_);
+    }
+
     public static LayerDefinition createBodyLayer() {
         return createArmorModel((mesh, root, body, leggings, right_legging, left_legging, right_foot, left_foot, right_arm, left_arm, head) -> {
             PartDefinition helmet = head.addOrReplaceChild("helmet", CubeListBuilder.create().texOffs(24, 25).addBox(-4.0F, -8.0F, -4.5F, 3.0F, 2.0F, 9.0F, new CubeDeformation(0.0F))

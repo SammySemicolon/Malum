@@ -120,7 +120,7 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
                         if (scytheOwner instanceof ServerPlayer player) {
                             ReboundHandler.pickupScythe(this, scythe, player);
                         }
-                        SoundHelper.playSound(this, SoundRegistry.SCYTHE_CATCH.get(), 1.5f, RandomHelper.randomBetween(level().getRandom(), 0.75f, 1.25f));
+                        SoundHelper.playSound(scytheOwner, SoundRegistry.SCYTHE_CATCH.get(), 1.5f, RandomHelper.randomBetween(level().getRandom(), 0.75f, 1.25f));
                         remove(RemovalReason.DISCARDED);
                     }
                     float delta = 0.1f;

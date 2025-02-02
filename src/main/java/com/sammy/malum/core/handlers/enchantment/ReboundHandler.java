@@ -20,7 +20,7 @@ public class ReboundHandler {
     public static void throwScythe(Level level, Player player, InteractionHand hand, ItemStack scythe) {
         int slot = hand == InteractionHand.OFF_HAND ? player.getInventory().getContainerSize() - 1 : player.getInventory().selected;
         if (player instanceof ServerPlayer serverPlayer) {
-            final boolean isEnhanced = !MalumScytheItem.canSweep(player);
+            boolean isEnhanced = MalumScytheItem.isEnhanced(player);
             float baseDamage = (float) player.getAttributes().getValue(Attributes.ATTACK_DAMAGE);
             float magicDamage = (float) player.getAttributes().getValue(LodestoneAttributes.MAGIC_DAMAGE);
             float velocity = (isEnhanced ? 3f : 1.75f);
@@ -30,8 +30,8 @@ public class ReboundHandler {
                 int angle = hand == InteractionHand.MAIN_HAND ? 225 : 90;
                 double radians = Math.toRadians(angle - player.yHeadRot);
                 position = player.position().add(player.getLookAngle().scale(0.5f)).add(0.75f * Math.sin(radians), player.getBbHeight() * 0.9f, 0.75f * Math.cos(radians));
-                baseDamage *= 1.5f;
-                magicDamage *= 1.5f;
+                baseDamage *= 1.3f;
+                magicDamage *= 1.3f;
             }
             var entity = new ScytheBoomerangEntity(level, position.x, position.y, position.z);
 

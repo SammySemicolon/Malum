@@ -1,15 +1,16 @@
 {
-  "anvil_cost": 10,
+  "anvil_cost": 8,
   "description": {
     "translate": "enchantment.malum.ascension"
   },
+  "exclusive_set": "malum:rebound",
   "max_cost": {
-    "base": 200,
+    "base": 55,
     "per_level_above_first": 0
   },
   "max_level": 3,
   "min_cost": {
-    "base": 55,
+    "base": 10,
     "per_level_above_first": 0
   },
   "slots": [

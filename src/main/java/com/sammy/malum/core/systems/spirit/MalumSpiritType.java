@@ -4,12 +4,16 @@ import com.google.gson.*;
 import com.mojang.serialization.*;
 import com.sammy.malum.*;
 import com.sammy.malum.common.block.curiosities.mana_mote.*;
+import com.sammy.malum.common.capabilities.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.block.*;
+import io.netty.buffer.*;
 import net.minecraft.*;
+import net.minecraft.network.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.*;
+import net.minecraft.network.codec.*;
 import net.minecraft.resources.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
@@ -31,6 +35,8 @@ public class MalumSpiritType {
         }
         return DataResult.success(spiritType);
     }, MalumSpiritType::getIdentifier);
+
+    public static StreamCodec<ByteBuf, MalumSpiritType> STREAM_CODEC = ByteBufCodecs.fromCodec(MalumSpiritType.CODEC);
 
     public static SpiritTypeBuilder create(String identifier, SpiritVisualMotif visualMotif, Supplier<SpiritShardItem> spiritShard) {
         return new SpiritTypeBuilder(identifier, visualMotif, spiritShard);

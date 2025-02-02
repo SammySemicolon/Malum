@@ -230,12 +230,9 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
 
     private void recalculateRecipes() {
         boolean hadRecipe = recipe != null;
-
+        inventory.updateInventoryCaches();
         ItemStack stack = inventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
-            List<ItemStack> physicalIngredients = new ArrayList<>();
-            physicalIngredients.add(stack);
-            physicalIngredients.addAll(extrasInventory.nonEmptyItemStacks);
             final Collection<SpiritInfusionRecipe> all = LodestoneRecipeType.getRecipes(level, RecipeTypeRegistry.SPIRIT_INFUSION.get());
             Collection<SpiritInfusionRecipe> recipes = all.stream().filter(r -> r.matches(new SpiritBasedRecipeInput(stack, spiritInventory.nonEmptyItemStacks), level)).toList();
             possibleRecipes.clear();
@@ -279,7 +276,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
                 ItemStack providedStack = inventoryForAltar.extractItem(0, nextIngredient.count(), true);
 
                 if (nextIngredient.ingredient().test(providedStack)) {
-                    level.playSound(null, provider.getAccessPointBlockPos(), SoundRegistry.ALTAR_CONSUME.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.2f);
+                    level.playSound(null, provider.getAccessPointBlockPos(), SoundRegistry.ALTAR_CONSUME.get(), SoundSource.BLOCKS, 1, 1.1f + level.random.nextFloat() * 0.5f);
                     ParticleEffectTypeRegistry.SPIRIT_ALTAR_EATS_ITEM.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits), SpiritAltarEatItemParticleEffect.createData(provider.getAccessPointBlockPos(), providedStack));
                     extrasInventory.insertItem(inventoryForAltar.extractItem(0, nextIngredient.count(), false));
                     BlockStateHelper.updateAndNotifyState(level, provider.getAccessPointBlockPos());

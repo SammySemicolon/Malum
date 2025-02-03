@@ -40,6 +40,7 @@ public class MalumGeasEffectTypeRegistry {
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_REAPER = GEAS_TYPES.register("pact_of_the_reaper", () -> new GeasEffectType(ReaperGeas::new));
 
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_SKYBREAKER = GEAS_TYPES.register("pact_of_the_skybreaker", () -> new GeasEffectType(SkyBreakerGeas::new));
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_MAVERICK = GEAS_TYPES.register("pact_of_the_absorbent", () -> new GeasEffectType(MaverickGeas::new));
 
 
     // Pact of the Profane Ascetic
@@ -55,8 +56,8 @@ public class MalumGeasEffectTypeRegistry {
     //Desperate Need also reduces armor, magic resistance, and healing received
     //Desperate Need is reduced when taking damage
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_PROFANE_GLUTTON = GEAS_TYPES.register("pact_of_the_profane_glutton", () -> new GeasEffectType(ProfaneGluttonGeas::new));
-
-    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_CONCUSSIVE_FORCE = GEAS_TYPES.register("pact_of_the_concussive_force", () -> new GeasEffectType(ConcussiveForceGeas::new));
+    
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_WYRD_RECONSTRUCTION = GEAS_TYPES.register("pact_of_wyrd_reconstruction", () -> new GeasEffectType(WyrdReconstructionGeas::new));
 
 
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_OVERKEEN_EYE = GEAS_TYPES.register("oath_of_the_overkeen_eye", () -> new GeasEffectType(OverkeenEyeGeas::new));

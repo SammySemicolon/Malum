@@ -12,13 +12,10 @@ import team.lodestar.lodestone.handlers.*;
 import java.util.*;
 
 public class GeasEffectHandler {
-    public static final ItemEventHandler.EventResponderSource GEAS_EFFECTS = new ItemEventHandler.EventResponderSource(MalumMod.malumPath("geas_effects"),
+    public static final ItemEventHandler.EventResponderSource GEAS_EFFECTS = ItemEventHandler.registerLookup(
+            new ItemEventHandler.EventResponderSource(MalumMod.malumPath("geas_effects"),
             GeasEffectHandler::getGeasItemStacks,
-            GeasEffectHandler::getEquippedGeasEffectFromStack);
-
-    public static void init() {
-        ItemEventHandler.registerLookup(GEAS_EFFECTS);
-    }
+            GeasEffectHandler::getEquippedGeasEffectFromStack));
 
     public static void entityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity living) {

@@ -257,13 +257,15 @@ public class MalumLang extends LanguageProvider {
 
         add("malum.effect.geas.hunger_as_withdrawal", "Addiction to Slaughter");
         add("malum.effect.geas.soul_ward_on_hit", "Magic Damage Recovers Soul Ward");
-        add("malum.effect.geas.staff_homing", "Staff Projectiles Home In on Targets");
-        add("malum.effect.geas.staff_autofire", "Staff Charges Automatically Fire");
+        add("malum.effect.geas.scythe_combo", "Scythe Cuts Create After-attacks");
+        add("malum.effect.geas.only_scythe", "Regular Weapons Crumble In Your Hands");
         add("malum.effect.geas.rocket_jumping", "Explosions Apply More Knockback");
         add("malum.effect.geas.no_block_breaking", "Explosions Cannot Damage Terrain");
         add("malum.effect.geas.malignant_crit_leech", "Malignant Deliverance Leeches Life Essence");
         add("malum.effect.geas.malignant_crit_healing_overexertion", "Repeated Activations Nullify All Healing");
         add("malum.effect.geas.malignant_crit_reinforcement", "Malignant Deliverance Improves Conversion");
+        add("malum.effect.geas.staff_homing", "Staff Projectiles Home In on Targets");
+        add("malum.effect.geas.staff_autofire", "Staff Charges Automatically Fire");
         add("malum.effect.geas.authority_of_wrath", "Injuries, Emotions, Senses are Shared with Witnesses");
         add("malum.effect.geas.authority_of_wrath_arcane_resonance", "Arcane Resonance Favors Influence");
         add("malum.effect.geas.authority_of_greed", "Aliments, Blessings, Curses are Paused When Wounded");

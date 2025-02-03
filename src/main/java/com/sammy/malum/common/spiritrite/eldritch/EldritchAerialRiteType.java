@@ -56,7 +56,7 @@ public class EldritchAerialRiteType extends TotemicRiteType {
                     Stat<ResourceLocation> sleepStat = Stats.CUSTOM.get(Stats.TIME_SINCE_REST);
                     int value = stats.getValue(sleepStat);
                     stats.setValue(p, sleepStat, Math.max(0, value - 1000));
-                    ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(p, new ColorEffectData(AERIAL_SPIRIT.getPrimaryColor()));
+                    ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(p, new ColorEffectData(AERIAL_SPIRIT));
                 });
             }
         };

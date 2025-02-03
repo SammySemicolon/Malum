@@ -31,7 +31,7 @@ public class WickedRiteType extends TotemicRiteType {
                 getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Player)).forEach(e -> {
                     final DamageSource damageSource = DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO_PLAYERLESS);
                     if (e.getHealth() > 2.5f && !e.isInvulnerableTo(damageSource)) {
-                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT.getPrimaryColor()));
+                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT));
                         e.hurt(damageSource, 2);
                     }
                 });
@@ -45,11 +45,11 @@ public class WickedRiteType extends TotemicRiteType {
         return new TotemicRiteEffect(TotemicRiteEffect.MalumRiteEffectCategory.LIVING_ENTITY_EFFECT) {
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
-                getNearbyEntities(totemBase, Monster.class).forEach(e -> {
-                    ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT.getPrimaryColor()));
-                    e.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 1));
-                    e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 1));
-                    e.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 1));
+                getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Player)).forEach(e -> {
+                    ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT));
+                    e.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1200, 1));
+                    e.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 1200, 1));
+                    e.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1200, 1));
                 });
             }
         };

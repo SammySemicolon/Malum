@@ -29,7 +29,7 @@ public class EldritchWickedRiteType extends TotemicRiteType {
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Player)).forEach(e -> {
                     if (e.getHealth() <= 2.5f && !e.isInvulnerableTo(DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO_PLAYERLESS))) {
-                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT));
                         e.hurt(DamageTypeHelper.create(e.level(), DamageTypeRegistry.VOODOO_PLAYERLESS), 10f);
                     }
                 });
@@ -51,7 +51,7 @@ public class EldritchWickedRiteType extends TotemicRiteType {
                     animals.removeIf(Animal::isInLove);
                     for (Animal animal : animals) {
                         animal.hurt(DamageTypeHelper.create(animal.level(), DamageTypeRegistry.VOODOO_PLAYERLESS), animal.getMaxHealth());
-                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(animal, new ColorEffectData(SACRED_SPIRIT.getPrimaryColor()));
+                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(animal, new ColorEffectData(WICKED_SPIRIT));
                         if (maxKills-- <= 0) {
                             return;
                         }

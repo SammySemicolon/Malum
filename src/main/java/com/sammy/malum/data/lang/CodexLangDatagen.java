@@ -481,7 +481,9 @@ public class CodexLangDatagen {
                 "The basic substrate here is the Alchemical Impetus, an artifact similar to those I've seen in the past. By focusing arcana into it, I can cause bits of the calx to transmute into something new, though this damages the Impetus in the process.");
 
         addSimpleEntryHeader("focus_ashes", "Arising of Ashes", "Creating powdered reagents");
-        addPages("focus_ashes", "By applying differing qualities of arcana to an Alchemical Impetus, I can cause powders of various forms to be created. It is a simple yet very useful arcane recipe.");
+        addPages("focus_ashes",
+                "By applying differing qualities of arcana to an Alchemical Impetus, I can cause powders of various forms to be created. It is a simple yet very useful arcane recipe.",
+                "Hex Ash has proven to be quite a useful material, by focusing gunpowder with the added presence of raw arcana it will create a near perfect substitute for hex ash.");
 
         addSimpleEntryHeader("focus_metals", "Magecraft of Metals", "Forming banded crystals");
         addPages("focus_metals",
@@ -839,8 +841,8 @@ public class CodexLangDatagen {
 
         addEntryHeader("corrupt_wicked_rite", "Corrupting the Wicked Rites", "Endangering the soul");
         addRiteEntry("corrupt_wicked_rite",
-                "Rather than harm, this rite enhances nearby hostile beings, granting protection, force, and speed. Rather useless, but might have niche applications.",
-                "Grants all nearby hostiles resistance, strength, and speed.");
+                "Rather than harm, this rite enhances nearby beings, granting protection, force, and speed. Players are unfortunately omitted from this effect. Might have niche applications.",
+                "Grants all nearby non-Player entities resistance, strength, and speed.");
         addRiteEntry("corrupt_greater_wicked_rite",
                 "An advanced rite, while active it will cull herds of nearby overcrowded animals.",
                 "While there are more than twenty animals within the range of the rite, the excess is removed.\n - This limit applies separately for each type of animal within the range of the rite.");

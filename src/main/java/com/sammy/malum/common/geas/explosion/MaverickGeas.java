@@ -7,27 +7,25 @@ import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
-import net.minecraft.util.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.level.*;
 
-import java.util.*;
 import java.util.function.*;
 
-public class ConcussiveForceGeas extends GeasEffect {
+public class MaverickGeas extends GeasEffect {
 
-    public ConcussiveForceGeas() {
-        super(MalumGeasEffectTypeRegistry.PACT_OF_CONCUSSIVE_FORCE.get());
+    public MaverickGeas() {
+        super(MalumGeasEffectTypeRegistry.PACT_OF_THE_MAVERICK.get());
     }
 
     public static void onExplosionKnockback(ExplosionKnockbackEvent event) {
         final LivingEntity sourceEntity = event.getExplosion().getIndirectSourceEntity();
         if (sourceEntity != null) {
-            if (GeasEffectHandler.hasGeasEffect(sourceEntity, MalumGeasEffectTypeRegistry.PACT_OF_CONCUSSIVE_FORCE.get())) {
+            if (GeasEffectHandler.hasGeasEffect(sourceEntity, MalumGeasEffectTypeRegistry.PACT_OF_THE_MAVERICK.get())) {
                 double multiplier = 4f / (event.getKnockbackVelocity().length()*2);
-                event.setKnockbackVelocity(event.getKnockbackVelocity().scale(Math.max(multiplier, 1)));
+                event.setKnockbackVelocity(event.getKnockbackVelocity().scale(Math.clamp(multiplier, 0, 1.5f)));
                 event.getAffectedBlocks().clear();
             }
         }

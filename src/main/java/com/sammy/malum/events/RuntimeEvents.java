@@ -181,6 +181,6 @@ public class RuntimeEvents {
     }
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onExplosionKnockback(ExplosionKnockbackEvent event) {
-        ConcussiveForceGeas.onExplosionKnockback(event);
+        MaverickGeas.onExplosionKnockback(event);
     }
 }

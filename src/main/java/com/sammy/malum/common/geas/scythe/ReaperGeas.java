@@ -8,6 +8,7 @@ import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
+import net.minecraft.network.chat.*;
 import net.minecraft.util.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
@@ -18,6 +19,8 @@ import net.neoforged.neoforge.event.entity.living.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 
+import java.util.function.*;
+
 import static net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 
 public class ReaperGeas extends GeasEffect {
@@ -27,17 +30,26 @@ public class ReaperGeas extends GeasEffect {
     }
 
     @Override
+    public void addTooltipComponents(LivingEntity entity, Consumer<Component> tooltipAcceptor, TooltipFlag tooltipFlag) {
+        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("scythe_combo"));
+        tooltipAcceptor.accept(ComponentHelper.negativeGeasEffect("only_scythe"));
+        super.addTooltipComponents(entity, tooltipAcceptor, tooltipFlag);
+    }
+
+    @Override
     public void outgoingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         final DamageSource source = event.getSource();
         final Level level = attacker.level();
 
-        if (source.is(DamageTypes.PLAYER_ATTACK) || source.is(DamageTypeRegistry.TYRVING)) {
-            event.setNewDamage(event.getNewDamage()*0.1f);
-            final ItemStack mainHandItem = attacker.getMainHandItem();
-            if (mainHandItem.isDamageableItem()) {
-                mainHandItem.hurtAndBreak(10, attacker, MAINHAND);
+        final ItemStack mainHandItem = attacker.getMainHandItem();
+        if (!mainHandItem.isEmpty()) {
+            if (source.is(DamageTypes.PLAYER_ATTACK) || source.is(DamageTypeRegistry.TYRVING)) {
+                event.setNewDamage(event.getNewDamage() * 0.1f);
+                if (mainHandItem.isDamageableItem()) {
+                    mainHandItem.hurtAndBreak(10, attacker, MAINHAND);
+                }
+                return;
             }
-            return;
         }
 
         final boolean enhanced = MalumScytheItem.isEnhanced(attacker);

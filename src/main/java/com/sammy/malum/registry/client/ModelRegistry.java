@@ -102,13 +102,5 @@ public class ModelRegistry {
 
         HEAD_OVERLAY_MODEL = new HeadOverlayModel(event.getEntityModels().bakeLayer(HeadOverlayModel.LAYER));
         SCARF = new ScarfModel(event.getEntityModels().bakeLayer(ScarfModel.LAYER));
-
-        for (PlayerSkin.Model skin : event.getSkins()) {
-            EntityRenderer<? extends Player> renderer = event.getSkin(skin);
-
-            if (renderer instanceof LivingEntityRenderer livingRenderer) {
-                livingRenderer.addLayer(new ScarfLayer(livingRenderer));
-            }
-        }
     }
 }

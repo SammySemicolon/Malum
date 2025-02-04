@@ -2,7 +2,6 @@ package com.sammy.malum.common.item.curiosities.weapons;
 
 import com.sammy.malum.*;
 import com.sammy.malum.common.item.*;
-import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.common.worldevent.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.spirit.*;
@@ -24,7 +23,6 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.registries.*;
 import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.*;
@@ -85,8 +83,9 @@ public class SunderingAnchorItem extends LodestoneCombatItem implements IMalumEv
             if (target.isAlive()) {
                 for (int i = 0; i < slashCount; i++) {
                     WorldEventHandler.addWorldEvent(level,
-                            new DelayedDamageWorldEvent()
-                                    .setData(attacker.getUUID(), target.getUUID(), 0, splitDamage, i * 2)
+                            new DelayedDamageWorldEvent(target)
+                                    .setAttacker(attacker)
+                                    .setDamageData(0, splitDamage, i * 2)
                                     .setSound(SoundRegistry.SUNDERING_ANCHOR_EXTRA_SWING, 1.25f, 2f, 0.7f));
                 }
             }

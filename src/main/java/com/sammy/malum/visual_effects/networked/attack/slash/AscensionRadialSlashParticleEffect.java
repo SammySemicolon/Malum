@@ -1,6 +1,7 @@
 package com.sammy.malum.visual_effects.networked.attack.slash;
 
 import com.sammy.malum.client.*;
+import com.sammy.malum.registry.client.*;
 import com.sammy.malum.visual_effects.*;
 import net.minecraft.nbt.*;
 import net.minecraft.util.*;
@@ -46,7 +47,7 @@ public class AscensionRadialSlashParticleEffect extends SlashAttackParticleEffec
                             .normalize();
                     var slashPosition = positionData.getAsVector().add(slashDirection.scale(1.75f));
 
-                    var slash = WeaponParticleEffects.spawnSlashParticle(level, slashPosition, spirit);
+                    var slash = WeaponParticleEffects.spawnSlashParticle(level, slashPosition, ParticleRegistry.SLASH, spirit);
                     slash.getBuilder()
                             .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
                             .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(random, 2.5f, 3f)).build())

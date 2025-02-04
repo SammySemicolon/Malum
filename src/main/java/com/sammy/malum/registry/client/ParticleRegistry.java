@@ -30,6 +30,8 @@ public class ParticleRegistry {
     //Weapon Effects
     public static DeferredHolder<ParticleType<?>, LodestoneWorldParticleType> SLASH = PARTICLES.register("slash", LodestoneWorldParticleType::new);
     public static DeferredHolder<ParticleType<?>, LodestoneWorldParticleType> THIN_SLASH = PARTICLES.register("thin_slash", LodestoneWorldParticleType::new);
+    public static DeferredHolder<ParticleType<?>, LodestoneWorldParticleType> ROUNDABOUT_SLASH = PARTICLES.register("roundabout_slash", LodestoneWorldParticleType::new);
+    public static DeferredHolder<ParticleType<?>, LodestoneWorldParticleType> THIN_ROUNDABOUT_SLASH = PARTICLES.register("thin_roundabout_slash", LodestoneWorldParticleType::new);
     public static DeferredHolder<ParticleType<?>, LodestoneWorldParticleType> SLAM = PARTICLES.register("staff_slam", LodestoneWorldParticleType::new);
 
     //Staff Charge Effects

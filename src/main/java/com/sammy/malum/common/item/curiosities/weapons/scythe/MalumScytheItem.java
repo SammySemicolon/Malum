@@ -52,7 +52,7 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
         if (stack.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
             particle.setSpiritType(spiritAffiliatedItem);
         }
-        if (isEnhanced(attacker)) {
+        if (isNarrow(attacker)) {
             SoundHelper.playSound(attacker, getScytheSound(false).value(), 1, 0.75f);
             particle.setVertical().spawnForwardSlashingParticle(attacker);
             return;
@@ -86,10 +86,15 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
         return super.supportsEnchantment(stack, enchantment);
     }
 
-    public static boolean isEnhanced(LivingEntity attacker) {
+    public static boolean isNarrow(LivingEntity attacker) {
         //TODO: convert this to a ToolAction, or something alike
         return CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get());
     }
+    public static boolean isMaelstrom(LivingEntity attacker) {
+        //TODO: convert this to a ToolAction, or something alike
+        return CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_NARROW_EDGE.get());
+    }
+
 
     public static DamageSource replaceDamageSource(Player player, DamageSource source) {
         if (player.getMainHandItem().is(ItemTagRegistry.SCYTHES)) {

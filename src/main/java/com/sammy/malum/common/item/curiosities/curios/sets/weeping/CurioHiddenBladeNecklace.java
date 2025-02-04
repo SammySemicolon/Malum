@@ -56,10 +56,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
         if (level.isClientSide()) {
             return;
         }
-        if (!source.is(DamageTypeTagRegistry.IS_SCYTHE)) {
-            return;
-        }
-        if (source.is(DamageTypeRegistry.HIDDEN_BLADE_COUNTER)) {
+        if (!source.is(DamageTypeRegistry.SCYTHE_MELEE)) {
             return;
         }
         if (CurioHelper.hasCurioEquipped(attacker, ItemRegistry.NECKLACE_OF_THE_HIDDEN_BLADE.get())) {
@@ -78,7 +75,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
                 return;
             }
             var scytheWeapon = SoulDataHandler.getScytheWeapon(source, attacker);
-            final boolean isRanged = source.getDirectEntity() != null;
+            final boolean isRanged = source.getDirectEntity() == null;
             var damageDealer = isRanged ? source.getDirectEntity() : attacker;
             var direction = isRanged ? damageDealer.getDeltaMovement().normalize() : attacker.getLookAngle();
             var damageCenter = damageDealer.position().add(direction);

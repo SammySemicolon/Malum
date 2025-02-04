@@ -1,6 +1,8 @@
 package com.sammy.malum.visual_effects;
 
 import com.sammy.malum.client.*;
+import com.sammy.malum.common.entity.scythe.*;
+import com.sammy.malum.common.item.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.client.*;
 import net.minecraft.util.*;
@@ -12,32 +14,59 @@ import team.lodestar.lodestone.systems.particle.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
 import team.lodestar.lodestone.systems.particle.data.*;
 import team.lodestar.lodestone.systems.particle.data.color.*;
+import team.lodestar.lodestone.systems.particle.data.spin.*;
 import team.lodestar.lodestone.systems.particle.render_types.*;
 import team.lodestar.lodestone.systems.particle.world.options.*;
+import team.lodestar.lodestone.systems.particle.world.type.*;
 
 import java.awt.*;
 import java.util.function.*;
 
 public class WeaponParticleEffects {
 
-    public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, MalumSpiritType spiritType) {
-        if (spiritType == null) {
-            return spawnSlashParticle(level, pos);
+    public static final PointyDirectionalBehaviorComponent MAELSTROM_DIRECTION = new PointyDirectionalBehaviorComponent(new Vec3(0, 0, 0));
+
+    public static void spawnMaelstromParticles(AbstractScytheProjectileEntity entity) {
+        var level = entity.level();
+        if (level.getGameTime() % 2L == 0) {
+            var random = level.getRandom();
+            var spirit = entity.getItem().getItem() instanceof ISpiritAffiliatedItem spiritItem ? spiritItem.getDefiningSpiritType() : null;
+            var slash = WeaponParticleEffects.spawnSlashParticle(level, entity.position(), ParticleRegistry.ROUNDABOUT_SLASH, spirit);
+            float spinOffset = RandomHelper.randomBetween(random, -0.8f, 0.8f);
+            int age = RandomHelper.randomBetween(random, 8, 18);
+            slash.getBuilder()
+                    .setBehavior(MAELSTROM_DIRECTION)
+                    .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
+                    .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(random, 1.5f, 3f)).build())
+                    .setTransparencyData(GenericParticleData.create(0.9f, 0.6f).build())
+                    .addTickActor(p -> p.setParticlePosition(entity.position()))
+                    .setLifetime(age);
+            slash.spawnParticles();
+            slash.getBuilder()
+                    .setTransparencyData(GenericParticleData.create(0.6f, 0.3f).build())
+                    .setLifeDelay(6);
+            slash.spawnParticles();
+            slash.getBuilder()
+                    .setTransparencyData(GenericParticleData.create(0.3f, 0f).build())
+                    .setLifeDelay(12);
+            slash.spawnParticles();
         }
-        return spawnSlashParticle(level, pos, o -> SpiritBasedParticleBuilder.createSpirit(o).setSpirit(spiritType));
     }
 
-    public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos) {
-        return spawnSlashParticle(level, pos, o -> WorldParticleBuilder.create(o).setRenderType(LodestoneWorldParticleRenderType.TRANSPARENT).setColorData(createGrayParticleColor(level.random)));
+
+    public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, Supplier<LodestoneWorldParticleType> particleType, MalumSpiritType spiritType) {
+        if (spiritType == null) {
+            return spawnSlashParticle(level, pos, particleType);
+        }
+        return spawnSlashParticle(level, pos, SpiritBasedParticleBuilder.createSpirit(particleType.get()).setSpirit(spiritType));
     }
 
-    public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, ColorParticleData colorData) {
-        return spawnSlashParticle(level, pos, o -> WorldParticleBuilder.create(o).setColorData(colorData));
+    public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, Supplier<LodestoneWorldParticleType> particleType, ColorParticleData colorData) {
+        return spawnSlashParticle(level, pos, WorldParticleBuilder.create(particleType.get()).setColorData(colorData));
     }
 
-    public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, Function<WorldParticleOptions, WorldParticleBuilder> builderSupplier) {
-        var builder = builderSupplier.apply(new WorldParticleOptions(ParticleRegistry.SLASH));
-        return spawnSlashParticle(level, pos, builder);
+    public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, Supplier<LodestoneWorldParticleType> particleType) {
+        return spawnSlashParticle(level, pos, WorldParticleBuilder.create(particleType).setRenderType(LodestoneWorldParticleRenderType.TRANSPARENT).setColorData(createGrayParticleColor(level.random)));
     }
 
     public static ParticleEffectSpawner spawnSlashParticle(Level level, Vec3 pos, WorldParticleBuilder builder) {

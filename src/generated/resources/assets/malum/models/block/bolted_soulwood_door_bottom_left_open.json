@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left_open",
+  "textures": {
+    "bottom": "malum:block/soulwood/bolted_soulwood_door_bottom",
+    "top": "malum:block/soulwood/bolted_soulwood_door_top"
+  }
+}

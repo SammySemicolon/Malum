@@ -115,11 +115,12 @@ public class InvertedHeartOath extends GeasEffect {
             }
             if (target.isAlive()) {
                 WorldEventHandler.addWorldEvent(target.level(),
-                        new DelayedDamageWorldEvent()
+                        new DelayedDamageWorldEvent(target)
                                 .setMagicDamageType(damageType)
                                 .setImpactParticleEffect(ParticleEffectTypeRegistry.SOULWASHING_IMPACT, target.getRandom().nextBoolean() ? SpiritTypeRegistry.WICKED_SPIRIT : SpiritTypeRegistry.ELDRITCH_SPIRIT)
                                 .setSound(SoundRegistry.SOULWASHING_IMPACT, 1f, 2f, 0.5f)
-                                .setData(wrathBearer.getUUID(), target.getUUID(), 0, damage, 8 + i * 2));
+                                .setAttacker(wrathBearer)
+                                .setDamageData(0, damage, 8 + i * 2));
             }
         }
     }

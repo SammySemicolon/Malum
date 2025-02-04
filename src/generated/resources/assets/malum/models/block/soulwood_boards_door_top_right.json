@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "malum:block/soulwood/soulwood_boards_door_bottom",
+    "top": "malum:block/soulwood/soulwood_boards_door_top"
+  }
+}

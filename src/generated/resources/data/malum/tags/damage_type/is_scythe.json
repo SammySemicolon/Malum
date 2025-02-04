@@ -1,8 +1,8 @@
 {
   "values": [
     "#malum:is_scythe_melee",
+    "#malum:is_hidden_blade",
     "malum:scythe_rebound",
-    "malum:scythe_combo",
-    "malum:hidden_blade_counter"
+    "malum:scythe_combo"
   ]
 }

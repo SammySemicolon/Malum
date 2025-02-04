@@ -1,6 +1,7 @@
 package com.sammy.malum.visual_effects.networked.attack.slash;
 
 import com.sammy.malum.client.*;
+import com.sammy.malum.registry.client.*;
 import com.sammy.malum.visual_effects.*;
 import net.minecraft.nbt.*;
 import net.minecraft.world.phys.*;
@@ -45,7 +46,7 @@ public class HiddenBladeCounterParticleEffect extends SlashAttackParticleEffect 
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset),
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset),
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset)));
-                    var slash = WeaponParticleEffects.spawnSlashParticle(level, position, spirit);
+                    var slash = WeaponParticleEffects.spawnSlashParticle(level, position, random.nextBoolean()?ParticleRegistry.THIN_ROUNDABOUT_SLASH:ParticleRegistry.ROUNDABOUT_SLASH, spirit);
                     slash.getBuilder()
                             .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
                             .setScaleData(GenericParticleData.create(scale).build())

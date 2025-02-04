@@ -1,6 +1,12 @@
 {
   "values": [
     "malum:runewood_door",
-    "malum:soulwood_door"
+    "malum:bolted_runewood_door",
+    "malum:runewood_boards_door",
+    "malum:bolted_runewood_boards_door",
+    "malum:soulwood_door",
+    "malum:bolted_soulwood_door",
+    "malum:soulwood_boards_door",
+    "malum:bolted_soulwood_boards_door"
   ]
 }

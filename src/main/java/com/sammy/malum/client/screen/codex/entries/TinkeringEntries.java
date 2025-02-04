@@ -63,7 +63,7 @@ public class TinkeringEntries {
         screen.addEntry("spirit_jar", -5, 8, b -> b
                 .configureWidget(w -> w.setIcon(SPIRIT_JAR))
                 .addPage(new HeadlineTextPage("spirit_jar", "spirit_jar.1"))
-                .addPage(new CraftingPage(SPIRIT_JAR.get(), EMPTY, HALLOWED_GOLD_INGOT.get(), EMPTY, EMPTY, EMPTY, GLASS, GLASS_PANE, GLASS_PANE, GLASS_PANE))
+                .addPage(new CraftingPage(SPIRIT_JAR.get(), EMPTY, HALLOWED_GOLD_INGOT.get(), EMPTY, EMPTY, GLASS))
         );
 
         screen.addEntry("soulstained_scythe", -5, 6, b -> b
@@ -152,6 +152,14 @@ public class TinkeringEntries {
                                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_THE_RISING_EDGE.get()))
                                 .addPage(new TextPage("necklace_of_the_narrow_edge.ring_of_the_rising_edge.2"))
                                 .addPage(new TextPage("necklace_of_the_narrow_edge.ring_of_the_rising_edge.3"))
+                ))
+                .addReference(new EntryReference(
+                        RING_OF_THE_HOWLING_MAELSTROM.get(),
+                        BookEntry.build("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom")
+                                .addPage(new HeadlineTextPage("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom", "necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom.1"))
+                                .addPage(SpiritInfusionPage.fromOutput(RING_OF_THE_HOWLING_MAELSTROM.get()))
+                                .addPage(new TextPage("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom.2"))
+                                .addPage(new TextPage("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom.3"))
                 ))
         );
 

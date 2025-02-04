@@ -1,6 +1,6 @@
 {
   "values": [
-    "malum:voodoo",
-    "malum:hidden_blade_counter"
+    "#malum:is_hidden_blade",
+    "malum:voodoo"
   ]
 }

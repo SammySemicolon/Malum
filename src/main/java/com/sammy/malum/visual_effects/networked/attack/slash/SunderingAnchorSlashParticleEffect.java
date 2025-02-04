@@ -3,6 +3,7 @@ package com.sammy.malum.visual_effects.networked.attack.slash;
 import com.sammy.malum.*;
 import com.sammy.malum.client.*;
 import com.sammy.malum.core.systems.spirit.*;
+import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.data.*;
@@ -56,7 +57,7 @@ public class SunderingAnchorSlashParticleEffect extends SlashAttackParticleEffec
             for (int i = 0; i < slashCount; i++) {
                 float spinOffset = angle + RandomHelper.randomBetween(random, -3.14f, 3.14f) + (mirror ? 3.14f : 0);
                 for (int j = 0; j < 2; j++) {
-                    var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), spirit);
+                    var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.THIN_SLASH, spirit);
                     int lifeDelay = (i+j) * 2;
                     slash.getBuilder()
                             .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())

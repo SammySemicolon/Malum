@@ -1,0 +1,51 @@
+{
+  "type": "malum:spirit_infusion",
+  "extraIngredients": [
+    {
+      "count": 1,
+      "item": "malum:fused_consciousness"
+    },
+    {
+      "count": 8,
+      "item": "minecraft:nautilus_shell"
+    },
+    {
+      "count": 8,
+      "item": "malum:living_flesh"
+    },
+    {
+      "count": 4,
+      "item": "malum:malignant_pewter_plating"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:soul_stained_steel_knife"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:sundering_anchor"
+  },
+  "spirits": [
+    {
+      "type": "sacred",
+      "count": 32
+    },
+    {
+      "type": "wicked",
+      "count": 32
+    },
+    {
+      "type": "arcane",
+      "count": 32
+    },
+    {
+      "type": "aqueous",
+      "count": 32
+    },
+    {
+      "type": "eldritch",
+      "count": 32
+    }
+  ]
+}

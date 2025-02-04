@@ -52,7 +52,7 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
             if (target.hasEffect(effect)) {
                 triggerMalignantCrit(event.getContainer(), attacker, target);
                 var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.EDGE_OF_DELIVERANCE_CRIT);
-                if (isEnhanced(attacker)) {
+                if (isNarrow(attacker)) {
                     particle.setVertical();
                 }
                 particle.spawnTargetBoundSlashingParticle(attacker, target);
@@ -60,7 +60,7 @@ public class EdgeOfDeliveranceItem extends MalumScytheItem {
             }
             else {
                 event.setNewDamage(event.getNewDamage() * 0.5f);
-                if (source.is(DamageTypeRegistry.HIDDEN_BLADE_COUNTER) && attacker.getRandom().nextFloat() >= 0.4f) {
+                if (source.is(DamageTypeTagRegistry.IS_HIDDEN_BLADE) && attacker.getRandom().nextFloat() >= 0.4f) {
                     return;
                 }
                 target.addEffect(new MobEffectInstance(MobEffectRegistry.IMMINENT_DELIVERANCE, 60));

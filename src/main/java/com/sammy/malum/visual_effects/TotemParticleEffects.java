@@ -73,7 +73,7 @@ public class TotemParticleEffects {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
                 float velocity = RandomHelper.randomBetween(random, 0.02f, 0.03f);
-                var offsetPosition = VecHelper.rotatingRadialOffset(position, 1.2f, j, 8, gameTime, time);
+                var offsetPosition = VecHelper.rotatingRadialOffset(position, 0.7f, j, 8, gameTime, time);
                 offsetPosition = offsetPosition.add(0, (Math.cos(((gameTime + j * 480) % time) / time) * 0.25f) - 0.25f, 0);
                 var motion = offsetPosition.subtract(position).normalize().scale(velocity);
                 var lightSpecs = spiritLightSpecs(level, offsetPosition, spiritType);

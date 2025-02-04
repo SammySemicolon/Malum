@@ -136,8 +136,8 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         BlockStateSmithTypes.CROSS_MODEL_BLOCK.act(data, RUNEWOOD_SAPLING, AZURE_RUNEWOOD_SAPLING);
         BlockStateSmithTypes.BUTTON_BLOCK.act(data, RUNEWOOD_BUTTON);
         BlockStateSmithTypes.PRESSURE_PLATE_BLOCK.act(data, RUNEWOOD_PRESSURE_PLATE);
-        BlockStateSmithTypes.DOOR_BLOCK.act(data, RUNEWOOD_DOOR);
-        BlockStateSmithTypes.TRAPDOOR_BLOCK.act(data, RUNEWOOD_TRAPDOOR, SOLID_RUNEWOOD_TRAPDOOR);
+        BlockStateSmithTypes.DOOR_BLOCK.act(data, RUNEWOOD_DOOR, BOLTED_RUNEWOOD_DOOR, RUNEWOOD_BOARDS_DOOR, BOLTED_RUNEWOOD_BOARDS_DOOR);
+        BlockStateSmithTypes.TRAPDOOR_BLOCK.act(data, RUNEWOOD_TRAPDOOR, BOLTED_RUNEWOOD_TRAPDOOR, RUNEWOOD_BOARDS_TRAPDOOR, BOLTED_RUNEWOOD_BOARDS_TRAPDOOR);
         BlockStateSmithTypes.WOODEN_SIGN_BLOCK.act(data, RUNEWOOD_SIGN, RUNEWOOD_WALL_SIGN);
         BlockStateSmithTypes.FENCE_BLOCK.act(data, RUNEWOOD_FENCE);
         BlockStateSmithTypes.FENCE_GATE_BLOCK.act(data, RUNEWOOD_FENCE_GATE);
@@ -174,8 +174,8 @@ public class MalumBlockStates extends LodestoneBlockStateProvider {
         BlockStateSmithTypes.CROSS_MODEL_BLOCK.act(data, SOULWOOD_GROWTH);
         BlockStateSmithTypes.BUTTON_BLOCK.act(data, SOULWOOD_BUTTON);
         BlockStateSmithTypes.PRESSURE_PLATE_BLOCK.act(data, SOULWOOD_PRESSURE_PLATE);
-        BlockStateSmithTypes.DOOR_BLOCK.act(data, SOULWOOD_DOOR);
-        BlockStateSmithTypes.TRAPDOOR_BLOCK.act(data, SOULWOOD_TRAPDOOR, SOLID_SOULWOOD_TRAPDOOR);
+        BlockStateSmithTypes.DOOR_BLOCK.act(data, SOULWOOD_DOOR, BOLTED_SOULWOOD_DOOR, SOULWOOD_BOARDS_DOOR, BOLTED_SOULWOOD_BOARDS_DOOR);
+        BlockStateSmithTypes.TRAPDOOR_BLOCK.act(data, SOULWOOD_TRAPDOOR, BOLTED_SOULWOOD_TRAPDOOR, SOULWOOD_BOARDS_TRAPDOOR, BOLTED_SOULWOOD_BOARDS_TRAPDOOR);
         BlockStateSmithTypes.WOODEN_SIGN_BLOCK.act(data, SOULWOOD_SIGN, SOULWOOD_WALL_SIGN);
         BlockStateSmithTypes.FENCE_BLOCK.act(data, SOULWOOD_FENCE);
         BlockStateSmithTypes.FENCE_GATE_BLOCK.act(data, SOULWOOD_FENCE_GATE);

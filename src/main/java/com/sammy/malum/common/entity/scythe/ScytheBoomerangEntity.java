@@ -1,8 +1,13 @@
 package com.sammy.malum.common.entity.scythe;
 
+import com.sammy.malum.client.*;
+import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.curiosities.curios.sets.scythe.*;
 import com.sammy.malum.core.handlers.enchantment.*;
+import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.entity.*;
+import com.sammy.malum.visual_effects.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.syncher.*;
 import net.minecraft.server.level.*;
@@ -11,11 +16,14 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
+import team.lodestar.lodestone.systems.particle.data.*;
+import team.lodestar.lodestone.systems.particle.data.spin.*;
 import team.lodestar.lodestone.systems.rendering.trail.*;
 
 public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
 
-    private static final EntityDataAccessor<Boolean> DATA_ENHANCED = SynchedEntityData.defineId(ScytheBoomerangEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_NARROW = SynchedEntityData.defineId(ScytheBoomerangEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_MAELSTROM = SynchedEntityData.defineId(ScytheBoomerangEntity.class, EntityDataSerializers.BOOLEAN);
 
     public final TrailPointBuilder theFormer = TrailPointBuilder.create(8);
     public final TrailPointBuilder theLatter = TrailPointBuilder.create(8);
@@ -31,27 +39,38 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_ENHANCED, false);
+        builder.define(DATA_NARROW, false);
+        builder.define(DATA_MAELSTROM, false);
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("isEnhanced", isEnhanced());
+        compound.putBoolean("isNarrow", isNarrow());
+        compound.putBoolean("isMaelstrom", isMaelstrom());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        setEnhanced(compound.getBoolean("isEnhanced"));
+        setNarrow(compound.getBoolean("isNarrow"));
+        setMaelstrom(compound.getBoolean("isMaelstrom"));
     }
 
-    public void setEnhanced(boolean enhanced) {
-        getEntityData().set(DATA_ENHANCED, enhanced);
+    public void setNarrow(boolean setNarrow) {
+        getEntityData().set(DATA_NARROW, setNarrow);
     }
 
-    public boolean isEnhanced() {
-        return getEntityData().get(DATA_ENHANCED);
+    public boolean isNarrow() {
+        return getEntityData().get(DATA_NARROW);
+    }
+
+    public void setMaelstrom(boolean maelstrom) {
+        getEntityData().set(DATA_MAELSTROM, maelstrom);
+    }
+
+    public boolean isMaelstrom() {
+        return getEntityData().get(DATA_MAELSTROM);
     }
 
     @Override
@@ -66,8 +85,15 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (isEnhanced()) {
-            returnTimer = 0;
+        if (isNarrow()) {
+            if (returnTimer > 0) {
+                final Entity target = result.getEntity();
+                LocalizedMaelstromEntity maelstrom = new LocalizedMaelstromEntity(level(), target.getX(), target.getY() + target.getBbHeight()*0.75f, target.getZ());
+                maelstrom.setData(getOwner(), damage, magicDamage, 0, 40);
+                maelstrom.setItem(getItem());
+                level().addFreshEntity(maelstrom);
+                returnTimer = 0;
+            }
             if (getOwner() instanceof LivingEntity scytheOwner) {
                 flyBack(scytheOwner);
             }
@@ -79,31 +105,22 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
         super.tick();
         var scythe = getItem();
         var level = level();
-        if (level.isClientSide) {
-            addTrailPoints();
-            theFormer.tickTrailPoints();
-            theLatter.tickTrailPoints();
-        } else {
+        if (level instanceof ServerLevel serverLevel) {
             var owner = getOwner();
             if (owner == null || !owner.isAlive() || !owner.level().equals(level()) || distanceTo(owner) > 1000f) {
                 setDeltaMovement(Vec3.ZERO);
                 return;
             }
             if (owner instanceof LivingEntity scytheOwner) {
-                if (age % 3 == 0) {
-                    float pitch = (float) (0.8f + Math.sin(level.getGameTime() * 0.5f) * 0.2f);
-                    float volumeScalar = Mth.clamp(age / 12f, 0, 1f);
-                    if (isInWater()) {
-                        volumeScalar *= 0.2f;
-                        pitch *= 0.5f;
-                    }
-                    SoundHelper.playSound(this, SoundRegistry.SCYTHE_SPINS.get(), 0.6f * volumeScalar, pitch);
-                    SoundHelper.playSound(this, SoundRegistry.SCYTHE_SWEEP.get(), 0.4f * volumeScalar, pitch);
+                if (isMaelstrom() && !isNarrow()) {
+                    CurioHowlingMaelstromRing.handleMaelstrom(serverLevel, scytheOwner, this);
                 }
+                playSound();
+                returnTimer--;
                 if (returnTimer <= 0) {
                     var ownerPos = scytheOwner.position().add(0, scytheOwner.getBbHeight() * 0.6f, 0);
                     float velocityLimit = 2f;
-                    if (isEnhanced()) {
+                    if (isNarrow()) {
                         double radians = Math.toRadians(90 - scytheOwner.yHeadRot);
                         ownerPos = scytheOwner.position().add(0.75f * Math.sin(radians), scytheOwner.getBbHeight() * 0.5f, 0.75f * Math.cos(radians));
                         velocityLimit = 4f;
@@ -111,32 +128,49 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
                             flyBack(scytheOwner);
                         }
                     }
+                    if (isMaelstrom()) {
+                        velocityLimit -= 1.5f;
+                    }
                     var motion = getDeltaMovement();
                     double velocity = Mth.clamp(motion.length() * 3, 0.5f, velocityLimit);
                     var returnMotion = ownerPos.subtract(position()).normalize().scale(velocity);
-                    float distance = distanceTo(scytheOwner);
+                    setDeltaMovement(motion.lerp(returnMotion, 0.1f));
 
-                    if (isAlive() && distance < 3f) {
+                    if (isAlive() && distanceTo(scytheOwner) < 3f) {
                         if (scytheOwner instanceof ServerPlayer player) {
                             ReboundHandler.pickupScythe(this, scythe, player);
                         }
-                        SoundHelper.playSound(scytheOwner, SoundRegistry.SCYTHE_CATCH.get(), 1.5f, RandomHelper.randomBetween(level().getRandom(), 0.75f, 1.25f));
+                        SoundHelper.playSound(scytheOwner, SoundRegistry.SCYTHE_CATCH.get(), 0.5f, RandomHelper.randomBetween(level().getRandom(), 0.75f, 1.25f));
                         remove(RemovalReason.DISCARDED);
                     }
-                    float delta = 0.1f;
-                    double x = Mth.lerp(delta, motion.x, returnMotion.x);
-                    double y = Mth.lerp(delta, motion.y, returnMotion.y);
-                    double z = Mth.lerp(delta, motion.z, returnMotion.z);
-                    setDeltaMovement(new Vec3(x, y, z));
                 }
-                returnTimer--;
             }
+        } else {
+            if (isMaelstrom() && !isNarrow()) {
+                WeaponParticleEffects.spawnMaelstromParticles(this);
+            }
+            addTrailPoints();
+            theFormer.tickTrailPoints();
+            theLatter.tickTrailPoints();
             updateRotation();
         }
     }
 
+    public void playSound() {
+        if (age % 3 == 0) {
+            float pitch = (float) (0.8f + Math.sin(level().getGameTime() * 0.5f) * 0.2f);
+            float volumeScalar = Mth.clamp(age / 12f, 0, 1f);
+            if (isInWater()) {
+                volumeScalar *= 0.2f;
+                pitch *= 0.5f;
+            }
+            SoundHelper.playSound(this, SoundRegistry.SCYTHE_SPINS.get(), 0.6f * volumeScalar, pitch);
+            SoundHelper.playSound(this, SoundRegistry.SCYTHE_SWEEP.get(), 0.4f * volumeScalar, pitch);
+        }
+    }
+
     public void addTrailPoints() {
-        if (isEnhanced()) {
+        if (isNarrow()) {
             Vec3 direction = getDeltaMovement().normalize();
             float yRot = ((float) (Mth.atan2(direction.x, direction.z) * (double) (180F / (float) Math.PI)));
             float yaw = (float) Math.toRadians(yRot);

@@ -68,7 +68,6 @@ import top.theillusivec4.curios.api.client.*;
 import java.util.List;
 import java.util.*;
 import java.util.function.*;
-import java.util.stream.*;
 
 import static com.sammy.malum.MalumMod.*;
 import static com.sammy.malum.registry.common.item.ItemTiers.*;
@@ -323,8 +322,16 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> RUSTIC_RUNEWOOD_TILES_SLAB = register("rustic_runewood_tiles_slab", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUSTIC_RUNEWOOD_TILES_SLAB.get(), p));
 
     public static final DeferredHolder<Item, Item> RUNEWOOD_DOOR = register("runewood_door", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUNEWOOD_DOOR.get(), p));
+    public static final DeferredHolder<Item, Item> BOLTED_RUNEWOOD_DOOR = register("bolted_runewood_door", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BOLTED_RUNEWOOD_DOOR.get(), p));
+
     public static final DeferredHolder<Item, Item> RUNEWOOD_TRAPDOOR = register("runewood_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUNEWOOD_TRAPDOOR.get(), p));
-    public static final DeferredHolder<Item, Item> SOLID_RUNEWOOD_TRAPDOOR = register("solid_runewood_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOLID_RUNEWOOD_TRAPDOOR.get(), p));
+    public static final DeferredHolder<Item, Item> BOLTED_RUNEWOOD_TRAPDOOR = register("bolted_runewood_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BOLTED_RUNEWOOD_TRAPDOOR.get(), p));
+
+    public static final DeferredHolder<Item, Item> RUNEWOOD_BOARDS_DOOR = register("runewood_boards_door", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUNEWOOD_BOARDS_DOOR.get(), p));
+    public static final DeferredHolder<Item, Item> BOLTED_RUNEWOOD_BOARDS_DOOR = register("bolted_runewood_boards_door", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BOLTED_RUNEWOOD_BOARDS_DOOR.get(), p));
+
+    public static final DeferredHolder<Item, Item> RUNEWOOD_BOARDS_TRAPDOOR = register("runewood_boards_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUNEWOOD_BOARDS_TRAPDOOR.get(), p));
+    public static final DeferredHolder<Item, Item> BOLTED_RUNEWOOD_BOARDS_TRAPDOOR = register("bolted_runewood_boards_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BOLTED_RUNEWOOD_BOARDS_TRAPDOOR.get(), p));
 
     public static final DeferredHolder<Item, Item> RUNEWOOD_BUTTON = register("runewood_planks_button", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUNEWOOD_BUTTON.get(), p));
     public static final DeferredHolder<Item, Item> RUNEWOOD_PRESSURE_PLATE = register("runewood_planks_pressure_plate", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUNEWOOD_PRESSURE_PLATE.get(), p));
@@ -399,8 +406,16 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> RUSTIC_SOULWOOD_TILES_SLAB = register("rustic_soulwood_tiles_slab", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.RUSTIC_SOULWOOD_TILES_SLAB.get(), p));
 
     public static final DeferredHolder<Item, Item> SOULWOOD_DOOR = register("soulwood_door", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_DOOR.get(), p));
+    public static final DeferredHolder<Item, Item> BOLTED_SOULWOOD_DOOR = register("bolted_soulwood_door", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BOLTED_SOULWOOD_DOOR.get(), p));
+
     public static final DeferredHolder<Item, Item> SOULWOOD_TRAPDOOR = register("soulwood_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_TRAPDOOR.get(), p));
-    public static final DeferredHolder<Item, Item> SOLID_SOULWOOD_TRAPDOOR = register("solid_soulwood_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOLID_SOULWOOD_TRAPDOOR.get(), p));
+    public static final DeferredHolder<Item, Item> BOLTED_SOULWOOD_TRAPDOOR = register("bolted_soulwood_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BOLTED_SOULWOOD_TRAPDOOR.get(), p));
+
+    public static final DeferredHolder<Item, Item> SOULWOOD_BOARDS_DOOR = register("soulwood_boards_door", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_BOARDS_DOOR.get(), p));
+    public static final DeferredHolder<Item, Item> BOLTED_SOULWOOD_BOARDS_DOOR = register("bolted_soulwood_boards_door", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BOLTED_SOULWOOD_BOARDS_DOOR.get(), p));
+
+    public static final DeferredHolder<Item, Item> SOULWOOD_BOARDS_TRAPDOOR = register("soulwood_boards_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_BOARDS_TRAPDOOR.get(), p));
+    public static final DeferredHolder<Item, Item> BOLTED_SOULWOOD_BOARDS_TRAPDOOR = register("bolted_soulwood_boards_trapdoor", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.BOLTED_SOULWOOD_BOARDS_TRAPDOOR.get(), p));
 
     public static final DeferredHolder<Item, Item> SOULWOOD_BUTTON = register("soulwood_planks_button", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_BUTTON.get(), p));
     public static final DeferredHolder<Item, Item> SOULWOOD_PRESSURE_PLATE = register("soulwood_planks_pressure_plate", NATURE_PROPERTIES(), (p) -> new BlockItem(BlockRegistry.SOULWOOD_PRESSURE_PLATE.get(), p));
@@ -657,6 +672,7 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> RING_OF_ESOTERIC_SPOILS = register("ring_of_esoteric_spoils", GEAR_PROPERTIES(), CurioArcaneSpoilRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_THE_RISING_EDGE = register("ring_of_the_rising_edge", GEAR_PROPERTIES(), CurioRisingEdgeRing::new);
+    public static final DeferredHolder<Item, Item> RING_OF_THE_HOWLING_MAELSTROM = register("ring_of_the_howling_maelstrom", GEAR_PROPERTIES(), CurioHowlingMaelstromRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_CURATIVE_TALENT = register("ring_of_curative_talent", GEAR_PROPERTIES(), CurioCurativeRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_ARCANE_PROWESS = register("ring_of_arcane_prowess", GEAR_PROPERTIES(), CurioProwessRing::new);
     public static final DeferredHolder<Item, Item> RING_OF_MANAWEAVING = register("ring_of_manaweaving", GEAR_PROPERTIES(), CurioManaweavingRing::new);

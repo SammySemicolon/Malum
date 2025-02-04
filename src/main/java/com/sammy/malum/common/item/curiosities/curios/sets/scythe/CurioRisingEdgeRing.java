@@ -2,7 +2,6 @@ package com.sammy.malum.common.item.curiosities.curios.sets.scythe;
 
 import com.google.common.collect.*;
 import com.sammy.malum.*;
-import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
 import com.sammy.malum.core.helpers.*;
@@ -12,20 +11,15 @@ import net.minecraft.core.particles.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
-import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.entity.projectile.windcharge.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.neoforged.neoforge.event.entity.living.*;
-import team.lodestar.lodestone.handlers.*;
 import team.lodestar.lodestone.helpers.*;
 import top.theillusivec4.curios.api.*;
 
 import java.util.function.*;
 
-public class CurioRisingEdgeRing extends MalumCurioItem implements IMalumEventResponderItem {
+public class CurioRisingEdgeRing extends MalumCurioItem {
     public CurioRisingEdgeRing(Properties builder) {
         super(builder, MalumTrinketType.METALLIC);
     }
@@ -39,12 +33,12 @@ public class CurioRisingEdgeRing extends MalumCurioItem implements IMalumEventRe
     @Override
     public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
         addAttributeModifier(map, AttributeRegistry.SCYTHE_PROFICIENCY,
-                new AttributeModifier(MalumMod.malumPath("rising_edge_ring"), 0.2f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                new AttributeModifier(MalumMod.malumPath("rising_edge_ring"), 0.15f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 
     public static void launchEntity(LivingEntity attacker, LivingEntity target) {
         float velocity = 0.9f;
-        if (MalumScytheItem.isEnhanced(attacker)) {
+        if (MalumScytheItem.isNarrow(attacker)) {
             velocity += 0.4f;
         }
         target.setDeltaMovement(target.getDeltaMovement().add(0, velocity, 0));

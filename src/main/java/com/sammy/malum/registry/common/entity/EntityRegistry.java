@@ -53,6 +53,10 @@ public class EntityRegistry {
             () -> EntityType.Builder.<ScytheBoomerangEntity>of((e, w) -> new ScytheBoomerangEntity(w), MobCategory.MISC).sized(2f, 2f).clientTrackingRange(20)
                     .build(MalumMod.malumPath("scythe_boomerang").toString()));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<LocalizedMaelstromEntity>> SCYTHE_MAELSTROM = ENTITY_TYPES.register("scythe_maelstrom",
+            () -> EntityType.Builder.<LocalizedMaelstromEntity>of((e, w) -> new LocalizedMaelstromEntity(w), MobCategory.MISC).sized(2f, 2f).clientTrackingRange(20)
+                    .build(MalumMod.malumPath("scythe_maelstrom").toString()));
+
     public static final DeferredHolder<EntityType<?>, EntityType<SpiritCollectionActivatorEntity>> SPIRIT_COLLECTION_ACTIVATOR = ENTITY_TYPES.register("pneuma_void",
             () -> EntityType.Builder.<SpiritCollectionActivatorEntity>of((e, w) -> new SpiritCollectionActivatorEntity(w), MobCategory.MISC).sized(1f, 1f).clientTrackingRange(10)
                     .build(MalumMod.malumPath("pneuma_void").toString()));
@@ -84,7 +88,9 @@ public class EntityRegistry {
             EntityRenderers.register(EntityRegistry.RUNEWOOD_BOAT.get(), (manager) -> new MalumBoatRenderer(manager, "runewood", false));
             EntityRenderers.register(EntityRegistry.SOULWOOD_BOAT.get(), (manager) -> new MalumBoatRenderer(manager, "soulwood", false));
             EntityRenderers.register(EntityRegistry.NATURAL_SPIRIT.get(), FloatingItemEntityRenderer::new);
+
             EntityRenderers.register(EntityRegistry.SCYTHE_BOOMERANG.get(), ScytheBoomerangEntityRenderer::new);
+            EntityRenderers.register(EntityRegistry.SCYTHE_MAELSTROM.get(), NoopRenderer::new);
 
             EntityRenderers.register(EntityRegistry.ETHERIC_NITRATE.get(), EthericNitrateEntityRenderer::new);
             EntityRenderers.register(EntityRegistry.VIVID_NITRATE.get(), VividNitrateEntityRenderer::new);

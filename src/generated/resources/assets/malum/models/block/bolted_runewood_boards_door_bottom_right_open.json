@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right_open",
+  "textures": {
+    "bottom": "malum:block/runewood/bolted_runewood_boards_door_bottom",
+    "top": "malum:block/runewood/bolted_runewood_boards_door_top"
+  }
+}

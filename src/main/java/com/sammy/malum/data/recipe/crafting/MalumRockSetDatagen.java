@@ -44,7 +44,7 @@ public class MalumRockSetDatagen {
 
             ItemRegistry.TAINTED_ROCK_PRESSURE_PLATE.get(), ItemRegistry.TAINTED_ROCK_BUTTON.get(),
 
-            ItemRegistry.TAINTED_ROCK_ITEM_PEDESTAL.get(), ItemRegistry.TAINTED_ROCK_ITEM_STAND.get(),
+            ItemRegistry.TAINTED_ROCK_ITEM_STAND.get(), ItemRegistry.TAINTED_ROCK_ITEM_PEDESTAL.get(),
 
             ItemTagRegistry.TAINTED_ROCK, ItemTagRegistry.TAINTED_BLOCKS, ItemTagRegistry.TAINTED_STAIRS, ItemTagRegistry.TAINTED_SLABS, ItemTagRegistry.TAINTED_WALLS
     );
@@ -75,7 +75,7 @@ public class MalumRockSetDatagen {
 
             ItemRegistry.TWISTED_ROCK_PRESSURE_PLATE.get(), ItemRegistry.TWISTED_ROCK_BUTTON.get(),
 
-            ItemRegistry.TWISTED_ROCK_ITEM_PEDESTAL.get(), ItemRegistry.TWISTED_ROCK_ITEM_STAND.get(),
+            ItemRegistry.TWISTED_ROCK_ITEM_STAND.get(), ItemRegistry.TWISTED_ROCK_ITEM_PEDESTAL.get(),
 
             ItemTagRegistry.TWISTED_ROCK, ItemTagRegistry.TWISTED_BLOCKS, ItemTagRegistry.TWISTED_STAIRS, ItemTagRegistry.TWISTED_SLABS, ItemTagRegistry.TWISTED_WALLS
     );

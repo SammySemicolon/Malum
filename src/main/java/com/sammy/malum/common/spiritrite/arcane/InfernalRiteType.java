@@ -21,12 +21,12 @@ public class InfernalRiteType extends TotemicRiteType {
 
     @Override
     public TotemicRiteEffect getNaturalRiteEffect() {
-        return new PotionRiteEffect(LivingEntity.class, MobEffectRegistry.MINERS_RAGE);
+        return new PotionRiteEffect(SpiritTypeRegistry.AERIAL_SPIRIT, LivingEntity.class, MobEffectRegistry.MINERS_RAGE);
     }
 
     @Override
     public TotemicRiteEffect getCorruptedEffect() {
-        return new PotionRiteEffect(LivingEntity.class, MobEffectRegistry.IFRITS_EMBRACE) {
+        return new PotionRiteEffect(SpiritTypeRegistry.AERIAL_SPIRIT, LivingEntity.class, MobEffectRegistry.IFRITS_EMBRACE) {
 
             @SuppressWarnings("ConstantConditions")
             @Override

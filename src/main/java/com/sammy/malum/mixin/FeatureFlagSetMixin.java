@@ -69,7 +69,7 @@ public class FeatureFlagSetMixin implements FeatureFlagExpandedUniverseSet {
 
 	@Override
 	public FeatureFlagSet malum$copyWithoutExpansion() {
-		return AccessorFeatureFlagSet.malum$createNewSet(universe, mask);
+		return FeatureFlagSetAccessor.malum$createNewSet(universe, mask);
 	}
 
 	@ModifyReturnValue(method = "equals", at = @At("RETURN"))

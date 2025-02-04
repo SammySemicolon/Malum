@@ -37,7 +37,7 @@ public class ScytheBoomerangEntityRenderer extends EntityRenderer<ScytheBoomeran
         poseStack.pushPose();
         var itemstack = entityIn.getItem();
         var model = this.itemRenderer.getModel(itemstack, entityIn.level(), null, 1);
-        if (entityIn.isEnhanced()) {
+        if (entityIn.isNarrow()) {
             Vec3 direction = entityIn.getDeltaMovement().normalize();
             float yRot = ((float) (Mth.atan2(direction.x, direction.z)));
             poseStack.mulPose(Axis.YP.rotation(yRot+1.57f));

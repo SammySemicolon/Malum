@@ -18,8 +18,8 @@ public abstract class AbstractScytheProjectileEntity extends ThrowableItemProjec
 
     public int slot;
     public int age;
-    protected float damage;
-    protected float magicDamage;
+    public float damage;
+    public float magicDamage;
     public int enemiesHit;
     public int returnTimer;
 

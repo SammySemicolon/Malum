@@ -242,6 +242,8 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.curio.enhanced_maneuvers", "Augments Rebound and Ascension");
         add("malum.effect.curio.ascension_launch", "Ascension Launches Targets Upwards");
         add("malum.effect.curio.longer_ascension_cooldown", "Ascension Suffers a Longer Cooldown");
+        add("malum.effect.curio.rebound_maelstrom", "Rebound Creates A Windborne Maelstrom");
+        add("malum.effect.curio.longer_rebound_cooldown", "Rebound Suffers a Longer Cooldown");
         add("malum.effect.curio.friendly_enemies", "Reduces Enemy Aggression");
         add("malum.effect.curio.soul_ward_magic_resilience", "Soul Ward Magic Rerouting");
         add("malum.effect.curio.soul_ward_long_shatter_cooldown", "Lengthy Soul Ward Recharge upon Disintegration");
@@ -259,8 +261,9 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.soul_ward_on_hit", "Magic Damage Recovers Soul Ward");
         add("malum.effect.geas.scythe_combo", "Scythe Cuts Create After-attacks");
         add("malum.effect.geas.only_scythe", "Regular Weapons Crumble In Your Hands");
-        add("malum.effect.geas.rocket_jumping", "Explosions Apply More Knockback");
-        add("malum.effect.geas.no_block_breaking", "Explosions Cannot Damage Terrain");
+        add("malum.effect.geas.explosion_absorption", "Explosions Become Propulsive Gusts of Wind");
+        add("malum.effect.geas.rocket_jumping", "Gusts of Wind Provide Greater Propulsion");
+        add("malum.effect.geas.explosion_absorption_cooldown", "Repeated Activations Exhaust The Effect And Drain Stamina");
         add("malum.effect.geas.malignant_crit_leech", "Malignant Deliverance Leeches Life Essence");
         add("malum.effect.geas.malignant_crit_healing_overexertion", "Repeated Activations Nullify All Healing");
         add("malum.effect.geas.malignant_crit_reinforcement", "Malignant Deliverance Improves Conversion");
@@ -283,6 +286,18 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.unwinding_chaos_burn", "Burn Damage Empowers Volley");
         add("malum.effect.sundering_anchor_damage_split", "Damage is Split Between Several Cuts");
         add("malum.effect.sundering_anchor_chaos_curse", "Each Cut Inflicts Chaos Curse");
+
+        add("malum.effect.wayne_june.0", "The Iron Crown. Enigmatic, and Ubiquitous");
+        add("malum.effect.wayne_june.1", "A Semi-Circle, Radiating Five Points of Power. A Symbol Hidden Deep in the Iconography of Every Ancient Empire");
+        add("malum.effect.wayne_june.2", "The Point of No Return Welcomes You, With Open Arms");
+        add("malum.effect.wayne_june.3", "The Greatest Horror It Would Seem, Is Nothing At All");
+        add("malum.effect.wayne_june.4", "An Ocean of Emptiness, Slowly Swallowing the World");
+        add("malum.effect.wayne_june.5", "A Nebulous Nightmare, an Apocalypse that Only We Can Oppose");
+        add("malum.effect.wayne_june.6", "Stagnant And Sprawling, This Hellish Abyss Extends Beyond Sanity Itself");
+        add("malum.effect.wayne_june.7", "We Travel Through The Incalculable Dimensions Of Human Weakness");
+        add("malum.effect.wayne_june.8", "Success, So Long Pursued, Is Rewarded Only With Creeping Revalation");
+        add("malum.effect.wayne_june.9", "You Have Cowered In Your Cowering Denial Long Enough");
+        add("malum.effect.wayne_june.10", "Let Us Drag Your Agglutinated Indignities Out Into The Light");
 
         add("malum.spirit.flavour.sacred", "Innocent");
         add("malum.spirit.flavour.wicked", "Malicious");
@@ -324,7 +339,8 @@ public class MalumLang extends LanguageProvider {
         addDeathMessage(DamageTypeRegistry.SCYTHE_ASCENSION, "%1$s was cleaved using ascension by %2$s", "%1$s was cleaved using ascension by %2$s using %3$s");
         addDeathMessage(DamageTypeRegistry.SCYTHE_COMBO, "%1$s was sliced in half and then again by %2$s", "%1$s was sliced in half and then again by %2$s using %3$s");
 
-        addDeathMessage(DamageTypeRegistry.HIDDEN_BLADE_COUNTER, "%1$s was sliced into innumerable pieces by %2$s", "%1$s was sliced into innumerable pieces by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.HIDDEN_BLADE_PHYSICAL_COUNTER, "%1$s was sliced into innumerable pieces by %2$s", "%1$s was sliced into innumerable pieces by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.HIDDEN_BLADE_MAGIC_COUNTER, "%1$s had their soul sliced into innumerable pieces by %2$s", "%1$s had their soul sliced into innumerable pieces by %2$s using %3$s");
 
         addDeathMessage(DamageTypeRegistry.TYRVING, "%1$s had their soul scarred by %2$s", "%1$s had their soul scarred by %2$s using %3$s");
 

@@ -2,7 +2,7 @@
   "type": "malum:spirit_infusion",
   "extraIngredients": [
     {
-      "count": 4,
+      "count": 6,
       "tag": "c:ingots/iron"
     },
     {
@@ -12,7 +12,7 @@
   ],
   "ingredient": {
     "count": 1,
-    "item": "malum:ornate_ring"
+    "item": "malum:gilded_ring"
   },
   "output": {
     "count": 1,

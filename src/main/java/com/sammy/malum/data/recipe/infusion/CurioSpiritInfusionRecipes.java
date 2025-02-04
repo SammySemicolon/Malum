@@ -89,9 +89,16 @@ public class CurioSpiritInfusionRecipes {
                 .addSpirit(ELDRITCH_SPIRIT, 4)
                 .save(recipeOutput);
 
-        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_RING.get(), 1, ItemRegistry.RING_OF_THE_RISING_EDGE.get(), 1)
-                .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 4))
+        new SpiritInfusionRecipeBuilder(ItemRegistry.GILDED_RING.get(), 1, ItemRegistry.RING_OF_THE_RISING_EDGE.get(), 1)
+                .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 6))
                 .addExtraItem(Items.WIND_CHARGE, 4)
+                .addSpirit(AERIAL_SPIRIT, 32)
+                .save(recipeOutput);
+
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ORNATE_RING.get(), 1, ItemRegistry.RING_OF_THE_HOWLING_MAELSTROM.get(), 1)
+                .addExtraItem(SizedIngredient.of(Tags.Items.INGOTS_IRON, 6))
+                .addExtraItem(Items.WIND_CHARGE, 4)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 2)
                 .addSpirit(AERIAL_SPIRIT, 32)
                 .save(recipeOutput);
 

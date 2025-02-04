@@ -77,6 +77,7 @@ public class MalumItemTags extends ItemTagsProvider {
 
         tag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS).add(
                 CRUDE_SCYTHE.get(), SOUL_STAINED_STEEL_SCYTHE.get(),
+                SOUL_STAINED_STEEL_SWORD.get(), SOUL_STAINED_STEEL_KNIFE.get(),
                 MNEMONIC_HEX_STAFF.get(), UNWINDING_CHAOS.get(), EROSION_SCEPTER.get(),
                 TYRVING.get(), SUNDERING_ANCHOR.get());
 

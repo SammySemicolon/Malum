@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_orientable_trapdoor_top",
+  "textures": {
+    "texture": "malum:block/soulwood/bolted_soulwood_trapdoor"
+  }
+}

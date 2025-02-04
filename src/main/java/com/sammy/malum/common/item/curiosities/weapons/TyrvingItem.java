@@ -5,11 +5,9 @@ import com.sammy.malum.common.worldevent.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
-import net.minecraft.network.chat.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
@@ -19,8 +17,6 @@ import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.registry.common.tag.*;
 import team.lodestar.lodestone.systems.item.*;
 import team.lodestar.lodestone.systems.item.tools.*;
-
-import java.util.*;
 
 public class TyrvingItem extends LodestoneSwordItem implements IMalumEventResponderItem {
 
@@ -49,9 +45,10 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
 
         if (target.isAlive()) {
             WorldEventHandler.addWorldEvent(level,
-                    new DelayedDamageWorldEvent()
+                    new DelayedDamageWorldEvent(target)
+                            .setAttacker(attacker)
                             .setMagicDamageType(DamageTypeRegistry.TYRVING)
-                            .setData(attacker.getUUID(), target.getUUID(), 0, magicDamage, 3));
+                            .setDamageData(0, magicDamage, 3));
         }
 
         SoundHelper.playSound(attacker, SoundRegistry.TYRVING_SLASH.get(), 1, RandomHelper.randomBetween(attacker.getRandom(), 1f, 1.5f));

@@ -1,5 +1,6 @@
 package com.sammy.malum.data.recipe.crafting;
 
+import com.sammy.malum.*;
 import com.sammy.malum.data.item.*;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.data.recipes.*;
@@ -34,10 +35,12 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
             ItemRegistry.RUSTIC_RUNEWOOD_PLANKS_STAIRS.get(), ItemRegistry.VERTICAL_RUSTIC_RUNEWOOD_PLANKS_STAIRS.get(), ItemRegistry.RUSTIC_RUNEWOOD_TILES_STAIRS.get(),
             ItemRegistry.RUNEWOOD_PANEL.get(), ItemRegistry.CUT_RUNEWOOD_PLANKS.get(), ItemRegistry.RUNEWOOD_BEAM.get(),
             ItemRegistry.RUNEWOOD_BUTTON.get(), ItemRegistry.RUNEWOOD_PRESSURE_PLATE.get(),
-            ItemRegistry.SOLID_RUNEWOOD_TRAPDOOR.get(), ItemRegistry.RUNEWOOD_TRAPDOOR.get(),
+            ItemRegistry.RUNEWOOD_DOOR.get(), ItemRegistry.BOLTED_RUNEWOOD_DOOR.get(),
+            ItemRegistry.RUNEWOOD_BOARDS_DOOR.get(), ItemRegistry.BOLTED_RUNEWOOD_BOARDS_DOOR.get(),
+            ItemRegistry.RUNEWOOD_TRAPDOOR.get(), ItemRegistry.BOLTED_RUNEWOOD_TRAPDOOR.get(),
+            ItemRegistry.RUNEWOOD_BOARDS_TRAPDOOR.get(), ItemRegistry.BOLTED_RUNEWOOD_BOARDS_TRAPDOOR.get(),
             ItemRegistry.RUNEWOOD_FENCE.get(), ItemRegistry.RUNEWOOD_FENCE_GATE.get(),
             ItemRegistry.RUNEWOOD_BOARDS_WALL.get(),
-            ItemRegistry.RUNEWOOD_DOOR.get(),
             ItemRegistry.RUNEWOOD_SIGN.get(), ItemRegistry.RUNEWOOD_SIGN.get(),
             ItemRegistry.RUNEWOOD_ITEM_STAND.get(), ItemRegistry.RUNEWOOD_ITEM_PEDESTAL.get(),
             ItemRegistry.GILDED_RUNEWOOD_ITEM_STAND.get(), ItemRegistry.GILDED_RUNEWOOD_ITEM_PEDESTAL.get(),
@@ -62,10 +65,12 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
             ItemRegistry.RUSTIC_SOULWOOD_PLANKS_STAIRS.get(), ItemRegistry.VERTICAL_RUSTIC_SOULWOOD_PLANKS_STAIRS.get(), ItemRegistry.RUSTIC_SOULWOOD_TILES_STAIRS.get(),
             ItemRegistry.SOULWOOD_PANEL.get(), ItemRegistry.CUT_SOULWOOD_PLANKS.get(), ItemRegistry.SOULWOOD_BEAM.get(),
             ItemRegistry.SOULWOOD_BUTTON.get(), ItemRegistry.SOULWOOD_PRESSURE_PLATE.get(),
-            ItemRegistry.SOLID_SOULWOOD_TRAPDOOR.get(), ItemRegistry.SOULWOOD_TRAPDOOR.get(),
+            ItemRegistry.SOULWOOD_DOOR.get(), ItemRegistry.BOLTED_SOULWOOD_DOOR.get(),
+            ItemRegistry.SOULWOOD_BOARDS_DOOR.get(), ItemRegistry.BOLTED_SOULWOOD_BOARDS_DOOR.get(),
+            ItemRegistry.SOULWOOD_TRAPDOOR.get(), ItemRegistry.BOLTED_SOULWOOD_TRAPDOOR.get(),
+            ItemRegistry.SOULWOOD_BOARDS_TRAPDOOR.get(), ItemRegistry.BOLTED_SOULWOOD_BOARDS_TRAPDOOR.get(),
             ItemRegistry.SOULWOOD_FENCE.get(), ItemRegistry.SOULWOOD_FENCE_GATE.get(),
             ItemRegistry.SOULWOOD_BOARDS_WALL.get(),
-            ItemRegistry.SOULWOOD_DOOR.get(),
             ItemRegistry.SOULWOOD_SIGN.get(), ItemRegistry.SOULWOOD_SIGN.get(),
             ItemRegistry.SOULWOOD_ITEM_STAND.get(), ItemRegistry.SOULWOOD_ITEM_PEDESTAL.get(),
             ItemRegistry.ORNATE_SOULWOOD_ITEM_STAND.get(), ItemRegistry.ORNATE_SOULWOOD_ITEM_PEDESTAL.get(),
@@ -86,22 +91,28 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
 
     protected static void addTags(MalumItemTags provider, MalumDatagenWoodSet woodSet) {
         provider.tag(woodSet.logTag).add(
-                woodSet.log, woodSet.strippedLog, woodSet.wood, woodSet.strippedWood, woodSet.sapFilledLog, woodSet.strippedSapFilledLog);
+                        woodSet.log, woodSet.strippedLog, woodSet.wood,
+                        woodSet.strippedWood, woodSet.sapFilledLog, woodSet.strippedSapFilledLog);
+
         provider.tag(woodSet.boardIngredientTag).add(woodSet.log, woodSet.wood);
+
         provider.tag(woodSet.planksTag).add(
                 woodSet.planks, woodSet.verticalPlanks,
                 woodSet.rusticPlanks, woodSet.verticalRusticPlanks,
                 woodSet.tiles, woodSet.rusticTiles
         );
+
         provider.tag(woodSet.boardsTag).add(
                 woodSet.boards, woodSet.verticalBoards
         );
+
         provider.tag(woodSet.stairsTag).add(
                 woodSet.boardsStairs, woodSet.verticalBoardsStairs,
                 woodSet.planksStairs, woodSet.verticalPlanksStairs,
                 woodSet.rusticPlanksStairs, woodSet.verticalRusticPlanksStairs,
                 woodSet.tilesStairs, woodSet.rusticTilesStairs
         );
+
         provider.tag(woodSet.slabTag).add(
                 woodSet.boardsSlab, woodSet.verticalBoardsSlab,
                 woodSet.planksSlab, woodSet.verticalPlanksSlab,
@@ -143,18 +154,24 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
 
         shapelessWood(recipeOutput, woodSet.wood, woodSet.log);
         shapelessWood(recipeOutput, woodSet.strippedWood, woodSet.strippedLog);
+
         shapelessButton(recipeOutput, woodSet.button, woodSet.planksTag);
-        shapedDoor(recipeOutput, woodSet.door, woodSet.planksTag);
-        shapedFence(recipeOutput, woodSet.fence, woodSet.planksTag);
-        shapedFenceGate(recipeOutput, woodSet.fenceGate, woodSet.planksTag);
         shapedPressurePlate(recipeOutput, woodSet.pressurePlate, woodSet.planksTag);
 
-        shapedTrapdoor(recipeOutput, woodSet.solidTrapdoor, woodSet.planksTag);
+        shapedDoor(recipeOutput, woodSet.door, woodSet.planksTag);
+        shapedDoor(recipeOutput, woodSet.boardsDoor, woodSet.boardsTag);
+        shapedTrapdoor(recipeOutput, woodSet.trapdoor, woodSet.planksTag);
+        shapedTrapdoor(recipeOutput, woodSet.boardsTrapdoor, woodSet.boardsTag);
+
+        bolting(recipeOutput, woodSet.boltedDoor, woodSet.door);
+        bolting(recipeOutput, woodSet.boltedBoardsDoor, woodSet.boardsDoor);
+        bolting(recipeOutput, woodSet.boltedTrapdoor, woodSet.trapdoor);
+        bolting(recipeOutput, woodSet.boltedBoardsTrapdoor, woodSet.boardsTrapdoor);
+
+        shapedFence(recipeOutput, woodSet.fence, woodSet.planksTag);
+        shapedFenceGate(recipeOutput, woodSet.fenceGate, woodSet.planksTag);
 
         shapedSign(recipeOutput, woodSet.sign, woodSet.planksTag);
-
-        trapdoorExchange(recipeOutput, woodSet.solidTrapdoor, woodSet.openTrapdoor, woodSet.prefix + "_open_trapdoor_exchange");
-        trapdoorExchange(recipeOutput, woodSet.openTrapdoor, woodSet.solidTrapdoor, woodSet.prefix + "_solid_trapdoor_exchange");
 
         planksExchange(recipeOutput, woodSet.planks, woodSet.verticalPlanks);
         planksExchange(recipeOutput, woodSet.verticalPlanks, woodSet.tiles);
@@ -171,9 +188,10 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
         var condition = has(woodSet.planksTag);
 
         shaped(RecipeCategory.MISC, woodSet.boardWall, 6)
-                .define('#', woodSet.boardsTag)
-                .pattern("###")
-                .pattern("###")
+                .define('X', woodSet.boardsTag)
+                .define('Y', Items.STICK)
+                .pattern("XYX")
+                .pattern("XYX")
                 .unlockedBy("has_input", condition)
                 .save(recipeOutput);
 
@@ -223,11 +241,13 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
 
     }
 
-    private static void trapdoorExchange(RecipeOutput recipeOutput, ItemLike input, ItemLike output, String path) {
+    private static void bolting(RecipeOutput recipeOutput, ItemLike output, ItemLike input) {
+        final ResourceLocation recipeID = getDefaultRecipeId(output).withSuffix("_bolting");
         shapeless(RecipeCategory.MISC, output)
                 .requires(input)
+                .requires(Items.IRON_NUGGET)
                 .unlockedBy("has_input", has(input))
-                .save(recipeOutput, malumPath(path));
+                .save(recipeOutput, recipeID);
     }
 
     private static void planksExchange(RecipeOutput recipeOutput, ItemLike input, ItemLike planks) {
@@ -239,6 +259,16 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
                 .pattern(" # ")
                 .unlockedBy("has_input", has(input))
                 .save(recipeOutput, recipeID);
+    }
+
+    private static void rusticExchange(RecipeOutput recipeOutput, ItemLike output, ItemLike input) {
+        final ResourceLocation recipeID = getDefaultRecipeId(output).withSuffix("_from_" + getDefaultRecipeId(input).getPath());
+        shaped(RecipeCategory.MISC, output, 5)
+                .define('#', input)
+                .pattern(" # ")
+                .pattern("###")
+                .pattern(" # ")
+                .unlockedBy("has_input", has(input)).save(recipeOutput, recipeID);
     }
 
     private static void shapelessPlanks(RecipeOutput recipeOutput, ItemLike planks, TagKey<Item> input) {
@@ -255,7 +285,8 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
                 .pattern(" # ")
                 .pattern("###")
                 .pattern(" # ")
-                .unlockedBy("has_input", has(input)).save(recipeOutput);
+                .unlockedBy("has_input", has(input))
+                .save(recipeOutput);
     }
 
     private static void shapedPanel(RecipeOutput recipeOutput, ItemLike output, TagKey<Item> input) {
@@ -264,17 +295,8 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
                 .pattern("###")
                 .pattern("###")
                 .pattern("###")
-                .unlockedBy("has_input", has(input)).save(recipeOutput);
-    }
-
-    private static void rusticExchange(RecipeOutput recipeOutput, ItemLike output, ItemLike input) {
-        final ResourceLocation recipeID = getDefaultRecipeId(output).withSuffix("_from_" + getDefaultRecipeId(input).getPath());
-        shaped(RecipeCategory.MISC, output, 5)
-                .define('#', input)
-                .pattern(" # ")
-                .pattern("###")
-                .pattern(" # ")
-                .unlockedBy("has_input", has(input)).save(recipeOutput, recipeID);
+                .unlockedBy("has_input", has(input))
+                .save(recipeOutput);
     }
 
     private static void shapelessWood(RecipeOutput recipeOutput, ItemLike stripped, ItemLike input) {
@@ -402,13 +424,15 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
 
             Item button, Item pressurePlate,
 
-            Item solidTrapdoor, Item openTrapdoor,
+            Item door, Item boardsDoor,
+            Item boltedDoor, Item boltedBoardsDoor,
+
+            Item trapdoor, Item boardsTrapdoor,
+            Item boltedTrapdoor, Item boltedBoardsTrapdoor,
 
             Item fence, Item fenceGate,
 
             Item boardWall,
-
-            Item door,
 
             Item sign, Item hangingSign,
 

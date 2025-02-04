@@ -26,7 +26,7 @@ import static com.sammy.malum.registry.common.item.EnchantmentRegistry.getEnchan
 public class AscensionHandler {
 
     public static void triggerAscension(Level level, Player player, InteractionHand hand, ItemStack scythe) {
-        final boolean isEnhanced = MalumScytheItem.isEnhanced(player);
+        final boolean isEnhanced = MalumScytheItem.isNarrow(player);
         player.resetFallDistance();
         if (level.isClientSide()) {
             Vec3 motion = player.getDeltaMovement();
@@ -61,6 +61,10 @@ public class AscensionHandler {
                 aabb = aabb.move(player.getLookAngle().scale(2f)).inflate(-2f, 1f, -2f);
                 sound = SoundRegistry.SCYTHE_CUT.get();
                 particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_UPPERCUT).setVerticalSlashAngle().setMirrored(true);
+            }
+            if (hasFunnyRing) {
+                baseDamage *= 0.6f;
+                magicDamage *= 0.6f;
             }
             if (scythe.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
                 particleEffect.setSpiritType(spiritAffiliatedItem);
@@ -98,9 +102,9 @@ public class AscensionHandler {
         if (!player.isCreative()) {
             int enchantmentLevel = getEnchantmentLevel(level, EnchantmentRegistry.ASCENSION, scythe);
             if (enchantmentLevel < 6) {
-                int cooldown = 150 - 25 * (enchantmentLevel - 1);
+                int cooldown = 200 - 25 * (enchantmentLevel - 1);
                 if (hasFunnyRing) {
-                    cooldown += 50;
+                    cooldown = (cooldown + 50);
                 }
                 player.getCooldowns().addCooldown(scythe.getItem(), cooldown);
             }

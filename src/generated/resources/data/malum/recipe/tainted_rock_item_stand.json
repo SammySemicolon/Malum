@@ -11,11 +11,10 @@
   },
   "pattern": [
     "YYY",
-    " X ",
-    "YYY"
+    "XXX"
   ],
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "malum:tainted_rock_item_stand"
   }
 }

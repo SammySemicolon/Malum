@@ -2,13 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
+    "X": {
       "tag": "malum:runewood_boards"
+    },
+    "Y": {
+      "item": "minecraft:stick"
     }
   },
   "pattern": [
-    "###",
-    "###"
+    "XYX",
+    "XYX"
   ],
   "result": {
     "count": 6,

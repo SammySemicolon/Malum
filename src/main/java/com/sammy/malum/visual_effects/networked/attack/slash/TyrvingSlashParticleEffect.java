@@ -1,6 +1,7 @@
 package com.sammy.malum.visual_effects.networked.attack.slash;
 
 import com.sammy.malum.client.*;
+import com.sammy.malum.registry.client.*;
 import com.sammy.malum.visual_effects.*;
 import net.minecraft.nbt.*;
 import net.minecraft.world.phys.*;
@@ -35,7 +36,7 @@ public class TyrvingSlashParticleEffect extends SlashAttackParticleEffect {
 
             float offsetBase = RandomHelper.randomBetween(random, 0.4f, 0.8f) * (random.nextBoolean() ? 1 : -1) + (mirror ? 3.14f : 0);
             for (int i = 0; i < 4; i++) {
-                var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), spirit);
+                var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.SLASH, spirit);
                 float spinOffset = angle + (i % 2 == 0 ? 1 : -1) * offsetBase;
                 int lifeDelay = (i % 2 == 0 ? 3 : 0);
                 slash.getBuilder()

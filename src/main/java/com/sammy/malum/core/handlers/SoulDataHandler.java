@@ -84,11 +84,9 @@ public class SoulDataHandler {
     }
 
     public static ItemStack getSoulHunterWeapon(DamageSource source, LivingEntity attacker) {
-        ItemStack stack = attacker.getMainHandItem();
-
         if (source.getDirectEntity() instanceof ScytheBoomerangEntity scytheBoomerang) {
-            stack = scytheBoomerang.getItem();
+            return scytheBoomerang.getItem();
         }
-        return stack;
+        return attacker.getMainHandItem();
     }
 }

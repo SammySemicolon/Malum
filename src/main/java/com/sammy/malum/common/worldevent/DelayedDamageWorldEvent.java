@@ -4,7 +4,6 @@ import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.visual_effects.networked.*;
 import com.sammy.malum.visual_effects.networked.data.*;
-import com.sammy.malum.visual_effects.networked.staff.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.nbt.*;
@@ -13,13 +12,12 @@ import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.worldevent.*;
 
+import javax.annotation.*;
 import java.awt.*;
 import java.util.*;
 
@@ -29,6 +27,7 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
     protected ResourceKey<DamageType> magicDamageType = DamageTypeRegistry.VOODOO;
 
     protected UUID attackerUUID;
+    protected UUID projectileUUID;
     protected UUID targetUUID;
     protected int delay;
     protected float physicalDamage;
@@ -44,6 +43,10 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
     protected Color particleColor;
     protected MalumSpiritType particleSpirit;
 
+    public DelayedDamageWorldEvent(Entity target) {
+        this();
+        this.targetUUID = target.getUUID();
+    }
     public DelayedDamageWorldEvent() {
         this(WorldEventTypeRegistry.DELAYED_DAMAGE.get());
     }
@@ -52,9 +55,15 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
         super(type);
     }
 
-    public DelayedDamageWorldEvent setData(UUID attackerUUID, UUID targetUUID, float physicalDamage, float magicDamage, int delay) {
-        this.attackerUUID = attackerUUID;
-        this.targetUUID = targetUUID;
+    public DelayedDamageWorldEvent setAttacker(Entity attacker) {
+        return setAttacker(attacker, attacker);
+    }
+    public DelayedDamageWorldEvent setAttacker(@Nonnull Entity attacker, Entity projectile) {
+        this.attackerUUID = attacker.getUUID();
+        this.projectileUUID = projectile != null ? projectile.getUUID() : null;
+        return this;
+    }
+    public DelayedDamageWorldEvent setDamageData(float physicalDamage, float magicDamage, int delay) {
         this.physicalDamage = physicalDamage;
         this.magicDamage = magicDamage;
         this.delay = delay;
@@ -104,21 +113,22 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
         if (level instanceof ServerLevel serverLevel) {
             Entity entity = serverLevel.getEntity(targetUUID);
             Entity attacker = serverLevel.getEntity(attackerUUID);
-            if (entity != null && attacker instanceof Player player) {
+            Entity projectile = serverLevel.getEntity(projectileUUID);
+            if (entity != null && attacker != null) {
                 if (entity.isAlive()) {
                     var deltaMovement = entity.getDeltaMovement();
                     if (physicalDamage > 0) {
                         entity.invulnerableTime = 0;
-                        entity.hurt(attacker.damageSources().source(physicalDamageType, player), physicalDamage);
+                        entity.hurt(DamageTypeHelper.create(level, physicalDamageType, projectile, attacker), physicalDamage);
                     }
                     if (magicDamage > 0) {
                         entity.invulnerableTime = 0;
-                        entity.hurt(DamageTypeHelper.create(serverLevel, magicDamageType, attacker), magicDamage);
+                        entity.hurt(DamageTypeHelper.create(level, magicDamageType, projectile, attacker), magicDamage);
                     }
                     entity.setDeltaMovement(deltaMovement);
                     if (soundEvent != null) {
-                        float pitch = RandomHelper.randomBetween(player.getRandom(), minPitch, maxPitch);
-                        float volume = RandomHelper.randomBetween(player.getRandom(), minVolume, maxVolume);
+                        float pitch = RandomHelper.randomBetween(attacker.getRandom(), minPitch, maxPitch);
+                        float volume = RandomHelper.randomBetween(attacker.getRandom(), minVolume, maxVolume);
                         SoundHelper.playSound(attacker, soundEvent.value(), volume, pitch);
                     }
                     if (particleEffect != null) {

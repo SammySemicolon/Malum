@@ -643,6 +643,13 @@ public class CodexLangDatagen {
                 "In addition to increased damage and a longer cooldown, those cut by the blades of wind under the Rising Edge’s effect will also find themselves launched upwards. Useful for crowd control and whatnot, but like the scythe itself, the Narrow Edge can change this purpose.",
                 "By wearing both the Necklace of the Narrow Edge and the Ring of the Rising Edge, the concentrated sweep of wind launches with vastly increased potency, allowing me to juggle my enemies above me.");
 
+        addEntryHeader("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom", "Ring of the Howling Maelstrom", "Slicing Winds");
+        addHeadline("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom", "The Howling Maelstrom");
+        addPages("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom",
+                "The Rebound enchantment is an effective ranged option for the scythe, much like with the Ascension enchantment it has close roots to Aerial Arcana. The process is the exact same apart from an additional extract of soulstone and a different basis for infusion.",
+                "In addition to increased damage and a substantially longer cooldown, the Rebound projectile carries with itself a powerful windborne maelstrom, repeatedly damaging everything within a large radius around the scythe.",
+                "By wearing both the Necklace of the Narrow Edge and the Ring of the Howling Maelstrom, the Maelstrom is instead reserved till after the moment of impact, remaining at the striking point for about two seconds.");
+
         addEntryHeader("runeworking", "Runeworking", "The central pin");
         addHeadline("runeworking", "Runeworking");
         addPages("runeworking",

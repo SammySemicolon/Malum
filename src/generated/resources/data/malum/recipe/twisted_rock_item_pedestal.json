@@ -11,10 +11,11 @@
   },
   "pattern": [
     "YYY",
-    "XXX"
+    " X ",
+    "YYY"
   ],
   "result": {
-    "count": 2,
+    "count": 1,
     "id": "malum:twisted_rock_item_pedestal"
   }
 }

@@ -20,7 +20,9 @@ public class DamageTypeRegistry {
     public static final ResourceKey<DamageType> SCYTHE_REBOUND = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("scythe_rebound"));
     public static final ResourceKey<DamageType> SCYTHE_ASCENSION = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("scythe_ascension"));
     public static final ResourceKey<DamageType> SCYTHE_COMBO = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("scythe_combo"));
-    public static final ResourceKey<DamageType> HIDDEN_BLADE_COUNTER = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("hidden_blade_counter"));
+
+    public static final ResourceKey<DamageType> HIDDEN_BLADE_MAGIC_COUNTER = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("hidden_blade_magic_counter"));
+    public static final ResourceKey<DamageType> HIDDEN_BLADE_PHYSICAL_COUNTER = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("hidden_blade_physical_counter"));
 
     public static final ResourceKey<DamageType> TYRVING = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("tyrving"));
 

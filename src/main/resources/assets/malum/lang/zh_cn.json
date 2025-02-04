@@ -686,7 +686,7 @@
   "malum.effect.curio.soul_ward_complete_absorption": "灵魂护盾吸收所有伤害",
   "malum.effect.curio.soul_ward_escalating_integrity": "灵魂护盾在接近破碎时获得稳固度",
   "malum.effect.curio.soul_ward_long_shatter_cooldown": "灵魂护盾破碎后需长时间才可恢复",
-  "malum.effect.curio.soul_ward_magic_resilience": "灵魂护盾魔法韧性",
+  "malum.effect.curio.soul_ward_magic_resilience": "灵魂护盾会将魔法重新导向",
   "malum.effect.curio.spirits_add_health": "收获精魂时给予额外生命值",
   "malum.effect.curio.spirits_extend_effect": "收获精魂时延长药水持续时间",
   "malum.effect.curio.spirits_gluttony": "收获精魂时给予暴食效果",

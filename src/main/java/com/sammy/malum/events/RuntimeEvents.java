@@ -38,7 +38,6 @@ import net.neoforged.neoforge.event.tick.*;
 @EventBusSubscriber
 public class RuntimeEvents {
 
-
     @SubscribeEvent
     public static void onEntityJoin(EntityJoinLevelEvent event) {
         CurioTokenOfGratitude.giveItem(event);

@@ -42,8 +42,7 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.helpers.block.*;
-import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
-import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntityInventory;
+import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.Easing;
 import team.lodestar.lodestone.systems.recipe.*;
 
@@ -51,7 +50,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-public class SpiritAltarBlockEntity extends LodestoneBlockEntity {
+public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IItemHandlerSupplier {
 
     private static final Vec3 ALTAR_ITEM_OFFSET = new Vec3(0.5f, 1.25f, 0.5f);
     public static final int HORIZONTAL_RANGE = 4;
@@ -87,7 +86,8 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity {
         spiritInventory = MalumSpiritBlockEntityInventory.spiritStacks(this, SpiritTypeRegistry.SPIRITS.size()).onContentsChanged(this::recalculateRecipes);
     }
 
-    public IItemHandler getItemHandler() {
+    @Override
+    public IItemHandler getInventory(Direction direction) {
         return exposedInventory.get();
     }
 

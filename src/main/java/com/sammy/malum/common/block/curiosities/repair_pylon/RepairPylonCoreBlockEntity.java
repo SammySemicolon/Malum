@@ -2,7 +2,6 @@ package com.sammy.malum.common.block.curiosities.repair_pylon;
 
 import com.sammy.malum.common.block.*;
 import com.sammy.malum.common.block.storage.*;
-import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.common.recipe.*;
 import com.sammy.malum.core.systems.recipe.*;
 import com.sammy.malum.registry.common.*;
@@ -19,12 +18,10 @@ import net.minecraft.util.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.*;
@@ -39,7 +36,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.*;
 
-public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements IBlockCapabilityProvider<IItemHandler, Direction> {
+public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements IItemHandlerSupplier {
 
     private static final Vec3 PYLON_ITEM_OFFSET = new Vec3(0.5f, 2.5f, 0.5f);
     private static final int HORIZONTAL_RANGE = 6;
@@ -80,7 +77,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
     public float spiritAmount;
     public float spiritSpin;
 
-    private final Supplier<IItemHandler> combinedInventory = () -> new CombinedInvWrapper(inventory, spiritInventory);
+    private final Supplier<IItemHandler> exposedInventory = () -> new CombinedInvWrapper(inventory, spiritInventory);
 
     public RepairPylonCoreBlockEntity(BlockEntityType<? extends RepairPylonCoreBlockEntity> type, MultiBlockStructure structure, BlockPos pos, BlockState state) {
         super(type, structure, pos, state);
@@ -90,6 +87,11 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
 
     public RepairPylonCoreBlockEntity(BlockPos pos, BlockState state) {
         this(BlockEntityRegistry.REPAIR_PYLON.get(), STRUCTURE.get(), pos, state);
+    }
+
+    @Override
+    public IItemHandler getInventory(Direction direction) {
+        return exposedInventory.get();
     }
 
     @Override
@@ -327,10 +329,5 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
 
     public float getCooldownOffset(int relativeCooldown, Easing easing) {
         return easing.ease(relativeCooldown / 90f, 0, 1, 1);
-    }
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
-        return combinedInventory.get();
     }
 }

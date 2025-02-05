@@ -43,7 +43,7 @@ import team.lodestar.lodestone.systems.recipe.*;
 import javax.annotation.Nullable;
 import java.util.function.*;
 
-public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implements IArtificeAcceptor, IMalumSpecialItemAccessPoint {
+public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implements IArtificeAcceptor, IMalumSpecialItemAccessPoint, IItemHandlerSupplier {
 
     public static final Vec3 CRUCIBLE_ITEM_OFFSET = new Vec3(0.5f, 1.6f, 0.5f);
     public static final Vec3 CRUCIBLE_CORE_AUGMENT_OFFSET = new Vec3(0.5f, 3f, 0.5f);
@@ -78,7 +78,8 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         this(BlockEntityRegistry.SPIRIT_CRUCIBLE.get(), STRUCTURE.get(), pos, state);
     }
 
-    public IItemHandler getItemHandler() {
+    @Override
+    public IItemHandler getInventory(Direction direction) {
         return exposedInventory.get();
     }
 

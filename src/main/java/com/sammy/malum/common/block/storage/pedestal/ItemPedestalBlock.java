@@ -35,7 +35,7 @@ public class ItemPedestalBlock<T extends ItemPedestalBlockEntity> extends WaterL
     public int getAnalogOutputSignal(BlockState pState, Level pLevel, BlockPos pPos) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (be instanceof ItemPedestalBlockEntity pedestal) {
-            return ItemHandlerHelper.calcRedstoneFromInventory(pedestal.getCapability(pLevel, pPos, pState, pedestal, Direction.UP));
+            return ItemHandlerHelper.calcRedstoneFromInventory(pedestal.getInventory(Direction.UP));
         }
         return 0;
     }

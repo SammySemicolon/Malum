@@ -2,7 +2,7 @@ package com.sammy.malum.visual_effects;
 
 import com.sammy.malum.client.*;
 import com.sammy.malum.common.entity.scythe.*;
-import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.client.*;
 import net.minecraft.util.*;

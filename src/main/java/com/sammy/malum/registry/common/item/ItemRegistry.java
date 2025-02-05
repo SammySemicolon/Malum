@@ -13,6 +13,7 @@ import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.augment.core.*;
+import com.sammy.malum.common.item.banner.*;
 import com.sammy.malum.common.item.codex.*;
 import com.sammy.malum.common.item.cosmetic.curios.*;
 import com.sammy.malum.common.item.curiosities.*;
@@ -509,6 +510,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> ROTTING_ESSENCE = register("rotting_essence", DEFAULT_PROPERTIES().food(FoodPropertyRegistry.ROTTING_ESSENCE), Item::new);
     public static final DeferredHolder<Item, Item> GRIM_TALC = register("grim_talc", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> ASTRAL_WEAVE = register("astral_weave", DEFAULT_PROPERTIES(), Item::new);
+    public static final DeferredHolder<Item, Item> WIND_NUCLEUS = register("wind_nucleus", DEFAULT_PROPERTIES(), WindNucleusItem::new);
     public static final DeferredHolder<Item, Item> WARP_FLUX = register("warp_flux", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> HEX_ASH = register("hex_ash", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> LIVING_FLESH = register("living_flesh", DEFAULT_PROPERTIES(), Item::new);

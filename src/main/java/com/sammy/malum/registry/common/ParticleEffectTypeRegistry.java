@@ -1,5 +1,6 @@
 package com.sammy.malum.registry.common;
 
+import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.visual_effects.networked.*;
 import com.sammy.malum.visual_effects.networked.altar.*;
 import com.sammy.malum.visual_effects.networked.attack.slam.SlamAttackParticleEffect;
@@ -41,7 +42,9 @@ public class ParticleEffectTypeRegistry {
 
     //Totem Effects
     public static final ParticleEffectType TOTEM_POLE_ACTIVATED = new TotemPoleActivatedParticleEffect("totem_pole_activated");
-    public static final ParticleEffectType RITE_EFFECT_TRIGGERED = new GenericRiteEffectTriggerParticleEffect("generic_rite_effect");
+    public static final ParticleEffectType ENTITY_RITE_EFFECT = new EntityTotemParticleEffect("entity_rite_effect");
+    public static final ParticleEffectType BLOCK_RITE_EFFECT = new BlockTotemParticleEffect("block_rite_effect");
+    public static final ParticleEffectType BLOCK_FALL_RITE_EFFECT = new BlockFallTotemParticleEffect("block_fall_rite_effect");
 
     //Ritual Plinth
     public static final ParticleEffectType RITUAL_PLINTH_EATS_ITEM = new RitualPlinthAbsorbItemParticleEffect("ritual_plinth_eats_item");

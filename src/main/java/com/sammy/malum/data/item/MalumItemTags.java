@@ -1,8 +1,8 @@
 package com.sammy.malum.data.item;
 
 import com.sammy.malum.*;
-import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
+import com.sammy.malum.common.item.banner.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.crafting.*;
@@ -120,6 +120,7 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(ItemTagRegistry.ASCENSION_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);
 
         tag(ItemTagRegistry.REPLENISHING_ENCHANTABLE).addTag(ItemTagRegistry.STAVES);
+        tag(ItemTagRegistry.CAPACITOR_ENCHANTABLE).addTag(ItemTagRegistry.STAVES);
 
         tag(ItemTagRegistry.ANIMATED_ENCHANTABLE).addTag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS);
         tag(ItemTagRegistry.HAUNTED_ENCHANTABLE).addTag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS);

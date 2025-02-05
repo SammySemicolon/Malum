@@ -154,14 +154,14 @@ public class IntroductionEntries {
         );
 
         screen.addEntry("esoteric_reaping", 0, 6, b -> b
-                .setWidgetSupplier((e, x, y) -> new IconObject(e, x, y, malumPath("textures/gui/book/icons/esoteric_reaping.png")))
-                .configureWidget(w -> w.setStyle(BookWidgetStyle.DARK_SMALL_RUNEWOOD))
+                .configureWidget(w -> w.setIcon(ROTTING_ESSENCE))
                 .addPage(new HeadlineTextPage("esoteric_reaping", "esoteric_reaping.1"))
                 .addPage(new TextPage("esoteric_reaping.2"))
                 .addPage(new TextPage("esoteric_reaping.3"))
                 .addPage(new HeadlineTextItemPage("esoteric_reaping.rotting_essence", "esoteric_reaping.rotting_essence.1", ROTTING_ESSENCE.get()))
                 .addPage(new HeadlineTextItemPage("esoteric_reaping.grim_talc", "esoteric_reaping.grim_talc.1", GRIM_TALC.get()))
                 .addPage(new HeadlineTextItemPage("esoteric_reaping.astral_weave", "esoteric_reaping.astral_weave.1", ASTRAL_WEAVE.get()))
+                .addPage(new HeadlineTextItemPage("esoteric_reaping.wind_nucleus", "esoteric_reaping.wind_nucleus.1", WIND_NUCLEUS.get()))
                 .addPage(new HeadlineTextItemPage("esoteric_reaping.warp_flux", "esoteric_reaping.warp_flux.1", WARP_FLUX.get()))
         );
 

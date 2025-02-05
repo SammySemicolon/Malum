@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "malum:runewood_trapdoor"
+            "items": "#malum:runewood_boards"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "malum:runewood_boards_trapdoor_bolting"
+        "recipe": "malum:runewood_boards_door"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "malum:runewood_boards_trapdoor_bolting"
+      "malum:runewood_boards_door"
     ]
   }
 }

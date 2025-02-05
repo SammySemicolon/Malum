@@ -128,7 +128,7 @@ public class MaterialSpiritInfusionRecipes {
     }
 
     public static void spiritedGlassRecipe(RecipeOutput recipeOutput, MalumSpiritType spirit, Item glass) {
-        new SpiritInfusionRecipeBuilder(Ingredient.of(Tags.Items.GLASS_BLOCKS), 16, glass, 16)
+        new SpiritInfusionRecipeBuilder(Ingredient.of(Tags.Items.GLASS_BLOCKS), 8, glass, 8)
                 .addSpirit(spirit, 2)
                 .addExtraItem(Items.IRON_INGOT, 1)
                 .save(recipeOutput);

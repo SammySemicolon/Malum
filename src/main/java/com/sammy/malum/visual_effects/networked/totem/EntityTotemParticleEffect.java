@@ -7,9 +7,9 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
-public class GenericRiteEffectTriggerParticleEffect extends ParticleEffectType {
+public class EntityTotemParticleEffect extends ParticleEffectType {
 
-    public GenericRiteEffectTriggerParticleEffect(String id) {
+    public EntityTotemParticleEffect(String id) {
         super(id);
     }
 

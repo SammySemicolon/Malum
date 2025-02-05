@@ -34,7 +34,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
+import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
@@ -51,7 +51,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlockCapabilityProvider<IItemHandler, Direction> {
+public class SpiritAltarBlockEntity extends LodestoneBlockEntity {
 
     private static final Vec3 ALTAR_ITEM_OFFSET = new Vec3(0.5f, 1.25f, 0.5f);
     public static final int HORIZONTAL_RANGE = 4;
@@ -74,7 +74,6 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
     public Map<SpiritInfusionRecipe, AltarCraftingHelper.Ranking> possibleRecipes = new HashMap<>();
     public SpiritInfusionRecipe recipe;
 
-    public Supplier<IItemHandler> internalInventory = () -> new CombinedInvWrapper(inventory, extrasInventory, spiritInventory);
     public Supplier<IItemHandler> exposedInventory = () -> new CombinedInvWrapper(inventory, spiritInventory);
 
     public SpiritAltarBlockEntity(BlockEntityType<? extends SpiritAltarBlockEntity> type, BlockPos pos, BlockState state) {
@@ -86,6 +85,10 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
         inventory = MalumBlockEntityInventory.singleStackNotSpirit(this).onContentsChanged(this::recalculateRecipes);
         extrasInventory = MalumBlockEntityInventory.stacksNotSpirits(this, 8);
         spiritInventory = MalumSpiritBlockEntityInventory.spiritStacks(this, SpiritTypeRegistry.SPIRITS.size()).onContentsChanged(this::recalculateRecipes);
+    }
+
+    public IItemHandler getItemHandler() {
+        return exposedInventory.get();
     }
 
     @Override
@@ -194,12 +197,11 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
             if (!isCrafting && recipe != null) {
                 isCrafting = true;
                 BlockStateHelper.updateAndNotifyState(level, worldPosition);
-            }
-            else if(isCrafting && recipe == null) {
+            } else if (isCrafting && recipe == null) {
                 isCrafting = false;
                 BlockStateHelper.updateAndNotifyState(level, worldPosition);
             }
-            progress = isCrafting ? progress+1 : progress;
+            progress = isCrafting ? progress + 1 : progress;
             if (level instanceof ServerLevel serverLevel) {
                 if (serverLevel.getGameTime() % 20L == 0) {
                     boolean canAccelerate = accelerators.stream().allMatch(IAltarAccelerator::canAccelerate);
@@ -316,6 +318,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
             }
         }
         recalibrateAccelerators();
+        recalculateRecipes();
         BlockStateHelper.updateAndNotifyState(level, worldPosition);
     }
 
@@ -362,13 +365,5 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IBlo
             return 1;
         }
         return easing.ease(spiritYLevel / 30f, 0, 1, 1);
-    }
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction side) {
-        if (side == null) {
-            return internalInventory.get();
-        }
-        return exposedInventory.get();
     }
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "malum:runewood_boards_door_bolting"
+        "recipe": "malum:bolted_runewood_door_bolting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "malum:runewood_boards_door_bolting"
+      "malum:bolted_runewood_door_bolting"
     ]
   }
 }

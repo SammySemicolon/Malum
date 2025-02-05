@@ -4,15 +4,7 @@
   "spirits": [
     {
       "spirit": "infernal",
-      "count": 2
-    },
-    {
-      "spirit": "arcane",
-      "count": 1
-    },
-    {
-      "spirit": "wicked",
-      "count": 1
+      "count": 3
     }
   ]
 }

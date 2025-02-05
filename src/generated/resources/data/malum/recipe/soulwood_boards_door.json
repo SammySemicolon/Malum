@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "tag": "malum:runewood_boards"
+      "tag": "malum:soulwood_boards"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 3,
-    "id": "malum:bolted_runewood_door"
+    "id": "malum:soulwood_boards_door"
   }
 }

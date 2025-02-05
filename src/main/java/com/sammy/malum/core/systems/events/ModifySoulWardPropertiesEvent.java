@@ -24,7 +24,7 @@ public class ModifySoulWardPropertiesEvent extends SoulWardEvent {
         this.newSoulWardIntegrity = soulWardIntegrity;
     }
 
-    public double getPhysicalDamageAbsorption() {
+    public double getOriginalPhysicalDamageAbsorption() {
         return physicalDamageAbsorption;
     }
 
@@ -32,11 +32,11 @@ public class ModifySoulWardPropertiesEvent extends SoulWardEvent {
         return newPhysicalDamageAbsorption;
     }
 
-    public void setNewMagicDamageAbsorption(double newMagicDamageAbsorption) {
-        this.newMagicDamageAbsorption = newMagicDamageAbsorption;
+    public void setNewPhysicalDamageAbsorption(double newPhysicalDamageAbsorption) {
+        this.newPhysicalDamageAbsorption = newPhysicalDamageAbsorption;
     }
 
-    public double getMagicDamageAbsorption() {
+    public double getOriginalMagicDamageAbsorption() {
         return magicDamageAbsorption;
     }
 
@@ -44,8 +44,8 @@ public class ModifySoulWardPropertiesEvent extends SoulWardEvent {
         return newMagicDamageAbsorption;
     }
 
-    public void setNewPhysicalDamageAbsorption(double newPhysicalDamageAbsorption) {
-        this.newPhysicalDamageAbsorption = newPhysicalDamageAbsorption;
+    public void setNewMagicDamageAbsorption(double newMagicDamageAbsorption) {
+        this.newMagicDamageAbsorption = newMagicDamageAbsorption;
     }
 
     public double getOriginalIntegrity() {

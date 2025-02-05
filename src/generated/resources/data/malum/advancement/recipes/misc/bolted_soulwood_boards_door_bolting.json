@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "malum:bolted_soulwood_door"
+            "items": "malum:soulwood_boards_door"
           }
         ]
       },

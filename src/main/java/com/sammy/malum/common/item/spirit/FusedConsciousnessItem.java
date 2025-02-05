@@ -1,5 +1,6 @@
-package com.sammy.malum.common.item;
+package com.sammy.malum.common.item.spirit;
 
+import com.sammy.malum.common.item.*;
 import net.minecraft.core.component.*;
 import net.minecraft.world.item.*;
 

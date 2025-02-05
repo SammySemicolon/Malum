@@ -1,6 +1,6 @@
 package com.sammy.malum.events;
 
-import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.banner.*;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.common.*;
 import net.neoforged.neoforge.event.*;

@@ -8,7 +8,7 @@ import net.neoforged.neoforge.event.entity.living.*;
 
 public class MalumAttributeEventHandler {
     public static void processAttributes(LivingDamageEvent.Pre event) {
-        if (event.getOriginalDamage() <= 0) {
+        if (event.getNewDamage() <= 0) {
             return;
         }
         DamageSource source = event.getSource();

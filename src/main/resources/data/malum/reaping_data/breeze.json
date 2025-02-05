@@ -1,0 +1,13 @@
+{
+  "registry_name": "minecraft:breeze",
+  "drops": [
+    {
+      "ingredient": {
+        "item": "malum:wind_nucleus"
+      },
+      "chance": "0.5",
+      "min": "2",
+      "max": "4"
+    }
+  ]
+}

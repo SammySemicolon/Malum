@@ -4,15 +4,15 @@
   "spirits": [
     {
       "spirit": "aqueous",
-      "count": 2
+      "count": 3
     },
     {
       "spirit": "sacred",
-      "count": 1
+      "count": 3
     },
     {
       "spirit": "wicked",
-      "count": 1
+      "count": 3
     }
   ]
 }

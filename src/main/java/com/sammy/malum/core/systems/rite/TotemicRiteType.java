@@ -1,4 +1,4 @@
-package com.sammy.malum.common.spiritrite;
+package com.sammy.malum.core.systems.rite;
 
 import com.sammy.malum.*;
 import com.sammy.malum.common.block.curiosities.totem.*;

@@ -1,6 +1,7 @@
 package com.sammy.malum.common.spiritrite.arcane;
 
 import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.core.systems.rite.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.world.entity.*;
 

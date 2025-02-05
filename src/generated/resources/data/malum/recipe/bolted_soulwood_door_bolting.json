@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "malum:runewood_door"
+      "item": "malum:soulwood_door"
     },
     {
       "item": "minecraft:iron_nugget"
@@ -11,6 +11,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "malum:runewood_boards_door"
+    "id": "malum:bolted_soulwood_door"
   }
 }

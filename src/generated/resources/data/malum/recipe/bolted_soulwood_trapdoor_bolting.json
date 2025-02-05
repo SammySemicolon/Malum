@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "malum:runewood_trapdoor"
+      "item": "malum:soulwood_trapdoor"
     },
     {
       "item": "minecraft:iron_nugget"
@@ -11,6 +11,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "malum:runewood_boards_trapdoor"
+    "id": "malum:bolted_soulwood_trapdoor"
   }
 }

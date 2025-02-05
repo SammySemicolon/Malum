@@ -1,6 +1,6 @@
 package com.sammy.malum.core.helpers;
 
-import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.visual_effects.networked.*;
 import com.sammy.malum.visual_effects.networked.attack.slam.SlamAttackParticleEffect;

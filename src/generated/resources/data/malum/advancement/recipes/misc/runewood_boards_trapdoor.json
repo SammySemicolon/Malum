@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#malum:soulwood_boards"
+            "items": "#malum:runewood_boards"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "malum:bolted_soulwood_door"
+        "recipe": "malum:runewood_boards_trapdoor"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "malum:bolted_soulwood_door"
+      "malum:runewood_boards_trapdoor"
     ]
   }
 }

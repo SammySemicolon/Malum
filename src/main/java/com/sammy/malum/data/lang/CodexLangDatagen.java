@@ -357,8 +357,8 @@ public class CodexLangDatagen {
         addSimpleEntryHeader("esoteric_reaping", "Esoteric Reaping", "Leaked magic");
         addPages("esoteric_reaping",
                 "When a being dies, its soul disperses. This is basic theory, and well proven by this point. It's been proposed that sometimes, that power leaks into the body of the creature as it dies, to explain the existence of reagents they drop. That hadn't been proven yet.",
-                "But now, with my scythe, I have proved it beyond doubt. When a soul is shattered, even if only for a brief moment, the energy collides with what's left of it's vessel. This phenomena appears to create a strong reaction, a change of sorts.",
-                "I have discovered four reagents born through this process, which I will detail further in this entry. In summary, the flesh of zombies can curdle to Rotting Essence; the bones of skeletons can crystallize to Grim Talc; the wings of phantoms can spin to Astral Weave; and the magic of endermen can coalesce into Warp Flux.");
+                "But now, with my scythe, I have proved it beyond doubt. When a soul is shattered, even if only for a brief moment, the energy collides with what's left of it's vessel, it's physical remains. That collision creates brand new reagents that cannot normally be obtained by destroying just the body. This phenomena appears to create a strong reaction, a change of sorts.",
+                "I have discovered five reagents born through this process, which I will detail further in this entry. In summary, the flesh of zombies can curdle to Rotting Essence; the bones of skeletons can crystallize to Grim Talc; the wings of phantoms can spin to Astral Weave; the essence of the breeze can persist as the Wind Nucleus; and the magic of endermen can coalesce into Warp Flux.");
         addHeadline("esoteric_reaping.rotting_essence", "Rotting Essence");
         addPages("esoteric_reaping.rotting_essence",
                 "When exposed to this magic, the flesh of the undead can curdle into Rotting Essence, a toxic and foul substance that smells like death itself.");
@@ -368,6 +368,9 @@ public class CodexLangDatagen {
         addHeadline("esoteric_reaping.astral_weave", "Astral Weave");
         addPages("esoteric_reaping.astral_weave",
                 "The membrane of a phantom will spin into Astral Weave with this magic, a mystic cloth with strange arcane properties.");
+        addHeadline("esoteric_reaping.wind_nucleus", "Wind Nucleus");
+        addPages("esoteric_reaping.wind_nucleus",
+                "The very essence of the Breeze remains alive -in some sense at least- as the Wind Nucleus, the core of it's design. It's stored energy can be quickly released to push away any nearby creature.");
         addHeadline("esoteric_reaping.warp_flux", "Warp Flux");
         addPages("esoteric_reaping.warp_flux",
                 "The magic that envelops the endermen coalesces into Warp Flux, a strange essence that seems to be inimical to natural law.");
@@ -646,7 +649,7 @@ public class CodexLangDatagen {
         addEntryHeader("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom", "Ring of the Howling Maelstrom", "Slicing Winds");
         addHeadline("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom", "The Howling Maelstrom");
         addPages("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom",
-                "The Rebound enchantment is an effective ranged option for the scythe, much like with the Ascension enchantment it has close roots to Aerial Arcana. The process is the exact same apart from an additional extract of soulstone and a different basis for infusion.",
+                "The Rebound enchantment is an effective ranged option for the scythe similarly to Ascension it has close connections to Aerial Arcana. Similarly, this ring enables an added functionality to Rebound, which I term the Howling Maelstrom.",
                 "In addition to increased damage and a substantially longer cooldown, the Rebound projectile carries with itself a powerful windborne maelstrom, repeatedly damaging everything within a large radius around the scythe.",
                 "By wearing both the Necklace of the Narrow Edge and the Ring of the Howling Maelstrom, the Maelstrom is instead reserved till after the moment of impact, remaining at the striking point for about two seconds.");
 

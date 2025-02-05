@@ -1,13 +1,12 @@
 package com.sammy.malum.common.spiritrite.eldritch;
 
 import com.sammy.malum.common.block.curiosities.totem.*;
-import com.sammy.malum.common.packets.particle.rite.generic.BlockSparkleParticlePacket;
-import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.core.systems.rite.*;
+import com.sammy.malum.registry.common.*;
+import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.server.level.*;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.*;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 
@@ -18,7 +17,7 @@ public class EldritchEarthenRiteType extends TotemicRiteType {
 
     @Override
     public TotemicRiteEffect getNaturalRiteEffect() {
-        return new BlockAffectingRiteEffect() {
+        return new TotemicRiteEffect(TotemicRiteEffect.MalumRiteEffectCategory.DIRECTIONAL_BLOCK_EFFECT) {
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 getBlocksAhead(totemBase).forEach(p -> {
@@ -26,7 +25,7 @@ public class EldritchEarthenRiteType extends TotemicRiteType {
                     boolean canBreak = !state.isAir() && state.getDestroySpeed(level, p) != -1;
                     if (canBreak) {
                         level.destroyBlock(p, true);
-                        PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(p), new BlockSparkleParticlePacket(EARTHEN_SPIRIT.getPrimaryColor(), p));
+                        ParticleEffectTypeRegistry.BLOCK_RITE_EFFECT.createPositionedEffect(level, new PositionEffectData(p), new ColorEffectData(EARTHEN_SPIRIT));
                     }
                 });
             }
@@ -35,7 +34,7 @@ public class EldritchEarthenRiteType extends TotemicRiteType {
 
     @Override
     public TotemicRiteEffect getCorruptedEffect() {
-        return new BlockAffectingRiteEffect() {
+        return new TotemicRiteEffect(TotemicRiteEffect.MalumRiteEffectCategory.DIRECTIONAL_BLOCK_EFFECT) {
             @SuppressWarnings("ConstantConditions")
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
@@ -46,7 +45,7 @@ public class EldritchEarthenRiteType extends TotemicRiteType {
                         BlockState cobblestone = Blocks.COBBLESTONE.defaultBlockState();
                         level.setBlockAndUpdate(p, cobblestone);
                         level.levelEvent(2001, p, Block.getId(cobblestone));
-                        PacketDistributor.sendToPlayersTrackingChunk(level, new ChunkPos(p), new BlockSparkleParticlePacket(EARTHEN_SPIRIT.getPrimaryColor(), p));
+                        ParticleEffectTypeRegistry.BLOCK_RITE_EFFECT.createPositionedEffect(level, new PositionEffectData(p), new ColorEffectData(EARTHEN_SPIRIT));
                     }
                 });
             }

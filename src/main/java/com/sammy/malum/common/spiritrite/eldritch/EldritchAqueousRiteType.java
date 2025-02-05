@@ -1,7 +1,7 @@
 package com.sammy.malum.common.spiritrite.eldritch;
 
 import com.sammy.malum.common.block.curiosities.totem.*;
-import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.core.systems.rite.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
@@ -19,12 +19,13 @@ public class EldritchAqueousRiteType extends TotemicRiteType {
 
     @Override
     public TotemicRiteEffect getNaturalRiteEffect() {
-        return new BlockAffectingRiteEffect() {
+        return new TotemicRiteEffect(TotemicRiteEffect.MalumRiteEffectCategory.DIRECTIONAL_BLOCK_EFFECT) {
 
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 getNearbyBlocks(totemBase, PointedDripstoneBlock.class).forEach(p -> {
                     if (level.random.nextFloat() < 0.1f) {
+                        ParticleEffectTypeRegistry.BLOCK_FALL_RITE_EFFECT.createPositionedEffect(level, new PositionEffectData(p), new ColorEffectData(AQUEOUS_SPIRIT));
                         for (int i = 0; i < 4 + level.random.nextInt(2); i++) {
                             level.getBlockState(p).randomTick(level, p, level.random);
                         }
@@ -52,7 +53,7 @@ public class EldritchAqueousRiteType extends TotemicRiteType {
                 getNearbyEntities(totemBase, Zombie.class).filter(z -> !(z instanceof Drowned)).forEach(e -> {
                     if (!e.isUnderWaterConverting()) {
                         e.startUnderWaterConversion(100);
-                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(AQUEOUS_SPIRIT));
+                        ParticleEffectTypeRegistry.ENTITY_RITE_EFFECT.createEntityEffect(e, new ColorEffectData(AQUEOUS_SPIRIT));
                     }
                 });
             }

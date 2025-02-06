@@ -64,6 +64,7 @@ public class ParticleEffectTypeRegistry {
 
     public static final ParticleEffectType TYRVING_SLASH = new TyrvingSlashParticleEffect("tyrving_slash");
     public static final ParticleEffectType SUNDERING_ANCHOR_SLASH = new SunderingAnchorSlashParticleEffect("sundering_anchor_slash");
+    public static final ParticleEffectType SUNDERING_ANCHOR_SWEEP = new TyrvingSlashParticleEffect("tyrving_slash");
 
     public static final ParticleEffectType WEIGHT_OF_WORLDS_CRIT = new WeightOfWorldsCritParticleEffect("weight_of_worlds_crit");
     public static final ParticleEffectType EDGE_OF_DELIVERANCE_CRIT = new EdgeOfDeliveranceCritParticleEffect("weight_of_worlds_crit");

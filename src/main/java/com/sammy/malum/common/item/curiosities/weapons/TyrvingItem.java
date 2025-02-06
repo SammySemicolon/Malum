@@ -38,11 +38,14 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
         if (!event.getSource().is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC)) {
             return;
         }
-        float magicDamage = EntitySpiritDropData.getSpiritData(target).map(d -> d.totalSpirits).orElse(0) * 2f;
+        float magicDamage = EntitySpiritDropData.getSpiritData(target).map(d -> d.totalSpirits).orElse(0);
         if (target instanceof Player) {
-            magicDamage = 4 * Math.max(1, (1 + target.getArmorValue() / 12f) * (1 + (1 - 1 / (float) target.getArmorValue())) / 12f);
+            magicDamage = 2 * Math.max(1, (1 + target.getArmorValue() / 12f) * (1 + (1 - 1 / (float) target.getArmorValue())) / 12f);
         }
-
+        if (target.isAlive()) {
+            target.invulnerableTime = 0;
+            target.hurt(DamageTypeHelper.create(level, DamageTypeRegistry.TYRVING, attacker), magicDamage);
+        }
         if (target.isAlive()) {
             WorldEventHandler.addWorldEvent(level,
                     new DelayedDamageWorldEvent(target)

@@ -280,7 +280,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.authority_of_greed", "Aliments, Blessings, Curses are Paused When Wounded");
         add("malum.effect.geas.authority_of_greed_arcane_resonance", "Arcane Resonance Aids Stasis Duration");
 
-        add("malum.effect.soul_based_damage", "Deals Soulbound Magic Damage");
+        add("malum.effect.soul_based_damage", "Deals Soul-Rending Damage");
         add("malum.effect.weight_of_worlds_crit", "Sometimes Strikes With Critical Force");
         add("malum.effect.weight_of_worlds_kill", "Kills Guarantee a Critical Strike");
         add("malum.effect.edge_of_deliverance_crit", "Follow-up Strikes Hit Critically");

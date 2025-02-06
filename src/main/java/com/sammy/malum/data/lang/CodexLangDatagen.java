@@ -700,7 +700,7 @@ public class CodexLangDatagen {
                 "The Rune of Dexterity implores a mind to move when cornered, boosting movement speed which can up to double as the user's health pool diminishes.");
         addSimpleEntryHeader("rune_of_reinforcement", "Rune of Reinforcement", "The impulse to make");
         addPages("rune_of_reinforcement",
-                "The Rune of Reinforcement, rather than imploring the body, simply provides pressure to the Arcane quality of its existence, granting their Soul Ward capacity and strength.");
+                "The Rune of Reinforcement, rather than imploring the body, simply provides pressure to the Arcane quality of its existence, granting their Soul Ward capacity and integrity.");
         addSimpleEntryHeader("rune_of_volatile_distortion", "Rune of Volatile Distortion", "The impulse to putrefy");
         addPages("rune_of_volatile_distortion",
                 "The Rune of Volatile Distortion, rather than imploring the mind, corrupts its actions with random chance, making the user's attacks erratic in damage - anywhere from nine tenths as powerful to twelve tenths. Sometimes, this randomness aligns with weaknesses by chance, doubling the strength of the attack.");
@@ -964,7 +964,7 @@ public class CodexLangDatagen {
         addPages("corrupted_resonance", "To fuel any further magics, I will need a catalyst. Something beautiful, full of magic, serving as the basis for any complex craft born from it. Corrupted Resonance is perfect for the role.");
 
         addSimpleEntryHeader("tyrving", "Tyrving", "Ancient relic");
-        addPages("tyrving", "The Tyrving is a rather esoteric blade. It's strange design makes it appear as a weak weapon not suited for combat. However, it's hex ash lining and twisted rock form cause it to deal extra magic damage to the soul, the greater the soul the more benefit.",
+        addPages("tyrving", "The Tyrving is a sword with a strange design, making it appear as a weak weapon not suited for combat. However, it's hex ash lining and twisted rock form cause it to deal extra magic damage proportional to the complexity of the target's soul. The greater the soul the more benefit.",
                 "The weapon can also be repaired using arcane restoration quite efficiently.");
 
         addSimpleEntryHeader("belt_of_the_magebane", "Belt of the Magebane", "Newfound ruin");

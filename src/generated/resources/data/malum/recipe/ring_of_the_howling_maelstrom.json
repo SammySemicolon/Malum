@@ -24,6 +24,10 @@
   },
   "spirits": [
     {
+      "type": "wicked",
+      "count": 32
+    },
+    {
       "type": "aerial",
       "count": 32
     }

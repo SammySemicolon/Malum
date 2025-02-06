@@ -370,7 +370,7 @@ public class CodexLangDatagen {
                 "The membrane of a phantom will spin into Astral Weave with this magic, a mystic cloth with strange arcane properties.");
         addHeadline("esoteric_reaping.wind_nucleus", "Wind Nucleus");
         addPages("esoteric_reaping.wind_nucleus",
-                "The very essence of the Breeze remains alive -in some sense at least- as the Wind Nucleus, the core of it's design. It's stored energy can be quickly released to push away any nearby creature.");
+                "The very essence of the Breeze remains intact as the Wind Nucleus, the core of it's design. It's stored energy can be quickly released to push away any nearby creature.");
         addHeadline("esoteric_reaping.warp_flux", "Warp Flux");
         addPages("esoteric_reaping.warp_flux",
                 "The magic that envelops the endermen coalesces into Warp Flux, a strange essence that seems to be inimical to natural law.");
@@ -643,14 +643,14 @@ public class CodexLangDatagen {
         addHeadline("necklace_of_the_narrow_edge.ring_of_the_rising_edge", "The Rising Edge");
         addPages("necklace_of_the_narrow_edge.ring_of_the_rising_edge",
                 "The Ascension enchantment allows me to rise on blades of wind - and the opportunity for sympathetic magic there is obvious. Air begets air, and by adding a simple array to alter the airflow, I have created a modifier for Ascension, which I term the Rising Edge.",
-                "In addition to increased damage and a longer cooldown, those cut by the blades of wind under the Rising Edge’s effect will also find themselves launched upwards. Useful for crowd control and whatnot, but like the scythe itself, the Narrow Edge can change this purpose.",
+                "At the cost of a decrease to damage, those cut by the blades of wind under the Rising Edge’s effect will also find themselves launched upwards. Useful for crowd control and whatnot, but like the scythe itself, the Narrow Edge can change this purpose.",
                 "By wearing both the Necklace of the Narrow Edge and the Ring of the Rising Edge, the concentrated sweep of wind launches with vastly increased potency, allowing me to juggle my enemies above me.");
 
         addEntryHeader("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom", "Ring of the Howling Maelstrom", "Slicing Winds");
         addHeadline("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom", "The Howling Maelstrom");
         addPages("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom",
                 "The Rebound enchantment is an effective ranged option for the scythe similarly to Ascension it has close connections to Aerial Arcana. Similarly, this ring enables an added functionality to Rebound, which I term the Howling Maelstrom.",
-                "In addition to increased damage and a substantially longer cooldown, the Rebound projectile carries with itself a powerful windborne maelstrom, repeatedly damaging everything within a large radius around the scythe.",
+                "At the cost of a substantially longer cooldown, the Rebound projectile carries with itself a powerful windborne maelstrom, repeatedly damaging everything within a large radius around the scythe.",
                 "By wearing both the Necklace of the Narrow Edge and the Ring of the Howling Maelstrom, the Maelstrom is instead reserved till after the moment of impact, remaining at the striking point for about two seconds.");
 
         addEntryHeader("runeworking", "Runeworking", "The central pin");

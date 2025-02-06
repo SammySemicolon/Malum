@@ -42,6 +42,7 @@ public class SkyBreakerGeas extends GeasEffect {
                     player.swing(InteractionHand.MAIN_HAND, true);
                     target.invulnerableTime = 0;
                     player.attack(target);
+                    target.invulnerableTime = 0;
                 }
             }
         }

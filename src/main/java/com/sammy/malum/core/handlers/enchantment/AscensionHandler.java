@@ -63,8 +63,8 @@ public class AscensionHandler {
                 particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_UPPERCUT).setVerticalSlashAngle().setMirrored(true);
             }
             if (hasFunnyRing) {
-                baseDamage *= 0.6f;
-                magicDamage *= 0.6f;
+                baseDamage *= 0.5f;
+                magicDamage *= 0.5f;
             }
             if (scythe.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
                 particleEffect.setSpiritType(spiritAffiliatedItem);
@@ -101,10 +101,7 @@ public class AscensionHandler {
         }
         if (!player.isCreative()) {
             int enchantmentLevel = getEnchantmentLevel(level, EnchantmentRegistry.ASCENSION, scythe);
-            int cooldown = 200 - 25 * (enchantmentLevel - 1);
-            if (hasFunnyRing) {
-                cooldown = (cooldown + 50);
-            }
+            int cooldown = 200 - 40 * (enchantmentLevel - 1);
             if (cooldown > 0) {
                 player.getCooldowns().addCooldown(scythe.getItem(), cooldown);
             }

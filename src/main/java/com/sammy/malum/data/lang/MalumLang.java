@@ -244,7 +244,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.curio.no_sweep", "Disables Scythe Sweeping");
         add("malum.effect.curio.enhanced_maneuvers", "Augments Rebound and Ascension");
         add("malum.effect.curio.ascension_launch", "Ascension Launches Targets Upwards");
-        add("malum.effect.curio.longer_ascension_cooldown", "Ascension Suffers a Longer Cooldown");
+        add("malum.effect.curio.lower_ascension_damage", "Ascension Suffers a Damage Penalty");
         add("malum.effect.curio.rebound_maelstrom", "Rebound Creates A Windborne Maelstrom");
         add("malum.effect.curio.longer_rebound_cooldown", "Rebound Suffers a Longer Cooldown");
         add("malum.effect.curio.friendly_enemies", "Reduces Enemy Aggression");

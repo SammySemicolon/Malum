@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "O": {
-      "item": "minecraft:slime_ball"
+      "tag": "c:slime_balls"
     },
     "~": {
       "item": "minecraft:string"

@@ -11,6 +11,7 @@ import net.minecraft.network.chat.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
+import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.event.level.*;
 import net.neoforged.neoforge.event.tick.*;
@@ -36,8 +37,8 @@ public class MaverickGeas extends GeasEffect {
                 final boolean isReal = !event.getAffectedBlocks().isEmpty();
                 if (instance.stocks >= 0 || !isReal) {
                     double multiplier = 4f / (event.getKnockbackVelocity().length() * 2);
-                    event.setKnockbackVelocity(event.getKnockbackVelocity().scale(Math.clamp(multiplier, 0, 1.75f)));
-                    if (event.getAffectedEntity() instanceof LivingEntity livingEntity) {
+                    event.setKnockbackVelocity(event.getKnockbackVelocity().scale(Math.clamp(multiplier, 1, 1.75f)));
+                    if (event.getAffectedEntity() instanceof LivingEntity livingEntity && !(livingEntity instanceof Enemy)) {
                         livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.ASCENSION, 200, 3));
                     }
                     if (isReal) {

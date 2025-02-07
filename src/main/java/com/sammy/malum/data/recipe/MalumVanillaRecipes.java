@@ -7,6 +7,7 @@ import com.sammy.malum.registry.common.item.*;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.*;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.*;
@@ -78,13 +79,11 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         shapeless(RecipeCategory.MISC, ItemRegistry.HALLOWED_GOLD_NUGGET.get(), 9).requires(ItemRegistry.HALLOWED_GOLD_INGOT.get()).unlockedBy("has_hallowed_gold", has(ItemRegistry.HALLOWED_GOLD_INGOT.get())).save(output);
         shapeless(RecipeCategory.MISC, ItemRegistry.HALLOWED_GOLD_INGOT.get(), 9).requires(ItemRegistry.BLOCK_OF_HALLOWED_GOLD.get()).unlockedBy("has_hallowed_gold", has(ItemRegistry.HALLOWED_GOLD_INGOT.get())).save(output, malumPath("hallowed_gold_from_block"));
 
-
         shaped(RecipeCategory.MISC, ItemRegistry.BLOCK_OF_MALIGNANT_PEWTER.get()).define('#', ItemRegistry.MALIGNANT_PEWTER_INGOT.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_malignant_alloy", has(ItemRegistry.MALIGNANT_PEWTER_INGOT.get())).save(output);
         shaped(RecipeCategory.MISC, ItemRegistry.MALIGNANT_PEWTER_INGOT.get()).define('#', ItemRegistry.MALIGNANT_PEWTER_NUGGET.get()).pattern("###").pattern("###").pattern("###").unlockedBy("has_malignant_alloy", has(ItemRegistry.MALIGNANT_PEWTER_INGOT.get())).save(output, malumPath("malignant_alloy_from_nuggets"));
         shapeless(RecipeCategory.MISC, ItemRegistry.MALIGNANT_PEWTER_NUGGET.get(), 9).requires(ItemRegistry.MALIGNANT_PEWTER_INGOT.get()).unlockedBy("has_malignant_alloy", has(ItemRegistry.MALIGNANT_PEWTER_INGOT.get())).save(output);
         shapeless(RecipeCategory.MISC, ItemRegistry.MALIGNANT_PEWTER_INGOT.get(), 9).requires(ItemRegistry.BLOCK_OF_MALIGNANT_PEWTER.get()).unlockedBy("has_malignant_alloy", has(ItemRegistry.MALIGNANT_PEWTER_INGOT.get())).save(output, malumPath("malignant_alloy_from_block"));
         shaped(RecipeCategory.MISC, ItemRegistry.MALIGNANT_PEWTER_PLATING.get(), 2).define('X', ItemRegistry.MALIGNANT_PEWTER_INGOT.get()).define('Y', ItemRegistry.MALIGNANT_PEWTER_NUGGET.get()).pattern(" Y ").pattern("YXY").pattern(" Y ").unlockedBy("has_malignant_alloy", has(ItemRegistry.MALIGNANT_PEWTER_INGOT.get())).save(output);
-
 
         //NODES
         smeltingWithCount(Ingredient.of(ItemRegistry.IRON_NODE.get()), RecipeCategory.MISC, Items.IRON_NUGGET, 6, 0.25f, 200).unlockedBy("has_impetus", has(ItemRegistry.IRON_IMPETUS.get())).save(output, malumPath("iron_from_node_smelting"));
@@ -93,9 +92,7 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         smeltingWithCount(Ingredient.of(ItemRegistry.GOLD_NODE.get()), RecipeCategory.MISC, Items.GOLD_NUGGET, 6, 0.25f, 200).unlockedBy("has_impetus", has(ItemRegistry.GOLD_IMPETUS.get())).save(output, malumPath("gold_from_node_smelting"));
         blastingWithCount(Ingredient.of(ItemRegistry.GOLD_NODE.get()), RecipeCategory.MISC, Items.GOLD_NUGGET, 6, 0.25f, 100).unlockedBy("has_impetus", has(ItemRegistry.GOLD_IMPETUS.get())).save(output, malumPath("gold_from_node_blasting"));
 
-        smeltingWithCount(Ingredient.of(ItemRegistry.COPPER_NODE.get()), RecipeCategory.MISC, ItemRegistry.COPPER_NUGGET.get(), 6, 0.25f, 200).unlockedBy("has_impetus", has(ItemRegistry.COPPER_IMPETUS.get())).save(output, malumPath("copper_from_node_smelting"));
-        blastingWithCount(Ingredient.of(ItemRegistry.COPPER_NODE.get()), RecipeCategory.MISC, ItemRegistry.COPPER_NUGGET.get(), 6, 0.25f, 100).unlockedBy("has_impetus", has(ItemRegistry.COPPER_IMPETUS.get())).save(output, malumPath("copper_from_node_blasting"));
-
+        nodeSmelting(output, ItemRegistry.COPPER_NODE, NUGGETS_COPPER);
         nodeSmelting(output, ItemRegistry.LEAD_NODE, NUGGETS_LEAD);
         nodeSmelting(output, ItemRegistry.SILVER_NODE, NUGGETS_SILVER);
         nodeSmelting(output, ItemRegistry.ALUMINUM_NODE, NUGGETS_ALUMINUM);
@@ -129,10 +126,6 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         shapeless(RecipeCategory.MISC, ItemRegistry.BLAZING_QUARTZ.get(), 1).requires(ItemRegistry.BLAZING_QUARTZ_FRAGMENT.get(), 8).unlockedBy("has_blazing_quartz", has(ItemRegistry.BLAZING_QUARTZ.get())).save(output, malumPath("blazing_quartz_from_fragment"));
         shapeless(RecipeCategory.MISC, ItemRegistry.ARCANE_CHARCOAL_FRAGMENT.get(), 8).requires(ItemRegistry.ARCANE_CHARCOAL.get()).unlockedBy("has_arcane_charcoal", has(ItemRegistry.ARCANE_CHARCOAL.get())).save(output, malumPath("arcane_charcoal_fragment"));
         shapeless(RecipeCategory.MISC, ItemRegistry.ARCANE_CHARCOAL.get(), 1).requires(ItemRegistry.ARCANE_CHARCOAL_FRAGMENT.get(), 8).unlockedBy("has_arcane_charcoal", has(ItemRegistry.ARCANE_CHARCOAL.get())).save(output, malumPath("arcane_charcoal_from_fragment"));
-
-        //COPPER
-        shaped(RecipeCategory.MISC, Items.COPPER_INGOT).define('#', NUGGETS_COPPER).pattern("###").pattern("###").pattern("###").unlockedBy("has_copper", has(INGOTS_COPPER)).save(output, malumPath("copper_ingot_from_nugget"));
-        shapeless(RecipeCategory.MISC, ItemRegistry.COPPER_NUGGET.get(), 9).requires(INGOTS_COPPER).unlockedBy("has_copper", has(INGOTS_COPPER)).save(output, malumPath("copper_nugget_from_ingot"));
 
         //ORE SMELTING
         smelting(Ingredient.of(ItemRegistry.BLAZING_QUARTZ_ORE.get()), RecipeCategory.MISC, ItemRegistry.BLAZING_QUARTZ.get(), 0.25f, 200).unlockedBy("has_blazing_quartz", has(ItemRegistry.BLAZING_QUARTZ.get())).save(output, malumPath("blazing_quartz_from_smelting"));
@@ -266,29 +259,20 @@ public class MalumVanillaRecipes implements IConditionBuilder {
         shapeless(RecipeCategory.MISC, output.get()).requires(ItemRegistry.ESOTERIC_SPOOL.get()).requires(sideItem).unlockedBy("has_spool", has(ItemRegistry.ESOTERIC_SPOOL.get())).save(consumer);
     }
 
-    private static void nodeSmelting(RecipeOutput recipeoutput, DeferredHolder<Item, ? extends Item> node, TagKey<Item> tag) {
-        String name = BuiltInRegistries.ITEM.getKey(node.get()).getPath().replaceFirst("_node", "");
+    private static void nodeSmelting(RecipeOutput recipeoutput, Holder<Item> node, TagKey<Item> tag) {
+        String name = BuiltInRegistries.ITEM.getKey(node.value()).getPath().replaceFirst("_node", "");
 
-        RecipeOutput conditionOutput = recipeoutput.withConditions(new ICondition[]{
-                new NotCondition(new TagEmptyCondition(tag.location().toString()))
-        });
-        MetalNodeCookingRecipeBuilder.smelting(SizedIngredient.of(tag, 6).ingredient(), RecipeCategory.MISC, node.get(), 0.25f, 200)
-                .unlockedBy("has_crucible", has(ItemRegistry.SPIRIT_CRUCIBLE.get()))
+        var input = Ingredient.of(node.value());
+        var output = Ingredient.of(tag);
+        var unlockCondition = has(ItemRegistry.SPIRIT_CRUCIBLE.get());
+        var conditionOutput = recipeoutput.withConditions(new NotCondition(new TagEmptyCondition(tag.location().toString())));
+        MetalNodeCookingRecipeBuilder.smelting(input, RecipeCategory.MISC, output, 6, 0.25f, 200)
+                .unlockedBy("has_crucible", unlockCondition)
                 .save(conditionOutput, MalumMod.malumPath(name + "_from_node_smelting"));
-        MetalNodeCookingRecipeBuilder.blasting(SizedIngredient.of(tag, 6).ingredient(), RecipeCategory.MISC, node.get(), 0.25f, 100)
-                .unlockedBy("has_crucible", has(ItemRegistry.SPIRIT_CRUCIBLE.get()))
+
+        MetalNodeCookingRecipeBuilder.blasting(input, RecipeCategory.MISC, output, 6, 0.25f, 100)
+                .unlockedBy("has_crucible", unlockCondition)
                 .save(conditionOutput, MalumMod.malumPath(name + "_from_node_blasting"));
-
-//        smeltingWithTag(SizedIngredient.of(tag, 6), Ingredient.of(node.get()), 0.25f, 200)
-//                .build(new ConditionalRecipeOutput(recipeoutput, new ICondition[]{
-//                        new NotCondition(new TagEmptyCondition(tag.location().toString()))
-//                }), MalumMod.malumPath(name + "_from_node_smelting"));
-//
-//        blastingWithTag(SizedIngredient.of(tag, 6), Ingredient.of(node.get()), 0.25f, 100)
-//                .build(new ConditionalRecipeOutput(recipeoutput, new ICondition[]{
-//                        new NotCondition(new TagEmptyCondition(tag.location().toString()))
-//                }), MalumMod.malumPath(name + "_from_node_blasting"));
-
     }
 
     private static void etherBrazier(RecipeOutput recipeoutput, ItemLike output, ItemLike rock, ItemLike ether) {

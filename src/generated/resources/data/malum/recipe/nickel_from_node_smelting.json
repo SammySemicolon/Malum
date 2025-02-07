@@ -8,15 +8,15 @@
       }
     }
   ],
-  "type": "minecraft:smelting",
-  "category": "misc",
-  "cookingtime": 200,
+  "type": "malum:node_smelting",
+  "cookingTime": 200,
   "experience": 0.25,
+  "group": "",
   "ingredient": {
+    "item": "malum:nickel_node"
+  },
+  "output": {
     "tag": "c:nuggets/nickel"
   },
-  "result": {
-    "count": 1,
-    "id": "malum:nickel_node"
-  }
+  "outputCount": 6
 }

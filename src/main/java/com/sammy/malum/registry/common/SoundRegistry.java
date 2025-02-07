@@ -235,6 +235,8 @@ public class SoundRegistry {
     public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_OPEN = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_diode_open")));
     public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_CLOSE = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_diode_close")));
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPIRIT_DIODE_TICK = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("spirit_diode_tick")));
+
     public static final DeferredHolder<SoundEvent, SoundEvent> WAVECHARGER_CHARGE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavecharger_charges"), 8f));
     public static final DeferredHolder<SoundEvent, SoundEvent> WAVEBANKER_STORE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebanker_stores"), 8f));
     public static final DeferredHolder<SoundEvent, SoundEvent> WAVEBREAKER_STORE = register(SoundEvent.createFixedRangeEvent(MalumMod.malumPath("wavebreaker_stores"), 8f));

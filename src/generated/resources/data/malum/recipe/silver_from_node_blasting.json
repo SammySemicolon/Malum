@@ -8,15 +8,15 @@
       }
     }
   ],
-  "type": "minecraft:blasting",
-  "category": "misc",
-  "cookingtime": 100,
+  "type": "malum:node_blasting",
+  "cookingTime": 100,
   "experience": 0.25,
+  "group": "",
   "ingredient": {
+    "item": "malum:silver_node"
+  },
+  "output": {
     "tag": "c:nuggets/silver"
   },
-  "result": {
-    "count": 1,
-    "id": "malum:silver_node"
-  }
+  "outputCount": 6
 }

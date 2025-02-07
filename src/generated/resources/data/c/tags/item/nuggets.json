@@ -1,7 +1,7 @@
 {
   "values": [
-    "malum:copper_nugget",
     "malum:hallowed_gold_nugget",
-    "malum:soul_stained_steel_nugget"
+    "malum:soul_stained_steel_nugget",
+    "malum:malignant_pewter_ingot"
   ]
 }

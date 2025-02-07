@@ -373,8 +373,9 @@ public class MalumBlockProperties {
                 .lightLevel((b) -> 14);
     }
 
-    public static LodestoneBlockProperties REDSTONE_DIODE() {
+    public static LodestoneBlockProperties WAVEFORM_DIODE() {
         return new LodestoneBlockProperties()
+                .addTag(BlockTagRegistry.WRENCH_PICKUP)
                 .mapColor(COPPER_BLOCK.defaultMapColor())
                 .strength(3.0F, 6.0F)
                 .sound(SoundRegistry.SPIRIT_DIODE)

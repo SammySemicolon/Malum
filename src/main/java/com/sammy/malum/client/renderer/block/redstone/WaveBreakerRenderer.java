@@ -14,8 +14,14 @@ public class WaveBreakerRenderer extends SpiritDiodeRenderer<WaveBreakerBlockEnt
 
     @Override
     public float getGlowDelta(WaveBreakerBlockEntity blockEntityIn, float delta) {
-        if (delta > 0.6f) {
-            return (delta-0.6f)*5;
+        if (blockEntityIn.visualTransitionEnd == 0) {
+            if (delta > 0.1f) {
+                return 1;
+            }
+            return delta*10f;
+        }
+        if (delta > 0.9f) {
+            return (delta-0.9f)*10;
         }
         return 0;
     }

@@ -1670,6 +1670,19 @@
     ],
     "subtitle": "malum.subtitle.spirit_diode_step"
   },
+  "spirit_diode_tick": {
+    "sounds": [
+      "malum:blocks/spirit_diode/waveform_tick1",
+      "malum:blocks/spirit_diode/waveform_tick2",
+      "malum:blocks/spirit_diode/waveform_tick3",
+      "malum:blocks/spirit_diode/waveform_tick4",
+      "malum:blocks/spirit_diode/waveform_tick5",
+      "malum:blocks/spirit_diode/waveform_tick6",
+      "malum:blocks/spirit_diode/waveform_tick7",
+      "malum:blocks/spirit_diode/waveform_tick8"
+    ],
+    "subtitle": "malum.subtitle.spirit_diode_tick"
+  },
   "spirit_engraved": {
     "sounds": [
       "malum:totem/totem_engrave1",
@@ -1891,31 +1904,31 @@
   },
   "wavebanker_stores": {
     "sounds": [
-      "malum:blocks/spirit_diode/tick"
+      "malum:blocks/spirit_diode/waveform_pulse"
     ],
     "subtitle": "malum.subtitle.wavebanker_stores"
   },
   "wavebreaker_releases": {
     "sounds": [
-      "malum:blocks/spirit_diode/tick"
+      "malum:blocks/spirit_diode/waveform_pulse"
     ],
     "subtitle": "malum.subtitle.wavebreaker_releases"
   },
   "wavebreaker_stores": {
     "sounds": [
-      "malum:blocks/spirit_diode/tick"
+      "malum:blocks/spirit_diode/waveform_pulse"
     ],
     "subtitle": "malum.subtitle.wavebreaker_stores"
   },
   "wavecharger_charges": {
     "sounds": [
-      "malum:blocks/spirit_diode/tick"
+      "malum:blocks/spirit_diode/waveform_pulse"
     ],
     "subtitle": "malum.subtitle.wavecharger_charges"
   },
   "wavemaker_pulses": {
     "sounds": [
-      "malum:blocks/spirit_diode/tick"
+      "malum:blocks/spirit_diode/waveform_pulse"
     ],
     "subtitle": "malum.subtitle.wavemaker_pulses"
   },

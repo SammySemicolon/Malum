@@ -5,14 +5,13 @@ import com.sammy.malum.common.packets.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.geas.*;
-import com.sammy.malum.mixin.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
 import net.neoforged.neoforge.event.level.*;
 import net.neoforged.neoforge.event.tick.*;
 import net.neoforged.neoforge.network.*;
@@ -35,26 +34,26 @@ public class MaverickGeas extends GeasEffect {
             var instance = getStockedInstance(sourceEntity);
             if (instance != null) {
                 final boolean isReal = !event.getAffectedBlocks().isEmpty();
-                if (instance.stocks >= 0) {
+                if (instance.stocks >= 0 || !isReal) {
                     double multiplier = 4f / (event.getKnockbackVelocity().length() * 2);
                     event.setKnockbackVelocity(event.getKnockbackVelocity().scale(Math.clamp(multiplier, 0, 1.75f)));
+                    if (event.getAffectedEntity() instanceof LivingEntity livingEntity) {
+                        livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.ASCENSION, 200, 3));
+                    }
                     if (isReal) {
                         event.getAffectedBlocks().clear();
                         instance.stocks--;
                         instance.sync(sourceEntity);
                     }
+                    return;
                 }
-                else {
-                    if (isReal) {
-                        instance.stocks--;
-                        instance.sync(sourceEntity);
-                    }
-                }
+                instance.stocks--;
+                instance.sync(sourceEntity);
             }
         }
     }
 
-    public static boolean modifyExplosionParticles(LivingEntity explosionOwner) {
+    public static boolean modifyExplosionProperties(LivingEntity explosionOwner) {
         return explosionOwner != null && getStockedInstance(explosionOwner) != null;
     }
 

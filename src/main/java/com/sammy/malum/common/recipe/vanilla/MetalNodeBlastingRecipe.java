@@ -5,20 +5,18 @@ import net.minecraft.core.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 
-public class MetalNodeBlastingRecipe extends BlastingRecipe implements INodeSmeltingRecipe {
+public class MetalNodeBlastingRecipe extends BlastingRecipe implements INodeCookingRecipe {
 
     public static final String NAME = "node_blasting";
-    public final ItemStack output;
-    public ItemStack cachedOutput;
 
-    public MetalNodeBlastingRecipe(String pGroup, Ingredient pIngredient, ItemStack output, float pExperience, int pCookingTime) {
-        super(pGroup, CookingBookCategory.MISC, pIngredient, ItemStack.EMPTY, pExperience, pCookingTime);
-        this.output = output;
-    }
+    private final Ingredient rawOutput;
+    private final int outputCount;
+    private ItemStack outputCache;
 
-    @Override
-    public boolean isSpecial() {
-        return false;
+    public MetalNodeBlastingRecipe(String group, Ingredient ingredient, Ingredient output, int outputCount, float experience, int cookingTime) {
+        super(group, CookingBookCategory.MISC, ingredient, ItemStack.EMPTY, experience, cookingTime);
+        this.rawOutput = output;
+        this.outputCount = outputCount;
     }
 
     @Override
@@ -27,19 +25,30 @@ public class MetalNodeBlastingRecipe extends BlastingRecipe implements INodeSmel
     }
 
     @Override
-    public Ingredient getIngredient() {
-        return this.ingredient;
+    public Ingredient getInput() {
+        return ingredient;
     }
 
-    public ItemStack getOutput() {
-        return this.output;
+    @Override
+    public int getOutputCount() {
+        return outputCount;
+    }
+
+    @Override
+    public Ingredient getRawOutput() {
+        return rawOutput;
     }
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider registries) {
-        if (cachedOutput == null) {
-            cachedOutput = output.copy();
+        return getOutput();
+    }
+
+    @Override
+    public ItemStack getOutput() {
+        if (outputCache == null) {
+            outputCache = NodeCookingSerializer.getStackFromIngredient(rawOutput).copyWithCount(outputCount);
         }
-        return cachedOutput;
+        return outputCache;
     }
 }

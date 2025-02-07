@@ -1,6 +1,7 @@
 package com.sammy.malum.data.lang;
 
 import com.sammy.malum.MalumMod;
+import com.sammy.malum.compability.create.*;
 import com.sammy.malum.core.systems.artifice.ArtificeAttributeType;
 import com.sammy.malum.common.block.ether.EtherWallTorchBlock;
 import com.sammy.malum.common.data_components.*;
@@ -62,6 +63,9 @@ public class MalumLang extends LanguageProvider {
         add("malum.spirit.description.stored_spirit", "Contains: ");
         add("malum.spirit.description.stored_soul", "Stores Soul With: ");
 
+        if (CreateCompat.LOADED) { //If Create is loaded, the copper nugget won't exist.
+            add("item.malum.copper_nugget", "Copper Nugget");
+        }
         DataHelper.takeAll(blocks, i -> i.get() instanceof WallTorchBlock);
         DataHelper.takeAll(blocks, i -> i.get() instanceof EtherWallTorchBlock);
         DataHelper.takeAll(blocks, i -> i.get() instanceof WallSignBlock);
@@ -265,8 +269,8 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.scythe_combo", "Scythe Cuts Create After-attacks");
         add("malum.effect.geas.only_scythe", "Regular Weapons Crumble In Your Hands");
         add("malum.effect.geas.fall_damage_auto_attack", "Outgoing Fall Damage Strikes With Your Weapon");
-        add("malum.effect.geas.explosion_absorption", "Explosions Become Propulsive Gusts of Wind");
-        add("malum.effect.geas.rocket_jumping", "Gusts of Wind Provide Greater Propulsion");
+        add("malum.effect.geas.explosion_absorption", "Explosions Become Propulsive Wind Charges");
+        add("malum.effect.geas.rocket_jumping", "Wind Charges Provide Greater Propulsion");
         add("malum.effect.geas.explosion_absorption_cooldown", "Repeated Activations Exhaust The Effect And Drain Stamina");
         add("malum.effect.geas.wyrd_reconstruction", "Prevents Death And Repeatedly Activates Spirit-Collection Effects");
         add("malum.effect.geas.wyrd_reconstruction_cooldown", "Effect Has A Lengthy Cooldown And Halves Arcane Resonance Until Recharged");

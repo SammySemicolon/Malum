@@ -30,7 +30,8 @@ public class PotionRiteEffect extends TotemicRiteEffect {
     public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
         getNearbyEntities(totemBase, targetClass).filter(getEntityPredicate()).forEach(e -> {
             MobEffectInstance instance = new MobEffectInstance(mobEffectHolder, 1200, 1, true, true);
-            if (!e.hasEffect(instance.getEffect()) && e.addEffect(instance)) {
+            final boolean success = e.addEffect(instance);
+            if (!e.hasEffect(instance.getEffect()) && success) {
                 ParticleEffectTypeRegistry.ENTITY_RITE_EFFECT.createEntityEffect(e, new ColorEffectData(definingSpirit));
             }
         });

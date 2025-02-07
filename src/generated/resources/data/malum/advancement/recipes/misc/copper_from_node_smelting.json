@@ -1,11 +1,20 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/copper"
+      }
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_impetus": {
+    "has_crucible": {
       "conditions": {
         "items": [
           {
-            "items": "malum:copper_impetus"
+            "items": "malum:spirit_crucible"
           }
         ]
       },
@@ -21,7 +30,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_impetus"
+      "has_crucible"
     ]
   ],
   "rewards": {

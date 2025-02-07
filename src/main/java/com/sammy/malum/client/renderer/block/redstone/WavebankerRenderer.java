@@ -14,6 +14,9 @@ public class WavebankerRenderer extends SpiritDiodeRenderer<WaveBankerBlockEntit
 
     @Override
     public float getGlowDelta(WaveBankerBlockEntity blockEntityIn, float delta) {
-        return Easing.QUARTIC_OUT.ease(delta, 0, 1);
+        if (delta > 0.5f) {
+            return 1;
+        }
+        return Easing.QUARTIC_OUT.ease(delta*2, 0, 1);
     }
 }

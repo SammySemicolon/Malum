@@ -45,8 +45,11 @@ public class WickedRiteType extends TotemicRiteType {
             @Override
             public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
                 getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Player)).forEach(e -> {
-                    ParticleEffectTypeRegistry.ENTITY_RITE_EFFECT.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT));
-                    e.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1200, 1));
+                    final boolean hadNoEffect = !e.hasEffect(MobEffects.DAMAGE_BOOST);
+                    final boolean success = e.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1200, 1));
+                    if (hadNoEffect && success) {
+                        ParticleEffectTypeRegistry.ENTITY_RITE_EFFECT.createEntityEffect(e, new ColorEffectData(WICKED_SPIRIT));
+                    }
                     e.addEffect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 1200, 1));
                     e.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1200, 1));
                 });

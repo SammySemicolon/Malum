@@ -1,13 +1,22 @@
 {
-  "type": "minecraft:blasting",
-  "category": "misc",
-  "cookingtime": 100,
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:tag_empty",
+        "tag": "c:nuggets/copper"
+      }
+    }
+  ],
+  "type": "malum:node_blasting",
+  "cookingTime": 100,
   "experience": 0.25,
+  "group": "",
   "ingredient": {
     "item": "malum:copper_node"
   },
-  "result": {
-    "count": 6,
-    "id": "malum:copper_nugget"
-  }
+  "output": {
+    "tag": "c:nuggets/copper"
+  },
+  "outputCount": 6
 }

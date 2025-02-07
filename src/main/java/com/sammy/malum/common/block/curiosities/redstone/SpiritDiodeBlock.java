@@ -160,7 +160,11 @@ public abstract class SpiritDiodeBlock<T extends SpiritDiodeBlockEntity> extends
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+        Direction direction = pContext.getHorizontalDirection();
+        if (pContext.getPlayer() == null || !pContext.getPlayer().isCrouching()) {
+            direction = direction.getOpposite();
+        }
+        return this.defaultBlockState().setValue(FACING, direction);
     }
 
     @Override

@@ -37,6 +37,8 @@ public class BlockTagRegistry {
     public static final TagKey<Block> HEAT_SOURCES = modTag("farmersdelight:heat_sources");
     public static final TagKey<Block> MINEABLE_WITH_KNIFE = modTag("farmersdelight:mineable/knife");
 
+    public static final TagKey<Block> WRENCH_PICKUP = modTag("create:wrench_pickup");
+
     public static final TagKey<Block> STRIPPED_LOGS = commonTag("stripped_logs");
     public static final TagKey<Block> STRIPPED_WOODS = commonTag("stripped_woods");
 

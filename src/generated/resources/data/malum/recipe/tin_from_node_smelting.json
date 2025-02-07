@@ -8,15 +8,15 @@
       }
     }
   ],
-  "type": "minecraft:smelting",
-  "category": "misc",
-  "cookingtime": 200,
+  "type": "malum:node_smelting",
+  "cookingTime": 200,
   "experience": 0.25,
+  "group": "",
   "ingredient": {
+    "item": "malum:tin_node"
+  },
+  "output": {
     "tag": "c:nuggets/tin"
   },
-  "result": {
-    "count": 1,
-    "id": "malum:tin_node"
-  }
+  "outputCount": 6
 }

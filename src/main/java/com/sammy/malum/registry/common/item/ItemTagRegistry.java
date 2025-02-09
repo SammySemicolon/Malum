@@ -29,6 +29,7 @@ public class ItemTagRegistry {
     public static final TagKey<Item> MATERIALS = malumTag("materials");
     public static final TagKey<Item> MINERALS = malumTag("minerals");
     public static final TagKey<Item> AUGMENTS = malumTag("augments");
+    public static final TagKey<Item> IMPETUS = malumTag("impetus");
     public static final TagKey<Item> METAL_NODES = malumTag("metal_nodes");
     public static final TagKey<Item> SOULWOVEN_BANNERS = malumTag("soulwoven_banners");
 

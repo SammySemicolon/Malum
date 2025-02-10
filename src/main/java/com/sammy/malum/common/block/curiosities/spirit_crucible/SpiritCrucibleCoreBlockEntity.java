@@ -1,12 +1,12 @@
 package com.sammy.malum.common.block.curiosities.spirit_crucible;
 
 import com.sammy.malum.common.block.*;
+import com.sammy.malum.common.data.ImpetusRepairData;
 import com.sammy.malum.common.item.augment.MendingDiffuserItem;
 import com.sammy.malum.common.item.augment.ShieldingApparatusItem;
 import com.sammy.malum.common.item.augment.WarpingEngineItem;
 import com.sammy.malum.core.systems.artifice.*;
 import com.sammy.malum.common.block.storage.*;
-import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.common.packets.CodecUtil;
 import com.sammy.malum.common.recipe.spirit.focusing.*;
@@ -19,6 +19,7 @@ import com.sammy.malum.registry.common.recipe.*;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.*;
@@ -27,11 +28,9 @@ import net.minecraft.world.*;
 import net.minecraft.world.entity.item.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import team.lodestar.lodestone.helpers.*;
@@ -272,8 +271,10 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         }
         if (durabilityCost > 0) {
             impetus.hurtAndBreak(durabilityCost, level, null, brokenStack -> {
-                if (brokenStack instanceof ImpetusItem impetusItem) {
-                    inventory.setStackInSlot(0, impetusItem.getCrackedVariant().getDefaultInstance());
+                Holder<Item> itemHolder = level.registryAccess().registry(Registries.ITEM).orElseThrow().wrapAsHolder(brokenStack.asItem());
+                ImpetusRepairData data = itemHolder.getData(DataMapRegistry.DAMAGED_IMPETUS_VARIANT);
+                if (data != null) {
+                    inventory.setStackInSlot(0, data.damagedImpetus().value().getDefaultInstance());
                 }
             });
             MendingDiffuserItem.repairImpetus(level, attributes, impetus);

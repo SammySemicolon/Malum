@@ -32,9 +32,10 @@ public class DataGenerators {
         var registryDataProvider = new RegistryDataGenerator(output, provider);
         generator.addProvider(includeServer, registryDataProvider);
         var registryProvider = registryDataProvider.getRegistryProvider();
+        generator.addProvider(includeServer, new MalumDataMaps(output, registryProvider));
 
         var itemModelsProvider = new MalumItemModels(output, helper);
-        var blockTagsProvider = new MalumBlockTags(output, provider, helper);
+        var blockTagsProvider = new MalumBlockTags(output, registryProvider, helper);
 
         generator.addProvider(includeClient, new MalumBlockStates(output, helper, itemModelsProvider));
         generator.addProvider(includeClient, itemModelsProvider);
@@ -42,7 +43,7 @@ public class DataGenerators {
         generator.addProvider(includeClient, new MalumSoundDatagen(output, helper));
 
         generator.addProvider(includeServer, blockTagsProvider);
-        generator.addProvider(includeServer, new MalumBlockLootTables(output, provider));
+        generator.addProvider(includeServer, new MalumBlockLootTables(output, registryProvider));
 
 
         generator.addProvider(includeServer, new MalumItemTags(output, provider, blockTagsProvider.contentsGetter(), helper));
@@ -51,9 +52,9 @@ public class DataGenerators {
         generator.addProvider(includeServer, new MalumEnchantmentTags(output, registryProvider, helper));
 
 
-        generator.addProvider(includeServer, new MalumRecipes(output, provider));
+        generator.addProvider(includeServer, new MalumRecipes(output, registryProvider));
 
-        generator.addProvider(includeServer, new MalumCuriosThings(output, helper, provider));
+        generator.addProvider(includeServer, new MalumCuriosThings(output, helper, registryProvider));
 
 
     }

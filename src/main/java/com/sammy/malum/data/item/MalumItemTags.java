@@ -157,6 +157,7 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(ItemTagRegistry.AUGMENTS).addAll(items.stream().filter(i -> i.get() instanceof AugmentItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.METAL_NODES).addAll(items.stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.IMPETUS).addAll(items.stream().filter(i -> i.get() instanceof ImpetusItem).map(DeferredHolder::getKey).toList());
+        tag(ItemTagRegistry.CRACKED_IMPETUS).addAll(items.stream().filter(i -> i.get() instanceof CrackedImpetusItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.SOULWOVEN_BANNERS).addAll(items.stream().filter(i -> i.get() instanceof SoulwovenBannerBlockItem).map(DeferredHolder::getKey).toList());
 
         tag(ItemTagRegistry.IS_TOTEMIC_TOOL).add(TOTEMIC_STAFF.get());

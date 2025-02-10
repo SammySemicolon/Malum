@@ -4,6 +4,7 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.item.curiosities.curios.runes.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.common.item.spirit.*;
+import com.sammy.malum.registry.common.DataMapRegistry;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.data.*;
 import net.minecraft.resources.ResourceLocation;
@@ -55,7 +56,8 @@ public class MalumItemModels extends LodestoneItemModelProvider {
         MalumItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof AbstractRuneCurioItem).collect(Collectors.toList()));
 
         setTexturePath("impetus/");
-        MalumItemModelSmithTypes.IMPETUS_ITEM.act(data, items.stream().filter(i -> i.get() instanceof ImpetusItem || i.get() instanceof CrackedImpetusItem).collect(Collectors.toList()));
+        MalumItemModelSmithTypes.IMPETUS_ITEM.act(data, items.stream().filter(i -> i.get() instanceof ImpetusItem ||
+                i.get() instanceof CrackedImpetusItem).collect(Collectors.toList())); //TODO: make this cleaner :3
         MalumItemModelSmithTypes.GENERATED_ITEM.act(data, items.stream().filter(i -> i.get() instanceof NodeItem).collect(Collectors.toList()));
 
         setTexturePath("");

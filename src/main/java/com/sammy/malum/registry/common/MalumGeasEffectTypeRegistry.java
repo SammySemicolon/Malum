@@ -9,6 +9,7 @@ import com.sammy.malum.common.geas.gluttony.*;
 import com.sammy.malum.common.geas.oath.*;
 import com.sammy.malum.common.geas.scythe.*;
 import com.sammy.malum.common.geas.soul_ward.*;
+import com.sammy.malum.common.geas.special.TheLastCurse;
 import com.sammy.malum.common.geas.staff.*;
 import com.sammy.malum.core.systems.geas.*;
 import net.minecraft.core.*;
@@ -111,5 +112,8 @@ public class MalumGeasEffectTypeRegistry {
     //Reduces Armor significantly
     //This is a void geas, might use fused consciousness even
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_LAST_STAND = GEAS_TYPES.register("oath_of_the_last_stand", () -> new GeasEffectType(LastStandOath::new));
+
+
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> THE_LAST_CURSE = GEAS_TYPES.register("the_last_curse", () -> new GeasEffectType(TheLastCurse::new));
 
 }

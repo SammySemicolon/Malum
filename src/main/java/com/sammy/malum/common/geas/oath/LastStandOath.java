@@ -91,7 +91,12 @@ public class LastStandOath extends GeasEffect {
             scheduledDeath = 0;
             return;
         }
-        scheduledDeath = target.level().getGameTime() + DEATH_DELAY;
+        long newDeathTime = target.level().getGameTime() + DEATH_DELAY;
+        if (scheduledDeath != 0) {
+            scheduledDeath = (long) Mth.lerp(0.3f, scheduledDeath, newDeathTime);
+            return;
+        }
+        scheduledDeath = newDeathTime;
     }
 
     @Override

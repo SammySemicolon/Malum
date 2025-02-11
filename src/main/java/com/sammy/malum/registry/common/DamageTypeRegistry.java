@@ -29,6 +29,4 @@ public class DamageTypeRegistry {
 
     public static final ResourceKey<DamageType> SOULWASHING_RETALIATION = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("soulwashing_retaliation"));
     public static final ResourceKey<DamageType> SOULWASHING_PROPAGATION = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("soulwashing_propagation"));
-
-
 }

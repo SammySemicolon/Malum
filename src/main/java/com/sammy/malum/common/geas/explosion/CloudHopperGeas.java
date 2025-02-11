@@ -8,11 +8,13 @@ import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.util.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
+import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.event.level.*;
 import net.neoforged.neoforge.event.tick.*;
 import net.neoforged.neoforge.network.*;
@@ -22,8 +24,8 @@ import java.util.function.*;
 
 public class CloudHopperGeas extends GeasEffect {
 
-    protected static final int FALLOFF_DURATION = 120;
-    protected static final int STAMINA_FALLOFF_START = 5;
+    protected static final int FALLOFF_DURATION = 60;
+    protected static final int STAMINA_FALLOFF_START = 10;
     protected int cooldown;
     public int streak;
 
@@ -46,10 +48,13 @@ public class CloudHopperGeas extends GeasEffect {
             if (!explosion.damageCalculator.shouldDamageEntity(explosion, entity)) {
                 var instance = getInstance(entity);
                 if (instance instanceof CloudHopperGeas cloudHopper) {
-                    double multiplier = 6f / (event.getKnockbackVelocity().length() * 2);
-                    final double scalar = Math.clamp(multiplier, 1, 1.75f);
-                    double horizontalScalar = scalar * 1.5f;
-                    event.setKnockbackVelocity(event.getKnockbackVelocity().multiply(horizontalScalar, scalar, horizontalScalar));
+                    final double scalar = 1.25f;
+                    double horizontalScalar = 2f;
+                    final Vec3 knockbackVelocity = event.getKnockbackVelocity();
+                    if (knockbackVelocity.y < 0.5f) {
+                        event.setKnockbackVelocity(new Vec3(knockbackVelocity.x, 0.5f, knockbackVelocity.z));
+                    }
+                    event.setKnockbackVelocity(knockbackVelocity.multiply(horizontalScalar, scalar, horizontalScalar));
                     if (event.getAffectedEntity().equals(entity)) {
                         entity.addEffect(new MobEffectInstance(MobEffectRegistry.ASCENSION, 100, 1));
                     }
@@ -79,12 +84,11 @@ public class CloudHopperGeas extends GeasEffect {
         }
         if (cooldown < FALLOFF_DURATION) {
             cooldown++;
-            if (cooldown == FALLOFF_DURATION) {
-                streak = Math.max(streak - 2, 0);
-                cooldown = 0;
-                sync(entity);
-            }
+            return;
         }
+        streak = Math.max(Mth.floor(streak / 2f), 0);
+        cooldown = 0;
+        sync(entity);
     }
 
     @Override
@@ -97,10 +101,8 @@ public class CloudHopperGeas extends GeasEffect {
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> createAttributeModifiers(LivingEntity entity, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
         if (streak >= STAMINA_FALLOFF_START) {
-            float modifier = 0.15f * (streak - STAMINA_FALLOFF_START);
-            addAttributeModifier(modifiers, Attributes.MOVEMENT_SPEED, -modifier, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-            addAttributeModifier(modifiers, Attributes.JUMP_STRENGTH, -modifier, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-            addAttributeModifier(modifiers, Attributes.GRAVITY, modifier / 2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            float modifier = 0.04f * (streak - STAMINA_FALLOFF_START);
+            addAttributeModifier(modifiers, Attributes.GRAVITY, modifier, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         }
         return modifiers;
     }

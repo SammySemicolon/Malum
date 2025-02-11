@@ -274,7 +274,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.only_scythe", "Regular Weapons Crumble In Your Hands");
         add("malum.effect.geas.fall_damage_auto_attack", "Outgoing Fall Damage Strikes Targets With Your Weapon");
         add("malum.effect.geas.rocket_jumping", "Wind Charges Provide Greater Propulsion");
-        add("malum.effect.geas.wind_charge_exhaustion", "Continuous Activations Exhaust The Effect And Severely Impede Stamina");
+        add("malum.effect.geas.wind_charge_exhaustion", "Continuous Activations Exhaust The Effect And Weighs You Down");
         add("malum.effect.geas.explosion_eating", "Explosions are Converted Into Mining Speed");
         add("malum.effect.geas.explosion_mining_cooldown", "Charges Require Recharge");
         add("malum.effect.geas.explosion_mining_exhaustion", "Overuse Exhausts Effect And Halts Dexterity");

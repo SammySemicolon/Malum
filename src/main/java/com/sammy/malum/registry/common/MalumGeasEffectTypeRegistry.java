@@ -85,22 +85,8 @@ public class MalumGeasEffectTypeRegistry {
     //This is a void geas
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_UNSIGHTED_RESISTANCE = GEAS_TYPES.register("oath_of_unsighted_resistance", () -> new GeasEffectType(UnsightedResistance::new));
 
-    // Oath of the Inverted Heart
-    //Damage you deal is applied to witnesses at a halved amount
-    //Damage you take is applied to witnesses
-    //Witness Detection range scales with arcane resonance
-    //Named Entities and Tamed Pets are excluded
-    //Effect stops working completely if the wrathbearer is invisible to the target
-    //Reduces Magic Resistance significantly
-    //This is a void geas, might use fused consciousness even
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_INVERTED_HEART = GEAS_TYPES.register("oath_of_the_inverted_heart", () -> new GeasEffectType(InvertedHeartOath::new));
-    // Oath of the Gleeful Target
-    //Taking damage applies a stasis onto your potion effects
-    //Potion effects in stasis have their duration paused with no change to their effect
-    //Stasis duration scales with arcane resonance
-    //While stasis is active you cannot be hurt by potion effects
-    //Reduces Healing Received significantly
-    //This is a void geas, might use fused consciousness even
+
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_GLEEFUL_TARGET = GEAS_TYPES.register("oath_of_the_gleeful_target", () -> new GeasEffectType(GleefulTargetOath::new));
     // Oath of the Loosened Shackles
     //Each time you die, it is instead stored for later

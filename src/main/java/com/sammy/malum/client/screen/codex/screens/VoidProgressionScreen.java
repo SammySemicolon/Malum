@@ -342,7 +342,7 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
         );
         addEntry("void.sundering_anchor", -2, 16, b -> b
                 .configureWidget(w -> w.setIcon(SUNDERING_ANCHOR).setStyle(BookWidgetStyle.TOTEMIC_SOULWOOD))
-                .addPage(new WeepingWellTextPage("void.fused_consciousness", "void.fused_consciousness.1", SUNDERING_ANCHOR.get()))
+                .addPage(new WeepingWellTextPage("void.sundering_anchor", "void.sundering_anchor.1", SUNDERING_ANCHOR.get()))
                 .addPage(SpiritInfusionPage.fromOutput(SUNDERING_ANCHOR.get()))
         );
         addEntry("void.unwinding_chaos", 2, 16, b -> b

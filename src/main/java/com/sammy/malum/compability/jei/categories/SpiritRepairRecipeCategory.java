@@ -19,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -77,12 +78,13 @@ public class SpiritRepairRecipeCategory implements IRecipeCategory<SpiritRepairR
     public void setRecipe(IRecipeLayoutBuilder builder, SpiritRepairRecipe recipe, IFocusGroup focuses) {
         List<ItemStack> repaired = recipe.itemsForRepair.stream().map(Item::getDefaultInstance).collect(Collectors.toList());
         List<ItemStack> repairIngredient = Arrays.stream(recipe.repairMaterial.getItems()).toList();
-
         List<ItemStack> damaged = repaired.stream()
                 .map(ItemStack::copy)
                 .peek(s -> s.setDamageValue((int) (s.getMaxDamage() * recipe.durabilityPercentage)))
                 .collect(Collectors.toCollection(ArrayList::new));
-
+        if (recipe.repairOutputOverride != Items.AIR) {
+            repaired = repaired.stream().map(recipe::getResultItem).toList();
+        }
         JEIHandler.addCustomIngredientToJei(builder, RecipeIngredientRole.INPUT, 62, 13, false, recipe.spirits);
 
         IRecipeSlotBuilder input = builder.addSlot(RecipeIngredientRole.INPUT, 82, 57)

@@ -15,7 +15,6 @@ import java.util.concurrent.*;
 
 public class RegistryDataGenerator extends DatapackBuiltinEntriesProvider {
 
-    public static RegistryDataGenerator registries;
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.ENCHANTMENT, MalumEnchantmentDatagen::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, ConfiguredFeatures::bootstrap)
@@ -24,6 +23,5 @@ public class RegistryDataGenerator extends DatapackBuiltinEntriesProvider {
 
     public RegistryDataGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, RegistryPatchGenerator.createLookup(registries, BUILDER), Set.of("minecraft", MalumMod.MALUM));
-        RegistryDataGenerator.registries = this;
     }
 }

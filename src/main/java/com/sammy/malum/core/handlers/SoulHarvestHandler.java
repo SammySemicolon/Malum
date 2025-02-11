@@ -171,13 +171,6 @@ public class SoulHarvestHandler {
         if (attacker.getAttribute(spiritSpoils) != null) {
             extra += Mth.ceil(attacker.getAttributeValue(spiritSpoils));
         }
-        if (!stack.isEmpty()) {
-            int spiritPlunder = EnchantmentRegistry.getEnchantmentLevel(attacker.level(), EnchantmentRegistry.SPIRIT_PLUNDER, stack);
-            if (spiritPlunder > 0) {
-                stack.hurtAndBreak(spiritPlunder, attacker, MAINHAND);
-            }
-            extra += spiritPlunder;
-        }
         for (int i = 0; i < extra; i++) {
             int random = attacker.getRandom().nextInt(spirits.size());
             spirits.get(random).grow(1);

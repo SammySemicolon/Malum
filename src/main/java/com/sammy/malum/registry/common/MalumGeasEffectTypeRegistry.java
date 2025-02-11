@@ -24,10 +24,6 @@ public class MalumGeasEffectTypeRegistry {
 
     // Oath, Bond, Pact, Promise, Creed, Coda, Manifesto, Ideal
 
-    //TODO: Hello Wiresegal https://cdn.discordapp.com/emojis/1102382147941191681.gif?size=48&name=wave%7E1&quality=lossless
-    // Pretty please rename all the stuff accordingly to whatever names you choose
-    // Tooltip Descriptions are in MalumLang#135 :3
-
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_NIGHTCHILD = GEAS_TYPES.register("pact_of_the_nightchild", () -> new GeasEffectType(NightChildGeas::new));
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_DAYBLESSED = GEAS_TYPES.register("pact_of_the_dayblessed", () -> new GeasEffectType(DayBlessedGeas::new));
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_SHATTERING_ADDICT = GEAS_TYPES.register("pact_of_the_shattering_addict", () -> new GeasEffectType(ShatteringAddict::new));
@@ -40,6 +36,7 @@ public class MalumGeasEffectTypeRegistry {
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_REAPER = GEAS_TYPES.register("pact_of_the_reaper", () -> new GeasEffectType(ReaperGeas::new));
 
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_SKYBREAKER = GEAS_TYPES.register("pact_of_the_skybreaker", () -> new GeasEffectType(SkyBreakerGeas::new));
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_CLOUDHOPPER = GEAS_TYPES.register("pact_of_the_cloudhopper", () -> new GeasEffectType(CloudHopperGeas::new));
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_MAVERICK = GEAS_TYPES.register("pact_of_the_maverick", () -> new GeasEffectType(MaverickGeas::new));
 
 
@@ -111,5 +108,9 @@ public class MalumGeasEffectTypeRegistry {
     //Reduces Armor significantly
     //This is a void geas, might use fused consciousness even
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_LAST_STAND = GEAS_TYPES.register("oath_of_the_last_stand", () -> new GeasEffectType(LastStandOath::new));
+
+
+
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> CREED_OF_THE_BLIGHT_EATER = GEAS_TYPES.register("creed_of_the_blight_eater", () -> new GeasEffectType(BlightEaterCreed::new));
 
 }

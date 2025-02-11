@@ -1,6 +1,7 @@
 package com.sammy.malum.core.handlers;
 
 import com.sammy.malum.*;
+import com.sammy.malum.common.data_components.*;
 import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
@@ -51,10 +52,15 @@ public class GeasEffectHandler {
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static GeasEffect getStoredGeasEffect(ItemStack stack) {
+    public static GeasDataComponent getStoredGeasEffect(ItemStack stack) {
         if (!stack.has(DataComponentRegistry.GEAS_EFFECT)) {
             throw new IllegalArgumentException("Stack does not have an etching effect");
         }
-        return stack.get(DataComponentRegistry.GEAS_EFFECT).effectInstance();
+        final GeasDataComponent geasDataComponent = stack.get(DataComponentRegistry.GEAS_EFFECT);
+        if (geasDataComponent.isInvalid()) {
+            stack.remove(DataComponentRegistry.GEAS_EFFECT);
+            throw new IllegalArgumentException("Stack had a deprecated geas effect type.");
+        }
+        return geasDataComponent;
     }
 }

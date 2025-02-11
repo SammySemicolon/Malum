@@ -16,7 +16,6 @@ import com.sammy.malum.common.item.curiosities.curios.sets.weeping.*;
 import com.sammy.malum.compability.tetra.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.listeners.*;
-import com.sammy.malum.registry.common.block.*;
 import net.minecraft.core.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
@@ -26,7 +25,6 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.common.*;
-import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.*;
 import net.neoforged.neoforge.event.entity.item.*;
@@ -177,12 +175,16 @@ public class RuntimeEvents {
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onExplosionStart(ExplosionEvent.Start event) {
+        MaverickGeas.onExplosionStart(event);
+    }
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onExplosionDetonate(ExplosionEvent.Detonate event) {
         CurioProspectorBelt.processExplosion(event);
         NitrateExplosion.processExplosion(event);
     }
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onExplosionKnockback(ExplosionKnockbackEvent event) {
-        MaverickGeas.onExplosionKnockback(event);
+        CloudHopperGeas.onExplosionKnockback(event);
     }
 }

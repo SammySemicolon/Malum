@@ -34,14 +34,13 @@ public class InvertedHeartOath extends GeasEffect {
 
     @Override
     public void addTooltipComponents(LivingEntity entity, Consumer<Component> tooltipAcceptor, TooltipFlag tooltipFlag) {
-        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("authority_of_wrath"));
-        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("authority_of_wrath_arcane_resonance"));
+        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("inverted_heart"));
+        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("inverted_heart_arcane_resonance"));
         super.addTooltipComponents(entity, tooltipAcceptor, tooltipFlag);
     }
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> createAttributeModifiers(LivingEntity entity, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        addAttributeModifier(modifiers, LodestoneAttributes.MAGIC_PROFICIENCY, 0.25f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         addAttributeModifier(modifiers, LodestoneAttributes.MAGIC_RESISTANCE, -0.75f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         return modifiers;
     }

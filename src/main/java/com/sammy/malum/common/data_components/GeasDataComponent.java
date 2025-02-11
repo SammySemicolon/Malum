@@ -6,14 +6,21 @@ import com.sammy.malum.core.systems.geas.*;
 import io.netty.buffer.*;
 import net.minecraft.network.codec.*;
 
-public record GeasDataComponent(GeasEffectType geasEffectType, GeasEffect effectInstance) {
+import java.util.*;
 
-    public GeasDataComponent(GeasEffectType geasEffectType) {
-        this(geasEffectType, geasEffectType.createEffect());
-    }
+public record GeasDataComponent(GeasEffectType geasEffectType) {
+
     public static Codec<GeasDataComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            GeasEffectType.CODEC.fieldOf("geasEffectType").forGetter(GeasDataComponent::geasEffectType)
-    ).apply(instance, GeasDataComponent::new));
+            GeasEffectType.CODEC.lenientOptionalFieldOf("geasEffectType").forGetter(g -> Optional.ofNullable(g.geasEffectType))
+    ).apply(instance, o -> new GeasDataComponent(o.orElse(null))));
 
     public static StreamCodec<ByteBuf, GeasDataComponent> STREAM_CODEC = ByteBufCodecs.fromCodec(GeasDataComponent.CODEC);
+
+    public boolean isInvalid() {
+        return geasEffectType == null;
+    }
+
+    public GeasEffect createEffectInstance() {
+        return geasEffectType.createEffect();
+    }
 }

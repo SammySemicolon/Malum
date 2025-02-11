@@ -147,6 +147,7 @@ public class MalumLang extends LanguageProvider {
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_REAPER.get(), "");
 
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_SKYBREAKER.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_CLOUDHOPPER.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_MAVERICK.get(), "");
 
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_PROFANE_ASCETIC.get(), "");
@@ -163,8 +164,11 @@ public class MalumLang extends LanguageProvider {
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_UNDISCERNED_MAW.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_UNSIGHTED_RESISTANCE.get(), "");
 
-        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_INVERTED_HEART.get(), "Witch Factor of Wrath");
-        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_GLEEFUL_TARGET.get(), "Witch Factor of Greed");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_INVERTED_HEART.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_GLEEFUL_TARGET.get(), "The most satisfied existence in the world");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_LAST_STAND.get(), "");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.CREED_OF_THE_BLIGHT_EATER.get(), "Mmmm... Blight... So Tasty..");
 
         add("malum.waveform_artifice.wavecharger", "Redstone Interpolation Time: %s");
         add("malum.waveform_artifice.wavebanker", "Redstone Pulse Duration: %s");
@@ -268,10 +272,12 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.soul_ward_on_hit", "Magic Damage Recovers Soul Ward");
         add("malum.effect.geas.scythe_combo", "Scythe Cuts Create After-attacks");
         add("malum.effect.geas.only_scythe", "Regular Weapons Crumble In Your Hands");
-        add("malum.effect.geas.fall_damage_auto_attack", "Outgoing Fall Damage Strikes With Your Weapon");
-        add("malum.effect.geas.explosion_absorption", "Explosions Become Propulsive Wind Charges");
+        add("malum.effect.geas.fall_damage_auto_attack", "Outgoing Fall Damage Strikes Targets With Your Weapon");
         add("malum.effect.geas.rocket_jumping", "Wind Charges Provide Greater Propulsion");
-        add("malum.effect.geas.explosion_absorption_cooldown", "Repeated Activations Exhaust The Effect And Drain Stamina");
+        add("malum.effect.geas.wind_charge_exhaustion", "Continuous Activations Exhaust The Effect And Severely Impede Stamina");
+        add("malum.effect.geas.explosion_eating", "Explosions are Converted Into Mining Speed");
+        add("malum.effect.geas.explosion_mining_cooldown", "Charges Require Recharge");
+        add("malum.effect.geas.explosion_mining_exhaustion", "Overuse Exhausts Effect And Halts Dexterity");
         add("malum.effect.geas.wyrd_reconstruction", "Prevents Death And Repeatedly Activates Spirit-Collection Effects");
         add("malum.effect.geas.wyrd_reconstruction_cooldown", "Effect Has A Lengthy Cooldown And Halves Arcane Resonance Until Recharged");
         add("malum.effect.geas.malignant_crit_leech", "Malignant Deliverance Leeches Life Essence");
@@ -279,10 +285,12 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.malignant_crit_reinforcement", "Malignant Deliverance Improves Conversion");
         add("malum.effect.geas.staff_homing", "Staff Projectiles Home In on Targets");
         add("malum.effect.geas.staff_autofire", "Staff Charges Automatically Fire");
-        add("malum.effect.geas.authority_of_wrath", "Injuries, Emotions, Senses are Shared with Witnesses");
-        add("malum.effect.geas.authority_of_wrath_arcane_resonance", "Arcane Resonance Favors Influence Radius");
-        add("malum.effect.geas.authority_of_greed", "Aliments, Blessings, Curses are Paused When Wounded");
-        add("malum.effect.geas.authority_of_greed_arcane_resonance", "Arcane Resonance Aids Stasis Duration");
+        add("malum.effect.geas.inverted_heart", "Injuries, Emotions, Senses are Shared with Witnesses");
+        add("malum.effect.geas.inverted_heart_arcane_resonance", "Arcane Resonance Favors Influence Radius");
+        add("malum.effect.geas.gleeful_target", "Aliments, Blessings, Curses are Paused When Wounded");
+        add("malum.effect.geas.gleeful_target_arcane_resonance", "Arcane Resonance Aids Stasis Duration");
+        add("malum.effect.geas.last_stand", "Expiration, Demise, Passing, Is Made Lenient");
+        add("malum.effect.geas.last_stand_patient_death", "Death Comes For Us All... Unless");
 
         add("malum.effect.soul_based_damage", "Deals Soul-Rending Damage");
         add("malum.effect.weight_of_worlds_crit", "Sometimes Strikes With Critical Force");

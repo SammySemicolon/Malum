@@ -6,9 +6,9 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "malum.refmap.json",
   "mixins": [
-    "FeatureFlagSetAccessor",
     "BlockBehaviorMixin",
     "ExplosionMixin",
+    "FeatureFlagSetAccessor",
     "FeatureFlagSetMixin",
     "FishingHookEntityMixin",
     "ItemStackMixin",

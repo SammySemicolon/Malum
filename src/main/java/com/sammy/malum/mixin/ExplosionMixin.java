@@ -27,6 +27,7 @@ public abstract class ExplosionMixin {
 
     @Unique
     boolean malum$hasHoarderRing;
+
     @Unique
     ItemStack malum$droppedItem;
 
@@ -48,16 +49,17 @@ public abstract class ExplosionMixin {
     @Mutable
     @Shadow @Final private ParticleOptions largeExplosionParticles;
 
+
     @Inject(method = "<init>(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/damagesource/DamageSource;Lnet/minecraft/world/level/ExplosionDamageCalculator;DDDFZLnet/minecraft/world/level/Explosion$BlockInteraction;Lnet/minecraft/core/particles/ParticleOptions;Lnet/minecraft/core/particles/ParticleOptions;Lnet/minecraft/core/Holder;)V", at = @At(value = "RETURN"))
     private void malum$modifyExplosionStats(Level level, Entity source, DamageSource damageSource, ExplosionDamageCalculator damageCalculator, double x, double y, double z, float radius, boolean fire, Explosion.BlockInteraction blockInteraction, ParticleOptions smallExplosionParticles, ParticleOptions largeExplosionParticles, Holder explosionSound, CallbackInfo ci) {
-        this.radius = CurioDemolitionistRing.increaseExplosionRadius(getIndirectSourceEntity(), radius);
-        if (MaverickGeas.modifyExplosionProperties(getIndirectSourceEntity())) {
-            if (damageSource == null) {
-                this.radius = Math.max(radius, 2);
+        LivingEntity sourceEntity = getIndirectSourceEntity();
+        this.radius = CurioDemolitionistRing.increaseExplosionRadius(sourceEntity, radius);
+        if (level.isClientSide) {
+            if (CloudHopperGeas.canModifyExplosion(sourceEntity)) {
+                this.explosionSound = SoundEvents.WIND_CHARGE_BURST;
+                this.smallExplosionParticles = ParticleTypes.GUST_EMITTER_SMALL;
+                this.largeExplosionParticles = ParticleTypes.GUST_EMITTER_LARGE;
             }
-            this.explosionSound = SoundEvents.WIND_CHARGE_BURST;
-            this.smallExplosionParticles = ParticleTypes.GUST_EMITTER_SMALL;
-            this.largeExplosionParticles = ParticleTypes.GUST_EMITTER_LARGE;
         }
     }
 

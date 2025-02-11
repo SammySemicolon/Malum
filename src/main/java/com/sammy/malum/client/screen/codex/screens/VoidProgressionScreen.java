@@ -14,9 +14,7 @@ import com.sammy.malum.client.screen.codex.pages.EntrySelectorPage;
 import com.sammy.malum.client.screen.codex.pages.recipe.RuneworkingPage;
 import com.sammy.malum.client.screen.codex.pages.recipe.SpiritInfusionPage;
 import com.sammy.malum.client.screen.codex.pages.recipe.vanilla.CraftingPage;
-import com.sammy.malum.client.screen.codex.pages.text.HeadlineTextPage;
-import com.sammy.malum.client.screen.codex.pages.text.TextPage;
-import com.sammy.malum.client.screen.codex.pages.text.WeepingWellTextPage;
+import com.sammy.malum.client.screen.codex.pages.text.*;
 import com.sammy.malum.core.systems.events.SetupMalumCodexEntriesEvent;
 import com.sammy.malum.common.item.codex.EncyclopediaEsotericaItem;
 import com.sammy.malum.registry.common.SoundRegistry;
@@ -337,25 +335,27 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
 //                .addPage(new HeadlineTextItemPage("void.anomalous_design", "void.anomalous_design.1", ANOMALOUS_DESIGN.get()))
 //                .addPage(SpiritInfusionPage.fromOutput(COMPLETE_DESIGN.get()))
 //        );
-//        addEntry("void.fused_consciousness", 0, 8, b -> b
-//                .setWidgetConfig(w -> w.setIcon(FUSED_CONSCIOUSNESS).setStyle(BookWidgetStyle.GILDED_SOULWOOD))
-//                .addPage(new HeadlineTextItemPage("void.fused_consciousness", "void.fused_consciousness.1", FUSED_CONSCIOUSNESS.get()))
-//        );
-//        addEntry("void.belt_of_the_limitless", -2, 9, b -> b
-//                .setWidgetConfig(w -> w.setIcon(BELT_OF_THE_LIMITLESS).setStyle(BookWidgetStyle.SOULWOOD))
-//                .addPage(new HeadlineTextPage("void.belt_of_the_limitless", "void.belt_of_the_limitless.1"))
-//                .addPage(SpiritInfusionPage.fromOutput(BELT_OF_THE_LIMITLESS.get()))
-//        );
-//        addEntry("void.stellar_mechanism", 2, 9, b -> b
-//                .setWidgetConfig(w -> w.setIcon(STELLAR_MECHANISM).setStyle(BookWidgetStyle.SOULWOOD))
-//                .addPage(new HeadlineTextPage("void.stellar_mechanism", "void.stellar_mechanism.1"))
-//                .addPage(SpiritInfusionPage.fromOutput(STELLAR_MECHANISM.get()))
-//        );
-//        addEntry("void.staff_of_the_auric_flame", 0, 10, b -> b
-//                .setWidgetConfig(w -> w.setIcon(STAFF_OF_THE_AURIC_FLAME).setStyle(BookWidgetStyle.SOULWOOD))
-//                .addPage(new HeadlineTextPage("void.staff_of_the_auric_flame", "void.staff_of_the_auric_flame.1"))
-//                .addPage(SpiritInfusionPage.fromOutput(STAFF_OF_THE_AURIC_FLAME.get()))
-//        );
+        addEntry("void.fused_consciousness", 0, 15, b -> b
+                .configureWidget(w -> w.setIcon(FUSED_CONSCIOUSNESS).setStyle(BookWidgetStyle.GILDED_SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.fused_consciousness", "void.fused_consciousness.1", FUSED_CONSCIOUSNESS.get()))
+                .addPage(SpiritInfusionPage.fromOutput(COMPLETE_DESIGN.get()))
+        );
+        addEntry("void.sundering_anchor", -2, 16, b -> b
+                .configureWidget(w -> w.setIcon(SUNDERING_ANCHOR).setStyle(BookWidgetStyle.TOTEMIC_SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.fused_consciousness", "void.fused_consciousness.1", SUNDERING_ANCHOR.get()))
+                .addPage(SpiritInfusionPage.fromOutput(SUNDERING_ANCHOR.get()))
+        );
+        addEntry("void.unwinding_chaos", 2, 16, b -> b
+                .configureWidget(w -> w.setIcon(UNWINDING_CHAOS).setStyle(BookWidgetStyle.TOTEMIC_SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.unwinding_chaos", "void.unwinding_chaos.1", UNWINDING_CHAOS.get()))
+                .addPage(SpiritInfusionPage.fromOutput(UNWINDING_CHAOS.get()))
+        );
+
+        addEntry("void.belt_of_the_limitless", -3, 17, b -> b
+                .configureWidget(w -> w.setIcon(BELT_OF_THE_LIMITLESS).setStyle(BookWidgetStyle.TOTEMIC_SOULWOOD))
+                .addPage(new WeepingWellTextPage("void.belt_of_the_limitless", "void.belt_of_the_limitless.1", BELT_OF_THE_LIMITLESS.get()))
+                .addPage(SpiritInfusionPage.fromOutput(BELT_OF_THE_LIMITLESS.get()))
+        );
 
         BookPage.isVoidThemed = false;
     }

@@ -281,6 +281,26 @@ public class CodexLangDatagen {
                 "Upon activation, the necklace remains inert for a total of ten seconds, requiring rest and concentration in order to recover it's effect. Attacking at any point in this state will prolong this absence of function.",
                 "The counterattack's nature is a strange one, one I have not fully identified. It is as though the blade asserts its existence in multiple places at once, demanding reality make it so.");
 
+        //TODO: Fused Consciousness
+        addSimpleEntryHeader("void.fused_consciousness", "Fused Consciousness", "The blueprint of everything that ever was and will be");
+        addPages("void.fused_consciousness",
+                "The Future Holds Many Secrets... But you may look at some of them early.\n Create the anomalous design by throwing an iron block into the well. Throw the complete design into the well for the fused consciousness.");
+
+        //TODO: Sundering Anchor
+        addSimpleEntryHeader("void.sundering_anchor", "Sundering Anchor", "");
+        addPages("void.sundering_anchor",
+                "Slashes Enemies Several Times with each hit. Applies Hatred each time, which forces malignant conversion and stacks up quickly. Right click for a cool ranged chain slash attack type deal");
+
+        //TODO: Unwinding Chaos
+        addSimpleEntryHeader("void.unwinding_chaos", "Unwinding Chaos", "");
+        addPages("void.unwinding_chaos",
+                "Blasts enemies with composite energy. Charge to fire a horizontal volley. Applies burn with damage. Burn damage or kills against burning enemies incrementally overcharge the volley, doubling projectile count.");
+
+        //TODO: Belt of the Limitless
+        addSimpleEntryHeader("void.belt_of_the_limitless", "Belt of the Limitless", "");
+        addPages("void.belt_of_the_limitless",
+                "Doubles Soul Ward Capacity, Soul Ward now absorbs *all* damage. Soul Ward Integrity scales double as soul ward approaches disintigration. Reduces Soul Ward Recovery Speed Slightly.");
+
         addSimpleEntryHeader("introduction", "Introduction", "On the nature of souls");
         addPages("introduction",
                 "\"Within our world, every living being has a soul. That soul is consciousness, what animates the body, and the meeting point between matter and magic. These represent our existence; as the body is presented to the physical world, so the soul is to the arcane.\"",

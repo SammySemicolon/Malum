@@ -273,6 +273,7 @@ public class CodexLangDatagen {
         addPages("void.necklace_of_the_watcher",
                 "Souls emit energy when damaged, not merely when shattered. This necklace allows me to harness that energy, causing effects that normally only occur when I collect a spirit to also happen when I strike an enemy at full health.");
 
+        //TODO: no longer removes sweeping
         addEntryHeader("void.necklace_of_the_hidden_blade", "Necklace of the Hidden Blade", "A knife at their backs");
         addHeadline("void.necklace_of_the_hidden_blade", "The Hidden Blade");
         addPages("void.necklace_of_the_hidden_blade",
@@ -368,6 +369,7 @@ public class CodexLangDatagen {
         addHeadline("esoteric_reaping.astral_weave", "Astral Weave");
         addPages("esoteric_reaping.astral_weave",
                 "The membrane of a phantom will spin into Astral Weave with this magic, a mystic cloth with strange arcane properties.");
+        //TODO: wind nucleus
         addHeadline("esoteric_reaping.wind_nucleus", "Wind Nucleus");
         addPages("esoteric_reaping.wind_nucleus",
                 "The very essence of the Breeze remains intact as the Wind Nucleus, the core of it's design. It's stored energy can be quickly released to push away any nearby creature.");
@@ -511,17 +513,31 @@ public class CodexLangDatagen {
         // First page talks about repairing tools using the pylon in general, second page comments on the extra efficiency in which malum gear is repaired
         addSimpleEntryHeader("arcane_restoration.tool_repair", "Repairing Tools", "Mending for Steelwear");
         addPages("arcane_restoration.tool_repair",
-                "",
-                "");
+                "The Repair Pylon isn't just for repairing the impetus. By supplying it with a valid repair ingredient for any given tool or piece of equipment, feeding it spirits, and socketing the tool in a nearby item pedestal, the item will be repaired free of experience cost. Each repair restores 50% of the total durability",
+                "Malum gear happens to be super effective and cool when repaired, restoring 75% of lost durability instead of the standard 50%");
         addSimpleEntryHeader("crucible_augmentation", "Crucible Augmentation", "Tuning the attuner");
         addPages("crucible_augmentation",
                 "The Spirit Crucible is a machine of great, but largely unrealized, potential. Through a process I call Augmentation, revolving around foci of Alchemical Calx, this potential can be extracted.",
                 "Each augment provides a unique effect that can be activated by inserting it in the spirit catalyzer, or placing up to four in the spirit crucible itself. Using more than one instance of the same augment type will compound their effects.",
                 "To assist in controlling this process, I have modified a Tuning Fork for the purpose. While held, I can see all the unique resonances of the crucible and it's augments. On top of that, by using this Tuning Fork on the crucible, I may choose an attribute to improve, at the cost of other attributes lessening in potency.");
 
+        //TODO: core augment entries
+        addSimpleEntryHeader("sympathy_drive", "Sympathy Drive", "");
+        addPages("sympathy_drive",
+                "When the impetus takes damage, the drive remembers it. When the impetus is healed via mending diffuser, the stored charge is converted into an increase to healing received and a percentage buff to all stats lasting for the next 3 focusing cycles");
+        addSimpleEntryHeader("resonance_tuner", "Resonance Tuner", "");
+        addPages("resonance_tuner",
+                "For each percentage of instability, uses up 2% of your focusing speed to apply a 1% decrease to the total instability. That focusing speed reduction is actually multiplied by 0.8 as to not drain ur focusing speed completely in some situations, but it's still as effective as if not multiplied by 0.8");
+        addSimpleEntryHeader("caustic_catalyst", "Caustic Catalyst", "");
+        addPages("caustic_catalyst",
+                "Tuning Potency is increased proportionally to instability");
+        addSimpleEntryHeader("suspicious_device", "Suspicious Device", "");
+        addPages("suspicious_device",
+                "Blows up. This entry is more of a joke, the whole item is, the author made a silly gizmo and warns anyone to not create it. The gizmo also creates blight in the area upon detonation.");
+
         addSimpleEntryHeader("mending_diffuser", "Mending Diffuser", "Unliving scar tissue");
         addPages("mending_diffuser",
-                "By using Living Flesh to sympathize with natural healing, the Mending Diffuser will, upon the Crucible completing a focusing cycle, potentially repair any impetus by a small amount. It cannot mend an already cracked impetus.");
+                "By using Living Flesh to sympathize with natural healing, the Mending Diffuser will, upon the Crucible completing a focusing cycle, potentially repair any impetus by a small amount. It cannot mend an already fractured impetus.");
 
         addSimpleEntryHeader("impurity_stabilizer", "Impurity Stabilizer", "Potency from weakness");
         addPages("impurity_stabilizer",
@@ -639,6 +655,7 @@ public class CodexLangDatagen {
         addPages("necklace_of_the_narrow_edge",
                 "The sweep of the scythe is its main draw. The ability to cut my targets like so much wheat is invaluable. But that comes at the cost of damage to a single target. This necklace mystically focuses the edge of my attack, directing all of the power into one target for a strong damage boost.");
 
+        //TODO: Rising Edge now lowers cooldown instead, uses wind nucleus in recipe
         addEntryHeader("necklace_of_the_narrow_edge.ring_of_the_rising_edge", "Ring of the Rising Edge", "An A press is an A press");
         addHeadline("necklace_of_the_narrow_edge.ring_of_the_rising_edge", "The Rising Edge");
         addPages("necklace_of_the_narrow_edge.ring_of_the_rising_edge",
@@ -646,10 +663,11 @@ public class CodexLangDatagen {
                 "At the cost of a decrease to damage, those cut by the blades of wind under the Rising Edge’s effect will also find themselves launched upwards. Useful for crowd control and whatnot, but like the scythe itself, the Narrow Edge can change this purpose.",
                 "By wearing both the Necklace of the Narrow Edge and the Ring of the Rising Edge, the concentrated sweep of wind launches with vastly increased potency, allowing me to juggle my enemies above me.");
 
+        //TODO: Look through this and potentially change it.
         addEntryHeader("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom", "Ring of the Howling Maelstrom", "Slicing Winds");
         addHeadline("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom", "The Howling Maelstrom");
         addPages("necklace_of_the_narrow_edge.ring_of_the_howling_maelstrom",
-                "The Rebound enchantment is an effective ranged option for the scythe similarly to Ascension it has close connections to Aerial Arcana. Similarly, this ring enables an added functionality to Rebound, which I term the Howling Maelstrom.",
+                "The Rebound enchantment is an effective ranged option for the scythe, and similarly to Ascension it has close connections to Aerial Arcana. Similarly, this ring enables an added functionality to Rebound, which I term the Howling Maelstrom.",
                 "At the cost of a substantially longer cooldown, the Rebound projectile carries with itself a powerful windborne maelstrom, repeatedly damaging everything within a large radius around the scythe.",
                 "By wearing both the Necklace of the Narrow Edge and the Ring of the Howling Maelstrom, the Maelstrom is instead reserved till after the moment of impact, remaining at the striking point for about two seconds.");
 
@@ -720,6 +738,7 @@ public class CodexLangDatagen {
         addSimpleEntryHeader("void.rune_of_twinned_duration", "Rune of Twinned Duration", "To suspend what must process");
         addPages("void.rune_of_twinned_duration",
                 "The Rune of Twinned Duration inhibits the body in breaking down substances, causing the body to hold on to positive effects for longer.");
+        //TODO: The effect has been changed, it instead doubles outgoing fire damage
         addSimpleEntryHeader("void.rune_of_igneous_solace", "Rune of Igneous Solace", "To fuel what must burn");
         addPages("void.rune_of_igneous_solace",
                 "The Rune of Igneous Solace toughens the user's skin when burning, giving them a partial resistance to damage. It does not, however, do anything about the flames.");
@@ -963,6 +982,7 @@ public class CodexLangDatagen {
         addSimpleEntryHeader("corrupted_resonance", "Corrupted Resonance", "Advanced magics");
         addPages("corrupted_resonance", "To fuel any further magics, I will need a catalyst. Something beautiful, full of magic, serving as the basis for any complex craft born from it. Corrupted Resonance is perfect for the role.");
 
+        //TODO: Tyrving
         addSimpleEntryHeader("tyrving", "Tyrving", "Ancient relic");
         addPages("tyrving", "The Tyrving is a sword with a strange design, making it appear as a weak weapon not suited for combat. However, it's hex ash lining and twisted rock form cause it to deal extra magic damage proportional to the complexity of the target's soul. The greater the soul the more benefit.",
                 "The weapon can also be repaired using arcane restoration quite efficiently.");

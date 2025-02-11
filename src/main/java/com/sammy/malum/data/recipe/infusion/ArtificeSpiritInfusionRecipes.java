@@ -77,6 +77,33 @@ public class ArtificeSpiritInfusionRecipes {
                 .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 2)
                 .save(recipeOutput);
 
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_CALX.get(), 6, ItemRegistry.SYMPATHY_DRIVE.get(), 1)
+                .addSpirit(SACRED_SPIRIT, 16)
+                .addSpirit(WICKED_SPIRIT, 16)
+                .addExtraItem(ItemRegistry.LIVING_FLESH.get(), 8)
+                .addExtraItem(ItemRegistry.REFINED_SOULSTONE.get(), 8)
+                .save(recipeOutput);
+
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_CALX.get(), 6, ItemRegistry.SUSPICIOUS_DEVICE.get(), 1)
+                .addSpirit(ARCANE_SPIRIT, 16)
+                .addSpirit(ELDRITCH_SPIRIT, 16)
+                .addExtraItem(ItemRegistry.WARP_FLUX.get(), 4)
+                .save(recipeOutput);
+
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_CALX.get(), 6, ItemRegistry.CAUSTIC_CATALYST.get(), 1)
+                .addSpirit(AQUEOUS_SPIRIT, 16)
+                .addSpirit(INFERNAL_SPIRIT, 16)
+                .addExtraItem(ItemRegistry.BLAZING_QUARTZ.get(), 8)
+                .addExtraItem(Items.PRISMARINE_CRYSTALS, 8)
+                .save(recipeOutput);
+
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_CALX.get(), 6, ItemRegistry.RESONANCE_TUNER.get(), 1)
+                .addSpirit(EARTHEN_SPIRIT, 16)
+                .addSpirit(AERIAL_SPIRIT, 16)
+                .addExtraItem(ItemRegistry.ASTRAL_WEAVE.get(), 8)
+                .addExtraItem(ItemRegistry.REFINED_BRILLIANCE.get(), 8)
+                .save(recipeOutput);
+
         new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_CALX.get(), 4, ItemRegistry.MENDING_DIFFUSER.get(), 1)
                 .addSpirit(SACRED_SPIRIT, 8)
                 .addSpirit(ARCANE_SPIRIT, 4)

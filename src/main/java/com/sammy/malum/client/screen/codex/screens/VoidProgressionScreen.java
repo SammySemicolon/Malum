@@ -252,26 +252,28 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
                 .afterUmbralCrystal()
         );
         addEntry("void.necklace_of_the_watcher", -3, 11, b -> b
-            .configureWidget(w -> w.setIcon(NECKLACE_OF_THE_WATCHER).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new HeadlineTextPage("void.necklace_of_the_watcher", "void.necklace_of_the_watcher.1"))
-            .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_WATCHER.get()))
-            .afterUmbralCrystal()
+                .configureWidget(w -> w.setIcon(NECKLACE_OF_THE_WATCHER).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new HeadlineTextPage("void.necklace_of_the_watcher", "void.necklace_of_the_watcher.1"))
+                .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_WATCHER.get()))
+                .afterUmbralCrystal()
         );
         addEntry("void.necklace_of_the_hidden_blade", -4, 12, b -> b
-            .configureWidget(w -> w.setIcon(NECKLACE_OF_THE_HIDDEN_BLADE).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new HeadlineTextPage("void.necklace_of_the_hidden_blade", "void.necklace_of_the_hidden_blade.1"))
-            .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_HIDDEN_BLADE.get()))
-            .afterUmbralCrystal()
+                .configureWidget(w -> w.setIcon(NECKLACE_OF_THE_HIDDEN_BLADE).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new HeadlineTextPage("void.necklace_of_the_hidden_blade", "void.necklace_of_the_hidden_blade.1"))
+                .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_HIDDEN_BLADE.get()))
+                .addPage(new TextPage("void.necklace_of_the_hidden_blade.2"))
+                .addPage(new TextPage("void.necklace_of_the_hidden_blade.3"))
+                .afterUmbralCrystal()
         );
 
         addEntry("void.malignant_pewter", 3, 9, b -> b
-            .withTraceFragmentEntry()
-            .configureWidget(w -> w.setIcon(MALIGNANT_PEWTER_INGOT).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new HeadlineTextPage("void.malignant_pewter", "void.malignant_pewter.1"))
-            .addPage(SpiritInfusionPage.fromOutput(MALIGNANT_PEWTER_INGOT.get()))
-            .addPage(new TextPage("void.malignant_pewter.2"))
-            .addPage(new TextPage("void.malignant_pewter.3"))
-            .afterUmbralCrystal()
+                .withTraceFragmentEntry()
+                .configureWidget(w -> w.setIcon(MALIGNANT_PEWTER_INGOT).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new HeadlineTextPage("void.malignant_pewter", "void.malignant_pewter.1"))
+                .addPage(SpiritInfusionPage.fromOutput(MALIGNANT_PEWTER_INGOT.get()))
+                .addPage(new TextPage("void.malignant_pewter.2"))
+                .addPage(new TextPage("void.malignant_pewter.3"))
+                .afterUmbralCrystal()
         );
 
         addEntry("void.weight_of_worlds", 4, 10, b -> b
@@ -291,43 +293,43 @@ public class VoidProgressionScreen extends AbstractProgressionCodexScreen {
         );
 
         addEntry("void.erosion_scepter", 3, 11, b -> b
-            .configureWidget(w -> w.setIcon(EROSION_SCEPTER).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new HeadlineTextPage("void.erosion_scepter", "void.erosion_scepter.1"))
-            .addPage(SpiritInfusionPage.fromOutput(EROSION_SCEPTER.get()))
-            .addPage(new TextPage("void.erosion_scepter.2"))
-            .addPage(new TextPage("void.erosion_scepter.3"))
-            .addPage(new TextPage("void.erosion_scepter.4"))
-            .afterUmbralCrystal()
+                .configureWidget(w -> w.setIcon(EROSION_SCEPTER).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new HeadlineTextPage("void.erosion_scepter", "void.erosion_scepter.1"))
+                .addPage(SpiritInfusionPage.fromOutput(EROSION_SCEPTER.get()))
+                .addPage(new TextPage("void.erosion_scepter.2"))
+                .addPage(new TextPage("void.erosion_scepter.3"))
+                .addPage(new TextPage("void.erosion_scepter.4"))
+                .afterUmbralCrystal()
         );
 
         addEntry("void.malignant_stronghold_armor", 4, 12, b -> b
-            .configureWidget(w -> w.setIcon(MALIGNANT_STRONGHOLD_HELMET).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new HeadlineTextPage("void.malignant_stronghold_armor", "void.malignant_stronghold_armor.1"))
-            .addPage(new TextPage("void.malignant_stronghold_armor.2"))
-            .addPage(new CyclingPage(
-                SpiritInfusionPage.fromOutput(MALIGNANT_STRONGHOLD_HELMET.get()),
-                SpiritInfusionPage.fromOutput(MALIGNANT_STRONGHOLD_CHESTPLATE.get()),
-                SpiritInfusionPage.fromOutput(MALIGNANT_STRONGHOLD_LEGGINGS.get()),
-                SpiritInfusionPage.fromOutput(MALIGNANT_STRONGHOLD_BOOTS.get())
-            ))
-            .addPage(new CraftingPage(new ItemStack(MALIGNANT_PEWTER_PLATING.get(), 2), EMPTY, MALIGNANT_PEWTER_NUGGET.get(), EMPTY, MALIGNANT_PEWTER_NUGGET.get(), MALIGNANT_PEWTER_INGOT.get(), MALIGNANT_PEWTER_NUGGET.get(), EMPTY, MALIGNANT_PEWTER_NUGGET.get(), EMPTY))
-            .afterUmbralCrystal()
+                .configureWidget(w -> w.setIcon(MALIGNANT_STRONGHOLD_HELMET).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new HeadlineTextPage("void.malignant_stronghold_armor", "void.malignant_stronghold_armor.1"))
+                .addPage(new TextPage("void.malignant_stronghold_armor.2"))
+                .addPage(new CyclingPage(
+                        SpiritInfusionPage.fromOutput(MALIGNANT_STRONGHOLD_HELMET.get()),
+                        SpiritInfusionPage.fromOutput(MALIGNANT_STRONGHOLD_CHESTPLATE.get()),
+                        SpiritInfusionPage.fromOutput(MALIGNANT_STRONGHOLD_LEGGINGS.get()),
+                        SpiritInfusionPage.fromOutput(MALIGNANT_STRONGHOLD_BOOTS.get())
+                ))
+                .addPage(new CraftingPage(new ItemStack(MALIGNANT_PEWTER_PLATING.get(), 2), EMPTY, MALIGNANT_PEWTER_NUGGET.get(), EMPTY, MALIGNANT_PEWTER_NUGGET.get(), MALIGNANT_PEWTER_INGOT.get(), MALIGNANT_PEWTER_NUGGET.get(), EMPTY, MALIGNANT_PEWTER_NUGGET.get(), EMPTY))
+                .afterUmbralCrystal()
         );
 
         addEntry("void.runes", 0, 11, b -> b
-            .configureWidget(w -> w.setIcon(RUNE_OF_THE_HERETIC).setStyle(BookWidgetStyle.SOULWOOD))
-            .addPage(new HeadlineTextPage("void.runes", "void.runes.1"))
-            .addPage(new TextPage("void.runes.2"))
-            .addPage(new EntrySelectorPage(item -> {
-                final String translationKey = "void." + BuiltInRegistries.ITEM.getKey(item).getPath();
-                return new EntryReference(item,
-                    BookEntry.build(translationKey)
-                        .addPage(new HeadlineTextPage(translationKey))
-                        .addPage(RuneworkingPage.fromOutput(item)));
-            },
-                RUNE_OF_BOLSTERING.get(), RUNE_OF_SACRIFICIAL_EMPOWERMENT.get(), RUNE_OF_SPELL_MASTERY.get(), RUNE_OF_THE_HERETIC.get(),
-                RUNE_OF_UNNATURAL_STAMINA.get(), RUNE_OF_TWINNED_DURATION.get(), RUNE_OF_TOUGHNESS.get(), RUNE_OF_IGNEOUS_SOLACE.get()))
-            .afterUmbralCrystal()
+                .configureWidget(w -> w.setIcon(RUNE_OF_THE_HERETIC).setStyle(BookWidgetStyle.SOULWOOD))
+                .addPage(new HeadlineTextPage("void.runes", "void.runes.1"))
+                .addPage(new TextPage("void.runes.2"))
+                .addPage(new EntrySelectorPage(item -> {
+                    final String translationKey = "void." + BuiltInRegistries.ITEM.getKey(item).getPath();
+                    return new EntryReference(item,
+                            BookEntry.build(translationKey)
+                                    .addPage(new HeadlineTextPage(translationKey))
+                                    .addPage(RuneworkingPage.fromOutput(item)));
+                },
+                        RUNE_OF_BOLSTERING.get(), RUNE_OF_SACRIFICIAL_EMPOWERMENT.get(), RUNE_OF_SPELL_MASTERY.get(), RUNE_OF_THE_HERETIC.get(),
+                        RUNE_OF_UNNATURAL_STAMINA.get(), RUNE_OF_TWINNED_DURATION.get(), RUNE_OF_TOUGHNESS.get(), RUNE_OF_IGNEOUS_SOLACE.get()))
+                .afterUmbralCrystal()
         );
 
 //        addEntry("void.anomalous_design", 0, 7, b -> b

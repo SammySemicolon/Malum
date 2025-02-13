@@ -27,19 +27,14 @@ public class WaveBreakerBlock extends SpiritDiodeBlock<WaveBreakerBlockEntity> {
         if (diode.outputSignal == diode.pendingSignal) {
             if (signal != diode.pendingSignal) {
                 diode.pendingSignal = signal;
-                level.playSound(null, pos, SoundRegistry.WAVEBREAKER_STORE.get(), SoundSource.BLOCKS, 0.3f, 1.5f);
-                emitRedstoneParticles(level, pos);
                 return true;
             }
 
             return false;
         } else {
             diode.outputSignal = diode.pendingSignal;
-
-            level.playSound(null, pos, SoundRegistry.WAVEBREAKER_RELEASE.get(), SoundSource.BLOCKS, 0.3f, 1.5f);
+            level.playSound(null, pos, diode.pendingSignal == 0 ? SoundRegistry.WAVEBREAKER_RELEASE.get() : SoundRegistry.WAVECHARGER_CHARGE.get(), SoundSource.BLOCKS, 0.3f, 2f);
             updateState(level, pos, state, diode);
-            emitRedstoneParticles(level, pos);
-
             return signal != diode.outputSignal;
         }
     }

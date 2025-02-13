@@ -28,7 +28,7 @@ public class GeasItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (stack.has(DataComponentRegistry.GEAS_EFFECT)) {
-            var etchingType = GeasEffectHandler.getStoredGeasEffect(stack).type;
+            var etchingType = GeasEffectHandler.getStoredGeasEffect(stack).geasEffectType().getEffectForDisplay().type;
             var component = tooltipComponents.getFirst().copy()
                     .append(": [")
                     .append(Component.translatable(etchingType.getLangKey()).withStyle(ChatFormatting.GOLD))
@@ -43,15 +43,15 @@ public class GeasItem extends Item {
             return;
         }
 
-        var etchingType = GeasEffectHandler.getStoredGeasEffect(itemStack).type;
+        var geas = GeasEffectHandler.getStoredGeasEffect(itemStack).geasEffectType();
         List<Component> tooltip = event.getToolTip();
         var index = new AtomicInteger(1);
         Consumer<Component> tooltipConsumer = c -> tooltip.add(index.getAndIncrement(), c);
-        tooltipConsumer.accept(etchingType.getDescription().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
+        tooltipConsumer.accept(geas.getDescription().withStyle(ChatFormatting.GRAY).withStyle(ChatFormatting.ITALIC));
         tooltipConsumer.accept(Component.translatable("malum.gui.slot").withStyle(ChatFormatting.GOLD)
                 .append(Component.translatable("malum.gui.geas.any").withStyle(ChatFormatting.YELLOW)));
         tooltipConsumer.accept(Component.empty());
         tooltipConsumer.accept(Component.translatable("malum.gui.geas.sworn").withStyle(ChatFormatting.GOLD));
-        GeasEffectHandler.getStoredGeasEffect(itemStack).addTooltipComponents(event.getEntity(), tooltipConsumer, event.getFlags());
+        geas.getEffectForDisplay().addTooltipComponents(event.getEntity(), tooltipConsumer, event.getFlags());
     }
 }

@@ -8,15 +8,15 @@
       }
     }
   ],
-  "type": "minecraft:blasting",
-  "category": "misc",
-  "cookingtime": 100,
+  "type": "malum:node_blasting",
+  "cookingTime": 100,
   "experience": 0.25,
+  "group": "",
   "ingredient": {
+    "item": "malum:aluminum_node"
+  },
+  "output": {
     "tag": "c:nuggets/aluminum"
   },
-  "result": {
-    "count": 1,
-    "id": "malum:aluminum_node"
-  }
+  "outputCount": 6
 }

@@ -3,25 +3,19 @@ package com.sammy.malum.client.renderer.block;
 import com.mojang.blaze3d.vertex.*;
 import com.sammy.malum.client.*;
 import com.sammy.malum.common.block.curiosities.totem.*;
-import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.core.systems.item.HeldItemTracker;
+import com.sammy.malum.core.systems.rite.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.item.*;
-import net.minecraft.client.*;
-import net.minecraft.client.player.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.*;
 import net.minecraft.core.*;
 import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import team.lodestar.lodestone.registry.client.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.rendering.*;
 import team.lodestar.lodestone.systems.rendering.cube.CubeVertexData;
-
-import static com.sammy.malum.client.RenderUtils.*;
 
 
 public class TotemBaseRenderer implements BlockEntityRenderer<TotemBaseBlockEntity> {

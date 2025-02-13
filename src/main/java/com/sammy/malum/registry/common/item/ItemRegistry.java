@@ -13,6 +13,7 @@ import com.sammy.malum.common.entity.nitrate.*;
 import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.augment.core.*;
+import com.sammy.malum.common.item.banner.*;
 import com.sammy.malum.common.item.codex.*;
 import com.sammy.malum.common.item.cosmetic.curios.*;
 import com.sammy.malum.common.item.curiosities.*;
@@ -38,6 +39,7 @@ import com.sammy.malum.common.item.ether.*;
 import com.sammy.malum.common.item.food.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.common.item.spirit.*;
+import com.sammy.malum.compability.create.*;
 import com.sammy.malum.compability.farmersdelight.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
@@ -139,7 +141,8 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> AESTHETICA = register("music_disc_aesthetica", HIDDEN_PROPERTIES().rarity(RARE), AestheticaMusicDiscItem::new);
 
     //region random stuff
-    public static final DeferredHolder<Item, Item> COPPER_NUGGET = register("copper_nugget", new LodestoneItemProperties(CreativeModeTabs.INGREDIENTS), Item::new);
+        public static DeferredHolder<Item, Item> COPPER_NUGGET;
+
     public static final DeferredHolder<Item, Item> COAL_FRAGMENT = register("coal_fragment", new LodestoneItemProperties(CreativeModeTabs.INGREDIENTS), (p) -> new LodestoneFuelItem(p, 200));
     public static final DeferredHolder<Item, Item> CHARCOAL_FRAGMENT = register("charcoal_fragment", new LodestoneItemProperties(CreativeModeTabs.INGREDIENTS), (p) -> new LodestoneFuelItem(p, 200));
     //endregion
@@ -509,6 +512,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> ROTTING_ESSENCE = register("rotting_essence", DEFAULT_PROPERTIES().food(FoodPropertyRegistry.ROTTING_ESSENCE), Item::new);
     public static final DeferredHolder<Item, Item> GRIM_TALC = register("grim_talc", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> ASTRAL_WEAVE = register("astral_weave", DEFAULT_PROPERTIES(), Item::new);
+    public static final DeferredHolder<Item, Item> WIND_NUCLEUS = register("wind_nucleus", DEFAULT_PROPERTIES(), WindNucleusItem::new);
     public static final DeferredHolder<Item, Item> WARP_FLUX = register("warp_flux", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> HEX_ASH = register("hex_ash", DEFAULT_PROPERTIES(), Item::new);
     public static final DeferredHolder<Item, Item> LIVING_FLESH = register("living_flesh", DEFAULT_PROPERTIES(), Item::new);
@@ -545,42 +549,42 @@ public class ItemRegistry {
 
 
     //region impetus
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_IRON_IMPETUS = register("cracked_iron_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> IRON_IMPETUS = register("iron_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_IRON_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_IRON_IMPETUS = register("cracked_iron_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> IRON_IMPETUS = register("iron_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> IRON_NODE = register("iron_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_COPPER_IMPETUS = register("cracked_copper_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> COPPER_IMPETUS = register("copper_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_COPPER_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_COPPER_IMPETUS = register("cracked_copper_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> COPPER_IMPETUS = register("copper_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> COPPER_NODE = register("copper_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_GOLD_IMPETUS = register("cracked_gold_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> GOLD_IMPETUS = register("gold_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_GOLD_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_GOLD_IMPETUS = register("cracked_gold_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> GOLD_IMPETUS = register("gold_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> GOLD_NODE = register("gold_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_LEAD_IMPETUS = register("cracked_lead_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> LEAD_IMPETUS = register("lead_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_LEAD_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_LEAD_IMPETUS = register("cracked_lead_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> LEAD_IMPETUS = register("lead_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> LEAD_NODE = register("lead_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_SILVER_IMPETUS = register("cracked_silver_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> SILVER_IMPETUS = register("silver_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_SILVER_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_SILVER_IMPETUS = register("cracked_silver_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> SILVER_IMPETUS = register("silver_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> SILVER_NODE = register("silver_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_ALUMINUM_IMPETUS = register("cracked_aluminum_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> ALUMINUM_IMPETUS = register("aluminum_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ALUMINUM_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_ALUMINUM_IMPETUS = register("cracked_aluminum_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> ALUMINUM_IMPETUS = register("aluminum_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> ALUMINUM_NODE = register("aluminum_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_NICKEL_IMPETUS = register("cracked_nickel_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> NICKEL_IMPETUS = register("nickel_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_NICKEL_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_NICKEL_IMPETUS = register("cracked_nickel_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> NICKEL_IMPETUS = register("nickel_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> NICKEL_NODE = register("nickel_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_URANIUM_IMPETUS = register("cracked_uranium_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> URANIUM_IMPETUS = register("uranium_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_URANIUM_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_URANIUM_IMPETUS = register("cracked_uranium_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> URANIUM_IMPETUS = register("uranium_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> URANIUM_NODE = register("uranium_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_OSMIUM_IMPETUS = register("cracked_osmium_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> OSMIUM_IMPETUS = register("osmium_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_OSMIUM_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_OSMIUM_IMPETUS = register("cracked_osmium_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> OSMIUM_IMPETUS = register("osmium_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> OSMIUM_NODE = register("osmium_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_ZINC_IMPETUS = register("cracked_zinc_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> ZINC_IMPETUS = register("zinc_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ZINC_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_ZINC_IMPETUS = register("cracked_zinc_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> ZINC_IMPETUS = register("zinc_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> ZINC_NODE = register("zinc_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_TIN_IMPETUS = register("cracked_tin_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> TIN_IMPETUS = register("tin_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_TIN_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_TIN_IMPETUS = register("cracked_tin_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> TIN_IMPETUS = register("tin_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     public static final DeferredHolder<Item, Item> TIN_NODE = register("tin_node", METALLURGIC_NODE_PROPERTIES(), NodeItem::new);
 
-    public static final DeferredHolder<Item, CrackedImpetusItem> CRACKED_ALCHEMICAL_IMPETUS = register("cracked_alchemical_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
-    public static final DeferredHolder<Item, ImpetusItem> ALCHEMICAL_IMPETUS = register("alchemical_impetus", METALLURGIC_PROPERTIES(), (p) -> new ImpetusItem(p).setCrackedVariant(CRACKED_ALCHEMICAL_IMPETUS));
+    public static final DeferredHolder<Item, Item> CRACKED_ALCHEMICAL_IMPETUS = register("cracked_alchemical_impetus", METALLURGIC_PROPERTIES(), CrackedImpetusItem::new);
+    public static final DeferredHolder<Item, ImpetusItem> ALCHEMICAL_IMPETUS = register("alchemical_impetus", METALLURGIC_PROPERTIES(), ImpetusItem::new);
     //endregion
 
     //region ether
@@ -626,6 +630,7 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> CRUDE_SCYTHE = register("crude_scythe", GEAR_PROPERTIES(), (p) -> new MalumScytheItem(Tiers.IRON, 0, 0.1f, p.durability(500)));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_SCYTHE = register("soul_stained_steel_scythe", GEAR_PROPERTIES(), (p) -> new MagicScytheItem(SOUL_STAINED_STEEL, -2.5f, 0.1f, 4, p));
+    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_KNIFE = register("soul_stained_steel_knife", FarmersDelightCompat.LOADED ? GEAR_PROPERTIES() : HIDDEN_PROPERTIES(), (p) -> FarmersDelightCompat.LOADED ? FarmersDelightCompat.LoadedOnly.makeMagicKnife(p) : new Item(p));
 
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_HELMET = register("soul_stained_steel_helmet", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.HELMET, p));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_CHESTPLATE = register("soul_stained_steel_chestplate", GEAR_PROPERTIES(), (p) -> new SoulStainedSteelArmorItem(ArmorItem.Type.CHESTPLATE, p));
@@ -637,7 +642,6 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_AXE = register("soul_stained_steel_axe", GEAR_PROPERTIES(), (p) -> new MagicAxeItem(SOUL_STAINED_STEEL, -3, 0, 4, p));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_SHOVEL = register("soul_stained_steel_shovel", GEAR_PROPERTIES(), (p) -> new MagicShovelItem(SOUL_STAINED_STEEL, -2, 0, 2, p));
     public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_HOE = register("soul_stained_steel_hoe", GEAR_PROPERTIES(), (p) -> new MagicHoeItem(SOUL_STAINED_STEEL, 0, -1.5f, 1, p));
-    public static final DeferredHolder<Item, Item> SOUL_STAINED_STEEL_KNIFE = register("soul_stained_steel_knife", FarmersDelightCompat.LOADED ? GEAR_PROPERTIES() : HIDDEN_PROPERTIES(), (p) -> FarmersDelightCompat.LOADED ? FarmersDelightCompat.LoadedOnly.makeMagicKnife(p) : new Item(p));
 
     public static final DeferredHolder<Item, Item> SOUL_HUNTER_CLOAK = register("soul_hunter_cloak", GEAR_PROPERTIES(), (p) -> new SoulHunterArmorItem(ArmorItem.Type.HELMET, p));
     public static final DeferredHolder<Item, Item> SOUL_HUNTER_ROBE = register("soul_hunter_robe", GEAR_PROPERTIES(), (p) -> new SoulHunterArmorItem(ArmorItem.Type.CHESTPLATE, p));

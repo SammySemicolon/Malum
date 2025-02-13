@@ -8,15 +8,15 @@
       }
     }
   ],
-  "type": "minecraft:smelting",
-  "category": "misc",
-  "cookingtime": 200,
+  "type": "malum:node_smelting",
+  "cookingTime": 200,
   "experience": 0.25,
+  "group": "",
   "ingredient": {
+    "item": "malum:zinc_node"
+  },
+  "output": {
     "tag": "c:nuggets/zinc"
   },
-  "result": {
-    "count": 1,
-    "id": "malum:zinc_node"
-  }
+  "outputCount": 6
 }

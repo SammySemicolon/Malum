@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.weapons.staff;
 
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.handlers.*;
 import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.core.helpers.ParticleHelper;

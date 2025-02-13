@@ -7,18 +7,26 @@
     },
     {
       "count": 4,
+      "item": "malum:wind_nucleus"
+    },
+    {
+      "count": 4,
       "item": "minecraft:wind_charge"
     }
   ],
   "ingredient": {
     "count": 1,
-    "item": "malum:gilded_ring"
+    "item": "malum:ornate_ring"
   },
   "output": {
     "count": 1,
     "id": "malum:ring_of_the_rising_edge"
   },
   "spirits": [
+    {
+      "type": "sacred",
+      "count": 32
+    },
     {
       "type": "aerial",
       "count": 32

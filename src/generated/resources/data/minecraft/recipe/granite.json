@@ -6,7 +6,7 @@
       "item": "minecraft:diorite"
     },
     {
-      "item": "minecraft:quartz"
+      "tag": "c:gems/quartz"
     }
   ],
   "result": {

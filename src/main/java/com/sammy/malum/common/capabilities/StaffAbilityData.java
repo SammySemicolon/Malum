@@ -41,16 +41,16 @@ public class StaffAbilityData {
     }
 
     public boolean tryEmpowerChaosVolley() {
-        boolean success = unwindingChaosBurnStacks > 10;
+        boolean success = unwindingChaosBurnStacks > 8;
         if (success) {
-            unwindingChaosBurnStacks -= 10;
+            unwindingChaosBurnStacks -= 8;
         }
         return success;
     }
 
     public void chargeUpUnwindingChaos(int charge, Runnable onCharge) {
-        if (unwindingChaosBurnStacks < 30) {
-            unwindingChaosBurnStacks = Mth.clamp(unwindingChaosBurnStacks+charge, 0, 30);
+        if (unwindingChaosBurnStacks < 40) {
+            unwindingChaosBurnStacks = Mth.clamp(unwindingChaosBurnStacks+charge, 0, 40);
             onCharge.run();
         }
     }

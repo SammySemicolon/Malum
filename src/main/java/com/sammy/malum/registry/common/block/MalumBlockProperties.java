@@ -80,10 +80,17 @@ public class MalumBlockProperties {
         return RUNEWOOD().addTags(STAIRS, WOODEN_STAIRS);
     }
 
+    public static LodestoneBlockProperties RUNEWOOD_DOOR() {
+        return RUNEWOOD().addTags(DOORS, WOODEN_DOORS).setCutoutRenderType().noOcclusion();
+    }
+
+    public static LodestoneBlockProperties RUNEWOOD_TRAPDOOR() {
+        return RUNEWOOD().addTags(TRAPDOORS, WOODEN_TRAPDOORS).setCutoutRenderType().noOcclusion();
+    }
+
     public static LodestoneBlockProperties RUNEWOOD_SAPLING() {
         return new LodestoneBlockProperties()
                 .addTag(BlockTags.SAPLINGS)
-
                 .mapColor(MapColor.TERRACOTTA_ORANGE)
                 .sound(SoundType.GRASS)
                 .setCutoutRenderType()
@@ -122,22 +129,6 @@ public class MalumBlockProperties {
                 .needsHoe();
     }
 
-    public static LodestoneBlockProperties RUNIC_SAP() {
-        return new LodestoneBlockProperties()
-                .mapColor(MapColor.TERRACOTTA_YELLOW)
-                .addTag(Tags.Blocks.STORAGE_BLOCKS)
-                .friction(0.8F)
-                .sound(SoundType.SLIME_BLOCK)
-                .noOcclusion();
-    }
-
-    public static LodestoneBlockProperties SOULWOVEN_BANNER() {
-        return RUNEWOOD()
-                .noOcclusion()
-                .noCollission()
-                .setCutoutRenderType();
-    }
-
     public static LodestoneBlockProperties SOULWOOD() {
         return new LodestoneBlockProperties()
                 .mapColor(MapColor.TERRACOTTA_PURPLE)
@@ -145,6 +136,26 @@ public class MalumBlockProperties {
                 .strength(1.75F, 4.0F)
                 .instrument(NoteBlockInstrument.BASS)
                 .needsAxe();
+    }
+
+    public static LodestoneBlockProperties SOULWOOD_PLANKS() {
+        return SOULWOOD().addTag(PLANKS);
+    }
+
+    public static LodestoneBlockProperties SOULWOOD_SLABS() {
+        return SOULWOOD().addTags(SLABS, WOODEN_SLABS);
+    }
+
+    public static LodestoneBlockProperties SOULWOOD_STAIRS() {
+        return SOULWOOD().addTags(STAIRS, WOODEN_STAIRS);
+    }
+
+    public static LodestoneBlockProperties SOULWOOD_DOOR() {
+        return SOULWOOD().addTags(DOORS, WOODEN_DOORS).setCutoutRenderType().noOcclusion();
+    }
+
+    public static LodestoneBlockProperties SOULWOOD_TRAPDOOR() {
+        return SOULWOOD().addTags(TRAPDOORS, WOODEN_TRAPDOORS).setCutoutRenderType().noOcclusion();
     }
 
     public static LodestoneBlockProperties SOULWOOD_LEAVES() {
@@ -172,6 +183,22 @@ public class MalumBlockProperties {
                 .isSuffocating((a,b,c) -> false)
                 .isViewBlocking((a,b,c) -> false)
                 .sound(SoundRegistry.SOULWOOD_LEAVES);
+    }
+
+    public static LodestoneBlockProperties RUNIC_SAP() {
+        return new LodestoneBlockProperties()
+                .mapColor(MapColor.TERRACOTTA_YELLOW)
+                .addTag(Tags.Blocks.STORAGE_BLOCKS)
+                .friction(0.8F)
+                .sound(SoundType.SLIME_BLOCK)
+                .noOcclusion();
+    }
+
+    public static LodestoneBlockProperties SOULWOVEN_BANNER() {
+        return RUNEWOOD()
+                .noOcclusion()
+                .noCollission()
+                .setCutoutRenderType();
     }
 
     public static LodestoneBlockProperties CURSED_SAP() {
@@ -346,8 +373,9 @@ public class MalumBlockProperties {
                 .lightLevel((b) -> 14);
     }
 
-    public static LodestoneBlockProperties REDSTONE_DIODE() {
+    public static LodestoneBlockProperties WAVEFORM_DIODE() {
         return new LodestoneBlockProperties()
+                .addTag(BlockTagRegistry.WRENCH_PICKUP)
                 .mapColor(COPPER_BLOCK.defaultMapColor())
                 .strength(3.0F, 6.0F)
                 .sound(SoundRegistry.SPIRIT_DIODE)

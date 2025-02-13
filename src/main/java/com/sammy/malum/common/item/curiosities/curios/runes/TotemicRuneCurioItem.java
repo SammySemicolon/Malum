@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.curios.runes;
 
 import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.core.systems.rite.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.item.*;

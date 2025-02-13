@@ -129,7 +129,7 @@ public class ScytheBoomerangEntity extends AbstractScytheProjectileEntity {
                         }
                     }
                     if (isMaelstrom()) {
-                        velocityLimit -= 1.5f;
+                        velocityLimit -= 1.25f;
                     }
                     var motion = getDeltaMovement();
                     double velocity = Mth.clamp(motion.length() * 3, 0.5f, velocityLimit);

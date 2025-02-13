@@ -2,6 +2,7 @@ package com.sammy.malum.client.screen.codex.entries;
 
 import com.sammy.malum.client.screen.codex.*;
 import com.sammy.malum.client.screen.codex.pages.recipe.*;
+import com.sammy.malum.client.screen.codex.pages.recipe.vanilla.*;
 import com.sammy.malum.client.screen.codex.pages.text.*;
 import com.sammy.malum.client.screen.codex.screens.*;
 import net.minecraft.world.item.*;
@@ -20,6 +21,30 @@ public class AugmentationEntries {
                 .addPage(new TextPage("crucible_augmentation.3"))
                 .addPage(SpiritInfusionPage.fromOutput(TUNING_FORK.get()))
         );
+
+        screen.addEntry("sympathy_drive", 13, 10, b -> b
+                .configureWidget(w -> w.setIcon(SYMPATHY_DRIVE))
+                .addPage(new HeadlineTextPage("sympathy_drive", "sympathy_drive.1"))
+                .addPage(SpiritInfusionPage.fromOutput(SYMPATHY_DRIVE.get()))
+        );
+
+        screen.addEntry("caustic_catalyst", 12, 11, b -> b
+                .configureWidget(w -> w.setIcon(CAUSTIC_CATALYST))
+                .addPage(new HeadlineTextPage("caustic_catalyst", "caustic_catalyst.1"))
+                .addPage(SpiritInfusionPage.fromOutput(CAUSTIC_CATALYST.get()))
+        );
+
+        screen.addEntry("resonance_tuner", 14, 11, b -> b
+                .configureWidget(w -> w.setIcon(RESONANCE_TUNER))
+                .addPage(new HeadlineTextPage("resonance_tuner", "resonance_tuner.1"))
+                .addPage(SpiritInfusionPage.fromOutput(RESONANCE_TUNER.get()))
+        );
+
+        screen.addEntry("suspicious_device", 13, 12, b -> b
+                .configureWidget(w -> w.setIcon(SUSPICIOUS_DEVICE))
+                .addPage(new HeadlineTextPage("suspicious_device", "suspicious_device.1"))
+        );
+
 
         screen.addEntry("mending_diffuser", 14, 7, b -> b
                 .configureWidget(w -> w.setIcon(MENDING_DIFFUSER))

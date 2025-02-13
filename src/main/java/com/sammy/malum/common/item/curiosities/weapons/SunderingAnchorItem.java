@@ -2,6 +2,7 @@ package com.sammy.malum.common.item.curiosities.weapons;
 
 import com.sammy.malum.*;
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.common.worldevent.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.spirit.*;

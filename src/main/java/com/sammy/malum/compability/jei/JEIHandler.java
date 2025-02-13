@@ -7,7 +7,7 @@ import com.sammy.malum.common.recipe.spirit.focusing.*;
 import com.sammy.malum.common.recipe.spirit.infusion.*;
 import com.sammy.malum.common.recipe.spirit.transmutation.*;
 import com.sammy.malum.common.recipe.void_favor.*;
-import com.sammy.malum.common.spiritrite.TotemicRiteType;
+import com.sammy.malum.core.systems.rite.TotemicRiteType;
 import com.sammy.malum.compability.farmersdelight.FarmersDelightCompat;
 import com.sammy.malum.compability.jei.categories.*;
 import com.sammy.malum.compability.jei.recipes.SpiritTransmutationWrapper;

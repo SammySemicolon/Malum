@@ -2,7 +2,7 @@ package com.sammy.malum.compability.jei.categories;
 
 import com.sammy.malum.client.screen.codex.ArcanaCodexHelper;
 import com.sammy.malum.compability.jei.JEIHandler;
-import com.sammy.malum.common.spiritrite.TotemicRiteType;
+import com.sammy.malum.core.systems.rite.TotemicRiteType;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;

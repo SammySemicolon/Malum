@@ -52,9 +52,9 @@ public class ReboundHandler {
     public static void pickupScythe(ScytheBoomerangEntity entity, ItemStack stack, ServerPlayer player) {
         if (!player.isCreative()) {
             int enchantmentLevel = EnchantmentRegistry.getEnchantmentLevel(player.level(), EnchantmentRegistry.REBOUND, stack);
-            int cooldown = 100 - 25 * (enchantmentLevel - 1);
+            int cooldown = 120 - 35 * (enchantmentLevel - 1);
             if (entity.isMaelstrom()) {
-                cooldown = (cooldown + 25) * 2;
+                cooldown = (cooldown + 30) * 2;
             }
             player.getCooldowns().addCooldown(stack.getItem(), cooldown);
         }

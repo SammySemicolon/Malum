@@ -23,7 +23,7 @@ public class LivingSoulData {
 
     private final List<ItemStack> geasStacks = new ArrayList<>();
     private final Map<ItemStack, GeasEffect> cachedGeasEffects = new WeakHashMap<>();
-    private boolean dirtyEtchings;
+    private boolean dirtyGeasEffects;
 
     private float exposedSoulDuration;
     private boolean soulless;
@@ -46,19 +46,19 @@ public class LivingSoulData {
 
     public void removeGeasEffect(ItemStack geas) {
         geasStacks.remove(geas);
-        dirtyEtchings = true;
+        dirtyGeasEffects = true;
     }
 
     public void addGeasEffect(ItemStack geas) {
         if (!geas.has(DataComponentRegistry.GEAS_EFFECT)) {
             throw new IllegalArgumentException("Etching Itemstack does not have an geas effect");
         }
-        var storedEtching = GeasEffectHandler.getStoredGeasEffect(geas);
+        var storedEtching = GeasEffectHandler.getStoredGeasEffect(geas).createEffectInstance();
         if (cachedGeasEffects.values().stream().anyMatch(e -> e.type.equals(storedEtching.type))) {
             return;
         }
         geasStacks.add(geas);
-        dirtyEtchings = true;
+        dirtyGeasEffects = true;
     }
 
     public boolean hasGeasEffect(LivingEntity living, GeasEffectType type) {
@@ -71,13 +71,13 @@ public class LivingSoulData {
 
     @SuppressWarnings("DataFlowIssue")
     public Map<ItemStack, GeasEffect> getGeasEffects(LivingEntity entity) {
-        if (dirtyEtchings) {
+        if (dirtyGeasEffects) {
             cachedGeasEffects.values().forEach(e -> e.removeAttributeModifiers(entity));
             cachedGeasEffects.clear();
             for (ItemStack geas : geasStacks) {
-                cachedGeasEffects.put(geas, geas.get(DataComponentRegistry.GEAS_EFFECT).geasEffectType().createEffect());
+                cachedGeasEffects.put(geas, geas.get(DataComponentRegistry.GEAS_EFFECT).createEffectInstance());
             }
-            dirtyEtchings = false;
+            dirtyGeasEffects = false;
         }
         return cachedGeasEffects;
     }

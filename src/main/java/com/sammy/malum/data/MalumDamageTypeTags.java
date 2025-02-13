@@ -46,9 +46,13 @@ public class MalumDamageTypeTags extends DamageTypeTagsProvider {
         tag(DamageTypeTagRegistry.SOULWASHING_BLACKLIST).addTag(DamageTypeTagRegistry.IS_SOULWASHING).add(DamageTypeRegistry.SCYTHE_SWEEP);
         tag(DamageTypeTagRegistry.LIONS_HEART_BLACKLIST).addTag(DamageTypeTags.BYPASSES_ARMOR);
 
-        tag(DamageTypeTags.BYPASSES_COOLDOWN).addTag(DamageTypeTagRegistry.IS_HIDDEN_BLADE).add(DamageTypeRegistry.VOODOO);
+        tag(DamageTypeTags.BYPASSES_COOLDOWN)
+                .addTag(DamageTypeTagRegistry.IS_HIDDEN_BLADE)
+                .add(DamageTypeRegistry.VOODOO)
+                .add(DamageTypeRegistry.SCYTHE_MAELSTROM);
         tag(DamageTypeTags.NO_KNOCKBACK)
+                .addTags(DamageTypeTagRegistry.IS_SOULWASHING, DamageTypeTagRegistry.IS_HIDDEN_BLADE)
                 .add(DamageTypeRegistry.VOODOO, DamageTypeRegistry.VOODOO_PLAYERLESS, DamageTypeRegistry.VOID)
-                .addTag(DamageTypeTagRegistry.IS_SOULWASHING);
+                .add(DamageTypeRegistry.SCYTHE_MAELSTROM);
     }
 }

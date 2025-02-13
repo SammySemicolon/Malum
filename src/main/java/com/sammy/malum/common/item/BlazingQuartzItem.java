@@ -1,5 +1,6 @@
 package com.sammy.malum.common.item;
 
+import net.minecraft.core.component.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.*;

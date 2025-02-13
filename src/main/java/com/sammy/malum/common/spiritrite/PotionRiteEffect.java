@@ -1,6 +1,7 @@
 package com.sammy.malum.common.spiritrite;
 
 import com.sammy.malum.common.block.curiosities.totem.TotemBaseBlockEntity;
+import com.sammy.malum.core.systems.rite.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
 import com.sammy.malum.visual_effects.networked.data.ColorEffectData;
@@ -11,8 +12,6 @@ import net.minecraft.world.entity.monster.Monster;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.function.Predicate;
-
-import static com.sammy.malum.registry.common.SpiritTypeRegistry.SACRED_SPIRIT;
 
 public class PotionRiteEffect extends TotemicRiteEffect {
 
@@ -31,8 +30,9 @@ public class PotionRiteEffect extends TotemicRiteEffect {
     public void doRiteEffect(TotemBaseBlockEntity totemBase, ServerLevel level) {
         getNearbyEntities(totemBase, targetClass).filter(getEntityPredicate()).forEach(e -> {
             MobEffectInstance instance = new MobEffectInstance(mobEffectHolder, 1200, 1, true, true);
-            if (!e.hasEffect(instance.getEffect()) && e.addEffect(instance)) {
-                ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(definingSpirit));
+            final boolean success = e.addEffect(instance);
+            if (!e.hasEffect(instance.getEffect()) && success) {
+                ParticleEffectTypeRegistry.ENTITY_RITE_EFFECT.createEntityEffect(e, new ColorEffectData(definingSpirit));
             }
         });
     }

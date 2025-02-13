@@ -59,9 +59,10 @@ public class CreativeTabRegistry {
                     .displayItems((p, o) -> {
                         for (DeferredHolder<GeasEffectType, ? extends GeasEffectType> etchingType : MalumGeasEffectTypeRegistry.GEAS_TYPES.getEntries()) {
                             final GeasEffectType geasEffectType = etchingType.get();
-                            ItemStack etching = new ItemStack(ItemRegistry.GEAS.get());
-                            etching.set(DataComponentRegistry.GEAS_EFFECT, new GeasDataComponent(geasEffectType));
-                            o.accept(etching);
+                            if (geasEffectType.equals(MalumGeasEffectTypeRegistry.CREED_OF_THE_BLIGHT_EATER.get())) {
+                                continue;
+                            }
+                            o.accept(geasEffectType.createDefaultStack());
                         }
                     })
                     .icon(() -> ItemRegistry.GEAS.get().getDefaultInstance()).build()

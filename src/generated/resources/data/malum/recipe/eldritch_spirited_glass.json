@@ -7,11 +7,11 @@
     }
   ],
   "ingredient": {
-    "count": 16,
+    "count": 8,
     "tag": "c:glass_blocks"
   },
   "output": {
-    "count": 16,
+    "count": 8,
     "id": "malum:eldritch_spirited_glass"
   },
   "spirits": [

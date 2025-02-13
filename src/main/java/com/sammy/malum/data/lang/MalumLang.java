@@ -1,11 +1,12 @@
 package com.sammy.malum.data.lang;
 
 import com.sammy.malum.MalumMod;
+import com.sammy.malum.compability.create.*;
 import com.sammy.malum.core.systems.artifice.ArtificeAttributeType;
 import com.sammy.malum.common.block.ether.EtherWallTorchBlock;
 import com.sammy.malum.common.data_components.*;
-import com.sammy.malum.common.spiritrite.*;
 import com.sammy.malum.core.systems.geas.*;
+import com.sammy.malum.core.systems.rite.*;
 import com.sammy.malum.core.systems.ritual.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.common.*;
@@ -62,6 +63,9 @@ public class MalumLang extends LanguageProvider {
         add("malum.spirit.description.stored_spirit", "Contains: ");
         add("malum.spirit.description.stored_soul", "Stores Soul With: ");
 
+        if (CreateCompat.LOADED) { //If Create is loaded, the copper nugget won't exist.
+            add("item.malum.copper_nugget", "Copper Nugget");
+        }
         DataHelper.takeAll(blocks, i -> i.get() instanceof WallTorchBlock);
         DataHelper.takeAll(blocks, i -> i.get() instanceof EtherWallTorchBlock);
         DataHelper.takeAll(blocks, i -> i.get() instanceof WallSignBlock);
@@ -143,9 +147,16 @@ public class MalumLang extends LanguageProvider {
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_REAPER.get(), "");
 
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_SKYBREAKER.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_CLOUDHOPPER.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_MAVERICK.get(), "");
 
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_PROFANE_ASCETIC.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_PROFANE_GLUTTON.get(), "");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_WYRD_RECONSTRUCTION.get(), "");
+
+        addGeasDescription(MalumGeasEffectTypeRegistry.BOND_OF_BELOVED_CHAINS.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.BOND_OF_DEATHS_SEEKERS.get(), "");
 
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVERKEEN_EYE.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_OVEREAGER_FIST.get(), "");
@@ -153,11 +164,11 @@ public class MalumLang extends LanguageProvider {
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_UNDISCERNED_MAW.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_UNSIGHTED_RESISTANCE.get(), "");
 
-        addGeasDescription(MalumGeasEffectTypeRegistry.BOND_OF_BELOVED_CHAINS.get(), "");
-        addGeasDescription(MalumGeasEffectTypeRegistry.BOND_OF_DEATHS_SEEKERS.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_INVERTED_HEART.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_GLEEFUL_TARGET.get(), "The most satisfied existence in the world");
+        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_LAST_STAND.get(), "");
 
-        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_INVERTED_HEART.get(), "Witch Factor of Wrath");
-        addGeasDescription(MalumGeasEffectTypeRegistry.OATH_OF_THE_GLEEFUL_TARGET.get(), "Witch Factor of Greed");
+        addGeasDescription(MalumGeasEffectTypeRegistry.CREED_OF_THE_BLIGHT_EATER.get(), "Mmmm... Blight... So Tasty..");
 
         add("malum.waveform_artifice.wavecharger", "Redstone Interpolation Time: %s");
         add("malum.waveform_artifice.wavebanker", "Redstone Pulse Duration: %s");
@@ -241,7 +252,7 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.curio.no_sweep", "Disables Scythe Sweeping");
         add("malum.effect.curio.enhanced_maneuvers", "Augments Rebound and Ascension");
         add("malum.effect.curio.ascension_launch", "Ascension Launches Targets Upwards");
-        add("malum.effect.curio.longer_ascension_cooldown", "Ascension Suffers a Longer Cooldown");
+        add("malum.effect.curio.lower_ascension_damage", "Ascension Suffers a Damage Penalty");
         add("malum.effect.curio.rebound_maelstrom", "Rebound Creates A Windborne Maelstrom");
         add("malum.effect.curio.longer_rebound_cooldown", "Rebound Suffers a Longer Cooldown");
         add("malum.effect.curio.friendly_enemies", "Reduces Enemy Aggression");
@@ -261,20 +272,27 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.soul_ward_on_hit", "Magic Damage Recovers Soul Ward");
         add("malum.effect.geas.scythe_combo", "Scythe Cuts Create After-attacks");
         add("malum.effect.geas.only_scythe", "Regular Weapons Crumble In Your Hands");
-        add("malum.effect.geas.explosion_absorption", "Explosions Become Propulsive Gusts of Wind");
-        add("malum.effect.geas.rocket_jumping", "Gusts of Wind Provide Greater Propulsion");
-        add("malum.effect.geas.explosion_absorption_cooldown", "Repeated Activations Exhaust The Effect And Drain Stamina");
+        add("malum.effect.geas.fall_damage_auto_attack", "Outgoing Fall Damage Strikes Targets With Your Weapon");
+        add("malum.effect.geas.rocket_jumping", "Wind Charges Provide Greater Propulsion");
+        add("malum.effect.geas.wind_charge_exhaustion", "Continuous Activations Exhaust The Effect And Weighs You Down");
+        add("malum.effect.geas.explosion_eating", "Explosions are Converted Into Mining Speed");
+        add("malum.effect.geas.explosion_mining_cooldown", "Charges Require Recharge");
+        add("malum.effect.geas.explosion_mining_exhaustion", "Overuse Exhausts Effect And Halts Dexterity");
+        add("malum.effect.geas.wyrd_reconstruction", "Prevents Death And Repeatedly Activates Spirit-Collection Effects");
+        add("malum.effect.geas.wyrd_reconstruction_cooldown", "Effect Has A Lengthy Cooldown And Halves Arcane Resonance Until Recharged");
         add("malum.effect.geas.malignant_crit_leech", "Malignant Deliverance Leeches Life Essence");
         add("malum.effect.geas.malignant_crit_healing_overexertion", "Repeated Activations Nullify All Healing");
         add("malum.effect.geas.malignant_crit_reinforcement", "Malignant Deliverance Improves Conversion");
         add("malum.effect.geas.staff_homing", "Staff Projectiles Home In on Targets");
         add("malum.effect.geas.staff_autofire", "Staff Charges Automatically Fire");
-        add("malum.effect.geas.authority_of_wrath", "Injuries, Emotions, Senses are Shared with Witnesses");
-        add("malum.effect.geas.authority_of_wrath_arcane_resonance", "Arcane Resonance Favors Influence");
-        add("malum.effect.geas.authority_of_greed", "Aliments, Blessings, Curses are Paused When Wounded");
-        add("malum.effect.geas.authority_of_greed_arcane_resonance", "Arcane Resonance Aids Stasis Duration");
+        add("malum.effect.geas.inverted_heart", "Injuries, Emotions, Senses are Shared with Witnesses");
+        add("malum.effect.geas.inverted_heart_arcane_resonance", "Arcane Resonance Favors Influence Radius");
+        add("malum.effect.geas.gleeful_target", "Aliments, Blessings, Curses are Paused When Wounded");
+        add("malum.effect.geas.gleeful_target_arcane_resonance", "Arcane Resonance Aids Stasis Duration");
+        add("malum.effect.geas.last_stand", "Expiration, Demise, Passing, Is Made Lenient");
+        add("malum.effect.geas.last_stand_patient_death", "Death Comes For Us All... Unless");
 
-        add("malum.effect.soul_based_damage", "Deals Soulbound Magic Damage");
+        add("malum.effect.soul_based_damage", "Deals Soul-Rending Damage");
         add("malum.effect.weight_of_worlds_crit", "Sometimes Strikes With Critical Force");
         add("malum.effect.weight_of_worlds_kill", "Kills Guarantee a Critical Strike");
         add("malum.effect.edge_of_deliverance_crit", "Follow-up Strikes Hit Critically");
@@ -338,6 +356,7 @@ public class MalumLang extends LanguageProvider {
         addDeathMessage(DamageTypeRegistry.SCYTHE_REBOUND, "%1$s was boomeranged by %2$s", "%1$s was boomeranged by %2$s using %3$s");
         addDeathMessage(DamageTypeRegistry.SCYTHE_ASCENSION, "%1$s was cleaved using ascension by %2$s", "%1$s was cleaved using ascension by %2$s using %3$s");
         addDeathMessage(DamageTypeRegistry.SCYTHE_COMBO, "%1$s was sliced in half and then again by %2$s", "%1$s was sliced in half and then again by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.SCYTHE_MAELSTROM, "%1$s was sliced and diced by %2$s", "%1$s was sliced and diced by %2$s using %3$s");
 
         addDeathMessage(DamageTypeRegistry.HIDDEN_BLADE_PHYSICAL_COUNTER, "%1$s was sliced into innumerable pieces by %2$s", "%1$s was sliced into innumerable pieces by %2$s using %3$s");
         addDeathMessage(DamageTypeRegistry.HIDDEN_BLADE_MAGIC_COUNTER, "%1$s had their soul sliced into innumerable pieces by %2$s", "%1$s had their soul sliced into innumerable pieces by %2$s using %3$s");

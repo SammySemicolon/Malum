@@ -1,7 +1,9 @@
 package com.sammy.malum.data.recipe;
 
+import com.sammy.malum.common.data.ImpetusRepairData;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.*;
+import com.sammy.malum.registry.common.DataMapRegistry;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.*;
@@ -133,21 +135,23 @@ public class MalumSpiritRepairRecipes implements IConditionBuilder {
                 .unlockedBy("has_crucible", has)
                 .save(recipeOutput, "alchemical_impetus_restoration");
 
-        List<DeferredHolder<Item, ? extends Item>> metalImpetus = ItemRegistry.ITEMS.getEntries().stream().filter(i -> i.get() instanceof ImpetusItem).sorted((d1, d2) -> d1.getId().compareNamespaced(d2.getId())).toList();
-        List<DeferredHolder<Item, ? extends Item>> crackedMetalImpetus = ItemRegistry.ITEMS.getEntries().stream().filter(i -> i.get() instanceof CrackedImpetusItem).sorted((d1, d2) -> d1.getId().compareNamespaced(d2.getId())).toList();
-        for (int i = 0; i < metalImpetus.size(); i++) {
-            var impetus = metalImpetus.get(i);
-            var crackedImpetus = crackedMetalImpetus.get(i);
-            if (impetus.get().equals(ItemRegistry.ALCHEMICAL_IMPETUS.get())) {
+        var crackedMetalImpetus = ItemRegistry.ITEMS.getEntries()
+                .stream().filter(i -> i.get() instanceof CrackedImpetusItem).sorted((d1, d2) -> d1.getId().compareNamespaced(d2.getId())).toList();
+        var metalImpetus = ItemRegistry.ITEMS.getEntries()
+                .stream().filter(i -> i.get() instanceof ImpetusItem).sorted((d1, d2) -> d1.getId().compareNamespaced(d2.getId())).toList();
+        for (int i = 0; i < crackedMetalImpetus.size(); i++) {
+            var metal = metalImpetus.get(i);
+            var cracked = crackedMetalImpetus.get(i);
+            if (metal.get().equals(ItemRegistry.ALCHEMICAL_IMPETUS.get())) {
                 continue;
             }
             new SpiritRepairRecipeBuilder(1f, Ingredient.of(ItemRegistry.CTHONIC_GOLD_FRAGMENT.get()), 2)
-                    .addItem(crackedImpetus.get())
-                    .overrideOutput(impetus.get())
+                    .addItem(cracked.get())
+                    .overrideOutput(metal.get())
                     .addSpirit(INFERNAL_SPIRIT, 8)
                     .addSpirit(EARTHEN_SPIRIT, 8)
                     .unlockedBy("has_crucible", has)
-                    .save(recipeOutput, impetus.getId().getPath().split("_")[0] + "_impetus_restoration");
+                    .save(recipeOutput, cracked.getId().getPath().split("_")[1] + "_impetus_restoration");
         }
     }
 }

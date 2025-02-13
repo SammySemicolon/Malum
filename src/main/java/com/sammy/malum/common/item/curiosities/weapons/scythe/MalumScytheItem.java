@@ -1,6 +1,7 @@
 package com.sammy.malum.common.item.curiosities.weapons.scythe;
 
 import com.sammy.malum.common.item.*;
+import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.handlers.enchantment.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
@@ -61,7 +62,7 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
         particle.mirrorRandomly(attacker.getRandom()).spawnForwardSlashingParticle(attacker);
 
         int sweeping = EnchantmentRegistry.getEnchantmentLevel(level, Enchantments.SWEEPING_EDGE, stack);
-        float damage = event.getOriginalDamage() * (0.66f + sweeping * 0.33f);
+        float damage = event.getNewDamage() * (0.66f + sweeping * 0.33f);
         float radius = 1 + sweeping * 0.25f;
         level.getEntities(attacker, target.getBoundingBox().inflate(radius)).forEach(e -> {
             if (e instanceof LivingEntity sweepTarget) {

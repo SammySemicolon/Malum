@@ -7,11 +7,11 @@
     },
     {
       "count": 4,
-      "item": "minecraft:wind_charge"
+      "item": "malum:wind_nucleus"
     },
     {
-      "count": 2,
-      "item": "malum:refined_soulstone"
+      "count": 4,
+      "item": "minecraft:wind_charge"
     }
   ],
   "ingredient": {
@@ -23,6 +23,10 @@
     "id": "malum:ring_of_the_howling_maelstrom"
   },
   "spirits": [
+    {
+      "type": "wicked",
+      "count": 32
+    },
     {
       "type": "aerial",
       "count": 32

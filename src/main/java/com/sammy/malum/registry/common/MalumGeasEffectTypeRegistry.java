@@ -9,6 +9,7 @@ import com.sammy.malum.common.geas.gluttony.*;
 import com.sammy.malum.common.geas.oath.*;
 import com.sammy.malum.common.geas.scythe.*;
 import com.sammy.malum.common.geas.soul_ward.*;
+import com.sammy.malum.common.geas.special.TheLastCurse;
 import com.sammy.malum.common.geas.staff.*;
 import com.sammy.malum.core.systems.geas.*;
 import net.minecraft.core.*;
@@ -24,10 +25,6 @@ public class MalumGeasEffectTypeRegistry {
 
     // Oath, Bond, Pact, Promise, Creed, Coda, Manifesto, Ideal
 
-    //TODO: Hello Wiresegal https://cdn.discordapp.com/emojis/1102382147941191681.gif?size=48&name=wave%7E1&quality=lossless
-    // Pretty please rename all the stuff accordingly to whatever names you choose
-    // Tooltip Descriptions are in MalumLang#135 :3
-
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_NIGHTCHILD = GEAS_TYPES.register("pact_of_the_nightchild", () -> new GeasEffectType(NightChildGeas::new));
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_DAYBLESSED = GEAS_TYPES.register("pact_of_the_dayblessed", () -> new GeasEffectType(DayBlessedGeas::new));
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_SHATTERING_ADDICT = GEAS_TYPES.register("pact_of_the_shattering_addict", () -> new GeasEffectType(ShatteringAddict::new));
@@ -40,7 +37,8 @@ public class MalumGeasEffectTypeRegistry {
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_REAPER = GEAS_TYPES.register("pact_of_the_reaper", () -> new GeasEffectType(ReaperGeas::new));
 
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_SKYBREAKER = GEAS_TYPES.register("pact_of_the_skybreaker", () -> new GeasEffectType(SkyBreakerGeas::new));
-    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_MAVERICK = GEAS_TYPES.register("pact_of_the_absorbent", () -> new GeasEffectType(MaverickGeas::new));
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_CLOUDHOPPER = GEAS_TYPES.register("pact_of_the_cloudhopper", () -> new GeasEffectType(CloudHopperGeas::new));
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_MAVERICK = GEAS_TYPES.register("pact_of_the_maverick", () -> new GeasEffectType(MaverickGeas::new));
 
 
     // Pact of the Profane Ascetic
@@ -60,17 +58,6 @@ public class MalumGeasEffectTypeRegistry {
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_WYRD_RECONSTRUCTION = GEAS_TYPES.register("pact_of_wyrd_reconstruction", () -> new GeasEffectType(WyrdReconstructionGeas::new));
 
 
-    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_OVERKEEN_EYE = GEAS_TYPES.register("oath_of_the_overkeen_eye", () -> new GeasEffectType(OverkeenEyeGeas::new));
-    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_OVEREAGER_FIST = GEAS_TYPES.register("oath_of_the_overeager_fist", () -> new GeasEffectType(OvereagerFistGeas::new));
-
-    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_UNDISCERNED_MAW = GEAS_TYPES.register("oath_of_the_undiscerned_maw", () -> new GeasEffectType(UndiscernedMawGeas::new));
-    // Oath of Unsighted Resistance
-    //Malignant Deliverance generates Malignant Conversion
-    //Need to think about this one more but the general theming of armor generation will persist
-    //This is a void geas
-    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_UNSIGHTED_RESISTANCE = GEAS_TYPES.register("oath_of_unsighted_resistance", () -> new GeasEffectType(UnsightedResistance::new));
-
-
     // Bond of Beloved Chains
     //Requires Several Players
     //All Bound Players can no longer hurt eachother
@@ -87,22 +74,19 @@ public class MalumGeasEffectTypeRegistry {
     public static final DeferredHolder<GeasEffectType, GeasEffectType> BOND_OF_DEATHS_SEEKERS = GEAS_TYPES.register("bond_of_deaths_seekers", () -> new GeasEffectType(DeathsSeekersBond::new));
 
 
-    // Oath of the Inverted Heart
-    //Damage you deal is applied to witnesses at a halved amount
-    //Damage you take is applied to witnesses
-    //Witness Detection range scales with arcane resonance
-    //Named Entities and Tamed Pets are excluded
-    //Effect stops working completely if the wrathbearer is invisible to the target
-    //Reduces Magic Resistance significantly
-    //This is a void geas, might use fused consciousness even
+
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_OVERKEEN_EYE = GEAS_TYPES.register("oath_of_the_overkeen_eye", () -> new GeasEffectType(OverkeenEyeGeas::new));
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_OVEREAGER_FIST = GEAS_TYPES.register("oath_of_the_overeager_fist", () -> new GeasEffectType(OvereagerFistGeas::new));
+
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_UNDISCERNED_MAW = GEAS_TYPES.register("oath_of_the_undiscerned_maw", () -> new GeasEffectType(UndiscernedMawGeas::new));
+    // Oath of Unsighted Resistance
+    //Malignant Deliverance generates Malignant Conversion
+    //Need to think about this one more but the general theming of armor generation will persist
+    //This is a void geas
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_UNSIGHTED_RESISTANCE = GEAS_TYPES.register("oath_of_unsighted_resistance", () -> new GeasEffectType(UnsightedResistance::new));
+
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_INVERTED_HEART = GEAS_TYPES.register("oath_of_the_inverted_heart", () -> new GeasEffectType(InvertedHeartOath::new));
-    // Oath of the Gleeful Target
-    //Taking damage applies a stasis onto your potion effects
-    //Potion effects in stasis have their duration paused with no change to their effect
-    //Stasis duration scales with arcane resonance
-    //While stasis is active you cannot be hurt by potion effects
-    //Reduces Healing Received significantly
-    //This is a void geas, might use fused consciousness even
+
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_GLEEFUL_TARGET = GEAS_TYPES.register("oath_of_the_gleeful_target", () -> new GeasEffectType(GleefulTargetOath::new));
     // Oath of the Loosened Shackles
     //Each time you die, it is instead stored for later
@@ -111,5 +95,9 @@ public class MalumGeasEffectTypeRegistry {
     //Reduces Armor significantly
     //This is a void geas, might use fused consciousness even
     public static final DeferredHolder<GeasEffectType, GeasEffectType> OATH_OF_THE_LAST_STAND = GEAS_TYPES.register("oath_of_the_last_stand", () -> new GeasEffectType(LastStandOath::new));
+
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> CREED_OF_THE_BLIGHT_EATER = GEAS_TYPES.register("creed_of_the_blight_eater", () -> new GeasEffectType(BlightEaterCreed::new));
+
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> THE_LAST_CURSE = GEAS_TYPES.register("the_last_curse", () -> new GeasEffectType(TheLastCurse::new));
 
 }

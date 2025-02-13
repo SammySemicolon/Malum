@@ -18,6 +18,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -94,7 +95,11 @@ public class SpiritDiodeBlockEntity extends LodestoneBlockEntity {
                 if (getBlockState().getBlock() instanceof SpiritDiodeBlock<?> diodeBlock) {
                     delay = diodeBlock.getFrequencyPresets()[2];
                 }
+                return ItemInteractionResult.SUCCESS;
             }
+            level.setBlock(getBlockPos(), getBlockState().rotate(level, getBlockPos(), Rotation.CLOCKWISE_90), 3);
+            level.playSound(null, getBlockPos(), SoundRegistry.SPIRIT_DIODE_TICK.get(), SoundSource.BLOCKS, 0.8f, RandomHelper.randomBetween(level.getRandom(), 0.9f, 1.1f));
+            return ItemInteractionResult.SUCCESS;
         }
         return super.onUseWithItem(pPlayer, pStack, pHand);
     }

@@ -1,0 +1,13 @@
+{
+  "registry_name": "minecraft:wither_skeleton",
+  "drops": [
+    {
+      "ingredient": {
+        "item": "malum:grim_talc"
+      },
+      "chance": "0.1",
+      "min": "2",
+      "max": "4"
+    }
+  ]
+}

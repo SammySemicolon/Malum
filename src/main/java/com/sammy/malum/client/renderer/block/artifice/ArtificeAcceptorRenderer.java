@@ -63,6 +63,9 @@ public abstract class ArtificeAcceptorRenderer<T extends LodestoneBlockEntity> i
     }
 
     public static void renderDebugGizmo(PoseStack stack, IArtificeAcceptor target) {
+        if (true) {//TODO: this should only render if holding the tuning fork and f3 and whatnot
+            return;
+        }
         Minecraft minecraft = Minecraft.getInstance();
         Color color = DEBUG_COLORS.computeIfAbsent(target, a -> ColorHelper.getColor(Mth.abs(a.hashCode())));
         var debugGizmo = LodestoneRenderTypes.TEXTURE.applyWithModifierAndCache(MalumRenderTypeTokens.DEBUG_GIZMO, ShaderUniformHandler.LUMITRANSPARENT, b -> b.setWriteMaskState(RenderStateShard.COLOR_WRITE).setDepthTestState(RenderStateShard.NO_DEPTH_TEST));

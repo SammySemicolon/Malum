@@ -50,7 +50,7 @@ public class SoulWardHandler {
         if (living.level().isClientSide()) {
             return;
         }
-        if (event.getOriginalDamage() <= 0) {
+        if (event.getNewDamage() <= 0) {
             return;
         }
 
@@ -58,12 +58,12 @@ public class SoulWardHandler {
         data.addCooldown(living, 4f);
         if (!data.isDepleted()) {
             var source = event.getSource();
-            float amount = event.getOriginalDamage();
-            double magicDamageAbsorption = CommonConfig.SOUL_WARD_MAGIC.getConfigValue();
-            double physicalDamageAbsorption = CommonConfig.SOUL_WARD_PHYSICAL.getConfigValue();
+            float amount = event.getNewDamage();
+            double magicDamageAbsorption = 1 - CommonConfig.SOUL_WARD_MAGIC.getConfigValue();
+            double physicalDamageAbsorption = 1 - CommonConfig.SOUL_WARD_PHYSICAL.getConfigValue();
             double integrity = living.getAttributeValue(AttributeRegistry.SOUL_WARD_INTEGRITY)*2;
             var eventResponders = getEventResponders(living);
-            var propertiesEvent = new ModifySoulWardPropertiesEvent(living, data, source, magicDamageAbsorption, physicalDamageAbsorption, integrity);
+            var propertiesEvent = new ModifySoulWardPropertiesEvent(living, data, source, physicalDamageAbsorption, magicDamageAbsorption, integrity);
             eventResponders.forEach(lookup -> lookup.run(IMalumEventResponderItem.class, (eventResponderItem, stack) ->
                     eventResponderItem.modifySoulWardPropertiesEvent(propertiesEvent, living, stack)));
             NeoForge.EVENT_BUS.post(propertiesEvent);
@@ -72,7 +72,7 @@ public class SoulWardHandler {
             integrity = propertiesEvent.getNewIntegrity();
 
             double absorptionMultiplier = source.is(LodestoneDamageTypeTags.IS_MAGIC) ? magicDamageAbsorption : physicalDamageAbsorption;
-            double absorbedDamage = amount * absorptionMultiplier;
+            double absorbedDamage = amount * (absorptionMultiplier);
             double soulWardDamage = absorbedDamage / Math.max(integrity, 0.01f);
             data.reduceSoulWard(soulWardDamage);
 

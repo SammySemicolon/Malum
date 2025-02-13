@@ -1,8 +1,8 @@
 package com.sammy.malum.data.item;
 
 import com.sammy.malum.*;
-import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.augment.*;
+import com.sammy.malum.common.item.banner.*;
 import com.sammy.malum.common.item.curiosities.curios.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.crafting.*;
@@ -20,6 +20,7 @@ import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.common.data.*;
 import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.*;
+import team.lodestar.lodestone.registry.common.tag.LodestoneItemTags;
 import team.lodestar.lodestone.systems.block.*;
 import team.lodestar.lodestone.systems.datagen.*;
 
@@ -71,7 +72,7 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(Tags.Items.GEMS).add(REFINED_SOULSTONE.get(), BLAZING_QUARTZ.get());
         tag(ItemTags.LOGS).addTag(ItemTagRegistry.RUNEWOOD_LOGS).addTag(ItemTagRegistry.SOULWOOD_LOGS);
         tag(ItemTags.LOGS_THAT_BURN).addTag(ItemTagRegistry.RUNEWOOD_LOGS).addTag(ItemTagRegistry.SOULWOOD_LOGS);
-        tag(Tags.Items.SLIMEBALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
+        tag(Tags.Items.SLIME_BALLS).add(RUNIC_SAPBALL.get(), CURSED_SAPBALL.get());
         tag(Tags.Items.GEMS_QUARTZ).add(NATURAL_QUARTZ.get());
         tag(Tags.Items.ORES_QUARTZ).add(NATURAL_QUARTZ_ORE.get(), DEEPSLATE_QUARTZ_ORE.get());
 
@@ -120,6 +121,7 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(ItemTagRegistry.ASCENSION_ENCHANTABLE).addTag(ItemTagRegistry.SCYTHES);
 
         tag(ItemTagRegistry.REPLENISHING_ENCHANTABLE).addTag(ItemTagRegistry.STAVES);
+        tag(ItemTagRegistry.CAPACITOR_ENCHANTABLE).addTag(ItemTagRegistry.STAVES);
 
         tag(ItemTagRegistry.ANIMATED_ENCHANTABLE).addTag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS);
         tag(ItemTagRegistry.HAUNTED_ENCHANTABLE).addTag(ItemTagRegistry.MAGIC_CAPABLE_WEAPONS);
@@ -154,6 +156,8 @@ public class MalumItemTags extends ItemTagsProvider {
 
         tag(ItemTagRegistry.AUGMENTS).addAll(items.stream().filter(i -> i.get() instanceof AugmentItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.METAL_NODES).addAll(items.stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::getKey).toList());
+        tag(ItemTagRegistry.IMPETUS).addAll(items.stream().filter(i -> i.get() instanceof ImpetusItem).map(DeferredHolder::getKey).toList());
+        tag(ItemTagRegistry.CRACKED_IMPETUS).addAll(items.stream().filter(i -> i.get() instanceof CrackedImpetusItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.SOULWOVEN_BANNERS).addAll(items.stream().filter(i -> i.get() instanceof SoulwovenBannerBlockItem).map(DeferredHolder::getKey).toList());
 
         tag(ItemTagRegistry.IS_TOTEMIC_TOOL).add(TOTEMIC_STAFF.get());
@@ -175,14 +179,15 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(ItemTagRegistry.SOULWOVEN_POUCH_AUTOCOLLECT)
                 .addTags(ItemTagRegistry.SPIRITS, ItemTagRegistry.MOB_DROPS, ItemTagRegistry.MINERALS);
 
-        tag(Tags.Items.NUGGETS).add(COPPER_NUGGET.get(), HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get());
+        tag(Tags.Items.NUGGETS).add(HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get(), MALIGNANT_PEWTER_INGOT.get());
+        tag(Tags.Items.INGOTS).add(HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_INGOT.get(), MALIGNANT_PEWTER_INGOT.get());
         tag(Tags.Items.GEMS).add(NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), RAW_BRILLIANCE.get());
-        tag(Tags.Items.INGOTS).add(SOUL_STAINED_STEEL_INGOT.get(), HALLOWED_GOLD_INGOT.get());
+
+        tag(Tags.Items.NUGGETS).addOptional(MalumMod.malumPath("copper_nugget"));
+        tag(NUGGETS_COPPER).addOptional(MalumMod.malumPath("copper_nugget"));
 
         tag(ItemTagRegistry.KNIVES).add(SOUL_STAINED_STEEL_KNIFE.get());
         tag(ItemTagRegistry.KNIVES_FD).add(SOUL_STAINED_STEEL_KNIFE.get());
-
-        tag(NUGGETS_COPPER).add(COPPER_NUGGET.get());
 
         tag(ItemTagRegistry.HIDDEN_ALWAYS).add(THE_DEVICE.get(), THE_VESSEL.get());
 

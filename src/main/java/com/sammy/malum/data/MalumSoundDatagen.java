@@ -215,11 +215,13 @@ public class MalumSoundDatagen extends SoundDefinitionsProvider {
         this.add(SoundRegistry.SPIRIT_DIODE_OPEN, s -> definition(s).with(sounds("blocks/spirit_diode/waveform_open", 4)));
         this.add(SoundRegistry.SPIRIT_DIODE_CLOSE, s -> definition(s).with(sounds("blocks/spirit_diode/waveform_close", 4)));
 
-        this.add(SoundRegistry.WAVECHARGER_CHARGE, s -> definition(s).with(sound("blocks/spirit_diode/tick")));
-        this.add(SoundRegistry.WAVEBANKER_STORE, s -> definition(s).with(sound("blocks/spirit_diode/tick")));
-        this.add(SoundRegistry.WAVEBREAKER_STORE, s -> definition(s).with(sound("blocks/spirit_diode/tick")));
-        this.add(SoundRegistry.WAVEBREAKER_RELEASE, s -> definition(s).with(sound("blocks/spirit_diode/tick")));
-        this.add(SoundRegistry.WAVEMAKER_PULSE, s -> definition(s).with(sound("blocks/spirit_diode/tick")));
+        this.add(SoundRegistry.SPIRIT_DIODE_TICK, s -> definition(s).with(sounds("blocks/spirit_diode/waveform_tick", 8)));
+
+        this.add(SoundRegistry.WAVECHARGER_CHARGE, s -> definition(s).with(sound("blocks/spirit_diode/waveform_pulse")));
+        this.add(SoundRegistry.WAVEBANKER_STORE, s -> definition(s).with(sound("blocks/spirit_diode/waveform_pulse")));
+        this.add(SoundRegistry.WAVEBREAKER_STORE, s -> definition(s).with(sound("blocks/spirit_diode/waveform_pulse")));
+        this.add(SoundRegistry.WAVEBREAKER_RELEASE, s -> definition(s).with(sound("blocks/spirit_diode/waveform_pulse")));
+        this.add(SoundRegistry.WAVEMAKER_PULSE, s -> definition(s).with(sound("blocks/spirit_diode/waveform_pulse")));
 
         this.add(SoundRegistry.ARCANE_ROCK_BREAK, s -> definition(s).with(sounds("blocks/arcane_rock/break", 6)));
         this.add(SoundRegistry.ARCANE_ROCK_STEP, s -> definition(s).with(sounds("blocks/arcane_rock/hit", 6)).with(sounds("minecraft:block/basalt/step", 6)));

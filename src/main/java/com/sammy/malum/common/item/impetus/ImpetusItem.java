@@ -9,19 +9,9 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import java.util.function.Supplier;
 
 public class ImpetusItem extends Item implements SpiritRepairRecipe.IRepairOutputOverride {
-    private Supplier<CrackedImpetusItem> cracked;
 
     public ImpetusItem(Properties properties) {
         super(properties.durability(800));
-    }
-
-    public ImpetusItem setCrackedVariant(Supplier<CrackedImpetusItem> cracked) {
-        this.cracked = cracked;
-        return this;
-    }
-
-    public CrackedImpetusItem getCrackedVariant() {
-        return cracked.get();
     }
 
     @Override

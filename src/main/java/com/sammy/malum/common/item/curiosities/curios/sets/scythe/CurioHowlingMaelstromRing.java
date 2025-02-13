@@ -33,12 +33,6 @@ public class CurioHowlingMaelstromRing extends MalumCurioItem implements IMalumE
         consumer.accept(ComponentHelper.negativeCurioEffect("longer_rebound_cooldown"));
     }
 
-    @Override
-    public void addAttributeModifiers(Multimap<Holder<Attribute>, AttributeModifier> map, SlotContext slotContext, ItemStack stack) {
-        addAttributeModifier(map, AttributeRegistry.SCYTHE_PROFICIENCY,
-                new AttributeModifier(MalumMod.malumPath("howling_maelstrom_ring"), 0.15f, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-    }
-
     public static void handleMaelstrom(ServerLevel serverLevel, LivingEntity scytheOwner, AbstractScytheProjectileEntity entity) {
         if (serverLevel.getGameTime() % 5L == 0) {
             boolean dealtDamage = false;
@@ -46,7 +40,7 @@ public class CurioHowlingMaelstromRing extends MalumCurioItem implements IMalumE
             float damage = entity.damage * 0.2f;
             float magicDamage = entity.magicDamage * 0.2f;
             for (Entity target : serverLevel.getEntities(entity, aabb, t -> maelstromCanHitEntity(scytheOwner, t))) {
-                var damageSource = DamageTypeHelper.create(serverLevel, DamageTypeRegistry.SCYTHE_REBOUND, entity, scytheOwner);
+                var damageSource = DamageTypeHelper.create(serverLevel, DamageTypeRegistry.SCYTHE_MAELSTROM, entity, scytheOwner);
                 target.invulnerableTime = 0;
                 boolean success = target.hurt(damageSource, damage);
                 if (success && target instanceof LivingEntity livingentity) {

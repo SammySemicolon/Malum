@@ -1,12 +1,12 @@
 package com.sammy.malum.common.block.curiosities.spirit_crucible;
 
 import com.sammy.malum.common.block.*;
+import com.sammy.malum.common.data.ImpetusRepairData;
 import com.sammy.malum.common.item.augment.MendingDiffuserItem;
 import com.sammy.malum.common.item.augment.ShieldingApparatusItem;
 import com.sammy.malum.common.item.augment.WarpingEngineItem;
 import com.sammy.malum.core.systems.artifice.*;
 import com.sammy.malum.common.block.storage.*;
-import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.common.packets.CodecUtil;
 import com.sammy.malum.common.recipe.spirit.focusing.*;
@@ -19,6 +19,7 @@ import com.sammy.malum.registry.common.recipe.*;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.*;
@@ -27,14 +28,11 @@ import net.minecraft.world.*;
 import net.minecraft.world.entity.item.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.capabilities.IBlockCapabilityProvider;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
-import org.jetbrains.annotations.NotNull;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
@@ -44,7 +42,7 @@ import team.lodestar.lodestone.systems.recipe.*;
 import javax.annotation.Nullable;
 import java.util.function.*;
 
-public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implements IArtificeAcceptor, IMalumSpecialItemAccessPoint, IBlockCapabilityProvider<IItemHandler, Direction> {
+public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implements IArtificeAcceptor, IMalumSpecialItemAccessPoint, IItemHandlerSupplier {
 
     public static final Vec3 CRUCIBLE_ITEM_OFFSET = new Vec3(0.5f, 1.6f, 0.5f);
     public static final Vec3 CRUCIBLE_CORE_AUGMENT_OFFSET = new Vec3(0.5f, 3f, 0.5f);
@@ -65,7 +63,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
     public int crackTimer;
 
     public ArtificeAttributeData attributes = new ArtificeAttributeData();
-    private final Supplier<IItemHandler> combinedInventory = () -> new CombinedInvWrapper(inventory, spiritInventory);
+    private final Supplier<IItemHandler> exposedInventory = () -> new CombinedInvWrapper(inventory, spiritInventory);
 
     public SpiritCrucibleCoreBlockEntity(BlockEntityType<? extends SpiritCrucibleCoreBlockEntity> type, MultiBlockStructure structure, BlockPos pos, BlockState state) {
         super(type, structure, pos, state);
@@ -77,6 +75,11 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
 
     public SpiritCrucibleCoreBlockEntity(BlockPos pos, BlockState state) {
         this(BlockEntityRegistry.SPIRIT_CRUCIBLE.get(), STRUCTURE.get(), pos, state);
+    }
+
+    @Override
+    public IItemHandler getInventory(Direction direction) {
+        return exposedInventory.get();
     }
 
     @Override
@@ -268,8 +271,10 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         }
         if (durabilityCost > 0) {
             impetus.hurtAndBreak(durabilityCost, level, null, brokenStack -> {
-                if (brokenStack instanceof ImpetusItem impetusItem) {
-                    inventory.setStackInSlot(0, impetusItem.getCrackedVariant().getDefaultInstance());
+                Holder<Item> itemHolder = level.registryAccess().registry(Registries.ITEM).orElseThrow().wrapAsHolder(brokenStack.asItem());
+                ImpetusRepairData data = itemHolder.getData(DataMapRegistry.DAMAGED_IMPETUS_VARIANT);
+                if (data != null) {
+                    inventory.setStackInSlot(0, data.damagedImpetus().value().getDefaultInstance());
                 }
             });
             MendingDiffuserItem.repairImpetus(level, attributes, impetus);
@@ -346,10 +351,5 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         float distance = 0.6f + (float) Math.sin(((spiritSpin + partialTicks) % 6.28f) / 20f) * 0.025f;
         float height = 1.6f;
         return VecHelper.rotatingRadialOffset(new Vec3(0.5f, height, 0.5f), distance, slot, augmentInventory.slotCount, spiritSpin + partialTicks, 240);
-    }
-
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
-        return combinedInventory.get();
     }
 }

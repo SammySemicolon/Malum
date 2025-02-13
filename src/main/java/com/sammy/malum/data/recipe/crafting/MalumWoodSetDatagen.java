@@ -424,11 +424,11 @@ public class MalumWoodSetDatagen implements IConditionBuilder {
 
             Item button, Item pressurePlate,
 
-            Item door, Item boardsDoor,
-            Item boltedDoor, Item boltedBoardsDoor,
+            Item door, Item boltedDoor,
+            Item boardsDoor, Item boltedBoardsDoor,
 
-            Item trapdoor, Item boardsTrapdoor,
-            Item boltedTrapdoor, Item boltedBoardsTrapdoor,
+            Item trapdoor, Item boltedTrapdoor,
+            Item boardsTrapdoor, Item boltedBoardsTrapdoor,
 
             Item fence, Item fenceGate,
 

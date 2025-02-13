@@ -2,6 +2,8 @@ package com.sammy.malum.visual_effects;
 
 import com.sammy.malum.common.block.curiosities.totem.*;
 import com.sammy.malum.core.systems.spirit.*;
+import net.minecraft.core.*;
+import net.minecraft.util.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
@@ -70,23 +72,70 @@ public class TotemParticleEffects {
         long gameTime = level.getGameTime();
         var random = level.random;
         final float time = 16;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 8; j++) {
-                float velocity = RandomHelper.randomBetween(random, 0.02f, 0.03f);
-                var offsetPosition = VecHelper.rotatingRadialOffset(position, 0.7f, j, 8, gameTime, time);
-                offsetPosition = offsetPosition.add(0, (Math.cos(((gameTime + j * 480) % time) / time) * 0.25f) - 0.25f, 0);
-                var motion = offsetPosition.subtract(position).normalize().scale(velocity);
+        for (int i = 0; i < 8; i++) {
+            var offsetPosition = VecHelper.rotatingRadialOffset(position, 0.7f, i, 8, gameTime, time);
+            offsetPosition = offsetPosition.add(0, (Math.cos(((gameTime + i * 480) % time) / time) * 0.25f) - 0.25f, 0);
+            for (int j = 0; j < 3; j++) {
                 var lightSpecs = spiritLightSpecs(level, offsetPosition, spiritType);
+                float velocity = RandomHelper.randomBetween(random, 0.02f, 0.03f);
+                var motion = offsetPosition.subtract(position).normalize().scale(velocity);
                 lightSpecs.getBuilder()
                         .multiplyLifetime(2.5f)
                         .setMotion(motion)
-                        .setLifeDelay(i*6)
+                        .setLifeDelay(j * 6)
                         .setTransparencyData(GenericParticleData.create(0.2f, 0.8f, 0f).build())
                         .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(RandomHelper.randomBetween(random, 1f, 2f)));
                 lightSpecs.getBloomBuilder()
                         .multiplyLifetime(1.5f)
                         .setMotion(motion)
-                        .setLifeDelay(i)
+                        .setLifeDelay(j * 6)
+                        .setTransparencyData(GenericParticleData.create(0.05f, 0.35f, 0f).build())
+                        .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(RandomHelper.randomBetween(random, 0.5f, 1f)));
+                lightSpecs.spawnParticles();
+            }
+        }
+    }
+    public static void triggerBlockFallEffect(Level level, MalumSpiritType spiritType, BlockPos position) {
+        var random = level.random;
+        for (int i = 0; i < 4; i++) {
+            int xOffset = Mth.clamp(i%3, 0, 1);
+            int zOffset = Mth.clamp((i-1)%4, 0, 1);
+            for (int j = 0; j < 2; j++) {
+                Vec3 offsetPosition = new Vec3(position.getX()+xOffset, position.getY()+j, position.getZ()+zOffset);
+                float motion = RandomHelper.randomBetween(random, 0.05f, 0.06f);
+                Vec3 velocity = position.getCenter().subtract(offsetPosition).add(0, -2, 0).normalize().scale(motion);
+                var lightSpecs = spiritLightSpecs(level, offsetPosition, spiritType);
+                lightSpecs.getBuilder()
+                        .multiplyLifetime(2.5f)
+                        .setMotion(velocity)
+                        .setTransparencyData(GenericParticleData.create(0.2f, 0.8f, 0f).build())
+                        .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(RandomHelper.randomBetween(random, 1f, 2f)));
+                lightSpecs.getBloomBuilder()
+                        .setTransparencyData(GenericParticleData.create(0.05f, 0.35f, 0f).build())
+                        .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(RandomHelper.randomBetween(random, 0.5f, 1f)));
+                lightSpecs.spawnParticles();
+            }
+        }
+    }
+
+    public static void triggerBlockEffect(Level level, MalumSpiritType spiritType, BlockPos position) {
+        var random = level.random;
+        for (int i = 0; i < 4; i++) {
+            int xOffset = Mth.clamp(i%3, 0, 1);
+            int zOffset = Mth.clamp((i-1)%4, 0, 1);
+            float xMotion = (i%2) * (i > 1 ? 0.06f : -0.06f);
+            float zMotion = ((i + 1) % 2) * (i > 1 ? -0.06f : 0.06f);
+            for (int j = 0; j < 2; j++) {
+                Vec3 offsetPosition = new Vec3(position.getX()+xOffset, position.getY()+j, position.getZ()+zOffset);
+                var lightSpecs = spiritLightSpecs(level, offsetPosition, spiritType);
+                lightSpecs.getBuilder()
+                        .multiplyLifetime(2.5f)
+                        .setMotion(xMotion, 0, zMotion)
+                        .setTransparencyData(GenericParticleData.create(0.2f, 0.8f, 0f).build())
+                        .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(RandomHelper.randomBetween(random, 1f, 2f)));
+                lightSpecs.getBloomBuilder()
+                        .multiplyLifetime(1.5f)
+                        .setMotion(xMotion, 0, zMotion)
                         .setTransparencyData(GenericParticleData.create(0.05f, 0.35f, 0f).build())
                         .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(RandomHelper.randomBetween(random, 0.5f, 1f)));
                 lightSpecs.spawnParticles();

@@ -1,0 +1,27 @@
+{
+  "type": "malum:spirit_infusion",
+  "extraIngredients": [
+    {
+      "count": 4,
+      "item": "malum:warp_flux"
+    }
+  ],
+  "ingredient": {
+    "count": 6,
+    "item": "malum:alchemical_calx"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:suspicious_device"
+  },
+  "spirits": [
+    {
+      "type": "arcane",
+      "count": 16
+    },
+    {
+      "type": "eldritch",
+      "count": 16
+    }
+  ]
+}

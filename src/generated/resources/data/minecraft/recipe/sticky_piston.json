@@ -6,7 +6,7 @@
       "item": "minecraft:piston"
     },
     "S": {
-      "item": "minecraft:slime_ball"
+      "tag": "c:slime_balls"
     }
   },
   "pattern": [

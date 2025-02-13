@@ -1,8 +1,8 @@
 package com.sammy.malum.core.handlers.enchantment;
 
-import com.sammy.malum.common.item.*;
 import com.sammy.malum.common.item.curiosities.curios.sets.scythe.*;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.*;
+import com.sammy.malum.common.item.spirit.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.item.*;
@@ -63,8 +63,8 @@ public class AscensionHandler {
                 particleEffect = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_ASCENSION_UPPERCUT).setVerticalSlashAngle().setMirrored(true);
             }
             if (hasFunnyRing) {
-                baseDamage *= 0.6f;
-                magicDamage *= 0.6f;
+                baseDamage *= 0.5f;
+                magicDamage *= 0.5f;
             }
             if (scythe.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
                 particleEffect.setSpiritType(spiritAffiliatedItem);
@@ -101,11 +101,8 @@ public class AscensionHandler {
         }
         if (!player.isCreative()) {
             int enchantmentLevel = getEnchantmentLevel(level, EnchantmentRegistry.ASCENSION, scythe);
-            if (enchantmentLevel < 6) {
-                int cooldown = 200 - 25 * (enchantmentLevel - 1);
-                if (hasFunnyRing) {
-                    cooldown = (cooldown + 50);
-                }
+            int cooldown = 200 - 40 * (enchantmentLevel - 1);
+            if (cooldown > 0) {
                 player.getCooldowns().addCooldown(scythe.getItem(), cooldown);
             }
         }
@@ -114,6 +111,11 @@ public class AscensionHandler {
     }
 
     protected static boolean ascensionCanHitEntity(Player attacker, Entity pTarget) {
+        if (pTarget instanceof TamableAnimal tamableAnimal) {
+            if (tamableAnimal.isTame()) {
+                return false;
+            }
+        }
         if (!pTarget.canBeHitByProjectile()) {
             return false;
         } else {

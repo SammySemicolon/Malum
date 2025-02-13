@@ -1,8 +1,10 @@
 {
   "values": [
+    "#malum:soulwashing",
+    "#malum:is_hidden_blade",
     "malum:voodoo",
     "malum:voodoo_playerless",
     "malum:void",
-    "#malum:soulwashing"
+    "malum:scythe_maelstrom"
   ]
 }

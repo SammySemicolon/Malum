@@ -1,18 +1,25 @@
 package com.sammy.malum.common.geas.oath;
 
+import com.google.common.collect.*;
 import com.sammy.malum.common.effect.*;
+import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
+import net.minecraft.core.*;
+import net.minecraft.network.chat.*;
 import net.minecraft.sounds.*;
 import net.minecraft.util.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
 import team.lodestar.lodestone.helpers.*;
+
+import java.util.function.*;
 
 public class LastStandOath extends GeasEffect {
 
@@ -23,6 +30,19 @@ public class LastStandOath extends GeasEffect {
 
     public LastStandOath() {
         super(MalumGeasEffectTypeRegistry.OATH_OF_THE_LAST_STAND.get());
+    }
+
+    @Override
+    public void addTooltipComponents(LivingEntity entity, Consumer<Component> tooltipAcceptor, TooltipFlag tooltipFlag) {
+        tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("last_stand"));
+        tooltipAcceptor.accept(ComponentHelper.negativeGeasEffect("last_stand_patient_death"));
+        super.addTooltipComponents(entity, tooltipAcceptor, tooltipFlag);
+    }
+
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> createAttributeModifiers(LivingEntity entity, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
+        addAttributeModifier(modifiers, Attributes.ARMOR, -0.75f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        return modifiers;
     }
 
     @Override
@@ -66,7 +86,17 @@ public class LastStandOath extends GeasEffect {
         }
         target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, DEATH_DELAY, 4, true, true, true));
         deaths++;
-        scheduledDeath = target.level().getGameTime() + DEATH_DELAY;
+        if (deaths == getLuckyNumber(target)) {
+            deaths = 0;
+            scheduledDeath = 0;
+            return;
+        }
+        long newDeathTime = target.level().getGameTime() + DEATH_DELAY;
+        if (scheduledDeath != 0) {
+            scheduledDeath = (long) Mth.lerp(0.3f, scheduledDeath, newDeathTime);
+            return;
+        }
+        scheduledDeath = newDeathTime;
     }
 
     @Override
@@ -75,5 +105,9 @@ public class LastStandOath extends GeasEffect {
             final float damage = event.getNewDamage() * target.getMaxHealth() * 1000f;
             event.setNewDamage(damage);
         }
+    }
+    public int getLuckyNumber(LivingEntity entity) {
+        int hash = entity.getUUID().hashCode();
+        return 4 + Math.floorMod(hash, 9);
     }
 }

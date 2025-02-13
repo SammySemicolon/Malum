@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import team.lodestar.lodestone.helpers.block.*;
 import team.lodestar.lodestone.systems.blockentity.*;
 
-public abstract class MalumItemHolderBlockEntity extends ItemHolderBlockEntity implements IMalumSpecialItemAccessPoint, IBlockCapabilityProvider<IItemHandler, Direction> {
+public abstract class MalumItemHolderBlockEntity extends ItemHolderBlockEntity implements IMalumSpecialItemAccessPoint {
 
     public MalumItemHolderBlockEntity(BlockEntityType<? extends MalumItemHolderBlockEntity> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -27,10 +27,6 @@ public abstract class MalumItemHolderBlockEntity extends ItemHolderBlockEntity i
         return inventory;
     }
 
-    @Override
-    public @Nullable IItemHandler getCapability(Level level, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, Direction direction) {
-        return inventory;
-    }
 
     @Override
     public Vec3 getItemPos(float partialTicks) {

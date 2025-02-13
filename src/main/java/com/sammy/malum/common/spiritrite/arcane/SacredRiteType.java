@@ -1,8 +1,8 @@
 package com.sammy.malum.common.spiritrite.arcane;
 
 import com.sammy.malum.common.block.curiosities.totem.TotemBaseBlockEntity;
-import com.sammy.malum.common.spiritrite.TotemicRiteEffect;
-import com.sammy.malum.common.spiritrite.TotemicRiteType;
+import com.sammy.malum.core.systems.rite.TotemicRiteEffect;
+import com.sammy.malum.core.systems.rite.TotemicRiteType;
 import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
 import com.sammy.malum.visual_effects.networked.data.ColorEffectData;
 import net.minecraft.Util;
@@ -40,7 +40,7 @@ public class SacredRiteType extends TotemicRiteType {
                 getNearbyEntities(totemBase, LivingEntity.class, e -> !(e instanceof Monster)).forEach(e -> {
                     if (e.getHealth() < e.getMaxHealth()) {
                         e.heal(2);
-                        ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT));
+                        ParticleEffectTypeRegistry.ENTITY_RITE_EFFECT.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT));
                     }
                 });
             }
@@ -57,7 +57,7 @@ public class SacredRiteType extends TotemicRiteType {
                     if (e instanceof Animal animal) {
                         if (animal.getAge() < 0) {
                             if (totemBase.getLevel().random.nextFloat() <= 0.04f) {
-                                ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT));
+                                ParticleEffectTypeRegistry.ENTITY_RITE_EFFECT.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT));
                                 animal.ageUp(25);
                             }
                         }
@@ -128,7 +128,7 @@ public class SacredRiteType extends TotemicRiteType {
         public final void tryAct(TotemBaseBlockEntity totemBaseBlockEntity, Mob mob) {
             if (targetClass.isInstance(mob)) {
                 act(totemBaseBlockEntity, (T) mob);
-                ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(mob, new ColorEffectData(SACRED_SPIRIT));
+                ParticleEffectTypeRegistry.ENTITY_RITE_EFFECT.createEntityEffect(mob, new ColorEffectData(SACRED_SPIRIT));
             }
         }
 

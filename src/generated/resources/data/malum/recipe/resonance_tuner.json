@@ -1,0 +1,31 @@
+{
+  "type": "malum:spirit_infusion",
+  "extraIngredients": [
+    {
+      "count": 8,
+      "item": "malum:astral_weave"
+    },
+    {
+      "count": 8,
+      "item": "malum:refined_brilliance"
+    }
+  ],
+  "ingredient": {
+    "count": 6,
+    "item": "malum:alchemical_calx"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:resonance_tuner"
+  },
+  "spirits": [
+    {
+      "type": "earthen",
+      "count": 16
+    },
+    {
+      "type": "aerial",
+      "count": 16
+    }
+  ]
+}

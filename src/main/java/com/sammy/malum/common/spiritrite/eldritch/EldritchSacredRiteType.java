@@ -1,7 +1,7 @@
 package com.sammy.malum.common.spiritrite.eldritch;
 
 import com.sammy.malum.common.block.curiosities.totem.*;
-import com.sammy.malum.common.spiritrite.*;
+import com.sammy.malum.core.systems.rite.*;
 import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
 import com.sammy.malum.visual_effects.networked.data.ColorEffectData;
 import net.minecraft.core.*;
@@ -74,7 +74,7 @@ public class EldritchSacredRiteType extends TotemicRiteType {
                         if (e.canFallInLove() && e.getAge() == 0) {
                             if (level.random.nextFloat() <= 0.2f) {
                                 e.setInLoveTime(600);
-                                ParticleEffectTypeRegistry.RITE_EFFECT_TRIGGERED.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT));
+                                ParticleEffectTypeRegistry.ENTITY_RITE_EFFECT.createEntityEffect(e, new ColorEffectData(SACRED_SPIRIT));
                             }
                         }
                     });

@@ -19,7 +19,7 @@ import static net.neoforged.neoforge.event.entity.living.MobEffectEvent.Applicab
 public class GluttonyEffect extends MobEffect {
     public GluttonyEffect() {
         super(MobEffectCategory.BENEFICIAL, ColorHelper.getColor(88, 86, 60));
-        addAttributeModifier(LodestoneAttributes.MAGIC_PROFICIENCY, MalumMod.malumPath("gluttony"), 0.1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        addAttributeModifier(LodestoneAttributes.MAGIC_PROFICIENCY, MalumMod.malumPath("gluttony"), 0.05f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         IronsSpellsCompat.addGluttonySpellPower(this);
     }
 

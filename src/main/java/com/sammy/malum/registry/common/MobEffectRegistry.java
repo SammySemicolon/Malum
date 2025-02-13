@@ -34,6 +34,7 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> REACTIVE_SHIELDING = EFFECTS.register("reactive_shielding", ReactiveShieldingEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> SACRIFICIAL_EMPOWERMENT = EFFECTS.register("sacrificial_empowerment", SacrificialEmpowermentEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> ASCENSION = EFFECTS.register("ascension", AscensionEffect::new);
+
     public static final DeferredHolder<MobEffect, MobEffect> GLUTTONY = EFFECTS.register("gluttony", GluttonyEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> CANCEROUS_GROWTH = EFFECTS.register("cancerous_growth", GrowingFleshEffect::new);
     public static final DeferredHolder<MobEffect, MobEffect> ECHOING_ARCANA = EFFECTS.register("echoing_arcana", EchoingArcanaEffect::new);

@@ -7,7 +7,6 @@ import net.minecraft.util.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.helpers.*;
-import team.lodestar.lodestone.registry.common.particle.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.particle.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
@@ -16,7 +15,6 @@ import team.lodestar.lodestone.systems.particle.data.color.*;
 import team.lodestar.lodestone.systems.particle.data.spin.*;
 import team.lodestar.lodestone.systems.particle.world.*;
 import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
-import team.lodestar.lodestone.systems.particle.world.options.*;
 
 import java.awt.*;
 import java.util.function.*;
@@ -38,9 +36,7 @@ public class EthericNitrateImpactParticleEffect extends ParticleEffectType {
             double posY = positionData.posY;
             double posZ = positionData.posZ;
             Vec3 pos = new Vec3(posX, posY, posZ);
-            final Color primaryColor = colorData.getDefaultColorRecord().primaryColor();
-            final Color secondaryColor = colorData.getDefaultColorRecord().secondaryColor();
-            ColorParticleData colorParticleData = ColorParticleData.create(primaryColor, secondaryColor).setEasing(Easing.SINE_IN_OUT).setCoefficient(0.9f).build();
+            ColorParticleData colorParticleData = colorData.getColor();
             for (int i = 0; i < 16; i++) {
                 float lifetimeMultiplier = RandomHelper.randomBetween(random, 1f, 1.5f);
                 float gravityStrength = RandomHelper.randomBetween(random, 0.03f, 0.06f);

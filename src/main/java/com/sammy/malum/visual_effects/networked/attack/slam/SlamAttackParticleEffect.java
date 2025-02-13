@@ -23,18 +23,12 @@ public class SlamAttackParticleEffect extends ParticleEffectType {
     }
 
     public static NBTEffectData createData(Vec3 direction, float angle) {
-        return createData(direction, angle, null);
-    }
-    public static NBTEffectData createData(Vec3 direction, float angle, MalumSpiritType spiritType) {
         CompoundTag tag = new CompoundTag();
         CompoundTag directionTag = new CompoundTag();
         directionTag.putDouble("x", direction.x);
         directionTag.putDouble("y", direction.y);
         directionTag.putDouble("z", direction.z);
         tag.putFloat("angle", angle);
-        if (spiritType != null) {
-            tag.putString("spiritType", spiritType.getIdentifier());
-        }
         tag.put("direction", directionTag);
         return new NBTEffectData(tag);
     }

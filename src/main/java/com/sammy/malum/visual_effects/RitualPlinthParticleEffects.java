@@ -31,7 +31,7 @@ import static net.minecraft.util.Mth.*;
 public class RitualPlinthParticleEffects {
 
     public static void failRitualParticles(RitualPlinthBlockEntity plinth, ColorEffectData colorData) {
-        MalumSpiritType spiritType = colorData.getSpiritType();
+        MalumSpiritType spiritType = colorData.getSpirit();
         Level level = plinth.getLevel();
         var random = level.random;
         Vec3 ritualIconPos = plinth.getRitualIconPos();
@@ -119,7 +119,7 @@ public class RitualPlinthParticleEffects {
     }
 
     public static void incrementRitualTierParticles(RitualPlinthBlockEntity plinth, ColorEffectData colorData) {
-        MalumSpiritType spiritType = colorData.getSpiritType();
+        MalumSpiritType spiritType = colorData.getSpirit();
         Level level = plinth.getLevel();
         var random = level.random;
         Vec3 ritualIconPos = plinth.getRitualIconPos();
@@ -204,7 +204,7 @@ public class RitualPlinthParticleEffects {
     }
 
     public static void beginChargingParticles(RitualPlinthBlockEntity plinth, ColorEffectData colorData) {
-        MalumSpiritType spiritType = colorData.getSpiritType();
+        MalumSpiritType spiritType = colorData.getSpirit();
         Level level = plinth.getLevel();
         long gameTime = level.getGameTime();
         var random = level.random;
@@ -334,7 +334,7 @@ public class RitualPlinthParticleEffects {
     }
 
     public static void eatItemParticles(RitualPlinthBlockEntity plinth, Vec3 targetPos, ColorEffectData colorData, ItemStack stack) {
-        MalumSpiritType spiritType = colorData.getSpiritType();
+        MalumSpiritType spiritType = colorData.getSpirit();
         Level level = plinth.getLevel();
         long gameTime = level.getGameTime();
         var random = level.random;
@@ -388,7 +388,7 @@ public class RitualPlinthParticleEffects {
     }
 
     public static void eatSpiritParticles(RitualPlinthBlockEntity plinth, Vec3 targetPos, ColorEffectData colorData, ItemStack stack) {
-        MalumSpiritType spiritType = colorData.getSpiritType();
+        MalumSpiritType spiritType = colorData.getSpirit();
         Level level = plinth.getLevel();
         long gameTime = level.getGameTime();
         var random = level.random;

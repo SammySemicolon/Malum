@@ -61,7 +61,7 @@ public abstract class AbstractStaffItem extends LodestoneCombatItem implements I
                 var particle = ParticleHelper.createSlamEffect(ParticleEffectTypeRegistry.STAFF_SLAM)
                         .setVerticalSlashAngle();
                 if (stack.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
-                    particle.setSpiritType(spiritAffiliatedItem);
+                    particle.setColor(spiritAffiliatedItem);
                 }
                 particle.spawnTargetBoundSlashingParticle(attacker, target);
             }

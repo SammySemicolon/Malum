@@ -8,6 +8,7 @@ import com.sammy.malum.registry.common.entity.*;
 import com.sammy.malum.registry.common.item.*;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.*;
+import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.*;
@@ -27,6 +28,8 @@ import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 import team.lodestar.lodestone.systems.rendering.trail.TrailPointBuilder;
 
 import java.util.function.*;
+
+import static com.sammy.malum.common.item.curiosities.weapons.staff.UnwindingChaosStaffItem.AURIC_COLOR_DATA;
 
 public class EntropicFlameBoltEntity extends AbstractBoltProjectileEntity {
 
@@ -93,45 +96,11 @@ public class EntropicFlameBoltEntity extends AbstractBoltProjectileEntity {
         }
     }
 
-    //    @Override
-//    public void tick() {
-//        Vec3 motion = getDeltaMovement();
-//        super.tick();
-//        Entity owner = getOwner();
-//        if (spawnDelay > 0 || owner == null || fadingAway) {
-//            return;
-//        }
-//        List<LivingEntity> entities = level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(25), target -> target != owner && target.isAlive() && !target.isAlliedTo(owner));
-//        if (!entities.isEmpty()) {
-//            LivingEntity nearest = entities.stream().min(Comparator.comparingDouble((e) -> e.distanceToSqr(this))).get();
-//            Vec3 nearestPosition = nearest.position().add(0, nearest.getBbHeight() / 2, 0);
-//            Vec3 diff = nearestPosition.subtract(position());
-//            double speed = motion.length();
-//            Vec3 nextPosition = position().add(getDeltaMovement());
-//            if (nearest.distanceToSqr(nextPosition) > nearest.distanceToSqr(position())) {
-//                return;
-//            }
-//            Vec3 newMotion = diff.normalize().scale(speed);
-//            final double dot = motion.normalize().dot(diff.normalize());
-//            if (dot < 0.8f) {
-//                return;
-//            }
-//            if (newMotion.length() == 0) {
-//                newMotion = newMotion.add(0.01, 0, 0);
-//            }
-//            float angleScalar = (float) ((dot - 0.8f) * 5f);
-//            float factor = 0.15f * angleScalar;
-//            final double x = Mth.lerp(factor, motion.x, newMotion.x);
-//            final double y = Mth.lerp(factor, motion.y, newMotion.y);
-//            final double z = Mth.lerp(factor, motion.z, newMotion.z);
-//            setDeltaMovement(new Vec3(x, y, z));
-//        }
-//    }
-
     @Override
     public void playSound(SoundEvent pSound, float pVolume, float pPitch) {
-        super.playSound(pSound, pVolume/2f, pPitch+0.4f);
-        super.playSound(SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), pVolume - 0.2f, pPitch + 0.3f);
+        super.playSound(pSound, pVolume, pPitch-0.2f);
+        super.playSound(SoundRegistry.WORLDSOUL_MOTIF_LIGHT_IMPACT.get(), pVolume - 0.2f, pPitch + 0.5f);
+        super.playSound(SoundRegistry.WORLDSOUL_MOTIF_REVERB.get(), pVolume - 0.2f, pPitch + 0.5f);
     }
 
     @Override
@@ -142,6 +111,11 @@ public class EntropicFlameBoltEntity extends AbstractBoltProjectileEntity {
     @Override
     public ParticleEffectType getImpactParticleEffect() {
         return ParticleEffectTypeRegistry.ENTROPIC_BOLT_IMPACT;
+    }
+
+    @Override
+    public ColorEffectData getImpactParticleColor() {
+        return new ColorEffectData(AURIC_COLOR_DATA, SpiritTypeRegistry.AQUEOUS_SPIRIT.createColorData().build());
     }
 
     @Override
@@ -156,7 +130,7 @@ public class EntropicFlameBoltEntity extends AbstractBoltProjectileEntity {
         Vec3 position = position();
         float scalar = getVisualEffectScalar();
         Vec3 norm = getDeltaMovement().normalize().scale(0.05f);
-        var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, position, UnwindingChaosStaffItem.AURIC_COLOR_DATA);
+        var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, position, AURIC_COLOR_DATA);
         lightSpecs.getBuilder()
                 .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(3 * scalar))
                 .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
@@ -178,7 +152,7 @@ public class EntropicFlameBoltEntity extends AbstractBoltProjectileEntity {
                 .setScaleData(GenericParticleData.create(1.2f * scalar, 0.1f * scalar).setEasing(Easing.SINE_IN_OUT).build())
                 .setSpritePicker(SimpleParticleOptions.ParticleSpritePicker.WITH_AGE)
                 .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
-                .setColorData(UnwindingChaosStaffItem.AURIC_COLOR_DATA)
+                .setColorData(AURIC_COLOR_DATA)
                 .setLifetime(Math.min(2 + age, 16))
                 .addTickActor(behavior)
                 .enableForcedSpawn()

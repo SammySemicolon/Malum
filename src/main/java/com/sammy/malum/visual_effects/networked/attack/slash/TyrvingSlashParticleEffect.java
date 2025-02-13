@@ -35,7 +35,6 @@ public class TyrvingSlashParticleEffect extends SlashAttackParticleEffect {
             Vec3 direction = new Vec3(dirX, dirY, dirZ);
             float angle = nbtData.compoundTag.getFloat("angle");
             boolean mirror = nbtData.compoundTag.getBoolean("mirror");
-            var spirit = getSpiritType(nbtData);
 
             float offsetBase = RandomHelper.randomBetween(random, 0.4f, 0.8f) * (random.nextBoolean() ? 1 : -1) + (mirror ? 3.14f : 0);
             for (int i = 0; i < 8; i++) {
@@ -45,7 +44,7 @@ public class TyrvingSlashParticleEffect extends SlashAttackParticleEffect {
                     slash.getBuilder().setRenderType(LodestoneWorldParticleRenderType.TRANSPARENT);
                 }
                 else {
-                    slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.SLASH, spirit);
+                    slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.SLASH, colorData);
                 }
                 float spinOffset = angle + (i % 2 == 0 ? 1 : -1) * offsetBase;
                 int lifeDelay = (i % 2 == 0 ? 3 : 0);

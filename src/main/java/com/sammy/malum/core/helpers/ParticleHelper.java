@@ -14,10 +14,10 @@ import net.minecraft.world.phys.*;
 public class ParticleHelper {
 
     public static WeaponParticleEffectBuilder createSlashingEffect(ParticleEffectType effectType) {
-        return createEffect(effectType, (d, b) -> SlashAttackParticleEffect.createData(d, b.isMirrored, b.slashAngle, b.spiritType));
+        return createEffect(effectType, (d, b) -> SlashAttackParticleEffect.createData(d, b.isMirrored, b.slashAngle));
     }
     public static WeaponParticleEffectBuilder createSlamEffect(ParticleEffectType effectType) {
-        return createEffect(effectType, (d, b) -> SlamAttackParticleEffect.createData(d, b.slashAngle, b.spiritType));
+        return createEffect(effectType, (d, b) -> SlamAttackParticleEffect.createData(d, b.slashAngle));
     }
     public static WeaponParticleEffectBuilder createEffect(ParticleEffectType effectType, WeaponParticleEffectBuilder.EffectDataSupplier supplier) {
         return new WeaponParticleEffectBuilder(effectType, supplier);
@@ -30,10 +30,11 @@ public class ParticleHelper {
         public float horizontalOffset;
         public float slashAngle;
         public boolean isMirrored;
-        public MalumSpiritType spiritType;
+        public ColorEffectData color;
+
 
         public Vec3 positionOffset = Vec3.ZERO;
-        public float horizontalDirectionOffset = 0, verticalDirectionOffset = 0, directionOffsetAngle = 0;
+        public float horizontalDirectionOffset = 0, verticalDirectionOffset = 0, forwardOffset = 0, directionOffsetAngle = 0;
 
         protected WeaponParticleEffectBuilder(ParticleEffectType effectType, EffectDataSupplier supplier) {
             this.effectType = effectType;
@@ -71,13 +72,16 @@ public class ParticleHelper {
             return this;
         }
 
-        public WeaponParticleEffectBuilder setSpiritType(ISpiritAffiliatedItem spiritAffiliatedItem) {
-            this.spiritType = spiritAffiliatedItem.getDefiningSpiritType();
-            return this;
+        public WeaponParticleEffectBuilder setColor(ISpiritAffiliatedItem spiritAffiliatedItem) {
+            return setColor(spiritAffiliatedItem.getDefiningSpiritType());
         }
 
-        public WeaponParticleEffectBuilder setSpiritType(MalumSpiritType spiritType) {
-            this.spiritType = spiritType;
+        public WeaponParticleEffectBuilder setColor(MalumSpiritType spiritType) {
+            return setColor(new ColorEffectData(spiritType));
+        }
+
+        public WeaponParticleEffectBuilder setColor(ColorEffectData color) {
+            this.color = color;
             return this;
         }
 
@@ -105,8 +109,13 @@ public class ParticleHelper {
             return this;
         }
 
-        public Vec3 getPosition(Vec3 position) {
-            return position.add(positionOffset);
+        public WeaponParticleEffectBuilder setForwardOffset(float forwardOffset) {
+            this.forwardOffset = forwardOffset;
+            return this;
+        }
+
+        public Vec3 getPosition(Vec3 position, Vec3 slashDirection) {
+            return position.add(positionOffset).add(slashDirection.scale(forwardOffset));
         }
 
         public Vec3 getDirection(Vec3 direction) {
@@ -193,7 +202,8 @@ public class ParticleHelper {
 
         public void spawnSlashingParticle(ServerLevel level, Vec3 slashPosition, Vec3 slashDirection) {
             effectType.createPositionedEffect(level,
-                    new PositionEffectData(getPosition(slashPosition)),
+                    new PositionEffectData(getPosition(slashPosition, slashDirection)),
+                    color,
                     supplier.createData(getDirection(slashDirection), this));
         }
 

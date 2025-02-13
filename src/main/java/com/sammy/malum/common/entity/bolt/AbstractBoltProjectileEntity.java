@@ -62,6 +62,8 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
 
     public abstract ParticleEffectType getImpactParticleEffect();
 
+    public abstract ColorEffectData getImpactParticleColor();
+
     public float getOrbitingTrailDistance() {
         return 0.3f;
     }
@@ -129,7 +131,10 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
             return;
         }
         if (level() instanceof ServerLevel serverLevel) {
-            getImpactParticleEffect().createPositionedEffect(serverLevel, new PositionEffectData(position().add(getDeltaMovement().scale(0.25f))), new ColorEffectData(SpiritTypeRegistry.WICKED_SPIRIT), HexBoltImpactParticleEffect.createData(getDeltaMovement().reverse().normalize()));
+            getImpactParticleEffect().createPositionedEffect(serverLevel,
+                    new PositionEffectData(position().add(getDeltaMovement().scale(0.25f))),
+                    getImpactParticleColor(),
+                    HexBoltImpactParticleEffect.createData(getDeltaMovement().reverse().normalize()));
             playSound(SoundRegistry.STAFF_STRIKES.get(), 0.5f, Mth.nextFloat(random, 0.9F, 1.5F));
             getEntityData().set(DATA_FADING_AWAY, true);
             Vec3 direction = pResult.getLocation().subtract(position());
@@ -152,7 +157,10 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
                 boolean success = target.hurt(source, magicDamage);
                 if (success && target instanceof LivingEntity livingentity) {
                     onDealDamage(livingentity);
-                    getImpactParticleEffect().createPositionedEffect(serverLevel, new PositionEffectData(position().add(getDeltaMovement().scale(0.5f))), new ColorEffectData(SpiritTypeRegistry.WICKED_SPIRIT), HexBoltImpactParticleEffect.createData(getDeltaMovement().reverse().normalize()));
+                    getImpactParticleEffect().createPositionedEffect(serverLevel,
+                            new PositionEffectData(position().add(getDeltaMovement().scale(0.5f))),
+                            getImpactParticleColor(),
+                            HexBoltImpactParticleEffect.createData(getDeltaMovement().reverse().normalize()));
                     playSound(SoundRegistry.STAFF_STRIKES.get(), 0.75f, Mth.nextFloat(random, 1f, 1.4f));
                     setDeltaMovement(getDeltaMovement().scale(0.05f));
                     getEntityData().set(DATA_FADING_AWAY, true);
@@ -176,11 +184,10 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
         age++;
         if (fadingAway) {
             fadingTimer++;
-        }
-        else {
+        } else {
             var motion = getDeltaMovement();
             float scalar = 0.96f;
-            setDeltaMovement(motion.x * scalar, (motion.y-0.02f)* scalar, motion.z * scalar);
+            setDeltaMovement(motion.x * scalar, (motion.y - 0.02f) * scalar, motion.z * scalar);
         }
         if (isHoming) {
             homeIn();
@@ -201,12 +208,10 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
             if (!fadingAway) {
                 spawnParticles();
             }
-        }
-        else if (age >= getMaxAge()) {
+        } else if (age >= getMaxAge()) {
             if (fadingAway) {
                 discard();
-            }
-            else {
+            } else {
                 getEntityData().set(DATA_FADING_AWAY, true);
             }
         }
@@ -266,8 +271,8 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
         this.setDeltaMovement(pX, pY, pZ);
         if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
             double d0 = Math.sqrt(pX * pX + pZ * pZ);
-            this.setXRot((float)(Mth.atan2(pY, d0) * (double)(180F / (float)Math.PI)));
-            this.setYRot((float)(Mth.atan2(pX, pZ) * (double)(180F / (float)Math.PI)));
+            this.setXRot((float) (Mth.atan2(pY, d0) * (double) (180F / (float) Math.PI)));
+            this.setYRot((float) (Mth.atan2(pX, pZ) * (double) (180F / (float) Math.PI)));
             this.xRotO = this.getXRot();
             this.yRotO = this.getYRot();
             this.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
@@ -286,9 +291,8 @@ public abstract class AbstractBoltProjectileEntity extends ThrowableItemProjecti
         float effectScalar = 1;
         if (age < 8) {
             effectScalar = age / 8f;
-        }
-        else if (fadingAway) {
-            effectScalar = effectScalar / ((fadingTimer+2) / 2f);
+        } else if (fadingAway) {
+            effectScalar = effectScalar / ((fadingTimer + 2) / 2f);
         }
         return effectScalar;
     }

@@ -90,7 +90,8 @@ public class SoundRegistry {
     public static final DeferredHolder<SoundEvent, SoundEvent> SUNDERING_ANCHOR_SWING = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("sundering_anchor_cuts")));
     public static final DeferredHolder<SoundEvent, SoundEvent> SUNDERING_ANCHOR_EXTRA_SWING = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("sundering_anchor_twists_gracefully")));
 
-    public static final DeferredHolder<SoundEvent, SoundEvent> SOULWASHING_IMPACT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("authority_of_wrath_takes_effect")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> INVERTED_HEART_IMPACT = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("the_inverted_heart_shrieks")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> WYRD_RECONSTRUCTION = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("wyrd_reconstruction_reconstructs_body")));
 
     public static final DeferredHolder<SoundEvent, SoundEvent> CATALYST_LOBBER_UNLOCKED = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("catalyst_lobber_unlocked")));
     public static final DeferredHolder<SoundEvent, SoundEvent> CATALYST_LOBBER_LOCKED = register(SoundEvent.createVariableRangeEvent(MalumMod.malumPath("catalyst_lobber_locked")));

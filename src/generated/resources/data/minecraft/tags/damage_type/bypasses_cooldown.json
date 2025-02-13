@@ -2,6 +2,8 @@
   "values": [
     "#malum:is_hidden_blade",
     "malum:voodoo",
+    "malum:voodoo_playerless",
+    "malum:void",
     "malum:scythe_maelstrom"
   ]
 }

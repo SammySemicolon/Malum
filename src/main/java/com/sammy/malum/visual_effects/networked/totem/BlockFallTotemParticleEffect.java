@@ -16,6 +16,6 @@ public class BlockFallTotemParticleEffect extends ParticleEffectType {
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) ->
-                TotemParticleEffects.triggerBlockFallEffect(level, colorData.getSpiritType(), positionData.getAsBlockPos());
+                TotemParticleEffects.triggerBlockFallEffect(level, colorData, positionData.getAsBlockPos());
     }
 }

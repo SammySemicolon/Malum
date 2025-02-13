@@ -51,7 +51,7 @@ public class MalumScytheItem extends LodestoneCombatItem implements IMalumEventR
         }
         var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_SLASH);
         if (stack.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
-            particle.setSpiritType(spiritAffiliatedItem);
+            particle.setColor(spiritAffiliatedItem);
         }
         if (isNarrow(attacker)) {
             SoundHelper.playSound(attacker, getScytheSound(false).value(), 1, 0.75f);

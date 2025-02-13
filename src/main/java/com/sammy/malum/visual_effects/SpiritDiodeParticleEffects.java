@@ -33,7 +33,7 @@ public class SpiritDiodeParticleEffects {
         for (int i = 0; i < 2; i++) {
             int lifeDelay = i * 3;
             float yVelocity = RandomHelper.randomBetween(random, 0.01f, 0.02f);
-            var square = waveformSquare(level, positionData.getAsVector(), ColorParticleData.create(colorData.getPrimaryColor(), colorData.getSecondaryColor()).build());
+            var square = waveformSquare(level, positionData.getAsVector(), colorData.getColor());
             square.getBuilder()
                     .setBehavior(LodestoneBehaviorComponent.DIRECTIONAL)
                     .setLifeDelay(lifeDelay)
@@ -47,7 +47,7 @@ public class SpiritDiodeParticleEffects {
 
         for (int i = 0; i < 4; i++) {
             int lifeDelay = i * 2;
-            var square = waveformSquare(level, positionData.getAsVector(), ColorParticleData.create(colorData.getPrimaryColor(), colorData.getSecondaryColor()).build());
+            var square = waveformSquare(level, positionData.getAsVector(), colorData.getColor());
             square.getBuilder()
                     .setSpinData(SpinParticleData.createRandomDirection(random, 2f, 0).setEasing(Easing.EXPO_OUT).build())
                     .modifyData(AbstractParticleBuilder::getScaleData, d -> d.multiplyValue(2f))

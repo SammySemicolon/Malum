@@ -1,7 +1,8 @@
 {
   "values": [
-    "#malum:soulwashing",
     "#malum:is_hidden_blade",
+    "#malum:is_sundering_anchor",
+    "#malum:soulwashing",
     "malum:voodoo",
     "malum:voodoo_playerless",
     "malum:void",

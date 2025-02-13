@@ -8,6 +8,7 @@ import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
+import net.minecraft.tags.*;
 import net.minecraft.util.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.level.*;
 import net.neoforged.neoforge.event.tick.*;
 import net.neoforged.neoforge.network.*;
@@ -65,10 +67,6 @@ public class CloudHopperGeas extends GeasEffect {
         }
     }
 
-    public static boolean canModifyExplosion(LivingEntity explosionOwner) {
-        return explosionOwner != null && getInstance(explosionOwner) != null;
-    }
-
     public static GeasEffect getInstance(LivingEntity entity) {
         var effect = GeasEffectHandler.getGeasEffect(entity, MalumGeasEffectTypeRegistry.PACT_OF_THE_CLOUDHOPPER.get());
         if (effect != null) {
@@ -92,9 +90,17 @@ public class CloudHopperGeas extends GeasEffect {
     }
 
     @Override
+    public void incomingDamageEvent(LivingDamageEvent.Pre event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
+        if (event.getSource().is(DamageTypeTags.IS_FALL)) {
+            event.setNewDamage(event.getNewDamage() * 1.5f);
+        }
+    }
+
+    @Override
     public void addTooltipComponents(LivingEntity entity, Consumer<Component> tooltipAcceptor, TooltipFlag tooltipFlag) {
         tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("rocket_jumping"));
         tooltipAcceptor.accept(ComponentHelper.negativeGeasEffect("wind_charge_exhaustion"));
+        tooltipAcceptor.accept(ComponentHelper.negativeGeasEffect("weak_legs"));
         super.addTooltipComponents(entity, tooltipAcceptor, tooltipFlag);
     }
 

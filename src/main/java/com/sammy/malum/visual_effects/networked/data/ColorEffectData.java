@@ -1,144 +1,78 @@
 package com.sammy.malum.visual_effects.networked.data;
 
-import com.sammy.malum.MalumMod;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import io.netty.buffer.*;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.*;
+import team.lodestar.lodestone.systems.easing.*;
+import team.lodestar.lodestone.systems.particle.data.color.*;
 
-import javax.annotation.Nullable;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.function.Function;
+import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ColorEffectData {
 
-    public final ArrayList<ColorRecord> colorRecordList = new ArrayList<>();
-    public int recordCycleCounter;
+    public static final Codec<ColorEffectData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            ColorParticleData.CODEC.listOf().fieldOf("colors").forGetter(data -> data.colors),
+            MalumSpiritType.CODEC.listOf().fieldOf("spirits").forGetter(data -> data.spirits)
+    ).apply(instance, ColorEffectData::new));
 
-    public static ColorEffectData fromRecipe(Collection<SpiritIngredient> malumSpiritTypes) {
-        return fromSpirits(malumSpiritTypes.stream().map(SpiritIngredient::getSpiritType).collect(Collectors.toList()), ColorRecord::new);
+    public static final StreamCodec<ByteBuf, ColorEffectData> STREAM_CODEC = ByteBufCodecs.fromCodec(CODEC);
+
+    private final List<ColorParticleData> colors;
+    private final List<MalumSpiritType> spirits;
+    public int colorCycleCounter;
+
+    public static ColorEffectData fromSpiritIngredients(Collection<SpiritIngredient> malumSpiritTypes) {
+        return new ColorEffectData(Collections.emptyList(), malumSpiritTypes.stream().map(SpiritIngredient::getSpiritType).collect(Collectors.toList()));
     }
 
-    public static ColorEffectData fromSpirits(Collection<MalumSpiritType> malumSpiritTypes) {
-        return fromSpirits(malumSpiritTypes, ColorRecord::new);
+    public static ColorEffectData fromColors(List<ColorParticleData> colors) {
+        return new ColorEffectData(colors, Collections.emptyList());
     }
 
-    public static ColorEffectData fromSpirits(Collection<MalumSpiritType> malumSpiritTypes, Function<MalumSpiritType, ColorRecord> spiritColorMapper) {
-        return new ColorEffectData(malumSpiritTypes.stream().map(spiritColorMapper).collect(Collectors.toList()));
+    public static ColorEffectData fromColor(ColorParticleData color) {
+        return fromColors(List.of(color));
     }
 
-    public ColorEffectData(ColorRecord colorRecord) {
-        colorRecordList.add(colorRecord);
+    public ColorEffectData(List<ColorParticleData> colors, List<MalumSpiritType> spirits) {
+        this.colors = colors.isEmpty() ? Collections.emptyList() : colors;
+        this.spirits = spirits.isEmpty() ? Collections.emptyList() : spirits;
     }
 
-    public ColorEffectData(Collection<ColorRecord> colorRecords) {
-        colorRecordList.addAll(colorRecords);
+    public ColorEffectData(ColorParticleData... colors) {
+        this(List.of(colors), Collections.emptyList());
     }
 
-    public ColorEffectData(Color primaryColor) {
-        this(new ColorRecord(primaryColor));
+    public ColorEffectData(MalumSpiritType... spirits) {
+        this(Collections.emptyList(), List.of(spirits));
     }
 
-    public ColorEffectData(MalumSpiritType spiritType) {
-        this(new ColorRecord(spiritType));
+    public boolean isSpiritBased() {
+        return colors.isEmpty();
     }
 
-    public ColorEffectData(Color primaryColor, Color secondaryColor) {
-        this(new ColorRecord(primaryColor, secondaryColor));
-    }
-
-    public ColorEffectData(Color primaryColor, Color secondaryColor, @Nullable MalumSpiritType spiritType) {
-        this(new ColorRecord(primaryColor, secondaryColor, spiritType));
-    }
-
-    public ColorEffectData(FriendlyByteBuf buf) {
-        boolean isEmpty = buf.readBoolean();
-        if (!isEmpty) {
-            int colorDataCount = buf.readInt();
-            for (int i = 0; i < colorDataCount; i++) {
-                colorRecordList.add(new ColorRecord(
-                        new Color(buf.readInt()),
-                        new Color(buf.readInt()),
-                        buf.readBoolean() ? MalumSpiritType.getSpiritType(buf.readUtf()) : null
-                ));
-            }
+    public ColorParticleData getColor() {
+        if (!spirits.isEmpty()) {
+            return getSpirit().createColorData().build();
         }
-    }
-
-    public void encode(FriendlyByteBuf buf) {
-        buf.writeBoolean(colorRecordList.isEmpty());
-        if (!colorRecordList.isEmpty()) {
-            buf.writeInt(colorRecordList.size());
-            for (ColorRecord colorRecord : this.colorRecordList) {
-                buf.writeInt(colorRecord.primaryColor.getRGB());
-                buf.writeInt(colorRecord.secondaryColor.getRGB());
-                boolean nonNullSpirit = colorRecord.spiritType != null;
-                buf.writeBoolean(nonNullSpirit);
-                if (nonNullSpirit) {
-                    buf.writeUtf(colorRecord.spiritType.getIdentifier());
-                }
-            }
+        if (colors.size() == 1) {
+            return colors.getFirst();
         }
+        return colors.get(colorCycleCounter++ % colors.size());
     }
 
-    public ColorRecord getDefaultColorRecord() {
-        if (colorRecordList.isEmpty()) {
-            return null;
+    public MalumSpiritType getSpirit() {
+        if (!colors.isEmpty()) {
+            throw new IllegalArgumentException("Networked Particle Effect expected Spirit Color Data. Raw Color Data was passed instead, which is not supported.");
         }
-        return colorRecordList.getFirst();
-    }
-
-    public ColorRecord getRandomColorRecord() {
-        if (colorRecordList.isEmpty()) {
-            return null;
+        if (spirits.size() == 1) {
+            return spirits.getFirst();
         }
-        return colorRecordList.get(MalumMod.RANDOM.nextInt(colorRecordList.size()));
-    }
-
-    public ColorRecord getCyclingColorRecord() {
-        if (colorRecordList.isEmpty()) {
-            return null;
-        }
-        return colorRecordList.get(recordCycleCounter++ % colorRecordList.size());
-    }
-
-    public Color getPrimaryColor() {
-        return getPrimaryColor(getDefaultColorRecord());
-    }
-    public Color getPrimaryColor(ColorRecord colorRecord) {
-        return colorRecord.primaryColor;
-    }
-
-    public Color getSecondaryColor() {
-        return getSecondaryColor(getDefaultColorRecord());
-    }
-    public Color getSecondaryColor(ColorRecord colorRecord) {
-        return colorRecord.secondaryColor;
-    }
-
-    @Nullable
-    public MalumSpiritType getSpiritType() {
-        return getSpiritType(getDefaultColorRecord());
-    }
-
-    @Nullable
-    public MalumSpiritType getSpiritType(ColorRecord colorRecord) {
-        return colorRecord.spiritType;
-    }
-
-    public record ColorRecord(Color primaryColor, Color secondaryColor, @Nullable MalumSpiritType spiritType) {
-        public ColorRecord(Color color) {
-            this(color, color);
-        }
-
-        public ColorRecord(MalumSpiritType type) {
-            this(type.getPrimaryColor(), type.getSecondaryColor(), type);
-        }
-
-        public ColorRecord(Color primaryColor, Color secondaryColor) {
-            this(primaryColor, secondaryColor, null);
-        }
+        return spirits.get(colorCycleCounter++ % spirits.size());
     }
 }

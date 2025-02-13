@@ -23,9 +23,6 @@ public class SlashAttackParticleEffect extends ParticleEffectType {
     }
 
     public static NBTEffectData createData(Vec3 direction, boolean mirror, float angle) {
-        return createData(direction, mirror, angle, null);
-    }
-    public static NBTEffectData createData(Vec3 direction, boolean mirror, float angle, MalumSpiritType spiritType) {
         CompoundTag tag = new CompoundTag();
         CompoundTag directionTag = new CompoundTag();
         directionTag.putDouble("x", direction.x);
@@ -33,9 +30,6 @@ public class SlashAttackParticleEffect extends ParticleEffectType {
         directionTag.putDouble("z", direction.z);
         tag.putFloat("angle", angle);
         tag.putBoolean("mirror", mirror);
-        if (spiritType != null) {
-            tag.putString("spiritType", spiritType.getIdentifier());
-        }
         tag.put("direction", directionTag);
         return new NBTEffectData(tag);
     }
@@ -54,10 +48,9 @@ public class SlashAttackParticleEffect extends ParticleEffectType {
             Vec3 direction = new Vec3(dirX, dirY, dirZ);
             float angle = nbtData.compoundTag.getFloat("angle");
             boolean mirror = nbtData.compoundTag.getBoolean("mirror");
-            var spirit = getSpiritType(nbtData);
             float spinOffset = angle + RandomHelper.randomBetween(random, -0.5f, 0.5f) + (mirror ? 3.14f : 0);
 
-            var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.SLASH, spirit);
+            var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.SLASH, colorData);
             slash.getBuilder()
                     .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
                     .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(random, 2f, 3f)).build())
@@ -65,9 +58,5 @@ public class SlashAttackParticleEffect extends ParticleEffectType {
                     .setBehavior(new PointyDirectionalBehaviorComponent(direction));
             slash.spawnParticles();
         };
-    }
-
-    public MalumSpiritType getSpiritType(NBTEffectData data) {
-        return SpiritTypeRegistry.SPIRITS.get(data.compoundTag.getString("spiritType"));
     }
 }

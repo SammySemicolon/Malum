@@ -6,6 +6,7 @@ import com.sammy.malum.registry.common.entity.*;
 import com.sammy.malum.registry.common.item.*;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.*;
+import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
@@ -45,6 +46,11 @@ public class HexBoltEntity extends AbstractBoltProjectileEntity {
     @Override
     public ParticleEffectType getImpactParticleEffect() {
         return ParticleEffectTypeRegistry.HEX_BOLT_IMPACT;
+    }
+
+    @Override
+    public ColorEffectData getImpactParticleColor() {
+        return new ColorEffectData(SpiritTypeRegistry.WICKED_SPIRIT);
     }
 
     @Override

@@ -260,7 +260,7 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
             }
         }
         progress = WarpingEngineItem.skipForward(level, worldPosition, attributes) ? recipe.time - 10 * speed : 0;
-        ParticleEffectTypeRegistry.SPIRIT_CRUCIBLE_CRAFTS.createPositionedEffect(level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits));
+        ParticleEffectTypeRegistry.SPIRIT_CRUCIBLE_CRAFTS.createPositionedEffect(level, new PositionEffectData(worldPosition), ColorEffectData.fromSpiritIngredients(recipe.spirits));
         level.playSound(null, worldPosition, SoundRegistry.CRUCIBLE_CRAFT.get(), SoundSource.BLOCKS, 1, 0.75f + random.nextFloat() * 0.5f);
         level.addFreshEntity(new ItemEntity(level, itemPos.x, itemPos.y, itemPos.z, outputStack));
         while (fortuneChance > 0) {

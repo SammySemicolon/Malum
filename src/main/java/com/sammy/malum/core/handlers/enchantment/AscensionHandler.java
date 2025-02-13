@@ -67,7 +67,7 @@ public class AscensionHandler {
                 magicDamage *= 0.5f;
             }
             if (scythe.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
-                particleEffect.setSpiritType(spiritAffiliatedItem);
+                particleEffect.setColor(spiritAffiliatedItem);
             }
             boolean dealtDamage = false;
             for (Entity target : serverLevel.getEntities(player, aabb, t -> ascensionCanHitEntity(player, t))) {

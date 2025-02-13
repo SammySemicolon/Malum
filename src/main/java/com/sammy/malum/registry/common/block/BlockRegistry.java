@@ -337,7 +337,7 @@ public class BlockRegistry {
     public static final DeferredHolder<Block, Block> STRIPPED_SOULWOOD = BLOCKS.register("stripped_soulwood", () -> new RotatedPillarBlock(MalumBlockProperties.SOULWOOD().addTags(LOGS, STRIPPED_WOODS, SOULWOOD_LOGS)));
     public static final DeferredHolder<Block, Block> SOULWOOD = BLOCKS.register("soulwood", () -> new SoulwoodBlock(MalumBlockProperties.SOULWOOD().addTags(LOGS, SOULWOOD_LOGS), STRIPPED_SOULWOOD));
 
-    public static final DeferredHolder<Block, Block> REVEALED_SOULWOOD_LOG = BLOCKS.register("revealed_soulwood_log", () -> new SapFilledSoulwoodLogBlock(MalumBlockProperties.SOULWOOD().addTags(LOGS, SOULWOOD_LOGS), STRIPPED_SOULWOOD_LOG, ItemRegistry.RUNIC_SAP, SpiritTypeRegistry.INFERNAL_SPIRIT.getPrimaryColor()));
+    public static final DeferredHolder<Block, Block> REVEALED_SOULWOOD_LOG = BLOCKS.register("revealed_soulwood_log", () -> new SapFilledSoulwoodLogBlock(MalumBlockProperties.SOULWOOD().addTags(LOGS, SOULWOOD_LOGS), STRIPPED_SOULWOOD_LOG, ItemRegistry.CURSED_SAP, SpiritTypeRegistry.ELDRITCH_SPIRIT.getPrimaryColor(), new Color(255, 61, 106)));
     public static final DeferredHolder<Block, Block> EXPOSED_SOULWOOD_LOG = BLOCKS.register("exposed_soulwood_log", () -> new LodestoneLogBlock(MalumBlockProperties.SOULWOOD().addTags(LOGS, STRIPPED_LOGS, SOULWOOD_LOGS), REVEALED_SOULWOOD_LOG));
 
     public static final DeferredHolder<Block, Block> SOULWOOD_BOARDS = BLOCKS.register("soulwood_boards", () -> new Block(MalumBlockProperties.SOULWOOD_PLANKS()));
@@ -482,8 +482,7 @@ public class BlockRegistry {
 
         @SubscribeEvent
         public static void setBlockColors(RegisterColorHandlersEvent.Block event) {
-            BlockColors blockColors = event.getBlockColors();
-            blockColors.register((s, l, p, c) -> {
+            event.register((s, l, p, c) -> {
                 BlockEntity blockEntity = l.getBlockEntity(p);
                 if (blockEntity instanceof EtherBlockEntity etherBlockEntity) {
                     if (etherBlockEntity.firstColor != null) {
@@ -494,7 +493,7 @@ public class BlockRegistry {
             }, ETHER.get(), IRIDESCENT_ETHER.get());
 
             var colorProperty = MalumLeavesBlock.COLOR;
-            blockColors.register((s, l, p, c) -> {
+            event.register((s, l, p, c) -> {
                 float colorMax = colorProperty.getPossibleValues().size();
                 float color = s.getValue(colorProperty);
                 float pct = (colorMax - (color / colorMax));
@@ -506,7 +505,7 @@ public class BlockRegistry {
                 return red << 16 | green << 8 | blue;
             }, RUNEWOOD_LEAVES.get(), HANGING_RUNEWOOD_LEAVES.get(), AZURE_RUNEWOOD_LEAVES.get(), HANGING_AZURE_RUNEWOOD_LEAVES.get());
 
-            blockColors.register((s, l, p, c) -> {
+            event.register((s, l, p, c) -> {
                 boolean isPersistent = s.getOptionalValue(MalumLeavesBlock.PERSISTENT).orElse(false);
                 int distanceMax = MalumLeavesBlock.DISTANCE.getPossibleValues().size();
                 BlockState stateForDistance = s;
@@ -531,7 +530,7 @@ public class BlockRegistry {
                 return red << 16 | green << 8 | blue;
             }, SOULWOOD_LEAVES.get(), HANGING_SOULWOOD_LEAVES.get());
 
-            blockColors.register((s, l, p, c) -> {
+            event.register((s, l, p, c) -> {
                 var spiritType = MalumSpiritType.getSpiritType(s.getValue(ManaMoteBlock.SPIRIT_TYPE));
                 var color  = spiritType.getPrimaryColor();
                 int red = color.getRed();

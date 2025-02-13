@@ -29,7 +29,6 @@ public class EntropicBoltImpactParticleEffect extends ParticleEffectType {
             if (!nbtData.compoundTag.contains("direction")) {
                 return;
             }
-            ColorParticleData colorParticleData = UnwindingChaosStaffItem.AURIC_COLOR_DATA;
             final CompoundTag directionData = nbtData.compoundTag.getCompound("direction");
             double dirX = directionData.getDouble("x");
             double dirY = directionData.getDouble("y");
@@ -46,6 +45,7 @@ public class EntropicBoltImpactParticleEffect extends ParticleEffectType {
             Vec3 pos = new Vec3(posX, posY, posZ);
 
             for (int i = 0; i < 32; i++) {
+                var color = colorData.getColor();
                 float spread = RandomHelper.randomBetween(random, 0.05f, 0.075f);
                 float speed = RandomHelper.randomBetween(random, 0.4f, 0.6f);
                 float distance = RandomHelper.randomBetween(random, 4f, 12f);
@@ -59,7 +59,7 @@ public class EntropicBoltImpactParticleEffect extends ParticleEffectType {
                 direction = direction.reverse();
                 float lifetimeMultiplier = 0.7f;
                 if (random.nextFloat() < 0.8f) {
-                    var lightSpecs = spiritLightSpecs(level, spawnPosition, colorParticleData);
+                    var lightSpecs = spiritLightSpecs(level, spawnPosition, color);
                     lightSpecs.getBuilder()
                             .multiplyLifetime(lifetimeMultiplier)
                             .enableForcedSpawn()
@@ -71,7 +71,7 @@ public class EntropicBoltImpactParticleEffect extends ParticleEffectType {
                     lightSpecs.spawnParticles();
                 }
                 if (random.nextFloat() < 0.8f) {
-                    var sparks = SparkParticleEffects.spiritMotionSparks(level, spawnPosition, colorParticleData);
+                    var sparks = SparkParticleEffects.spiritMotionSparks(level, spawnPosition, color);
                     sparks.getBuilder()
                             .multiplyLifetime(lifetimeMultiplier)
                             .enableForcedSpawn()

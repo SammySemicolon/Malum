@@ -37,7 +37,6 @@ public class AscensionRadialSlashParticleEffect extends SlashAttackParticleEffec
             Vec3 left = new Vec3(-Math.cos(yaw), 0, Math.sin(yaw));
             float angle = nbtData.compoundTag.getFloat("angle");
             boolean mirror = nbtData.compoundTag.getBoolean("mirror");
-            var spirit = getSpiritType(nbtData);
 
             for(int i = 0; i < 3; i++) {
                 final Vec3 pos = positionData.getAsVector();
@@ -49,7 +48,7 @@ public class AscensionRadialSlashParticleEffect extends SlashAttackParticleEffec
                             .normalize();
                     var slashPosition = pos.add(slashDirection.scale(0.14f));
 
-                    var slash = WeaponParticleEffects.spawnSlashParticle(level, slashPosition, ParticleRegistry.ROUNDABOUT_SLASH, spirit);
+                    var slash = WeaponParticleEffects.spawnSlashParticle(level, slashPosition, ParticleRegistry.ROUNDABOUT_SLASH, colorData);
                     slash.getBuilder()
                             .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
                             .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(random, 2.5f, 5f)).build())
@@ -59,7 +58,7 @@ public class AscensionRadialSlashParticleEffect extends SlashAttackParticleEffec
                             .setBehavior(new PointyDirectionalBehaviorComponent(slashDirection));
                     slash.spawnParticles();
                 }
-                var slash = WeaponParticleEffects.spawnSlashParticle(level, pos, ParticleRegistry.ROUNDABOUT_SLASH, spirit);
+                var slash = WeaponParticleEffects.spawnSlashParticle(level, pos, ParticleRegistry.ROUNDABOUT_SLASH, colorData);
                 slash.getBuilder()
                         .setSpinData(SpinParticleData.create(0).setSpinOffset(i * 1.57f).build())
                         .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(random, 4.5f, 5f)).build())

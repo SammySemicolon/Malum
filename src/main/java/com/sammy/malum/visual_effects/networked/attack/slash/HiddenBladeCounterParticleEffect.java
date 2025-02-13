@@ -32,7 +32,6 @@ public class HiddenBladeCounterParticleEffect extends SlashAttackParticleEffect 
             Vec3 direction = new Vec3(dirX, dirY, dirZ);
             float angle = nbtData.compoundTag.getFloat("angle");
             boolean mirror = nbtData.compoundTag.getBoolean("mirror");
-            var spirit = getSpiritType(nbtData);
 
             final float maxBackwardsOffset = 1.5f;
             final float maxForwardsOffset = 4.5f;
@@ -46,7 +45,7 @@ public class HiddenBladeCounterParticleEffect extends SlashAttackParticleEffect 
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset),
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset),
                             RandomHelper.randomBetween(random, -maxBackwardsOffset, maxForwardsOffset)));
-                    var slash = WeaponParticleEffects.spawnSlashParticle(level, position, random.nextBoolean()?ParticleRegistry.THIN_ROUNDABOUT_SLASH:ParticleRegistry.ROUNDABOUT_SLASH, spirit);
+                    var slash = WeaponParticleEffects.spawnSlashParticle(level, position, random.nextBoolean()?ParticleRegistry.THIN_ROUNDABOUT_SLASH:ParticleRegistry.ROUNDABOUT_SLASH, colorData);
                     slash.getBuilder()
                             .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
                             .setScaleData(GenericParticleData.create(scale).build())

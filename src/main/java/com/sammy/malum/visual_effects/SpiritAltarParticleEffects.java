@@ -105,7 +105,7 @@ public class SpiritAltarParticleEffects {
             SpiritLightSpecs.coolLookingShinyThing(level, holderTargetPos, activeSpiritType);
         }
         for (int i = 0; i < 16; i++) {
-            MalumSpiritType cyclingSpiritType = colorData.getCyclingColorRecord().spiritType();
+            MalumSpiritType cyclingSpiritType = colorData.getSpirit();
             Vec3 velocity = altarTargetPos.subtract(holderTargetPos).normalize().scale(0.025f);
             int finalI = i;
             Vec3 offsetPosition = VecHelper.rotatingRadialOffset(holderTargetPos, 0.5f, i, 16, gameTime, 160);
@@ -150,7 +150,7 @@ public class SpiritAltarParticleEffects {
             SpiritLightSpecs.coolLookingShinyThing(level, targetPos, activeSpiritType);
         }
         for (int i = 0; i < 8; i++) {
-            MalumSpiritType cyclingSpiritType = colorData.getCyclingColorRecord().spiritType();
+            MalumSpiritType cyclingSpiritType = colorData.getSpirit();
             float xOffset = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, 0.1f, 0.5f)*(random.nextBoolean()?-1:1);
             float yOffset = i * 0.08f;
             float zOffset = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, 0.1f, 0.5f)*(random.nextBoolean()?-1:1);
@@ -176,7 +176,7 @@ public class SpiritAltarParticleEffects {
 
         for (int i = 0; i < 12; i++) {
             int lifeDelay = i / 4;
-            MalumSpiritType cyclingSpiritType = colorData.getCyclingColorRecord().spiritType();
+            MalumSpiritType cyclingSpiritType = colorData.getSpirit();
             float xVelocity = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, -0.075f, 0.075f);
             float yVelocity = RandomHelper.randomBetween(random, 0.2f, 0.5f);
             float zVelocity = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, -0.075f, 0.075f);

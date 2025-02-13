@@ -37,9 +37,6 @@ public class SapCollectionParticleEffect extends ParticleEffectType {
                 return;
             }
             Direction direction = Direction.byName(nbtData.compoundTag.getString("direction"));
-            ColorEffectData.ColorRecord colorRecord = colorData.getDefaultColorRecord();
-            Color primaryColor = colorData.getPrimaryColor(colorRecord);
-            Color secondaryColor = colorData.getSecondaryColor(colorRecord);
             BlockPos blockPos = positionData.getAsBlockPos();
             Vec3 pos = blockPos.getCenter().relative(direction, 0.5f);
             Vec3 playerPosition = Minecraft.getInstance().player.position();
@@ -56,7 +53,7 @@ public class SapCollectionParticleEffect extends ParticleEffectType {
                 Vec3 particleMotion = playerPosition.subtract(particlePosition).normalize();
                 Vec3 targetPosition = pos.add(particleMotion.scale(0.75f));
                 Vec3 actualMotion = targetPosition.subtract(particlePosition).normalize().scale(0.01f);
-                var lightSpecs = spiritLightSpecs(level, particlePosition, ColorParticleData.create(primaryColor, secondaryColor).build());
+                var lightSpecs = spiritLightSpecs(level, particlePosition, colorData.getColor());
                 lightSpecs.getBuilder().act(b -> b
                         .addTickActor(acceleration)
                         .setMotion(actualMotion)

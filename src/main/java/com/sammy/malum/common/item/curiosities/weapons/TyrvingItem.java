@@ -56,7 +56,7 @@ public class TyrvingItem extends LodestoneSwordItem implements IMalumEventRespon
 
         SoundHelper.playSound(attacker, SoundRegistry.TYRVING_SLASH.get(), 1, RandomHelper.randomBetween(attacker.getRandom(), 1f, 1.5f));
         ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.TYRVING_SLASH)
-                .setSpiritType(SpiritTypeRegistry.WICKED_SPIRIT)
+                .setColor(SpiritTypeRegistry.WICKED_SPIRIT)
                 .setVerticalSlashAngle()
                 .spawnForwardSlashingParticle(attacker);
     }

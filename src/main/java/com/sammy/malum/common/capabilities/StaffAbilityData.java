@@ -41,7 +41,7 @@ public class StaffAbilityData {
     }
 
     public boolean tryEmpowerChaosVolley() {
-        boolean success = unwindingChaosBurnStacks > 8;
+        boolean success = unwindingChaosBurnStacks >= 8;
         if (success) {
             unwindingChaosBurnStacks -= 8;
         }

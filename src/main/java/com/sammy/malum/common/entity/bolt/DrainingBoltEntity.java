@@ -1,12 +1,12 @@
 package com.sammy.malum.common.entity.bolt;
 
-import com.sammy.malum.common.item.curiosities.weapons.staff.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.entity.*;
 import com.sammy.malum.registry.common.item.*;
 import com.sammy.malum.visual_effects.*;
 import com.sammy.malum.visual_effects.networked.*;
+import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.sounds.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
@@ -26,6 +26,8 @@ import team.lodestar.lodestone.systems.particle.world.*;
 import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 
 import java.util.function.*;
+
+import static com.sammy.malum.common.item.curiosities.weapons.staff.ErosionScepterItem.SCEPTER_COLOR_DATA;
 
 public class DrainingBoltEntity extends AbstractBoltProjectileEntity {
 
@@ -75,6 +77,11 @@ public class DrainingBoltEntity extends AbstractBoltProjectileEntity {
     }
 
     @Override
+    public ColorEffectData getImpactParticleColor() {
+        return new ColorEffectData(SCEPTER_COLOR_DATA);
+    }
+
+    @Override
     protected Item getDefaultItem() {
         return ItemRegistry.EROSION_SCEPTER.get();
     }
@@ -86,7 +93,7 @@ public class DrainingBoltEntity extends AbstractBoltProjectileEntity {
         Vec3 position = position();
         float scalar = getVisualEffectScalar();
         Vec3 norm = getDeltaMovement().normalize().scale(0.05f);
-        var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, position, ErosionScepterItem.MALIGNANT_COLOR_DATA);
+        var lightSpecs = SpiritLightSpecs.spiritLightSpecs(level, position, SCEPTER_COLOR_DATA);
         lightSpecs.getBuilder()
                 .setRenderType(LodestoneWorldParticleRenderType.LUMITRANSPARENT)
                 .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
@@ -104,7 +111,7 @@ public class DrainingBoltEntity extends AbstractBoltProjectileEntity {
                 .setTransparencyData(GenericParticleData.create(0.4f * scalar, 0.2f * scalar, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
                 .setScaleData(GenericParticleData.create(0.3f * scalar, 0.1f * scalar).setEasing(Easing.SINE_IN_OUT).build())
                 .setSpritePicker(SimpleParticleOptions.ParticleSpritePicker.WITH_AGE)
-                .setColorData(ErosionScepterItem.MALIGNANT_COLOR_DATA)
+                .setColorData(SCEPTER_COLOR_DATA)
                 .setRenderTarget(RenderHandler.LATE_DELAYED_RENDER)
                 .setLifetime(Math.min(6 + age * 3, 24))
                 .addTickActor(behavior)

@@ -34,7 +34,7 @@ public class ParticleEffectPacket extends OneSidedPayloadData {
     public ParticleEffectPacket(FriendlyByteBuf buf) {
         this.id = buf.readUtf();
         this.positionData = new PositionEffectData(buf);
-        this.colorData = buf.readBoolean() ? new ColorEffectData(buf) : null;
+        this.colorData = buf.readBoolean() ? ColorEffectData.STREAM_CODEC.decode(buf) : null;
         this.nbtData = buf.readBoolean() ? new NBTEffectData(buf.readNbt()) : null;
     }
 
@@ -45,7 +45,7 @@ public class ParticleEffectPacket extends OneSidedPayloadData {
         boolean nonNullColorData = colorData != null;
         buf.writeBoolean(nonNullColorData);
         if (nonNullColorData) {
-            colorData.encode(buf);
+            ColorEffectData.STREAM_CODEC.encode(buf, colorData);
         }
         boolean nonNullCompoundTag = nbtData != null;
         buf.writeBoolean(nonNullCompoundTag);

@@ -268,7 +268,10 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
         if (!(getLevel() instanceof ServerLevel serverLevel)) {
             return;
         }
-        ParticleEffectTypeRegistry.REPAIR_PYLON_PREPARES.createPositionedEffect(serverLevel, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits), PylonPrepareRepairParticleEffect.createData(provider.getAccessPointBlockPos()));
+        ParticleEffectTypeRegistry.REPAIR_PYLON_PREPARES.createPositionedEffect(serverLevel,
+                new PositionEffectData(worldPosition),
+                ColorEffectData.fromSpiritIngredients(recipe.spirits),
+                PylonPrepareRepairParticleEffect.createData(provider.getAccessPointBlockPos()));
         level.playSound(null, worldPosition, SoundRegistry.REPAIR_PYLON_REPAIR_START.get(), SoundSource.BLOCKS, 1.0f, 0.8f);
         setState(RepairPylonState.REPAIRING);
     }
@@ -290,7 +293,7 @@ public class RepairPylonCoreBlockEntity extends MultiBlockCoreEntity implements 
         var result = recipe.getResultItem(repairTarget);
         suppliedInventory.setStackInSlot(0, result);
         level.playSound(null, worldPosition, SoundRegistry.REPAIR_PYLON_REPAIR_FINISH.get(), SoundSource.BLOCKS, 1.0f, 0.8f);
-        ParticleEffectTypeRegistry.REPAIR_PYLON_REPAIRS.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits), PylonPrepareRepairParticleEffect.createData(provider.getAccessPointBlockPos()));
+        ParticleEffectTypeRegistry.REPAIR_PYLON_REPAIRS.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromSpiritIngredients(recipe.spirits), PylonPrepareRepairParticleEffect.createData(provider.getAccessPointBlockPos()));
         setState(RepairPylonState.COOLDOWN);
     }
 

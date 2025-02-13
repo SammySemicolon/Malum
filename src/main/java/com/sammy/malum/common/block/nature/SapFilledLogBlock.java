@@ -20,20 +20,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import team.lodestar.lodestone.helpers.block.*;
+import team.lodestar.lodestone.systems.particle.data.color.*;
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class SapFilledLogBlock extends RotatedPillarBlock {
     public final Supplier<Block> drained;
     public final Supplier<Item> sap;
-    public final Color sapColor;
+    public final List<ColorParticleData> sapColor;
 
-    public SapFilledLogBlock(Properties properties, Supplier<Block> drained, Supplier<Item> sap, Color sapColor) {
+    public SapFilledLogBlock(Properties properties, Supplier<Block> drained, Supplier<Item> sap, Color... sapColor) {
         super(properties);
         this.drained = drained;
         this.sap = sap;
-        this.sapColor = sapColor;
+        this.sapColor = Arrays.stream(sapColor).map(c -> ColorParticleData.create(c).build()).toList();
     }
 
     @Override
@@ -43,7 +46,7 @@ public class SapFilledLogBlock extends RotatedPillarBlock {
                 itemstack.shrink(1);
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
                 ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(sap.get()));
-                ParticleEffectTypeRegistry.SAP_COLLECTED.createPositionedEffect((ServerLevel) level, new PositionEffectData(pos), new ColorEffectData(sapColor), SapCollectionParticleEffect.createData(hit.getDirection()));
+                ParticleEffectTypeRegistry.SAP_COLLECTED.createPositionedEffect((ServerLevel) level, new PositionEffectData(pos), ColorEffectData.fromColors(sapColor), SapCollectionParticleEffect.createData(hit.getDirection()));
                 if (level.random.nextBoolean()) {
                     BlockStateHelper.setBlockStateWithExistingProperties(level, pos, drained.get().defaultBlockState(), 3);
                 }

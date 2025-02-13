@@ -3,7 +3,6 @@ package com.sammy.malum.common.block.curiosities.spirit_altar;
 import com.sammy.malum.common.block.MalumBlockEntityInventory;
 import com.sammy.malum.common.block.MalumSpiritBlockEntityInventory;
 import com.sammy.malum.common.block.storage.IMalumSpecialItemAccessPoint;
-import com.sammy.malum.common.item.spirit.SpiritShardItem;
 import com.sammy.malum.common.recipe.spirit.infusion.SpiritInfusionRecipe;
 import com.sammy.malum.core.systems.recipe.SpiritBasedRecipeInput;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
@@ -11,7 +10,6 @@ import com.sammy.malum.registry.common.ParticleEffectTypeRegistry;
 import com.sammy.malum.registry.common.SoundRegistry;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.block.BlockEntityRegistry;
-import com.sammy.malum.registry.common.item.DataComponentRegistry;
 import com.sammy.malum.registry.common.recipe.RecipeTypeRegistry;
 import com.sammy.malum.visual_effects.SpiritAltarParticleEffects;
 import com.sammy.malum.visual_effects.networked.altar.SpiritAltarEatItemParticleEffect;
@@ -34,7 +32,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
-import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
@@ -279,7 +276,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IIte
 
                 if (nextIngredient.ingredient().test(providedStack)) {
                     level.playSound(null, provider.getAccessPointBlockPos(), SoundRegistry.ALTAR_CONSUME.get(), SoundSource.BLOCKS, 1, 1.1f + level.random.nextFloat() * 0.5f);
-                    ParticleEffectTypeRegistry.SPIRIT_ALTAR_EATS_ITEM.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits), SpiritAltarEatItemParticleEffect.createData(provider.getAccessPointBlockPos(), providedStack));
+                    ParticleEffectTypeRegistry.SPIRIT_ALTAR_EATS_ITEM.createPositionedEffect((ServerLevel) level, new PositionEffectData(worldPosition), ColorEffectData.fromSpiritIngredients(recipe.spirits), SpiritAltarEatItemParticleEffect.createData(provider.getAccessPointBlockPos(), providedStack));
                     extrasInventory.insertItem(inventoryForAltar.extractItem(0, nextIngredient.count(), false));
                     BlockStateHelper.updateAndNotifyState(level, provider.getAccessPointBlockPos());
                     break;
@@ -299,7 +296,7 @@ public class SpiritAltarBlockEntity extends LodestoneBlockEntity implements IIte
         ItemStack outputStack = recipe.output.copy();
         Vec3 itemPos = getItemPos();
         ParticleEffectTypeRegistry.SPIRIT_ALTAR_CRAFTS
-                .createPositionedEffect(level, new PositionEffectData(worldPosition), ColorEffectData.fromRecipe(recipe.spirits));
+                .createPositionedEffect(level, new PositionEffectData(worldPosition), ColorEffectData.fromSpiritIngredients(recipe.spirits));
         level.playSound(null, worldPosition, SoundRegistry.ALTAR_CRAFT.get(), SoundSource.BLOCKS, 1, 0.9f + level.random.nextFloat() * 0.2f);
         if (recipe.carryOverData) {
             outputStack.applyComponents(stack.getComponents());

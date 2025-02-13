@@ -5,6 +5,7 @@ import com.sammy.malum.common.worldevent.*;
 import com.sammy.malum.core.helpers.*;
 import com.sammy.malum.core.systems.geas.*;
 import com.sammy.malum.registry.common.*;
+import com.sammy.malum.visual_effects.networked.data.*;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
@@ -113,11 +114,12 @@ public class InvertedHeartOath extends GeasEffect {
                 continue;
             }
             if (target.isAlive()) {
+                var color = new ColorEffectData(SpiritTypeRegistry.WICKED_SPIRIT, SpiritTypeRegistry.ELDRITCH_SPIRIT);
                 WorldEventHandler.addWorldEvent(target.level(),
                         new DelayedDamageWorldEvent(target)
                                 .setMagicDamageType(damageType)
-                                .setImpactParticleEffect(ParticleEffectTypeRegistry.SOULWASHING_IMPACT, target.getRandom().nextBoolean() ? SpiritTypeRegistry.WICKED_SPIRIT : SpiritTypeRegistry.ELDRITCH_SPIRIT)
-                                .setSound(SoundRegistry.SOULWASHING_IMPACT, 1f, 2f, 0.5f)
+                                .setImpactParticleEffect(ParticleEffectTypeRegistry.INVERTED_HEART_IMPACT, color)
+                                .setSound(SoundRegistry.INVERTED_HEART_IMPACT, 1f, 2f, 0.5f)
                                 .setAttacker(wrathBearer)
                                 .setDamageData(0, damage, 8 + i * 2));
             }

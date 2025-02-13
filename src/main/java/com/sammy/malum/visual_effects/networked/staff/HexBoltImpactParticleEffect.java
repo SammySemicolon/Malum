@@ -10,6 +10,7 @@ import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.*;
 import team.lodestar.lodestone.helpers.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
+import team.lodestar.lodestone.systems.particle.data.color.*;
 import team.lodestar.lodestone.systems.particle.world.behaviors.components.*;
 
 import java.util.function.*;
@@ -54,8 +55,8 @@ public class HexBoltImpactParticleEffect extends ParticleEffectType {
             double posZ = positionData.posZ;
             Vec3 pos = new Vec3(posX, posY, posZ);
 
-            MalumSpiritType spiritType = colorData.getSpiritType();
             for (int i = 0; i < 32; i++) {
+                var color = colorData.getColor();
                 float spread = RandomHelper.randomBetween(random, 0.1f, 0.5f);
                 float speed = RandomHelper.randomBetween(random, 0.3f, 0.4f);
                 float distance = RandomHelper.randomBetween(random, 3f, 6f);
@@ -69,7 +70,7 @@ public class HexBoltImpactParticleEffect extends ParticleEffectType {
                 direction = direction.reverse();
                 float lifetimeMultiplier = 0.7f;
                 if (random.nextFloat() < 0.8f) {
-                    var lightSpecs = spiritLightSpecs(level, spawnPosition, spiritType);
+                    var lightSpecs = spiritLightSpecs(level, spawnPosition, color);
                     lightSpecs.getBuilder()
                             .multiplyLifetime(lifetimeMultiplier)
                             .enableForcedSpawn()
@@ -81,7 +82,7 @@ public class HexBoltImpactParticleEffect extends ParticleEffectType {
                     lightSpecs.spawnParticles();
                 }
                 if (random.nextFloat() < 0.8f) {
-                    var sparks = SparkParticleEffects.spiritMotionSparks(level, spawnPosition, spiritType);
+                    var sparks = SparkParticleEffects.spiritMotionSparks(level, spawnPosition, color);
                     sparks.getBuilder()
                             .multiplyLifetime(lifetimeMultiplier)
                             .enableForcedSpawn()

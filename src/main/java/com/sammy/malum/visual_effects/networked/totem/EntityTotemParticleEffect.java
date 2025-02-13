@@ -17,6 +17,6 @@ public class EntityTotemParticleEffect extends ParticleEffectType {
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) ->
-                TotemParticleEffects.triggerEntityEffect(level, colorData.getSpiritType(), positionData.getAsVector());
+                TotemParticleEffects.triggerEntityEffect(level, colorData, positionData.getAsVector());
     }
 }

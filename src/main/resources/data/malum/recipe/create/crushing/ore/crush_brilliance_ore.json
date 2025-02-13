@@ -8,7 +8,7 @@
   "type": "create:crushing",
   "ingredients": [
     {
-      "item": "malum:cluster_of_brilliance"
+      "item": "malum:raw_brilliance"
     }
   ],
   "results": [

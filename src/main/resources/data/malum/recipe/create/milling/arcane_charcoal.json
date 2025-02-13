@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "malum:arcane_charcoal"
+    }
+  ],
+  "processingTime": 100,
+  "results": [
+    {
+      "item": "minecraft:gray_dye",
+      "count": 2
+    },
+    {
+      "chance": 0.1,
+      "count": 2,
+      "item": "minecraft:purple_dye"
+    }
+  ]
+}

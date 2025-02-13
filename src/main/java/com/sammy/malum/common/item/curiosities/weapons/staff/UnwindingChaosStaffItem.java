@@ -78,12 +78,12 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
         }
         boolean canTriggerMagic = source.is(LodestoneDamageTypeTags.CAN_TRIGGER_MAGIC);
         if (canTriggerMagic || source.is(DamageTypeRegistry.SOULWASHING_PROPAGATION)) {
-            target.igniteForTicks(100);
+            target.igniteForSeconds(8);
         }
         if (canTriggerMagic) {
             for (int i = 0; i < 3; i++) {
                 var particle = ParticleHelper.createSlamEffect(ParticleEffectTypeRegistry.STAFF_SLAM)
-                        .setSpiritType(getDefiningSpiritType())
+                        .setColor(getDefiningSpiritType())
                         .setPositionOffset(RandomHelper.randomBetween(random, 0.3f, 0.8f) * (random.nextBoolean() ? 1 : -1))
                         .setDirectionOffset(RandomHelper.randomBetween(random, -0.4f, 0.4f), random.nextFloat() * 6.28f)
                         .setRandomSlashAngle(random);
@@ -107,7 +107,7 @@ public class UnwindingChaosStaffItem extends AbstractStaffItem implements ISpiri
                 data.unwindingChaosBurnStacks--;
                 return 17;
             }
-            return 9;
+            return 7;
         }
         return 0;
     }

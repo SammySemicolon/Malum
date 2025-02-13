@@ -21,6 +21,7 @@ import team.lodestar.lodestone.systems.particle.render_types.*;
 import team.lodestar.lodestone.systems.particle.world.*;
 
 import java.awt.*;
+import java.util.List;
 import java.util.function.*;
 
 public class EthericNitrateEntity extends AbstractNitrateEntity {
@@ -55,7 +56,7 @@ public class EthericNitrateEntity extends AbstractNitrateEntity {
 
     @Override
     public ColorEffectData getImpactParticleEffectColor() {
-        return new ColorEffectData(AURIC_YELLOW, AURIC_PURPLE);
+        return new ColorEffectData(AURIC_COLOR_DATA);
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -76,10 +76,8 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
                 return;
             }
             var scytheWeapon = SoulDataHandler.getScytheWeapon(source, attacker);
-            final boolean isRanged = source.getDirectEntity() == null;
-            var damageDealer = isRanged ? source.getDirectEntity() : attacker;
-            var direction = isRanged ? damageDealer.getDeltaMovement().normalize() : attacker.getLookAngle();
-            var damageCenter = damageDealer.position().add(direction);
+            var direction = attacker.getLookAngle();
+            var damageCenter = attacker.position().add(direction);
             var attributes = attacker.getAttributes();
             float multiplier = 1+(effect.amplifier+1)*0.2f;
             int duration = 25;
@@ -101,7 +99,7 @@ public class CurioHiddenBladeNecklace extends MalumCurioItem implements IMalumEv
             }
             var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.HIDDEN_BLADE_COUNTER_FLURRY);
             if (scytheWeapon.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
-                particle.setSpiritType(spiritAffiliatedItem);
+                particle.setColor(spiritAffiliatedItem);
             }
             particle.setRandomSlashAngle(random)
                     .mirrorRandomly(random)

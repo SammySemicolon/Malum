@@ -24,12 +24,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.network.PacketDistributor;
 import team.lodestar.lodestone.helpers.RandomHelper;
 import team.lodestar.lodestone.systems.blockentity.LodestoneBlockEntity;
+import team.lodestar.lodestone.systems.particle.data.color.*;
 
 import java.awt.*;
 
 public class SpiritDiodeBlockEntity extends LodestoneBlockEntity {
 
-    protected static final Color REDSTONE_COLOR = new Color(170, 15, 1);
+    protected static final ColorParticleData REDSTONE_COLOR = ColorParticleData.create(new Color(170, 15, 1), new Color(129, 12, 0)).build();
     public int delay;
     public int outputSignal;
 

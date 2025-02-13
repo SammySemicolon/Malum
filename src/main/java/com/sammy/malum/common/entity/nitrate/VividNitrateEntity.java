@@ -48,7 +48,7 @@ public class VividNitrateEntity extends AbstractNitrateEntity {
         float time = ((f.level.getGameTime() + f.partialTicks) % f.duration) / f.duration;
         float lerp = time + f.offset;
         if (lerp > 1) {
-            lerp -= Math.floor(lerp);
+            lerp -= Mth.floor(lerp);
         }
         return ColorHelper.multicolorLerp(Easing.SINE_IN, lerp, VividNitrateEntity.COLORS);
     };
@@ -78,7 +78,7 @@ public class VividNitrateEntity extends AbstractNitrateEntity {
 
     @Override
     public ColorEffectData getImpactParticleEffectColor() {
-        return new ColorEffectData(COLOR_FUNCTION.apply(new ColorFunctionData(level(), 0.125f)));
+        return ColorEffectData.fromColor(ColorParticleData.create(COLOR_FUNCTION.apply(new ColorFunctionData(level(), 0.125f))).build());
     }
 
     @Override

@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "malum:blazing_quartz"
+    }
+  ],
+  "processingTime": 100,
+  "results": [
+    {
+      "item": "minecraft:orange_dye"
+    },
+    {
+      "chance": 0.1,
+      "count": 2,
+      "item": "minecraft:yellow_dye"
+    }
+  ]
+}

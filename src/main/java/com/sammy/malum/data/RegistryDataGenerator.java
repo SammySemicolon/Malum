@@ -17,6 +17,7 @@ public class RegistryDataGenerator extends DatapackBuiltinEntriesProvider {
 
     private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.ENCHANTMENT, MalumEnchantmentDatagen::bootstrap)
+            .add(Registries.DAMAGE_TYPE, MalumDamageTypeDatagen::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, ConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, PlacedFeatures::bootstrap)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, BiomeModifications::bootstrap);

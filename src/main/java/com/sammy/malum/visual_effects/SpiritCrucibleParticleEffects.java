@@ -8,7 +8,6 @@ import com.sammy.malum.core.systems.artifice.IArtificeAcceptor;
 import com.sammy.malum.common.block.curiosities.spirit_catalyzer.*;
 import com.sammy.malum.common.item.augment.*;
 import com.sammy.malum.common.item.spirit.*;
-import com.sammy.malum.common.recipe.spirit.focusing.*;
 import com.sammy.malum.core.systems.spirit.*;
 import com.sammy.malum.registry.client.*;
 import com.sammy.malum.visual_effects.networked.data.*;
@@ -18,7 +17,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 import team.lodestar.lodestone.helpers.*;
-import team.lodestar.lodestone.systems.blockentity.*;
 import team.lodestar.lodestone.systems.easing.*;
 import team.lodestar.lodestone.systems.particle.*;
 import team.lodestar.lodestone.systems.particle.builder.*;
@@ -157,7 +155,7 @@ public class SpiritCrucibleParticleEffects {
         }
         for (int i = 0; i < 24; i++) {
             int lifeDelay = i / 8;
-            MalumSpiritType cyclingSpiritType = colorData.getCyclingColorRecord().spiritType();
+            MalumSpiritType cyclingSpiritType = colorData.getSpirit();
             float xVelocity = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, -0.075f, 0.075f);
             float yVelocity = RandomHelper.randomBetween(random, 0.2f, 0.5f);
             float zVelocity = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, -0.075f, 0.075f);
@@ -204,7 +202,7 @@ public class SpiritCrucibleParticleEffects {
         }
 
         for (int i = 0; i < 8; i++) {
-            MalumSpiritType cyclingSpiritType = colorData.getCyclingColorRecord().spiritType();
+            MalumSpiritType cyclingSpiritType = colorData.getSpirit();
             float xVelocity = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, -0.025f, 0.025f);
             float yVelocity = RandomHelper.randomBetween(random, 0.015f, 0.035f);
             float zVelocity = RandomHelper.randomBetween(random, Easing.CUBIC_OUT, -0.025f, 0.025f);

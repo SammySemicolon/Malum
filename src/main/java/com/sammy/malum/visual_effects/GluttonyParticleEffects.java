@@ -43,7 +43,7 @@ public class GluttonyParticleEffects {
                     .setRenderType(LodestoneWorldParticleRenderType.LUMITRANSPARENT.withDepthFade())
                     .repeat(level, positionData.posX, positionData.posY, positionData.posZ, 2);
         }
-        float distance = 0.5f;
+        float distance = 0.7f;
         float length = 0.75f * gluttonyPotency;
         float scale = 0.2f * gluttonyPotency;
         int count = gluttonyPotency < 1f ? 6 : 8;

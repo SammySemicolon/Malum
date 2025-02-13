@@ -13,7 +13,7 @@ import java.awt.*;
 import java.util.function.Supplier;
 
 public class SapFilledSoulwoodLogBlock extends SapFilledLogBlock {
-    public SapFilledSoulwoodLogBlock(Properties properties, Supplier<Block> drained, Supplier<Item> sap, Color sapColor) {
+    public SapFilledSoulwoodLogBlock(Properties properties, Supplier<Block> drained, Supplier<Item> sap, Color... sapColor) {
         super(properties, drained, sap, sapColor);
     }
 

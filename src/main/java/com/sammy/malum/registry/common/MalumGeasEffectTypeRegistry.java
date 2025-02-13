@@ -38,7 +38,7 @@ public class MalumGeasEffectTypeRegistry {
 
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_SKYBREAKER = GEAS_TYPES.register("pact_of_the_skybreaker", () -> new GeasEffectType(SkyBreakerGeas::new));
     public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_CLOUDHOPPER = GEAS_TYPES.register("pact_of_the_cloudhopper", () -> new GeasEffectType(CloudHopperGeas::new));
-    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_MAVERICK = GEAS_TYPES.register("pact_of_the_maverick", () -> new GeasEffectType(MaverickGeas::new));
+    public static final DeferredHolder<GeasEffectType, GeasEffectType> PACT_OF_THE_PYROMANIAC = GEAS_TYPES.register("pact_of_the_pyromaniac", () -> new GeasEffectType(PyromaniacGeas::new));
 
 
     // Pact of the Profane Ascetic

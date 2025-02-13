@@ -40,13 +40,14 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
     protected float maxVolume;
 
     protected ParticleEffectType particleEffect;
-    protected Color particleColor;
-    protected MalumSpiritType particleSpirit;
+    protected ColorEffectData particleColor;
+    protected NBTEffectData nbtData;
 
     public DelayedDamageWorldEvent(Entity target) {
         this();
         this.targetUUID = target.getUUID();
     }
+
     public DelayedDamageWorldEvent() {
         this(WorldEventTypeRegistry.DELAYED_DAMAGE.get());
     }
@@ -58,16 +59,25 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
     public DelayedDamageWorldEvent setAttacker(Entity attacker) {
         return setAttacker(attacker, attacker);
     }
+
     public DelayedDamageWorldEvent setAttacker(@Nonnull Entity attacker, Entity projectile) {
         this.attackerUUID = attacker.getUUID();
         this.projectileUUID = projectile != null ? projectile.getUUID() : null;
         return this;
     }
+
     public DelayedDamageWorldEvent setDamageData(float physicalDamage, float magicDamage, int delay) {
         this.physicalDamage = physicalDamage;
         this.magicDamage = magicDamage;
         this.delay = delay;
         return this;
+    }
+
+    public DelayedDamageWorldEvent setDamageData(ResourceKey<DamageType> physicalDamageType, float physicalDamage, ResourceKey<DamageType> magicDamageType, float magicDamage, int delay) {
+        this.physicalDamage = physicalDamage;
+        this.magicDamage = magicDamage;
+        this.delay = delay;
+        return setPhysicalDamageType(physicalDamageType).setMagicDamageType(magicDamageType);
     }
 
     public DelayedDamageWorldEvent setPhysicalDamageType(ResourceKey<DamageType> physicalDamageType) {
@@ -93,14 +103,14 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
         return this;
     }
 
-    public DelayedDamageWorldEvent setImpactParticleEffect(ParticleEffectType particleEffect, Color particleColor) {
+    public DelayedDamageWorldEvent setImpactParticleEffect(ParticleEffectType particleEffect, ColorEffectData color) {
         this.particleEffect = particleEffect;
-        this.particleColor = particleColor;
+        this.particleColor = color;
         return this;
     }
-    public DelayedDamageWorldEvent setImpactParticleEffect(ParticleEffectType particleEffect, MalumSpiritType particleSpirit) {
-        this.particleEffect = particleEffect;
-        this.particleSpirit = particleSpirit;
+
+    public DelayedDamageWorldEvent setParticleEffectNBT(NBTEffectData nbtData) {
+        this.nbtData = nbtData;
         return this;
     }
 
@@ -132,8 +142,9 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
                         SoundHelper.playSound(attacker, soundEvent.value(), volume, pitch);
                     }
                     if (particleEffect != null) {
-                        particleEffect.createPositionedEffect(serverLevel, new PositionEffectData(new Vec3(entity.getX(), entity.getY()+entity.getBbHeight()/2f, entity.getZ())),
-                                new ColorEffectData(particleSpirit != null ? particleSpirit.getPrimaryColor() : particleColor));
+                        particleEffect.createPositionedEffect(serverLevel,
+                                new PositionEffectData(new Vec3(entity.getX(), entity.getY()+entity.getBbHeight()/2f, entity.getZ())),
+                                particleColor, nbtData);
                     }
                 }
             }
@@ -163,11 +174,7 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
         }
         if (particleEffect != null) {
             compoundTag.put("particleEffect", ParticleEffectType.CODEC.encodeStart(NbtOps.INSTANCE, particleEffect).result().orElseThrow());
-            if (particleSpirit != null) {
-                compoundTag.put("particleSpirit", MalumSpiritType.CODEC.encodeStart(NbtOps.INSTANCE, particleSpirit).result().orElseThrow());
-            } else {
-                compoundTag.putInt("particleColor", particleColor.getRGB());
-            }
+            compoundTag.put("particleColor", ColorEffectData.CODEC.encodeStart(NbtOps.INSTANCE, particleColor).result().orElseThrow());
         }
     }
 
@@ -190,10 +197,6 @@ public class DelayedDamageWorldEvent extends WorldEventInstance {
         minVolume = compoundTag.getFloat("minVolume");
         maxVolume = compoundTag.getFloat("maxVolume");
         particleEffect = ParticleEffectType.CODEC.parse(NbtOps.INSTANCE, compoundTag.get("particleEffect")).result().orElse(null);
-        if (compoundTag.contains("particleSpirit")) {
-            particleSpirit = MalumSpiritType.CODEC.parse(NbtOps.INSTANCE, compoundTag.get("particleSpirit")).result().orElse(null);
-        } else {
-            particleColor = new Color(compoundTag.getInt("particleColor"));
-        }
+        particleColor = ColorEffectData.CODEC.parse(NbtOps.INSTANCE, compoundTag.get("particleColor")).result().orElse(null);
     }
 }

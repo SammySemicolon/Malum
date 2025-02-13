@@ -148,7 +148,7 @@ public class MalumLang extends LanguageProvider {
 
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_SKYBREAKER.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_CLOUDHOPPER.get(), "");
-        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_MAVERICK.get(), "");
+        addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_PYROMANIAC.get(), "");
 
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_PROFANE_ASCETIC.get(), "");
         addGeasDescription(MalumGeasEffectTypeRegistry.PACT_OF_THE_PROFANE_GLUTTON.get(), "");
@@ -274,12 +274,13 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.only_scythe", "Regular Weapons Crumble In Your Hands");
         add("malum.effect.geas.fall_damage_auto_attack", "Outgoing Fall Damage Strikes Targets With Your Weapon");
         add("malum.effect.geas.rocket_jumping", "Wind Charges Provide Greater Propulsion");
-        add("malum.effect.geas.wind_charge_exhaustion", "Continuous Activations Exhaust The Effect And Weighs You Down");
-        add("malum.effect.geas.explosion_eating", "Explosions are Converted Into Mining Speed");
-        add("malum.effect.geas.explosion_mining_cooldown", "Charges Require Recharge");
-        add("malum.effect.geas.explosion_mining_exhaustion", "Overuse Exhausts Effect And Halts Dexterity");
+        add("malum.effect.geas.wind_charge_exhaustion", "Continuous Activations Weigh You Down");
+        add("malum.effect.geas.weak_legs", "Fall Damage Is Made Deadlier");
+        add("malum.effect.geas.explosion_lover", "Absorbed Explosions Generate Fervor");
+        add("malum.effect.geas.explosion_fire", "Overexertion Ignites You");
+        add("malum.effect.geas.scary_fire", "Fire Damage Is Made Deadlier");
         add("malum.effect.geas.wyrd_reconstruction", "Prevents Death And Repeatedly Activates Spirit-Collection Effects");
-        add("malum.effect.geas.wyrd_reconstruction_cooldown", "Effect Has A Lengthy Cooldown And Halves Arcane Resonance Until Recharged");
+        add("malum.effect.geas.wyrd_reconstruction_cooldown", "Arcane Resonance is Dampened Until Recharged");
         add("malum.effect.geas.malignant_crit_leech", "Malignant Deliverance Leeches Life Essence");
         add("malum.effect.geas.malignant_crit_healing_overexertion", "Repeated Activations Nullify All Healing");
         add("malum.effect.geas.malignant_crit_reinforcement", "Malignant Deliverance Improves Conversion");
@@ -362,6 +363,9 @@ public class MalumLang extends LanguageProvider {
         addDeathMessage(DamageTypeRegistry.HIDDEN_BLADE_MAGIC_COUNTER, "%1$s had their soul sliced into innumerable pieces by %2$s", "%1$s had their soul sliced into innumerable pieces by %2$s using %3$s");
 
         addDeathMessage(DamageTypeRegistry.TYRVING, "%1$s had their soul scarred by %2$s", "%1$s had their soul scarred by %2$s using %3$s");
+
+        addDeathMessage(DamageTypeRegistry.SUNDERING_ANCHOR_PHYSICAL_COMBO, "%1$s was struck down through torment by %2$s", "%1$s was struck down through torment by %2$s using %3$s");
+        addDeathMessage(DamageTypeRegistry.SUNDERING_ANCHOR_MAGIC_COMBO, "%1$s had their soul struck down through torment by %2$s", "%1$s had their soul struck down through torment by %2$s using %3$s");
 
         addDeathMessage(DamageTypeRegistry.SOULWASHING_PROPAGATION, "%1$s was caught in %2$s's karmic flow", "%1$s was caught in %2$s's karmic flow using %3$s");
         addDeathMessage(DamageTypeRegistry.SOULWASHING_RETALIATION, "%1$s was caught in %2$s's karmic flow", "%1$s was caught in %2$s's karmic flow using %3$s");

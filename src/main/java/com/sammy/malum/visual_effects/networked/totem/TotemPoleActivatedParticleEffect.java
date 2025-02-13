@@ -17,6 +17,6 @@ public class TotemPoleActivatedParticleEffect extends ParticleEffectType {
     @Override
     public Supplier<ParticleEffectActor> get() {
         return () -> (level, random, positionData, colorData, nbtData) ->
-                TotemParticleEffects.activateTotemPoleParticles(level, colorData.getSpiritType(), positionData.getAsBlockPos().getCenter());
+                TotemParticleEffects.activateTotemPoleParticles(level, colorData, positionData.getAsBlockPos().getCenter());
     }
 }

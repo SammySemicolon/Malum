@@ -32,14 +32,13 @@ public class WeightOfWorldsCritParticleEffect extends SlashAttackParticleEffect 
             Vec3 direction = new Vec3(dirX, dirY, dirZ);
             float angle = nbtData.compoundTag.getFloat("angle");
             boolean mirror = nbtData.compoundTag.getBoolean("mirror");
-            var spirit = getSpiritType(nbtData);
 
             float spinOffset = 0;
             for (int i = 0; i < 8; i++) {
                 if (i % 2 == 0) {
                     spinOffset = angle + RandomHelper.randomBetween(random, -0.5f, 0.5f) + (mirror ? 3.14f : 0);
                 }
-                var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.SLASH, spirit);
+                var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.SLASH, colorData);
                 slash.getBuilder()
                         .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
                         .setScaleData(GenericParticleData.create(RandomHelper.randomBetween(random, 3f, 4f)).build())

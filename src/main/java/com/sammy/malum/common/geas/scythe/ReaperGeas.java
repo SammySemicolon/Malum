@@ -62,7 +62,7 @@ public class ReaperGeas extends GeasEffect {
             var particle = ParticleHelper.createSlashingEffect(ParticleEffectTypeRegistry.SCYTHE_SLASH);
             var scytheStack = SoulDataHandler.getScytheWeapon(source, attacker);
             if (scytheStack.getItem() instanceof ISpiritAffiliatedItem spiritAffiliatedItem) {
-                particle.setSpiritType(spiritAffiliatedItem);
+                particle.setColor(spiritAffiliatedItem);
             }
             if (enhanced) {
                 particle.setVertical();

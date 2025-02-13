@@ -36,7 +36,7 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
 
     public static final Color MALIGNANT_PURPLE = new Color(68, 11, 61);
     public static final Color MALIGNANT_BLACK = new Color(12, 4, 11);
-    public static final ColorParticleData MALIGNANT_COLOR_DATA = ColorParticleData.create(MALIGNANT_PURPLE, MALIGNANT_BLACK).setEasing(Easing.BOUNCE_IN_OUT).setCoefficient(1.2f).build();
+    public static final ColorParticleData SCEPTER_COLOR_DATA = ColorParticleData.create(MALIGNANT_PURPLE, MALIGNANT_BLACK).setEasing(Easing.BOUNCE_IN_OUT).setCoefficient(1.2f).build();
 
     public ErosionScepterItem(Tier tier, float magicDamage, float chargeDuration, LodestoneItemProperties properties) {
         super(tier, magicDamage, chargeDuration, properties);
@@ -117,7 +117,7 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
         WorldParticleBuilder.create(ParticleRegistry.DRAINING_TARGET, new DirectionalBehaviorComponent(pLivingEntity.getLookAngle().normalize()))
                 .setSpinData(SpinParticleData.createRandomDirection(random, 0.1f, 0.2f).setSpinOffset(RandomHelper.randomBetween(random, -0.314f, 0.314f)).build())
                 .setTransparencyData(GenericParticleData.create(0.8f * pct, 0f).setEasing(Easing.SINE_IN_OUT, Easing.SINE_IN).build())
-                .setColorData(ColorParticleData.create(MALIGNANT_PURPLE, MALIGNANT_BLACK).setCoefficient(2f).build())
+                .setColorData(SCEPTER_COLOR_DATA.copy().setCoefficient(2f).build())
                 .setScaleData(GenericParticleData.create(0.3f * pct, 0).setEasing(Easing.SINE_IN_OUT).build())
                 .setMotion(pLivingEntity.getLookAngle().normalize().scale(0.05f))
                 .setRenderType(LodestoneWorldParticleRenderType.LUMITRANSPARENT)
@@ -128,7 +128,7 @@ public class ErosionScepterItem extends AbstractStaffItem implements ISpiritAffi
                 .setLifetime(5)
                 .spawn(pLevel, pos.x, pos.y, pos.z)
                 .setScaleData(GenericParticleData.create(0.4f * pct, 0).setEasing(Easing.SINE_IN_OUT).build())
-                .setColorData(ColorParticleData.create(MALIGNANT_BLACK, MALIGNANT_BLACK).build())
+                .setColorData(SCEPTER_COLOR_DATA.invert().build())
                 .spawn(pLevel, pos.x, pos.y, pos.z);
     }
 }

@@ -22,10 +22,13 @@ public class DamageTypeRegistry {
     public static final ResourceKey<DamageType> SCYTHE_COMBO = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("scythe_combo"));
     public static final ResourceKey<DamageType> SCYTHE_MAELSTROM = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("scythe_maelstrom"));
 
-    public static final ResourceKey<DamageType> HIDDEN_BLADE_MAGIC_COUNTER = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("hidden_blade_magic_counter"));
     public static final ResourceKey<DamageType> HIDDEN_BLADE_PHYSICAL_COUNTER = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("hidden_blade_physical_counter"));
+    public static final ResourceKey<DamageType> HIDDEN_BLADE_MAGIC_COUNTER = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("hidden_blade_magic_counter"));
 
     public static final ResourceKey<DamageType> TYRVING = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("tyrving"));
+
+    public static final ResourceKey<DamageType> SUNDERING_ANCHOR_PHYSICAL_COMBO = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("sundering_anchor_physical_combo"));
+    public static final ResourceKey<DamageType> SUNDERING_ANCHOR_MAGIC_COMBO = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("sundering_anchor_magic_combo"));
 
     public static final ResourceKey<DamageType> SOULWASHING_RETALIATION = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("soulwashing_retaliation"));
     public static final ResourceKey<DamageType> SOULWASHING_PROPAGATION = ResourceKey.create(Registries.DAMAGE_TYPE, MalumMod.malumPath("soulwashing_propagation"));

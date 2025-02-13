@@ -300,17 +300,6 @@
     ],
     "subtitle": "malum.subtitle.auric_flame_motif"
   },
-  "authority_of_wrath_takes_effect": {
-    "sounds": [
-      "malum:curiosities/geas/soulwashing_impact1",
-      "malum:curiosities/geas/soulwashing_impact2",
-      "malum:curiosities/geas/soulwashing_impact3",
-      "malum:curiosities/geas/soulwashing_impact4",
-      "malum:curiosities/geas/soulwashing_impact5",
-      "malum:curiosities/geas/soulwashing_impact6"
-    ],
-    "subtitle": "malum.subtitle.authority_of_wrath_takes_effect"
-  },
   "blazing_quartz_block_break": {
     "sounds": [
       "malum:blocks/gemstone/break1",
@@ -1779,6 +1768,17 @@
     ],
     "subtitle": "malum.subtitle.the_heavens_sing"
   },
+  "the_inverted_heart_shrieks": {
+    "sounds": [
+      "malum:curiosities/geas/soulwashing_impact1",
+      "malum:curiosities/geas/soulwashing_impact2",
+      "malum:curiosities/geas/soulwashing_impact3",
+      "malum:curiosities/geas/soulwashing_impact4",
+      "malum:curiosities/geas/soulwashing_impact5",
+      "malum:curiosities/geas/soulwashing_impact6"
+    ],
+    "subtitle": "malum.subtitle.the_inverted_heart_shrieks"
+  },
   "the_unknown_weeps": {
     "sounds": [
       "malum:weeping_well/uncanny_valley1",
@@ -1950,5 +1950,12 @@
       "malum:curiosities/weapons/scythe/sweep7"
     ],
     "subtitle": "malum.subtitle.weight_of_worlds_cuts"
+  },
+  "wyrd_reconstruction_reconstructs_body": {
+    "sounds": [
+      "malum:curiosities/geas/wyrd_reconstruction1",
+      "malum:curiosities/geas/wyrd_reconstruction2"
+    ],
+    "subtitle": "malum.subtitle.wyrd_reconstruction_reconstructs_body"
   }
 }

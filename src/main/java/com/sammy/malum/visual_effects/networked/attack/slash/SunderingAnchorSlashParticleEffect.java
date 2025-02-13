@@ -23,18 +23,9 @@ public class SunderingAnchorSlashParticleEffect extends SlashAttackParticleEffec
     }
 
     public static NBTEffectData createData(Vec3 direction, boolean mirror, float angle, int slashCount) {
-        return createData(direction, mirror, angle, slashCount, null);
-    }
-
-    public static NBTEffectData createData(Vec3 direction, boolean mirror, float angle, int slashCount, MalumSpiritType spiritType) {
-        var data = SlashAttackParticleEffect.createData(direction, mirror, angle, spiritType);
+        var data = SlashAttackParticleEffect.createData(direction, mirror, angle);
         data.compoundTag.putInt("slashCount", slashCount);
         return data;
-    }
-
-    public MalumSpiritType getRandomSpirit() {
-        var spirits = new MalumSpiritType[]{SpiritTypeRegistry.INFERNAL_SPIRIT, SpiritTypeRegistry.SACRED_SPIRIT, SpiritTypeRegistry.AQUEOUS_SPIRIT, SpiritTypeRegistry.EARTHEN_SPIRIT};
-        return spirits[MalumMod.RANDOM.nextInt(spirits.length)];
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -52,12 +43,11 @@ public class SunderingAnchorSlashParticleEffect extends SlashAttackParticleEffec
             float angle = nbtData.compoundTag.getFloat("angle");
             boolean mirror = nbtData.compoundTag.getBoolean("mirror");
             int slashCount = nbtData.compoundTag.getInt("slashCount");
-            var spirit = getSpiritType(nbtData);
 
             for (int i = 0; i < slashCount; i++) {
                 float spinOffset = angle + RandomHelper.randomBetween(random, -3.14f, 3.14f) + (mirror ? 3.14f : 0);
                 for (int j = 0; j < 2; j++) {
-                    var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.THIN_SLASH, spirit);
+                    var slash = WeaponParticleEffects.spawnSlashParticle(level, positionData.getAsVector(), ParticleRegistry.THIN_SLASH, colorData);
                     int lifeDelay = (i+j) * 2;
                     slash.getBuilder()
                             .setSpinData(SpinParticleData.create(0).setSpinOffset(spinOffset).build())
@@ -68,7 +58,6 @@ public class SunderingAnchorSlashParticleEffect extends SlashAttackParticleEffec
                             .setBehavior(new PointyDirectionalBehaviorComponent(direction));
                     slash.spawnParticles();
                 }
-                spirit = getRandomSpirit();
             }
         };
     }

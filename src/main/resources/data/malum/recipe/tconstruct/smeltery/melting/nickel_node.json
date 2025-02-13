@@ -1,0 +1,19 @@
+{
+    "conditions": [
+        {
+            "type": "forge:mod_loaded",
+            "modid": "tconstruct"
+        }
+    ],
+    "type": "tconstruct:melting",
+    "ingredient": {
+        "count": 1,
+        "item": "malum:nickel_node"
+    },
+    "result": {
+        "fluid": "tconstruct:molten_nickel",
+        "amount": 60
+    },
+    "temperature": 950,
+    "time": 43
+}

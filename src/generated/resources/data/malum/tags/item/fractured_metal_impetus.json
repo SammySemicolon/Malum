@@ -1,0 +1,9 @@
+{
+  "remove": [
+    "malum:fractured_alchemical_impetus",
+    "malum:fractured_zephyr_impetus"
+  ],
+  "values": [
+    "#malum:fractured_impetus"
+  ]
+}

@@ -392,7 +392,7 @@ public class CodexLangDatagen {
         //TODO: wind nucleus
         addHeadline("esoteric_reaping.wind_nucleus", "Wind Nucleus");
         addPages("esoteric_reaping.wind_nucleus",
-                "The very essence of the Breeze remains intact as the Wind Nucleus, the core of it's design. It's stored energy can be quickly released to push away any nearby creature.");
+                "The constructed magic of the Breeze persists as the Wind Nucleus, a nodule of wind magics. It's stored energy can be quickly released to push away any nearby creature.");
         addHeadline("esoteric_reaping.warp_flux", "Warp Flux");
         addPages("esoteric_reaping.warp_flux",
                 "The magic that envelops the endermen coalesces into Warp Flux, a strange essence that seems to be inimical to natural law.");
@@ -507,8 +507,7 @@ public class CodexLangDatagen {
 
         addSimpleEntryHeader("focus_ashes", "Arising of Ashes", "Creating powdered reagents");
         addPages("focus_ashes",
-                "By applying differing qualities of arcana to an Alchemical Impetus, I can cause powders of various forms to be created. It is a simple yet very useful arcane recipe.",
-                "Hex Ash has proven to be quite a useful material, by focusing gunpowder with the added presence of raw arcana it will create a near perfect substitute for hex ash.");
+                "By applying differing qualities of arcana to an Alchemical Impetus, I can cause powders of various forms to be created. It is a simple yet very useful arcane recipe.");
 
         addSimpleEntryHeader("focus_metals", "Magecraft of Metals", "Forming banded crystals");
         addPages("focus_metals",
@@ -517,6 +516,14 @@ public class CodexLangDatagen {
 
         addSimpleEntryHeader("focus_crystals", "Creation of Crystals", "Forming irregular crystals");
         addPages("focus_crystals", "By applying differing qualities of arcana to an Alchemical Impetus, I can cause more mundane crystals to be formed.");
+
+
+        //TODO: look over this. In the future there will be an impetus tied to the blaze as well.
+        addSimpleEntryHeader("focus_elemental", "Rebirth of Remnants", "Creating construct cores");
+        addHeadline("focus_elemental.zephyr_impetus", "Zephyr Impetus");
+        addPages("focus_elemental.zephyr_impetus",
+                "Wind Charges are great. By fusing my basic Impetus with a Heavy Core and fitting it with some Wind Nucleus I've created the Zephyr Impetus, which can be used to focus arcana into Wind Charges and Nucleus alike. Out of all the processes tied to spirit focusing, this one takes by far the longest.",
+                "In my earlier notes on Wind Nucleus, I noted that in some ways it is a living remainder of the Breeze's soul. Having recreated it through spirit focusing, which cannot create life nor soul, I'm able to disprove that theory. While not a soul, it is a core inscribed with protective runes, explaining the Breeze's territorial behavior.");
 
         addSimpleEntryHeader("crucible_acceleration", "Crucible Acceleration", "Heating up");
         addPages("crucible_acceleration",

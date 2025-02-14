@@ -174,6 +174,15 @@ public class ArtificeEntries {
                 .addPage(SpiritFocusingPage.fromOutput(PRISMARINE))
         );
 
+        screen.addEntry("focus_elemental", 14, 5, b -> b
+                .configureWidget(w -> w.setIcon(ZEPHYR_IMPETUS))
+                .addPage(new HeadlineTextPage("focus_elemental.zephyr_impetus", "focus_elemental.zephyr_impetus.1"))
+                .addPage(SpiritInfusionPage.fromOutput(ZEPHYR_IMPETUS.get()))
+                .addPage(SpiritFocusingPage.fromOutput(WIND_CHARGE))
+                .addPage(SpiritFocusingPage.fromOutput(WIND_NUCLEUS.get()))
+                .addPage(new TextPage("focus_elemental.zephyr_impetus.2"))
+        );
+
         screen.addEntry("crucible_acceleration", 10, 5, b -> b
                 .configureWidget(w -> w.setIcon(SPIRIT_CATALYZER))
                 .addPage(new HeadlineTextPage("crucible_acceleration", "crucible_acceleration.1"))

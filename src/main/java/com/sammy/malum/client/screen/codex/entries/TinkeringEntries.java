@@ -100,7 +100,7 @@ public class TinkeringEntries {
                                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_ESOTERIC_SPOILS.get()))))
         );
 
-        screen.addEntry("reactive_trinkets",-12, 6, b -> b
+        screen.addEntry("reactive_trinkets", -12, 6, b -> b
                 .configureWidget(w -> w.setIcon(RING_OF_CURATIVE_TALENT))
                 .addPage(new HeadlineTextPage("reactive_trinkets.ring_of_curative_talent", "reactive_trinkets.ring_of_curative_talent.1"))
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_CURATIVE_TALENT.get()))
@@ -111,11 +111,12 @@ public class TinkeringEntries {
                 .addPage(new HeadlineTextPage("reactive_trinkets.ring_of_prowess", "reactive_trinkets.ring_of_prowess.1"))
                 .addPage(new TextPage("reactive_trinkets.ring_of_prowess.2"))
                 .addPage(SpiritInfusionPage.fromOutput(RING_OF_ARCANE_PROWESS.get()))
-                .addReference(new EntryReference(NECKLACE_OF_THE_MYSTIC_MIRROR.get(),
-                        BookEntry.build("necklace_of_the_mystic_mirror")
-                                .addPage(new HeadlineTextPage("necklace_of_the_mystic_mirror", "necklace_of_the_mystic_mirror.1"))
-                                .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_MYSTIC_MIRROR.get()))))
         );
+
+        screen.addEntry("necklace_of_the_mystic_mirror", -14, 5, b -> b
+                .configureWidget(w -> w.setIcon(NECKLACE_OF_THE_MYSTIC_MIRROR))
+                .addPage(new HeadlineTextPage("necklace_of_the_mystic_mirror", "necklace_of_the_mystic_mirror.1"))
+                .addPage(SpiritInfusionPage.fromOutput(NECKLACE_OF_THE_MYSTIC_MIRROR.get())));
 
         screen.addEntry("belt_of_the_starved",-11, 8, b -> b
                 .configureWidget(w -> w.setIcon(BELT_OF_THE_STARVED))

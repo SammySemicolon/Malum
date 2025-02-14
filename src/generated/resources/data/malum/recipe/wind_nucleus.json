@@ -1,0 +1,26 @@
+{
+  "type": "malum:spirit_focusing",
+  "durabilityCost": 1,
+  "ingredient": {
+    "item": "malum:zephyr_impetus"
+  },
+  "output": {
+    "count": 4,
+    "id": "malum:wind_nucleus"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 2
+    },
+    {
+      "type": "arcane",
+      "count": 2
+    },
+    {
+      "type": "wicked",
+      "count": 2
+    }
+  ],
+  "time": 300
+}

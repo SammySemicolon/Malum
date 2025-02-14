@@ -1,16 +1,17 @@
 {
   "values": [
-    "malum:cracked_iron_impetus",
-    "malum:cracked_copper_impetus",
-    "malum:cracked_gold_impetus",
-    "malum:cracked_lead_impetus",
-    "malum:cracked_silver_impetus",
-    "malum:cracked_aluminum_impetus",
-    "malum:cracked_nickel_impetus",
-    "malum:cracked_uranium_impetus",
-    "malum:cracked_osmium_impetus",
-    "malum:cracked_zinc_impetus",
-    "malum:cracked_tin_impetus",
-    "malum:cracked_alchemical_impetus"
+    "malum:fractured_iron_impetus",
+    "malum:fractured_copper_impetus",
+    "malum:fractured_gold_impetus",
+    "malum:fractured_lead_impetus",
+    "malum:fractured_silver_impetus",
+    "malum:fractured_aluminum_impetus",
+    "malum:fractured_nickel_impetus",
+    "malum:fractured_uranium_impetus",
+    "malum:fractured_osmium_impetus",
+    "malum:fractured_zinc_impetus",
+    "malum:fractured_tin_impetus",
+    "malum:fractured_alchemical_impetus",
+    "malum:fractured_zephyr_impetus"
   ]
 }

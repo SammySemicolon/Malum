@@ -157,7 +157,10 @@ public class MalumItemTags extends ItemTagsProvider {
         tag(ItemTagRegistry.AUGMENTS).addAll(items.stream().filter(i -> i.get() instanceof AugmentItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.METAL_NODES).addAll(items.stream().filter(i -> i.get() instanceof NodeItem).map(DeferredHolder::getKey).toList());
         tag(ItemTagRegistry.IMPETUS).addAll(items.stream().filter(i -> i.get() instanceof ImpetusItem).map(DeferredHolder::getKey).toList());
-        tag(ItemTagRegistry.CRACKED_IMPETUS).addAll(items.stream().filter(i -> i.get() instanceof CrackedImpetusItem).map(DeferredHolder::getKey).toList());
+        tag(ItemTagRegistry.FRACTURED_IMPETUS).addAll(items.stream().filter(i -> i.get() instanceof CrackedImpetusItem).map(DeferredHolder::getKey).toList());
+        tag(ItemTagRegistry.METAL_IMPETUS).addTag(ItemTagRegistry.IMPETUS).remove(ALCHEMICAL_IMPETUS.get(), ZEPHYR_IMPETUS.get());
+        tag(ItemTagRegistry.FRACTURED_METAL_IMPETUS).addTag(ItemTagRegistry.FRACTURED_IMPETUS).remove(FRACTURED_ALCHEMICAL_IMPETUS.get(), FRACTURED_ZEPHYR_IMPETUS.get());
+
         tag(ItemTagRegistry.SOULWOVEN_BANNERS).addAll(items.stream().filter(i -> i.get() instanceof SoulwovenBannerBlockItem).map(DeferredHolder::getKey).toList());
 
         tag(ItemTagRegistry.IS_TOTEMIC_TOOL).add(TOTEMIC_STAFF.get());
@@ -180,7 +183,7 @@ public class MalumItemTags extends ItemTagsProvider {
                 .addTags(ItemTagRegistry.SPIRITS, ItemTagRegistry.MOB_DROPS, ItemTagRegistry.MINERALS);
 
         tag(Tags.Items.NUGGETS).add(HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_NUGGET.get(), MALIGNANT_PEWTER_INGOT.get());
-        tag(Tags.Items.INGOTS).add(HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_INGOT.get(), MALIGNANT_PEWTER_INGOT.get());
+        tag(Tags.Items.INGOTS).add(HALLOWED_GOLD_NUGGET.get(), SOUL_STAINED_STEEL_INGOT.get(), MALIGNANT_PEWTER_NUGGET.get());
         tag(Tags.Items.GEMS).add(NATURAL_QUARTZ.get(), BLAZING_QUARTZ.get(), RAW_BRILLIANCE.get());
 
         tag(Tags.Items.NUGGETS).addOptional(MalumMod.malumPath("copper_nugget"));

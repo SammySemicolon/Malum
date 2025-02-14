@@ -2,7 +2,7 @@
   "type": "malum:spirit_repair",
   "durabilityPercentage": 1.0,
   "inputs": [
-    "malum:cracked_silver_impetus"
+    "malum:fractured_silver_impetus"
   ],
   "repairMaterial": {
     "count": 2,
@@ -11,12 +11,8 @@
   "repairOutputOverride": "malum:silver_impetus",
   "spirits": [
     {
-      "type": "infernal",
-      "count": 8
-    },
-    {
-      "type": "earthen",
-      "count": 8
+      "type": "aqueous",
+      "count": 16
     }
   ]
 }

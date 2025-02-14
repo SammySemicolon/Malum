@@ -24,14 +24,11 @@ public class SkyBreakerGeas extends GeasEffect {
     @Override
     public void addTooltipComponents(LivingEntity entity, Consumer<Component> tooltipAcceptor, TooltipFlag tooltipFlag) {
         tooltipAcceptor.accept(ComponentHelper.positiveGeasEffect("fall_damage_auto_attack"));
+        tooltipAcceptor.accept(ComponentHelper.negativeGeasEffect("more_knockback"));
         super.addTooltipComponents(entity, tooltipAcceptor, tooltipFlag);
     }
 
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> createAttributeModifiers(LivingEntity entity, Multimap<Holder<Attribute>, AttributeModifier> modifiers) {
-        addAttributeModifier(modifiers, Attributes.ATTACK_KNOCKBACK, -1f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-        return modifiers;
-    }
+
 
     @Override
     public void finalizedOutgoingDamageEvent(LivingDamageEvent.Post event, LivingEntity attacker, LivingEntity target, ItemStack stack) {

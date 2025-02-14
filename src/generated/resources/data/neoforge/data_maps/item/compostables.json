@@ -1,0 +1,34 @@
+{
+  "values": {
+    "malum:azure_runewood_leaves": {
+      "chance": 0.3
+    },
+    "malum:azure_runewood_sapling": {
+      "chance": 0.3
+    },
+    "malum:blighted_gunk": {
+      "chance": 0.1
+    },
+    "malum:hanging_azure_runewood_leaves": {
+      "chance": 0.2
+    },
+    "malum:hanging_runewood_leaves": {
+      "chance": 0.2
+    },
+    "malum:hanging_soulwood_leaves": {
+      "chance": 0.2
+    },
+    "malum:runewood_leaves": {
+      "chance": 0.3
+    },
+    "malum:runewood_sapling": {
+      "chance": 0.3
+    },
+    "malum:soulwood_growth": {
+      "chance": 0.3
+    },
+    "malum:soulwood_leaves": {
+      "chance": 0.3
+    }
+  }
+}

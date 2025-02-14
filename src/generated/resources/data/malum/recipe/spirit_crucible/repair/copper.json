@@ -1,5 +1,8 @@
 {
   "type": "malum:spirit_repair",
+  "inputs": [
+    "malum:copper_impetus"
+  ],
   "itemIdRegex": "copper_.+",
   "repairMaterial": {
     "count": 2,

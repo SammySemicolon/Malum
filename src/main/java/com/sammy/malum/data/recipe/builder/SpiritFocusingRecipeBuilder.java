@@ -5,6 +5,7 @@ import com.sammy.malum.MalumMod;
 import com.sammy.malum.common.recipe.spirit.focusing.SpiritFocusingRecipe;
 import com.sammy.malum.core.systems.recipe.SpiritIngredient;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import net.minecraft.core.*;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -31,6 +32,10 @@ public class SpiritFocusingRecipeBuilder implements AutonamedRecipeBuilder<Spiri
 
     public SpiritFocusingRecipeBuilder(int time, int durabilityCost, Ingredient input, ItemLike output, int outputCount) {
         this(time, durabilityCost, input, new ItemStack(output, outputCount));
+    }
+
+    public SpiritFocusingRecipeBuilder(int time, int durabilityCost, Holder<Item> input, ItemLike output, int outputCount) {
+        this(time, durabilityCost, Ingredient.of(input.value()), new ItemStack(output, outputCount));
     }
 
     public SpiritFocusingRecipeBuilder addSpirit(MalumSpiritType type, int count) {

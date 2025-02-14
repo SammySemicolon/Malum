@@ -4,11 +4,14 @@ import com.sammy.malum.*;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.*;
 import com.sammy.malum.registry.common.item.*;
+import net.minecraft.core.*;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.*;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.conditions.*;
 import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -186,6 +189,15 @@ public class ArtificeSpiritInfusionRecipes {
                 .addSpirit(ELDRITCH_SPIRIT, 4)
                 .save(recipeOutput);
 
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_IMPETUS.get(), 1, ItemRegistry.ZEPHYR_IMPETUS.get(), 1)
+                .addSpirit(AERIAL_SPIRIT, 16)
+                .addSpirit(ARCANE_SPIRIT, 16)
+                .addExtraItem(Items.WIND_CHARGE, 8)
+                .addExtraItem(ItemRegistry.IRON_NODE.get(), 6)
+                .addExtraItem(ItemRegistry.WIND_NUCLEUS.get(), 4)
+                .addExtraItem(Items.HEAVY_CORE, 1)
+                .save(recipeOutput);
+
         metalImpetusRecipe(recipeOutput, ItemRegistry.IRON_IMPETUS, Items.IRON_INGOT);
         metalImpetusRecipe(recipeOutput, ItemRegistry.COPPER_IMPETUS, Items.COPPER_INGOT);
         metalImpetusRecipe(recipeOutput, ItemRegistry.GOLD_IMPETUS, Items.GOLD_INGOT);
@@ -199,22 +211,25 @@ public class ArtificeSpiritInfusionRecipes {
         metalImpetusRecipe(recipeOutput, ItemRegistry.TIN_IMPETUS, INGOTS_TIN);
     }
 
-    public static void metalImpetusRecipe(RecipeOutput recipeOutput, DeferredHolder<Item, ? extends ImpetusItem> output, TagKey<Item> ingot) {
-                new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_IMPETUS.get(), output.get(), 1)
-                        .addSpirit(EARTHEN_SPIRIT, 8)
-                        .addSpirit(INFERNAL_SPIRIT, 8)
-                        .addExtraItem(SizedIngredient.of(Tags.Items.GUNPOWDERS, 4))
-                        .addExtraItem(SizedIngredient.of(ItemRegistry.CTHONIC_GOLD.get(), 1))
-                        .addExtraItem(SizedIngredient.of(ingot, 6))
-                .save(recipeOutput, MalumMod.malumPath("impetus_creation_" + ingot.location().getPath().replace("ingots/", "")));
-
-//new NotCondition(new TagEmptyCondition(ingot.location().toString()))
-    }
-
-    public static void metalImpetusRecipe(RecipeOutput recipeOutput, DeferredHolder<Item, ? extends ImpetusItem> output, Item ingot) {
-        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_IMPETUS.get(), output.get(), 1)
+    public static void metalImpetusRecipe(RecipeOutput recipeOutput, Holder<Item> impetus, TagKey<Item> ingot) {
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_IMPETUS.get(), impetus.value(), 1)
                 .addSpirit(EARTHEN_SPIRIT, 8)
                 .addSpirit(INFERNAL_SPIRIT, 8)
+                .addSpirit(AQUEOUS_SPIRIT, 8)
+                .addExtraItem(SizedIngredient.of(Tags.Items.GUNPOWDERS, 4))
+                .addExtraItem(SizedIngredient.of(ItemRegistry.CTHONIC_GOLD.get(), 1))
+                .addExtraItem(SizedIngredient.of(ingot, 6))
+                .save(recipeOutput.withConditions(
+                        new NotCondition(
+                                new TagEmptyCondition(ingot.location())
+                        )));
+    }
+
+    public static void metalImpetusRecipe(RecipeOutput recipeOutput, Holder<Item> impetus, Item ingot) {
+        new SpiritInfusionRecipeBuilder(ItemRegistry.ALCHEMICAL_IMPETUS.get(), impetus.value(), 1)
+                .addSpirit(EARTHEN_SPIRIT, 8)
+                .addSpirit(INFERNAL_SPIRIT, 8)
+                .addSpirit(AQUEOUS_SPIRIT, 8)
                 .addExtraItem(SizedIngredient.of(Tags.Items.GUNPOWDERS, 4))
                 .addExtraItem(SizedIngredient.of(ItemRegistry.CTHONIC_GOLD.get(), 1))
                 .addExtraItem(SizedIngredient.of(ingot, 6))

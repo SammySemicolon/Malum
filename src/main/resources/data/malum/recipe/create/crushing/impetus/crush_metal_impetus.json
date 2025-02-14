@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "tag": "malum:metal_impetus"
+    }
+  ],
+  "results": [
+    {
+      "item": "malum:cthonic_gold_fragment",
+      "count": 3
+    },
+    {
+      "item": "malum:cthonic_gold_fragment",
+      "count": 3,
+      "chance": 0.75
+    }
+  ],
+  "processingTime": 600
+}

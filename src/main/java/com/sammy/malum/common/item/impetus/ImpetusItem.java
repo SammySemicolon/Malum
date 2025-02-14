@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.function.Supplier;
 
-public class ImpetusItem extends Item implements SpiritRepairRecipe.IRepairOutputOverride {
+public class ImpetusItem extends Item {
 
     public ImpetusItem(Properties properties) {
         super(properties.durability(800));
@@ -22,10 +22,5 @@ public class ImpetusItem extends Item implements SpiritRepairRecipe.IRepairOutpu
     @Override
     public boolean isEnchantable(ItemStack p_41456_) {
         return false;
-    }
-
-    @Override
-    public boolean ignoreDuringLookup() {
-        return true;
     }
 }

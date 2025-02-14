@@ -30,7 +30,9 @@ public class ItemTagRegistry {
     public static final TagKey<Item> MINERALS = malumTag("minerals");
     public static final TagKey<Item> AUGMENTS = malumTag("augments");
     public static final TagKey<Item> IMPETUS = malumTag("impetus");
-    public static final TagKey<Item> CRACKED_IMPETUS = malumTag("cracked_impetus");
+    public static final TagKey<Item> FRACTURED_IMPETUS = malumTag("fractured_impetus");
+    public static final TagKey<Item> METAL_IMPETUS = malumTag("metal_impetus");
+    public static final TagKey<Item> FRACTURED_METAL_IMPETUS = malumTag("fractured_metal_impetus");
     public static final TagKey<Item> METAL_NODES = malumTag("metal_nodes");
     public static final TagKey<Item> SOULWOVEN_BANNERS = malumTag("soulwoven_banners");
 

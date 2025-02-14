@@ -1,9 +1,7 @@
 package com.sammy.malum.data.recipe;
 
-import com.sammy.malum.common.data.ImpetusRepairData;
 import com.sammy.malum.common.item.impetus.*;
 import com.sammy.malum.data.recipe.builder.*;
-import com.sammy.malum.registry.common.DataMapRegistry;
 import com.sammy.malum.registry.common.item.*;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.*;
@@ -11,9 +9,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
-import net.neoforged.neoforge.registries.*;
-
-import java.util.*;
 
 import static com.sammy.malum.registry.common.SpiritTypeRegistry.*;
 
@@ -128,12 +123,20 @@ public class MalumSpiritRepairRecipes implements IConditionBuilder {
                 .save(recipeOutput, "soul_hunter_armor");
 
         new SpiritRepairRecipeBuilder(1f, Ingredient.of(ItemRegistry.ALCHEMICAL_CALX.get()), 2)
-                .addItem(ItemRegistry.CRACKED_ALCHEMICAL_IMPETUS.get())
+                .addItem(ItemRegistry.FRACTURED_ALCHEMICAL_IMPETUS.get())
                 .addSpirit(ARCANE_SPIRIT, 4)
                 .addSpirit(EARTHEN_SPIRIT, 4)
                 .overrideOutput(ItemRegistry.ALCHEMICAL_IMPETUS.get())
                 .unlockedBy("has_crucible", has)
                 .save(recipeOutput, "alchemical_impetus_restoration");
+
+        new SpiritRepairRecipeBuilder(1f, Ingredient.of(ItemRegistry.WIND_NUCLEUS.get()), 4)
+                .addItem(ItemRegistry.FRACTURED_ZEPHYR_IMPETUS.get())
+                .addSpirit(ARCANE_SPIRIT, 8)
+                .addSpirit(AERIAL_SPIRIT, 8)
+                .overrideOutput(ItemRegistry.ZEPHYR_IMPETUS.get())
+                .unlockedBy("has_crucible", has)
+                .save(recipeOutput, "zephyr_impetus_restoration");
 
         var crackedMetalImpetus = ItemRegistry.ITEMS.getEntries()
                 .stream().filter(i -> i.get() instanceof CrackedImpetusItem).sorted((d1, d2) -> d1.getId().compareNamespaced(d2.getId())).toList();
@@ -142,14 +145,13 @@ public class MalumSpiritRepairRecipes implements IConditionBuilder {
         for (int i = 0; i < crackedMetalImpetus.size(); i++) {
             var metal = metalImpetus.get(i);
             var cracked = crackedMetalImpetus.get(i);
-            if (metal.get().equals(ItemRegistry.ALCHEMICAL_IMPETUS.get())) {
+            if (metal.get().equals(ItemRegistry.ALCHEMICAL_IMPETUS.get()) || metal.get().equals(ItemRegistry.ZEPHYR_IMPETUS.get())) {
                 continue;
             }
             new SpiritRepairRecipeBuilder(1f, Ingredient.of(ItemRegistry.CTHONIC_GOLD_FRAGMENT.get()), 2)
                     .addItem(cracked.get())
                     .overrideOutput(metal.get())
-                    .addSpirit(INFERNAL_SPIRIT, 8)
-                    .addSpirit(EARTHEN_SPIRIT, 8)
+                    .addSpirit(AQUEOUS_SPIRIT, 16)
                     .unlockedBy("has_crucible", has)
                     .save(recipeOutput, cracked.getId().getPath().split("_")[1] + "_impetus_restoration");
         }

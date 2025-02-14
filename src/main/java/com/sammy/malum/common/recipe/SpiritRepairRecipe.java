@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.sammy.malum.core.systems.recipe.*;
+import com.sammy.malum.registry.common.*;
 import com.sammy.malum.registry.common.recipe.*;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -78,11 +79,13 @@ public class SpiritRepairRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipe
         for (int i = 0; i < BuiltInRegistries.ITEM.size(); i++) {
             Item item = BuiltInRegistries.ITEM.byId(i);
             if (item.isRepairable(item.getDefaultInstance())) {
-                if (BuiltInRegistries.ITEM.getKey(item).getPath().matches(itemIdRegex)) {
-                    if (!modIdRegex.isEmpty() && !BuiltInRegistries.ITEM.getKey(item).getNamespace().matches(modIdRegex)) {
-                        break;
-                    }
-                    if (item instanceof IRepairOutputOverride repairOutputOverride && repairOutputOverride.ignoreDuringLookup()) {
+                var damagedImpetusVariant = item.builtInRegistryHolder().getData(DataMapRegistry.FRACTURED_IMPETUS_VARIANT);
+                if (damagedImpetusVariant != null) {
+                    continue;
+                }
+                var id = BuiltInRegistries.ITEM.getKey(item);
+                if (id.getPath().matches(itemIdRegex)) {
+                    if (!modIdRegex.isEmpty() && !id.getNamespace().matches(modIdRegex)) {
                         break;
                     }
                     if (!inputs.contains(item)) {
@@ -90,16 +93,6 @@ public class SpiritRepairRecipe extends LodestoneInWorldRecipe<SpiritBasedRecipe
                     }
                 }
             }
-        }
-    }
-
-    public interface IRepairOutputOverride {
-        default Item overrideRepairResult() {
-            return Items.AIR;
-        }
-
-        default boolean ignoreDuringLookup() {
-            return false;
         }
     }
 }

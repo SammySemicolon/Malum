@@ -1,7 +1,7 @@
 package com.sammy.malum.common.block.curiosities.spirit_crucible;
 
 import com.sammy.malum.common.block.*;
-import com.sammy.malum.common.data.ImpetusRepairData;
+import com.sammy.malum.common.data.ImpetusData;
 import com.sammy.malum.common.item.augment.MendingDiffuserItem;
 import com.sammy.malum.common.item.augment.ShieldingApparatusItem;
 import com.sammy.malum.common.item.augment.WarpingEngineItem;
@@ -272,9 +272,9 @@ public class SpiritCrucibleCoreBlockEntity extends MultiBlockCoreEntity implemen
         if (durabilityCost > 0) {
             impetus.hurtAndBreak(durabilityCost, level, null, brokenStack -> {
                 Holder<Item> itemHolder = level.registryAccess().registry(Registries.ITEM).orElseThrow().wrapAsHolder(brokenStack.asItem());
-                ImpetusRepairData data = itemHolder.getData(DataMapRegistry.DAMAGED_IMPETUS_VARIANT);
+                ImpetusData data = itemHolder.getData(DataMapRegistry.FRACTURED_IMPETUS_VARIANT);
                 if (data != null) {
-                    inventory.setStackInSlot(0, data.damagedImpetus().value().getDefaultInstance());
+                    inventory.setStackInSlot(0, data.fracturedImpetus().value().getDefaultInstance());
                 }
             });
             MendingDiffuserItem.repairImpetus(level, attributes, impetus);

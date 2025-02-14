@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    }
+  ],
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "malum:fractured_zephyr_impetus"
+    }
+  ],
+  "results": [
+    {
+      "item": "malum:wind_nucleus",
+      "count": 2
+    },
+    {
+      "item": "malum:iron_node",
+      "count": 2
+    },
+    {
+      "item": "malum:iron_node",
+      "count": 2,
+      "chance": 0.5
+    }
+  ],
+  "processingTime": 600
+}

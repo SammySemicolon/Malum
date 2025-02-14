@@ -30,6 +30,10 @@
     {
       "type": "infernal",
       "count": 8
+    },
+    {
+      "type": "aqueous",
+      "count": 8
     }
   ]
 }

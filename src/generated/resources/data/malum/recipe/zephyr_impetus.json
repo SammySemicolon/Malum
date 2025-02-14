@@ -1,0 +1,39 @@
+{
+  "type": "malum:spirit_infusion",
+  "extraIngredients": [
+    {
+      "count": 8,
+      "item": "minecraft:wind_charge"
+    },
+    {
+      "count": 6,
+      "item": "malum:iron_node"
+    },
+    {
+      "count": 4,
+      "item": "malum:wind_nucleus"
+    },
+    {
+      "count": 1,
+      "item": "minecraft:heavy_core"
+    }
+  ],
+  "ingredient": {
+    "count": 1,
+    "item": "malum:alchemical_impetus"
+  },
+  "output": {
+    "count": 1,
+    "id": "malum:zephyr_impetus"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 16
+    },
+    {
+      "type": "arcane",
+      "count": 16
+    }
+  ]
+}

@@ -11,7 +11,8 @@
     "minecraft:iron_chestplate",
     "minecraft:iron_leggings",
     "minecraft:iron_boots",
-    "farmersdelight:iron_knife"
+    "farmersdelight:iron_knife",
+    "malum:iron_impetus"
   ],
   "itemIdRegex": "iron_.+",
   "repairMaterial": {

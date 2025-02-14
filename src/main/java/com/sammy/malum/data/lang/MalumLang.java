@@ -272,14 +272,15 @@ public class MalumLang extends LanguageProvider {
         add("malum.effect.geas.soul_ward_on_hit", "Magic Damage Recovers Soul Ward");
         add("malum.effect.geas.scythe_combo", "Scythe Cuts Create After-attacks");
         add("malum.effect.geas.only_scythe", "Regular Weapons Crumble In Your Hands");
-        add("malum.effect.geas.fall_damage_auto_attack", "Outgoing Fall Damage Strikes Targets With Your Weapon");
+        add("malum.effect.geas.fall_damage_auto_attack", "Outgoing Fall Damage Strikes Targets With Your Weapon Regardless Of Distance");
+        add("malum.effect.geas.more_knockback", "Doubles Incoming Knockback");
         add("malum.effect.geas.rocket_jumping", "Wind Charges Provide Greater Propulsion");
         add("malum.effect.geas.wind_charge_exhaustion", "Continuous Activations Weigh You Down");
         add("malum.effect.geas.weak_legs", "Fall Damage Is Made Deadlier");
         add("malum.effect.geas.explosion_lover", "Absorbed Explosions Generate Fervor");
         add("malum.effect.geas.explosion_fire", "Overexertion Ignites You");
         add("malum.effect.geas.scary_fire", "Fire Damage Is Made Deadlier");
-        add("malum.effect.geas.wyrd_reconstruction", "Prevents Death And Repeatedly Activates Spirit-Collection Effects");
+        add("malum.effect.geas.wyrd_reconstruction", "Death Instead Triggers Spirit-Collection Effects");
         add("malum.effect.geas.wyrd_reconstruction_cooldown", "Arcane Resonance is Dampened Until Recharged");
         add("malum.effect.geas.malignant_crit_leech", "Malignant Deliverance Leeches Life Essence");
         add("malum.effect.geas.malignant_crit_healing_overexertion", "Repeated Activations Nullify All Healing");
